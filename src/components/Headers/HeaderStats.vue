@@ -33,7 +33,7 @@
               <a :href="href" @click="navigate">
                 <card-stats statSubtitle="MY HEALTH" :statTitle="health.statTitle + ' €'"
                   :statArrow="health.statArrow" :statPercent="health.statPercent"
-                  statIconName="fas fa-heart" statIconColor="bg-teal-500" />
+                  statIconName="fas fa-heart" :statIconColor=health.iconColor />
               </a>
             </router-link>
           </div>
@@ -87,7 +87,8 @@ export default {
         statTitle: 0,
         statArrow: "up",
         statPercent: 0,
-        statPercentColor: "text-emerald-500"
+        statPercentColor: "text-emerald-500",
+        iconColor: 'bg-teal-500'
       },
       walletPlanned: {
         statTitle: 0,
@@ -144,6 +145,10 @@ export default {
       StatsService.health().then((resp) => {
         let data = resp.data
         this.health.statTitle = data.total.toFixed(2)
+
+        if(data.total <= 0) {
+          this.health.iconColor = 'bg-red-500'
+        }
 
       }).catch((error) => {
         console.error(error);
