@@ -58,9 +58,11 @@ export default {
       const _this = this
       AuthService.check().catch((response) => {
         console.log("res", response)
+        localStorage.clear();
         _this.$router.push({ path: 'auth' })
       });
     } catch {
+      localStorage.clear();
       this.$router.push({ path: 'auth' })
     }
   },

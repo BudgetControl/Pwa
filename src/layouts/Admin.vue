@@ -34,10 +34,12 @@ export default {
       const _this = this
       AuthService.check().catch((response) => {
         console.log("res", response)
-        _this.$router.push({ path: 'auth' })
+        localStorage.clear();
+        _this.$router.push({ path: '/auth/login' })
       });
     } catch {
-      this.$router.push({ path: 'auth' })
+      localStorage.clear();
+      this.$router.push({ path: '/auth/login' })
     }
   }
 };
