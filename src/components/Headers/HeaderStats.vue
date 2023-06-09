@@ -134,7 +134,7 @@ export default {
     getWallet() {
       StatsService.total().then((resp) => {
         let data = resp.data
-        this.wallet.statTitle = data.total.toFixed(2)
+        this.wallet.statTitle = data.total
 
       }).catch((error) => {
         console.error(error);
@@ -144,7 +144,7 @@ export default {
     getHealth() {
       StatsService.health().then((resp) => {
         let data = resp.data
-        this.health.statTitle = data.total.toFixed(2)
+        this.health.statTitle = data.total
 
         if(data.total <= 0) {
           this.health.iconColor = 'bg-red-500'
@@ -159,7 +159,7 @@ export default {
       StatsService.planned().then((resp) => {
 
         let data = resp.data
-        this.walletPlanned.statTitle = data.total.toFixed(2)
+        this.walletPlanned.statTitle = data.total
         
       }).catch((error) => {
         console.error(error);
@@ -169,8 +169,8 @@ export default {
     getMonthIncoming() {
       StatsService.incoming().then((resp) => {
         let data = resp.data
-        this.incoming.statTitle = data.total.toFixed(2)
-        this.incoming.statPercent = data.percentage.toFixed(2)
+        this.incoming.statTitle = data.total
+        this.incoming.statPercent = data.percentage
         this.incoming.statArrow = data.percentage <= 0 ? "down" : "up"
         this.incoming.statPercentColor = data.percentage <= 0 ? "text-red-500" : "text-emerald-500"
 
@@ -181,8 +181,8 @@ export default {
     getMonthexpenses() {
       StatsService.expenses().then((resp) => {
         let data = resp.data
-        this.expenses.statTitle = data.total.toFixed(2)
-        this.expenses.statPercent = data.percentage.toFixed(2)
+        this.expenses.statTitle = data.total
+        this.expenses.statPercent = data.percentage
         this.expenses.statArrow = data.percentage < 0 ? "down" : "up"
         this.expenses.statPercentColor = data.percentage > 0 ? "text-red-500" : "text-emerald-500"
 
