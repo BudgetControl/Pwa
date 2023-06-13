@@ -7,7 +7,7 @@
             {{ title }}
           </h2>
           <h3 class="text-white text-xl font-semibold">
-            {{subTitle}}
+            {{ subTitle }}
           </h3>
         </div>
       </div>
@@ -15,16 +15,14 @@
     <div class="p-4 flex-auto">
       <!-- Chart -->
       <div class="relative h-350-px">
-        <canvas :id="'line_graph_doubleline_' + ID_GRAPH"></canvas>
+        <canvas :id="'line_graph_doubleline_'"></canvas>
       </div>
     </div>
   </div>
 </template>
 <script>
 import Chart from "chart.js";
-import axios from 'axios'
-// const X_API_KEY = { "X-API-KEY": "7221" };
-const DOMAIN = process.env.VUE_APP_API_PATH;
+import ChartService from "../../../services/ChartService.vue";
 
 export default {
   props: {
@@ -33,73 +31,59 @@ export default {
       required: true,
       default: false
     },
-    ID_GRAPH: {
-      type: String,
-      required: true
-    },
-    type: {
-      type: String,
-      required: true
-    },
     title: {
       type: String,
       required: true
     },
   },
-  watch: {
-    "$store.state.filter_graph.year": function () {
-      this.setGraph()
-    },
-    "$store.state.filter_graph.month": function () {
-      this.setGraph()
-    },
-  },
   data() {
     return {
-      datasets: [],
-      labels: [],
       subTitle: null,
-      months: ["01","02","03","04","05","06","07","08","09","10","11","12"],
+      localStorage: {
+        month: null,
+        year: null
+      },
+      months: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
     }
   },
   mounted() {
     this.setGraph()
+    const _this = this
+    setInterval(function () {
+      _this.checkLocalStorageUpdate()
+    }, 1000)
   },
   methods: {
     setGraph() {
       let date = new Date
-      let month = this.$store.state.filter_graph.month
-      let year = this.$store.state.filter_graph.year
+      let month = localStorage.getItem('chart-month')
+      let year = localStorage.getItem('chart-year')
 
       if (year === null) {
         year = date.getFullYear()
       }
 
       if (month === null) {
-        month = date.getMonth() + 1
+        month = date.getMonth()
       }
-      
+
       month = this.months[month]
       this.subTitle = year + "/" + month
 
       this.$nextTick(function () {
-        if (window.myLineChart !== undefined) {
-          this.datasets = []
-          this.labels = []
-          window.myLineChart.destroy()
-        }
+
         var config = {
-          type: this.type,
+          type: "line",
           data: {
-            labels: this.labels,
-            datasets: this.datasets,
+            labels: [],
+            datasets: [],
           },
           options: {
             maintainAspectRatio: false,
             responsive: true,
             title: {
               display: false,
-              text: "Sales Charts",
+              text: "Entries stats",
               fontColor: "white",
             },
             legend: {
@@ -155,77 +139,74 @@ export default {
                     borderDash: [3],
                     borderDashOffset: [3],
                     drawBorder: false,
-                    color: "rgba(33, 37, 41, 0.3)",
-                    zeroLineColor: "rgba(0, 0, 0, 0)",
+                    color: "rgba(255, 255, 255, 0.15)",
+                    zeroLineColor: "rgba(33, 37, 41, 0)",
                     zeroLineBorderDash: [2],
                     zeroLineBorderDashOffset: [2],
                   },
                 },
-              ],
+              ]
             },
           },
         };
 
-        let dataSubmit = {
-          category: [],
-          time: "monthly",
-          year: year
-        }
+        let data = []
 
-        let path = [
-          "entries", "expenses"
-        ]
+        this.months.forEach(month => {
+          data.push({
+            start: year + "/" + month + "/01",
+            end: year + "/" + month + "/28"
+          })
+        })
 
-        path.forEach((e) => {
-          axios.post(DOMAIN + "/api/stats/graph/" + e, dataSubmit).then((resp) => {
-            let response = resp.data
-            let randomColor = "#ffffff";
+        ChartService.incomingExpensesLine(data).then((resp) => {
 
-            if (e == "entries") {
-              randomColor = "#3bb143"
-            }
+          resp.series.forEach(element => {
 
-            if (e == "expenses") {
-              randomColor = "#fb3b1e"
-            }
-
-
-            if (this.filter === true) {
-              let theseMonth = month - 1
-              response = [
-                response[theseMonth]
-              ]
+            let color = '#FF0000';
+            if (element.label == 'incoming') {
+              color = '#00FF00';
             }
 
             let dataset = {
-              label: "",
-              backgroundColor: randomColor,
-              borderColor: randomColor,
+              label: element.label,
+              backgroundColor: color,
+              borderColor: color,
               data: [],
               fill: false,
               barThickness: 50,
             }
 
-            response.forEach(element => {
-              dataset.data.push(element.total)
-              dataset.label = e
-            });
-            dataset.data.push(0)
-            this.datasets.push(dataset)
+            element.points.forEach(point => {
+              if (element.label == 'incoming') {
+                config.data.labels.push(point.label)
+              }
+              let value = point.x < 0 ? point.x * -1 : point.x
+              dataset.data.push(value)
+            })
 
-            if (e == "expenses") {
-              response.forEach(element => {
-                this.labels.push(element.label)
-              });
-              var ctx = document.getElementById("line_graph_doubleline_" + this.ID_GRAPH).getContext("2d");
-              window.myLineChart = new Chart(ctx, config);
+            config.data.datasets.push(dataset)
+
+            var ctx = document.getElementById("line_graph_doubleline_").getContext("2d");
+            if(window.myLine !== undefined) {
+              window.myLine.update()
+            } {
+              window.myLine = new Chart(ctx, config);
             }
 
-          }).catch((error) => {
-            console.error(error);
-          })
+          });
+
+        }).catch((error) => {
+          console.error(error);
         })
       })
+    },
+    checkLocalStorageUpdate() {
+      const year = localStorage.getItem('chart-year')
+      if (year != this.localStorage.year) {
+        this.localStorage.year = year
+        this.setGraph()
+      }
     }
   }
 };

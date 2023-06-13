@@ -69,8 +69,8 @@ export default {
         setGraph() {
 
             let date = new Date
-            let month = this.$store.state.filter_graph.month
-            let year = this.$store.state.filter_graph.year
+            let month = localStorage.getItem('chart-month')
+      let year = localStorage.getItem('chart-year')
 
             if (year === null) {
                 year = date.getFullYear()

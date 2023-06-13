@@ -7,24 +7,21 @@
             {{ title }}
           </h2>
           <h3 class="text-white text-xl font-semibold">
-            {{subTitle}}
+            {{ subTitle }}
           </h3>
         </div>
       </div>
     </div>
     <div class="p-4 flex-auto">
-      <!-- Chart -->
       <div class="relative h-350-px">
-        <canvas :id="'line_graph_' + ID_GRAPH"></canvas>
+        <canvas :id="'bar-chart_' + ID_GRAPH"></canvas>
       </div>
     </div>
   </div>
 </template>
 <script>
 import Chart from "chart.js";
-import axios from 'axios'
-// const X_API_KEY = { "X-API-KEY": "7221" };
-const DOMAIN = process.env.VUE_APP_API_PATH;
+import ChartService from "../../../services/ChartService.vue";
 
 export default {
   props: {
@@ -38,7 +35,8 @@ export default {
     },
     category: {
       type: Array,
-      required: true
+      required: false,
+      default: null
     },
     ID_GRAPH: {
       type: String,
@@ -46,78 +44,68 @@ export default {
     }
   },
   watch: {
-    "$store.state.filter_graph.year": function () {
-      this.setGraph()
-    },
-    "$store.state.filter_graph.month": function () {
-      this.setGraph()
-    },
   },
   data() {
     return {
-      datasets: [],
-      labels: [],
       subTitle: null,
-      months: ["01","02","03","04","05","06","07","08","09","10","11","12"],
+      months: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+      localStorage: {
+        month: null,
+        year: null
+      },
     }
   },
   mounted() {
     this.setGraph()
+    const _this = this
+    setInterval(function () {
+      _this.checkLocalStorageUpdate()
+    }, 1000)
   },
   methods: {
     setGraph() {
-
       let date = new Date
-      let month = this.$store.state.filter_graph.month
-      let year = this.$store.state.filter_graph.year
+      let month = localStorage.getItem('chart-month')
+      let year = localStorage.getItem('chart-year')
 
       if (year === null) {
         year = date.getFullYear()
       }
 
       if (month === null) {
-        month = date.getMonth() + 1
+        month = date.getMonth()
       }
 
       month = this.months[month]
+
       this.subTitle = year + "/" + month
 
       this.$nextTick(function () {
-
-        if (window.myLine !== undefined) {
+        if (window.myBar !== undefined) {
           this.datasets = []
-          this.labels = []
-          window.myLine.destroy()
+          window.myBar.destroy()
         }
 
-        var config = {
-          type: "line",
+        let config = {
+          type: "bar",
           data: {
-            labels: this.labels,
-            datasets: this.datasets,
+            // labels: [],
+            datasets: [],
           },
           options: {
             maintainAspectRatio: false,
             responsive: true,
-            title: {
-              display: false,
-              text: "Sales Charts",
-              fontColor: "white",
-            },
-            legend: {
-              labels: {
-                fontColor: "white",
-              },
-              align: "end",
-              position: "bottom",
-            },
-            tooltips: {
-              mode: "index",
-              intersect: false,
-            },
             hover: {
               mode: "nearest",
               intersect: false,
+            },
+            legend: {
+              display: false,
+            },
+            onClick: (evt, el) => {
+              let position = el[0]._datasetIndex
+              let element = config.data.datasets[position].id
+              window.location.href = "/admin/entries/0/" + this.path + "-" + element
             },
             scales: {
               xAxes: [
@@ -125,14 +113,12 @@ export default {
                   ticks: {
                     fontColor: "rgba(255,255,255,.7)",
                   },
-                  display: true,
+                  display: false,
                   scaleLabel: {
-                    display: false,
+                    display: true,
                     labelString: "Month",
-                    fontColor: "white",
                   },
                   gridLines: {
-                    display: false,
                     borderDash: [2],
                     borderDashOffset: [2],
                     color: "rgba(33, 37, 41, 0.3)",
@@ -149,16 +135,15 @@ export default {
                   },
                   display: true,
                   scaleLabel: {
-                    display: false,
-                    labelString: "Value",
-                    fontColor: "white",
+                    display: true,
+                    labelString: "Amount",
                   },
                   gridLines: {
-                    borderDash: [3],
-                    borderDashOffset: [3],
+                    borderDash: [2],
                     drawBorder: false,
-                    color: "rgba(255, 255, 255, 0.15)",
-                    zeroLineColor: "rgba(33, 37, 41, 0)",
+                    borderDashOffset: [2],
+                    color: "rgba(33, 37, 41, 0.3)",
+                    zeroLineColor: "rgba(0, 0, 0, 0)",
                     zeroLineBorderDash: [2],
                     zeroLineBorderDashOffset: [2],
                   },
@@ -168,41 +153,46 @@ export default {
           },
         };
 
-        let data = {
-          category: this.category,
-          time: "monthly",
-          year: year
-        }
+        const data = [{
+          start: year + "/" + month + "/01",
+          end: year + "/" + month + "/31"
+        }]
 
-        axios.post(DOMAIN + "/api/stats/graph/" + this.path, data).then((resp) => {
-          let response = resp.data
-          let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+        ChartService.expensesBarByCategory(data).then((resp) => {
+          resp.series.forEach(element => {
 
-          let dataset = {
-            label: "",
-            backgroundColor: randomColor,
-            borderColor: randomColor,
-            data: [],
-            fill: false,
-            barThickness: 20,
-          }
+            let dataset = {
+              label: element.label,
+              backgroundColor: element.color,
+              data: [element.value * -1],
+              fill: true,
+              barThickness: 20,
+              id: element.id
+            }
 
-          response.forEach(element => {
-            config.data.labels.push(element.label)
-            dataset.data.push(element.total)
-            dataset.label = element.label
+            // config.data.labels.push(element.label)
+            config.data.datasets.push(dataset)
+
           });
 
-          this.datasets.push(dataset)
-
-          var ctx = document.getElementById("line_graph_" + this.ID_GRAPH).getContext("2d");
-          window.myLine = new Chart(ctx, config);
+          var ctx = document.getElementById("bar-chart_" + this.ID_GRAPH).getContext("2d");
+            if(window.myBar !== undefined) {
+              window.myBar.update()
+            } {
+              window.myBar = new Chart(ctx, config);
+            }
 
         }).catch((error) => {
           console.error(error);
         })
-
-      });
+      })
+    },
+    checkLocalStorageUpdate() {
+      const year = localStorage.getItem('chart-year')
+      if (year != this.localStorage.year) {
+        this.localStorage.year = year
+        this.setGraph()
+      }
     }
   }
 };

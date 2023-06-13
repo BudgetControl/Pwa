@@ -13,8 +13,9 @@
       </div>
     </div>
     <div class="p-4 flex-auto">
+      <!-- Chart -->
       <div class="relative h-350-px">
-        <canvas :id="'bar-chart_' + ID_GRAPH"></canvas>
+        <canvas :id="'line_graph_' + ID_GRAPH"></canvas>
       </div>
     </div>
   </div>
@@ -37,8 +38,7 @@ export default {
     },
     category: {
       type: Array,
-      required: false,
-      default: null
+      required: true
     },
     ID_GRAPH: {
       type: String,
@@ -66,30 +66,32 @@ export default {
   },
   methods: {
     setGraph() {
-      let date = new Date
-      let month = this.$store.state.filter_graph.month
-      let year = this.$store.state.filter_graph.year
 
-      if(year === null) {
+      let date = new Date
+      let month = localStorage.getItem('chart-month')
+      let year = localStorage.getItem('chart-year')
+
+      if (year === null) {
         year = date.getFullYear()
       }
 
-      if(month === null) {
-        month = date.getMonth()
+      if (month === null) {
+        month = date.getMonth() + 1
       }
 
       month = this.months[month]
-
       this.subTitle = year + "/" + month
 
       this.$nextTick(function () {
-        if (window.myBar !== undefined) {
+
+        if (window.myLine !== undefined) {
           this.datasets = []
-          window.myBar.destroy()
+          this.labels = []
+          window.myLine.destroy()
         }
 
-        let config = {
-          type: "bar",
+        var config = {
+          type: "line",
           data: {
             labels: this.labels,
             datasets: this.datasets,
@@ -97,17 +99,25 @@ export default {
           options: {
             maintainAspectRatio: false,
             responsive: true,
+            title: {
+              display: false,
+              text: "Sales Charts",
+              fontColor: "white",
+            },
+            legend: {
+              labels: {
+                fontColor: "white",
+              },
+              align: "end",
+              position: "bottom",
+            },
+            tooltips: {
+              mode: "index",
+              intersect: false,
+            },
             hover: {
               mode: "nearest",
               intersect: false,
-            },
-            legend: {
-              display: false,
-            },
-            onClick: (evt, el) => {
-              let position = el[0]._datasetIndex
-              let element = config.data.datasets[position].id
-              window.location.href = "/admin/entries/0/" + this.path + "-" + element
             },
             scales: {
               xAxes: [
@@ -115,12 +125,14 @@ export default {
                   ticks: {
                     fontColor: "rgba(255,255,255,.7)",
                   },
-                  display: false,
+                  display: true,
                   scaleLabel: {
-                    display: true,
+                    display: false,
                     labelString: "Month",
+                    fontColor: "white",
                   },
                   gridLines: {
+                    display: false,
                     borderDash: [2],
                     borderDashOffset: [2],
                     color: "rgba(33, 37, 41, 0.3)",
@@ -137,15 +149,16 @@ export default {
                   },
                   display: true,
                   scaleLabel: {
-                    display: true,
-                    labelString: "Amount",
+                    display: false,
+                    labelString: "Value",
+                    fontColor: "white",
                   },
                   gridLines: {
-                    borderDash: [2],
+                    borderDash: [3],
+                    borderDashOffset: [3],
                     drawBorder: false,
-                    borderDashOffset: [2],
-                    color: "rgba(33, 37, 41, 0.3)",
-                    zeroLineColor: "rgba(0, 0, 0, 0)",
+                    color: "rgba(255, 255, 255, 0.15)",
+                    zeroLineColor: "rgba(33, 37, 41, 0)",
                     zeroLineBorderDash: [2],
                     zeroLineBorderDashOffset: [2],
                   },
@@ -161,40 +174,35 @@ export default {
           year: year
         }
 
-        let currentMonth = month
-        if (this.category === null) {
-          data = {
-            timeStart: year + "/" + currentMonth + "/01",
-            timeEnd: year + "/" + currentMonth + "/31"
-          }
-        }
-
         axios.post(DOMAIN + "/api/stats/graph/" + this.path, data).then((resp) => {
           let response = resp.data
+          let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+
+          let dataset = {
+            label: "",
+            backgroundColor: randomColor,
+            borderColor: randomColor,
+            data: [],
+            fill: false,
+            barThickness: 20,
+          }
+
           response.forEach(element => {
-
-            let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-
-            let dataset = {
-              label: element.label,
-              backgroundColor: randomColor,
-              data: [element.total],
-              fill: true,
-              barThickness: 20,
-              id: element.id
-            }
-
-            this.datasets.push(dataset)
-
+            config.data.labels.push(element.label)
+            dataset.data.push(element.total)
+            dataset.label = element.label
           });
 
-          let ctx = document.getElementById("bar-chart_" + this.ID_GRAPH).getContext("2d");
-          window.myBar = new Chart(ctx, config);
+          this.datasets.push(dataset)
+
+          var ctx = document.getElementById("line_graph_" + this.ID_GRAPH).getContext("2d");
+          window.myLine = new Chart(ctx, config);
 
         }).catch((error) => {
           console.error(error);
         })
-      })
+
+      });
     }
   }
 };

@@ -202,8 +202,8 @@ export default {
   methods: {
     getAllData: function (type) {
 
-      let currentMonth = this.$store.state.filter_graph.month
-      let year = this.$store.state.filter_graph.year
+      let currentMonth = localStorage.getItem('chart-month')
+      let year = localStorage.getItem('chart-year')
       let date = new Date
 
       if (currentMonth === null) {
@@ -258,9 +258,8 @@ export default {
     },
 
     getAllDataBefore: function (type) {
-
-      let currentMonth = this.$store.state.filter_graph.month
-      let year = this.$store.state.filter_graph.year
+      let currentMonth = localStorage.getItem('chart-month')
+      let year = localStorage.getItem('chart-year')
       let date = new Date
 
       if (currentMonth === null) {
