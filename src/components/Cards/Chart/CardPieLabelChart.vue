@@ -4,7 +4,7 @@
       <div class="flex flex-wrap items-center">
         <div class="relative w-full max-w-full flex-grow flex-1">
           <h2 class="text-white text-xl font-semibold">
-            {{ title }}
+            Expenses by Labels
           </h2>
           <h3 class="text-white text-xl font-semibold">
             {{ subTitle }}
@@ -13,8 +13,9 @@
       </div>
     </div>
     <div class="p-4 flex-auto">
+      <!-- Chart -->
       <div class="relative h-350-px">
-        <canvas :id="'bar-chart_' + ID_GRAPH"></canvas>
+        <canvas :id="'bar_graph_' + ID_GRAPH"></canvas>
       </div>
     </div>
   </div>
@@ -35,15 +36,12 @@ export default {
     },
     category: {
       type: Array,
-      required: false,
-      default: null
+      required: true
     },
     ID_GRAPH: {
       type: String,
       required: true
     }
-  },
-  watch: {
   },
   data() {
     return {
@@ -64,6 +62,7 @@ export default {
   },
   methods: {
     setGraph() {
+
       let date = new Date
       let month = localStorage.getItem('chart-month')
       let year = localStorage.getItem('chart-year')
@@ -77,50 +76,35 @@ export default {
       }
 
       month = this.months[month]
-
       this.subTitle = year + "/" + month
 
       this.$nextTick(function () {
-        if (window.myBar !== undefined) {
-          this.datasets = []
-          window.myBar.destroy()
-        }
 
         let config = {
-          type: "bar",
+          type: "pie",
           data: {
             labels: [],
             datasets: [],
           },
           options: {
-            maintainAspectRatio: false,
-            responsive: true,
-            hover: {
-              mode: "nearest",
-              intersect: false,
-            },
             legend: {
               display: false,
             },
-            onClick: (evt, el) => {
-              let position = el[0]._datasetIndex
-              let element = config.data.datasets[position].id
-              window.location.href = "/admin/entries/0/" + this.path + "-" + element
-            },
+            responsive: true,
           },
         };
 
-        const data = [{
+        const date = [{
           start: year + "/" + month + "/01",
           end: year + "/" + month + "/31"
         }]
 
-        let labels = []
-        let colors = []
-        let values = []
+        ChartService.expensesLabelLine(date).then((resp) => {
 
+          let labels = []
+          let colors = []
+          let values = []
 
-        ChartService.expensesBarByCategory(data).then((resp) => {
           resp.series.forEach(element => {
 
             labels.push(element.label)
@@ -130,27 +114,26 @@ export default {
           });
 
           let dataset = {
-            label: 'expenses',
+            label: 'expenses by labels',
             backgroundColor: colors,
-            data: values,
-            fill: true,
-            barThickness: 40,
+            data: values
           }
 
-          config.data.datasets.push(dataset)
           config.data.labels = labels
+          config.data.datasets.push(dataset)
 
-          var ctx = document.getElementById("bar-chart_" + this.ID_GRAPH).getContext("2d");
-          if (window.myBar !== undefined) {
-            window.myBar.destroy()
+          var ctx = document.getElementById('bar_graph_' + this.ID_GRAPH).getContext("2d");
+          if (window.myBarLabel !== undefined) {
+            window.myBarLabel.destroy()
           }
 
-          window.myBar = new Chart(ctx, config);
+          window.myBarLabel = new Chart(ctx, config);
 
         }).catch((error) => {
           console.error(error);
         })
-      })
+
+      });
     },
     checkLocalStorageUpdate() {
       const year = localStorage.getItem('chart-year')

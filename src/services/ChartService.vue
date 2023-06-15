@@ -60,12 +60,44 @@ async function incomingExpensesLine(data) {
   return response.data;
 }
 
+async function expensesLabelLine(data) {
+  const config = {
+    params: {
+      date_time : data
+    }
+  }
+  const response = await instance.get('/api/chart/bar/expenses/label',config);
+  return response.data;
+}
+
+async function expensesLabelTable(data) {
+  const config = {
+    params: {
+      date_time : data
+    }
+  }
+  const response = await instance.get('/api/chart/table/expenses/label',config);
+  return response.data;
+}
+
+async function expensesLabelCategory(data) {
+  const config = {
+    params: {
+      date_time : data
+    }
+  }
+  const response = await instance.get('/api/chart/table/expenses/category',config);
+  return response.data;
+}
 
 export default {
   incomingLineYear,
   incomingBarByCategory,
   expensesBarByCategory,
-  incomingExpensesLine
+  incomingExpensesLine,
+  expensesLabelLine,
+  expensesLabelCategory,
+  expensesLabelTable
 }
 
 </script>

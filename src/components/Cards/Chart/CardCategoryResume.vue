@@ -52,7 +52,7 @@
             </td>
             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
               <i class="fas mr-4" :class="[d.bounce_rate < 0 ? 'fa-arrow-down text-emerald-500' : 'fa-arrow-up text-red-500']
-              "></i>
+                "></i>
               {{ d.bounce_rate }}%
             </td>
           </tr>
@@ -63,9 +63,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-// const X_API_KEY = { "X-API-KEY": "7221" };
-const DOMAIN = process.env.VUE_APP_API_PATH;
+import ChartServiceVue from '../../../services/ChartService.vue'
 
 export default {
   props: {
@@ -79,147 +77,76 @@ export default {
       required: true
     },
   },
-  watch: {
-    "$store.state.filter_graph.year": function () {
-      this.elements = []
-      this.elementsBefore = []
-      this.getAllData()
-    },
-    "$store.state.filter_graph.month": function () {
-      this.elements = []
-      this.elementsBefore = []
-      this.getAllData()
-    },
-  },
   data() {
     return {
       elements: [],
-      elementsBefore: [],
-      months: ["01","02","03","04","05","06","07","08","09","10","11","12"],
+      months: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+      localStorage: {
+        month: null,
+        year: null
+      },
     }
   },
   mounted() {
-    this.getAllData()
+    this.setGraph()
+    const _this = this
+    setInterval(function () {
+      _this.checkLocalStorageUpdate()
+    }, 1000)
   },
   methods: {
-    getAllData: function () {
+    setGraph: function () {
 
-      let currentMonth = localStorage.getItem('chart-month')
+      this.elements = []
+
+      let month = localStorage.getItem('chart-month')
       let year = localStorage.getItem('chart-year')
       let date = new Date
 
-      if (currentMonth === null) {
-        currentMonth = date.getMonth()
+      if (month === null) {
+        month = date.getMonth()
       }
 
       if (year === null) {
         year = date.getFullYear()
       }
 
-      currentMonth = this.months[currentMonth]
+      month = this.months[month]
 
-      let data = {
-        timeStart: year + "/" + currentMonth + "/01",
-        timeEnd: year + "/" + currentMonth + "/31"
-      }
+      let data = [{
+        start: year + "/" + month + "/01",
+        end: year + "/" + month + "/31"
+      }]
 
-      axios.post(DOMAIN + "/api/stats/graph/" + this.path, data).then((resp) => {
-        let response = resp.data
-        response.forEach(element => {
+      ChartServiceVue.expensesLabelCategory(data).then((resp) => {
 
-          let total = element.total
-          total = parseFloat(total).toFixed(2)
+        resp.series.forEach(element => {
 
           this.elements.push({
             label: element.label,
-            amount: total,
-            amount_before: 0,
-            bounce_rate: 100
+            amount: element.value,
+            amount_before: element.value_previus,
+            bounce_rate: element.bounce_rate
           })
 
-
-        });
-        this.getAllDataBefore()
-      }).catch((error) => {
-        console.error(error);
-      })
-    },
-
-    getAllDataBefore: function () {
-
-      let currentMonth = localStorage.getItem('chart-month')
-      let year = localStorage.getItem('chart-year')
-      let date = new Date
-
-      if (currentMonth === null) {
-        currentMonth = date.getMonth()
-      }
-
-      if (year === null) {
-        year = date.getFullYear()
-      }
-
-      currentMonth = currentMonth - 1
-      if (currentMonth < 0) {
-        currentMonth = 11
-        year = year - 1
-      }
-
-      currentMonth = this.months[currentMonth]
-
-      let data = {
-        timeStart: year + "/" + currentMonth + "/01",
-        timeEnd: year + "/" + currentMonth + "/31"
-      }
-
-      axios.post(DOMAIN + "/api/stats/graph/" + this.path, data).then((resp) => {
-        let response = resp.data
-        response.forEach(element => {
-
-          let total = element.total
-          total = parseFloat(total).toFixed(2)
-          let found = false
-
-          this.elements.forEach(data => {
-            if (data.label == element.label) {
-              data.amount_before = total
-              data.bounce_rate = this.calculateBounceRate(data.amount, element.total)
-              found = true
-            }
-          });
-
-          this.elementsBefore.push({
-            label: element.label,
-            amount: 0,
-            amount_before: total,
-            bounce_rate: -100,
-            found: found
-          })
-
-        });
-
-        this.elementsBefore.forEach(element => {
-          if(element.found === false) {
-            this.elements.push(element)
-          }
         });
 
       }).catch((error) => {
         console.error(error);
       })
     },
-    calculateBounceRate: function (amount, amountBefore) {
-      if (amountBefore < 0) {
-        amountBefore = amountBefore * -1
+    checkLocalStorageUpdate() {
+      const year = localStorage.getItem('chart-year')
+      const month = localStorage.getItem('chart-month')
+      if (year != this.localStorage.year) {
+        this.localStorage.year = year
+        this.setGraph()
+      }
+      if (month != this.localStorage.month) {
+        this.localStorage.month = month
+        this.setGraph()
       }
 
-      if (amount < 0) {
-        amount = amount * -1
-      }
-
-      let result = ((amount - amountBefore) / amountBefore) * 100
-
-      return result.toFixed(0)
     }
   }
 }

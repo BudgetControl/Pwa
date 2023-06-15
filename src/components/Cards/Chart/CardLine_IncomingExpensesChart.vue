@@ -68,7 +68,7 @@ export default {
       }
 
       month = this.months[month]
-      this.subTitle = year + "/" + month
+      this.subTitle = year
 
       this.$nextTick(function () {
 
@@ -189,10 +189,10 @@ export default {
 
             var ctx = document.getElementById("line_graph_doubleline_").getContext("2d");
             if(window.myLine !== undefined) {
-              window.myLine.update()
-            } {
-              window.myLine = new Chart(ctx, config);
-            }
+              window.myLine.destroy()
+            } 
+              
+            window.myLine = new Chart(ctx, config);
 
           });
 
