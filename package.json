@@ -5,6 +5,9 @@
   "description": "Vue Notus - A free Tailwind CSS and VueJS UI Kit and Admin by Creative Tim.",
   "repository": "https://github.com/creativetimofficial/vue-notus",
   "license": "MIT",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build && gulp licenses",
