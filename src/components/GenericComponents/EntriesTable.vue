@@ -73,34 +73,7 @@
         </div>
         <!-- pagination -->
         <div class="py-2" v-if="pagination.enabled">
-            <nav class="block">
-                <ul class="flex pl-0 rounded list-none flex-wrap">
-                    <li>
-                        <a v-on:click="first(pagination.first_page_url)"
-                            class="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-emerald-500 text-white bg-emerald-500">
-                            <i class="fas fa-chevron-left -ml-px"></i><i class="fas fa-chevron-left -ml-px"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a v-on:click="previus(pagination.previus)"
-                            class="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-emerald-500 text-white bg-emerald-500">
-                            <i class="fas fa-chevron-left -ml-px"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a v-on:click="next(pagination.next)"
-                            class="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-emerald-500 text-white bg-emerald-500">
-                            <i class="fas fa-chevron-right -mr-px"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a v-on:click="last(pagination.last_page_url)"
-                            class="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-emerald-500 text-white bg-emerald-500">
-                            <i class="fas fa-chevron-right -mr-px"></i><i class="fas fa-chevron-right -mr-px"></i>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <Paginator ></Paginator>
         </div>
         <!-- end pagination -->
     </div>
@@ -113,12 +86,13 @@ import react from "@/assets/img/react.jpg";
 import vue from "@/assets/img/react.jpg";
 import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue";
 
-import axios from 'axios'
 import ApiService from '../../services/ApiService.vue';
-// const X_API_KEY = { "X-API-KEY": "7221" }
-const DOMAIN = process.env.VUE_APP_API_PATH
+import Paginator from "./Paginator.vue";
 
 export default {
+    components: {
+        Paginator,EntryActionDropdown
+    },
     data() {
         return {
             ENTRIES_ROUTE: "/api/entry/",
@@ -131,17 +105,6 @@ export default {
             filter: "",
             planned: false,
             wallet: null,
-            pagination: {
-                enabled: false,
-                previus: 1,
-                next: 2,
-                from: 1,
-                last_page: 1,
-                last_page_url: "",
-                first_page_url: "",
-                links: [],
-                path: ""
-            },
             selected: {
                 account: 0
             },
@@ -153,9 +116,6 @@ export default {
                 account: [],
             }
         };
-    },
-    components: {
-        EntryActionDropdown
     },
     watch: {
         '$route.params.account_id': function (account_id) {
@@ -172,36 +132,7 @@ export default {
             this.getEntries('label=' + label_id, null)
         }
     },
-    mounted() {
-        //let filter = ''
-        //let category_id = this.$route.params.category_id
-       // let label_id = this.$route.params.label_id
-        /*if (category_id != undefined) {
-            filter = 'category=' + category_id
-        }
-        if (label_id != undefined) {
-            filter = 'label=' + label_id
-        }*/
-        //this.getEntries(filter, null)
-    },
     methods: {
-        fixWallet() {
-
-            let data = {
-                amount: this.wallet,
-                account_id: this.selected.account
-            }
-
-
-            axios.post(DOMAIN + "/api/stats/wallet", data).then((resp) => {
-                //TODO: inserire un messaggio
-                console.log(resp)
-            }).catch((error) => {
-                this.action.alert = true
-                this.action.alert_message = "Ops... An error occured"
-                console.error(error);
-            })
-        },
         getAccount() {
             let _this = this
 
@@ -216,25 +147,6 @@ export default {
             this.entries = []
 
             let data = res
-
-            if (this.pagination.enabled === true) {
-                this.pagination.links = []
-
-                let links = res.links
-
-                this.pagination.from = res.from
-                this.pagination.last_page = res.last_page
-                this.pagination.last_page_url = res.last_page_url
-                this.pagination.first_page_url = res.first_page_url
-                this.pagination.path = res.path
-
-                links.forEach((item) => {
-                    this.pagination.links.push(item)
-                });
-
-                data = res.data
-
-            }
 
             let _this = this
             if (data !== undefined) {
@@ -269,7 +181,7 @@ export default {
                         },
                         labels: labels,
                         payee: null,
-                        transfer: r.transfer == 0 ? false : true,
+                        transfer: r.type == 'transfer' ? true : false,
                         type: r.type
                     }
 
@@ -311,46 +223,6 @@ export default {
                 })
             }
 
-            this.pagination.enabled = false
-
-        },
-        get(path, callBack) {
-            axios.get(path).then((resp) => {
-                callBack(resp.data)
-            }).catch((error) => {
-                console.error(error);
-            })
-        },
-        resetFilter() {
-            this.action.reset = false
-            this.filter = ''
-            this.getEntries('', null)
-        },
-        next(next) {
-            this.getEntries('', DOMAIN + this.ENTRIES_ROUTE + this.$route.params.account_id + "?page=" + this.pagination.next + this.filter)
-            this.pagination.next = next + 1
-            this.pagination.previus = next - 1
-        },
-        previus(previus) {
-            this.getEntries('', DOMAIN + this.ENTRIES_ROUTE + this.$route.params.account_id + "?page=" + this.pagination.previus + this.filter)
-            this.pagination.previus = previus - 1
-            this.pagination.next = previus + 1
-            if (this.pagination.next == this.pagination.last_page) {
-                this.pagination.next = this.pagination.last_page
-            }
-        },
-        last(last) {
-            this.getEntries('', last)
-            this.pagination.next = this.pagination.last_page
-            this.pagination.previus = this.pagination.last_page - 1
-            if (this.pagination.previus == 1) {
-                this.pagination.previus = 1
-            }
-        },
-        first(first) {
-            this.getEntries('', first)
-            this.pagination.next = 2
-            this.pagination.previus = 1
         }
     }
 };
