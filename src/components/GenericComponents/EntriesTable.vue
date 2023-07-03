@@ -132,7 +132,7 @@ export default {
             planned: false,
             wallet: null,
             pagination: {
-                enabled: true,
+                enabled: false,
                 previus: 1,
                 next: 2,
                 from: 1,
@@ -173,16 +173,16 @@ export default {
         }
     },
     mounted() {
-        let filter = ''
-        let category_id = this.$route.params.category_id
-        let label_id = this.$route.params.label_id
-        if (category_id != undefined) {
+        //let filter = ''
+        //let category_id = this.$route.params.category_id
+       // let label_id = this.$route.params.label_id
+        /*if (category_id != undefined) {
             filter = 'category=' + category_id
         }
         if (label_id != undefined) {
             filter = 'label=' + label_id
-        }
-        this.getEntries(filter, null)
+        }*/
+        //this.getEntries(filter, null)
     },
     methods: {
         fixWallet() {
@@ -237,8 +237,8 @@ export default {
             }
 
             let _this = this
-            if (data.elements !== undefined) {
-                data.elements.forEach(function (r) {
+            if (data !== undefined) {
+                data.forEach(function (r) {
 
                     let labels = []
                     r.label.forEach((l) => {

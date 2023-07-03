@@ -90,12 +90,6 @@ async function importData(data) {
   return response.data;
 }
 
-async function search(data) {
-  const response = await instance.post('/api/search',data);
-  return response.data;
-}
-
-
 export default {
   setEntry,
   getEntry,
@@ -110,7 +104,6 @@ export default {
   currencies,
   accounts,
   importData,
-  search,
   getEntryFromAccount,
 }
 
