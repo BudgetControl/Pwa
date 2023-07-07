@@ -71,11 +71,6 @@
             </div>
 
         </div>
-        <!-- pagination -->
-        <div class="py-2" v-if="pagination.enabled">
-            <Paginator ></Paginator>
-        </div>
-        <!-- end pagination -->
     </div>
 </template>
 <script>
@@ -87,15 +82,13 @@ import vue from "@/assets/img/react.jpg";
 import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue";
 
 import ApiService from '../../services/ApiService.vue';
-import Paginator from "./Paginator.vue";
 
 export default {
     components: {
-        Paginator,EntryActionDropdown
+        EntryActionDropdown
     },
     data() {
         return {
-            ENTRIES_ROUTE: "/api/entry/",
             vue,
             react,
             sketch,
@@ -116,21 +109,6 @@ export default {
                 account: [],
             }
         };
-    },
-    watch: {
-        '$route.params.account_id': function (account_id) {
-            this.selected.account = account_id === undefined ? this.selected.account : account_id
-            this.getEntries('', null)
-        },
-        '$route.params.filter_type': function (filter_type) {
-            this.getEntries('type=' + filter_type, null)
-        },
-        '$route.params.category_id': function (category_id) {
-            this.getEntries('category=' + category_id, null)
-        },
-        '$route.params.label_id': function (label_id) {
-            this.getEntries('label=' + label_id, null)
-        }
     },
     methods: {
         getAccount() {
@@ -198,32 +176,7 @@ export default {
             }
 
         },
-        getEntries(filter, path) {
-            let _this = this
-
-            if (filter != "") {
-                _this.filter = _this.filter + "&" + filter
-            }
-
-            if (filter != '') {
-                this.action.reset = true
-            } else {
-                this.action.reset = false
-            }
-
-            if (path == null) {
-                ApiService.getEntry().then((res) => {
-                    _this.buildEntriesTable(res.data)
-                })
-            }
-
-            if (this.$route.params.account_id != 0) {
-                ApiService.getEntryFromAccount(this.$route.params.account_id).then((res) => {
-                    _this.buildEntriesTable(res.data)
-                })
-            }
-
-        }
+        
     }
 };
 </script>

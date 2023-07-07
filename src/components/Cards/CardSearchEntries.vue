@@ -54,7 +54,7 @@
                                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 v-model="action.month">
                                 <option value="">select one</option>
-                                <option v-for="(month, k) in input.month" :key="k" :value="month.id">{{ month.label }}
+                                <option v-for="(month, k) in input.month" :key="k" :value="month.value">{{ month.label }}
                                 </option>
                             </select>
                         </div>
@@ -141,7 +141,7 @@
                 <div class="flex flex-wrap">
                     <div class="w-full lg:w-12/12 px-4">
                         <div class="relative w-full mb-3">
-                            <button v-on:click="search()"
+                            <button v-on:click="invoke()"
                                 class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                 type="button">
                                 SEARCH
@@ -174,7 +174,13 @@
                 <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
                     <div class="px-4 py-5 flex-auto">
                         <div class="tab-content tab-space">
-                                <EntriesTable ref="entryIncoming" />
+                            <EntriesTable ref="entryIncoming" />
+
+                            <!-- pagination -->
+                            <div class="py-2" v-if="pagination.enabled">
+                                <Paginator ref="_paginator"></Paginator>
+                            </div>
+                            <!-- end pagination -->
                         </div>
                     </div>
                 </div>
@@ -189,10 +195,11 @@
 import EntriesTable from "@/components/GenericComponents/EntriesTable.vue";
 import SearchService from "../../services/SearchService.vue";
 import ApiService from "../../services/ApiService.vue";
+import Paginator from "../GenericComponents/Paginator.vue";
 
 export default {
     components: {
-        EntriesTable
+        EntriesTable, Paginator
     },
     data() {
         return {
@@ -201,6 +208,9 @@ export default {
                 expenses: 0,
                 debit: 0,
                 transfer: 0
+            },
+            pagination: {
+                enabled: false
             },
             input: {
                 account: [],
@@ -212,50 +222,62 @@ export default {
                     [
                         {
                             "id": 1,
+                            "value": "01",
                             "label": "Jenuary"
                         },
                         {
                             "id": 2,
+                            "value": "02",
                             "label": "February"
                         },
                         {
                             "id": 3,
+                            "value": "03",
                             "label": "March"
                         },
                         {
                             "id": 4,
+                            "value": "04",
                             "label": "April"
                         },
                         {
                             "id": 5,
+                            "value": "05",
                             "label": "May"
                         },
                         {
                             "id": 6,
+                            "value": "06",
                             "label": "June"
                         },
                         {
                             "id": 7,
+                            "value": "07",
                             "label": "July"
                         },
                         {
                             "id": 8,
+                            "value": "08",
                             "label": "August"
                         },
                         {
                             "id": 9,
+                            "value": "09",
                             "label": "September"
                         },
                         {
                             "id": 10,
+                            "value": "10",
                             "label": "October"
                         },
                         {
                             "id": 11,
+                            "value": "11",
                             "label": "November"
                         },
                         {
                             "id": 12,
+                            "value": "12",
                             "label": "December"
                         }
                     ],
@@ -283,29 +305,28 @@ export default {
         }
     },
     methods: {
-        search() {
+        invoke() {
             let _this = this
             let data = this.action
-            let currentPage = window.localStorage.getItem('search_current_page') == null ? 1 : window.localStorage.getItem('search_current_page')
+            let currentPage = window.localStorage.getItem('current_page') == null ? 1 : window.localStorage.getItem('current_page')
 
-            SearchService.filter(data,currentPage).then((res) => {
+            SearchService.filter(data, currentPage).then((res) => {
                 _this.$refs.entryIncoming.entries = []
 
                 if (res.data.length > 0) {
                     _this.$refs.entryIncoming.buildEntriesTable(res.data)
                     _this.total.incoming = res.balance
-                    window.localStorage.setItem('search_current_page',res.currentPage)
                 }
 
-                if(res.paginate === true) {
-                    this.$refs.entryIncoming.pagination.enabled = true
-                    this.$refs.entryIncoming.pagination.last_page = res.last_page
+                this.pagination.enabled = res.paginate
+                if (this.$refs._paginator !== undefined) {
+                    this.$refs._paginator.hasMorePage = res.hasMorePages
                 }
 
             }).catch((error) => {
                 this.action.alert = true
                 this.action.alert_message = "Ops... An error occured"
-                console.error(error);
+                console.log(error);
             })
         },
         getLabels() {
