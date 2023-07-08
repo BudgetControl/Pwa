@@ -54,10 +54,8 @@
 </template>
 <script>
 
-import axios from 'axios'
-// const X_API_KEY = { "X-API-KEY": "7221" }
-const DOMAIN = process.env.VUE_APP_API_PATH_V2
 import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue";
+import ApiServiceVue from '../../../services/ApiService.vue';
 
 export default {
     components: {
@@ -73,8 +71,9 @@ export default {
     },
     methods: {
         getPlannedEntries() {
-            axios.get(DOMAIN + "/api/planned-entries/").then((resp) => {
-                resp.data.data.forEach(e => {
+
+            ApiServiceVue.getPlannedEntry().then((resp) => {
+                resp.data.forEach(e => {
                     let info = {
                         id: e.id,
                         date: e.created_at,
@@ -85,9 +84,9 @@ export default {
                         note: e.note,
                         planned: e.planned == 0 ? false : true,
                         category: {
-                            name: e.sub_category.name,
-                            id: e.sub_category.id,
-                            icon: e.sub_category.category.icon
+                            name: e.category.name,
+                            id: e.category.id,
+                            icon: e.category.category.icon
                         },
                         payee: null,
                     }

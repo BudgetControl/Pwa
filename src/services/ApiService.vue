@@ -90,6 +90,16 @@ async function importData(data) {
   return response.data;
 }
 
+async function getPlannedEntry() {
+  const response = await instance.get('/api/planning-recursively');
+  return response.data;
+}
+
+async function setPlannedEntry(data) {
+  const response = await instance.post('/api/planning-recursively',data);
+  return response.data;
+}
+
 export default {
   setEntry,
   getEntry,
@@ -105,6 +115,8 @@ export default {
   accounts,
   importData,
   getEntryFromAccount,
+  getPlannedEntry,
+  setPlannedEntry,
 }
 
 </script>

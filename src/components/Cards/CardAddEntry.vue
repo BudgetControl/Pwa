@@ -153,13 +153,15 @@
               In garanzia <input v-model="waranty" type="checkbox" value="1">
             </label>
           </div>
-          <div class="lg:w-4/12 px-2">
+
+          <div class="lg:w-4/12 px-2" v-if="isPlanned">
             <select v-model="planning"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option></option>
               <option v-for="(item, k) in input.planning" :key="k" :value="item">{{ item }}</option>
             </select>
           </div>
+          
         </div>
 
         <div class="flex flex-wrap py-3">
@@ -236,8 +238,8 @@ export default {
       default: 0,
     },
     isPlanned: {
-      type: Number,
-      default: 0,
+      type: Boolean,
+      default: false,
     },
     typeOfEntry: {
       type: String,
@@ -368,10 +370,6 @@ export default {
     getEntry() {
       let _this = this
       this.action.reset = true
-      // let planned = ""
-      if (this.isPlanned == 1) {
-        // planned = "/planned"
-      }
 
       this.toggleTabs(this.typeOfEntry)
 
