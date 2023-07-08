@@ -101,7 +101,7 @@ export default {
           _this.$refs.entry.buildEntriesTable(res.data)
         }
 
-        if (currentPage == 1) {
+        if (currentPage == 0) {
           this.pagination.enabled = res.paginate
         }
         if (this.$refs._paginator !== undefined) {

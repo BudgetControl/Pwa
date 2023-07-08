@@ -318,7 +318,7 @@ export default {
                     _this.total.incoming = res.balance
                 }
 
-                if(currentPage == 1) {
+                if(currentPage == 0) {
                     this.pagination.enabled = res.paginate
                 }
                 
