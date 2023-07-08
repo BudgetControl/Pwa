@@ -29,15 +29,22 @@
       </div>
     </div>
 
-    <EntriesTable ref="entries" />
+    <EntriesTable ref="entry" />
+    <!-- pagination -->
+    <div class="py-2" v-if="pagination.enabled">
+      <Paginator ref="_paginator"></Paginator>
+    </div>
+    <!-- end pagination -->
 
   </div>
 </template>
 <script>
 
 import EntriesTable from "@/components/GenericComponents/EntriesTable.vue";
-
 import axios from 'axios'
+import ApiServiceVue from '../../services/ApiService.vue';
+import Paginator from "../GenericComponents/Paginator.vue";
+
 // const X_API_KEY = { "X-API-KEY": "7221" }
 const DOMAIN = process.env.VUE_APP_API_PATH
 
@@ -58,18 +65,51 @@ export default {
       selected: {
         account: 0
       },
+      pagination: {
+        enabled: false
+      },
       action: {
         reset: true
       },
     }
   },
   components: {
-    EntriesTable
+    EntriesTable, Paginator
   },
   mounted() {
-
+    this.invoke()
   },
   methods: {
+    invoke(filter) {
+      let _this = this
+
+      if (filter != "") {
+        _this.filter = _this.filter + "&" + filter
+      }
+
+      if (filter != '') {
+        this.action.reset = true
+      } else {
+        this.action.reset = false
+      }
+
+      let currentPage = window.localStorage.getItem('current_page') == null ? 1 : window.localStorage.getItem('current_page')
+      ApiServiceVue.getEntry(currentPage).then((res) => {
+        _this.$refs.entry.entries = []
+
+        if (res.data.length > 0) {
+          _this.$refs.entry.buildEntriesTable(res.data)
+        }
+
+        if (currentPage == 1) {
+          this.pagination.enabled = res.paginate
+        }
+        if (this.$refs._paginator !== undefined) {
+          this.$refs._paginator.hasMorePage = res.hasMorePages
+        }
+      })
+
+    },
     fixWallet() {
 
       let data = {

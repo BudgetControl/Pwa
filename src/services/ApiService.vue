@@ -25,8 +25,8 @@ async function setEntry(type,data) {
   return response.data;
 }
 
-async function getEntry() {
-  const response = await instance.get('/api/entry');
+async function getEntry(page) {
+  const response = await instance.get(`/api/entry?page=${page}`);
   return response.data;
 }
 
@@ -90,12 +90,6 @@ async function importData(data) {
   return response.data;
 }
 
-async function search(data) {
-  const response = await instance.post('/api/search',data);
-  return response.data;
-}
-
-
 export default {
   setEntry,
   getEntry,
@@ -110,7 +104,6 @@ export default {
   currencies,
   accounts,
   importData,
-  search,
   getEntryFromAccount,
 }
 
