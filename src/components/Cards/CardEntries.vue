@@ -80,6 +80,11 @@ export default {
     this.invoke()
   },
   methods: {
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> 266d83e (hotfix)
     invoke(filter) {
       let _this = this
 
@@ -93,7 +98,11 @@ export default {
         this.action.reset = false
       }
 
+<<<<<<< HEAD
       let currentPage = window.localStorage.getItem('current_page') == null ? 1 : window.localStorage.getItem('current_page')
+=======
+      let currentPage = window.localStorage.getItem('current_page') == null ? 0 : window.localStorage.getItem('current_page')
+>>>>>>> 266d83e (hotfix)
       ApiServiceVue.getEntry(currentPage).then((res) => {
         _this.$refs.entry.entries = []
 
@@ -110,6 +119,10 @@ export default {
       })
 
     },
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
+>>>>>>> 266d83e (hotfix)
     fixWallet() {
 
       let data = {

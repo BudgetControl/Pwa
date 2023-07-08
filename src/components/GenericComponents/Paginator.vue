@@ -38,8 +38,10 @@ export default {
             }
         },
         previus() {
-            this.pagination.current--
-            this.invokeEntry()
+            if(this.pagination.current != 0) {
+                this.pagination.current--
+                this.invokeEntry()
+            }
         },
         invokeEntry() {
             window.localStorage.setItem('current_page',this.pagination.current) 

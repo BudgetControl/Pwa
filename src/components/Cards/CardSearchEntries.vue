@@ -308,7 +308,13 @@ export default {
         invoke() {
             let _this = this
             let data = this.action
+<<<<<<< HEAD
             let currentPage = window.localStorage.getItem('current_page') == null ? 1 : window.localStorage.getItem('current_page')
+=======
+<<<<<<< Updated upstream
+=======
+            let currentPage = window.localStorage.getItem('current_page') == null ? 0 : window.localStorage.getItem('current_page')
+>>>>>>> 266d83e (hotfix)
 
             SearchService.filter(data, currentPage).then((res) => {
                 _this.$refs.entryIncoming.entries = []
@@ -325,6 +331,10 @@ export default {
                 if (this.$refs._paginator !== undefined) {
                     this.$refs._paginator.hasMorePage = res.hasMorePages
                 }
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
+>>>>>>> 266d83e (hotfix)
 
             }).catch((error) => {
                 this.action.alert = true
