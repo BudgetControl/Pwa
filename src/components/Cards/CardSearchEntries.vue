@@ -318,7 +318,10 @@ export default {
                     _this.total.incoming = res.balance
                 }
 
-                this.pagination.enabled = res.paginate
+                if(currentPage == 1) {
+                    this.pagination.enabled = res.paginate
+                }
+                
                 if (this.$refs._paginator !== undefined) {
                     this.$refs._paginator.hasMorePage = res.hasMorePages
                 }
