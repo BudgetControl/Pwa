@@ -22,7 +22,7 @@ instance.interceptors.request.use(
 
 async function setEntry(type,data, isPlanned) {
   let url = `/api/${type}`
-  if(isPlanned === true) {
+  if(isPlanned == true || isPlanned == 'true') {
     url = `/api/planning-recursively`
   }
   const response = await instance.post(url,data);
@@ -34,13 +34,22 @@ async function getEntry(page) {
   return response.data;
 }
 
-async function deleteEntry(id) {
-  const response = await instance.delete('/api/entry/'+id);
+async function deleteEntry(id,isPlanned) {
+  let url = `/api/entry/${id}`
+  if(isPlanned == true || isPlanned == 'true') {
+    url = `/api/planning-recursively/${id}`
+  }
+
+  const response = await instance.delete(url);
   return response.data;
 }
 
-async function getEntryDetail(type,id) {
-  const response = await instance.get('/api/'+type+'/'+id);
+async function getEntryDetail(type,id,isPlanned) {
+  let url = `/api/${type}/${id}`
+  if(isPlanned == true || isPlanned == 'true') {
+    url = `/api/planning-recursively/${id}`
+  }
+  const response = await instance.get(url);
   return response.data;
 }
 

@@ -65,8 +65,8 @@ export default {
       }
     },
     deleteEntry() {
-      ApiService.deleteEntry(this.entryId).then((resp) => {
-        console.log(resp)
+      let isPlanned = this.queryParams == 'planned=true'
+      ApiService.deleteEntry(this.entryId,isPlanned).then(() => {
       }).catch((error) => {
         console.error(error);
       })
