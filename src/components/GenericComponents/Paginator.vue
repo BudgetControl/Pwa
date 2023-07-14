@@ -22,13 +22,13 @@ export default {
     data() {
         return {
             pagination: {
-                current: 1,
+                current: 0,
                 hasMorePage: true
             }
         }
     },
-    mounted() {
-        window.localStorage.setItem('current_page',1) 
+    beforeCreate() {
+        window.localStorage.setItem('current_page',0) 
     },
     methods: {
         next() {
