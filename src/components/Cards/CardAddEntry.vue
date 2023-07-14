@@ -141,13 +141,13 @@
               <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
           </div>
-          <div class="lg:w-4/12 px-2 mt-2">
+          <div class="lg:w-4/12 px-2 mt-2" v-if="!isPlanned">
             <label for="confirmed"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               Confermato <input v-model="confirmed" type="checkbox" id="confirmed" value="1" checked>
             </label>
           </div>
-          <div class="lg:w-4/12 px-2 mt-2">
+          <div class="lg:w-4/12 px-2 mt-2" v-if="!isPlanned">
             <label for="waranty"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               In garanzia <input v-model="waranty" type="checkbox" value="1">
@@ -155,8 +155,8 @@
           </div>
 
           <div class="lg:w-4/12 px-2" v-if="isPlanned">
-            <select v-model="planning"
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+            <select id="planning" v-model="planning"
+              class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option></option>
               <option v-for="(item, k) in input.planning" :key="k" :value="item">{{ item }}</option>
             </select>
@@ -526,7 +526,7 @@ export default {
         data.amount = this.amount * -1
       }
 
-      ApiService.setEntry(this.type, data).then(() => {
+      ApiService.setEntry(this.type, data, this.isPlanned).then(() => {
         _this.date = null,
           _this.amount = null,
           _this.category = data.category_id,
@@ -540,6 +540,7 @@ export default {
 
           _this.action.alert = true
         _this.action.alert_message = _this.type + " inserito correttamente"
+        this.time()
         setTimeout(_this.action.alert = false, 3000)
 
       }).catch((reason) => {

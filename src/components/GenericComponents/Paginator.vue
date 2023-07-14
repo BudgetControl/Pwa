@@ -27,7 +27,7 @@ export default {
             }
         }
     },
-    beforeCreate() {
+    mounted() {
         window.localStorage.setItem('current_page',1) 
     },
     methods: {

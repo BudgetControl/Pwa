@@ -20,8 +20,12 @@ instance.interceptors.request.use(
   }
 );
 
-async function setEntry(type,data) {
-  const response = await instance.post('/api/'+type,data);
+async function setEntry(type,data, isPlanned) {
+  let url = `/api/${type}`
+  if(isPlanned === true) {
+    url = `/api/planning-recursively`
+  }
+  const response = await instance.post(url,data);
   return response.data;
 }
 
@@ -90,8 +94,8 @@ async function importData(data) {
   return response.data;
 }
 
-async function getPlannedEntry() {
-  const response = await instance.get('/api/planning-recursively');
+async function getPlannedEntry(page) {
+  const response = await instance.get(`/api/planning-recursively?page=${page}`);
   return response.data;
 }
 
