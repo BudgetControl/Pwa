@@ -9,7 +9,7 @@
         block: dropdownPopoverShow,
       }">
 
-      <router-link :to="'/app/add_entry?planned='+isPlanned+'&entry_id=' + entryId+'&type='+type" v-slot="{ href, navigate, isActive }">
+      <router-link :to="`/app/add_entry?entry_id=${entryId}&${queryParams}`" v-slot="{ href, navigate, isActive }">
         <a :href="href" @click="navigate"
           class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700" :class="[
             isActive
@@ -35,10 +35,9 @@ export default {
   props: {
     entryId: {
       type: Number,
-      default: 0,
       required: true
     },
-    type: {
+    queryParams: {
       type: String,
       default: ""
     },
@@ -53,11 +52,6 @@ export default {
       isPlanned : 0
     };
   },
-  mounted() {
-      if(this.type == "planned-entries") {
-        this.isPlanned = 1
-      }
-    },
   methods: {
     toggleDropdown: function (event) {
       event.preventDefault();
@@ -71,8 +65,8 @@ export default {
       }
     },
     deleteEntry() {
-      ApiService.deleteEntry(this.entryId).then((resp) => {
-        console.log(resp)
+      let isPlanned = this.queryParams == 'planned=true'
+      ApiService.deleteEntry(this.entryId,isPlanned).then(() => {
       }).catch((error) => {
         console.error(error);
       })

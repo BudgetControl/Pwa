@@ -76,7 +76,9 @@ export default {
   components: {
     EntriesTable, Paginator
   },
+
   mounted() {
+    window.localStorage.setItem('current_page',0) 
     this.invoke()
   },
   methods: {

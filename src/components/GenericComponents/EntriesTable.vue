@@ -38,7 +38,7 @@
 
                     </div>
                     <div class="flex-l">
-                        <EntryActionDropdown :entryId="entry.id" :type="entry.type" />
+                        <EntryActionDropdown :entryId="entry.uuid" :type="entry.type" />
                     </div>
                 </div>
 

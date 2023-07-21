@@ -141,25 +141,27 @@
               <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
           </div>
-          <div class="lg:w-4/12 px-2 mt-2">
+          <div class="lg:w-4/12 px-2 mt-2" v-if="!isPlanned">
             <label for="confirmed"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               Confermato <input v-model="confirmed" type="checkbox" id="confirmed" value="1" checked>
             </label>
           </div>
-          <div class="lg:w-4/12 px-2 mt-2">
+          <div class="lg:w-4/12 px-2 mt-2" v-if="!isPlanned">
             <label for="waranty"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               In garanzia <input v-model="waranty" type="checkbox" value="1">
             </label>
           </div>
-          <div class="lg:w-4/12 px-2">
-            <select v-model="planning"
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+
+          <div class="lg:w-4/12 px-2" v-if="isPlanned">
+            <select id="planning" v-model="planning"
+              class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option></option>
               <option v-for="(item, k) in input.planning" :key="k" :value="item">{{ item }}</option>
             </select>
           </div>
+          
         </div>
 
         <div class="flex flex-wrap py-3">
@@ -236,8 +238,8 @@ export default {
       default: 0,
     },
     isPlanned: {
-      type: Number,
-      default: 0,
+      type: Boolean,
+      default: false,
     },
     typeOfEntry: {
       type: String,
@@ -368,41 +370,33 @@ export default {
     getEntry() {
       let _this = this
       this.action.reset = true
-      // let planned = ""
-      if (this.isPlanned == 1) {
-        // planned = "/planned"
-      }
 
       this.toggleTabs(this.typeOfEntry)
 
-      ApiService.getEntryDetail(this.type, this.entryId).then((res) => {
+      ApiService.getEntryDetail(this.type, this.entryId, this.isPlanned).then((res) => {
         let model = res.data
 
         _this.amount = model.amount
-        if (model.type == "expenses") {
-          _this.amount = model.amount * -1
+        if (model.amount <= 0) {
+          _this.action.openTab = 1
         }
 
-        if (model.type == "incoming") {
+        if (model.amount >= 0) {
           _this.action.openTab = 2
         }
 
-        if (model.type == "transfer") {
-          _this.action.openTab = 3
-        }
-
         _this.type = model.type
-        _this.category = model.category_id
+        _this.category = model.category.id
         _this.note = model.note
-        _this.currency = model.currency_id
-        _this.account = model.account_id
-        _this.payment_type = model.payment_type
+        _this.currency = model.currency.id
+        _this.account = model.account.id
+        _this.payment_type = model.payment_type.id
         _this.waranty = model.waranty == 1 ? true : false
         _this.confirmed = model.confirmed == 1 ? true : false
-        _this.date = model.created_at
         _this.action.dateUpdated = true
         _this.uuid = model.uuid
         _this.date = model.date_time
+        _this.planning = model.planning
 
         if (model.transfer == 1) {
           _this.action.hidecategory = true
@@ -521,14 +515,15 @@ export default {
         payee_id: this.debit_name,
         confirmed: this.confirmed,
         waranty: this.waranty,
-        geolocalization: this.geolocalization
+        geolocalization: this.geolocalization,
+        planning: this.planning
       }
 
       if (this.type == "expenses") {
         data.amount = this.amount * -1
       }
 
-      ApiService.setEntry(this.type, data).then(() => {
+      ApiService.setEntry(this.type, data, this.isPlanned).then(() => {
         _this.date = null,
           _this.amount = null,
           _this.category = data.category_id,
@@ -542,6 +537,9 @@ export default {
 
           _this.action.alert = true
         _this.action.alert_message = _this.type + " inserito correttamente"
+        
+        _this.action.dateUpdated = false
+        this.time()
         setTimeout(_this.action.alert = false, 3000)
 
       }).catch((reason) => {
