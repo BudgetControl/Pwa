@@ -27,9 +27,6 @@ export default {
             }
         }
     },
-    beforeCreate() {
-        window.localStorage.setItem('current_page',0) 
-    },
     methods: {
         next() {
             if(this.pagination.hasMorePage == true) {
