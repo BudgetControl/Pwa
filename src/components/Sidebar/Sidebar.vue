@@ -106,7 +106,7 @@
 
           <li class="items-center">
             <router-link
-              to="/app/entries/0"
+              to="/app/entries"
               v-slot="{ href, navigate, isActive }"
             >
               <a

@@ -29,8 +29,8 @@ async function setEntry(type,data, isPlanned) {
   return response.data;
 }
 
-async function getEntry(page) {
-  const response = await instance.get(`/api/entry?page=${page}`);
+async function getEntry(page,filter) {
+  const response = await instance.get(`/api/entry?page=${page}${filter}`);
   return response.data;
 }
 

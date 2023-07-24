@@ -39,7 +39,7 @@
           </div>
 
           <div class="min-w px-2">
-            <router-link to="/app/entries/type/incoming" v-slot="{ href, navigate }">
+            <router-link to="/app/entries?type=incoming" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
                 <card-stats statSubtitle="MY INCOMING" :statTitle="incoming.statTitle + ' €'"
                   :statArrow="incoming.statArrow" :statPercent="incoming.statPercent"
@@ -50,7 +50,7 @@
           </div>
 
           <div class="min-w px-2">
-            <router-link to="/app/entries/type/expenses" v-slot="{ href, navigate }">
+            <router-link to="/app/entries?type=expenses" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
                 <card-stats statSubtitle="MY EXPENSES" :statTitle="expenses.statTitle + ' €'"
                   :statArrow="expenses.statArrow" :statPercent="expenses.statPercent"

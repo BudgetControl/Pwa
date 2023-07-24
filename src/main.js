@@ -56,22 +56,8 @@ const routes = [
         component: AddEntry,
       },
       {
-        path: "/app/entries/:account_id",
+        path: "/app/entries",
         component: MyEntries,
-        children: [
-          {
-            path: "/app/entries/type/:filter_type",
-            component: MyEntries,
-          },
-          {
-            path: "/app/entries/:account_id/category-:category_id",
-            component: MyEntries,
-          },
-          {
-            path: "/app/entries/:account_id/label-:label_id",
-            component: MyEntries,
-          }
-        ]
       },
       {
         path: "/app/import",

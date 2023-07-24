@@ -20,7 +20,7 @@
           </button>
         </div>
         <div class="lg:w-2/12 px-2">
-          <button v-on:click="$refs.entries.resetFilter()" v-if="action.reset"
+          <button v-on:click="resetFilter()" v-if="action.reset"
             class="text-emerald-500 bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
             type="button">
             RESET FILTER
@@ -76,17 +76,35 @@ export default {
   components: {
     EntriesTable, Paginator
   },
-
+  watch: {
+    $route() {
+      this.invoke()
+    }
+  },
   mounted() {
     window.localStorage.setItem('current_page',0) 
     this.invoke()
   },
   methods: {
-    invoke(filter) {
+    invoke() {
       let _this = this
 
-      if (filter != "") {
-        _this.filter = _this.filter + "&" + filter
+      let filter = ''
+
+      if(this.$route.query.account !== undefined) {
+        filter += `&filter[account]=${this.$route.query.account}`
+      }
+
+      if(this.$route.query.category !== undefined) {
+        filter += `&filter[category]=${this.$route.query.category}`
+      }
+
+      if(this.$route.query.type !== undefined) {
+        filter += `&filter[type]=${this.$route.query.type}`
+      }
+
+      if(this.$route.query.label !== undefined) {
+        filter += `&filter[label]=${this.$route.query.label}`
       }
 
       if (filter != '') {
@@ -96,7 +114,7 @@ export default {
       }
 
       let currentPage = window.localStorage.getItem('current_page') == null ? 0 : window.localStorage.getItem('current_page')
-      ApiServiceVue.getEntry(currentPage).then((res) => {
+      ApiServiceVue.getEntry(currentPage,filter).then((res) => {
         _this.$refs.entry.entries = []
 
         if (res.data.length > 0) {
@@ -128,6 +146,9 @@ export default {
         console.error(error);
       })
     },
+    resetFilter() {
+      this.$router.push('/app/entries')
+  },
     get(path, callBack) {
       axios.get(path).then((resp) => {
         callBack(resp.data)
@@ -135,7 +156,7 @@ export default {
         console.error(error);
       })
     }
-  }
+  },
 };
 </script>
 
