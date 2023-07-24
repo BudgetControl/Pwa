@@ -144,6 +144,7 @@ export default {
                     });
 
                     let info = {
+                        uuid: r.uuid,
                         id: r.id,
                         date: r.date_time,
                         amount: parseFloat(r.amount).toFixed(2) + " €",
