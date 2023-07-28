@@ -264,7 +264,7 @@ export default {
       type: "expenses",
       category: 3,
       label: [],
-      note: null,
+      note: '-',
       currency: 1,
       account: 1,
       payment_type: 1,
@@ -376,7 +376,7 @@ export default {
       ApiService.getEntryDetail(this.type, this.entryId, this.isPlanned).then((res) => {
         let model = res.data
 
-        _this.amount = model.amount
+        _this.amount = Math.abs(model.amount)
         if (model.amount <= 0) {
           _this.action.openTab = 1
         }
@@ -459,7 +459,7 @@ export default {
       this.type = "expenses"
       this.category = null
       this.label = []
-      this.note = null
+      this.note = '-'
       this.currency = 1
       this.account = 1
       this.payment_type = 1
@@ -528,7 +528,7 @@ export default {
           _this.amount = null,
           _this.category = data.category_id,
           _this.label = [],
-          _this.note = null,
+          _this.note = '-',
           _this.currency = 1,
           _this.account = data.account_id,
           _this.payment_type = 1,
