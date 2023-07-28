@@ -376,7 +376,7 @@ export default {
       ApiService.getEntryDetail(this.type, this.entryId, this.isPlanned).then((res) => {
         let model = res.data
 
-        _this.amount = model.amount
+        _this.amount = Math.abs(model.amount)
         if (model.amount <= 0) {
           _this.action.openTab = 1
         }
