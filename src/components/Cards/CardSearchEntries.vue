@@ -156,11 +156,11 @@
         </div>
 
         <div class="flex flex-wrap">
-            <div class="flex-l px-4" v-if="total.incoming">
+            <div class="flex-l px-4" v-if="total.entry">
                 <div class="relative  mb-3">
                     incoming: <span
-                        class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-emerald-600 bg-emerald-200 uppercase last:mr-0 mr-1">
-                        {{ total.incoming }} €
+                        :class="'text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-emerald-600 uppercase last:mr-0 mr-1 '+total.bgcolor">
+                        {{ total.entry }} €
                     </span>
 
                 </div>
@@ -204,10 +204,8 @@ export default {
     data() {
         return {
             total: {
-                incoming: 0,
-                expenses: 0,
-                debit: 0,
-                transfer: 0
+                entry: 0,
+                bgcolor: "bg-emerald-400"
             },
             pagination: {
                 enabled: false
@@ -315,7 +313,10 @@ export default {
 
                 if (res.data.length > 0) {
                     _this.$refs.entryIncoming.buildEntriesTable(res.data)
-                    _this.total.incoming = res.balance
+                    _this.total.entry = res.balance
+                    if(res.balance < 0) {
+                        _this.total.bgcolor = "bg-orange-600"
+                    }
                 }
 
                 if(currentPage == 0) {

@@ -20,12 +20,19 @@ instance.interceptors.request.use(
   }
 );
 
-async function setEntry(type,data, isPlanned) {
+async function setEntry(type,data, isPlanned, uuid) {
   let url = `/api/${type}`
   if(isPlanned == true || isPlanned == 'true') {
     url = `/api/planning-recursively`
   }
-  const response = await instance.post(url,data);
+  
+  let response
+  if(uuid !== null || uuid !== undefined) {
+    url = `/api/${type}/${uuid}`
+    response = await instance.put(url,data);
+  } else {
+    response = await instance.post(url,data);
+  }
   return response.data;
 }
 
