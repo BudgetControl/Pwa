@@ -397,6 +397,7 @@ export default {
         _this.uuid = model.uuid
         _this.date = model.date_time
         _this.planning = model.planning
+        _this.transfer_realtion= model.transfer_relation
 
         if (model.transfer == 1) {
           _this.action.hidecategory = true
@@ -516,14 +517,15 @@ export default {
         confirmed: this.confirmed,
         waranty: this.waranty,
         geolocalization: this.geolocalization,
-        planning: this.planning
+        planning: this.planning,
+        transfer_realtion: this.transfer_relation
       }
 
       if (this.type == "expenses") {
         data.amount = this.amount * -1
       }
 
-      ApiService.setEntry(this.type, data, this.isPlanned).then(() => {
+      ApiService.setEntry(this.type, data, this.isPlanned, this.entryId).then(() => {
         _this.date = null,
           _this.amount = null,
           _this.category = data.category_id,
