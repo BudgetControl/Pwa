@@ -236,7 +236,7 @@ export default {
   props: {
     entryId: {
       type: Number,
-      default: 0,
+      default: null,
     },
     isPlanned: {
       type: Boolean,
