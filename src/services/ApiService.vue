@@ -27,7 +27,7 @@ async function setEntry(type,data, isPlanned, uuid) {
   }
   
   let response
-  if(uuid !== null || uuid !== undefined) {
+  if(uuid !== null && uuid !== undefined) {
     url = `/api/${type}/${uuid}`
     response = await instance.put(url,data);
   } else {
