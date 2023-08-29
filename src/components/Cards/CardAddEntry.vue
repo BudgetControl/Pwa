@@ -387,7 +387,7 @@ export default {
         }
 
         _this.type = model.type
-        _this.category = model.category.id
+        _this.category = model.sub_category.id
         _this.note = model.note
         _this.currency = model.currency.id
         _this.account = model.account.id
@@ -507,9 +507,9 @@ export default {
         amount: this.amount,
         note: this.note,
         label: label,
-        account_id: this.account,
-        category_id: this.category,
-        currency_id: this.currency,
+        account_id: this.account_id,
+        category_id: this.category_id,
+        currency_id: this.currency_id,
         payment_type: this.payment_type,
         uuid: this.uuid,
         transfer_id: this.transferto,
