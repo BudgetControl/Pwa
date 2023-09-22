@@ -28,6 +28,13 @@ async function login(email, password) {
   return response.data;
 }
 
+async function verify(email) {
+  const response = await instance.post('/auth/verify-email',{
+    email: email
+  });
+  return response.data;
+}
+
 async function register(name, password, email) {
   const response = await instance.post('/auth/register', {
     name: name,
@@ -50,9 +57,29 @@ async function authenticate(email, password) {
   return response.data;
 }
 
+async function recoveryPassword(email) {
+  const response = await instance.post('/auth/recovery', {
+    email: email,
+  });
+  return response.data;
+}
+
+async function resetPassword(token,password) {
+  const response = await instance.put(`/auth/recovery/${token}`, {
+    password: password
+  });
+  return response.data;
+}
+
 async function check() {
   //retrive access token header
   const response = await instance.get('/auth/check');
+  return response.status;
+}
+
+async function confirm(token) {
+  //retrive access token header
+  const response = await instance.get(`/auth/confirm/${token}`);
   return response.status;
 }
 
@@ -61,7 +88,11 @@ export default {
   register,
   logout,
   authenticate,
-  check
+  check,
+  recoveryPassword,
+  resetPassword,
+  verify,
+  confirm
 }
 
 </script>

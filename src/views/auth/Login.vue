@@ -35,9 +35,11 @@
 
               <div role="alert" v-if="error">
                 <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-                  User not found
+                  Could not log in
                 </div>
                 <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                  maybe you lost your password or your email is not verified. <br/>
+                  <VerifyEmailButton :email=this.email class="font-bold"></VerifyEmailButton>
                 </div>
               </div>
 
@@ -57,6 +59,9 @@
                 <input type="password" v-model="password"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Password" />
+              </div>
+              <div class="text-blueGray-400 mb-3 font-bold">
+                <small>Lost your passowrd ? <a href="/auth/recovery-password">recovery here</a></small>
               </div>
               <div>
                 <label class="inline-flex items-center cursor-pointer">
@@ -99,10 +104,12 @@ import facebook from "@/assets/img/github.svg";
 import google from "@/assets/img/google.svg";
 import AuthService from "../../services/AuthService.vue";
 import loading from 'vue-full-loading'
+import VerifyEmailButton from "../../components/Auth/VerifyEmailButton.vue";
 
 export default {
   components: {
-    loading
+    loading,
+    VerifyEmailButton
   },
   data() {
     return {
