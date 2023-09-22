@@ -27,9 +27,11 @@ import SearchEntries from "@/views/admin/SearchEntries.vue";
 import EntriesResume from "@/views/admin/EntriesResume.vue";
 
 // views for Auth layout
-
 import Login from "@/views/auth/Login.vue";
 import Register from "@/views/auth/Register.vue";
+import RecoveryPassword from "@/views/auth/RecoveryPassword.vue";
+import ResetPassword from "@/views/auth/ResetPassword.vue";
+import AuthConfirm from "@/views/auth/Confirm.vue";
 
 // views without layouts
 
@@ -98,6 +100,18 @@ const routes = [
         path: "/auth/register",
         component: Register,
       },
+      {
+        path: "/auth/recovery-password",
+        component: RecoveryPassword,
+      },
+      {
+        path: "/auth/reset-password/:token",
+        component: ResetPassword,
+      },
+      {
+        path: "/auth/confirm/:token",
+        component: AuthConfirm,
+      }
     ],
   },
   {

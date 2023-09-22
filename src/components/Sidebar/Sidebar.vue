@@ -266,12 +266,6 @@
         <!-- Divider -->
         <hr class="my-4 md:min-w-full" />
         <!-- Heading -->
-        <h6
-          class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
-        >
-          Auth Layout Pages
-        </h6>
-        <!-- Navigation -->
 
         <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
           <li class="items-center">
@@ -285,15 +279,10 @@
           </li>
 
           <li class="items-center">
-            <router-link
-              class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-              to="/auth/register"
-            >
               <i
                 class="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"
               ></i>
-              Register
-            </router-link>
+              <LogoutButton class="px-2 text-xs font-bold uppercase "></LogoutButton>
           </li>
         </ul>
 
@@ -310,6 +299,7 @@
 <script>
 import NotificationDropdown from "@/components/Dropdowns/NotificationDropdown.vue";
 import UserDropdown from "@/components/Dropdowns/UserDropdown.vue";
+import LogoutButton from "../Auth/LogoutButton.vue";
 
 export default {
   data() {
@@ -325,6 +315,7 @@ export default {
   components: {
     NotificationDropdown,
     UserDropdown,
+    LogoutButton
   },
 };
 </script>
