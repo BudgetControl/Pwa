@@ -33,7 +33,7 @@
                   <input v-model="password" type="password"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Password" />
-                  <password-meter :password="password" />
+                    <PasswordStrengthMeter :password="password" ref="passwordStreight" />
                 </div>
 
                 <div class="text-center mt-6">
@@ -54,12 +54,12 @@
 <script>
 import AuthService from "../../services/AuthService.vue";
 import loading from 'vue-full-loading'
-import PasswordMeter from 'vue-simple-password-meter';
+import PasswordStrengthMeter from "../../components/Auth/PasswordStrengthMeter.vue";
 
 export default {
   components: {
     loading,
-    PasswordMeter
+    PasswordStrengthMeter,
   },
   data() {
     return {
