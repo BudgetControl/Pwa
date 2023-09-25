@@ -83,6 +83,18 @@ async function confirm(token) {
   return response.status;
 }
 
+async function profile() {
+  //retrive access token header
+  const response = await instance.get(`/auth/profile`);
+  return response;
+}
+
+async function deleteUser() {
+  //retrive access token header
+  const response = await instance.delete(`/auth/delete`);
+  return response;
+}
+
 export default {
   login,
   register,
@@ -92,7 +104,9 @@ export default {
   recoveryPassword,
   resetPassword,
   verify,
-  confirm
+  confirm,
+  profile,
+  deleteUser
 }
 
 </script>
