@@ -65,8 +65,23 @@ async function getEntryFromAccount(id) {
   return response.data;
 }
 
-async function debit() {
-  const response = await instance.get('/api/debit');
+async function debit(page) {
+  let params = ''
+  if(page !== undefined) {
+    params = `?page=${page}`
+  }
+  
+  const response = await instance.get(`/api/debit${params}`);
+  return response.data;
+}
+
+async function payee() {
+  const response = await instance.get(`/api/payee`);
+  return response.data;
+}
+
+async function deletePayee(id) {
+  const response = await instance.delete(`/api/payee/${id}`);
   return response.data;
 }
 
@@ -137,6 +152,8 @@ export default {
   getEntryFromAccount,
   getPlannedEntry,
   setPlannedEntry,
+  payee,
+  deletePayee
 }
 
 </script>

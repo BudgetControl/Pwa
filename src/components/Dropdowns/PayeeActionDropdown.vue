@@ -30,6 +30,9 @@ export default {
     icon: {
       type: String,
       default: "fa-ellipsis-v",
+    },
+    index: {
+      required: true
     }
   },
   data() {
@@ -50,8 +53,9 @@ export default {
       }
     },
     deleteEntry() {
-      ApiService.deleteEntry(this.entryId).then((resp) => {
-        console.log(resp)
+      this.dropdownPopoverShow = false;
+      ApiService.deletePayee(this.entryId).then(() => {
+        this.$emit('deleteItem', this.index)
       }).catch((error) => {
         console.error(error);
       })
