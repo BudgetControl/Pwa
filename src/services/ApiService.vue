@@ -28,11 +28,12 @@ async function setEntry(type,data, isPlanned, uuid) {
   
   let response
   if(uuid !== null && uuid !== undefined) {
-    url = `/api/${type}/${uuid}`
+    url = `${url}/${uuid}`
     response = await instance.put(url,data);
   } else {
     response = await instance.post(url,data);
   }
+
   return response.data;
 }
 

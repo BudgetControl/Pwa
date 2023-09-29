@@ -159,17 +159,26 @@
             <select id="planning" v-model="planning"
               class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option></option>
-              <option v-for="(item, k) in input.planning" :key="k" :value="item">{{ item }}</option>
+              <option required v-for="(item, k) in input.planning" :key="k" :value="item">{{ item }}</option>
             </select>
           </div>
-          
+
         </div>
 
         <div class="flex flex-wrap py-3">
-          <div class="lg:w-12/12 px-2 w-full">
+          <div class=" px-2 " :class="{
+            'lg:w-12/12 w-full': !isPlanned,
+            'lg:w-6/12': isPlanned,
+          }">
             <input v-model="date" type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
+
+          <div  v-if="isPlanned" class="g:w-6/12 px-2">
+            <input v-model="end_date_time" type="text"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+          </div>
+
         </div>
 
         <div class="flex py-3">
@@ -279,6 +288,7 @@ export default {
       geolocalization: "",
       name: "",
       debit_name: null,
+      end_date_time: null,
       planning: null,
       debit: null,
       input: {
@@ -322,6 +332,7 @@ export default {
       if (this.action.dateUpdated == false) {
         let dateTime = new Date()
         _this.date = dateTime.toISOString().split('T')[0] + " " + dateTime.toLocaleTimeString()
+        _this.end_date_time = dateTime.toISOString().split('T')[0] + " " + dateTime.toLocaleTimeString()
       }
     },
     getDebit() {
@@ -375,7 +386,7 @@ export default {
       this.toggleTabs(this.typeOfEntry)
 
       ApiService.getEntryDetail(this.type, this.entryId, this.isPlanned).then((res) => {
-        let model = res.data
+        let model = res[0]
 
         _this.amount = Math.abs(model.amount)
         if (model.amount <= 0) {
@@ -398,7 +409,8 @@ export default {
         _this.uuid = model.uuid
         _this.date = model.date_time
         _this.planning = model.planning
-        _this.transfer_realtion= model.transfer_relation
+        _this.transfer_realtion = model.transfer_relation
+        _this.planned = model.planning
 
         if (model.transfer == 1) {
           _this.action.hidecategory = true
@@ -519,7 +531,8 @@ export default {
         waranty: this.waranty,
         geolocalization: this.geolocalization,
         planning: this.planning,
-        transfer_realtion: this.transfer_relation
+        transfer_realtion: this.transfer_relation,
+        end_date_time: this.end_date_time
       }
 
       if (this.type == "expenses") {
@@ -540,7 +553,7 @@ export default {
 
           _this.action.alert = true
         _this.action.alert_message = _this.type + " inserito correttamente"
-        
+
         _this.action.dateUpdated = false
         this.time()
         setTimeout(_this.action.alert = false, 3000)

@@ -19,7 +19,7 @@
             v-for="(entry, i) in this.entries" :key="i">
             <div class="flex flex-wrap">
                 <div class="flex-l w-full px-4">
-                    <span class="text-xs block text-emerald-500 rounded ">{{ entry.date }}</span>
+                    <span class="text-xs block text-emerald-500 rounded ">{{ entry.date }} {{ entry.end_date }}</span>
                 </div>
             </div>
             <div class="flex flex-wrap">
@@ -103,7 +103,8 @@ export default {
                 resp.data.forEach(e => {
                     let info = {
                         id: e.uuid,
-                        date: e.created_at,
+                        date: `Start: ${e.date_time}`,
+                        end_date: (e.end_date_time == null) ? null : `End: ${e.end_date_time}`,
                         amount: e.amount.toFixed(2) + " €",
                         color_amount: e.amount <= 0 ? "text-red-500" : "text-emerald-500",
                         type_amount: e.amount <= 0 ? "expenses" : "incoming",
@@ -111,9 +112,9 @@ export default {
                         note: e.note,
                         planned: e.planned == 0 ? false : true,
                         category: {
-                            name: e.category.name,
-                            id: e.category.id,
-                            icon: e.category.category.icon
+                            name: e.sub_category.name,
+                            id: e.sub_category.id,
+                            icon: e.sub_category.category.icon
                         },
                         payee: null,
                     }
