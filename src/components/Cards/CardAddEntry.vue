@@ -337,8 +337,8 @@ export default {
     },
     getDebit() {
       let _this = this
-      ApiService.debit().then((res) => {
-        let data = res.data
+      ApiService.payee().then((res) => {
+        let data = res
         data.forEach(function (r) {
           _this.input.debit.push(r)
         })
@@ -526,7 +526,7 @@ export default {
         uuid: this.uuid,
         transfer_id: this.transferto,
         date_time: this.date,
-        payee_id: this.debit_name,
+        payee_id: (this.debit_name == null) ? this.debit : this.debit_name,
         confirmed: this.confirmed,
         waranty: this.waranty,
         geolocalization: this.geolocalization,

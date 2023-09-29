@@ -152,18 +152,19 @@ export default {
         resp.forEach(e => {
 
           let totalamout = 0
-          debitColor = "text-red-500"
-          if (e.amount >= 0) {
-            debitColor = "text-emerald-500"
-          }
-
-          if (e.type == 1) {
-            debitColor = "text-blueGray-400"
-          }
+          debitColor = "text-blueGray-500"
 
           e.entry.forEach(e => {
             totalamout += e.amount
           })
+
+          if (totalamout > 0) {
+            debitColor = "text-emerald-500"
+          }
+
+          if (totalamout < 0) {
+            debitColor = "text-red-400"
+          }
           
 
           let info = {
