@@ -38,7 +38,7 @@
 
                     </div>
                     <div class="flex-l">
-                        <EntryActionDropdown :entryId="entry.uuid" :type="entry.type" />
+                        <EntryActionDropdown :entryId="entry.uuid" :type="entry.type" :index=i @deleteItem="deleteItemFromArray" />
                     </div>
                 </div>
 
@@ -51,9 +51,8 @@
                 <div class="flex flex-wrap">
                     <div class="w-full px-4 flex-1">
                         <span class="text-xs mt-2 block text-blueGray-700 rounded ">
-                            <span v-for="(label, i) in entry.labels" 
-                                v-on:click="$router.push(`/app/entries?label=${label.id}`)"   
-                                :key="i"
+                            <span v-for="(label, i) in entry.labels"
+                                v-on:click="$router.push(`/app/entries?label=${label.id}`)" :key="i"
                                 class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
                                 :style="'color: #fff; background-color: ' + label.color">{{
                                     label.name
@@ -112,6 +111,9 @@ export default {
         };
     },
     methods: {
+        deleteItemFromArray(index) {
+            this.entries.splice(index, 1);
+        },
         getAccount() {
             let _this = this
 
@@ -178,7 +180,7 @@ export default {
             }
 
         },
-        
+
     }
 };
 </script>

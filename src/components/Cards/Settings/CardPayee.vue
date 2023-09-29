@@ -82,7 +82,7 @@
           <span class="text-xs block text-emerald-500 rounded ">{{ entry.date }}</span>
         </div>
       </div>
-      <div v-on:click="toggleModal(i)" class="flex flex-wrap">
+      <div class="flex flex-wrap">
         <div class="w-full px-4 flex-1">
           <span class="text-xs block rounded text-blueGray-900">
             {{ entry.name }}</span>
@@ -95,7 +95,7 @@
         </div>
 
         <div class="flex-l">
-          <PayeeActionDropdown :entryId="entry.id" />
+          <PayeeActionDropdown :entryId="entry.id" :index=i @deleteItem="deleteItemFromArray" />
         </div>
 
       </div>
@@ -118,10 +118,8 @@
 </template>
 <script>
 
-import axios from 'axios'
-// const X_API_KEY = { "X-API-KEY": "7221" }
-const DOMAIN = process.env.VUE_APP_API_PATH_V2
 import PayeeActionDropdown from "@/components/Dropdowns/PayeeActionDropdown.vue";
+import ApiService from '../../../services/ApiService.vue';
 
 export default {
   components: {
@@ -144,11 +142,16 @@ export default {
       this.showModal = !this.showModal;
       this.name = this.entries[i].name
     },
+    deleteItemFromArray(index) {
+      this.entries.splice(index, 1);
+    },
     getPlannedEntries() {
-      axios.get(DOMAIN + "/api/debit/get-total/entry").then((resp) => {
+      ApiService.payee().then((resp) => {
         let debitColor = "text-red-500"
 
-        resp.data.data.forEach(e => {
+        resp.forEach(e => {
+
+          let totalamout = 0
           debitColor = "text-red-500"
           if (e.amount >= 0) {
             debitColor = "text-emerald-500"
@@ -158,16 +161,22 @@ export default {
             debitColor = "text-blueGray-400"
           }
 
+          e.entry.forEach(e => {
+            totalamout += e.amount
+          })
+          
+
           let info = {
             id: e.id,
-            date: e.created_at,
+            date: e.date_time,
             color_amount: debitColor,
             name: e.name,
-            amount: e.amount.toFixed(2) + " €",
+            amount: totalamout.toFixed(2) + " €",
             entry: e.entry
           }
 
           this.entries.push(info)
+
         });
 
       }).catch((error) => {
