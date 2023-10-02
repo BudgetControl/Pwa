@@ -386,7 +386,7 @@ export default {
       this.toggleTabs(this.typeOfEntry)
 
       ApiService.getEntryDetail(this.type, this.entryId, this.isPlanned).then((res) => {
-        let model = res[0]
+        let model = res
 
         _this.amount = Math.abs(model.amount)
         if (model.amount <= 0) {
