@@ -28,13 +28,13 @@
                   </div>
                 </div>
                 <div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
-                  <div class="py-6 px-3 mt-32 sm:mt-0">
+                  <div class="py-6 px-3 mt-32 sm:mt-0 text-center">
                     <a href="/app/dashboard"
                       class="bg-emerald-500 active:bg-emerald-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150">
                       Wallet
                     </a>
                     <a href="/app/add_entry"
-                      class="bg-emerald-500 active:bg-emerald-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150">
+                      class="ml-5 bg-emerald-500 active:bg-emerald-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150">
                       Add entry
                     </a>
                   </div>
@@ -42,25 +42,25 @@
                 <div class="w-full lg:w-4/12 px-4 lg:order-1">
                   <div class="flex justify-center py-4 lg:pt-4 pt-8">
                     <div class="mr-4 p-3 text-center">
-                      <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                      <span class="text-xl font-bold block uppercase tracking-wide " :class="user.wallet.total_color">
                         {{ user.wallet.total }}
                       </span>
                       <span class="text-sm text-blueGray-400">Wallet</span>
                     </div>
                     <div class="mr-4 p-3 text-center">
-                      <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                      <span class="text-xl font-bold block uppercase tracking-wide text-emerald-600">
                         {{ user.wallet.incoming }}
                       </span>
                       <span class="text-sm text-blueGray-400">Incoming</span>
                     </div>
-                    <div class="lg:mr-4 p-3 text-center">
-                      <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                    <div class="lg:mr-4 p-3 text-center text-red-500">
+                      <span class="text-xl font-bold block uppercase tracking-wide">
                         {{ user.wallet.expenses }}
                       </span>
                       <span class="text-sm text-blueGray-400">Expenses</span>
                     </div>
-                    <div class="lg:mr-4 p-3 text-center" :class="user.wallet.health_color">
-                      <span class="text-xl font-bold block uppercase tracking-wide" >
+                    <div class="lg:mr-4 p-3 text-center">
+                      <span class="text-xl font-bold block uppercase tracking-wide " :class="user.wallet.health_color" >
                         {{ user.wallet.health }}
                       </span>
                       <span class="text-sm">Health</span>
@@ -124,7 +124,8 @@ export default {
           incoming: 0,
           expenses: 0,
           health: 0,
-          health_color: 'text-emerald-600'
+          health_color: 'text-emerald-600',
+          total_color: 'text-emerald-600'
         }
       }
     };
@@ -158,6 +159,10 @@ export default {
 
       if(resp.health <= 0) {
         _this.user.wallet.health_color = 'text-red-500'
+      }
+
+      if(resp.total <= 0) {
+        _this.user.wallet.total_color = 'text-red-500'
       }
 
     }).catch((err) => {

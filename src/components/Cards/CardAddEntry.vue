@@ -29,28 +29,28 @@
                     <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(1)"
                       v-bind:class="{ 'text-emerald-600 bg-white': action.openTab !== 1, 'text-white bg-emerald-600': action.openTab === 1 }">
-                      SPESE
+                      EXPENSES
                     </a>
                   </li>
                   <li class="nav-item">
                     <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(2)"
                       v-bind:class="{ 'text-emerald-600 bg-white': action.openTab !== 2, 'text-white bg-emerald-600': action.openTab === 2 }">
-                      ENTRATA
+                      INCOMING
                     </a>
                   </li>
                   <li class="nav-item">
                     <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(3)"
                       v-bind:class="{ 'text-emerald-600 bg-white': action.openTab !== 3, 'text-white bg-emerald-600': action.openTab === 3 }">
-                      TRASFERIMENTO
+                      TRANSFER
                     </a>
                   </li>
                   <li class="nav-item">
                     <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(4)"
                       v-bind:class="{ 'text-emerald-600 bg-white': action.openTab !== 4, 'text-white bg-emerald-600': action.openTab === 4 }">
-                      DEBITI
+                      DEBIT
                     </a>
                   </li>
                 </ul>
@@ -65,29 +65,35 @@
         class="container relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg border-0 flex-auto p-4">
         <div class="flex flex-wrap py-3">
           <div class="lg:w-6/12 px-2 py-2 w-full">
-            <select v-model="account"
+
+            <label for="account" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select wallet account</label>
+            <select v-model="account" id="account"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-              <option v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
+              <option  v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
           </div>
           <div class="px-2 py-2 w-full" :class="action.hidedebit ? 'lg:w-3/12' : 'lg:w-6/12'">
-            <select v-on:change="checkDebit()" v-if="action.hidecategory" v-model="category"
+            <label v-if="action.hidecategory" for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select category</label>
+            <select v-on:change="checkDebit()" v-if="action.hidecategory" v-model="category" id="category"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option v-for="item in input.category" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
 
-            <select v-if="!action.hidecategory && !action.hidetransfer_to" v-model="transferto"
+            <label v-if="!action.hidecategory && !action.hidetransfer_to" for="transferto" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select category</label>
+            <select v-if="!action.hidecategory && !action.hidetransfer_to" v-model="transferto" id="transferto"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option value="0">Other</option>
               <option v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
 
-            <input v-model="debit_name" v-if="action.hidetransfer_to" type="text" placeholder="Name"
+            <label v-if="action.hidetransfer_to" for="debit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Debit reference</label>
+            <input v-model="debit_name" v-if="action.hidetransfer_to" type="text" placeholder="Name" id="debit"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
 
           </div>
 
           <div class="px-2 py-2 w-full" :class="action.hidedebit ? 'lg:w-3/12' : 'lg:w-6/12'">
+            <label v-if="action.hidedebit" for="debit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Debit reference</label>
             <select v-if="action.hidedebit" v-model="debit"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option v-for="item in input.debit" :key="item.id" :value="item.id">{{ item.name }}</option>
@@ -96,10 +102,12 @@
         </div>
         <div class="flex flex-wrap py-3">
           <div class="lg:w-6/12 px-2 py-2 w-full">
-            <input v-model="amount" type="tel" placeholder="0,00 €"
+            <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
+            <input v-model="amount" type="tel" placeholder="0,00 €" id="amount"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
           <div class="lg:w-6/12 px-2 py-2 w-full">
+            <label for="currency" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Currency</label>
             <select v-model="currency"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option v-for="item in input.currency" :key="item.id" :value="item.id">{{ item.name }}</option>
@@ -109,14 +117,16 @@
 
         <div class="flex flex-wrap py-3">
           <div class="lg:w-12/12 px-2 w-full">
-            <input placeholder="inserisci nuova label..." v-model="newlabel" type="text"
+            <label for="tag" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tag</label>
+            <input placeholder="inserisci nuova label..." v-model="newlabel" type="text" id="tag"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
         </div>
 
         <div class="flex flex-wrap py-3">
           <div class="lg:w-12/12 px-2 w-full">
-            <select v-model="label" multiple
+            <label for="tags" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose a tags</label>
+            <select v-model="label" multiple id="tags"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option
                 class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
@@ -130,25 +140,29 @@
 
         <div class="flex flex-wrap py-3">
           <div class="lg:w-12/12 px-2 w-full">
-            <textarea v-model="note" type="text" placeholder="Note..." required
+            <label for="note" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Add your note</label>
+            <textarea v-model="note" type="text" placeholder="Note..." required id="note"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
           </div>
         </div>
 
         <div class="flex flex-wrap py-3">
           <div class="lg:w-4/12 px-2 w-full mb-2 ">
-            <select v-model="payment_type"
+            <label for="payment_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Payment method</label>
+            <select v-model="payment_type" id="payment_type"
               class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
           </div>
           <div class="lg:w-4/12 px-2 mt-2" v-if="!isPlanned">
-            <label for="confirmed"
+            <label for="confirm" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Is confirmed</label>
+            <label for="confirmed" id="confirm"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               Confermato <input v-model="confirmed" type="checkbox" id="confirmed" value="1" checked>
             </label>
           </div>
           <div class="lg:w-4/12 px-2 mt-2" v-if="!isPlanned">
+            <label for="guarantee" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Is in guarantee</label>
             <label for="waranty"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               In garanzia <input v-model="waranty" type="checkbox" value="1">
@@ -156,6 +170,7 @@
           </div>
 
           <div class="lg:w-4/12 px-2" v-if="isPlanned">
+            <label for="planning" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Planned</label>
             <select id="planning" v-model="planning"
               class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option></option>
@@ -170,12 +185,14 @@
             'lg:w-12/12 w-full': !isPlanned,
             'lg:w-6/12': isPlanned,
           }">
-            <input v-model="date" type="text"
+            <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date time</label>
+            <input v-model="date" type="text" id="date"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
 
-          <div  v-if="isPlanned" class="g:w-6/12 px-2">
-            <input v-model="end_date_time" type="text"
+          <div v-if="isPlanned" class="g:w-6/12 px-2">
+            <label for="date_end" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date time to end</label>
+            <input v-model="end_date_time" type="text" id="date_end"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
 
@@ -183,10 +200,12 @@
 
         <div class="flex py-3">
           <div class="lg:w-8/12 px-2 w-full">
+          <label for="model" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Save your model of transaction</label>
             <input v-model="name" type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
           <div class="lg:w-4/12 px-2 w-full">
+          <label for="model" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-8"></label>
             <button v-on:click="setModel()"
               class="w-full text-xs py-3 bg-yellow-500 text-white active:bg-amber-600 font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
               type="button">
@@ -307,6 +326,7 @@ export default {
   components: {
   },
   mounted() {
+    this.action.openTab = 1
     this.time()
     this.getCategory()
     this.getCurrency()
@@ -314,7 +334,7 @@ export default {
     this.getLabels()
     this.getPaymentType()
     this.getModels()
-    if (this.entryId != 0) {
+    if (this.entryId != null) {
       this.getEntry()
     }
   },
@@ -385,24 +405,32 @@ export default {
 
       this.toggleTabs(this.typeOfEntry)
 
-      ApiService.getEntryDetail(this.type, this.entryId, this.isPlanned).then((res) => {
-        let model = res
+      ApiService.getEntryDetail(this.entryId, this.isPlanned).then((res) => {
+        let model = res[0]
 
         _this.amount = Math.abs(model.amount)
-        if (model.amount <= 0) {
+        if (model.type == 'incoming') {
           _this.action.openTab = 1
         }
 
-        if (model.amount >= 0) {
+        if (model.type == 'expenses') {
           _this.action.openTab = 2
+        }
+
+        if (model.type == 'transfer') {
+          _this.action.openTab = 3
+        }
+
+        if (model.type == 'debit') {
+          _this.action.openTab = 4
         }
 
         _this.type = model.type
         _this.category = model.sub_category.id
         _this.note = model.note
-        _this.currency = model.currency.id
+        _this.currency = model.currency_id
         _this.account = model.account.id
-        _this.payment_type = model.payment_type.id
+        _this.payment_type = model.payment_type
         _this.waranty = model.waranty == 1 ? true : false
         _this.confirmed = model.confirmed == 1 ? true : false
         _this.action.dateUpdated = true
@@ -417,7 +445,7 @@ export default {
           _this.transferto = model.transfer_id
         }
 
-        _this.label.forEach((item) => {
+        model.label.forEach((item) => {
           _this.label.push(item.id)
         });
       })
