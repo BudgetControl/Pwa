@@ -174,7 +174,7 @@
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
 
-          <div  v-if="isPlanned" class="g:w-6/12 px-2">
+          <div v-if="isPlanned" class="g:w-6/12 px-2">
             <input v-model="end_date_time" type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
@@ -307,6 +307,7 @@ export default {
   components: {
   },
   mounted() {
+    this.action.openTab = 1
     this.time()
     this.getCategory()
     this.getCurrency()
@@ -314,7 +315,7 @@ export default {
     this.getLabels()
     this.getPaymentType()
     this.getModels()
-    if (this.entryId != 0) {
+    if (this.entryId != null) {
       this.getEntry()
     }
   },
@@ -385,24 +386,32 @@ export default {
 
       this.toggleTabs(this.typeOfEntry)
 
-      ApiService.getEntryDetail(this.type, this.entryId, this.isPlanned).then((res) => {
+      ApiService.getEntryDetail(this.entryId, this.isPlanned).then((res) => {
         let model = res[0]
 
         _this.amount = Math.abs(model.amount)
-        if (model.amount <= 0) {
+        if (model.type == 'incoming') {
           _this.action.openTab = 1
         }
 
-        if (model.amount >= 0) {
+        if (model.type == 'expenses') {
           _this.action.openTab = 2
+        }
+
+        if (model.type == 'transfer') {
+          _this.action.openTab = 3
+        }
+
+        if (model.type == 'debit') {
+          _this.action.openTab = 4
         }
 
         _this.type = model.type
         _this.category = model.sub_category.id
         _this.note = model.note
-        _this.currency = model.currency.id
+        _this.currency = model.currency_id
         _this.account = model.account.id
-        _this.payment_type = model.payment_type.id
+        _this.payment_type = model.payment_type
         _this.waranty = model.waranty == 1 ? true : false
         _this.confirmed = model.confirmed == 1 ? true : false
         _this.action.dateUpdated = true
@@ -417,7 +426,7 @@ export default {
           _this.transferto = model.transfer_id
         }
 
-        _this.label.forEach((item) => {
+        model.label.forEach((item) => {
           _this.label.push(item.id)
         });
       })

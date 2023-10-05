@@ -10,7 +10,7 @@
         <!-- Card stats -->
         <div class="flex overflow-x-auto">
           <div class="min-w px-2">
-            <router-link to="/app/graph/wallet" v-slot="{ href, navigate }">
+            <router-link to="/app/entries" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
                 <card-stats statSubtitle="WALLET" :statTitle="wallet.statTitle + ' €'"
                   statIconColor="bg-lightBlue-500" />
@@ -19,7 +19,7 @@
           </div>
 
           <div class="min-w px-2">
-            <router-link to="/app/graph/wallet" v-slot="{ href, navigate }">
+            <router-link to="/app/entries?type=planned" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
                 <card-stats statSubtitle="MY PLANNED" :statTitle="walletPlanned.statTitle + ' €'"
                   :statArrow="walletPlanned.statArrow" :statPercent="walletPlanned.statPercent"
@@ -29,13 +29,11 @@
           </div>
 
           <div class="min-w px-2">
-            <router-link to="/app/graph/wallet" v-slot="{ href, navigate }">
-              <a :href="href" @click="navigate">
+              <a>
                 <card-stats statSubtitle="MY HEALTH" :statTitle="health.statTitle + ' €'"
                   :statArrow="health.statArrow" :statPercent="health.statPercent"
                   statIconName="fas fa-heart" :statIconColor=health.iconColor />
               </a>
-            </router-link>
           </div>
 
           <div class="min-w px-2">

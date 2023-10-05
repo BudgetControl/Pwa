@@ -152,7 +152,7 @@
             </router-link>
           </li>
 
-          <li class="items-center">
+          <!-- <li class="items-center">
             <router-link
               to="/app/import"
               v-slot="{ href, navigate, isActive }"
@@ -174,7 +174,7 @@
                 Import Entries
               </a>
             </router-link>
-          </li>
+          </li> -->
 
         </ul>
 

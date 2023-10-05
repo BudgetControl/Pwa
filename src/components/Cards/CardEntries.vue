@@ -8,24 +8,6 @@
             Wallet
           </h3>
         </div>
-        <div class="lg:w-8/12 px-2">
-          <input v-model="wallet" type="tel" placeholder="0,00 €"
-            class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-        </div>
-        <div class="lg:w-2/12 px-2">
-          <button v-on:click="fixWallet()"
-            class="text-emerald-500 bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-            type="button">
-            FIX WALLET
-          </button>
-        </div>
-        <div class="lg:w-2/12 px-2">
-          <button v-on:click="resetFilter()" v-if="action.reset"
-            class="text-emerald-500 bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-            type="button">
-            RESET FILTER
-          </button>
-        </div>
       </div>
     </div>
 
@@ -44,9 +26,6 @@ import EntriesTable from "@/components/GenericComponents/EntriesTable.vue";
 import axios from 'axios'
 import ApiServiceVue from '../../services/ApiService.vue';
 import Paginator from "../GenericComponents/Paginator.vue";
-
-// const X_API_KEY = { "X-API-KEY": "7221" }
-const DOMAIN = process.env.VUE_APP_API_PATH
 
 export default {
   props: {
@@ -82,7 +61,7 @@ export default {
     }
   },
   mounted() {
-    window.localStorage.setItem('current_page',0) 
+    window.localStorage.setItem('current_page', 0)
     this.invoke()
   },
   methods: {
@@ -91,19 +70,19 @@ export default {
 
       let filter = ''
 
-      if(this.$route.query.account !== undefined) {
+      if (this.$route.query.account !== undefined) {
         filter += `&filter[account]=${this.$route.query.account}`
       }
 
-      if(this.$route.query.category !== undefined) {
+      if (this.$route.query.category !== undefined) {
         filter += `&filter[category]=${this.$route.query.category}`
       }
 
-      if(this.$route.query.type !== undefined) {
+      if (this.$route.query.type !== undefined) {
         filter += `&filter[type]=${this.$route.query.type}`
       }
 
-      if(this.$route.query.label !== undefined) {
+      if (this.$route.query.label !== undefined) {
         filter += `&filter[label]=${this.$route.query.label}`
       }
 
@@ -114,7 +93,7 @@ export default {
       }
 
       let currentPage = window.localStorage.getItem('current_page') == null ? 0 : window.localStorage.getItem('current_page')
-      ApiServiceVue.getEntry(currentPage,filter).then((res) => {
+      ApiServiceVue.getEntry(currentPage, filter).then((res) => {
         _this.$refs.entry.entries = []
 
         if (res.data.length > 0) {
@@ -130,25 +109,6 @@ export default {
       })
 
     },
-    fixWallet() {
-
-      let data = {
-        amount: this.wallet,
-        account_id: this.selected.account
-      }
-
-      axios.post(DOMAIN + "/api/stats/wallet", data).then((resp) => {
-        //TODO: inserire un messaggio
-        console.log(resp)
-      }).catch((error) => {
-        this.action.alert = true
-        this.action.alert_message = "Ops... An error occured"
-        console.error(error);
-      })
-    },
-    resetFilter() {
-      this.$router.push('/app/entries')
-  },
     get(path, callBack) {
       axios.get(path).then((resp) => {
         callBack(resp.data)

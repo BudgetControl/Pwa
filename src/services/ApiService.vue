@@ -52,8 +52,8 @@ async function deleteEntry(id,isPlanned) {
   return response.data;
 }
 
-async function getEntryDetail(type,id,isPlanned) {
-  let url = `/api/${type}/${id}`
+async function getEntryDetail(id,isPlanned) {
+  let url = `/api/entry/${id}`
   if(isPlanned == true || isPlanned == 'true') {
     url = `/api/planning-recursively/${id}`
   }
