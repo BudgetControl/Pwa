@@ -66,27 +66,28 @@
           </div>
         </div>
 
-        <div class="flex flex-wrap py-3">
-          <div class="lg:w-12/12 px-2 w-full">
-            <input placeholder="Insert new TAG name" v-model="newlabel" type="text" id="tag"
-              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+        <div class="row border rounded border-blueGray-500 py-3 border-dashed">
+          <div class="flex flex-wrap">
+            <div class="lg:w-12/12 px-2 w-full text-center">
+              <label class="text-xs w-full" for="tags">Choose one of
+                currently tags</label>
+              <select v-model="label" multiple id="tags"
+                class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                <option
+                  class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                  :style="'color: #fff; background-color: ' + item.color" v-for="item in input.tags" :key="item.id"
+                  :value="item.id">
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
           </div>
-        </div>
 
-        <div class="flex flex-wrap py-3">
-          <div class="lg:w-12/12 px-2 w-full">
-            <label class="text-xs font-semibold uppercase bg-white text-blueGray-500 p-2 w-full" for="tags">Choose one of
-              currently
-              tags</label>
-            <select v-model="label" multiple id="tags"
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-              <option
-                class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
-                :style="'color: #fff; background-color: ' + item.color" v-for="item in input.tags" :key="item.id"
-                :value="item.id">
-                {{ item.name }}
-              </option>
-            </select>
+          <div class="flex flex-wrap ">
+            <div class="lg:w-12/12 px-2 w-full">
+              <input placeholder="Or nsert new TAG name" v-model="newlabel" type="text" id="tag"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+            </div>
           </div>
         </div>
 
@@ -97,18 +98,18 @@
           </div>
 
           <div class="flex w-full flex-wrap py-3">
-            <div class="lg:w-3/12 px-2">
+            <div class="lg:w-3/12 px-2 w-full">
               <span class="text-xs">Date start</span>
               <VueDatePicker v-model="date"></VueDatePicker>
 
             </div>
 
-            <div class="lg:w-3/12 px-2">
+            <div class="lg:w-3/12 px-2 w-full">
               <span class="text-xs">Date end</span>
               <VueDatePicker v-model="end_date_time"></VueDatePicker>
             </div>
 
-            <div class="lg:w-3/12 px-2">
+            <div class="lg:w-3/12 px-2 w-full">
               <span class="text-xs">Choose a frequency</span>
               <select id="planning" v-model="planning"
                 class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
@@ -116,7 +117,7 @@
               </select>
             </div>
 
-            <div class="lg:w-3/12 px-2">
+            <div class="lg:w-3/12 px-2 w-full">
               <span class="text-xs">Choose a payment method</span>
               <select v-model="payment_type" id="payment_type"
                 class="w-full border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
@@ -353,24 +354,6 @@ export default {
       if (this.note == null) {
         alert("Please insert a note description")
         return false
-      }
-
-      if (this.action.openTab == 4) {
-        if (this.debit == 'njn76298fm' && this.debit_name == null) {
-          alert("Please insert a valid debt Name")
-          return false
-        }
-        if (this.debit == 0) {
-          alert("Please choose one of debt")
-          return false
-        }
-      }
-
-      if (this.action.openTab == 3) {
-        if (this.transferto == '-1') {
-          alert("Please choose a wallet to transfer to")
-          return false
-        }
       }
 
       return true
