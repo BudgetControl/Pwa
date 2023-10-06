@@ -10,7 +10,7 @@
         <!-- Card stats -->
         <div class="flex overflow-x-auto">
           <div class="min-w px-2">
-            <router-link to="/app/graph/wallet" v-slot="{ href, navigate }">
+            <router-link to="/app/entries" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
                 <card-stats statSubtitle="WALLET" :statTitle="wallet.statTitle + ' €'"
                   statIconColor="bg-lightBlue-500" />
@@ -19,7 +19,7 @@
           </div>
 
           <div class="min-w px-2">
-            <router-link to="/app/graph/wallet" v-slot="{ href, navigate }">
+            <router-link to="/app/entries?type=planned" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
                 <card-stats statSubtitle="MY PLANNED" :statTitle="walletPlanned.statTitle + ' €'"
                   :statArrow="walletPlanned.statArrow" :statPercent="walletPlanned.statPercent"
@@ -29,7 +29,15 @@
           </div>
 
           <div class="min-w px-2">
-            <router-link to="/app/entries/type/incoming" v-slot="{ href, navigate }">
+              <a>
+                <card-stats statSubtitle="MY HEALTH" :statTitle="health.statTitle + ' €'"
+                  :statArrow="health.statArrow" :statPercent="health.statPercent"
+                  statIconName="fas fa-heart" :statIconColor=health.iconColor />
+              </a>
+          </div>
+
+          <div class="min-w px-2">
+            <router-link to="/app/entries?type=incoming" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
                 <card-stats statSubtitle="MY INCOMING" :statTitle="incoming.statTitle + ' €'"
                   :statArrow="incoming.statArrow" :statPercent="incoming.statPercent"
@@ -40,7 +48,7 @@
           </div>
 
           <div class="min-w px-2">
-            <router-link to="/app/entries/type/expenses" v-slot="{ href, navigate }">
+            <router-link to="/app/entries?type=expenses" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
                 <card-stats statSubtitle="MY EXPENSES" :statTitle="expenses.statTitle + ' €'"
                   :statArrow="expenses.statArrow" :statPercent="expenses.statPercent"
@@ -72,6 +80,13 @@ export default {
         statArrow: "up",
         statPercent: 0,
         statPercentColor: "text-emerald-500"
+      },
+      health: {
+        statTitle: 0,
+        statArrow: "up",
+        statPercent: 0,
+        statPercentColor: "text-emerald-500",
+        iconColor: 'bg-teal-500'
       },
       walletPlanned: {
         statTitle: 0,
@@ -111,12 +126,27 @@ export default {
       this.getWallet()
       this.getWallets()
       this.getWalletPlanned()
+      this.getHealth()
 
     },
     getWallet() {
       StatsService.total().then((resp) => {
         let data = resp.data
-        this.wallet.statTitle = data.total.toFixed(2)
+        this.wallet.statTitle = data.total
+
+      }).catch((error) => {
+        console.error(error);
+      })
+    },
+
+    getHealth() {
+      StatsService.health().then((resp) => {
+        let data = resp.data
+        this.health.statTitle = data.total
+
+        if(data.total <= 0) {
+          this.health.iconColor = 'bg-red-500'
+        }
 
       }).catch((error) => {
         console.error(error);
@@ -127,7 +157,7 @@ export default {
       StatsService.planned().then((resp) => {
 
         let data = resp.data
-        this.walletPlanned.statTitle = data.total.toFixed(2)
+        this.walletPlanned.statTitle = data.total
         
       }).catch((error) => {
         console.error(error);
@@ -137,8 +167,8 @@ export default {
     getMonthIncoming() {
       StatsService.incoming().then((resp) => {
         let data = resp.data
-        this.incoming.statTitle = data.total.toFixed(2)
-        this.incoming.statPercent = data.percentage.toFixed(2)
+        this.incoming.statTitle = data.total
+        this.incoming.statPercent = data.percentage
         this.incoming.statArrow = data.percentage <= 0 ? "down" : "up"
         this.incoming.statPercentColor = data.percentage <= 0 ? "text-red-500" : "text-emerald-500"
 
@@ -149,8 +179,8 @@ export default {
     getMonthexpenses() {
       StatsService.expenses().then((resp) => {
         let data = resp.data
-        this.expenses.statTitle = data.total.toFixed(2)
-        this.expenses.statPercent = data.percentage.toFixed(2)
+        this.expenses.statTitle = data.total
+        this.expenses.statPercent = data.percentage
         this.expenses.statArrow = data.percentage < 0 ? "down" : "up"
         this.expenses.statPercentColor = data.percentage > 0 ? "text-red-500" : "text-emerald-500"
 

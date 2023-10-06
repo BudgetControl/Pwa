@@ -2,21 +2,7 @@
   <form>
     <div
       class="container relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0 flex-auto p-4">
-      <div class="flex flex-wrap py-3">
-        <div class="lg:w-6/12 px-2">
-          <select v-model="model" v-on:change="retriveModel()" id="model" v-if="action.models"
-            class="border-0 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-            <option v-for="(item, k) in input.model" :key="k" :value="k">{{ item.name }}</option>
-          </select>
-        </div>
-        <div class="lg:w-4/12 px-2">
-          <button v-on:click="resetModel()" v-if="action.reset"
-            class="text-emerald-500 bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-            type="button">
-            RESET
-          </button>
-        </div>
-      </div>
+
       <div class="flex flex-wrap py-3">
         <!-- ##### menu ########### -->
         <div class="w-full">
@@ -39,20 +25,6 @@
                       INCOMING
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                      href="javascript:void(0)" v-on:click="toggleTabs(3)"
-                      v-bind:class="{ 'text-emerald-600 bg-white': action.openTab !== 3, 'text-white bg-emerald-600': action.openTab === 3 }">
-                      TRANSFER
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                      href="javascript:void(0)" v-on:click="toggleTabs(4)"
-                      v-bind:class="{ 'text-emerald-600 bg-white': action.openTab !== 4, 'text-white bg-emerald-600': action.openTab === 4 }">
-                      DEBIT
-                    </a>
-                  </li>
                 </ul>
               </div>
             </div>
@@ -60,8 +32,7 @@
         </div>
         <!-- ##### menu ########### -->
       </div>
-      <div
-        v-bind:class="{ 'bg-red-200': action.openTab === 1, 'bg-lightBlue-200': action.openTab === 2, 'bg-emerald-200': action.openTab === 3, 'bg-orange-200': action.openTab === 3 }"
+      <div v-bind:class="{ 'bg-red-200': action.openTab === 1, 'bg-lightBlue-200': action.openTab === 2 }"
         class="container relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg border-0 flex-auto p-4">
         <div class="flex flex-wrap">
           <div class="lg:w-6/12 px-2 py-2 w-full">
@@ -73,38 +44,12 @@
             </select>
           </div>
 
-          <div class="px-2 py-2 w-full" :class="{
-            'lg:w-4/12': action.openTab == 4,
-            'lg:w-6/12': action.openTab != 4,
-          }">
-
-            <select v-on:change="checkDebit()" v-if="action.hidecategory" v-model="category" id="category"
+          <div class="px-2 py-2 w-full lg:w-6/12">
+            <select v-model="category" id="category"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option value="0">Choose a category</option>
               <option v-for="item in input.category" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
-
-            <select v-if="!action.hidecategory && !action.hidetransfer_to" v-model="transferto" id="transferto"
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
-              <option value="-1">Choose a wallet to transfer to</option>
-              <option value="0">Out of wallet</option>
-              <option v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
-            </select>
-
-            <select v-model="debit" v-if="action.hidetransfer_to"
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
-              <option value="0">Choose an existing debt</option>
-              <option value="njn76298fm">Create new debt</option>
-              <option v-for="item in input.debit" :key="item.id" :value="item.name">{{ item.name }}</option>
-            </select>
-          </div>
-
-          <div class="px-2 py-2 w-full lg:w-2/12" v-if="action.openTab == 4">
-            <input v-model="debit_name" type="text" placeholder="Name" id="debit" v-if="debit != 'njn76298fm'" disabled
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-
-            <input v-model="debit_name" type="text" placeholder="Name" id="debit" v-if="debit == 'njn76298fm'"
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
 
         </div>
@@ -147,61 +92,42 @@
         </div>
 
         <div class="flex flex-wrap py-3">
-          <div class="lg:w-8/12 px-2 w-full">
+          <div class="lg:w-12/12 px-2 w-full">
             <textarea v-model="note" type="text" placeholder="Add here your note" required id="note" rows="2"
               class="border-0 px-3 py-5 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
           </div>
 
-          <div class="lg:w-4/12 px-2 w-full mb-2">
-
-            <div class="flex flex-wrap">
+          <div class="flex w-full flex-wrap py-3">
+            <div class="lg:w-3/12 px-2 w-full">
+              <span class="text-xs">Date start</span>
               <VueDatePicker v-model="date"></VueDatePicker>
+
             </div>
 
-            <div class="flex flex-wrap">
-              <div class="lg:w-6/12 w-full">
-                <select v-model="payment_type" id="payment_type"
-                  class="w-full mt-2 border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                  <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ item.name }}</option>
-                </select>
-              </div>
-              <div class="lg:w-6/12 w-full ">
-                <div
-                  class="border-0 mt-2 px-2 py-2 text-center placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                  <label for="confirmed" id="confirm" v-if="!isPlanned">
-                    payment confirm <input v-model="confirmed" type="checkbox" id="confirmed" value="1" checked>
-                  </label>
-                </div>
-              </div>
+            <div class="lg:w-3/12 px-2 w-full">
+              <span class="text-xs">Date end</span>
+              <VueDatePicker v-model="end_date_time"></VueDatePicker>
             </div>
 
+            <div class="lg:w-3/12 px-2 w-full">
+              <span class="text-xs">Choose a frequency</span>
+              <select id="planning" v-model="planning"
+                class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                <option required v-for="(item, k) in input.planning" :key="k" :value="item">{{ item }}</option>
+              </select>
+            </div>
 
-          </div>
+            <div class="lg:w-3/12 px-2 w-full">
+              <span class="text-xs">Choose a payment method</span>
+              <select v-model="payment_type" id="payment_type"
+                class="w-full border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ item.name }}</option>
+              </select>
+            </div>
 
-          <div class="lg:w-4/12 px-2" v-if="isPlanned">
-            <select id="planning" v-model="planning"
-              class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-              <option></option>
-              <option required v-for="(item, k) in input.planning" :key="k" :value="item">{{ item }}</option>
-            </select>
           </div>
 
         </div>
-
-        <!-- <div class="flex py-2 border border-solid border-blueGray-500 shadow rounded"
-          v-if="action.openTab != 3 && action.openTab != 4">
-          <div class="lg:w-8/12 px-2 w-full">
-            <input v-model="name" type="text" placeholder="save these settings as a template"
-              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-          </div>
-          <div class="lg:w-4/12 px-2 w-full">
-            <button v-on:click="setModel()"
-              class="w-full text-xs py-3 bg-yellow-500 text-white active:bg-amber-600 font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
-              type="button">
-              SAVE TEMPLATE
-            </button>
-          </div>
-        </div> -->
 
       </div>
 
@@ -283,9 +209,8 @@ export default {
       transferto: "-1",
       geolocalization: "",
       name: "",
-      debit_name: null,
       end_date_time: null,
-      planning: null,
+      planning: 'daily',
       debit: null,
       input: {
         tags: [],
@@ -295,7 +220,7 @@ export default {
         currency: [],
         payment_type: [],
         model: [],
-        planning: ["daily", "monthly", "yearly"],
+        planning: ["daily", "weekly", "monthly", "yearly"],
         debit: [],
       }
     }
@@ -311,36 +236,17 @@ export default {
     this.getAccount()
     this.getLabels()
     this.getPaymentType()
-    this.getModels()
-    this.getDebit()
     if (this.entryId != null) {
       this.getEntry()
     }
   },
   methods: {
-    checkDebit() {
-      if (this.action.openTab == 55) {
-        this.action.hidedebit = true
-      } else {
-        this.action.hidedebit = false
-      }
-    },
     time() {
       const _this = this
       if (this.action.dateUpdated == false) {
         let dateTime = new Date()
         _this.date = dateTime.toISOString().split('T')[0] + " " + dateTime.toLocaleTimeString()
-        _this.end_date_time = dateTime.toISOString().split('T')[0] + " " + dateTime.toLocaleTimeString()
       }
-    },
-    getDebit() {
-      let _this = this
-      ApiService.payee().then((res) => {
-        let data = res
-        data.forEach(function (r) {
-          _this.input.debit.push(r)
-        })
-      })
     },
     getCategory() {
       let _this = this
@@ -362,18 +268,6 @@ export default {
         let data = res.data
         data.forEach(function (r) {
           _this.input.payment_type.push(r)
-        })
-      })
-    },
-    getModels() {
-      let _this = this
-      ApiService.model().then((res) => {
-        let data = res.data
-        if (res.data.length > 0) {
-          _this.action.models = true
-        }
-        data.forEach(function (r) {
-          _this.input.model.push(r)
         })
       })
     },
@@ -429,41 +323,6 @@ export default {
       })
 
     },
-    retriveModel() {
-      let model = this.input.model[this.model]
-      if (model !== null) {
-
-        this.amount = model.amount
-        if (model.type == "expenses") {
-          this.amount = model.amount * -1
-        }
-
-        if (model.type == "incoming") {
-          this.action.openTab = 2
-        }
-
-        if (model.type == "transfer") {
-          this.action.openTab = 3
-        }
-
-        this.type = model.type
-        this.category = model.category_id
-        this.note = model.note
-        this.currency = model.currency_id
-        this.account = model.account_id
-        this.payment_type = model.payment_type
-        this.waranty = model.waranty == 1 ? true : false
-        this.confirmed = model.confirmed == 1 ? true : false
-        this.name = model.name
-        this.action.reset = true
-        let _this = this
-
-        this.label.forEach((item) => {
-          _this.label.push(item.id)
-        });
-
-      }
-    },
     getLabels() {
       let _this = this
       ApiService.labels().then((res) => {
@@ -471,46 +330,6 @@ export default {
         data.forEach(function (r) {
           _this.input.tags.push(r)
         })
-      })
-    },
-    resetModel() {
-      this.date = null
-      this.amount = null
-      this.type = "expenses"
-      this.category = null
-      this.label = []
-      this.note = null
-      this.currency = 1
-      this.account = 1
-      this.payment_type = 1
-      this.model = []
-      this.newlabel = null
-      this.name = null
-      this.action.reset = false
-      this.model = null
-    },
-    setModel() {
-      let _this = this
-      let data = {
-        name: this.name,
-        amount: this.amount,
-        note: this.note,
-        label: this.label,
-        account: this.account,
-        category: this.category,
-        currency: this.currency,
-        type: this.type,
-        payment_type: this.payment_type,
-      }
-
-      if (this.type == "expenses") {
-        data.amount = this.amount * -1
-      }
-
-      ApiService.setModel(data).then(() => {
-        _this.action.alert = true
-        _this.action.alert_message = "Modello salvato correttamente"
-        setTimeout(_this.action.alert = false, 3000)
       })
     },
 
@@ -535,24 +354,6 @@ export default {
       if (this.note == null) {
         alert("Please insert a note description")
         return false
-      }
-
-      if (this.action.openTab == 4) {
-        if (this.debit == 'njn76298fm' && this.debit_name == null) {
-          alert("Please insert a valid debt Name")
-          return false
-        }
-        if (this.debit == 0) {
-          alert("Please choose one of debt")
-          return false
-        }
-      }
-
-      if(this.action.openTab == 3) {
-        if(this.transferto == '-1') {
-          alert("Please choose a wallet to transfer to")
-          return false
-        }
       }
 
       return true
@@ -605,7 +406,7 @@ export default {
             _this.newlabel = null,
 
             _this.action.alert = true
-          _this.action.alert_message = _this.type + " inserito correttamente"
+          _this.action.alert_message = _this.type + " inserito correttament e"
 
           _this.action.dateUpdated = false
           this.time()

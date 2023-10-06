@@ -42,10 +42,10 @@ export default {
     },
     methods: {
         setYear: function (y) {
-            this.$store.state.filter_graph.year = y
+            localStorage.setItem('chart-year', y)
         },
         setMonth: function (m) {
-            this.$store.state.filter_graph.month = m
+            localStorage.setItem('chart-month', m)
         },
         setFilter() {
             this.setYear(this.input.year)

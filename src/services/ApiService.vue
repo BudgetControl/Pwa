@@ -11,7 +11,7 @@ instance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('auth-token');
     if (token) {
-      config.headers['access_token'] = token;
+      config.headers['X-ACCESS-TOKEN'] = token;
     }
     return config;
   },
@@ -20,18 +20,44 @@ instance.interceptors.request.use(
   }
 );
 
-async function setEntry(type,data) {
-  const response = await instance.post('/api/'+type,data);
+async function setEntry(type,data, isPlanned, uuid) {
+  let url = `/api/${type}`
+  if(isPlanned == true || isPlanned == 'true') {
+    url = `/api/planning-recursively`
+  }
+  
+  let response
+  if(uuid !== null && uuid !== undefined) {
+    url = `${url}/${uuid}`
+    response = await instance.put(url,data);
+  } else {
+    response = await instance.post(url,data);
+  }
+
   return response.data;
 }
 
-async function getEntry() {
-  const response = await instance.get('/api/entry');
+async function getEntry(page,filter) {
+  const response = await instance.get(`/api/entry?page=${page}${filter}`);
   return response.data;
 }
 
-async function getEntryDetail(type,id) {
-  const response = await instance.get('/api/'+type+'/'+id);
+async function deleteEntry(id,isPlanned) {
+  let url = `/api/entry/${id}`
+  if(isPlanned == true || isPlanned == 'true') {
+    url = `/api/planning-recursively/${id}`
+  }
+
+  const response = await instance.delete(url);
+  return response.data;
+}
+
+async function getEntryDetail(id,isPlanned) {
+  let url = `/api/entry/${id}`
+  if(isPlanned == true || isPlanned == 'true') {
+    url = `/api/planning-recursively/${id}`
+  }
+  const response = await instance.get(url);
   return response.data;
 }
 
@@ -40,8 +66,23 @@ async function getEntryFromAccount(id) {
   return response.data;
 }
 
-async function debit() {
-  const response = await instance.get('/api/debit');
+async function debit(page) {
+  let params = ''
+  if(page !== undefined) {
+    params = `?page=${page}`
+  }
+  
+  const response = await instance.get(`/api/debit${params}`);
+  return response.data;
+}
+
+async function payee() {
+  const response = await instance.get(`/api/payee`);
+  return response.data;
+}
+
+async function deletePayee(id) {
+  const response = await instance.delete(`/api/payee/${id}`);
   return response.data;
 }
 
@@ -81,19 +122,24 @@ async function accounts() {
 }
 
 async function importData(data) {
-  const response = await instance.post('/api/import',data);
+  const response = await instance.post('/api/entries/import',data);
   return response.data;
 }
 
-async function search(data) {
-  const response = await instance.post('/api/search',data);
+async function getPlannedEntry(page) {
+  const response = await instance.get(`/api/planning-recursively?page=${page}`);
   return response.data;
 }
 
+async function setPlannedEntry(data) {
+  const response = await instance.post('/api/planning-recursively',data);
+  return response.data;
+}
 
 export default {
   setEntry,
   getEntry,
+  deleteEntry,
   getEntryDetail,
   debit,
   categories,
@@ -104,8 +150,11 @@ export default {
   currencies,
   accounts,
   importData,
-  search,
   getEntryFromAccount,
+  getPlannedEntry,
+  setPlannedEntry,
+  payee,
+  deletePayee
 }
 
 </script>

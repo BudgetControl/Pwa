@@ -20,6 +20,7 @@ import Auth from "@/layouts/Auth.vue";
 
 import Dashboard from "@/views/admin/Dashboard.vue";
 import AddEntry from "@/views/admin/AddEntry.vue";
+import AddPlannedEntry from "@/views/admin/AddPlannedEntry.vue";
 import Settings from "@/views/admin/Settings.vue";
 import MyEntries from "@/views/admin/MyEntries.vue";
 import ImportEntries from "@/views/admin/ImportEntries.vue";
@@ -27,9 +28,11 @@ import SearchEntries from "@/views/admin/SearchEntries.vue";
 import EntriesResume from "@/views/admin/EntriesResume.vue";
 
 // views for Auth layout
-
 import Login from "@/views/auth/Login.vue";
 import Register from "@/views/auth/Register.vue";
+import RecoveryPassword from "@/views/auth/RecoveryPassword.vue";
+import ResetPassword from "@/views/auth/ResetPassword.vue";
+import AuthConfirm from "@/views/auth/Confirm.vue";
 
 // views without layouts
 
@@ -52,25 +55,17 @@ const routes = [
       },
       {
         path: "/app/add_entry",
+        name: 'add_entry',
         component: AddEntry,
       },
       {
-        path: "/app/entries/:account_id",
+        path: "/app/add_planned_entry",
+        name: 'add_planned_entry',
+        component: AddPlannedEntry,
+      },
+      {
+        path: "/app/entries",
         component: MyEntries,
-        children: [
-          {
-            path: "/app/entries/type/:filter_type",
-            component: MyEntries,
-          },
-          {
-            path: "/app/entries/:account_id/category-:category_id",
-            component: MyEntries,
-          },
-          {
-            path: "/app/entries/:account_id/label-:label_id",
-            component: MyEntries,
-          }
-        ]
       },
       {
         path: "/app/import",
@@ -111,6 +106,18 @@ const routes = [
         path: "/auth/register",
         component: Register,
       },
+      {
+        path: "/auth/recovery-password",
+        component: RecoveryPassword,
+      },
+      {
+        path: "/auth/reset-password/:token",
+        component: ResetPassword,
+      },
+      {
+        path: "/auth/confirm/:token",
+        component: AuthConfirm,
+      }
     ],
   },
   {

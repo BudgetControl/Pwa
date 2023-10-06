@@ -35,7 +35,7 @@
 
               <div role="alert" v-if="error">
                 <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-                  Ops ... si è verificato un errore
+                  Oops... an error occurred
                 </div>
                 <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
                 </div>
@@ -65,6 +65,7 @@
                 <input v-model="password" type="password"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Password" />
+                <PasswordStrengthMeter :password="password" ref="passwordStreight" />
               </div>
 
               <div>
@@ -99,28 +100,21 @@ import facebook from "@/assets/img/github.svg";
 import google from "@/assets/img/google.svg";
 import AuthService from "../../services/AuthService.vue";
 import loading from 'vue-full-loading'
-
+import PasswordStrengthMeter from "../../components/Auth/PasswordStrengthMeter.vue";
 
 export default {
   components: {
-    loading
+    loading,
+    PasswordStrengthMeter
   },
   data() {
     return {
       facebook,
       google,
       show: false,
-      error: false
+      error: false,
+      password: null,
     };
-  },
-  mounted() {
-      //retrive access token header
-      this.show = true
-      AuthService.check().then(() => [
-        this.$router.push({ path: '/app/dashboard' })
-      ]).catch(() => {
-        this.show = false
-      })
   },
   methods: {
     async submit() {

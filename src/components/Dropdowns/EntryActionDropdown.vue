@@ -9,7 +9,7 @@
         block: dropdownPopoverShow,
       }">
 
-      <router-link :to="'/admin/add_entry?planned='+isPlanned+'&entry_id=' + entryId+'&type='+type" v-slot="{ href, navigate, isActive }">
+      <router-link :to="`/app/add_entry?entry_id=${entryId}&${queryParams}`" v-slot="{ href, navigate, isActive }">
         <a :href="href" @click="navigate"
           class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700" :class="[
             isActive
@@ -29,24 +29,24 @@
 </template>
 <script>
 import { createPopper } from "@popperjs/core";
-import axios from 'axios'
-// const X_API_KEY = { "X-API-KEY": "7221" };
-const DOMAIN = process.env.VUE_APP_API_PATH_V2;
+import ApiService from "../../services/ApiService.vue";
 
 export default {
   props: {
     entryId: {
       type: Number,
-      default: 0,
       required: true
     },
-    type: {
+    queryParams: {
       type: String,
       default: ""
     },
     icon: {
       type: String,
       default: "fa-ellipsis-v",
+    },
+    index: {
+      required: true
     }
   },
   data() {
@@ -55,11 +55,6 @@ export default {
       isPlanned : 0
     };
   },
-  mounted() {
-      if(this.type == "planned-entries") {
-        this.isPlanned = 1
-      }
-    },
   methods: {
     toggleDropdown: function (event) {
       event.preventDefault();
@@ -73,8 +68,10 @@ export default {
       }
     },
     deleteEntry() {
-      axios.delete(DOMAIN + "/api/"+this.type+"/" + this.entryId).then((resp) => {
-        console.log(resp)
+      this.dropdownPopoverShow = false;
+      let isPlanned = this.queryParams == 'planned=true'
+      ApiService.deleteEntry(this.entryId,isPlanned).then(() => {
+        this.$emit('deleteItem', this.index)
       }).catch((error) => {
         console.error(error);
       })

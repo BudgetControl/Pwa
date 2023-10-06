@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="'/admin/entries/' + statIdWallet" v-slot="{ href, navigate, isActive }">
+    <router-link :to="'?account=' + statIdWallet" v-slot="{ href, navigate, isActive }">
         <a :href="href" @click="navigate"
             :class="[
                 isActive
@@ -7,7 +7,9 @@
                     : '',
             ]">
             <div
-                :class="'px-4 flex-1 rounded border border-solid border-blueGray-100 block p-4 shadow-lg mr-4 ' + statColor">
+                class="px-4 flex-1 rounded border border-solid border-blueGray-100 block p-4 shadow-lg mr-4" 
+                :style="'background-color:'+statColor"
+                >
                 <span
                     class="text-xs font-semibold block text-center py-1 px-2 uppercase rounded-full uppercase last:mr-0 min-w">
                     {{ statTitle }}

@@ -27,7 +27,7 @@
               </li>
               <li class="nav-item border border-solid border-blueGray-100 mx-2">
                 <router-link
-                  to="/app/entries/0"
+                  to="/app/entries"
                   v-slot="{ href, navigate, isActive }"
                 >
                   <a
