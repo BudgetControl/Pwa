@@ -6,7 +6,7 @@
       ref="btnDropdownRef"
       v-on:click="toggleDropdown($event)"
     >
-      Budget Tracker
+      Budget Control
     </a>
     <div
       ref="popoverDropdownRef"
