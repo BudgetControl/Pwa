@@ -121,27 +121,28 @@
           </div>
         </div>
 
-        <div class="flex flex-wrap py-3">
-          <div class="lg:w-12/12 px-2 w-full">
-            <input placeholder="Insert new TAG name" v-model="newlabel" type="text" id="tag"
-              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+        <div class="row border rounded border-blueGray-500 py-3 border-dashed">
+          <div class="flex flex-wrap">
+            <div class="lg:w-12/12 px-2 w-full text-center">
+              <label class="text-xs w-full" for="tags">Choose one of
+                currently tags</label>
+              <select v-model="label" multiple id="tags"
+                class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                <option
+                  class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                  :style="'color: #fff; background-color: ' + item.color" v-for="item in input.tags" :key="item.id"
+                  :value="item.id">
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
           </div>
-        </div>
 
-        <div class="flex flex-wrap py-3">
-          <div class="lg:w-12/12 px-2 w-full">
-            <label class="text-xs font-semibold uppercase bg-white text-blueGray-500 p-2 w-full" for="tags">Choose one of
-              currently
-              tags</label>
-            <select v-model="label" multiple id="tags"
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-              <option
-                class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
-                :style="'color: #fff; background-color: ' + item.color" v-for="item in input.tags" :key="item.id"
-                :value="item.id">
-                {{ item.name }}
-              </option>
-            </select>
+          <div class="flex flex-wrap ">
+            <div class="lg:w-12/12 px-2 w-full">
+              <input placeholder="Or nsert new TAG name" v-model="newlabel" type="text" id="tag"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+            </div>
           </div>
         </div>
 
@@ -157,17 +158,16 @@
               <VueDatePicker v-model="date"></VueDatePicker>
             </div>
 
-            <div class="flex flex-wrap mt-2">
-
+            <div class="flex flex-wrap">
               <div class="lg:w-6/12 w-full">
                 <select v-model="payment_type" id="payment_type"
-                  class="w-full border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                  class="w-full mt-2 border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                   <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ item.name }}</option>
                 </select>
               </div>
-              <div class="lg:w-6/12 px-2 w-full ">
+              <div class="lg:w-6/12 w-full ">
                 <div
-                  class="border-0 px-2 py-2 text-center placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                  class="border-0 mt-2 px-2 py-2 text-center placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                   <label for="confirmed" id="confirm" v-if="!isPlanned">
                     payment confirm <input v-model="confirmed" type="checkbox" id="confirmed" value="1" checked>
                   </label>
@@ -177,12 +177,6 @@
 
 
           </div>
-          <!-- <div class="lg:w-4/12 px-2 mt-2" v-if="!isPlanned">
-            <label for="waranty"
-              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-              In garanzia <input v-model="waranty" type="checkbox" value="1">
-            </label>
-          </div> -->
 
           <div class="lg:w-4/12 px-2" v-if="isPlanned">
             <select id="planning" v-model="planning"
@@ -194,7 +188,7 @@
 
         </div>
 
-        <div class="flex py-2 border border-solid border-blueGray-500 shadow rounded"
+        <!-- <div class="flex py-2 border border-solid border-blueGray-500 shadow rounded"
           v-if="action.openTab != 3 && action.openTab != 4">
           <div class="lg:w-8/12 px-2 w-full">
             <input v-model="name" type="text" placeholder="save these settings as a template"
@@ -207,7 +201,7 @@
               SAVE TEMPLATE
             </button>
           </div>
-        </div>
+        </div> -->
 
       </div>
 
