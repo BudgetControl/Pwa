@@ -282,7 +282,7 @@ export default {
 
         _this.amount = Math.abs(model.amount)
         if (model.type == 'incoming') {
-          _this.action.openTab = 1
+          _this.action.openTab = 2
         }
 
         if (model.type == 'expenses') {

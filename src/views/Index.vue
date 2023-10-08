@@ -101,5 +101,11 @@ export default {
     IndexNavbar,
     FooterComponent,
   },
+  mounted: function() {
+    //check if I'm on mobile phone, switch home page
+      if(window.location.pathname === '/' && window.location.href.indexOf('budgetcontrol') == '-1') {
+        this.$router.push({ path: 'app' })
+      }
+  }
 };
 </script>
