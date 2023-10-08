@@ -48,27 +48,27 @@
           </li>
 
           <li class="flex items-center" v-if="!token">
-            <a
+            <router-link
               class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
-              href="/auth/login"
+              to="/auth/login"
             >
               <i
                 class="text-blueGray-400 far fa-solid fa-user text-lg leading-lg mr-2"
               />
               Login
-            </a>
+            </router-link>
           </li>
 
           <li class="flex items-center" v-if="!token">
-            <a
+            <router-link
               class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
-              href="/auth/register"
+              to="/auth/register"
             >
               <i
                 class="text-blueGray-400 far fa-solid fa-right-to-bracket text-lg leading-lg mr-2"
               />
               Sign up
-            </a>
+            </router-link>
           </li>
 
           <li class="flex items-center">

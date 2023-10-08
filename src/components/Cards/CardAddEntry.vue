@@ -3,12 +3,12 @@
     <div
       class="container relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0 flex-auto p-4">
       <div class="flex flex-wrap py-3">
-        <div class="lg:w-6/12 px-2">
+        <!-- <div class="lg:w-6/12 px-2">
           <select v-model="model" v-on:change="retriveModel()" id="model" v-if="action.models"
             class="border-0 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
             <option v-for="(item, k) in input.model" :key="k" :value="k">{{ item.name }}</option>
           </select>
-        </div>
+        </div> -->
         <div class="lg:w-4/12 px-2">
           <button v-on:click="resetModel()" v-if="action.reset"
             class="text-emerald-500 bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -410,11 +410,11 @@ export default {
 
         _this.amount = Math.abs(model.amount)
         if (model.type == 'incoming') {
-          _this.action.openTab = 1
+          _this.action.openTab = 2
         }
 
         if (model.type == 'expenses') {
-          _this.action.openTab = 2
+          _this.action.openTab = 1
         }
 
         if (model.type == 'transfer') {
