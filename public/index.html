@@ -29,7 +29,7 @@
     />
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
     <title>
-      Vue Notus by Creative Tim | Free and Open Source UI Kit
+      Budget Control
     </title>
   </head>
   <body class="text-blueGray-700 antialiased">
@@ -39,36 +39,7 @@
         enabled. Please enable it to continue.</strong
       >
     </noscript>
-    <button onclick="installApp()">Installa</button>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
 </html>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
-      .then(function(registration) {
-        console.log('Service Worker registrato con successo:', registration);
-      })
-      .catch(function(error) {
-        console.log('Errore nella registrazione del Service Worker:', error);
-      });
-  }
-  
-  function installApp() {
-  if ('BeforeInstallPromptEvent' in window) {
-    // Mostra il prompt di installazione
-    deferredPrompt.prompt();
-    // Attendere l'utente per l'installazione
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('L\'utente ha installato l\'app');
-      } else {
-        console.log('L\'utente ha rifiutato l\'installazione');
-      }
-      // Pulisci il prompt
-      deferredPrompt = null;
-    });
-  }
-}
-</script>

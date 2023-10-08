@@ -20,6 +20,7 @@ import Auth from "@/layouts/Auth.vue";
 
 import Dashboard from "@/views/admin/Dashboard.vue";
 import AddEntry from "@/views/admin/AddEntry.vue";
+import AddPlannedEntry from "@/views/admin/AddPlannedEntry.vue";
 import Settings from "@/views/admin/Settings.vue";
 import MyEntries from "@/views/admin/MyEntries.vue";
 import ImportEntries from "@/views/admin/ImportEntries.vue";
@@ -56,6 +57,11 @@ const routes = [
         path: "/app/add_entry",
         name: 'add_entry',
         component: AddEntry,
+      },
+      {
+        path: "/app/add_planned_entry",
+        name: 'add_planned_entry',
+        component: AddPlannedEntry,
       },
       {
         path: "/app/entries",
