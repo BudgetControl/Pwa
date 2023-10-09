@@ -3,26 +3,13 @@
         <div class="container mx-auto px-4">
             <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
                 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
-                    <HeaderButton back="/app/settings" title="Wallet settings" />
+                    <HeaderButton back="/app/settings" title="Category settings" />
 
-                    <!-- wallets -->
-                    <div class="container px-4 mx-auto" v-on:click="openModal(null)">
-                        <div class="flex border border-dotted m-1 bg-blueGray-200">
-                            <div class="flex lg:w-2/12 p-2">
-                                <i class="fas fa-plus fa-lg"></i>
-                            </div>
-                            <div class="flex lg:w-10/12 p-2">
-                                <p>
-                                    Add new wallet
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="container px-4 mx-auto " v-for="(item, k) in wallets" :key="k" v-on:click="openModal(k)">
+                    <!-- categories -->
+                    <div class="container px-4 mx-auto " v-for="(item, k) in categories" :key="k" v-on:click="showSub(k)">
                         <div class="flex border border-dotted m-1">
                             <div class="flex lg:w-2/12 p-2">
-                                <i class="fas fa-wallet fa-lg" :style="'color:' + item.color"></i>
+                                <i :class="'fa-lg '+item.icon + ' ' + item.type"></i>
                             </div>
                             <div class="flex lg:w-10/12 p-2">
                                 <p>
@@ -30,6 +17,22 @@
                                 </p>
                             </div>
                         </div>
+
+                        <div v-if="opentab == k" >
+                            <div class="container px-4 mx-auto " v-for="(subItem, k) in item.sub_category" :key="k">
+                            <div class="flex border border-dotted m-1">
+                                <div class="flex lg:w-2/12 p-2">
+                                </div>
+                                <div class="flex lg:w-10/12 p-2">
+                                    <p>
+                                        {{ subItem.name }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
                     </div>
 
                     <!-- modal -->
@@ -131,8 +134,9 @@ export default {
     data() {
         return {
             showModal: false,
-            wallets: [],
+            categories: [],
             color: null,
+            opentab: null,
             form: {
                 type: ['Cash', 'Bank', 'Credit Card', 'Credit Card Revolving', 'Savings'],
                 currency: []
@@ -140,7 +144,7 @@ export default {
             modal: {
                 id: null,
                 name: null,
-                color: null,
+                icon: null,
                 invoiceDate: null,
                 type: [0],
                 currency: [0],
@@ -150,28 +154,32 @@ export default {
         }
     },
     mounted: function () {
-        this.getCurrency()
-        ApiService.accounts().then((res) => {
+        ApiService.categories().then((res) => {
             res.data.forEach(e => {
-                this.wallets.push(e)
+                this.categories.push(e)
             });
         })
     },
     methods: {
-        openModal(id) {
-            this.modal.color = "#c5c526"
-            if(id != null) {
-                let wallets = this.wallets
-
-                this.modal.id = wallets[id].id
-                this.modal.name = wallets[id].name
-                this.modal.color = wallets[id].color
-                this.modal.invoiceDate = wallets[id].date
-                this.modal.type = wallets[id].type
-                this.modal.currency = wallets[id].currency
-                this.modal.exclude_stats = false
-                this.modal.installment = wallets[id].installementValue
+        showSub(id) {
+            if(this.opentab == id) {
+                this.opentab = null
+            } else {
+                this.opentab = id
             }
+            
+        },
+        openModal(id) {
+            let categories = this.categories
+
+            this.modal.id = categories[id].id
+            this.modal.name = categories[id].name
+            this.modal.color = categories[id].color
+            this.modal.invoiceDate = categories[id].date
+            this.modal.type = categories[id].type
+            this.modal.currency = categories[id].currency
+            this.modal.exclude_stats = false
+            this.modal.installment = categories[id].installementValue
 
             this.showModal = true
 
@@ -196,13 +204,6 @@ export default {
         updateColor(eventData) {
             this.modal.color = eventData.cssColor
         },
-        getCurrency() {
-            ApiService.currencies().then((res) => {
-                res.data.forEach(e => {
-                    this.form.currency.push(e)
-                });
-            })
-        }
     }
 };
 </script>
@@ -210,5 +211,7 @@ export default {
 <style>
 .vacp-color-input-group { display: none !important; }
 .vacp-copy-button { display: none !important; }
+.expenses { color: red}
+.incoming { color: green}
 </style>
   
