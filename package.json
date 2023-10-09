@@ -19,6 +19,11 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.15.3",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/free-regular-svg-icons": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/vue-fontawesome": "^3.0.3",
     "@popperjs/core": "2.9.1",
     "@tailwindcss/forms": "0.2.1",
     "@vue/compiler-sfc": "^3.3.4",
@@ -30,6 +35,7 @@
     "gulp-append-prepend": "1.0.8",
     "tailwindcss": "2.0.4",
     "vue": "^3.3.4",
+    "vue-accessible-color-picker": "^4.1.4",
     "vue-full-loading": "^1.2.1",
     "vue-router": "4.0.5"
   },

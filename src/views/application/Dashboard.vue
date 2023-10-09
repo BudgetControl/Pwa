@@ -27,7 +27,7 @@
 import FilterBar from "@/components/Navbars/FilterBar.vue";
 import CardBarChart from "@/components/Cards/Chart/CardBarChart.vue";
 import CardLine_IncomingExpensesChart from "@/components/Cards/Chart/CardLine_IncomingExpensesChart.vue";
-import AuthService from "../../services/AuthService.vue";
+import AuthService from "@/services/AuthService.vue";
 import CardPieLabelChart from "../../components/Cards/Chart/CardPieLabelChart.vue";
 import CardCategoryResume from "../../components/Cards/Chart/CardCategoryResume.vue";
 

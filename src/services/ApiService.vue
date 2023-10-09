@@ -121,6 +121,15 @@ async function accounts() {
   return response.data;
 }
 
+async function setAccount(data, id) {
+  let response = await instance.post('/api/accounts',data);
+  if(id != null) {
+    response = await instance.put(`/api/accounts/${id}`,data);
+  }
+  
+  return response.data;
+}
+
 async function importData(data) {
   const response = await instance.post('/api/entries/import',data);
   return response.data;
@@ -154,7 +163,8 @@ export default {
   getPlannedEntry,
   setPlannedEntry,
   payee,
-  deletePayee
+  deletePayee,
+  setAccount
 }
 
 </script>
