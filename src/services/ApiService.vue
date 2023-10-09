@@ -20,31 +20,31 @@ instance.interceptors.request.use(
   }
 );
 
-async function setEntry(type,data, isPlanned, uuid) {
+async function setEntry(type, data, isPlanned, uuid) {
   let url = `/api/${type}`
-  if(isPlanned == true || isPlanned == 'true') {
+  if (isPlanned == true || isPlanned == 'true') {
     url = `/api/planning-recursively`
   }
-  
+
   let response
-  if(uuid !== null && uuid !== undefined) {
+  if (uuid !== null && uuid !== undefined) {
     url = `${url}/${uuid}`
-    response = await instance.put(url,data);
+    response = await instance.put(url, data);
   } else {
-    response = await instance.post(url,data);
+    response = await instance.post(url, data);
   }
 
   return response.data;
 }
 
-async function getEntry(page,filter) {
+async function getEntry(page, filter) {
   const response = await instance.get(`/api/entry?page=${page}${filter}`);
   return response.data;
 }
 
-async function deleteEntry(id,isPlanned) {
+async function deleteEntry(id, isPlanned) {
   let url = `/api/entry/${id}`
-  if(isPlanned == true || isPlanned == 'true') {
+  if (isPlanned == true || isPlanned == 'true') {
     url = `/api/planning-recursively/${id}`
   }
 
@@ -52,9 +52,9 @@ async function deleteEntry(id,isPlanned) {
   return response.data;
 }
 
-async function getEntryDetail(id,isPlanned) {
+async function getEntryDetail(id, isPlanned) {
   let url = `/api/entry/${id}`
-  if(isPlanned == true || isPlanned == 'true') {
+  if (isPlanned == true || isPlanned == 'true') {
     url = `/api/planning-recursively/${id}`
   }
   const response = await instance.get(url);
@@ -62,16 +62,16 @@ async function getEntryDetail(id,isPlanned) {
 }
 
 async function getEntryFromAccount(id) {
-  const response = await instance.get('/api/entry/account/'+id);
+  const response = await instance.get('/api/entry/account/' + id);
   return response.data;
 }
 
 async function debit(page) {
   let params = ''
-  if(page !== undefined) {
+  if (page !== undefined) {
     params = `?page=${page}`
   }
-  
+
   const response = await instance.get(`/api/debit${params}`);
   return response.data;
 }
@@ -102,7 +102,7 @@ async function model() {
 }
 
 async function setModel(data) {
-  const response = await instance.post('/api/model',data);
+  const response = await instance.post('/api/model', data);
   return response.data;
 }
 
@@ -122,16 +122,18 @@ async function accounts() {
 }
 
 async function setAccount(data, id) {
-  let response = await instance.post('/api/accounts',data);
-  if(id != null) {
-    response = await instance.put(`/api/accounts/${id}`,data);
+  if (id != null) {
+    const response = await instance.put(`/api/accounts/${id}`, data);
+    return response.data;
+  } else {
+    const response = await instance.post('/api/accounts', data);
+    return response.data;
+
   }
-  
-  return response.data;
 }
 
 async function importData(data) {
-  const response = await instance.post('/api/entries/import',data);
+  const response = await instance.post('/api/entries/import', data);
   return response.data;
 }
 
@@ -141,7 +143,7 @@ async function getPlannedEntry(page) {
 }
 
 async function setPlannedEntry(data) {
-  const response = await instance.post('/api/planning-recursively',data);
+  const response = await instance.post('/api/planning-recursively', data);
   return response.data;
 }
 

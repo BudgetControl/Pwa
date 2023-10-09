@@ -49,6 +49,11 @@
                                     </div>
 
                                     <div class="mb-3 pt-0">
+                                        <input type="text" placeholder="Balance wallet" v-model="modal.balance"
+                                            class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
+                                    </div>
+
+                                    <div class="mb-3 pt-0">
                                         <select
                                             class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             v-model="modal.currency">
@@ -68,23 +73,23 @@
                                         </select>
                                     </div>
 
-                                    <div class="mb-3 pt-0" v-if="modal.type.indexOf('Credit Card') != '-1' ">
+                                    <div class="mb-3 pt-0" v-if="modal.type == 'Credit Card' ||  modal.type == 'Credit Card Revolving'">
                                         <span class="text-xs text-blueGray-400">Payment deadline</span>
                                         <VueDatePicker v-model="modal.invoiceDate"></VueDatePicker>
                                     </div>
 
-                                    <div class="mb-3 pt-0" v-if="modal.type.indexOf('Credit Card') != '-1' ">
+                                    <div class="mb-3 pt-0" v-if="modal.type == 'Credit Card' ||  modal.type == 'Credit Card Revolving'">
                                         <span class="text-xs text-blueGray-400">Credit card installment</span>
                                         <input type="text" placeholder="500.00 €" v-model="modal.installment"
                                             class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                                     </div>
 
-                                    <!-- <div class="mb-3 pt-0">
+                                    <div class="mb-3 pt-0">
                                         <label for="exclude_stats">
                                             <input v-model="modal.exclude_stats" type="checkbox" class="p-1 border rounded"
                                                 id="exclude_stats" :value="true" checked> Exclude from stats
                                         </label>
-                                    </div> -->
+                                    </div>
 
                                     <div class="mb-3 pt-0">
                                         <span class="text-xs text-blueGray-400">Wallet color</span>
@@ -145,22 +150,26 @@ export default {
                 type: [0],
                 currency: [0],
                 exclude_stats: false,
-                installment: 0
+                installment: 0,
+                balance: 0
             }
         }
     },
     mounted: function () {
         this.getCurrency()
-        ApiService.accounts().then((res) => {
-            res.data.forEach(e => {
-                this.wallets.push(e)
-            });
-        })
+        this.getWallets()
     },
     methods: {
+        getWallets() {
+            ApiService.accounts().then((res) => {
+                res.data.forEach(e => {
+                    this.wallets.push(e)
+                });
+            })
+        },
         openModal(id) {
             this.modal.color = "#c5c526"
-            if(id != null) {
+            if (id != null) {
                 let wallets = this.wallets
 
                 this.modal.id = wallets[id].id
@@ -171,6 +180,7 @@ export default {
                 this.modal.currency = wallets[id].currency
                 this.modal.exclude_stats = false
                 this.modal.installment = wallets[id].installementValue
+                this.modal.balance = wallets[id].balance
             }
 
             this.showModal = true
@@ -187,11 +197,27 @@ export default {
             this.modal.currency = null
             this.modal.exclude_stats = false
             this.modal.installment = null
+            this.modal.balance = 0
         },
-        saveModal() {
-            ApiService.setAccount(this.modal, this.modal.id).then(() => {
-                this.showModal = false
+        async saveModal() {
+            const data = {
+                name: this.modal.name,
+                color: this.modal.color,
+                date: this.modal.invoiceDate,
+                type: this.modal.type,
+                installementValue: this.modal.installment,
+                currency: this.modal.currency,
+                balance: this.modal.balance,
+                exclude_from_stats: this.modal.exclude_stats
+            }
+
+            ApiService.setAccount(data, this.modal.id).then(() => {
+                this.closeModal()
+                this.wallets = []
+                this.getWallets()
             })
+
+
         },
         updateColor(eventData) {
             this.modal.color = eventData.cssColor
@@ -208,7 +234,11 @@ export default {
 </script>
 
 <style>
-.vacp-color-input-group { display: none !important; }
-.vacp-copy-button { display: none !important; }
-</style>
+.vacp-color-input-group {
+    display: none !important;
+}
+
+.vacp-copy-button {
+    display: none !important;
+}</style>
   
