@@ -159,7 +159,7 @@
 </template>
 
 <script>
-import ApiService from '../../services/ApiService.vue';
+import ApiService from '@/services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 

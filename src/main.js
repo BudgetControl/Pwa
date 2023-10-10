@@ -14,18 +14,25 @@ import Index from "@/views/Index.vue";
 // layouts
 
 import Admin from "@/layouts/Admin.vue";
+import Application from "@/layouts/Application.vue";
 import Auth from "@/layouts/Auth.vue";
 
 // views for Admin layout
 
-import Dashboard from "@/views/admin/Dashboard.vue";
-import AddEntry from "@/views/admin/AddEntry.vue";
-import AddPlannedEntry from "@/views/admin/AddPlannedEntry.vue";
-import Settings from "@/views/admin/Settings.vue";
-import MyEntries from "@/views/admin/MyEntries.vue";
-import ImportEntries from "@/views/admin/ImportEntries.vue";
-import SearchEntries from "@/views/admin/SearchEntries.vue";
-import EntriesResume from "@/views/admin/EntriesResume.vue";
+import Dashboard from "@/views/application/Dashboard.vue";
+import AddEntry from "@/views/application/AddEntry.vue";
+import AddPlannedEntry from "@/views/application/AddPlannedEntry.vue";
+import MyEntries from "@/views/application/MyEntries.vue";
+import ImportEntries from "@/views/application/ImportEntries.vue";
+import SearchEntries from "@/views/application/SearchEntries.vue";
+import EntriesResume from "@/views/application/EntriesResume.vue";
+
+// settings layout
+
+import Profile from "@/views/settings/Profile.vue";
+import Settings from "@/views/settings/Settings.vue";
+import Wallet from "@/views/settings/Wallet.vue";
+import Category from "@/views/settings/Category.vue";
 
 // views for Auth layout
 import Login from "@/views/auth/Login.vue";
@@ -37,7 +44,6 @@ import AuthConfirm from "@/views/auth/Confirm.vue";
 // views without layouts
 
 import Landing from "@/views/Landing.vue";
-import Profile from "@/views/Profile.vue";
 // import Index from "@/views/Index.vue";
 
 // routes
@@ -47,7 +53,7 @@ const routes = [
     path: "/app",
     redirect: "/app/dashboard",
     name: 'app',
-    component: Admin,
+    component: Application,
     children: [
       {
         path: "/app/dashboard",
@@ -80,18 +86,32 @@ const routes = [
         path: "/app/see_all/:type",
         component: EntriesResume,
       },
-      {
-        path: "/app/settings/",
-        component: Settings,
-        children: [
-          {
-            path: "/app/settings/:setting_type",
-            component: Settings,
-          }
-        ]
-      },
     ],
   },
+
+  {
+    path: "/app/settings",
+    component: Admin,
+    children: [
+      {
+        path: "/app/settings",
+        component: Settings,
+      },
+      {
+        path: "/app/settings/wallet",
+        component: Wallet,
+      },
+      {
+        path: "/app/settings/category",
+        component: Category,
+      },
+      {
+        path: "/app/settings/profile",
+        component: Profile,
+      },
+    ]
+  },
+
   {
     path: "/auth",
     name: "auth",
@@ -123,10 +143,6 @@ const routes = [
   {
     path: "/landing",
     component: Landing,
-  },
-  {
-    path: "/profile",
-    component: Profile,
   },
   {
     path: "/",

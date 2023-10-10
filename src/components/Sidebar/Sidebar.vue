@@ -176,7 +176,7 @@
 
           <li class="items-center">
             <router-link
-              to="/app/settings/generic"
+              to="/app/settings"
               v-slot="{ href, navigate, isActive }"
             >
               <a
