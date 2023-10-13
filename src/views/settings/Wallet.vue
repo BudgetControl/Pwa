@@ -139,7 +139,7 @@ export default {
             wallets: [],
             color: null,
             form: {
-                type: ['Cash', 'Bank', 'Credit Card', 'Credit Card Revolving', 'Savings'],
+                type: ['Cash', 'Bank', 'Credit Card', 'Credit Card Revolving', 'Saving', 'Investment'],
                 currency: []
             },
             modal: {

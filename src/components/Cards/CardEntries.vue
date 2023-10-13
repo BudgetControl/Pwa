@@ -94,7 +94,6 @@ export default {
 
       let currentPage = window.localStorage.getItem('current_page') == null ? 0 : window.localStorage.getItem('current_page')
       ApiServiceVue.getEntry(currentPage, filter).then((res) => {
-        _this.$refs.entry.entries = []
 
         if (res.data.length > 0) {
           _this.$refs.entry.buildEntriesTable(res.data)

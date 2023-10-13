@@ -41,7 +41,12 @@
         localStorage.clear();
         this.$router.push({ path: '/auth/login' })
       }
+    },
+  methods: {
+    parentFunction() {
+      console.log('Funzione del componente genitore chiamata');
     }
+  }
   };
   </script>
   

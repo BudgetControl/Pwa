@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="'?account=' + statIdWallet" v-slot="{ href, navigate, isActive }">
+    <router-link :to="'/app/entries?account=' + statIdWallet" v-slot="{ href, navigate, isActive }">
         <a :href="href" @click="navigate"
             :class="[
                 isActive

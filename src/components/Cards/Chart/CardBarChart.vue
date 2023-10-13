@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-700">
+  <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-700 text-white">
     <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
       <div class="flex flex-wrap items-center">
         <div class="relative w-full max-w-full flex-grow flex-1">
@@ -14,7 +14,7 @@
     </div>
     <div class="p-4 flex-auto">
       <div class="relative h-350-px">
-        <canvas :id="'bar-chart_' + ID_GRAPH"></canvas>
+        <canvas class="text-white" :id="'bar-chart_' + ID_GRAPH"></canvas>
       </div>
     </div>
   </div>
@@ -60,7 +60,7 @@ export default {
     const _this = this
     setInterval(function () {
       _this.checkLocalStorageUpdate()
-    }, 1000)
+    }, 2000)
   },
   methods: {
     setGraph() {
@@ -93,19 +93,24 @@ export default {
             datasets: [],
           },
           options: {
+            title: {
+              display: false,
+              text: "Entries stats",
+              fontColor: "white",
+            },
+            legend: {
+              labels: {
+                fontColor: "white",
+              },
+              align: "end",
+              position: "bottom",
+              display: false
+            },
             maintainAspectRatio: false,
             responsive: true,
             hover: {
               mode: "nearest",
               intersect: false,
-            },
-            legend: {
-              display: false,
-            },
-            onClick: (evt, el) => {
-              let position = el[0]._datasetIndex
-              let element = config.data.datasets[position].id
-              window.location.href = "/admin/entries/0/" + this.path + "-" + element
             },
           },
         };
@@ -134,7 +139,6 @@ export default {
             backgroundColor: colors,
             data: values,
             fill: true,
-            barThickness: 40,
           }
 
           config.data.datasets.push(dataset)
@@ -148,7 +152,7 @@ export default {
           window.myBar = new Chart(ctx, config);
 
         }).catch((error) => {
-          console.error(error);
+          console.info(error);
         })
       })
     },
