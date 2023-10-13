@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import CardAddEntry from "@/components/Cards/CardAddPlannedEntry.vue";
+import CardAddEntry from "@/components/Cards/Settings/CardAddPlannedEntry.vue";
 
 export default {
   components: {

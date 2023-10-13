@@ -21,7 +21,9 @@ import Auth from "@/layouts/Auth.vue";
 
 import Dashboard from "@/views/application/Dashboard.vue";
 import AddEntry from "@/views/application/AddEntry.vue";
+import MyPlannedEntries from "@/views/application/MyPlannedEntries.vue";
 import AddPlannedEntry from "@/views/application/AddPlannedEntry.vue";
+import PayeeList from "@/views/application/PayeeList.vue";
 import MyEntries from "@/views/application/MyEntries.vue";
 import ImportEntries from "@/views/application/ImportEntries.vue";
 import SearchEntries from "@/views/application/SearchEntries.vue";
@@ -69,6 +71,17 @@ const routes = [
         name: 'add_planned_entry',
         component: AddPlannedEntry,
       },
+      {
+        path: "/app/planned-entries",
+        name: 'planned-entries',
+        component: MyPlannedEntries,
+      },
+      {
+        path: "/app/payee",
+        name: 'payee',
+        component: PayeeList,
+      },
+
       {
         path: "/app/entries",
         component: MyEntries,

@@ -65,7 +65,7 @@
         <!-- Navigation -->
 
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
-          <li class="items-center">
+          <li class="items-center" v-on:click="toggleCollapseShow('hidden')">
             <router-link
               to="/app/dashboard"
               v-slot="{ href, navigate, isActive }"
@@ -89,7 +89,7 @@
             </router-link>
           </li>
 
-          <li class="items-center">
+          <li class="items-center" v-on:click="toggleCollapseShow('hidden')">
             <router-link
               to="/app/entries"
               v-slot="{ href, navigate, isActive }"
@@ -113,7 +113,8 @@
             </router-link>
           </li>
 
-          <li class="items-center">
+          <li class="items-center" 
+              v-on:click="toggleCollapseShow('hidden')">
             <router-link
               to="/app/add_entry"
               v-slot="{ href, navigate, isActive }"
@@ -166,41 +167,10 @@
         <!-- Divider -->
         <hr class="my-4 md:min-w-full" />
 
-        <h6
-          class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
-        >
-          Settings
-        </h6>
-
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
-
-          <li class="items-center">
+          <li class="items-center" v-on:click="toggleCollapseShow('hidden')">
             <router-link
-              to="/app/settings"
-              v-slot="{ href, navigate, isActive }"
-            >
-              <a
-                :href="href"
-                @click="navigate"
-                class="text-xs uppercase py-3 font-bold block"
-                :class="[
-                  isActive
-                    ? 'text-emerald-500 hover:text-emerald-600'
-                    : 'text-blueGray-700 hover:text-blueGray-500',
-                ]"
-              >
-                <i
-                  class="fas fa-tools mr-2 text-sm"
-                  :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
-                ></i>
-                Settings
-              </a>
-            </router-link>
-          </li>
-
-          <li class="items-center">
-            <router-link
-              to="/app/settings/payee"
+              to="/app/payee"
               v-slot="{ href, navigate, isActive }"
             >
               <a
@@ -222,9 +192,9 @@
             </router-link>
           </li>
 
-          <li class="items-center">
+          <li class="items-center" v-on:click="toggleCollapseShow('hidden')">
             <router-link
-              to="/app/settings/planned"
+              to="/app/planned-entries"
               v-slot="{ href, navigate, isActive }"
             >
               <a
@@ -250,10 +220,40 @@
 
         <!-- Divider -->
         <hr class="my-4 md:min-w-full" />
+
+        <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+
+          <li class="items-center" v-on:click="toggleCollapseShow('hidden')">
+            <router-link
+              to="/app/settings"
+              v-slot="{ href, navigate, isActive }"
+            >
+              <a
+                :href="href"
+                @click="navigate"
+                class="text-xs uppercase py-3 font-bold block"
+                :class="[
+                  isActive
+                    ? 'text-emerald-500 hover:text-emerald-600'
+                    : 'text-blueGray-700 hover:text-blueGray-500',
+                ]"
+              >
+                <i
+                  class="fas fa-tools mr-2 text-sm"
+                  :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
+                ></i>
+                Settings
+              </a>
+            </router-link>
+          </li>
+        </ul>
+
+        <!-- Divider -->
+        <hr class="my-4 md:min-w-full" />
         <!-- Heading -->
 
         <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-          <li class="items-center">
+          <li class="items-center" v-on:click="toggleCollapseShow('hidden')">
             <router-link
               class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
               to="/profile"
@@ -279,7 +279,6 @@
     </div>
   </nav>
 </template>
-); }
 
 <script>
 import NotificationDropdown from "@/components/Dropdowns/NotificationDropdown.vue";
