@@ -19,18 +19,23 @@
                         </div>
                     </div>
 
-                    <div class="container px-4 mx-auto " v-for="(item, k) in wallets" :key="k" v-on:click="openModal(k)">
-                        <div class="flex border border-dotted m-1">
-                            <div class="flex lg:w-2/12 p-2">
-                                <i class="fas fa-wallet fa-lg" :style="'color:' + item.color"></i>
+                    <draggable :list="wallets" group="wallet" @start="drag = true" @end="drag = false" key=""
+                        :move="checkMove">
+                        <template #item="{ element }">
+                            <div class="container px-4 mx-auto ">
+                                <div class="flex border border-dotted m-1">
+                                    <div class="flex lg:w-2/12 p-2">
+                                        <i class="fas fa-wallet fa-lg" :style="'color:' + element.color"></i>
+                                    </div>
+                                    <div class="flex lg:w-10/12 p-2">
+                                        <p>element
+                                            {{ element.name }}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="flex lg:w-10/12 p-2">
-                                <p>
-                                    {{ item.name }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                        </template>
+                    </draggable>
 
                     <!-- modal -->
                     <div v-if="showModal"
@@ -73,12 +78,14 @@
                                         </select>
                                     </div>
 
-                                    <div class="mb-3 pt-0" v-if="modal.type == 'Credit Card' ||  modal.type == 'Credit Card Revolving'">
+                                    <div class="mb-3 pt-0"
+                                        v-if="modal.type == 'Credit Card' || modal.type == 'Credit Card Revolving'">
                                         <span class="text-xs text-blueGray-400">Payment deadline</span>
                                         <VueDatePicker v-model="modal.invoiceDate"></VueDatePicker>
                                     </div>
 
-                                    <div class="mb-3 pt-0" v-if="modal.type == 'Credit Card' ||  modal.type == 'Credit Card Revolving'">
+                                    <div class="mb-3 pt-0"
+                                        v-if="modal.type == 'Credit Card' || modal.type == 'Credit Card Revolving'">
                                         <span class="text-xs text-blueGray-400">Credit card installment</span>
                                         <input type="text" placeholder="500.00 €" v-model="modal.installment"
                                             class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
@@ -128,10 +135,11 @@ import ApiService from '@/services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { ColorPicker } from 'vue-accessible-color-picker';
+import draggable from 'vuedraggable'
 
 export default {
     components: {
-        HeaderButton, VueDatePicker, ColorPicker
+        HeaderButton, VueDatePicker, ColorPicker, draggable
     },
     data() {
         return {
@@ -166,6 +174,26 @@ export default {
                     this.wallets.push(e)
                 });
             })
+        },
+        handleChange() {
+            console.log('changed');
+        },
+        inputChanged(value) {
+            this.activeNames = value;
+        },
+        getComponentData() {
+            return {
+                on: {
+                    change: this.handleChange,
+                    input: this.inputChanged
+                },
+                attrs: {
+                    wrap: true
+                },
+                props: {
+                    value: this.activeNames
+                }
+            };
         },
         openModal(id) {
             this.modal.color = "#c5c526"
@@ -228,6 +256,9 @@ export default {
                     this.form.currency.push(e)
                 });
             })
+        },
+        checkMove: function (e) {
+            window.console.log("Future index: " + e.draggedContext.futureIndex);
         }
     }
 };
@@ -240,5 +271,6 @@ export default {
 
 .vacp-copy-button {
     display: none !important;
-}</style>
+}
+</style>
   
