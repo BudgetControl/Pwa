@@ -610,7 +610,6 @@ export default {
           _this.action.dateUpdated = false
           this.time()
           setTimeout(_this.action.alert = false, 3000)
-          _this.$router.push({ path: '/app/entries' })
 
         }).catch((reason) => {
 
