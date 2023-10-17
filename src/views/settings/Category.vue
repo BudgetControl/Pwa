@@ -5,11 +5,24 @@
                 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
                     <HeaderButton back="/app/settings" title="Category settings" />
 
+                    <div class="container px-4 mx-auto" v-on:click="openModal(null)">
+                        <div class="flex border border-dotted m-1 bg-blueGray-200">
+                            <div class="flex lg:w-2/12 p-2">
+                                <i class="fas fa-plus fa-lg"></i>
+                            </div>
+                            <div class="flex lg:w-10/12 p-2">
+                                <p>
+                                    Add new category
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- categories -->
                     <div class="container px-4 mx-auto " v-for="(item, k) in categories" :key="k" v-on:click="showSub(k)">
                         <div class="flex border border-dotted m-1">
                             <div class="flex lg:w-2/12 p-2">
-                                <i :class="'fa-lg '+item.icon + ' ' + item.type"></i>
+                                <i :class="'fa-lg ' + item.icon + ' ' + item.type"></i>
                             </div>
                             <div class="flex lg:w-10/12 p-2">
                                 <p>
@@ -18,20 +31,27 @@
                             </div>
                         </div>
 
-                        <div v-if="opentab == k" >
-                            <div class="container px-4 mx-auto " v-for="(subItem, k) in item.sub_category" :key="k">
-                            <div class="flex border border-dotted m-1">
-                                <div class="flex lg:w-2/12 p-2">
-                                </div>
-                                <div class="flex lg:w-10/12 p-2">
-                                    <p>
-                                        {{ subItem.name }}
-                                    </p>
+
+                        <div v-if="opentab == k">
+                            <div class="container px-4 mx-auto " v-for="(subItem, kk) in item.sub_category" :key="kk">
+                                <div class="flex border border-dotted m-1">
+                                    <div class="flex lg:w-2/12 p-2">
+                                    </div>
+                                    <div class="flex lg:w-10/12 p-2">
+                                        <p class="w-full">
+                                            {{ subItem.name }}
+
+                                        <span v-on:click="openModal(k,kk)" v-if="subItem.custom == 1"
+                                            class="text-xs align-right font-semibold  py-1 px-2 rounded text-blueGray-600 bg-blueGray-200 uppercase">
+                                            edit
+                                        </span>
+
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
-                        
-                    </div>
 
                     </div>
 
@@ -47,52 +67,25 @@
                                 <div class="relative p-6 flex-auto">
                                     <!-- Regular Input -->
                                     <div class="mb-3 pt-0">
-                                        <input type="text" placeholder="Wallet name" v-model="modal.name"
+                                        <input type="text" placeholder="Category name" v-model="modal.name"
                                             class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                                     </div>
 
                                     <div class="mb-3 pt-0">
                                         <select
                                             class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                            v-model="modal.currency">
-                                            <option value="0">Choose a currency</option>
-                                            <option v-for="(item, k) in form.currency" :key="k" :value="item.id">{{
+                                            v-model="modal.parent_category">
+                                            <option value="0">Choose a parent category</option>
+                                            <option v-for="(item, k) in categories" :key="k" :value="item.id">{{
                                                 item.name }}</option>
                                         </select>
                                     </div>
 
                                     <div class="mb-3 pt-0">
-                                        <select
-                                            class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                            v-model="modal.type">
-                                            <option value="0">Choose a wallet type</option>
-                                            <option v-for="(item, k) in form.type" :key="k" :value="item">{{ item }}
-                                            </option>
-                                        </select>
-                                    </div>
-
-                                    <div class="mb-3 pt-0" v-if="modal.type.indexOf('Credit Card') != '-1' ">
-                                        <span class="text-xs text-blueGray-400">Payment deadline</span>
-                                        <VueDatePicker v-model="modal.invoiceDate"></VueDatePicker>
-                                    </div>
-
-                                    <div class="mb-3 pt-0" v-if="modal.type.indexOf('Credit Card') != '-1' ">
-                                        <span class="text-xs text-blueGray-400">Credit card installment</span>
-                                        <input type="text" placeholder="500.00 €" v-model="modal.installment"
-                                            class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
-                                    </div>
-
-                                    <!-- <div class="mb-3 pt-0">
                                         <label for="exclude_stats">
                                             <input v-model="modal.exclude_stats" type="checkbox" class="p-1 border rounded"
                                                 id="exclude_stats" :value="true" checked> Exclude from stats
                                         </label>
-                                    </div> -->
-
-                                    <div class="mb-3 pt-0">
-                                        <span class="text-xs text-blueGray-400">Wallet color</span>
-                                        <color-picker :visible-formats="['hex']" :color="modal.color"
-                                            @color-change="updateColor" />
                                     </div>
 
                                 </div>
@@ -123,13 +116,11 @@
 
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import ApiService from '@/services/ApiService.vue';
-import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
-import { ColorPicker } from 'vue-accessible-color-picker';
 
 export default {
     components: {
-        HeaderButton, VueDatePicker, ColorPicker
+        HeaderButton
     },
     data() {
         return {
@@ -138,18 +129,13 @@ export default {
             color: null,
             opentab: null,
             form: {
-                type: ['Cash', 'Bank', 'Credit Card', 'Credit Card Revolving', 'Savings'],
-                currency: []
+                type: ['incoming', 'expenses', 'investments'],
             },
             modal: {
                 id: null,
                 name: null,
-                icon: null,
-                invoiceDate: null,
-                type: [0],
-                currency: [0],
+                parent_category: [0],
                 exclude_stats: false,
-                installment: 0
             }
         }
     },
@@ -162,42 +148,33 @@ export default {
     },
     methods: {
         showSub(id) {
-            if(this.opentab == id) {
+            if (this.opentab == id) {
                 this.opentab = null
             } else {
                 this.opentab = id
             }
-            
-        },
-        openModal(id) {
-            let categories = this.categories
 
-            this.modal.id = categories[id].id
-            this.modal.name = categories[id].name
-            this.modal.color = categories[id].color
-            this.modal.invoiceDate = categories[id].date
-            this.modal.type = categories[id].type
-            this.modal.currency = categories[id].currency
-            this.modal.exclude_stats = false
-            this.modal.installment = categories[id].installementValue
+        },
+        openModal(id,subId) {
+            if (id !== null) {
+                let categories = this.categories
+                this.modal.id = categories[id].sub_category[subId].id
+                this.modal.name = categories[id].sub_category[subId].name
+                this.modal.parent_category = categories[id].sub_category[subId].category_id
+                this.modal.exclude_stats = (categories[id].sub_category[subId].exclude_from_stats == 1) ? true : false
+            }
 
             this.showModal = true
-
         },
         closeModal() {
             this.showModal = false
-
             this.modal.id = null
             this.modal.name = null
-            this.modal.color = null
-            this.modal.invoiceDate = null
-            this.modal.type = null
-            this.modal.currency = null
             this.modal.exclude_stats = false
-            this.modal.installment = null
+            this.modal.parent_category = null
         },
         saveModal() {
-            ApiService.setAccount(this.modal, this.modal.id).then(() => {
+            ApiService.setCategories(this.modal, this.modal.id).then(() => {
                 this.showModal = false
             })
         },
@@ -209,9 +186,20 @@ export default {
 </script>
 
 <style>
-.vacp-color-input-group { display: none !important; }
-.vacp-copy-button { display: none !important; }
-.expenses { color: red}
-.incoming { color: green}
+.vacp-color-input-group {
+    display: none !important;
+}
+
+.vacp-copy-button {
+    display: none !important;
+}
+
+.expenses {
+    color: red
+}
+
+.incoming {
+    color: green
+}
 </style>
   

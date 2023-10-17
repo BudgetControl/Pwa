@@ -132,6 +132,17 @@ async function setAccount(data, id) {
   }
 }
 
+async function setCategories(data, id) {
+  if (id != null) {
+    const response = await instance.put(`/api/categories/${id}`, data);
+    return response.data;
+  } else {
+    const response = await instance.post('/api/categories', data);
+    return response.data;
+
+  }
+}
+
 async function setAccountSorting(id, sorting) {
     const response = await instance.put(`/api/sorting-account/${id}`, {'sorting': sorting});
     return response.data;
@@ -172,7 +183,8 @@ export default {
   payee,
   deletePayee,
   setAccount,
-  setAccountSorting
+  setAccountSorting,
+  setCategories
 }
 
 </script>

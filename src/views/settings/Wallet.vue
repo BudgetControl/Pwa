@@ -206,7 +206,7 @@ export default {
                 this.modal.invoiceDate = wallets[id].date
                 this.modal.type = wallets[id].type
                 this.modal.currency = wallets[id].currency
-                this.modal.exclude_stats = false
+                this.modal.exclude_stats = wallets[id].exclude_from_stats
                 this.modal.installment = wallets[id].installementValue
                 this.modal.balance = wallets[id].balance
             }
