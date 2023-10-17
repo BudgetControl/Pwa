@@ -132,6 +132,11 @@ async function setAccount(data, id) {
   }
 }
 
+async function setAccountSorting(id, sorting) {
+    const response = await instance.put(`/api/sorting-account/${id}`, {'sorting': sorting});
+    return response.data;
+}
+
 async function importData(data) {
   const response = await instance.post('/api/entries/import', data);
   return response.data;
@@ -166,7 +171,8 @@ export default {
   setPlannedEntry,
   payee,
   deletePayee,
-  setAccount
+  setAccount,
+  setAccountSorting
 }
 
 </script>

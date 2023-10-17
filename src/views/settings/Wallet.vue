@@ -19,7 +19,7 @@
                         </div>
                     </div>
 
-                    <draggable :list="wallets" group="wallet" @start="drag = true" @end="drag = false" key=""
+                    <draggable :list="wallets" group="wallet" @start="drag = true" @end="saveSorting"
                         :move="checkMove">
                         <template #item="{ element }">
                             <div class="container px-4 mx-auto ">
@@ -28,8 +28,7 @@
                                         <i class="fas fa-wallet fa-lg" :style="'color:' + element.color"></i>
                                     </div>
                                     <div class="flex lg:w-10/12 p-2">
-                                        <p>element
-                                            {{ element.name }}
+                                        <p>{{ element.name }}
                                         </p>
                                     </div>
                                 </div>
@@ -143,6 +142,7 @@ export default {
     },
     data() {
         return {
+            sortingList: [],
             showModal: false,
             wallets: [],
             color: null,
@@ -236,7 +236,8 @@ export default {
                 installementValue: this.modal.installment,
                 currency: this.modal.currency,
                 balance: this.modal.balance,
-                exclude_from_stats: this.modal.exclude_stats
+                exclude_from_stats: this.modal.exclude_stats,
+                sorting: this.modal.sorting
             }
 
             ApiService.setAccount(data, this.modal.id).then(() => {
@@ -257,8 +258,15 @@ export default {
                 });
             })
         },
+        saveSorting() {
+            let i = 0;
+            this.sortingList.forEach((e) => {
+                i++;
+                ApiService.setAccountSorting(e.id, i)
+            })
+        },
         checkMove: function (e) {
-            window.console.log("Future index: " + e.draggedContext.futureIndex);
+            this.sortingList = e.relatedContext.list;
         }
     }
 };
