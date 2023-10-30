@@ -32,6 +32,7 @@ import EntriesResume from "@/views/application/EntriesResume.vue";
 import Profile from "@/views/settings/Profile.vue";
 import Settings from "@/views/settings/Settings.vue";
 import Wallet from "@/views/settings/Wallet.vue";
+import WalletCard from "@/views/settings/Cards/WalletCard.vue";
 import Category from "@/views/settings/Category.vue";
 
 // views for Auth layout
@@ -100,6 +101,10 @@ const routes = [
       {
         path: "/app/settings/wallet",
         component: Wallet,
+      },
+      {
+        path: "/app/settings/wallet/:id",
+        component: WalletCard,
       },
       {
         path: "/app/settings/category",
