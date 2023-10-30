@@ -48,9 +48,7 @@ export default {
   async beforeMount() {
     try {
       const _this = this
-      AuthService.check().response(() => {
-        _this.$router.push({ path: '/app/dashboard' })
-      }).catch(() => {
+      AuthService.check().catch(() => {
         localStorage.clear();
         _this.$router.push({ path: 'auth' })
       });
