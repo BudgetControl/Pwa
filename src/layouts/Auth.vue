@@ -16,7 +16,7 @@
 <script>
 import Navbar from "@/components/Navbars/IndexNavbar.vue";
 import FooterSmall from "@/components/Footers/FooterSmall.vue";
-
+import AuthService from "@/services/AuthService.vue";
 import registerBg2 from "@/assets/img/register_bg_2.png";
 
 export default {
@@ -30,13 +30,16 @@ export default {
     FooterSmall,
   },
   mounted() {
-      //retrive access token header
-      this.show = true
-      const token = localStorage.getItem('auth-token');
-      if(token === null) {
-        this.show = false
-      } else {
-        this.$router.push({ path: '/app/dashboard' })
+    try {
+        const _this = this
+        AuthService.check().then(() => {
+          _this.$router.push({ path: '/app/dashboard' })
+        }).catch(() => {
+          localStorage.clear();
+        });
+      } catch {
+        localStorage.clear();
+        this.$router.push({ path: 'auth' })
       }
   },
 };

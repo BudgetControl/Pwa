@@ -1,9 +1,9 @@
 {
-  "name": "vue-notus",
-  "homepage": "https://demos.creative-tim.com/vue-notus/",
+  "name": "BudgetControl",
+  "homepage": "https://www.budgetcontrol.cloud",
   "version": "1.1.0",
   "description": "Budget control free app for budget monitoring",
-  "repository": "https://github.com/creativetimofficial/vue-notus",
+  "repository": "https://github.com/mlabfactory",
   "license": "MIT",
   "engines": {
     "node": "18.x"
@@ -11,6 +11,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build && gulp licenses",
+    "build-dev": "vue-cli-service build --mode dev --report-json && gulp licenses",
     "build-mobile": "vue-cli-service build --dest ../Cordova-APP/www",
     "lint": "vue-cli-service lint",
     "build:tailwind": "tailwind build src/assets/styles/index.css -o src/assets/styles/tailwind.css",
@@ -47,6 +48,7 @@
     "@vue/cli-plugin-eslint": "5.0.0-alpha.7",
     "@vue/cli-service": "5.0.0-alpha.7",
     "autoprefixer": "^10.4.14",
+    "cypress": "^13.3.3",
     "eslint": "7.22.0",
     "eslint-plugin-vue": "7.7.0",
     "postcss": "^8.4.23",

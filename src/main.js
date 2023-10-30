@@ -9,7 +9,6 @@ import "@/assets/styles/tailwind.css";
 // mouting point for the whole app
 
 import App from "@/App.vue";
-import Index from "@/views/Index.vue";
 
 // layouts
 
@@ -159,9 +158,9 @@ const routes = [
   },
   {
     path: "/",
-    component: Index,
+    redirect: "/app/dashboard",
   },
-  { path: "/:pathMatch(.*)*", redirect: "/" },
+  { path: "/:pathMatch(.*)*", redirect: "/app" },
 ];
 
 const router = createRouter({
