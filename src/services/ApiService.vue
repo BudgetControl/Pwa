@@ -91,6 +91,11 @@ async function categories() {
   return response.data;
 }
 
+async function category(id) {
+  const response = await instance.get(`/api/categories/${id}`);
+  return response.data;
+}
+
 async function paymentstype() {
   const response = await instance.get('/api/paymentstype');
   return response.data;
@@ -118,6 +123,11 @@ async function currencies() {
 
 async function accounts() {
   const response = await instance.get('/api/accounts');
+  return response.data;
+}
+
+async function account(id) {
+  const response = await instance.get(`/api/accounts/${id}`);
   return response.data;
 }
 
@@ -184,7 +194,9 @@ export default {
   deletePayee,
   setAccount,
   setAccountSorting,
-  setCategories
+  setCategories,
+  account,
+  category
 }
 
 </script>

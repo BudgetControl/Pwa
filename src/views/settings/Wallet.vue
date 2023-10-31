@@ -23,7 +23,7 @@
                         :move="checkMove">
                         <template #item="{ element }">
                             <div class="container px-4 mx-auto ">
-                                <div class="flex border border-dotted m-1">
+                                <div class="flex border border-dotted m-1" v-on:click="openModal(element.id)">
                                     <div class="flex lg:w-2/12 p-2">
                                         <i class="fas fa-wallet fa-lg" :style="'color:' + element.color"></i>
                                     </div>
@@ -64,6 +64,13 @@ export default {
         this.getWallets()
     },
     methods: {
+        openModal(id) {
+            if (id != null) {
+                this.$router.push({path : "/app/settings/wallet/" + id})
+            } else {
+                this.$router.push({path: "/app/settings/wallet/new-account"})
+            }
+        },
         getWallets() {
             ApiService.accounts().then((res) => {
                 res.data.forEach(e => {
