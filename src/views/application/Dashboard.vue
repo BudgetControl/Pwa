@@ -46,18 +46,13 @@ export default {
     }
   },
   async beforeMount() {
-    try {
       const _this = this
-      AuthService.check().response(() => {
+      AuthService.check().then(() => {
         _this.$router.push({ path: '/app/dashboard' })
       }).catch(() => {
-        localStorage.clear();
+        localStorage.clear()
         _this.$router.push({ path: 'auth' })
       });
-    } catch {
-      localStorage.clear();
-      this.$router.push({ path: 'auth' })
-    }
   },
   methods: {
     toggleTabs: function (tabNumber) {
