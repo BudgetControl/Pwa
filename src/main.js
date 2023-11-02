@@ -156,10 +156,6 @@ const routes = [
     path: "/landing",
     component: Landing,
   },
-  {
-    path: "/",
-    redirect: "/app/dashboard",
-  },
   { path: "/:pathMatch(.*)*", redirect: "/app" },
 ];
 
