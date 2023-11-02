@@ -30,17 +30,12 @@ export default {
     FooterSmall,
   },
   mounted() {
-    try {
         const _this = this
         AuthService.check().then(() => {
           _this.$router.push({ path: '/app/dashboard' })
         }).catch(() => {
           localStorage.clear();
         });
-      } catch {
-        localStorage.clear();
-        this.$router.push({ path: 'auth' })
-      }
   },
 };
 </script>

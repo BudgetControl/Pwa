@@ -13,8 +13,8 @@ services:
       ports:
         - 8080:8080
       networks:
-        - services_budgetcontrol_network
+        - app_budgetcontrol_network      
 
 networks:
-  services_budgetcontrol_network:
+  app_budgetcontrol_network:
     external: true
