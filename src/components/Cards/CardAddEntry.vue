@@ -608,6 +608,7 @@ export default {
           _this.action.alert_message = _this.type + " inserito correttamente"
 
           _this.action.dateUpdated = false
+          localStorage.setItem("new_entry",true)
           this.time()
           setTimeout(_this.action.alert = false, 3000)
 
@@ -620,7 +621,6 @@ export default {
         })
 
       }
-
 
     },
     getCurrency() {

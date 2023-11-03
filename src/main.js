@@ -1,3 +1,4 @@
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 import { createApp } from "vue";
 import { createWebHistory, createRouter } from "vue-router";
 
