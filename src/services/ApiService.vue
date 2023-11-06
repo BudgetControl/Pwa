@@ -91,6 +91,11 @@ async function categories() {
   return response.data;
 }
 
+async function category(id) {
+  const response = await instance.get(`/api/categories/${id}`);
+  return response.data;
+}
+
 async function paymentstype() {
   const response = await instance.get('/api/paymentstype');
   return response.data;
@@ -121,6 +126,11 @@ async function accounts() {
   return response.data;
 }
 
+async function account(id) {
+  const response = await instance.get(`/api/accounts/${id}`);
+  return response.data;
+}
+
 async function setAccount(data, id) {
   if (id != null) {
     const response = await instance.put(`/api/accounts/${id}`, data);
@@ -130,6 +140,22 @@ async function setAccount(data, id) {
     return response.data;
 
   }
+}
+
+async function setCategories(data, id) {
+  if (id != null) {
+    const response = await instance.put(`/api/categories/${id}`, data);
+    return response.data;
+  } else {
+    const response = await instance.post('/api/categories', data);
+    return response.data;
+
+  }
+}
+
+async function setAccountSorting(id, sorting) {
+    const response = await instance.put(`/api/sorting-account/${id}`, {'sorting': sorting});
+    return response.data;
 }
 
 async function importData(data) {
@@ -166,7 +192,11 @@ export default {
   setPlannedEntry,
   payee,
   deletePayee,
-  setAccount
+  setAccount,
+  setAccountSorting,
+  setCategories,
+  account,
+  category
 }
 
 </script>

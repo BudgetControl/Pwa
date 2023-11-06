@@ -37,7 +37,7 @@
     "vue-accessible-color-picker": "^4.1.4",
     "vue-full-loading": "^1.2.1",
     "vue-router": "4.0.5",
-    "vuedraggable": "^2.24.3"
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "7.13.10",
