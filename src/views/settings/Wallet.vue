@@ -65,11 +65,7 @@ export default {
     },
     methods: {
         openModal(id) {
-            if (id != null) {
-                this.$router.push({path : "/app/settings/wallet/" + id})
-            } else {
-                this.$router.push({path: "/app/settings/wallet/new-account"})
-            }
+            this.$router.push({path : `/app/settings/wallet/edit/${id}`})
         },
         getWallets() {
             ApiService.accounts().then((res) => {

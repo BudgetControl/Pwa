@@ -5,7 +5,7 @@
                 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
                     <HeaderButton back="/app/settings" title="Category settings" />
 
-                    <div class="container px-4 mx-auto" v-on:click="openModal(null)">
+                    <div class="container px-4 mx-auto" v-on:click="openModal(null,null)">
                         <div class="flex border border-dotted m-1 bg-blueGray-200">
                             <div class="flex lg:w-2/12 p-2">
                                 <i class="fas fa-plus fa-lg"></i>
@@ -103,7 +103,7 @@ export default {
 
         },
         openModal(id,subId) {
-            this.$router.push({path: "/app/settings/wallet/new-category"})
+            this.$router.push({path: `/app/settings/category/edit/${id}/${subId}`})
         },
         closeModal() {
             this.showModal = false

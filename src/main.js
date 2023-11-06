@@ -104,11 +104,11 @@ const routes = [
         component: Wallet,
       },
       {
-        path: "/app/settings/wallet/:id",
+        path: "/app/settings/wallet/edit/:id",
         component: WalletCard,
       },
       {
-        path: "/app/settings/wallet/new-account",
+        path: "/app/settings/wallet/edit/",
         component: WalletCard,
       },
       {
@@ -116,11 +116,11 @@ const routes = [
         component: Category,
       },
       {
-        path: "/app/settings/category/:id/:subId",
+        path: "/app/settings/category/edit/:id/:subId",
         component: CategoryCard,
       },
       {
-        path: "/app/settings/category/new-category",
+        path: "/app/settings/category/edit/",
         component: CategoryCard,
       },
       {
