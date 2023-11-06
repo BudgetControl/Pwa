@@ -45,15 +45,6 @@ export default {
       openTab: 1
     }
   },
-  async beforeMount() {
-    const _this = this
-    AuthService.check().then(() => {
-      _this.$router.push({ path: '/app/dashboard' })
-    }).catch(() => {
-      localStorage.clear()
-      _this.$router.push({ path: 'auth' })
-    });
-  },
   methods: {
     toggleTabs: function (tabNumber) {
       this.openTab = tabNumber
