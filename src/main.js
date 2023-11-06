@@ -1,3 +1,4 @@
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 import { createApp } from "vue";
 import { createWebHistory, createRouter } from "vue-router";
 
@@ -125,40 +126,36 @@ const routes = [
   },
 
   {
-    path: "/auth",
+    path: "/app/auth",
     name: "auth",
-    redirect: "/auth/login",
+    redirect: "/app/auth/login",
     component: Auth,
     children: [
       {
-        path: "/auth/login",
+        path: "/app/auth/login",
         component: Login,
       },
       {
-        path: "/auth/register",
+        path: "/app/auth/register",
         component: Register,
       },
       {
-        path: "/auth/recovery-password",
+        path: "/app/auth/recovery-password",
         component: RecoveryPassword,
       },
       {
-        path: "/auth/reset-password/:token",
+        path: "/app/auth/reset-password/:token",
         component: ResetPassword,
       },
       {
-        path: "/auth/confirm/:token",
+        path: "/app/auth/confirm/:token",
         component: AuthConfirm,
       }
     ],
   },
   {
-    path: "/landing",
+    path: "/app/landing",
     component: Landing,
-  },
-  {
-    path: "/",
-    redirect: "/app/dashboard",
   },
   { path: "/:pathMatch(.*)*", redirect: "/app" },
 ];

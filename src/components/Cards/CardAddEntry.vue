@@ -68,7 +68,8 @@
 
             <select v-model="account" id="account" required
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-              <option value="0">Choose Wallet account</option>
+              <option value="-1">Choose Wallet account</option>
+              <option value="0" v-if="!action.hidecategory && !action.hidetransfer_to">Out of wallet</option>
               <option v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
           </div>
@@ -272,7 +273,7 @@ export default {
       label: [],
       note: null,
       currency: 1,
-      account: 0,
+      account: "-1",
       payment_type: 1,
       model: null,
       newlabel: null,
@@ -542,14 +543,20 @@ export default {
           alert("Please insert a valid debt Name")
           return false
         }
+
+        if (this.account == this.transferto) {
+          alert("Please choose a different wallet to transfer")
+          return false
+        }
+
         if (this.debit == 0) {
           alert("Please choose one of debt")
           return false
         }
       }
 
-      if(this.action.openTab == 3) {
-        if(this.transferto == '-1') {
+      if (this.action.openTab == 3) {
+        if (this.transferto == '-1') {
           alert("Please choose a wallet to transfer to")
           return false
         }
@@ -608,6 +615,7 @@ export default {
           _this.action.alert_message = _this.type + " inserito correttamente"
 
           _this.action.dateUpdated = false
+          localStorage.setItem("new_entry", true)
           this.time()
           setTimeout(_this.action.alert = false, 3000)
 
@@ -620,7 +628,6 @@ export default {
         })
 
       }
-
 
     },
     getCurrency() {

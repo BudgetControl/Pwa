@@ -58,8 +58,7 @@
                                             class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             v-model="modal.currency">
                                             <option value="0">Choose a currency</option>
-                                            <option v-for="(item, k) in form.currency" :key="k" :value="item.id">{{
-                                                item.name }}</option>
+                                            <option v-for="(item, k) in form.currency" :key="k" :value="item.id">{{item.name}}</option>
                                         </select>
                                     </div>
 
@@ -200,7 +199,7 @@ export default {
             this.modal.balance = 0
         },
         async saveModal() {
-            const data = {
+            let data = {
                 name: this.modal.name,
                 color: this.modal.color,
                 date: this.modal.invoiceDate,
@@ -209,6 +208,10 @@ export default {
                 currency: this.modal.currency,
                 balance: this.modal.balance,
                 exclude_from_stats: this.modal.exclude_stats
+            }
+
+            if(data.installementValue != null) {
+                data.installement = 1
             }
 
             ApiService.setAccount(data, this.modal.id).then(() => {

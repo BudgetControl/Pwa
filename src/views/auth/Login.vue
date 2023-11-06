@@ -142,7 +142,7 @@ export default {
         //save token in local storage
         localStorage.setItem("auth-token", response.token.plainTextToken);
         //redirecto to dashboard
-        this.$router.push({ path: '/app/dashboard' })
+        this.$router.push({ path: '/app/auth' })
       }).catch((err) => {
         _this.show = false
         _this.error = true
