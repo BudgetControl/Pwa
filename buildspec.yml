@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+ install:
+   commands:
+     - |
+         #Update
+         apt-get update
+
+ build:
+   commands:
+     - echo Install application
+
+ post_build:
+   commands:
+     - echo Run test
+
+artifacts:
+  files:
+    - '**/*'
+  name: application-$(date +%Y-%m-%d)

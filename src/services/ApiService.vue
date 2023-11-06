@@ -4,7 +4,7 @@ import axios from 'axios';
 const DOMAIN = process.env.VUE_APP_API_PATH_V2;
 
 const instance = axios.create({
-  baseURL: DOMAIN
+  baseURL: DOMAIN,
 });
 
 instance.interceptors.request.use(

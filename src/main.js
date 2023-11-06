@@ -1,3 +1,4 @@
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 import { createApp } from "vue";
 import { createWebHistory, createRouter } from "vue-router";
 
@@ -9,7 +10,6 @@ import "@/assets/styles/tailwind.css";
 // mouting point for the whole app
 
 import App from "@/App.vue";
-import Index from "@/views/Index.vue";
 
 // layouts
 
@@ -21,7 +21,9 @@ import Auth from "@/layouts/Auth.vue";
 
 import Dashboard from "@/views/application/Dashboard.vue";
 import AddEntry from "@/views/application/AddEntry.vue";
+import MyPlannedEntries from "@/views/application/MyPlannedEntries.vue";
 import AddPlannedEntry from "@/views/application/AddPlannedEntry.vue";
+import PayeeList from "@/views/application/PayeeList.vue";
 import MyEntries from "@/views/application/MyEntries.vue";
 import ImportEntries from "@/views/application/ImportEntries.vue";
 import SearchEntries from "@/views/application/SearchEntries.vue";
@@ -71,6 +73,17 @@ const routes = [
         name: 'add_planned_entry',
         component: AddPlannedEntry,
       },
+      {
+        path: "/app/planned-entries",
+        name: 'planned-entries',
+        component: MyPlannedEntries,
+      },
+      {
+        path: "/app/payee",
+        name: 'payee',
+        component: PayeeList,
+      },
+
       {
         path: "/app/entries",
         component: MyEntries,
@@ -131,42 +144,38 @@ const routes = [
   },
 
   {
-    path: "/auth",
+    path: "/app/auth",
     name: "auth",
-    redirect: "/auth/login",
+    redirect: "/app/auth/login",
     component: Auth,
     children: [
       {
-        path: "/auth/login",
+        path: "/app/auth/login",
         component: Login,
       },
       {
-        path: "/auth/register",
+        path: "/app/auth/register",
         component: Register,
       },
       {
-        path: "/auth/recovery-password",
+        path: "/app/auth/recovery-password",
         component: RecoveryPassword,
       },
       {
-        path: "/auth/reset-password/:token",
+        path: "/app/auth/reset-password/:token",
         component: ResetPassword,
       },
       {
-        path: "/auth/confirm/:token",
+        path: "/app/auth/confirm/:token",
         component: AuthConfirm,
       }
     ],
   },
   {
-    path: "/landing",
+    path: "/app/landing",
     component: Landing,
   },
-  {
-    path: "/",
-    component: Index,
-  },
-  { path: "/:pathMatch(.*)*", redirect: "/" },
+  { path: "/:pathMatch(.*)*", redirect: "/app" },
 ];
 
 const router = createRouter({

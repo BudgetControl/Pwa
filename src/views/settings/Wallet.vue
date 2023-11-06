@@ -58,6 +58,24 @@ export default {
             showModal: false,
             wallets: [],
             color: null,
+<<<<<<< HEAD
+=======
+            form: {
+                type: ['Cash', 'Bank', 'Credit Card', 'Credit Card Revolving', 'Saving', 'Investment'],
+                currency: []
+            },
+            modal: {
+                id: null,
+                name: null,
+                color: null,
+                invoiceDate: null,
+                type: [0],
+                currency: [0],
+                exclude_stats: false,
+                installment: 0,
+                balance: 0
+            }
+>>>>>>> stable/version-2.0
         }
     },
     mounted: function () {
@@ -74,11 +92,66 @@ export default {
                 });
             })
         },
+<<<<<<< HEAD
         saveSorting() {
             let i = 0;
             this.sortingList.forEach((e) => {
                 i++;
                 ApiService.setAccountSorting(e.id, i)
+=======
+        openModal(id) {
+            this.modal.color = "#c5c526"
+            if (id != null) {
+                let wallets = this.wallets
+
+                this.modal.id = wallets[id].id
+                this.modal.name = wallets[id].name
+                this.modal.color = wallets[id].color
+                this.modal.invoiceDate = wallets[id].date
+                this.modal.type = wallets[id].type
+                this.modal.currency = wallets[id].currency
+                this.modal.exclude_stats = false
+                this.modal.installment = wallets[id].installementValue
+                this.modal.balance = wallets[id].balance
+            }
+
+            this.showModal = true
+
+        },
+        closeModal() {
+            this.showModal = false
+
+            this.modal.id = null
+            this.modal.name = null
+            this.modal.color = null
+            this.modal.invoiceDate = null
+            this.modal.type = null
+            this.modal.currency = null
+            this.modal.exclude_stats = false
+            this.modal.installment = null
+            this.modal.balance = 0
+        },
+        async saveModal() {
+            let data = {
+                name: this.modal.name,
+                color: this.modal.color,
+                date: this.modal.invoiceDate,
+                type: this.modal.type,
+                installementValue: this.modal.installment,
+                currency: this.modal.currency,
+                balance: this.modal.balance,
+                exclude_from_stats: this.modal.exclude_stats
+            }
+
+            if(data.installementValue != null) {
+                data.installement = 1
+            }
+
+            ApiService.setAccount(data, this.modal.id).then(() => {
+                this.closeModal()
+                this.wallets = []
+                this.getWallets()
+>>>>>>> stable/version-2.0
             })
         },
         checkMove: function (e) {

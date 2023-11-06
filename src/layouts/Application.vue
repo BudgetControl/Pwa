@@ -35,13 +35,18 @@
         AuthService.check().catch((response) => {
           console.log("res", response)
           localStorage.clear();
-          _this.$router.push({ path: '/auth/login' })
+          _this.$router.push({ path: '/app/auth/login' })
         });
       } catch {
         localStorage.clear();
-        this.$router.push({ path: '/auth/login' })
+        this.$router.push({ path: '/app/auth/login' })
       }
+    },
+  methods: {
+    parentFunction() {
+      console.log('Funzione del componente genitore chiamata');
     }
+  }
   };
   </script>
   
