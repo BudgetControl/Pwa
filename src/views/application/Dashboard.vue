@@ -29,6 +29,7 @@ import CardBarChart from "@/components/Cards/Chart/CardBarChart.vue";
 import CardLine_IncomingExpensesChart from "@/components/Cards/Chart/CardLine_IncomingExpensesChart.vue";
 import CardPieLabelChart from "../../components/Cards/Chart/CardPieLabelChart.vue";
 import CardCategoryResume from "../../components/Cards/Chart/CardCategoryResume.vue";
+import AuthService from '../../services/AuthService.vue';
 
 export default {
   name: "dashboard-page",
@@ -43,6 +44,15 @@ export default {
     return {
       openTab: 1
     }
+  },
+  async beforeMount() {
+    const _this = this
+    AuthService.check().then(() => {
+      _this.$router.push({ path: '/app/dashboard' })
+    }).catch(() => {
+      localStorage.clear()
+      _this.$router.push({ path: 'auth' })
+    });
   },
   methods: {
     toggleTabs: function (tabNumber) {
