@@ -1,8 +1,8 @@
-# Budget Control - Vue Notus <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fdemos.creative-tim.com%2Fvue-notus%2F%23%2F&text=Start%20your%20development%20with%20a%20Free%20Tailwind%20CSS%20and%20VueJS%20UI%20Kit%20and%20Admin.%20Let%20Vue%20Notus%20amaze%20you%20with%20its%20cool%20features%20and%20build%20tools%20and%20get%20your%20project%20to%20a%20whole%20new%20level.%20" target="_blank">![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)</a>
+# Budget Control - Vue Notus <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fdemos.creative-tim.com%2Fbudget-control%2F%23%2F&text=Start%20your%20development%20with%20a%20Free%20Tailwind%20CSS%20and%20VueJS%20UI%20Kit%20and%20Admin.%20Let%20Vue%20Notus%20amaze%20you%20with%20its%20cool%20features%20and%20build%20tools%20and%20get%20your%20project%20to%20a%20whole%20new%20level.%20" target="_blank">![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)</a>
 
-![version](https://img.shields.io/badge/version-1.1.0-blue.svg) ![license](https://img.shields.io/badge/license-MIT-blue.svg) <a href="https://github.com/creativetimofficial/vue-notus/issues?q=is%3Aopen+is%3Aissue" target="_blank">![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/vue-notus.svg)</a> <a href="https://github.com/creativetimofficial/vue-notus/issues?q=is%3Aissue+is%3Aclosed" target="_blank">![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/vue-notus.svg)</a> <a href="https://gitter.im/creative-tim-general/Lobby" target="_blank">![Join the chat at https://gitter.im/NIT-dgp/General](https://badges.gitter.im/NIT-dgp/General.svg)</a> <a href="https://discord.gg/E4aHAQy" target="_blank">![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)</a>
+![version](https://img.shields.io/badge/version-1.1.0-blue.svg) ![license](https://img.shields.io/badge/license-MIT-blue.svg) <a href="https://github.com/BudgetControl/Application/issues?q=is%3Aopen+is%3Aissue" target="_blank">![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/budget-control.svg)</a> <a href="https://github.com/BudgetControl/Application/issues?q=is%3Aissue+is%3Aclosed" target="_blank">![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/budget-control.svg)</a> <a href="https://gitter.im/creative-tim-general/Lobby" target="_blank">![Join the chat at https://gitter.im/NIT-dgp/General](https://badges.gitter.im/NIT-dgp/General.svg)</a> <a href="https://discord.gg/E4aHAQy" target="_blank">![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)</a>
 
-![Vue Notus](https://github.com/creativetimofficial/public-assets/blob/master/vue-notus/vue-notus.jpg?raw=true)
+![Vue Notus](https://github.com/creativetimofficial/public-assets/blob/master/budget-control/budget-control.jpg?raw=true)
 
 ### A beautiful UI Kit and Admin for Tailwind CSS and VueJS.
 
@@ -10,9 +10,9 @@ Start your development with a Free Tailwind CSS and VueJS UI Kit and Admin. Let 
 
 Vue Notus is Free and Open Source. It features multiple HTML and VueJS elements and it comes with dynamic components for VueJS.
 
-It is based on [Tailwind Starter Kit](https://www.creative-tim.com/learning-lab/tailwind-starter-kit/presentation?ref=vn-github-readme) by Creative Tim, and it is build with both presentation pages, and pages for an admin dashboard.
+It is based on [Tailwind Starter Kit](https://www.mlabfactory.it/learning-lab/tailwind-starter-kit/presentation?ref=vn-github-readme) by Mlab Factory, and it is build with both presentation pages, and pages for an admin dashboard.
 
-Speed up your web development with a beautiful product made by <a href="https://creative-tim.com/" target="_blank">Creative Tim </a>.
+Speed up your web development with a beautiful product made by <a href="https://creative-tim.com/" target="_blank">Mlab Factory </a>.
 If you like bright and fresh colors, you will love this Free Tailwind CSS Template! It features a huge number of components that can help you create amazing websites.
 
 ### Get Started
@@ -36,18 +36,18 @@ you can jump start your development with our pre-built example pages. You will b
 to quickly set up the basic structure for your web project.
 
 Here are all the page from the project:
-- [Presentation](https://demos.creative-tim.com/vue-notus/?ref=vn-github-readme)
+- [Presentation](https://demos.creative-tim.com/budget-control/?ref=vn-github-readme)
 - Admin Samples
-  - [Dashboard](https://demos.creative-tim.com/vue-notus/admin/dashboard?ref=vn-github-readme)
-  - [Settings](https://demos.creative-tim.com/vue-notus/admin/settings?ref=vn-github-readme)
-  - [Tables](https://demos.creative-tim.com/vue-notus/admin/tables?ref=vn-github-readme)
-  - [Maps](https://demos.creative-tim.com/vue-notus/admin/maps?ref=vn-github-readme)
+  - [Dashboard](https://demos.creative-tim.com/budget-control/admin/dashboard?ref=vn-github-readme)
+  - [Settings](https://demos.creative-tim.com/budget-control/admin/settings?ref=vn-github-readme)
+  - [Tables](https://demos.creative-tim.com/budget-control/admin/tables?ref=vn-github-readme)
+  - [Maps](https://demos.creative-tim.com/budget-control/admin/maps?ref=vn-github-readme)
 - Authentication Samples
-  - [Login](https://demos.creative-tim.com/vue-notus/auth/login?ref=vn-github-readme)
-  - [Register](https://demos.creative-tim.com/vue-notus/auth/register?ref=vn-github-readme)
+  - [Login](https://demos.creative-tim.com/budget-control/auth/login?ref=vn-github-readme)
+  - [Register](https://demos.creative-tim.com/budget-control/auth/register?ref=vn-github-readme)
 - Presentation Samples
-  - [Landing](https://demos.creative-tim.com/vue-notus/landing?ref=vn-github-readme)
-  - [Profile](https://demos.creative-tim.com/vue-notus/profile?ref=vn-github-readme)
+  - [Landing](https://demos.creative-tim.com/budget-control/landing?ref=vn-github-readme)
+  - [Profile](https://demos.creative-tim.com/budget-control/profile?ref=vn-github-readme)
 
 
 ### Fully Coded Components
@@ -62,21 +62,21 @@ Every element has multiple states for colors, styles, hover, focus, that you can
 
 ### CSS Components
 
-Vue Notus comes with 120 Fully Coded CSS elements, such as [Alerts](https://www.creative-tim.com/learning-lab/tailwind/vue/alerts/notus?ref=vn-github-readme), [Buttons](https://www.creative-tim.com/learning-lab/tailwind/buttons/notus-vuejs?ref=vn-github-readme), [Inputs](https://www.creative-tim.com/learning-lab/tailwind/inputs/notus-vuejs?ref=vn-github-readme) and many more.
+Vue Notus comes with 120 Fully Coded CSS elements, such as [Alerts](https://www.mlabfactory.it/learning-lab/tailwind/vue/alerts/notus?ref=vn-github-readme), [Buttons](https://www.mlabfactory.it/learning-lab/tailwind/buttons/notus-vuejs?ref=vn-github-readme), [Inputs](https://www.mlabfactory.it/learning-lab/tailwind/inputs/notus-vuejs?ref=vn-github-readme) and many more.
 
-Please [check all of them here](https://www.creative-tim.com/learning-lab/tailwind/vue/alerts/notus?ref=vn-github-readme).
+Please [check all of them here](https://www.mlabfactory.it/learning-lab/tailwind/vue/alerts/notus?ref=vn-github-readme).
 
 ### VueJS Components
 
 We also feature the following 18 dynamic components:
-- [Alerts](https://www.creative-tim.com/learning-lab/tailwind/vue/alerts/notus?tws=vtw-github-readme)
-- [Popper for Menus](https://www.creative-tim.com/learning-lab/tailwind/vue/dropdowns/notus?tws=vtw-github-readme)
-- [Menus](https://www.creative-tim.com/learning-lab/tailwind/vue/menus/notus?ref=vn-github-readme)
-- [Modals](https://www.creative-tim.com/learning-lab/tailwind/vue/modals/notus?ref=vn-github-readme)
-- [Navbars](https://www.creative-tim.com/learning-lab/tailwind/vue/navbar/notus?ref=vn-github-readme)
-- [Popper for popover content](https://www.creative-tim.com/learning-lab/tailwind/vue/popovers/notus?ref=vn-github-readme)
-- [Tabs](https://www.creative-tim.com/learning-lab/tailwind/vue/tabs/notus?ref=vn-github-readme)
-- [Popper for tooltips content](https://www.creative-tim.com/learning-lab/tailwind/vue/tooltips/notus?ref=vn-github-readme)
+- [Alerts](https://www.mlabfactory.it/learning-lab/tailwind/vue/alerts/notus?tws=vtw-github-readme)
+- [Popper for Menus](https://www.mlabfactory.it/learning-lab/tailwind/vue/dropdowns/notus?tws=vtw-github-readme)
+- [Menus](https://www.mlabfactory.it/learning-lab/tailwind/vue/menus/notus?ref=vn-github-readme)
+- [Modals](https://www.mlabfactory.it/learning-lab/tailwind/vue/modals/notus?ref=vn-github-readme)
+- [Navbars](https://www.mlabfactory.it/learning-lab/tailwind/vue/navbar/notus?ref=vn-github-readme)
+- [Popper for popover content](https://www.mlabfactory.it/learning-lab/tailwind/vue/popovers/notus?ref=vn-github-readme)
+- [Tabs](https://www.mlabfactory.it/learning-lab/tailwind/vue/tabs/notus?ref=vn-github-readme)
+- [Popper for tooltips content](https://www.mlabfactory.it/learning-lab/tailwind/vue/tooltips/notus?ref=vn-github-readme)
 
 
 ## Table of Contents
@@ -93,26 +93,26 @@ We also feature the following 18 dynamic components:
 
 ## Versions
 
-[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/angular.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/notus-angular?ref=vn-github-readme)[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/js.png?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/notus-js?ref=vn-github-readme)[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/nextjs.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/notus-nextjs?ref=vn-github-readme)[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/react.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/notus-react?ref=vn-github-readme)[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/svelte.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/notus-svelte?ref=vn-github-readme)[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/vue.jpg?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/vue-notus?ref=vn-github-readme)
+[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/angular.jpg?raw=true" width="60" height="60" />](https://www.mlabfactory.it/product/notus-angular?ref=vn-github-readme)[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/js.png?raw=true" width="60" height="60" />](https://www.mlabfactory.it/product/notus-js?ref=vn-github-readme)[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/nextjs.jpg?raw=true" width="60" height="60" />](https://www.mlabfactory.it/product/notus-nextjs?ref=vn-github-readme)[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/react.jpg?raw=true" width="60" height="60" />](https://www.mlabfactory.it/product/notus-react?ref=vn-github-readme)[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/svelte.jpg?raw=true" width="60" height="60" />](https://www.mlabfactory.it/product/notus-svelte?ref=vn-github-readme)[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/vue.jpg?raw=true" width="60" height="60" />](https://www.mlabfactory.it/product/budget-control?ref=vn-github-readme)
 
 
 | Angular | JavaScript / HTML | NextJS | React | Svelte | VueJS |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| [![Notus Angular](https://github.com/creativetimofficial/public-assets/blob/master/notus-angular/notus-angular.jpg?raw=true)](https://www.creative-tim.com/product/notus-angular?ref=vn-github-readme)  | [![Notus JS](https://github.com/creativetimofficial/public-assets/blob/master/notus-js/notus-js.jpg?raw=true)](https://www.creative-tim.com/product/notus-js?ref=vn-github-readme)  | [![Notus NextJS](https://github.com/creativetimofficial/public-assets/blob/master/notus-nextjs/notus-nextjs.jpg?raw=true)](https://www.creative-tim.com/product/notus-nextjs?ref=vn-github-readme)  | [![Notus React](https://github.com/creativetimofficial/public-assets/blob/master/notus-react/notus-react.jpg?raw=true)](https://www.creative-tim.com/product/notus-react?ref=vn-github-readme)  | [![Notus Svelte](https://github.com/creativetimofficial/public-assets/blob/master/notus-svelte/notus-svelte.jpg?raw=true)](https://www.creative-tim.com/product/notus-svelte?ref=vn-github-readme)  | [![Vue Notus](https://github.com/creativetimofficial/public-assets/blob/master/vue-notus/vue-notus.jpg?raw=true)](https://www.creative-tim.com/product/vue-notus?ref=vn-github-readme)
+| [![Notus Angular](https://github.com/creativetimofficial/public-assets/blob/master/notus-angular/notus-angular.jpg?raw=true)](https://www.mlabfactory.it/product/notus-angular?ref=vn-github-readme)  | [![Notus JS](https://github.com/creativetimofficial/public-assets/blob/master/notus-js/notus-js.jpg?raw=true)](https://www.mlabfactory.it/product/notus-js?ref=vn-github-readme)  | [![Notus NextJS](https://github.com/creativetimofficial/public-assets/blob/master/notus-nextjs/notus-nextjs.jpg?raw=true)](https://www.mlabfactory.it/product/notus-nextjs?ref=vn-github-readme)  | [![Notus React](https://github.com/creativetimofficial/public-assets/blob/master/notus-react/notus-react.jpg?raw=true)](https://www.mlabfactory.it/product/notus-react?ref=vn-github-readme)  | [![Notus Svelte](https://github.com/creativetimofficial/public-assets/blob/master/notus-svelte/notus-svelte.jpg?raw=true)](https://www.mlabfactory.it/product/notus-svelte?ref=vn-github-readme)  | [![Vue Notus](https://github.com/creativetimofficial/public-assets/blob/master/budget-control/budget-control.jpg?raw=true)](https://www.mlabfactory.it/product/budget-control?ref=vn-github-readme)
 
 ## Documentation
-The documentation for the Vue Notus is hosted at our <a href="https://www.creative-tim.com/learning-lab/tailwind/vue/overview/notus?ref=vn-readme" target="_blank">website</a>.
+The documentation for the Vue Notus is hosted at our <a href="https://www.mlabfactory.it/learning-lab/tailwind/vue/overview/notus?ref=vn-readme" target="_blank">website</a>.
 
 ## Quick start
 
-- <a href="https://www.creative-tim.com/product/vue-notus?ref=vn-github-readme" target="_blank">Download from Creative Tim</a>.
-- <a href="https://github.com/creativetimofficial/vue-notus" target="_blank">Check it on Github</a>.
+- <a href="https://www.mlabfactory.it/product/budget-control?ref=vn-github-readme" target="_blank">Download from Mlab Factory</a>.
+- <a href="https://github.com/BudgetControl/Application" target="_blank">Check it on Github</a>.
 
 ## Files and Folder
 
 This is the project structure that you will get upon the download:
 ```
-vue-notus
+budget-control
 .
 ├── CHANGELOG.md
 ├── ISSUE_TEMPLATE.md
@@ -194,30 +194,30 @@ At present, we officially aim to support the last two versions of the following 
 
 We use GitHub Issues as the official bug tracker for the Vue Notus. Here are some advices for our users that want to report an issue:
 
-1. Make sure that you are using the latest version of the Vue Notus. Check the CHANGELOG from your dashboard on our <a href="https://www.creative-tim.com/?ref=vn-readme" target="_blank">website</a>.
+1. Make sure that you are using the latest version of the Vue Notus. Check the CHANGELOG from your dashboard on our <a href="https://www.mlabfactory.it/?ref=vn-readme" target="_blank">website</a>.
 2. Providing us reproducible steps for the issue will shorten the time it takes for it to be fixed.
 3. Some issues may be browser specific, so specifying in what browser you encountered the issue might help.
 
 ## Licensing
 
-- Copyright 2021 <a href="https://www.creative-tim.com/?ref=vn-readme" target="_blank">Creative Tim</a>
+- Copyright 2021 <a href="https://www.mlabfactory.it/?ref=vn-readme" target="_blank">Mlab Factory</a>
 
-- Licensed under <a href="https://github.com/creativetimofficial/vue-notus/blob/main/LICENSE.md" target="_blank">MIT</a>
+- Licensed under <a href="https://github.com/BudgetControl/Application/blob/main/LICENSE.md" target="_blank">MIT</a>
 
 ## Useful Links
 
 - <a href="https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w" target="_blank">Tutorials</a>
-- <a href="https://www.creative-tim.com/affiliates/new?ref=vn-readme" target="_blank">Affiliate Program</a> (earn money)
-- <a href="http://blog.creative-tim.com/?ref=vn-readme" target="_blank">Blog Creative Tim</a>
-- <a href="https://www.creative-tim.com/templates/free?ref=vn-readme" target="_blank">Free Products</a> from Creative Tim
-- <a href="https://www.creative-tim.com/templates/premium?ref=vn-readme" target="_blank">Premium Products</a> from Creative Tim
-- <a href="https://www.creative-tim.com/templates/react?ref=vn-readme" target="_blank">React Products</a> from Creative Tim
-- <a href="https://www.creative-tim.com/templates/angular?ref=vn-readme" target="_blank">Angular Products</a> from Creative Tim
-- <a href="https://www.creative-tim.com/templates/vuejs?ref=vn-readme" target="_blank">VueJS Products</a> from Creative Tim
-- <a href="https://www.creative-tim.com/templates?ref=vn-readme" target="_blank">More products</a> from Creative Tim
-- Check our Bundles <a href="https://www.creative-tim.com/bundles?ref=vn-readme" target="_blank">here</a>
-- Check our awesome builder <a href="https://www.creative-tim.com/builder/argon?ref=vn-readme" target="_blank">here</a>
-- Check Tailwind Starter Kit, the project behind this product <a href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/presentation?ref=vn-readme" target="_blank">here</a>
+- <a href="https://www.mlabfactory.it/affiliates/new?ref=vn-readme" target="_blank">Affiliate Program</a> (earn money)
+- <a href="http://blog.creative-tim.com/?ref=vn-readme" target="_blank">Blog Mlab Factory</a>
+- <a href="https://www.mlabfactory.it/templates/free?ref=vn-readme" target="_blank">Free Products</a> from Mlab Factory
+- <a href="https://www.mlabfactory.it/templates/premium?ref=vn-readme" target="_blank">Premium Products</a> from Mlab Factory
+- <a href="https://www.mlabfactory.it/templates/react?ref=vn-readme" target="_blank">React Products</a> from Mlab Factory
+- <a href="https://www.mlabfactory.it/templates/angular?ref=vn-readme" target="_blank">Angular Products</a> from Mlab Factory
+- <a href="https://www.mlabfactory.it/templates/vuejs?ref=vn-readme" target="_blank">VueJS Products</a> from Mlab Factory
+- <a href="https://www.mlabfactory.it/templates?ref=vn-readme" target="_blank">More products</a> from Mlab Factory
+- Check our Bundles <a href="https://www.mlabfactory.it/bundles?ref=vn-readme" target="_blank">here</a>
+- Check our awesome builder <a href="https://www.mlabfactory.it/builder/argon?ref=vn-readme" target="_blank">here</a>
+- Check Tailwind Starter Kit, the project behind this product <a href="https://www.mlabfactory.it/learning-lab/tailwind-starter-kit/presentation?ref=vn-readme" target="_blank">here</a>
 
 ### Social Media
 
@@ -231,9 +231,9 @@ Instagram: <a href="https://www.instagram.com/creativetimofficial/" target="_bla
 
 
 ## Resources
-- Demo: <a href="https://demos.creative-tim.com/vue-notus/?ref=vn-readme" target="_blank">https://demos.creative-tim.com/vue-notus/?ref=vn-readme</a>
-- Download Page: <a href="https://www.creative-tim.com/product/vue-notus?ref=vn-github-readme" target="_blank">https://www.creative-tim.com/product/vue-notus</a>
-- Documentation: <a href="https://www.creative-tim.com/learning-lab/tailwind/vue/overview/notus?ref=vn-readme" target="_blank">https://www.creative-tim.com/learning-lab/tailwind/vue/overview/notus</a>
-- License Agreement: <a href="https://www.creative-tim.com/license?ref=vn-readme" target="_blank">https://www.creative-tim.com/license?ref=vn-readme</a>
-- Support: <a href="https://www.creative-tim.com/contact-us?ref=vn-readme" target="_blank">https://www.creative-tim.com/contact-us?ref=vn-readme</a>
-- Issues: <a href="https://github.com/creativetimofficial/vue-notus/issues" target="_blank">Github Issues Page</a>
+- Demo: <a href="https://demos.creative-tim.com/budget-control/?ref=vn-readme" target="_blank">https://demos.creative-tim.com/budget-control/?ref=vn-readme</a>
+- Download Page: <a href="https://www.mlabfactory.it/product/budget-control?ref=vn-github-readme" target="_blank">https://www.mlabfactory.it/product/budget-control</a>
+- Documentation: <a href="https://www.mlabfactory.it/learning-lab/tailwind/vue/overview/notus?ref=vn-readme" target="_blank">https://www.mlabfactory.it/learning-lab/tailwind/vue/overview/notus</a>
+- License Agreement: <a href="https://www.mlabfactory.it/license?ref=vn-readme" target="_blank">https://www.mlabfactory.it/license?ref=vn-readme</a>
+- Support: <a href="https://www.mlabfactory.it/contact-us?ref=vn-readme" target="_blank">https://www.mlabfactory.it/contact-us?ref=vn-readme</a>
+- Issues: <a href="https://github.com/BudgetControl/Application/issues" target="_blank">Github Issues Page</a>

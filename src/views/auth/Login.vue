@@ -38,7 +38,7 @@
                   Could not log in
                 </div>
                 <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
-                  maybe you lost your password or your email is not verified. <br/>
+                  maybe you lost your password or your email is not verified. <br />
                   <VerifyEmailButton :email=this.email class="font-bold"></VerifyEmailButton>
                 </div>
               </div>
@@ -97,6 +97,14 @@
         </div>
       </div>
     </div>
+
+
+    <div class="flex flex-wrap mt-6 relative text-blueGray-200 justify-center mt-10 text-xs">
+          <p>Registrandoti o connettendoti con uno dei suddetti servizi,
+            acconsenti ai nostri <a class="font-bold text-decoration-line" href="https://www.budgetcontrol.cloud/terms-of-service/">Termini di Servizio</a> e
+            riconosci la nostra <a class="font-bold text-decoration-line" href="https://www.budgetcontrol.cloud/security-policy/">Informativa sulla Privacy</a>,
+            che descrive come gestiamo i tuoi dati personali.</p>
+        </div>
   </div>
 </template>
 <script>

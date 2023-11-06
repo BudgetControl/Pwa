@@ -1,0 +1,7 @@
+version: '2.2'
+
+services:
+    femodule:
+      container_name: budgetcontrol-app
+      ports:
+        - 8080:8080
