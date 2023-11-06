@@ -21,7 +21,7 @@ instance.interceptors.request.use(
 );
 
 async function login(email, password) {
-  const response = await instance.post('/auth/login', {
+  const response = await instance.post('/app/auth/login', {
     email: email,
     password: password
   });
