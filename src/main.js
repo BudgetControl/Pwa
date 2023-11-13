@@ -37,6 +37,8 @@ import Wallet from "@/views/settings/Wallet.vue";
 import WalletCard from "@/views/settings/Cards/WalletCard.vue";
 import Category from "@/views/settings/Category.vue";
 import CategoryCard from "@/views/settings/Cards/CategoryCard.vue";
+import Label from "@/views/settings/Label.vue";
+import LabelCard from "@/views/settings/Cards/LabelCard.vue";
 
 // views for Auth layout
 import Login from "@/views/auth/Login.vue";
@@ -132,6 +134,16 @@ const routes = [
         path: "/app/settings/category/edit/:id/:subId",
         component: CategoryCard,
       },
+
+      {
+        path: "/app/settings/label",
+        component: Label,
+      },
+      {
+        path: "/app/settings/label/edit/:id",
+        component: LabelCard,
+      },
+
       {
         path: "/app/settings/category/edit/",
         component: CategoryCard,

@@ -113,6 +113,11 @@ async function setModel(data) {
 
 async function labels() {
   const response = await instance.get('/api/labels');
+  return response;
+}
+
+async function label(id) {
+  const response = await instance.get(`/api/labels/${id}`);
   return response.data;
 }
 
@@ -184,6 +189,7 @@ export default {
   model,
   setModel,
   labels,
+  label,
   currencies,
   accounts,
   importData,
