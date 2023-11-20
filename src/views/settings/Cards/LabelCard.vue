@@ -19,7 +19,7 @@
 
                         <div class="mb-3 pt-0">
                             <label for="exclude_stats">
-                                <input v-model="modal.deleted" type="checkbox" class="p-1 border rounded"
+                                <input v-model="modal.archive" type="checkbox" class="p-1 border rounded"
                                     id="exclude_stats" :value="true" checked> Archive label
                             </label>
                         </div>
@@ -58,8 +58,7 @@ export default {
             modal: {
                 id: null,
                 name: null,
-                parent_category: [0],
-                exclude_stats: false,
+                archive: false
             }
         }
     },
@@ -76,18 +75,19 @@ export default {
 
         },
         openModal(id) {
-
             ApiService.label(id).then((resp) => {
+                resp = resp[0]
                 this.modal.id = resp.id
                 this.modal.name = resp.name
-                this.modal.deleted = resp.archive
+                this.modal.archive = resp.archive
                 this.modal.color = resp.color
             })
         },
 
         saveModal() {
-            ApiService.setLabel(this.modal, this.modal.id).then(() => {
-                this.showModal = false
+            const _this = this
+            ApiService.setLabel(this.modal.id, this.modal).then(() => {
+                _this.$router.push({path : '/app/settings/label'})
             })
         },
         updateColor(eventData) {

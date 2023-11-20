@@ -121,6 +121,11 @@ async function label(id) {
   return response.data;
 }
 
+async function setLabel(id, data) {
+  const response = await instance.put(`/api/labels/${id}`,data);
+  return response.data;
+}
+
 async function currencies() {
   const response = await instance.get('/api/currencies');
   return response.data;
@@ -202,7 +207,8 @@ export default {
   setAccountSorting,
   setCategories,
   account,
-  category
+  category,
+  setLabel
 }
 
 </script>
