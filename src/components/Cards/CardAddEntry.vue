@@ -94,7 +94,7 @@
 
             <select v-model="debit" v-if="action.hidetransfer_to"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
-              <option value="0">Choose an existing debt</option>
+              <option value="0">Choose an option</option>
               <option value="njn76298fm">Create new debt</option>
               <option v-for="item in input.debit" :key="item.id" :value="item.name">{{ item.name }}</option>
             </select>
@@ -517,7 +517,7 @@ export default {
 
     validateBefore() {
 
-      if (this.account == 0) {
+      if (this.account == 0 && this.action.openTab != 3) {
         alert("Please choose a wallet account")
         return false
       }
@@ -538,6 +538,31 @@ export default {
         return false
       }
 
+      if (this.action.openTab == 3) {
+
+        if (this.account == -1) {
+          alert("Please choose a wallet account")
+          return false
+        }
+
+        if (this.account == this.transferto) {
+          alert("Please choose a different wallet to transfer")
+          return false
+        }
+
+        if (this.account == this.transferto) {
+          alert("Please choose a different wallet to transfer")
+          return false
+        }
+
+
+        if (this.transferto == '-1') {
+          alert("Please choose a wallet to transfer to")
+          return false
+        }
+
+      }
+
       if (this.action.openTab == 4) {
         if (this.debit == 'njn76298fm' && this.debit_name == null) {
           alert("Please insert a valid debt Name")
@@ -549,18 +574,13 @@ export default {
           return false
         }
 
-        if (this.debit == 0) {
-          alert("Please choose one of debt")
+        if (this.account == this.transferto) {
+          alert("Please choose a different wallet to transfer")
           return false
         }
+
       }
 
-      if (this.action.openTab == 3) {
-        if (this.transferto == '-1') {
-          alert("Please choose a wallet to transfer to")
-          return false
-        }
-      }
 
       return true
 
