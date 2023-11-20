@@ -73,7 +73,6 @@ export default {
     data() {
         return {
             categories: [],
-            color: null,
             opentab: null,
             form: {
                 type: ['incoming', 'expenses', 'investments'],
@@ -104,21 +103,6 @@ export default {
         },
         openModal(id,subId) {
             this.$router.push({path: `/app/settings/category/edit/${id}/${subId}`})
-        },
-        closeModal() {
-            this.showModal = false
-            this.modal.id = null
-            this.modal.name = null
-            this.modal.exclude_stats = false
-            this.modal.parent_category = null
-        },
-        saveModal() {
-            ApiService.setCategories(this.modal, this.modal.id).then(() => {
-                this.showModal = false
-            })
-        },
-        updateColor(eventData) {
-            this.modal.color = eventData.cssColor
         },
     }
 };

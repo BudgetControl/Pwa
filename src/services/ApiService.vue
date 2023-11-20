@@ -113,6 +113,16 @@ async function setModel(data) {
 
 async function labels() {
   const response = await instance.get('/api/labels');
+  return response;
+}
+
+async function label(id) {
+  const response = await instance.get(`/api/labels/${id}`);
+  return response.data;
+}
+
+async function setLabel(id, data) {
+  const response = await instance.put(`/api/labels/${id}`,data);
   return response.data;
 }
 
@@ -184,6 +194,7 @@ export default {
   model,
   setModel,
   labels,
+  label,
   currencies,
   accounts,
   importData,
@@ -196,7 +207,8 @@ export default {
   setAccountSorting,
   setCategories,
   account,
-  category
+  category,
+  setLabel
 }
 
 </script>
