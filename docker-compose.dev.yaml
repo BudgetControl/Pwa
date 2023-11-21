@@ -2,6 +2,11 @@ version: '2.2'
 
 services:
     femodule:
+      image: budgetcontrol-application:beta_v1
       container_name: budgetcontrol-app
-      ports:
-        - 8080:8080
+      build:
+        context: .
+        dockerfile: Dockerfile.dev
+      volumes:
+        - ./dist:/usr/local/apache2/htdocs/
+      command: tail -F /var/www/error.log

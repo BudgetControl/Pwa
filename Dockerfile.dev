@@ -1,0 +1,19 @@
+FROM php:8.2.7-apache
+
+WORKDIR /var/www/
+
+COPY ./dist/ /var/www/htdocs/
+RUN mkdir /var/www/logs
+RUN touch /var/www/logs/error.log
+
+###########################################
+# apache conf
+###########################################
+
+COPY bin/apache/budgetcontrol.dev.conf /etc/apache2/sites-available/budgetcontrol-default.conf
+RUN a2ensite budgetcontrol-default.conf
+RUN a2enmod rewrite
+RUN chown -R www-data:www-data /var/www/htdocs/
+RUN chmod -R 775 /var/www/htdocs/
+
+RUN service apache2 restart

@@ -2,17 +2,18 @@ version: '2.2'
 
 services:
     femodule:
+      image: budgetcontrol-application:node-beta_v1
       container_name: budgetcontrol-app
       build:
         context: .
         dockerfile: Dockerfile
       volumes:
           - ./:/usr/src/app
-      command: bash -c "npm install && npm build:tailwind && npm run serve"
+      command: bash -c "npm run build"
       restart: unless-stopped
       networks:
-        - app_budgetcontrol_network      
+        - services_budgetcontrol_network      
 
 networks:
-  app_budgetcontrol_network:
+  services_budgetcontrol_network:
     external: true

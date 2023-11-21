@@ -2,14 +2,18 @@ version: 0.2
 
 phases:
  install:
+  runtime-versions:
+   nodejs: 16
    commands:
      - |
          #Update
          apt-get update
+         npm install
 
  build:
    commands:
      - echo Install application
+     - npm run build
 
  post_build:
    commands:
@@ -17,5 +21,5 @@ phases:
 
 artifacts:
   files:
-    - '**/*'
+    - 'dist/*'
   name: application-$(date +%Y-%m-%d)
