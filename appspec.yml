@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /var/www/application/budgetcontrol
+    destination: /var/www/applications/budgetcontrol
 hooks:
   BeforeInstall:
     - location: bin/scripts/BeforeInstall.sh
