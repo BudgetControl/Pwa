@@ -49,7 +49,7 @@ export default {
     },
     mounted: function () {
         ApiService.labels().then((res) => {
-            res.data.forEach(e => {
+            res.forEach(e => {
                 this.labels.push(e)
             });
         })
