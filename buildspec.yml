@@ -5,10 +5,7 @@ phases:
   runtime-versions:
    nodejs: 16
    commands:
-     - |
-         #Update
-         apt-get update
-         npm install
+      - npm install
 
  build:
    commands:
