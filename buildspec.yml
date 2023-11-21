@@ -10,7 +10,7 @@ phases:
  build:
    commands:
      - echo Install application
-     - npm run build
+     - npm run build-dev
 
  post_build:
    commands:
@@ -18,5 +18,5 @@ phases:
 
 artifacts:
   files:
-    - 'dist/*'
+    - '**/*'
   name: application-$(date +%Y-%m-%d)
