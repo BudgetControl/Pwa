@@ -113,7 +113,7 @@ async function setModel(data) {
 
 async function labels() {
   const response = await instance.get('/api/labels');
-  return response;
+  return response.data;
 }
 
 async function label(id) {
