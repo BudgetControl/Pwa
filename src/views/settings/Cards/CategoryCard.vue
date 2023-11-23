@@ -68,7 +68,7 @@ export default {
         }
     },
     mounted: function () {
-        this.openModal(this.$route.params.id, this.$route.params.subId)
+        this.openModal(this.$route.params.subId)
     },
     methods: {
         showSub(id) {
@@ -79,14 +79,14 @@ export default {
             }
 
         },
-        openModal(id, subId) {
+        openModal(id) {
 
             if (null != id) {
                 ApiService.category(id).then((resp) => {
-                    this.modal.id = resp.sub_category[subId].id
-                    this.modal.name = resp.sub_category[subId].name
-                    this.modal.parent_category = resp.sub_category[subId].category_id
-                    this.modal.exclude_stats = (resp.sub_category[subId].exclude_from_stats == 1) ? true : false
+                    this.modal.id = resp.id
+                    this.modal.name = resp.name
+                    this.modal.parent_category = resp.category_id
+                    this.modal.exclude_stats = (resp.exclude_from_stats == 1) ? true : false
                 })
             }
         },

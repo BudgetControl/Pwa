@@ -41,7 +41,7 @@
                                         <p class="w-full">
                                             {{ subItem.name }}
 
-                                        <span v-on:click="openModal(k,kk)" v-if="subItem.custom == 1"
+                                        <span v-on:click="openModal(k,subItem.id)" v-if="subItem.custom == 1"
                                             class="text-xs align-right font-semibold  py-1 px-2 rounded text-blueGray-600 bg-blueGray-200 uppercase">
                                             edit
                                         </span>
@@ -87,7 +87,7 @@ export default {
     },
     mounted: function () {
         ApiService.categories().then((res) => {
-            res.data.forEach(e => {
+            res.forEach(e => {
                 this.categories.push(e)
             });
         })

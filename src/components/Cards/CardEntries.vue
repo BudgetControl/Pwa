@@ -26,6 +26,7 @@ import EntriesTable from "@/components/GenericComponents/EntriesTable.vue";
 import axios from 'axios'
 import ApiServiceVue from '../../services/ApiService.vue';
 import Paginator from "../GenericComponents/Paginator.vue";
+import LocalStorageService from "../../services/LocalStorageService.vue";
 
 export default {
   props: {
