@@ -19,11 +19,39 @@
                         </div>
                     </div>
 
-                    <draggable :list="wallets" group="wallet" @start="drag = true" @end="saveSorting"
-                        :move="checkMove">
+                    <div class="container px-4 mx-auto">
+                        <div class="flex border border-dotted m-1 bg-blueGray-200">
+                            <ul
+                                class="flex items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600 flex lg:w3/12 px-4">
+                                    <div class="flex items-center ps-3">
+                                        <input id="vue-checkbox-list" type="checkbox" v-model="action.order" value="true"
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <label for="vue-checkbox-list"
+                                            class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Change order</label>
+                                    </div>
+                                </li>
+                                <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600 flex lg:w3/12 px-4">
+                                    <div class="flex items-center ps-3">
+                                        <input id="react-checkbox-list" type="checkbox" v-model="action.archived" value="true"
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <label for="react-checkbox-list"
+                                            class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Show archived</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <draggable :list="wallets" group="wallet" @end="saveSorting" :move="checkMove" :disabled="!action.order" >
                         <template #item="{ element }">
                             <div class="container px-4 mx-auto ">
-                                <div class="flex border border-dotted m-1" v-on:click="openModal(element.id)">
+                                <div class="flex border border-dotted m-1" v-on:click="openModal(element.id)"
+                                v-if="element.deleted_at == null || action.archived == true"
+                                >
+                                    <div class="flex lg:w-2/12 p-2" v-if="action.order">
+                                        <i class="fas fa-bars fa-lg"></i>
+                                    </div>
                                     <div class="flex lg:w-2/12 p-2">
                                         <i class="fas fa-wallet fa-lg" :style="'color:' + element.color"></i>
                                     </div>
@@ -54,6 +82,10 @@ export default {
     },
     data() {
         return {
+            action: {
+                order: false,
+                archived: false
+            },
             sortingList: [],
             showModal: false,
             wallets: [],
@@ -65,10 +97,11 @@ export default {
     },
     methods: {
         openModal(id) {
-            this.$router.push({path : `/app/settings/wallet/edit/${id}`})
+            this.$router.push({ path: `/app/settings/wallet/edit/${id}` })
         },
         getWallets() {
-            ApiService.accounts().then((res) => {
+
+            ApiService.accounts("?trashed=1").then((res) => {
                 res.data.forEach(e => {
                     this.wallets.push(e)
                 });
@@ -88,13 +121,11 @@ export default {
 };
 </script>
 
-<style>
-.vacp-color-input-group {
+<style>.vacp-color-input-group {
     display: none !important;
 }
 
 .vacp-copy-button {
     display: none !important;
-}
-</style>
+}</style>
   

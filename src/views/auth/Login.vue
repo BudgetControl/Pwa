@@ -113,6 +113,7 @@ import google from "@/assets/img/google.svg";
 import AuthService from "../../services/AuthService.vue";
 import loading from 'vue-full-loading'
 import VerifyEmailButton from "../../components/Auth/VerifyEmailButton.vue";
+import LocalStorageService from "../../services/LocalStorageService.vue";
 
 export default {
   components: {
@@ -140,7 +141,7 @@ export default {
 
       AuthService.login(email, password).then((response) => {
         //save token in local storage
-        localStorage.setItem("auth-token", response.token.plainTextToken);
+        LocalStorageService.setToken(response.token.plainTextToken);
         //redirecto to dashboard
         this.$router.push({ path: '/app/dashboard' })
       }).catch((err) => {

@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import LocalStorageService from './LocalStorageService.vue';
 
 const DOMAIN = process.env.VUE_APP_API_PATH_V2;
 
@@ -9,7 +10,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('auth-token');
+    const token = LocalStorageService.getToken()
     if (token) {
       config.headers['X-ACCESS-TOKEN'] = token;
     }
@@ -131,8 +132,8 @@ async function currencies() {
   return response.data;
 }
 
-async function accounts() {
-  const response = await instance.get('/api/accounts');
+async function accounts(queryParams = '') {
+  const response = await instance.get(`/api/accounts${queryParams}`);
   return response.data;
 }
 

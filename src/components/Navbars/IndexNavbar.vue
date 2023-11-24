@@ -111,6 +111,7 @@
 
 <script>
 import IndexDropdown from "@/components/Dropdowns/IndexDropdown.vue";
+import LocalStorageService from "../../services/LocalStorageService.vue";
 
 export default {
   data() {
@@ -120,7 +121,7 @@ export default {
     };
   },
   mounted() {
-    this.token = localStorage.getItem('auth-token');
+    this.token = LocalStorageService.getToken()
   },
   methods: {
     setNavbarOpen: function () {
