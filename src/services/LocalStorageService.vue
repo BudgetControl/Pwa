@@ -13,19 +13,23 @@ function getToken() {
     return atob(localStorage.getItem('auth-token'))
 }
 
-function setToken() {
+function setToken(value) {
     localStorage.setItem('auth-token',btoa(value))
 }
 
 function set(name, value) {
     if(this.check('auth-token') === true) {
-        const hash = btoa(localStorage.getItem('auth-token')+name)
+        const hash = this.hash(name)
         localStorage.setItem(hash,btoa(value))
     }
 }
 
+function hash(name) {
+    return btoa(localStorage.getItem('auth-token')+name)
+}
+
 function get(name) {
-    return atob(localStorage.getItem(name))
+    return atob(localStorage.getItem(this.hash(name)))
 }
 
 function clear() {
@@ -38,7 +42,8 @@ export default {
   set,
   clear,
   getToken,
-  setToken
+  setToken,
+  hash
 }
 
 </script>

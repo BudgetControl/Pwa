@@ -153,6 +153,8 @@ export default {
 
         if (data.total <= 0) {
           this.health.iconColor = 'bg-red-500'
+        } else {
+          this.health.iconColor = 'bg-teal-500'
         }
 
       }).catch((error) => {

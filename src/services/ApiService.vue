@@ -132,8 +132,8 @@ async function currencies() {
   return response.data;
 }
 
-async function accounts() {
-  const response = await instance.get('/api/accounts');
+async function accounts(queryParams = '') {
+  const response = await instance.get(`/api/accounts${queryParams}`);
   return response.data;
 }
 

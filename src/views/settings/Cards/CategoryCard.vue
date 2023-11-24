@@ -59,6 +59,7 @@ export default {
             form: {
                 type: ['incoming', 'expenses', 'investments'],
             },
+            categories: [],
             modal: {
                 id: null,
                 name: null,
@@ -80,15 +81,15 @@ export default {
 
         },
         openModal(id) {
-
-            if (null != id) {
-                ApiService.category(id).then((resp) => {
-                    this.modal.id = resp.id
-                    this.modal.name = resp.name
-                    this.modal.parent_category = resp.category_id
-                    this.modal.exclude_stats = (resp.exclude_from_stats == 1) ? true : false
-                })
+            if (undefined === id) {
+                id = ''
             }
+
+            ApiService.category(id).then((resp) => {
+                resp.forEach(e => {
+                    this.categories.push(e)
+                });
+            })
         },
         closeModal() {
             this.showModal = false
@@ -98,8 +99,9 @@ export default {
             this.modal.parent_category = null
         },
         saveModal() {
+            const _this = this
             ApiService.setCategories(this.modal, this.modal.id).then(() => {
-                this.showModal = false
+                _this.$router.push({path : '/app/settings/category'})
             })
         },
         updateColor(eventData) {

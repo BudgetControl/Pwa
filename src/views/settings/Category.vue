@@ -102,7 +102,11 @@ export default {
 
         },
         openModal(id,subId) {
-            this.$router.push({path: `/app/settings/category/edit/${id}/${subId}`})
+            let path = '';
+            if(id !== null) {
+                path = `${id}/${subId}`
+            }
+            this.$router.push({path: `/app/settings/category/edit/${path}`})
         },
     }
 };

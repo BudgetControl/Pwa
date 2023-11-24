@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios';
-import LocalStorageServiceVue from './LocalStorageService.vue';
+import LocalStorageService from './LocalStorageService.vue';
 
 const DOMAIN = process.env.VUE_APP_API_PATH_V2;
 

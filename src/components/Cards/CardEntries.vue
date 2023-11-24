@@ -62,7 +62,7 @@ export default {
     }
   },
   mounted() {
-    window.localStorage.setItem('current_page', 0)
+    LocalStorageService.set('current_page', 0)
     this.invoke()
   },
   methods: {
@@ -93,7 +93,7 @@ export default {
         this.action.reset = false
       }
 
-      let currentPage = window.localStorage.getItem('current_page') == null ? 0 : window.localStorage.getItem('current_page')
+      let currentPage = LocalStorageService.get('current_page') == null ? 0 : LocalStorageService.get('current_page')
       ApiServiceVue.getEntry(currentPage, filter).then((res) => {
 
         if (res.data.length > 0) {
