@@ -160,6 +160,7 @@ export default {
                 date: this.modal.invoiceDate,
                 type: this.modal.type,
                 installementValue: this.modal.installment,
+                installment: this.installment,
                 currency: this.modal.currency,
                 balance: this.modal.balance,
                 exclude_from_stats: this.modal.exclude_stats,
