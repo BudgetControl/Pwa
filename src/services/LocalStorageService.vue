@@ -29,7 +29,11 @@ function hash(name) {
 }
 
 function get(name) {
-    return atob(localStorage.getItem(this.hash(name)))
+    const value = localStorage.getItem(this.hash(name))
+    if(value === null) {
+        return null
+    }
+    return atob(value)
 }
 
 function clear() {
