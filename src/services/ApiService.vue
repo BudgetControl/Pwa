@@ -132,6 +132,11 @@ async function currencies() {
   return response.data;
 }
 
+async function setDefaultCurrency(id) {
+  const response = await instance.post('/api/user/currency', {currency: id});
+  return response.data;
+}
+
 async function accounts(queryParams = '') {
   const response = await instance.get(`/api/accounts${queryParams}`);
   return response.data;
@@ -209,7 +214,8 @@ export default {
   setCategories,
   account,
   category,
-  setLabel
+  setLabel,
+  setDefaultCurrency
 }
 
 </script>

@@ -237,6 +237,7 @@
 import ApiService from '../../services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+import LocalStorageService from '../../services/LocalStorageService.vue';
 
 export default {
   props: {
@@ -317,6 +318,11 @@ export default {
     if (this.entryId != null) {
       this.getEntry()
     }
+
+    const settings = LocalStorageService.get("user_settings")
+    this.currency = settings.currency_id
+    this.payment_type = settings.payment_type_id
+
   },
   methods: {
     checkDebit() {
