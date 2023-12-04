@@ -336,7 +336,7 @@ export default {
         getLabels() {
             let _this = this
             ApiService.labels().then((res) => {
-                let data = res.data
+                let data = res
                 data.forEach(function (r) {
                     _this.input.tags.push(r)
                 })
@@ -345,7 +345,7 @@ export default {
         getCategory() {
             let _this = this
             ApiService.categories().then((res) => {
-                let data = res.data
+                let data = res
                 data.forEach(function (r) {
                     r.sub_category.forEach((item) => {
                         _this.input.category.push(item)

@@ -14,14 +14,14 @@
                   <li class="nav-item">
                     <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(1)"
-                      v-bind:class="{ 'text-emerald-600 bg-white': action.openTab !== 1, 'text-white bg-emerald-600': action.openTab === 1 }">
+                      v-bind:class="{ 'text-emerald-600 ': action.openTab !== 1, 'text-white bg-emerald-600': action.openTab === 1 }">
                       EXPENSES
                     </a>
                   </li>
                   <li class="nav-item">
                     <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(2)"
-                      v-bind:class="{ 'text-emerald-600 bg-white': action.openTab !== 2, 'text-white bg-emerald-600': action.openTab === 2 }">
+                      v-bind:class="{ 'text-emerald-600 ': action.openTab !== 2, 'text-white bg-emerald-600': action.openTab === 2 }">
                       INCOMING
                     </a>
                   </li>
@@ -159,7 +159,7 @@
 </template>
 
 <script>
-import ApiService from '../../services/ApiService.vue';
+import ApiService from '@/services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
@@ -251,7 +251,7 @@ export default {
     getCategory() {
       let _this = this
       ApiService.categories().then((res) => {
-        let data = res.data
+        let data = res
         data.forEach(function (r) {
           r.sub_category.forEach((item) => {
             _this.input.category.push(item)
@@ -282,7 +282,7 @@ export default {
 
         _this.amount = Math.abs(model.amount)
         if (model.type == 'incoming') {
-          _this.action.openTab = 1
+          _this.action.openTab = 2
         }
 
         if (model.type == 'expenses') {
@@ -326,7 +326,7 @@ export default {
     getLabels() {
       let _this = this
       ApiService.labels().then((res) => {
-        let data = res.data
+        let data = res
         data.forEach(function (r) {
           _this.input.tags.push(r)
         })

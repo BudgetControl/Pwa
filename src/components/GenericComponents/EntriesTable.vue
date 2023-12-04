@@ -84,6 +84,13 @@ import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue"
 import ApiService from '../../services/ApiService.vue';
 
 export default {
+    props: {
+        showPlanned: {
+            required: true,
+            default: false,
+            type: Boolean
+        }
+    },
     components: {
         EntryActionDropdown
     },

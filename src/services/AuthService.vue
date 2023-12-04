@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import LocalStorageService from './LocalStorageService.vue';
 
 const DOMAIN = process.env.VUE_APP_API_PATH_V2;
 
@@ -9,7 +10,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('auth-token');
+    const token = LocalStorageService.getToken()
     if (token) {
       config.headers['X-ACCESS-TOKEN'] = token;
     }
@@ -95,6 +96,20 @@ async function deleteUser() {
   return response;
 }
 
+
+async function deleteDataUser() {
+  //retrive access token header
+  const response = await instance.delete(`/auth/data/delete`);
+  return response;
+}
+
+
+async function settings() {
+  //retrive access token header
+  const response = await instance.get(`/api/user/settings`);
+  return response.data;
+}
+
 export default {
   login,
   register,
@@ -106,7 +121,9 @@ export default {
   verify,
   confirm,
   profile,
-  deleteUser
+  deleteUser,
+  deleteDataUser,
+  settings
 }
 
 </script>

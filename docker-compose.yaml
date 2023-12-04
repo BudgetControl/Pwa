@@ -2,13 +2,18 @@ version: '2.2'
 
 services:
     femodule:
-      ports:
-        - 80:8080
+      image: budgetcontrol-application:node-beta_v1
+      container_name: budgetcontrol-app
       build:
         context: .
         dockerfile: Dockerfile
       volumes:
           - ./:/usr/src/app
-          - ./.env:/usr/src/app/.env
-      command: "npm run install:clean"
+      command: bash -c "npm run build"
       restart: unless-stopped
+      networks:
+        - services_budgetcontrol_network      
+
+networks:
+  services_budgetcontrol_network:
+    external: true

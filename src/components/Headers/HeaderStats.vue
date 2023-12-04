@@ -12,8 +12,7 @@
           <div class="min-w px-2">
             <router-link to="/app/entries" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
-                <card-stats statSubtitle="WALLET" :statTitle="wallet.statTitle + ' €'"
-                  statIconColor="bg-lightBlue-500" />
+                <card-stats statSubtitle="WALLET" :statTitle="wallet.statTitle + ' €'" statIconColor="bg-lightBlue-500" />
               </a>
             </router-link>
           </div>
@@ -29,11 +28,10 @@
           </div>
 
           <div class="min-w px-2">
-              <a>
-                <card-stats statSubtitle="MY HEALTH" :statTitle="health.statTitle + ' €'"
-                  :statArrow="health.statArrow" :statPercent="health.statPercent"
-                  statIconName="fas fa-heart" :statIconColor=health.iconColor />
-              </a>
+            <a>
+              <card-stats statSubtitle="MY HEALTH" :statTitle="health.statTitle + ' €'" :statArrow="health.statArrow"
+                :statPercent="health.statPercent" statIconName="fas fa-heart" :statIconColor=health.iconColor />
+            </a>
           </div>
 
           <div class="min-w px-2">
@@ -109,17 +107,27 @@ export default {
       planned: 0
     }
   },
-  mounted() {
-    this.update()
-  },
   watch: {
     "$store.state.actions.updatestats": function (updatestats) {
-      if(updatestats === true) {
+      if (updatestats === true) {
         this.update()
       }
     },
   },
+  mounted() {
+    this.update()
+    let _this = this
+    setInterval(function() {
+      _this.handleStorageChange()
+    },'1000')
+  },
   methods: {
+    handleStorageChange() {
+        if (localStorage.getItem("new_entry") == 'true') {
+          this.update()
+          localStorage.setItem("new_entry", false)
+        }
+    },
     update() {
       this.getMonthIncoming()
       this.getMonthexpenses()
@@ -127,7 +135,6 @@ export default {
       this.getWallets()
       this.getWalletPlanned()
       this.getHealth()
-
     },
     getWallet() {
       StatsService.total().then((resp) => {
@@ -144,21 +151,23 @@ export default {
         let data = resp.data
         this.health.statTitle = data.total
 
-        if(data.total <= 0) {
+        if (data.total <= 0) {
           this.health.iconColor = 'bg-red-500'
+        } else {
+          this.health.iconColor = 'bg-teal-500'
         }
 
       }).catch((error) => {
         console.error(error);
       })
     },
-    
+
     getWalletPlanned() {
       StatsService.planned().then((resp) => {
 
         let data = resp.data
         this.walletPlanned.statTitle = data.total
-        
+
       }).catch((error) => {
         console.error(error);
       })

@@ -3,12 +3,12 @@
     <div
       class="container relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0 flex-auto p-4">
       <div class="flex flex-wrap py-3">
-        <div class="lg:w-6/12 px-2">
+        <!-- <div class="lg:w-6/12 px-2">
           <select v-model="model" v-on:change="retriveModel()" id="model" v-if="action.models"
             class="border-0 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
             <option v-for="(item, k) in input.model" :key="k" :value="k">{{ item.name }}</option>
           </select>
-        </div>
+        </div> -->
         <div class="lg:w-4/12 px-2">
           <button v-on:click="resetModel()" v-if="action.reset"
             class="text-emerald-500 bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -26,30 +26,30 @@
               <div class="w-full" id="example-navbar-info">
                 <ul class="flex flex-col lg:flex-row list-none ml-auto w-full justify-center">
                   <li class="nav-item">
-                    <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                    <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(1)"
-                      v-bind:class="{ 'text-emerald-600 bg-white': action.openTab !== 1, 'text-white bg-emerald-600': action.openTab === 1 }">
+                      v-bind:class="{ 'text-emerald-600 ': action.openTab !== 1, 'text-white bg-emerald-600': action.openTab === 1 }">
                       EXPENSES
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                    <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(2)"
-                      v-bind:class="{ 'text-emerald-600 bg-white': action.openTab !== 2, 'text-white bg-emerald-600': action.openTab === 2 }">
+                      v-bind:class="{ 'text-emerald-600 ': action.openTab !== 2, 'text-white bg-emerald-600': action.openTab === 2 }">
                       INCOMING
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                    <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(3)"
-                      v-bind:class="{ 'text-emerald-600 bg-white': action.openTab !== 3, 'text-white bg-emerald-600': action.openTab === 3 }">
+                      v-bind:class="{ 'text-emerald-600 ': action.openTab !== 3, 'text-white bg-emerald-600': action.openTab === 3 }">
                       TRANSFER
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                    <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(4)"
-                      v-bind:class="{ 'text-emerald-600 bg-white': action.openTab !== 4, 'text-white bg-emerald-600': action.openTab === 4 }">
+                      v-bind:class="{ 'text-emerald-600 ': action.openTab !== 4, 'text-white bg-emerald-600': action.openTab === 4 }">
                       DEBIT
                     </a>
                   </li>
@@ -68,7 +68,8 @@
 
             <select v-model="account" id="account" required
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-              <option value="0">Choose Wallet account</option>
+              <option value="-1">Choose Wallet account</option>
+              <option value="0" v-if="!action.hidecategory && !action.hidetransfer_to">Out of wallet</option>
               <option v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
           </div>
@@ -93,7 +94,7 @@
 
             <select v-model="debit" v-if="action.hidetransfer_to"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
-              <option value="0">Choose an existing debt</option>
+              <option value="0">Choose an option</option>
               <option value="njn76298fm">Create new debt</option>
               <option v-for="item in input.debit" :key="item.id" :value="item.name">{{ item.name }}</option>
             </select>
@@ -236,6 +237,7 @@
 import ApiService from '../../services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+import LocalStorageService from '../../services/LocalStorageService.vue';
 
 export default {
   props: {
@@ -272,7 +274,7 @@ export default {
       label: [],
       note: null,
       currency: 1,
-      account: 0,
+      account: "-1",
       payment_type: 1,
       model: null,
       newlabel: null,
@@ -316,6 +318,11 @@ export default {
     if (this.entryId != null) {
       this.getEntry()
     }
+
+    const settings = LocalStorageService.get("user_settings")
+    this.currency = settings.currency_id
+    this.payment_type = settings.payment_type_id
+
   },
   methods: {
     checkDebit() {
@@ -345,7 +352,7 @@ export default {
     getCategory() {
       let _this = this
       ApiService.categories().then((res) => {
-        let data = res.data
+        let data = res
         data.forEach(function (r) {
           r.sub_category.forEach((item) => {
             _this.input.category.push(item)
@@ -388,11 +395,11 @@ export default {
 
         _this.amount = Math.abs(model.amount)
         if (model.type == 'incoming') {
-          _this.action.openTab = 1
+          _this.action.openTab = 2
         }
 
         if (model.type == 'expenses') {
-          _this.action.openTab = 2
+          _this.action.openTab = 1
         }
 
         if (model.type == 'transfer') {
@@ -467,7 +474,7 @@ export default {
     getLabels() {
       let _this = this
       ApiService.labels().then((res) => {
-        let data = res.data
+        let data = res
         data.forEach(function (r) {
           _this.input.tags.push(r)
         })
@@ -516,7 +523,7 @@ export default {
 
     validateBefore() {
 
-      if (this.account == 0) {
+      if (this.account == 0 && this.action.openTab != 3) {
         alert("Please choose a wallet account")
         return false
       }
@@ -537,23 +544,49 @@ export default {
         return false
       }
 
+      if (this.action.openTab == 3) {
+
+        if (this.account == -1) {
+          alert("Please choose a wallet account")
+          return false
+        }
+
+        if (this.account == this.transferto) {
+          alert("Please choose a different wallet to transfer")
+          return false
+        }
+
+        if (this.account == this.transferto) {
+          alert("Please choose a different wallet to transfer")
+          return false
+        }
+
+
+        if (this.transferto == '-1') {
+          alert("Please choose a wallet to transfer to")
+          return false
+        }
+
+      }
+
       if (this.action.openTab == 4) {
         if (this.debit == 'njn76298fm' && this.debit_name == null) {
           alert("Please insert a valid debt Name")
           return false
         }
-        if (this.debit == 0) {
-          alert("Please choose one of debt")
+
+        if (this.account == this.transferto) {
+          alert("Please choose a different wallet to transfer")
           return false
         }
+
+        if (this.account == this.transferto) {
+          alert("Please choose a different wallet to transfer")
+          return false
+        }
+
       }
 
-      if(this.action.openTab == 3) {
-        if(this.transferto == '-1') {
-          alert("Please choose a wallet to transfer to")
-          return false
-        }
-      }
 
       return true
 
@@ -608,6 +641,7 @@ export default {
           _this.action.alert_message = _this.type + " inserito correttamente"
 
           _this.action.dateUpdated = false
+          localStorage.setItem("new_entry", true)
           this.time()
           setTimeout(_this.action.alert = false, 3000)
 
@@ -618,6 +652,7 @@ export default {
           console.error(reason);
 
         })
+
       }
 
     },

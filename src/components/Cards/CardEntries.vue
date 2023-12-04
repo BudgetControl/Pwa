@@ -26,6 +26,7 @@ import EntriesTable from "@/components/GenericComponents/EntriesTable.vue";
 import axios from 'axios'
 import ApiServiceVue from '../../services/ApiService.vue';
 import Paginator from "../GenericComponents/Paginator.vue";
+import LocalStorageService from "../../services/LocalStorageService.vue";
 
 export default {
   props: {
@@ -61,7 +62,7 @@ export default {
     }
   },
   mounted() {
-    window.localStorage.setItem('current_page', 0)
+    LocalStorageService.set('current_page', 0)
     this.invoke()
   },
   methods: {
@@ -92,9 +93,8 @@ export default {
         this.action.reset = false
       }
 
-      let currentPage = window.localStorage.getItem('current_page') == null ? 0 : window.localStorage.getItem('current_page')
+      let currentPage = LocalStorageService.get('current_page') == null ? 0 : LocalStorageService.get('current_page')
       ApiServiceVue.getEntry(currentPage, filter).then((res) => {
-        _this.$refs.entry.entries = []
 
         if (res.data.length > 0) {
           _this.$refs.entry.buildEntriesTable(res.data)
