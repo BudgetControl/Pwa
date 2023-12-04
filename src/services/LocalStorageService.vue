@@ -20,7 +20,7 @@ function setToken(value) {
 function set(name, value) {
     if(this.check('auth-token') === true) {
         const hash = this.hash(name)
-        localStorage.setItem(hash,btoa(value))
+        localStorage.setItem(hash,btoa(JSON.stringify(value)))
     }
 }
 
@@ -29,11 +29,7 @@ function hash(name) {
 }
 
 function get(name) {
-    const value = localStorage.getItem(this.hash(name))
-    if(value === null) {
-        return null
-    }
-    return atob(value)
+    return JSON.parse(atob(localStorage.getItem(this.hash(name))))
 }
 
 function clear() {

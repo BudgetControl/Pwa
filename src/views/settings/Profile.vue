@@ -73,6 +73,9 @@
                 </a>
               </div>
             </div>
+            <div class="text-xs text-red-500 mb-2">
+              <DeleteSoftButtonVue />
+            </div>
             <div class="text-xs text-red-500">
               <DeleteButton />
             </div>
@@ -96,8 +99,8 @@
 
 import AuthService from "@/services/AuthService.vue";
 import DeleteButton from "../../components/Auth/DeleteButton.vue";
-
 import userProfile from "@/assets/img/flat-business-man-user-profile.jpeg";
+import DeleteSoftButtonVue from '../../components/Auth/DeleteSoftButton.vue';
 
 export default {
   data() {
@@ -120,7 +123,7 @@ export default {
     };
   },
   components: {
-    DeleteButton
+    DeleteButton, DeleteSoftButtonVue
   },
   async beforeMount() {
     try {

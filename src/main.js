@@ -39,6 +39,7 @@ import Category from "@/views/settings/Category.vue";
 import CategoryCard from "@/views/settings/Cards/CategoryCard.vue";
 import Label from "@/views/settings/Label.vue";
 import LabelCard from "@/views/settings/Cards/LabelCard.vue";
+import Currency from "@/views/settings/Currency.vue";
 
 // views for Auth layout
 import Login from "@/views/auth/Login.vue";
@@ -143,10 +144,17 @@ const routes = [
         path: "/app/settings/label/edit/:id",
         component: LabelCard,
       },
-
       {
         path: "/app/settings/category/edit/",
         component: CategoryCard,
+      },
+      {
+        path: "/app/settings/currency/",
+        component: Currency,
+      },
+      {
+        path: "/app/settings/currency/add",
+        component: Currency,
       },
       {
         path: "/app/settings/profile",
