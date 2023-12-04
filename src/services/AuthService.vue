@@ -96,11 +96,13 @@ async function deleteUser() {
   return response;
 }
 
+
 async function deleteDataUser() {
   //retrive access token header
   const response = await instance.delete(`/auth/data/delete`);
   return response;
 }
+
 
 async function settings() {
   //retrive access token header
