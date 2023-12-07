@@ -2,7 +2,7 @@
     <div class="block w-full overflow-x-auto mt-10">
 
         <div class="container x-4 mx-auto py-3">
-            <router-link to="/app/add_planned_entry?planned=true" v-slot="{ href, navigate, isActive }">
+            <router-link to="/app/planned_entry?planned=true" v-slot="{ href, navigate, isActive }">
                 <a :href="href" @click="navigate"
                     class="px-3 py-2 items-center text-xs bg-emerald-600 uppercase font-bold leading-snug text-white hover:opacity-75"
                     :class="[
@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="flex-l">
-                    <EntryActionDropdown :entryId="entry.id" queryParams="planned=true" />
+                    <EntryActionDropdown :entryId="entry.id" type="planned_entry" queryParams="planned=true" />
                 </div>
 
             </div>

@@ -107,9 +107,20 @@ async function model() {
   return response.data;
 }
 
-async function setModel(data) {
-  const response = await instance.post('/api/model', data);
+async function getModel(id) {
+  const response = await instance.get(`/api/model/${id}`);
   return response.data;
+}
+
+async function setModel(data,id) {
+  if (id != null) {
+    const response = await instance.put(`/api/model/${id}`, data);
+    return response.data;
+  } else {
+    const response = await instance.post('/api/model', data);
+    return response.data;
+  }
+
 }
 
 async function labels() {
@@ -154,7 +165,6 @@ async function setAccount(data, id) {
   } else {
     const response = await instance.post('/api/accounts', data);
     return response.data;
-
   }
 }
 
@@ -215,7 +225,8 @@ export default {
   account,
   category,
   setLabel,
-  setDefaultCurrency
+  setDefaultCurrency,
+  getModel
 }
 
 </script>

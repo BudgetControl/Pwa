@@ -3,18 +3,12 @@
     <div
       class="container relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0 flex-auto p-4">
       <div class="flex flex-wrap py-3">
-        <!-- <div class="lg:w-6/12 px-2">
+        <div class="lg:w-6/12 px-2" v-if="this.isModel === false">
           <select v-model="model" v-on:change="retriveModel()" id="model" v-if="action.models"
             class="border-0 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-            <option v-for="(item, k) in input.model" :key="k" :value="k">{{ item.name }}</option>
+            <option value="0">Choose a model</option>
+            <option v-for="(item, k) in input.model" :key="k" :value="item.uuid">{{ item.name }}</option>
           </select>
-        </div> -->
-        <div class="lg:w-4/12 px-2">
-          <button v-on:click="resetModel()" v-if="action.reset"
-            class="text-emerald-500 bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-            type="button">
-            RESET
-          </button>
         </div>
       </div>
       <div class="flex flex-wrap py-3">
@@ -39,14 +33,14 @@
                       INCOMING
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" v-if="isModel === false">
                     <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(3)"
                       v-bind:class="{ 'text-emerald-600 ': action.openTab !== 3, 'text-white bg-emerald-600': action.openTab === 3 }">
                       TRANSFER
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" v-if="isModel === false">
                     <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(4)"
                       v-bind:class="{ 'text-emerald-600 ': action.openTab !== 4, 'text-white bg-emerald-600': action.openTab === 4 }">
@@ -125,8 +119,7 @@
         <div class="row border rounded border-blueGray-500 py-3 border-dashed">
           <div class="flex flex-wrap">
             <div class="lg:w-12/12 px-2 w-full text-center">
-              <label class="text-xs w-full" for="tags">Choose one of
-                currently tags</label>
+              <label class="text-xs w-full" for="tags">Choose one of currently tags</label>
               <select v-model="label" multiple id="tags"
                 class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                 <option
@@ -145,6 +138,16 @@
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
             </div>
           </div>
+
+          <div class="flex flex-wrap py-3 ml-2">
+            <div v-for="(item, i) in input.tags" :key="i">
+              <span class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                v-if="label.includes(item.id)" :style="'color: #fff; background-color: ' + item.color">{{
+                  item.name
+                }}</span>
+            </div>
+          </div>
+
         </div>
 
         <div class="flex flex-wrap py-3">
@@ -155,19 +158,19 @@
 
           <div class="lg:w-4/12 px-2 w-full mb-2">
 
-            <div class="flex flex-wrap">
+            <div class="flex flex-wrap" v-if="isModel === false">
               <VueDatePicker v-model="date"></VueDatePicker>
             </div>
 
             <div class="flex flex-wrap">
-              <div class="lg:w-6/12 w-full">
+              <div class="w-full" v-bind:class="{ 'lg:w-6/12 ': isModel === false, 'lg:w-12/12': isModel === true }">
                 <select v-model="payment_type" id="payment_type"
-                  class="w-full mt-2 border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                  class="w-full border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                   <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ item.name }}</option>
                 </select>
               </div>
               <div class="lg:w-6/12 w-full ">
-                <div
+                <div v-if="isModel === false"
                   class="border-0 mt-2 px-2 py-2 text-center placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                   <label for="confirmed" id="confirm" v-if="!isPlanned">
                     payment confirm <input v-model="confirmed" type="checkbox" id="confirmed" value="1" checked>
@@ -189,8 +192,7 @@
 
         </div>
 
-        <!-- <div class="flex py-2 border border-solid border-blueGray-500 shadow rounded"
-          v-if="action.openTab != 3 && action.openTab != 4">
+        <div class="flex py-2 border border-solid border-blueGray-500 shadow rounded" v-if="isModel">
           <div class="lg:w-8/12 px-2 w-full">
             <input v-model="name" type="text" placeholder="save these settings as a template"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
@@ -202,11 +204,11 @@
               SAVE TEMPLATE
             </button>
           </div>
-        </div> -->
+        </div>
 
       </div>
 
-      <div class="flex flex-wrap py-3">
+      <div class="flex flex-wrap py-3" v-if="this.isModel === false">
         <div class="lg:w-12/12 px-2 w-full">
           <button v-on:click="setEntry()"
             class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -242,10 +244,14 @@ import LocalStorageService from '../../services/LocalStorageService.vue';
 export default {
   props: {
     entryId: {
-      type: Number,
+      type: String,
       default: null,
     },
     isPlanned: {
+      type: Boolean,
+      default: false,
+    },
+    isModel: {
       type: Boolean,
       default: false,
     },
@@ -313,10 +319,17 @@ export default {
     this.getAccount()
     this.getLabels()
     this.getPaymentType()
-    this.getModels()
-    this.getDebit()
-    if (this.entryId != null) {
+    if (this.entryId != null && this.isModel === false) {
       this.getEntry()
+    }
+
+    if (this.entryId != null && this.isModel === true) {
+      this.retriveModel()
+    }
+
+    if (this.isModel === false) {
+      this.getModels()
+      this.getDebit()
     }
 
     const settings = LocalStorageService.get("user_settings")
@@ -375,8 +388,8 @@ export default {
     getModels() {
       let _this = this
       ApiService.model().then((res) => {
-        let data = res.data
-        if (res.data.length > 0) {
+        let data = res
+        if (data.length > 0) {
           _this.action.models = true
         }
         data.forEach(function (r) {
@@ -389,7 +402,6 @@ export default {
       this.action.reset = true
 
       this.toggleTabs(this.typeOfEntry)
-
       ApiService.getEntryDetail(this.entryId, this.isPlanned).then((res) => {
         let model = res[0]
 
@@ -437,10 +449,13 @@ export default {
 
     },
     retriveModel() {
-      let model = this.input.model[this.model]
-      if (model !== null) {
+      const id = this.entryId === null ? this.model : this.entryId
 
-        this.amount = model.amount
+      ApiService.getModel(id).then((res) => {
+
+        const model = res
+        const _this = this
+        _this.amount = model.amount
         if (model.type == "expenses") {
           this.amount = model.amount * -1
         }
@@ -449,27 +464,21 @@ export default {
           this.action.openTab = 2
         }
 
-        if (model.type == "transfer") {
-          this.action.openTab = 3
-        }
+        _this.type = model.type
+        _this.category = model.category_id
+        _this.note = model.note
+        _this.currency = model.currency_id
+        _this.account = model.account_id
+        _this.payment_type = model.payment_type
+        _this.name = model.name
+        _this.action.reset = true
 
-        this.type = model.type
-        this.category = model.category_id
-        this.note = model.note
-        this.currency = model.currency_id
-        this.account = model.account_id
-        this.payment_type = model.payment_type
-        this.waranty = model.waranty == 1 ? true : false
-        this.confirmed = model.confirmed == 1 ? true : false
-        this.name = model.name
-        this.action.reset = true
-        let _this = this
-
-        this.label.forEach((item) => {
+        model.label.forEach((item) => {
           _this.label.push(item.id)
         });
 
-      }
+      })
+
     },
     getLabels() {
       let _this = this
@@ -479,22 +488,6 @@ export default {
           _this.input.tags.push(r)
         })
       })
-    },
-    resetModel() {
-      this.date = null
-      this.amount = null
-      this.type = "expenses"
-      this.category = null
-      this.label = []
-      this.note = null
-      this.currency = 1
-      this.account = 1
-      this.payment_type = 1
-      this.model = []
-      this.newlabel = null
-      this.name = null
-      this.action.reset = false
-      this.model = null
     },
     setModel() {
       let _this = this
@@ -514,7 +507,7 @@ export default {
         data.amount = this.amount * -1
       }
 
-      ApiService.setModel(data).then(() => {
+      ApiService.setModel(data, this.entryId).then(() => {
         _this.action.alert = true
         _this.action.alert_message = "Modello salvato correttamente"
         setTimeout(_this.action.alert = false, 3000)

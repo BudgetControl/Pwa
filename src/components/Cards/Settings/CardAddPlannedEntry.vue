@@ -89,6 +89,16 @@
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
             </div>
           </div>
+
+          <div class="flex flex-wrap py-3 ml-2">
+            <div v-for="(item, i) in input.tags" :key="i">
+              <span class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                v-if="label.includes(item.id)" :style="'color: #fff; background-color: ' + item.color">{{
+                  item.name
+                }}</span>
+            </div>
+          </div>
+
         </div>
 
         <div class="flex flex-wrap py-3">
@@ -118,7 +128,7 @@
             </div>
 
             <div class="lg:w-3/12 px-2 w-full">
-              <span class="text-xs">Choose a payment method</span>
+              <span class="text-xs">Choose a method</span>
               <select v-model="payment_type" id="payment_type"
                 class="w-full border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                 <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ item.name }}</option>
@@ -274,11 +284,10 @@ export default {
     getEntry() {
       let _this = this
       this.action.reset = true
-
       this.toggleTabs(this.typeOfEntry)
 
       ApiService.getEntryDetail(this.entryId, this.isPlanned).then((res) => {
-        let model = res[0]
+        let model = res
 
         _this.amount = Math.abs(model.amount)
         if (model.type == 'incoming') {

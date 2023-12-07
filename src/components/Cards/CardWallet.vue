@@ -30,8 +30,8 @@ export default {
             required: true
         },
         statWallet: {
-            type: String,
-            default: "2000",
+            type: Number,
+            default: 2000,
             required: true
         },
         statColor: {
