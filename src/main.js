@@ -42,6 +42,7 @@ import LabelCard from "@/views/settings/Cards/LabelCard.vue";
 import Currency from "@/views/settings/Currency.vue";
 import Model from "@/views/settings/Model.vue";
 import ModelCard from "@/views/settings/Cards/ModelCard.vue";
+import Assistance from "@/views/settings/Assistance.vue";
 
 // views for Auth layout
 import Login from "@/views/auth/Login.vue";
@@ -185,6 +186,10 @@ const routes = [
       {
         path: "/app/settings/profile",
         component: Profile,
+      },
+      {
+        path: "/app/settings/assistance",
+        component: Assistance,
       },
     ]
   },

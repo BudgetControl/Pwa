@@ -123,8 +123,8 @@ async function setModel(data,id) {
 
 }
 
-async function labels() {
-  const response = await instance.get('/api/labels');
+async function labels(queryParams) {
+  const response = await instance.get(`/api/labels${queryParams}`);
   return response.data;
 }
 
@@ -199,6 +199,18 @@ async function setPlannedEntry(data) {
   return response.data;
 }
 
+async function deleteModel(id) {
+  let url = `/api/model/${id}`
+  const response = await instance.delete(url);
+  return response.data;
+}
+
+async function assistance(data) {
+  let url = `/api/assistance/`
+  const response = await instance.post(url,data);
+  return response.data;
+}
+
 export default {
   setEntry,
   getEntry,
@@ -226,7 +238,9 @@ export default {
   category,
   setLabel,
   setDefaultCurrency,
-  getModel
+  getModel,
+  deleteModel,
+  assistance
 }
 
 </script>
