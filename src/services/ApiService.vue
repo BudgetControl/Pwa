@@ -107,13 +107,24 @@ async function model() {
   return response.data;
 }
 
-async function setModel(data) {
-  const response = await instance.post('/api/model', data);
+async function getModel(id) {
+  const response = await instance.get(`/api/model/${id}`);
   return response.data;
 }
 
-async function labels() {
-  const response = await instance.get('/api/labels');
+async function setModel(data,id) {
+  if (id != null) {
+    const response = await instance.put(`/api/model/${id}`, data);
+    return response.data;
+  } else {
+    const response = await instance.post('/api/model', data);
+    return response.data;
+  }
+
+}
+
+async function labels(queryParams) {
+  const response = await instance.get(`/api/labels${queryParams}`);
   return response.data;
 }
 
@@ -154,7 +165,6 @@ async function setAccount(data, id) {
   } else {
     const response = await instance.post('/api/accounts', data);
     return response.data;
-
   }
 }
 
@@ -189,6 +199,18 @@ async function setPlannedEntry(data) {
   return response.data;
 }
 
+async function deleteModel(id) {
+  let url = `/api/model/${id}`
+  const response = await instance.delete(url);
+  return response.data;
+}
+
+async function assistance(data) {
+  let url = `/api/assistance/`
+  const response = await instance.post(url,data);
+  return response.data;
+}
+
 export default {
   setEntry,
   getEntry,
@@ -215,7 +237,10 @@ export default {
   account,
   category,
   setLabel,
-  setDefaultCurrency
+  setDefaultCurrency,
+  getModel,
+  deleteModel,
+  assistance
 }
 
 </script>

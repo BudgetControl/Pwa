@@ -40,6 +40,9 @@ import CategoryCard from "@/views/settings/Cards/CategoryCard.vue";
 import Label from "@/views/settings/Label.vue";
 import LabelCard from "@/views/settings/Cards/LabelCard.vue";
 import Currency from "@/views/settings/Currency.vue";
+import Model from "@/views/settings/Model.vue";
+import ModelCard from "@/views/settings/Cards/ModelCard.vue";
+import Assistance from "@/views/settings/Assistance.vue";
 
 // views for Auth layout
 import Login from "@/views/auth/Login.vue";
@@ -66,13 +69,25 @@ const routes = [
         path: "/app/dashboard",
         component: Dashboard,
       },
+      
       {
-        path: "/app/add_entry",
-        name: 'add_entry',
+        path: "/app/entry/:entry_id",
+        name: 'edit_entry',
+        component: AddEntry,
+      },
+      
+      {
+        path: "/app/entry",
+        name: 'entry',
         component: AddEntry,
       },
       {
-        path: "/app/add_planned_entry",
+        path: "/app/planned_entry/:entry_id",
+        name: 'planned_entry',
+        component: AddPlannedEntry,
+      },
+      {
+        path: "/app/planned_entry",
         name: 'add_planned_entry',
         component: AddPlannedEntry,
       },
@@ -157,8 +172,24 @@ const routes = [
         component: Currency,
       },
       {
+        path: "/app/model/:entry_id",
+        component: ModelCard,
+      },
+      {
+        path: "/app/settings/model/add",
+        component: ModelCard,
+      },
+      {
+        path: "/app/settings/model/",
+        component: Model,
+      },
+      {
         path: "/app/settings/profile",
         component: Profile,
+      },
+      {
+        path: "/app/settings/assistance",
+        component: Assistance,
       },
     ]
   },

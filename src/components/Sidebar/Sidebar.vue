@@ -116,7 +116,7 @@
           <li class="items-center" 
               v-on:click="toggleCollapseShow('hidden')">
             <router-link
-              to="/app/add_entry"
+              to="/app/entry"
               v-slot="{ href, navigate, isActive }"
             >
               <a

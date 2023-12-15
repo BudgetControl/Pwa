@@ -95,7 +95,7 @@ export default {
             showModal: false,
             color: "#c5c526",
             form: {
-                type: ['Cash', 'Bank', 'Credit Card', 'Credit Card Revolving', 'Savings'],
+                type: ['Cash', 'Bank', 'Credit Card', 'Credit Card Revolving', 'Saving', 'Investment'],
                 currency: []
             },
             modal: {
@@ -167,12 +167,11 @@ export default {
                 sorting: this.modal.sorting
             }
 
-            ApiService.setAccount(data, this.modal.id).then(() => {
-                this.closeModal()
-                this.wallets = []
-                this.getWallets()
-            })
+            const _this = this
 
+            ApiService.setAccount(data, this.modal.id).then(() => {
+                _this.$router.push({path : '/app/settings/label'})
+            })
 
         },
         updateColor(eventData) {
