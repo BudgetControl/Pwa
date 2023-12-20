@@ -15,7 +15,8 @@
             ]" v-for="(entry, i) in entries" :key="i">
                 <div class="flex flex-wrap">
                     <div class="flex-l w-full px-4">
-                        <span class="text-xs block text-emerald-500 rounded ">{{ entry.date }}</span>
+                        <span  v-if="isModel == false" class="text-xs block text-emerald-500 rounded ">{{ entry.date }}</span>
+                        <span  v-if="isModel == true" class="text-xs block rounded ">{{ entry.name }}</span>
                     </div>
                 </div>
                 <div class="flex flex-wrap">
@@ -179,7 +180,8 @@ export default {
                         labels: labels,
                         payee: null,
                         transfer: r.type == 'transfer' ? true : false,
-                        type: r.type
+                        type: r.type,
+                        name: r.name
                     }
 
                     if (r.transfer_to != null) {

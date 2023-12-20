@@ -472,6 +472,7 @@ export default {
         _this.payment_type = model.payment_type
         _this.name = model.name
         _this.action.reset = true
+        _this.label = []
 
         model.label.forEach((item) => {
           _this.label.push(item.id)
