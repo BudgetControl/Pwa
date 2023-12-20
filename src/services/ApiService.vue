@@ -112,7 +112,7 @@ async function getModel(id) {
   return response.data;
 }
 
-async function setModel(data,id) {
+async function setModel(data, id) {
   if (id != null) {
     const response = await instance.put(`/api/model/${id}`, data);
     return response.data;
@@ -124,6 +124,10 @@ async function setModel(data,id) {
 }
 
 async function labels(queryParams) {
+  if (queryParams === undefined) {
+    queryParams = '';
+  }
+
   const response = await instance.get(`/api/labels${queryParams}`);
   return response.data;
 }
@@ -134,7 +138,7 @@ async function label(id) {
 }
 
 async function setLabel(id, data) {
-  const response = await instance.put(`/api/labels/${id}`,data);
+  const response = await instance.put(`/api/labels/${id}`, data);
   return response.data;
 }
 
@@ -144,7 +148,7 @@ async function currencies() {
 }
 
 async function setDefaultCurrency(id) {
-  const response = await instance.post('/api/user/currency', {currency: id});
+  const response = await instance.post('/api/user/currency', { currency: id });
   return response.data;
 }
 
@@ -180,8 +184,8 @@ async function setCategories(data, id) {
 }
 
 async function setAccountSorting(id, sorting) {
-    const response = await instance.put(`/api/sorting-account/${id}`, {'sorting': sorting});
-    return response.data;
+  const response = await instance.put(`/api/sorting-account/${id}`, { 'sorting': sorting });
+  return response.data;
 }
 
 async function importData(data) {
@@ -207,7 +211,7 @@ async function deleteModel(id) {
 
 async function assistance(data) {
   let url = `/api/assistance/`
-  const response = await instance.post(url,data);
+  const response = await instance.post(url, data);
   return response.data;
 }
 
