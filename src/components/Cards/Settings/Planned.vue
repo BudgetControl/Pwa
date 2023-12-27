@@ -18,11 +18,6 @@
         <div class="container px-4 mx-auto py-3 border border-solid border-blueGray-100 shadow"
             v-for="(entry, i) in this.entries" :key="i">
             <div class="flex flex-wrap">
-                <div class="flex-l w-full px-4">
-                    <span class="text-xs block text-emerald-500 rounded ">{{ entry.date }} {{ entry.end_date }}</span>
-                </div>
-            </div>
-            <div class="flex flex-wrap">
                 <div class="w-full px-4 flex-1">
                     <i :class="'block text-lightBlue-400 ' + entry.category.icon"> <span
                             class="px-2 text-blueGray-700 rounded ">
@@ -48,21 +43,19 @@
 
             <div class="flex flex-wrap">
                 <div class="flex-l w-full px-4">
-                    <span class="text-xs block text-blueGray-700 rounded ">{{ entry.note }}</span>
+                    <p class="text-xs block rounded"><span class="text-emerald-500">Note:</span>{{ entry.note }}</p>
+                    <p class="text-xs block rounded"><span class="text-emerald-500">Next execution time:</span> {{ entry.date }}</p>
+                    <p class="text-xs block rounded" v-if="entry.end_date"><span class="text-emerald-500">End time:</span> {{ entry.end_date }}</p>
                 </div>
             </div>
 
             <div class="flex flex-wrap">
-                <div class="w-full px-4 flex-1">
-                    <span class="text-xs mt-2 block text-blueGray-700 rounded ">
-
-                    </span>
+                <div class="flex-l w-full px-4">
+                    <span
+                    class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1 text-emerald-600 bg-emerald-200">
+                    {{entry.planning}}
+                </span>
                 </div>
-
-                <div class="w-full px-4 flex-1 text-right">
-
-                </div>
-
             </div>
         </div>
 
@@ -103,13 +96,14 @@ export default {
                 resp.data.forEach(e => {
                     let info = {
                         id: e.uuid,
-                        date: `Start: ${e.date_time}`,
-                        end_date: (e.end_date_time == null) ? null : `End: ${e.end_date_time}`,
+                        date: e.date_time,
+                        end_date: (e.end_date_time == null) ? null : e.end_date_time,
                         amount: e.amount.toFixed(2) + " €",
                         color_amount: e.amount <= 0 ? "text-red-500" : "text-emerald-500",
                         type_amount: e.amount <= 0 ? "expenses" : "incoming",
                         account: e.account.name,
                         note: e.note,
+                        planning: e.planning,
                         planned: e.planned == 0 ? false : true,
                         category: {
                             name: e.sub_category.name,

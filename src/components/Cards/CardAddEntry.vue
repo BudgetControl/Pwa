@@ -73,13 +73,13 @@
             'lg:w-6/12': action.openTab != 4,
           }">
 
-            <select v-on:change="checkDebit()" v-if="action.hidecategory" v-model="category" id="category"
+            <select v-if="action.hidecategory == false" v-model="category" id="category"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option value="0">Choose a category</option>
               <option v-for="item in input.category" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
 
-            <select v-if="!action.hidecategory && !action.hidetransfer_to" v-model="transferto" id="transferto"
+            <select v-if="action.hidecategory == true && !action.hidetransfer_to" v-model="transferto" id="transferto"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option value="-1">Choose a wallet to transfer to</option>
               <option value="0">Out of wallet</option>
@@ -94,12 +94,28 @@
             </select>
           </div>
 
-          <div class="px-2 py-2 w-full lg:w-2/12" v-if="action.openTab == 4">
-            <input v-model="debit_name" type="text" placeholder="Name" id="debit" v-if="debit != 'njn76298fm'" disabled
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-
+          <div class="px-2 py-2 w-full lg:w-12/12" v-if="action.openTab == 4">
             <input v-model="debit_name" type="text" placeholder="Name" id="debit" v-if="debit == 'njn76298fm'"
+              :disabled="action.disabled_debit_name"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+          </div>
+
+          <div class="px-2 py-2 lg:w-6/12" v-if="action.openTab == 4">
+            <label for="incoming" class="uppercase text-blueGray-600 text-xs font-bold mb-2">
+              INCOMING  
+              <input type="radio" id="incoming" value="+"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
+                v-model="action.debit_type" />
+            </label>
+          </div>
+
+          <div class="px-2 py-2 lg:w-6/12" v-if="action.openTab == 4">
+            <label for="expenses" class="uppercase text-blueGray-600 text-xs font-bold mb-2">
+              EXPENSES  
+              <input type="radio" id="expenses" value="-"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
+                v-model="action.debit_type" />
+            </label>
           </div>
 
         </div>
@@ -268,10 +284,12 @@ export default {
         openTab: 1,
         alert: false,
         alert_message: null,
-        hidecategory: true,
+        hidecategory: false,
         hidedebit: false,
         dateUpdated: false,
         hidetransfer_to: false,
+        disabled_debit_name: true,
+        debit_type: '-'
       },
       date: null,
       amount: null,
@@ -338,13 +356,6 @@ export default {
 
   },
   methods: {
-    checkDebit() {
-      if (this.action.openTab == 55) {
-        this.action.hidedebit = true
-      } else {
-        this.action.hidedebit = false
-      }
-    },
     time() {
       const _this = this
       if (this.action.dateUpdated == false) {
@@ -418,10 +429,6 @@ export default {
           _this.action.openTab = 3
         }
 
-        if (model.type == 'debit') {
-          _this.action.openTab = 4
-        }
-
         _this.type = model.type
         _this.category = model.sub_category.id
         _this.note = model.note
@@ -436,6 +443,16 @@ export default {
         _this.planning = model.planning
         _this.transfer_realtion = model.transfer_relation
         _this.planned = model.planning
+
+        if (model.type == 'debit') {
+          _this.action.openTab = 4
+          _this.action.hidecategory = true
+          _this.action.hidetransfer_to = true
+          _this.debit = model.payee.name
+          if(model.amount >= 0) {
+            _this.action.debit_type = '+'
+          }
+        }
 
         if (model.transfer == 1) {
           _this.action.hidecategory = true
@@ -581,7 +598,6 @@ export default {
 
       }
 
-
       return true
 
     },
@@ -617,6 +633,12 @@ export default {
 
         if (this.type == "expenses") {
           data.amount = this.amount * -1
+        }
+
+        if (this.type == "debit") {
+          if(this.action.debit_type == '-') {
+            data.amount = this.amount * -1
+          }
         }
 
         ApiService.setEntry(this.type, data, this.isPlanned, this.entryId).then(() => {
@@ -679,7 +701,7 @@ export default {
           this.category = 0
           this.debit = 0
           this.debit_name = null
-          this.action.hidecategory = true
+          this.action.hidecategory = false
           this.action.hidetransfer_to = false
           break;
         case 2:
@@ -688,7 +710,7 @@ export default {
           this.debit = 0
           this.category = 0
           this.debit_name = null
-          this.action.hidecategory = true
+          this.action.hidecategory = false
           this.action.hidetransfer_to = false
           break;
         case 3:
@@ -696,14 +718,15 @@ export default {
           this.type = "transfer"
           this.debit = 0
           this.debit_name = null
-          this.action.hidecategory = false
+          this.action.hidecategory = true
           this.action.hidetransfer_to = false
           this.category = null
           break;
         case 4:
         case 'debit':
           this.type = "debit"
-          this.action.hidecategory = false
+          this.debit = 0
+          this.action.hidecategory = true
           this.action.hidetransfer_to = true
           this.category = null
           break;
