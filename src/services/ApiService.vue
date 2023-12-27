@@ -157,6 +157,16 @@ async function accounts(queryParams = '') {
   return response.data;
 }
 
+async function deleteWallet(id) {
+  const response = await instance.delete(`/api/accounts/${id}`);
+  return response.data;
+}
+
+async function restoreWallet(id) {
+  const response = await instance.get(`/api/account-restore/${id}`);
+  return response.data;
+}
+
 async function account(id) {
   const response = await instance.get(`/api/accounts/${id}`);
   return response.data;
@@ -244,7 +254,9 @@ export default {
   setDefaultCurrency,
   getModel,
   deleteModel,
-  assistance
+  assistance,
+  deleteWallet,
+  restoreWallet
 }
 
 </script>
