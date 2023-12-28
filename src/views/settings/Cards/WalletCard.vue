@@ -66,6 +66,19 @@
                     </div>
                     <!--footer-->
                     <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+
+                        <button v-if="$route.params.id && restore === false"
+                            class="bg-red-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            type="button" v-on:click="archiveWallet()">
+                            Archive Wallet
+                        </button>
+
+                        <button v-if="$route.params.id && restore === true"
+                            class="bg-lightBlue-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            type="button" v-on:click="restoreWallet()">
+                            Restore Wallet
+                        </button>
+
                         <button
                             class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button" v-on:click="saveModal()">
@@ -94,8 +107,9 @@ export default {
             sortingList: [],
             showModal: false,
             color: "#c5c526",
+            restore: false,
             form: {
-                type: ['Cash', 'Bank', 'Credit Card', 'Credit Card Revolving', 'Savings'],
+                type: ['Cash', 'Bank', 'Credit Card', 'Credit Card Revolving', 'Saving', 'Investment'],
                 currency: []
             },
             modal: {
@@ -122,6 +136,16 @@ export default {
         inputChanged(value) {
             this.activeNames = value;
         },
+        archiveWallet() {
+            if (window.confirm("Are you shure do you want archive these wallet ?")) {
+                ApiService.deleteWallet(this.$route.params.id)
+                this.$router.push({ path: '/app/settings/wallet' })
+            }
+        },
+        restoreWallet() {
+            ApiService.restoreWallet(this.$route.params.id)
+            this.$router.push({ path: '/app/settings/wallet' })
+        },
         getComponentData() {
             return {
                 on: {
@@ -139,7 +163,6 @@ export default {
         openModal(id) {
             if (id != null) {
                 ApiService.account(id).then((resp) => {
-
                     this.modal.id = resp.id
                     this.modal.name = resp.name
                     this.modal.color = resp.color
@@ -149,6 +172,11 @@ export default {
                     this.modal.exclude_stats = resp.exclude_from_stats
                     this.modal.installment = resp.installementValue
                     this.modal.balance = resp.balance
+                    this.modal.deleted = resp.deleted_at
+
+                    if (resp.deleted_at != null) {
+                        this.restore = true
+                    }
                 })
             }
         },
@@ -167,12 +195,11 @@ export default {
                 sorting: this.modal.sorting
             }
 
-            ApiService.setAccount(data, this.modal.id).then(() => {
-                this.closeModal()
-                this.wallets = []
-                this.getWallets()
-            })
+            const _this = this
 
+            ApiService.setAccount(data, this.modal.id).then(() => {
+                _this.$router.push({ path: '/app/settings/wallet' })
+            })
 
         },
         updateColor(eventData) {

@@ -3,18 +3,12 @@
     <div
       class="container relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0 flex-auto p-4">
       <div class="flex flex-wrap py-3">
-        <!-- <div class="lg:w-6/12 px-2">
+        <div class="lg:w-6/12 px-2" v-if="this.isModel === false">
           <select v-model="model" v-on:change="retriveModel()" id="model" v-if="action.models"
             class="border-0 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-            <option v-for="(item, k) in input.model" :key="k" :value="k">{{ item.name }}</option>
+            <option value="0">Choose a model</option>
+            <option v-for="(item, k) in input.model" :key="k" :value="item.uuid">{{ item.name }}</option>
           </select>
-        </div> -->
-        <div class="lg:w-4/12 px-2">
-          <button v-on:click="resetModel()" v-if="action.reset"
-            class="text-emerald-500 bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-            type="button">
-            RESET
-          </button>
         </div>
       </div>
       <div class="flex flex-wrap py-3">
@@ -39,14 +33,14 @@
                       INCOMING
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" v-if="isModel === false">
                     <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(3)"
                       v-bind:class="{ 'text-emerald-600 ': action.openTab !== 3, 'text-white bg-emerald-600': action.openTab === 3 }">
                       TRANSFER
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" v-if="isModel === false">
                     <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(4)"
                       v-bind:class="{ 'text-emerald-600 ': action.openTab !== 4, 'text-white bg-emerald-600': action.openTab === 4 }">
@@ -79,13 +73,13 @@
             'lg:w-6/12': action.openTab != 4,
           }">
 
-            <select v-on:change="checkDebit()" v-if="action.hidecategory" v-model="category" id="category"
+            <select v-if="action.hidecategory == false" v-model="category" id="category"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option value="0">Choose a category</option>
               <option v-for="item in input.category" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
 
-            <select v-if="!action.hidecategory && !action.hidetransfer_to" v-model="transferto" id="transferto"
+            <select v-if="action.hidecategory == true && !action.hidetransfer_to" v-model="transferto" id="transferto"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option value="-1">Choose a wallet to transfer to</option>
               <option value="0">Out of wallet</option>
@@ -100,12 +94,28 @@
             </select>
           </div>
 
-          <div class="px-2 py-2 w-full lg:w-2/12" v-if="action.openTab == 4">
-            <input v-model="debit_name" type="text" placeholder="Name" id="debit" v-if="debit != 'njn76298fm'" disabled
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-
+          <div class="px-2 py-2 w-full lg:w-12/12" v-if="action.openTab == 4">
             <input v-model="debit_name" type="text" placeholder="Name" id="debit" v-if="debit == 'njn76298fm'"
+              :disabled="action.disabled_debit_name"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+          </div>
+
+          <div class="px-2 py-2 lg:w-6/12" v-if="action.openTab == 4">
+            <label for="incoming" class="uppercase text-blueGray-600 text-xs font-bold mb-2">
+              INCOMING  
+              <input type="radio" id="incoming" value="+"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
+                v-model="action.debit_type" />
+            </label>
+          </div>
+
+          <div class="px-2 py-2 lg:w-6/12" v-if="action.openTab == 4">
+            <label for="expenses" class="uppercase text-blueGray-600 text-xs font-bold mb-2">
+              EXPENSES  
+              <input type="radio" id="expenses" value="-"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
+                v-model="action.debit_type" />
+            </label>
           </div>
 
         </div>
@@ -125,8 +135,7 @@
         <div class="row border rounded border-blueGray-500 py-3 border-dashed">
           <div class="flex flex-wrap">
             <div class="lg:w-12/12 px-2 w-full text-center">
-              <label class="text-xs w-full" for="tags">Choose one of
-                currently tags</label>
+              <label class="text-xs w-full" for="tags">Choose one of currently tags</label>
               <select v-model="label" multiple id="tags"
                 class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                 <option
@@ -145,6 +154,16 @@
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
             </div>
           </div>
+
+          <div class="flex flex-wrap py-3 ml-2">
+            <div v-for="(item, i) in input.tags" :key="i">
+              <span class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                v-if="label.includes(item.id)" :style="'color: #fff; background-color: ' + item.color">{{
+                  item.name
+                }}</span>
+            </div>
+          </div>
+
         </div>
 
         <div class="flex flex-wrap py-3">
@@ -155,19 +174,19 @@
 
           <div class="lg:w-4/12 px-2 w-full mb-2">
 
-            <div class="flex flex-wrap">
+            <div class="flex flex-wrap" v-if="isModel === false">
               <VueDatePicker v-model="date"></VueDatePicker>
             </div>
 
             <div class="flex flex-wrap">
-              <div class="lg:w-6/12 w-full">
+              <div class="w-full" v-bind:class="{ 'lg:w-6/12 ': isModel === false, 'lg:w-12/12': isModel === true }">
                 <select v-model="payment_type" id="payment_type"
-                  class="w-full mt-2 border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                  class="w-full border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                   <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ item.name }}</option>
                 </select>
               </div>
               <div class="lg:w-6/12 w-full ">
-                <div
+                <div v-if="isModel === false"
                   class="border-0 mt-2 px-2 py-2 text-center placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                   <label for="confirmed" id="confirm" v-if="!isPlanned">
                     payment confirm <input v-model="confirmed" type="checkbox" id="confirmed" value="1" checked>
@@ -189,8 +208,7 @@
 
         </div>
 
-        <!-- <div class="flex py-2 border border-solid border-blueGray-500 shadow rounded"
-          v-if="action.openTab != 3 && action.openTab != 4">
+        <div class="flex py-2 border border-solid border-blueGray-500 shadow rounded" v-if="isModel">
           <div class="lg:w-8/12 px-2 w-full">
             <input v-model="name" type="text" placeholder="save these settings as a template"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
@@ -202,11 +220,11 @@
               SAVE TEMPLATE
             </button>
           </div>
-        </div> -->
+        </div>
 
       </div>
 
-      <div class="flex flex-wrap py-3">
+      <div class="flex flex-wrap py-3" v-if="this.isModel === false">
         <div class="lg:w-12/12 px-2 w-full">
           <button v-on:click="setEntry()"
             class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -242,10 +260,14 @@ import LocalStorageService from '../../services/LocalStorageService.vue';
 export default {
   props: {
     entryId: {
-      type: Number,
+      type: String,
       default: null,
     },
     isPlanned: {
+      type: Boolean,
+      default: false,
+    },
+    isModel: {
       type: Boolean,
       default: false,
     },
@@ -262,10 +284,12 @@ export default {
         openTab: 1,
         alert: false,
         alert_message: null,
-        hidecategory: true,
+        hidecategory: false,
         hidedebit: false,
         dateUpdated: false,
         hidetransfer_to: false,
+        disabled_debit_name: true,
+        debit_type: '-'
       },
       date: null,
       amount: null,
@@ -313,25 +337,25 @@ export default {
     this.getAccount()
     this.getLabels()
     this.getPaymentType()
-    this.getModels()
-    this.getDebit()
-    if (this.entryId != null) {
+    if (this.entryId != null && this.isModel === false) {
       this.getEntry()
     }
 
+    if (this.entryId != null && this.isModel === true) {
+      this.retriveModel()
+    }
+
+    if (this.isModel === false) {
+      this.getModels()
+      this.getDebit()
+    }
+
     const settings = LocalStorageService.get("user_settings")
-    this.currency = settings.currency_id
-    this.payment_type = settings.payment_type_id
+    this.currency = settings.settings.currency_id
+    this.payment_type = settings.settings.payment_type_id
 
   },
   methods: {
-    checkDebit() {
-      if (this.action.openTab == 55) {
-        this.action.hidedebit = true
-      } else {
-        this.action.hidedebit = false
-      }
-    },
     time() {
       const _this = this
       if (this.action.dateUpdated == false) {
@@ -375,8 +399,8 @@ export default {
     getModels() {
       let _this = this
       ApiService.model().then((res) => {
-        let data = res.data
-        if (res.data.length > 0) {
+        let data = res
+        if (data.length > 0) {
           _this.action.models = true
         }
         data.forEach(function (r) {
@@ -389,7 +413,6 @@ export default {
       this.action.reset = true
 
       this.toggleTabs(this.typeOfEntry)
-
       ApiService.getEntryDetail(this.entryId, this.isPlanned).then((res) => {
         let model = res[0]
 
@@ -404,10 +427,6 @@ export default {
 
         if (model.type == 'transfer') {
           _this.action.openTab = 3
-        }
-
-        if (model.type == 'debit') {
-          _this.action.openTab = 4
         }
 
         _this.type = model.type
@@ -425,6 +444,16 @@ export default {
         _this.transfer_realtion = model.transfer_relation
         _this.planned = model.planning
 
+        if (model.type == 'debit') {
+          _this.action.openTab = 4
+          _this.action.hidecategory = true
+          _this.action.hidetransfer_to = true
+          _this.debit = model.payee.name
+          if(model.amount >= 0) {
+            _this.action.debit_type = '+'
+          }
+        }
+
         if (model.transfer == 1) {
           _this.action.hidecategory = true
           _this.transferto = model.transfer_id
@@ -437,10 +466,13 @@ export default {
 
     },
     retriveModel() {
-      let model = this.input.model[this.model]
-      if (model !== null) {
+      const id = this.entryId === null ? this.model : this.entryId
 
-        this.amount = model.amount
+      ApiService.getModel(id).then((res) => {
+
+        const model = res
+        const _this = this
+        _this.amount = model.amount
         if (model.type == "expenses") {
           this.amount = model.amount * -1
         }
@@ -449,27 +481,22 @@ export default {
           this.action.openTab = 2
         }
 
-        if (model.type == "transfer") {
-          this.action.openTab = 3
-        }
+        _this.type = model.type
+        _this.category = model.category_id
+        _this.note = model.note
+        _this.currency = model.currency_id
+        _this.account = model.account_id
+        _this.payment_type = model.payment_type
+        _this.name = model.name
+        _this.action.reset = true
+        _this.label = []
 
-        this.type = model.type
-        this.category = model.category_id
-        this.note = model.note
-        this.currency = model.currency_id
-        this.account = model.account_id
-        this.payment_type = model.payment_type
-        this.waranty = model.waranty == 1 ? true : false
-        this.confirmed = model.confirmed == 1 ? true : false
-        this.name = model.name
-        this.action.reset = true
-        let _this = this
-
-        this.label.forEach((item) => {
+        model.label.forEach((item) => {
           _this.label.push(item.id)
         });
 
-      }
+      })
+
     },
     getLabels() {
       let _this = this
@@ -479,22 +506,6 @@ export default {
           _this.input.tags.push(r)
         })
       })
-    },
-    resetModel() {
-      this.date = null
-      this.amount = null
-      this.type = "expenses"
-      this.category = null
-      this.label = []
-      this.note = null
-      this.currency = 1
-      this.account = 1
-      this.payment_type = 1
-      this.model = []
-      this.newlabel = null
-      this.name = null
-      this.action.reset = false
-      this.model = null
     },
     setModel() {
       let _this = this
@@ -514,7 +525,7 @@ export default {
         data.amount = this.amount * -1
       }
 
-      ApiService.setModel(data).then(() => {
+      ApiService.setModel(data, this.entryId).then(() => {
         _this.action.alert = true
         _this.action.alert_message = "Modello salvato correttamente"
         setTimeout(_this.action.alert = false, 3000)
@@ -587,7 +598,6 @@ export default {
 
       }
 
-
       return true
 
     },
@@ -623,6 +633,12 @@ export default {
 
         if (this.type == "expenses") {
           data.amount = this.amount * -1
+        }
+
+        if (this.type == "debit") {
+          if(this.action.debit_type == '-') {
+            data.amount = this.amount * -1
+          }
         }
 
         ApiService.setEntry(this.type, data, this.isPlanned, this.entryId).then(() => {
@@ -685,7 +701,7 @@ export default {
           this.category = 0
           this.debit = 0
           this.debit_name = null
-          this.action.hidecategory = true
+          this.action.hidecategory = false
           this.action.hidetransfer_to = false
           break;
         case 2:
@@ -694,7 +710,7 @@ export default {
           this.debit = 0
           this.category = 0
           this.debit_name = null
-          this.action.hidecategory = true
+          this.action.hidecategory = false
           this.action.hidetransfer_to = false
           break;
         case 3:
@@ -702,14 +718,15 @@ export default {
           this.type = "transfer"
           this.debit = 0
           this.debit_name = null
-          this.action.hidecategory = false
+          this.action.hidecategory = true
           this.action.hidetransfer_to = false
           this.category = null
           break;
         case 4:
         case 'debit':
           this.type = "debit"
-          this.action.hidecategory = false
+          this.debit = 0
+          this.action.hidecategory = true
           this.action.hidetransfer_to = true
           this.category = null
           break;

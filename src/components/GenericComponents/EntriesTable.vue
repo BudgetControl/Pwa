@@ -3,7 +3,7 @@
         <div class="block w-full overflow-x-auto">
 
             <div class="container px-4 mx-auto py-3 border border-solid border-blueGray-100 shadow" :class="[
-                entry.planned
+                entry.planned === 1
                     ? 'bg-blueGray-100'
                     : '',
                 entry.payee
@@ -15,7 +15,8 @@
             ]" v-for="(entry, i) in entries" :key="i">
                 <div class="flex flex-wrap">
                     <div class="flex-l w-full px-4">
-                        <span class="text-xs block text-emerald-500 rounded ">{{ entry.date }}</span>
+                        <span  v-if="isModel == false" class="text-xs block text-emerald-500 rounded ">{{ entry.date }}</span>
+                        <span  v-if="isModel == true" class="text-xs block rounded ">{{ entry.name }}</span>
                     </div>
                 </div>
                 <div class="flex flex-wrap">
@@ -38,7 +39,11 @@
 
                     </div>
                     <div class="flex-l">
-                        <EntryActionDropdown :entryId="entry.uuid" :type="entry.type" :index=i @deleteItem="deleteItemFromArray" />
+                        <EntryActionDropdown :entryId="entry.uuid" :type="
+                            isModel === true
+                            ? 'model'
+                            : 'entry'
+                        " :index=i @deleteItem="deleteItemFromArray" />
                     </div>
                 </div>
 
@@ -62,7 +67,7 @@
 
                     <div class="w-full px-4 flex-1 text-right">
                         <span class="text-xs mt-2 block text-blueGray-700 rounded ">
-                            <span v-if="entry.planned"
+                            <span v-if="entry.planned === 1"
                                 class="'text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1 bg-red-200">pianificato</span>
                         </span>
                     </div>
@@ -80,13 +85,17 @@ import sketch from "@/assets/img/sketch.jpg";
 import react from "@/assets/img/react.jpg";
 import vue from "@/assets/img/react.jpg";
 import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue";
-
 import ApiService from '../../services/ApiService.vue';
 
 export default {
     props: {
         showPlanned: {
-            required: true,
+            required: false,
+            default: false,
+            type: Boolean
+        },
+        isModel: {
+            required: false,
             default: false,
             type: Boolean
         }
@@ -171,7 +180,8 @@ export default {
                         labels: labels,
                         payee: null,
                         transfer: r.type == 'transfer' ? true : false,
-                        type: r.type
+                        type: r.type,
+                        name: r.name
                     }
 
                     if (r.transfer_to != null) {

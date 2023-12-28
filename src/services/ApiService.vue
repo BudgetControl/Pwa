@@ -107,13 +107,28 @@ async function model() {
   return response.data;
 }
 
-async function setModel(data) {
-  const response = await instance.post('/api/model', data);
+async function getModel(id) {
+  const response = await instance.get(`/api/model/${id}`);
   return response.data;
 }
 
-async function labels() {
-  const response = await instance.get('/api/labels');
+async function setModel(data, id) {
+  if (id != null) {
+    const response = await instance.put(`/api/model/${id}`, data);
+    return response.data;
+  } else {
+    const response = await instance.post('/api/model', data);
+    return response.data;
+  }
+
+}
+
+async function labels(queryParams) {
+  if (queryParams === undefined) {
+    queryParams = '';
+  }
+
+  const response = await instance.get(`/api/labels${queryParams}`);
   return response.data;
 }
 
@@ -123,7 +138,7 @@ async function label(id) {
 }
 
 async function setLabel(id, data) {
-  const response = await instance.put(`/api/labels/${id}`,data);
+  const response = await instance.put(`/api/labels/${id}`, data);
   return response.data;
 }
 
@@ -133,12 +148,22 @@ async function currencies() {
 }
 
 async function setDefaultCurrency(id) {
-  const response = await instance.post('/api/user/currency', {currency: id});
+  const response = await instance.post('/api/user/currency', { currency: id });
   return response.data;
 }
 
 async function accounts(queryParams = '') {
   const response = await instance.get(`/api/accounts${queryParams}`);
+  return response.data;
+}
+
+async function deleteWallet(id) {
+  const response = await instance.delete(`/api/accounts/${id}`);
+  return response.data;
+}
+
+async function restoreWallet(id) {
+  const response = await instance.get(`/api/account-restore/${id}`);
   return response.data;
 }
 
@@ -154,7 +179,6 @@ async function setAccount(data, id) {
   } else {
     const response = await instance.post('/api/accounts', data);
     return response.data;
-
   }
 }
 
@@ -170,8 +194,8 @@ async function setCategories(data, id) {
 }
 
 async function setAccountSorting(id, sorting) {
-    const response = await instance.put(`/api/sorting-account/${id}`, {'sorting': sorting});
-    return response.data;
+  const response = await instance.put(`/api/sorting-account/${id}`, { 'sorting': sorting });
+  return response.data;
 }
 
 async function importData(data) {
@@ -186,6 +210,18 @@ async function getPlannedEntry(page) {
 
 async function setPlannedEntry(data) {
   const response = await instance.post('/api/planning-recursively', data);
+  return response.data;
+}
+
+async function deleteModel(id) {
+  let url = `/api/model/${id}`
+  const response = await instance.delete(url);
+  return response.data;
+}
+
+async function assistance(data) {
+  let url = `/api/mailer/assistance`
+  const response = await instance.post(url, data);
   return response.data;
 }
 
@@ -215,7 +251,12 @@ export default {
   account,
   category,
   setLabel,
-  setDefaultCurrency
+  setDefaultCurrency,
+  getModel,
+  deleteModel,
+  assistance,
+  deleteWallet,
+  restoreWallet
 }
 
 </script>

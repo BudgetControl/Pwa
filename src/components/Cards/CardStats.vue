@@ -49,14 +49,15 @@ export default {
     },
     statArrow: {
       default: "",
+      type: String,
       validator: function (value) {
         // The value must match one of these strings
         return ["up", "down"].indexOf(value) !== -1;
       },
     },
     statPercent: {
-      type: String,
-      default: "",
+      type: Number,
+      default: 0,
     },
     // can be any of the text color utilities
     // from tailwindcss

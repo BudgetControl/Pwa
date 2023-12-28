@@ -8,7 +8,7 @@
             <ul class="flex flex-l lg:flex-row list-none ml-auto w-full justify-center">
               <li class="nav-item border border-solid border-blueGray-100 mx-2">
                 <router-link
-                  to="/app/add_entry"
+                  to="/app/entry"
                   v-slot="{ href, navigate, isActive }"
                 >
                   <a

@@ -36,6 +36,10 @@ function clear() {
     return localStorage.clear()
 }
 
+function deleteItem(name) {
+    return localStorage.removeItem(this.hash(name))
+}
+
 export default {
   check,
   get,
@@ -43,7 +47,8 @@ export default {
   clear,
   getToken,
   setToken,
-  hash
+  hash,
+  deleteItem
 }
 
 </script>
