@@ -14,43 +14,57 @@
               <div class="py-6 px-3 mt-32 sm:mt-0 text-center">
                 <a href="/app/dashboard"
                   class="bg-emerald-500 active:bg-emerald-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150">
-                  Wallet
+                  Dashboard
                 </a>
-                <a href="/app/entry"
-                  class="ml-5 bg-emerald-500 active:bg-emerald-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150">
-                  Add entry
+                <a href="/app/settings"
+                  class="bg-emerald-500 active:bg-emerald-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150">
+                  Settings
                 </a>
               </div>
             </div>
             <div class="w-full lg:w-4/12 px-4 lg:order-1">
-              <div class="flex justify-center py-4 lg:pt-4 pt-8">
+              <div class="py-6 px-3 mt-32 sm:mt-0 text-center">
+                <a href="/app/entry"
+                  class="ml-5 bg-emerald-500 active:bg-emerald-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150">
+                  Add new entry
+                </a>
+                <a href="/app/entries"
+                  class="ml-5 bg-emerald-500 active:bg-emerald-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150">
+                  My entries
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mt-12">
+            <div class="flex justify-center flex-wrap py-4 lg:pt-4 pt-8">
                 <div class="mr-4 p-3 text-center">
                   <span class="text-xl font-bold block uppercase tracking-wide " :class="user.wallet.total_color">
-                    {{ user.wallet.total }}
+                    {{ user.wallet.total }} {{ this.currency }}
                   </span>
                   <span class="text-sm text-blueGray-400">Wallet</span>
                 </div>
                 <div class="mr-4 p-3 text-center">
                   <span class="text-xl font-bold block uppercase tracking-wide text-emerald-600">
-                    {{ user.wallet.incoming }}
+                    {{ user.wallet.incoming }} {{ this.currency }}
                   </span>
                   <span class="text-sm text-blueGray-400">Incoming</span>
                 </div>
                 <div class="lg:mr-4 p-3 text-center text-red-500">
                   <span class="text-xl font-bold block uppercase tracking-wide">
-                    {{ user.wallet.expenses }}
+                    {{ user.wallet.expenses }} {{ this.currency }}
                   </span>
                   <span class="text-sm text-blueGray-400">Expenses</span>
                 </div>
                 <div class="lg:mr-4 p-3 text-center">
                   <span class="text-xl font-bold block uppercase tracking-wide " :class="user.wallet.health_color">
-                    {{ user.wallet.health }}
+                    {{ user.wallet.health }} {{ this.currency }}
                   </span>
                   <span class="text-sm">Health</span>
                 </div>
               </div>
-            </div>
           </div>
+
           <div class="text-center mt-12">
             <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
               {{ user.name }}
@@ -101,12 +115,14 @@ import AuthService from "@/services/AuthService.vue";
 import DeleteButton from "../../components/Auth/DeleteButton.vue";
 import userProfile from "@/assets/img/flat-business-man-user-profile.jpeg";
 import DeleteSoftButtonVue from '../../components/Auth/DeleteSoftButton.vue';
+import LocalStorageService from "../../services/LocalStorageService.vue";
 
 export default {
   data() {
     return {
       userProfile,
       user: {
+        currency: '$',
         photo: null,
         suggestion: null,
         name: null,
@@ -135,6 +151,9 @@ export default {
       localStorage.clear();
       this.$router.push({ path: '/' })
     }
+
+    const storage = LocalStorageService.get('user_settings')
+    this.currency = storage.currency.icon
   },
   async mounted() {
     const _this = this

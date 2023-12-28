@@ -220,7 +220,7 @@ async function deleteModel(id) {
 }
 
 async function assistance(data) {
-  let url = `/api/assistance/`
+  let url = `/api/mailer/assistance`
   const response = await instance.post(url, data);
   return response.data;
 }

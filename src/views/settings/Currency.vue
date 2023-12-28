@@ -60,7 +60,7 @@ export default {
                 this.currencies.push(e)
             });
             const settings = LocalStorageService.get("user_settings")
-            this.currency_id = settings.currency_id
+            this.currency_id = settings.settings.currency_id
         })
     },
     methods: {

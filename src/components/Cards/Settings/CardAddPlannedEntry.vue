@@ -295,7 +295,7 @@ export default {
         }
 
         if (model.type == 'expenses') {
-          _this.action.openTab = 2
+          _this.action.openTab = 1
         }
 
         if (model.type == 'transfer') {

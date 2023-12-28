@@ -43,6 +43,7 @@ import Currency from "@/views/settings/Currency.vue";
 import Model from "@/views/settings/Model.vue";
 import ModelCard from "@/views/settings/Cards/ModelCard.vue";
 import Assistance from "@/views/settings/Assistance.vue";
+import AboutUs from "@/views/settings/AboutUs.vue";
 
 // views for Auth layout
 import Login from "@/views/auth/Login.vue";
@@ -69,13 +70,13 @@ const routes = [
         path: "/app/dashboard",
         component: Dashboard,
       },
-      
+
       {
         path: "/app/entry/:entry_id",
         name: 'edit_entry',
         component: AddEntry,
       },
-      
+
       {
         path: "/app/entry",
         name: 'entry',
@@ -190,6 +191,10 @@ const routes = [
       {
         path: "/app/settings/assistance",
         component: Assistance,
+      },
+      {
+        path: "/app/settings/about-us",
+        component: AboutUs,
       },
     ]
   },

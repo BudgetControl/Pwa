@@ -69,11 +69,14 @@ export default {
         }
     },
     methods: {
+        closeAlert: function () {
+            this.alert_message = null;
+        },
         sendRequest() {
             const userSettings = LocalStorageService.get("user_settings")
             const _this = this
             const data = {
-                "user_id": userSettings.user_id,
+                "user_id": userSettings.settings.user_id,
                 "text": this.text
             }
 
