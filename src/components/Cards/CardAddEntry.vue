@@ -514,9 +514,9 @@ export default {
         amount: this.amount,
         note: this.note,
         label: this.label,
-        account: this.account,
-        category: this.category,
-        currency: this.currency,
+        account_id: this.account,
+        category_id: this.category,
+        currency_id: this.currency,
         type: this.type,
         payment_type: this.payment_type,
       }
