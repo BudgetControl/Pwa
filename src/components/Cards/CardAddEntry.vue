@@ -234,7 +234,7 @@
         </div>
       </div>
 
-      <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500" v-if="this.action.alert">
+      <div :class="'text-white px-6 py-4 border-0 rounded relative mb-4' + action.alert_color" v-if="this.action.alert">
         <span class="text-xl inline-block mr-5 align-middle">
           <i class="fas fa-bell"></i>
         </span>
@@ -284,6 +284,7 @@ export default {
         openTab: 1,
         alert: false,
         alert_message: null,
+        alert_color: 'bg-red-500',
         hidecategory: false,
         hidedebit: false,
         dateUpdated: false,
@@ -527,8 +528,8 @@ export default {
 
       ApiService.setModel(data, this.entryId).then(() => {
         _this.action.alert = true
+        _this.action.alert_color = 'bg-emerald-600'
         _this.action.alert_message = "Modello salvato correttamente"
-        setTimeout(_this.action.alert = false, 3000)
       })
     },
 
