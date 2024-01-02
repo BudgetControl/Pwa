@@ -55,6 +55,14 @@
                     class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1 text-emerald-600 bg-emerald-200">
                     {{entry.planning}}
                 </span>
+
+                <span v-for="(label, i) in entry.labels"
+                                v-on:click="$router.push(`/app/entries?label=${label.id}`)" :key="i"
+                                class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                                :style="'color: #fff; background-color: ' + label.color">{{
+                                    label.name
+                                }}</span>
+
                 </div>
             </div>
         </div>
@@ -111,7 +119,20 @@ export default {
                             icon: e.sub_category.category.icon
                         },
                         payee: null,
+                        labels: []
                     }
+                    
+                    e.label.forEach((l) => {
+                        if (l.name != "") {
+                            info.labels.push(
+                                {
+                                    id: l.id,
+                                    name: l.name,
+                                    color: l.color
+                                }
+                            )
+                        }
+                    });
 
                     this.entries.push(info)
 
