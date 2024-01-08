@@ -645,15 +645,10 @@ export default {
         ApiService.setEntry(this.type, data, this.isPlanned, this.entryId).then(() => {
           _this.date = null,
             _this.amount = null,
-            _this.category = data.category_id,
             _this.label = [],
             _this.note = null,
-            _this.currency = 1,
-            _this.account = data.account_id,
-            _this.payment_type = 1,
             _this.model = [],
             _this.newlabel = null,
-
             _this.action.alert = true
           _this.action.alert_message = _this.type + " inserito correttamente"
 
