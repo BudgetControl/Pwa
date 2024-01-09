@@ -31,9 +31,10 @@
                             </span>
                         </div>
                     </div>
-                    <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-emerald-200">
+                    <div class="overflow-hidden h-2 mb-4 text-xs flex rounded" v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 80, 'bg-red-200': budget.percentage >= 80 }" >
                         <div :style="'width:' + budget.percentage + '%'"
-                            class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500">
+                            class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
+                                v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 80, 'bg-red-600': budget.percentage >= 80 }" >
                         </div>
                     </div>
 
@@ -70,9 +71,10 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-emerald-200">
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded" v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 80, 'bg-red-200': budget.percentage >= 80 }" >
                             <div :style="'width:' + budget.percentage + '%'"
-                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500">
+                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
+                                v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 80, 'bg-red-600': budget.percentage >= 80 }" >
                             </div>
                         </div>
 
@@ -109,9 +111,10 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-emerald-200">
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded" v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 80, 'bg-red-200': budget.percentage >= 80 }" >
                             <div :style="'width:' + budget.percentage + '%'"
-                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500">
+                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
+                                v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 80, 'bg-red-600': budget.percentage >= 80 }" >
                             </div>
                         </div>
 
@@ -147,9 +150,10 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-emerald-200">
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded" v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 80, 'bg-red-200': budget.percentage >= 80 }" >
                             <div :style="'width:' + budget.percentage + '%'"
-                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500">
+                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
+                                v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 80, 'bg-red-600': budget.percentage >= 80 }" >
                             </div>
                         </div>
 
