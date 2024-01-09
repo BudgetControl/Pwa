@@ -28,6 +28,8 @@ import MyEntries from "@/views/application/MyEntries.vue";
 import ImportEntries from "@/views/application/ImportEntries.vue";
 import SearchEntries from "@/views/application/SearchEntries.vue";
 import EntriesResume from "@/views/application/EntriesResume.vue";
+import Budgets from "@/views/application/Budgets.vue";
+import AddBudgets from "@/components/Cards/Settings/CardAddBudget.vue";
 
 // settings layout
 
@@ -101,6 +103,22 @@ const routes = [
         path: "/app/payee",
         name: 'payee',
         component: PayeeList,
+      },
+
+      {
+        path: "/app/budgets",
+        component: Budgets,
+      },
+
+      {
+        path: "/app/budgets/new",
+        component: AddBudgets,
+      },
+
+
+      {
+        path: "/app/budgets/edit/:id",
+        component: AddBudgets,
       },
 
       {

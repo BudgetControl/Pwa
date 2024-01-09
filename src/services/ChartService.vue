@@ -81,6 +81,21 @@ async function expensesLabelTable(data) {
   return response.data;
 }
 
+async function createBudget(data) {
+  const response = await instance.post('/api/budget/create',data);
+  return response.data;
+}
+
+async function getBudgets() {
+  const response = await instance.get('/api/budget/stats');
+  return response.data;
+}
+
+async function getBudget(id) {
+  const response = await instance.get(`/api/budget/stats/${id}`);
+  return response.data;
+}
+
 async function expensesLabelCategory(data) {
   const config = {
     params: {
@@ -98,7 +113,10 @@ export default {
   incomingExpensesLine,
   expensesLabelLine,
   expensesLabelCategory,
-  expensesLabelTable
+  expensesLabelTable,
+  getBudgets,
+  getBudget,
+  createBudget
 }
 
 </script>
