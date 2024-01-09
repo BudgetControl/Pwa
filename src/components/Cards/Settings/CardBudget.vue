@@ -12,9 +12,8 @@
                 <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
                     WEEK
                 </span>
-                <div v-for="budget in budgets.year" :key="budget.id"></div>
-                <a :href="'/app/budgets/edit/' + budget.id" class="relative pt-1" v-for="budget in budgets.week"
-                    :key="budget.id">
+                <div v-for="budget in budgets.week" :key="budget.id"></div>
+                <a :href="'/app/budgets/edit/' + budget.id" class="relative pt-1">
                     <div class="flex mb-2 items-center justify-between">
                         <div>
                             <span
@@ -52,9 +51,8 @@
                 <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
                     MONTH
                 </span>
-                <div v-for="budget in budgets.year" :key="budget.id">
-                    <a :href="'/app/budgets/edit/' + budget.id" class="relative pt-1" v-for="budget in budgets.month"
-                        :key="budget.id">
+                <div v-for="budget in budgets.month" :key="budget.id">
+                    <a :href="'/app/budgets/edit/' + budget.id" class="relative pt-1" >
                         <div class="flex mb-2 items-center justify-between">
                             <div>
                                 <span
