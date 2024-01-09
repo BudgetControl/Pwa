@@ -96,6 +96,11 @@ async function getBudget(id) {
   return response.data;
 }
 
+async function deleteBudget(id) {
+  const response = await instance.delete(`/api/budget/${id}`);
+  return response.data;
+}
+
 async function expensesLabelCategory(data) {
   const config = {
     params: {
@@ -116,7 +121,8 @@ export default {
   expensesLabelTable,
   getBudgets,
   getBudget,
-  createBudget
+  createBudget,
+  deleteBudget
 }
 
 </script>

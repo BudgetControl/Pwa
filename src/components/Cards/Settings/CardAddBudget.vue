@@ -33,8 +33,9 @@
                                     htmlFor="grid-password">
                                     Period
                                 </label>
-                                <select v-model="data.planning" id="planning"
+                                <select v-model="data.period" id="planning"
                                     class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                    <option value="_">Choose a period</option>
                                     <option value="weekly">Weekly</option>
                                     <option value="monthly">monthly</option>
                                     <option value="yearly">yearly</option>
@@ -43,15 +44,15 @@
                             </div>
                         </div>
 
-                        <div class="flex flex-wrap" v-if="data.planning == 'one_shot'">
+                        <div class="flex flex-wrap" v-if="data.period == 'one_shot'">
                             <div class="lg:w-6/12 px-2 py-2 w-full">
 
                                 <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
                                     htmlFor="grid-password">
                                     Start date
                                 </label>
-                                
-                                <VueDatePicker v-model="start_Date"></VueDatePicker>
+
+                                <VueDatePicker v-model="start_date"></VueDatePicker>
                             </div>
 
                             <div class="lg:w-6/12 px-2 py-2 w-full">
@@ -127,7 +128,7 @@
                                     Entry type
                                 </label>
 
-                                <select v-model="data.tags" multiple
+                                <select v-model="data.type" multiple
                                     class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                                     <option
                                         class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
@@ -161,7 +162,7 @@
                                     Note
                                 </label>
 
-                                <textarea
+                                <textarea v-model="data.note"
                                     class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                     rows="4" />
                             </div>
@@ -169,10 +170,16 @@
 
                         <div class="flex flex-wrap py-3">
                             <div class="lg:w-12/12 px-2 w-full">
-                                <button v-on:click="set()"
+                                <button v-on:click="set()" v-if="!id"
                                     class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="button">
-                                    SAVEBUDGET
+                                    SAVE BUDGET
+                                </button>
+
+                                <button v-on:click="deleteBudget()" v-if="id"
+                                    class="w-full bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    type="button">
+                                    DELETE BUDGET
                                 </button>
                             </div>
                         </div>
@@ -190,6 +197,7 @@
 import '@vuepic/vue-datepicker/dist/main.css'
 import ApiService from '../../../services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
+import ChartServiceVue from '../../../services/ChartService.vue';
 
 export default {
     components: {
@@ -202,15 +210,16 @@ export default {
                 category: [],
                 tags: [],
             },
+            id: null,
             data: {
                 account: [],
                 category: [],
-                tags: [],
+                label: [],
                 type: [],
                 period: null,
-                start_Date: null,
+                start_date: null,
                 end_date: null,
-                budget: 0,
+                amount: 0,
                 name: null,
                 note: null,
             }
@@ -220,9 +229,13 @@ export default {
         this.getCategory()
         this.getAccount()
         this.getLabels()
+        this.id = this.$route.params.id
     },
     methods: {
-
+        deleteBudget() {
+            ChartServiceVue.deleteBudget(this.id)
+            this.$router.push({ path: '/app/budgets' })
+        },
         getLabels() {
             let _this = this
             ApiService.labels().then((res) => {
@@ -255,6 +268,49 @@ export default {
                 })
             })
         },
+        set() {
+
+            if (this.validate() === true) {
+                const data = this.data
+                const _this = this
+                ChartServiceVue.createBudget(data).then(() => {
+                    //return
+                    _this.$router.push({ path: '/app/budgets' })
+                })
+            }
+        },
+        validate() {
+            if (this.data.period == "_") {
+                alert("Please choose a right period")
+                return false
+            }
+
+            if (this.data.amount == 0) {
+                alert("Please insert a budget")
+                return false
+            }
+
+            if (this.data.name == null) {
+                alert("Please insert a budget name")
+                return false
+            }
+
+            if (this.data.period == "one_shot") {
+
+                if (this.data.start_date == null) {
+                    alert("Please insert a start date for a budget")
+                    return false
+                }
+
+                if (this.data.end_date == null) {
+                    alert("Please insert a end date for a budget")
+                    return false
+                }
+
+            }
+
+            return true
+        }
     }
 };
 

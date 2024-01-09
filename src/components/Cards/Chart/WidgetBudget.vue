@@ -13,7 +13,7 @@
                             <div>
                                 <span
                                     class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200">
-                                    {{ budget.name }}
+                                    {{ budget.config.name }}
                                 </span>
                             </div>
                             <div class="text-right">
@@ -29,6 +29,12 @@
                             <div :style="'width:' + budget.percentage + '%'"
                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500">
                             </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <span class="text-xs font-semibold inline-block text-blueGray-400">
+                                {{ budget.config.note }}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -45,7 +51,7 @@
                             <div>
                                 <span
                                     class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200">
-                                    {{ budget.name }}
+                                    {{ budget.config.name }}
                                 </span>
                             </div>
                             <div class="text-right">
@@ -61,6 +67,12 @@
                             <div :style="'width:' + budget.percentage + '%'"
                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500">
                             </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <span class="text-xs font-semibold inline-block text-blueGray-400">
+                                {{ budget.config.note }}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -76,7 +88,7 @@
                             <div>
                                 <span
                                     class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200">
-                                    {{ budget.name }}
+                                    {{ budget.config.name }}
                                 </span>
                             </div>
                             <div class="text-right">
@@ -93,6 +105,12 @@
                             <div :style="'width:' + budget.percentage + '%'"
                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500">
                             </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <span class="text-xs font-semibold inline-block text-blueGray-400">
+                                {{ budget.config.note }}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -139,7 +157,7 @@ export default {
             const _this = this
             ChartServiceVue.getBudgets().then((resp) => {
                 resp.forEach((data) => {
-                    switch (data.planning) {
+                    switch (data.config.period) {
                         case 'weekly':
                             _this.budgets.week.push(data)
                             break;
