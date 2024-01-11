@@ -170,6 +170,16 @@
 
                         <div class="flex flex-wrap py-3">
                             <div class="lg:w-12/12 px-2 w-full">
+                                <input id="vue-checkbox-list" type="checkbox" v-model="data.notification" value="true"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                <label for="vue-checkbox-list"
+                                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Enable
+                                    email notification</label>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap py-3">
+                            <div class="lg:w-12/12 px-2 w-full">
                                 <button v-on:click="set()" v-if="!id"
                                     class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="button">
@@ -222,6 +232,7 @@ export default {
                 amount: 0,
                 name: null,
                 note: null,
+                notification: false,
             }
         }
     },

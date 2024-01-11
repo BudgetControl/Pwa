@@ -2,10 +2,10 @@
     <div class="block w-full overflow-x-auto mt-10">
         <div class="container x-4 mx-auto py-3">
 
-            <a class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                href="/app/budgets/new">
+            <router-link class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                to="/app/budgets/new">
                 Create new budget
-            </a>
+            </router-link>
 
             <!--content-->
             <div class="border p-2 mt-2" v-if="budgets.week.length != 0">
@@ -13,7 +13,7 @@
                     WEEK
                 </span>
                 <div v-for="budget in budgets.week" :key="budget.id"></div>
-                <a :href="'/app/budgets/edit/' + budget.id" class="relative pt-1">
+                <router-link :to="'/app/budgets/edit/' + budget.id" class="relative pt-1">
                     <div class="flex mb-2 items-center justify-between">
                         <div>
                             <span
@@ -42,7 +42,7 @@
                             {{ budget.config.note }}
                         </span>
                     </div>
-                </a>
+                </router-link>
             </div>
 
 
@@ -52,7 +52,7 @@
                     MONTH
                 </span>
                 <div v-for="budget in budgets.month" :key="budget.id">
-                    <a :href="'/app/budgets/edit/' + budget.id" class="relative pt-1" >
+                    <router-link :to="'/app/budgets/edit/' + budget.id" class="relative pt-1" >
                         <div class="flex mb-2 items-center justify-between">
                             <div>
                                 <span
@@ -81,7 +81,7 @@
                                 {{ budget.config.note }}
                             </span>
                         </div>
-                    </a>
+                    </router-link>
                 </div>
             </div>
 
@@ -91,7 +91,7 @@
                     YEAR
                 </span>
                 <div v-for="budget in budgets.year" :key="budget.id">
-                    <a :href="'/app/budgets/edit/' + budget.id" class="relative pt-1">
+                    <router-link :to="'/app/budgets/edit/' + budget.id" class="relative pt-1">
                         <div class="flex mb-2 items-center justify-between">
                             <div>
                                 <span
@@ -121,7 +121,7 @@
                                 {{ budget.config.note }}
                             </span>
                         </div>
-                    </a>
+                    </router-link>
                 </div>
             </div>
 
@@ -130,7 +130,7 @@
                     ONE SHOT BUDGET
                 </span>
                 <div v-for="budget in budgets.custom" :key="budget.id">
-                    <a :href="'/app/budgets/edit/' + budget.id" class="relative pt-1">
+                    <router-link :to="'/app/budgets/edit/' + budget.id" class="relative pt-1">
                         <div class="flex mb-2 items-center justify-between">
                             <div>
                                 <span
@@ -160,7 +160,7 @@
                                 {{ budget.config.note }}
                             </span>
                         </div>
-                    </a>
+                    </router-link>
                 </div>
             </div>
 
