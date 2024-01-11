@@ -25,7 +25,7 @@
                         <div class="flex-l w-full px-4">
                             <span v-if="isModel == false" class="text-xs block text-emerald-500 rounded ">{{ entry.date
                             }}</span>
-                            <span v-if="isModel == true" class="text-xs block rounded ">{{ entry.name }}</span>
+                            <span v-if="isModel == true" class="text-xs block uppercase font-bold rounded ">{{ entry.name }}</span>
                         </div>
                     </div>
                     <div class="flex flex-wrap">

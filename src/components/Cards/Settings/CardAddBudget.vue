@@ -170,7 +170,8 @@
 
                         <div class="flex flex-wrap py-3">
                             <div class="lg:w-12/12 px-2 w-full">
-                                <input id="vue-checkbox-list" type="checkbox" v-model="data.notification" value="true"
+                                <input id="vue-checkbox-list" type="checkbox" v-model="data.notification"
+                                    :checked="data.notification" value="true"
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                 <label for="vue-checkbox-list"
                                     class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Enable
@@ -184,6 +185,12 @@
                                     class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="button">
                                     SAVE BUDGET
+                                </button>
+
+                                <button v-on:click="update()" v-if="id"
+                                    class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    type="button">
+                                    UPDATE BUDGET
                                 </button>
 
                                 <button v-on:click="deleteBudget()" v-if="id"
@@ -241,11 +248,26 @@ export default {
         this.getAccount()
         this.getLabels()
         this.id = this.$route.params.id
+        this.getBudget()
     },
     methods: {
         deleteBudget() {
             ChartServiceVue.deleteBudget(this.id)
             this.$router.push({ path: '/app/budgets' })
+        },
+        getBudget() {
+            const _this = this
+            ChartServiceVue.getBudget(this.id).then((resp) => {
+                _this.data.name = resp.config.name
+                _this.data.note = resp.config.note
+                _this.data.amount = resp.budget
+                _this.data.period = resp.config.period
+                _this.data.account = resp.config.account
+                _this.data.category = resp.config.category
+                _this.data.label = resp.config.label
+                _this.data.type = resp.config.type
+                _this.data.notification = resp.notification
+            })
         },
         getLabels() {
             let _this = this
@@ -290,6 +312,17 @@ export default {
                 })
             }
         },
+        update() {
+            if (this.validate() === true) {
+                const data = this.data
+                const _this = this
+                ChartServiceVue.updateBudget(data,this.id).then(() => {
+                    //return
+                    _this.$router.push({ path: '/app/budgets' })
+                })
+            }
+        },
+
         validate() {
             if (this.data.period == "_") {
                 alert("Please choose a right period")

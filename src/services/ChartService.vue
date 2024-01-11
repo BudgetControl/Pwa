@@ -86,6 +86,11 @@ async function createBudget(data) {
   return response.data;
 }
 
+async function updateBudget(data,id) {
+  const response = await instance.put(`/api/budget/update/${id}`,data);
+  return response.data;
+}
+
 async function getBudgets() {
   const response = await instance.get('/api/budget/stats');
   return response.data;
@@ -122,7 +127,8 @@ export default {
   getBudgets,
   getBudget,
   createBudget,
-  deleteBudget
+  deleteBudget,
+  updateBudget
 }
 
 </script>

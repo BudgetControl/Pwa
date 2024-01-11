@@ -63,7 +63,7 @@
             <select v-model="account" id="account" required
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option value="-1">Choose Wallet account</option>
-              <option value="0" v-if="!action.hidecategory && !action.hidetransfer_to">Out of wallet</option>
+              <option value="0">Out of wallet</option>
               <option v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
           </div>
@@ -559,7 +559,7 @@ export default {
       if (this.action.openTab == 3) {
 
         if (this.account == -1) {
-          alert("Please choose a wallet account")
+          alert("Please choose a wallet accounts")
           return false
         }
 

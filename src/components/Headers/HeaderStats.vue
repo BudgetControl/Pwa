@@ -202,7 +202,7 @@ export default {
       StatsService.wallets().then((resp) => {
         let data = resp.data
         data.forEach(e => {
-          this.wallets.push(e)
+            this.wallets.push(e)
         });
       }).catch((error) => {
         console.error(error);
