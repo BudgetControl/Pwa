@@ -18,7 +18,7 @@
                             </div>
                             <div class="text-right">
                                 <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
-                                    {{ budget.difference }}{{ currency }} /
+                                   ({{ budget.budget }}) {{ budget.difference }}{{ currency }} -
                                 </span>
                                 <span class="text-xs font-semibold inline-block text-emerald-600">
                                     {{ budget.percentage }}%
@@ -57,7 +57,7 @@
                             </div>
                             <div class="text-right">
                                 <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
-                                    {{ budget.difference }}{{ currency }} /
+                                   ({{ budget.budget }}) {{ budget.difference }}{{ currency }} -
                                 </span>
                                 <span class="text-xs font-semibold inline-block text-emerald-600">
                                     {{ budget.percentage }}%
@@ -95,7 +95,7 @@
                             </div>
                             <div class="text-right">
                                 <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
-                                    {{ budget.difference }}{{ currency }} /
+                                   ({{ budget.budget }}) {{ budget.difference }}{{ currency }} -
                                 </span>
 
                                 <span class="text-xs font-semibold inline-block text-emerald-600">
@@ -133,7 +133,7 @@
                             </div>
                             <div class="text-right">
                                 <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
-                                    {{ budget.difference }}{{ currency }} /
+                                   ({{ budget.budget }}) {{ budget.difference }}{{ currency }} -
                                 </span>
 
                                 <span class="text-xs font-semibold inline-block text-emerald-600">
