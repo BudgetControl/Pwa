@@ -190,7 +190,7 @@ export default {
         this.init()
 
         try {
-            const userconfig = LocalStorageServiceVue.get("user_Setting")
+            const userconfig = LocalStorageServiceVue.get("user_setting")
             this.currency = userconfig.settings.currency_id
         } catch (e) {
             console.info(e)

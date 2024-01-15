@@ -132,7 +132,7 @@
                                     class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                                     <option
                                         class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
-                                        value="inconing"> incoming
+                                        value="incoming"> incoming
                                     </option>
 
                                     <option
