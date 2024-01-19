@@ -37,7 +37,7 @@ async function verify(email) {
 }
 
 async function register(name, password, email) {
-  const response = await instance.post('/auth/register', {
+  const response = await instance.post('/app/auth/register', {
     name: name,
     password: password,
     email: email

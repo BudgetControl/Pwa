@@ -90,7 +90,7 @@
             </a>
           </div>
           <div class="w-1/2 text-right">
-            <router-link to="/auth/register" class="text-blueGray-200">
+            <router-link to="/app/auth/register" class="text-blueGray-200">
               <small>Create new account</small>
             </router-link>
           </div>

@@ -2,18 +2,19 @@ version: '2.2'
 
 services:
     femodule:
-      image: budgetcontrol-application:node-beta_v1
-      container_name: budgetcontrol-app
+      image: budgetcontrol-application:apache-${VUE_APP_VERSION}
+      container_name: budgetcontrol-pwa
       build:
         context: .
-        dockerfile: Dockerfile
+        dockerfile: Dockerfile.apache
       volumes:
           - ./:/usr/src/app
-      command: bash -c "npm install && npm run build"
       restart: unless-stopped
       networks:
-        - services_budgetcontrol_network      
+        - budgetcontrol_network    
+      command: tail -F /var/www/error.log  
 
 networks:
-  services_budgetcontrol_network:
+  budgetcontrol_network:
+    name: budgetcontrol_network
     external: true
