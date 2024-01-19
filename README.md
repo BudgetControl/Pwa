@@ -16,19 +16,21 @@ It is based on [Tailwind Starter Kit](https://www.mlabfactory.it/learning-lab/ta
 Speed up your web development with a beautiful product made by <a href="https://creative-tim.com/" target="_blank">Mlab Factory </a>.
 If you like bright and fresh colors, you will love this Free Tailwind CSS Template! It features a huge number of components that can help you create amazing websites.
 
-### Get Started
-
-- Install NodeJS **LTS** version from <a href="https://nodejs.org/en/?ref=creativetim">NodeJs Official Page</a>
-- Download the product on this page
-- Unzip the downloaded file to a folder in your computer
-- Open Terminal
-- Go to your file project (where you’ve unzipped the product)
-- (If you are on a linux based terminal) Simply run `npm run install:clean`
-- (If not) Run in terminal `npm install`
-- (If not) Run in terminal `npm run build:tailwind` (each time you add a new class, a class that does not exist in `src/assets/styles/tailwind.css`, you will need to run this command)
-- (If not) Run in terminal `npm run serve`
-- Navigate to https://localhost:8080
-- Check more about [Tailwind CSS](https://tailwindcss.com/?ref=creativetim)
+### Installations
+* Clone the repository on your computer with the command git clone git@github.com:BudgetControl/Pwa.git.
+* Enter the repository directory with the command cd Pwa.
+* checkout on the last stable version branch for dev environment
+* Copy file .env.example on .env 
+* You have three ways for execute pea application on local machine
+* 1 Install node JS on you machine and run `nom run install:clean`
+* 2 Creation of the dockerfile container with Node JS
+   docker-compose -f docker-compose.yml -f docker-compose.node.yml up -d
+* 3 Creation of the dockerfile container with Apache (PROD environment )
+   docker-compose -f docker-compose.yml up -d
+  * you must edit the /etc/host file with dev.budgetcontrol.cloud 127.0.0.1
+* Wait composer install into docker container are finished
+* Enjoy
+   insert url http://localhost
 
 ### Pages
 
