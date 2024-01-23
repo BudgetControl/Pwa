@@ -101,7 +101,6 @@ import google from "@/assets/img/google.svg";
 import AuthService from "../../services/AuthService.vue";
 import loading from 'vue-full-loading'
 import PasswordStrengthMeter from "../../components/Auth/PasswordStrengthMeter.vue";
-import LocalStorageService from "../../services/LocalStorageService.vue";
 
 export default {
   components: {
@@ -126,9 +125,7 @@ export default {
 
       this.show = true
       this.error = false
-      AuthService.register(name, password, email).then((response) => {
-        //save token in local storage
-        LocalStorageService.setToken(response.token.plainTextToken);
+      AuthService.register(name, password, email).then(() => {
         //redirecto to dashboard
         _this.$router.push({ path: '/app/dashboard' })
       }).catch((err) => {

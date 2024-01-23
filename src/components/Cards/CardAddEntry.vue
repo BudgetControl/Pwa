@@ -352,8 +352,8 @@ export default {
     }
 
     const settings = LocalStorageService.get("user_settings")
-    this.currency = settings.settings.currency_id
-    this.payment_type = settings.settings.payment_type_id
+    this.currency = settings.currency.id
+    this.payment_type = settings.paymentType.id
 
   },
   methods: {
