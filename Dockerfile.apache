@@ -27,5 +27,6 @@ RUN a2ensite budgetcontrol-default.conf
 RUN a2enmod rewrite
 RUN chown -R www-data:www-data /var/www/htdocs/dist
 RUN chmod -R 775 /var/www/htdocs/dist
+COPY bin/apache/htaccess.conf /var/www/htdocs/dist/.htaccess
 
 RUN service apache2 restart
