@@ -61,7 +61,7 @@
                   placeholder="Password" />
               </div>
               <div class="text-blueGray-400 mb-3 font-bold">
-                <small>Lost your passowrd ? <a href="/auth/recovery-password">recovery here</a></small>
+                <small>Lost your passowrd ? <a href="/app/auth/recovery-password">recovery here</a></small>
               </div>
               <div>
                 <label class="inline-flex items-center cursor-pointer">
