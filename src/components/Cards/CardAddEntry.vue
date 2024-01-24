@@ -680,7 +680,7 @@ export default {
     getAccount() {
       let _this = this
       ApiService.accounts().then((res) => {
-        let data = res.data
+        let data = res
         data.forEach(function (r) {
           _this.input.account.push(r)
         })
