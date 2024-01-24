@@ -42,7 +42,6 @@ import HeaderButton from '@/components/Button/HeaderButton.vue';
 import ApiService from '@/services/ApiService.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
 import LocalStorageService from '../../services/LocalStorageService.vue';
-import AuthService from '../../services/AuthService.vue';
 
 export default {
     components: {
@@ -65,11 +64,11 @@ export default {
     },
     methods: {
         setDefault(id) {
+            let updateSettings = LocalStorageService.get("user_settings")
             LocalStorageService.deleteItem("user_settings")
             ApiService.setDefaultCurrency(id);
-            AuthService.settings().then((res) => {
-                LocalStorageService.set('user_settings', res)
-            })
+            updateSettings.currency.id = id
+            LocalStorageService.set('user_settings', updateSettings)
         }
     },
 };
