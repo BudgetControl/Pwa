@@ -96,7 +96,6 @@
 
           <div class="px-2 py-2 w-full lg:w-12/12" v-if="action.openTab == 4">
             <input v-model="debit_name" type="text" placeholder="Name" id="debit" v-if="debit == 'njn76298fm'"
-              :disabled="action.disabled_debit_name"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
 
