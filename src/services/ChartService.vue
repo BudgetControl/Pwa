@@ -97,7 +97,13 @@ async function getBudgets() {
 }
 
 async function getBudget(id) {
-  const response = await instance.get(`/api/budget/stats/${id}`);
+
+  if(id !== undefined) {
+      id = `/${id}`
+  } else {
+    id = ''
+  }
+  const response = await instance.get(`/api/budget/stats${id}`);
   return response.data;
 }
 

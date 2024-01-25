@@ -52,7 +52,7 @@
                                     Start date
                                 </label>
 
-                                <VueDatePicker v-model="start_date"></VueDatePicker>
+                                <VueDatePicker v-model="data.start_date"></VueDatePicker>
                             </div>
 
                             <div class="lg:w-6/12 px-2 py-2 w-full">
