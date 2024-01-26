@@ -61,7 +61,7 @@
                   placeholder="Password" />
               </div>
               <div class="text-blueGray-400 mb-3 font-bold">
-                <small>Lost your passowrd ? <a href="/app/auth/recovery-password">recovery here</a></small>
+                <small>Lost your passowrd ? <router-link to="/app/auth/recovery-password">recovery here</router-link></small>
               </div>
               <div>
                 <label class="inline-flex items-center cursor-pointer">
@@ -85,9 +85,9 @@
         </div>
         <div class="flex flex-wrap mt-6 relative">
           <div class="w-1/2">
-            <a href="javascript:void(0)" class="text-blueGray-200">
+            <router-link to="/app/auth/recovery-password" class="text-blueGray-200">
               <small>Forgot password?</small>
-            </a>
+            </router-link>
           </div>
           <div class="w-1/2 text-right">
             <router-link to="/app/auth/register" class="text-blueGray-200">
