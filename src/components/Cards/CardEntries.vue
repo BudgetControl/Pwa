@@ -95,7 +95,6 @@ export default {
 
       let currentPage = LocalStorageService.get('current_page') == null ? 0 : LocalStorageService.get('current_page')
       ApiServiceVue.getEntry(currentPage, filter).then((res) => {
-
         if (res.data.length > 0) {
           _this.$refs.entry.buildEntriesTable(res.data)
         }
