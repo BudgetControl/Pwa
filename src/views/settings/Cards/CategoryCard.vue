@@ -86,9 +86,7 @@ export default {
             }
 
             ApiService.category(id).then((resp) => {
-                resp.forEach(e => {
-                    this.categories.push(e)
-                });
+                this.categories.push(resp)
             })
         },
         closeModal() {
