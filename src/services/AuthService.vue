@@ -12,7 +12,7 @@ instance.interceptors.request.use(
   (config) => {
     const token = LocalStorageService.getToken()
     if (token) {
-      config.headers['X-ACCESS-TOKEN'] = token;
+       config.headers['Authorization'] = `Bearer ${token}`;
     }
     return config;
   },
@@ -22,7 +22,7 @@ instance.interceptors.request.use(
 );
 
 async function login(email, password) {
-  const response = await instance.post('/auth/login', {
+  const response = await instance.post('/auth/authenticate', {
     email: email,
     password: password
   });
@@ -65,9 +65,10 @@ async function recoveryPassword(email) {
   return response.data;
 }
 
-async function resetPassword(token,password) {
+async function resetPassword(token,password,confirm_password) {
   const response = await instance.put(`/auth/recovery/${token}`, {
-    password: password
+    password: password,
+    password_confirmation: confirm_password
   });
   return response.data;
 }

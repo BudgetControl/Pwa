@@ -33,6 +33,15 @@
                   <input v-model="password" type="password"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Password" />
+                </div>
+
+                <div class="relative w-full mb-3">
+                  <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                    Confirm Password
+                  </label>
+                  <input v-model="confirm_password" type="password"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Confirm Password" />
                     <PasswordStrengthMeter :password="password" ref="passwordStreight" />
                 </div>
 
@@ -66,19 +75,21 @@ export default {
       show: false,
       error: false,
       error_message: null,
-      password: null
+      password: null,
+      confirm_password: null
     };
   },
   methods: {
     async submit() {
       const password = this.password;
+      const confirm_password = this.confirm_password;
       const token = this.$route.params.token
       const _this = this
 
       this.show = false
       this.error = false
 
-      AuthService.resetPassword(token, password).then(() => {
+      AuthService.resetPassword(token, password, confirm_password).then(() => {
         _this.$router.push({ path: '/app/login' })
       }).catch((err) => {
         _this.show = false

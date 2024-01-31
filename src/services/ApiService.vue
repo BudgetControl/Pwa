@@ -12,7 +12,7 @@ instance.interceptors.request.use(
   (config) => {
     const token = LocalStorageService.getToken()
     if (token) {
-      config.headers['X-ACCESS-TOKEN'] = token;
+      config.headers['Authorization'] = `Bearer ${token}`;
     }
     return config;
   },

@@ -141,7 +141,7 @@ export default {
 
       AuthService.login(email, password).then((response) => {
         //save token in local storage
-        LocalStorageService.setToken(response.token.plainTextToken);
+        LocalStorageService.setToken(response.access_token);
         //redirecto to dashboard
         this.$router.push({ path: '/app/dashboard' })
       }).catch((err) => {
