@@ -12,7 +12,7 @@
               </h6>
             </div>
             <div class="btn-wrapper text-center">
-              <button
+              <!-- <button
                 class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                 type="button">
                 <img alt="..." class="w-5 mr-1" :src="facebook" />
@@ -23,7 +23,7 @@
                 type="button">
                 <img alt="..." class="w-5 mr-1" :src="google" />
                 Google
-              </button>
+              </button> -->
             </div>
             <hr class="mt-6 border-b-1 border-blueGray-300" />
           </div>
@@ -66,8 +66,18 @@
                 <input v-model="password" type="password"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Password" />
-                <PasswordStrengthMeter :password="password" ref="passwordStreight" />
               </div>
+
+
+              <div class="relative w-full mb-3">
+                  <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                    Confirm Password
+                  </label>
+                  <input v-model="confirm_password" type="password"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Confirm Password" />
+                    <PasswordStrengthMeter :password="password" ref="passwordStreight" />
+                </div>
 
               <div>
                 <label class="inline-flex items-center cursor-pointer">
@@ -97,8 +107,8 @@
   </div>
 </template>
 <script>
-import facebook from "@/assets/img/github.svg";
-import google from "@/assets/img/google.svg";
+// import facebook from "@/assets/img/github.svg";
+// import google from "@/assets/img/google.svg";
 import AuthService from "../../services/AuthService.vue";
 import loading from 'vue-full-loading'
 import PasswordStrengthMeter from "../../components/Auth/PasswordStrengthMeter.vue";
@@ -110,11 +120,10 @@ export default {
   },
   data() {
     return {
-      facebook,
-      google,
       show: false,
       error: false,
       password: null,
+      confirm_password: null
     };
   },
   methods: {
@@ -122,11 +131,12 @@ export default {
       let email = this.email;
       let password = this.password;
       let name = this.name;
+      const confirm_password = this.confirm_password
       const _this = this
 
       this.show = true
       this.error = false
-      AuthService.register(name, password, email).then(() => {
+      AuthService.register(name, password,confirm_password, email).then(() => {
         //redirecto to dashboard
         _this.$router.push({ path: '/app/auth/login?signin=1' })
       }).catch((err) => {

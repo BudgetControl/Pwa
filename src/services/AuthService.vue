@@ -36,11 +36,12 @@ async function verify(email) {
   return response.data;
 }
 
-async function register(name, password, email) {
+async function register(name, password,confirm_password, email) {
   const response = await instance.post('/auth/register', {
     name: name,
     password: password,
-    email: email
+    email: email,
+    password_confirmation: confirm_password
   });
   return response.data;
 }
