@@ -38,8 +38,8 @@
                   Could not log in
                 </div>
                 <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
-                  maybe you lost your password or your email is not verified. <br />
-                  <VerifyEmailButton :email=this.email class="font-bold"></VerifyEmailButton>
+                  {{ error }} <br />
+                  <VerifyEmailButton v-if="verify" :email=this.email class="font-bold"></VerifyEmailButton>
                 </div>
               </div>
 
@@ -61,7 +61,8 @@
                   placeholder="Password" />
               </div>
               <div class="text-blueGray-400 mb-3 font-bold">
-                <small>Lost your passowrd ? <router-link to="/app/auth/recovery-password">recovery here</router-link></small>
+                <small>Lost your passowrd ? <router-link to="/app/auth/recovery-password">recovery
+                    here</router-link></small>
               </div>
 
               <div class="text-center mt-6">
@@ -91,11 +92,13 @@
 
 
     <div class="flex flex-wrap mt-6 relative text-blueGray-200 justify-center mt-10 text-xs">
-          <p>Registrandoti o connettendoti con uno dei suddetti servizi,
-            acconsenti ai nostri <a class="font-bold text-decoration-line" href="https://www.budgetcontrol.cloud/terms-of-service/">Termini di Servizio</a> e
-            riconosci la nostra <a class="font-bold text-decoration-line" href="https://www.budgetcontrol.cloud/security-policy/">Informativa sulla Privacy</a>,
-            che descrive come gestiamo i tuoi dati personali.</p>
-        </div>
+      <p>Registrandoti o connettendoti con uno dei suddetti servizi,
+        acconsenti ai nostri <a class="font-bold text-decoration-line"
+          href="https://www.budgetcontrol.cloud/terms-of-service/">Termini di Servizio</a> e
+        riconosci la nostra <a class="font-bold text-decoration-line"
+          href="https://www.budgetcontrol.cloud/security-policy/">Informativa sulla Privacy</a>,
+        che descrive come gestiamo i tuoi dati personali.</p>
+    </div>
   </div>
 </template>
 <script>
@@ -116,7 +119,8 @@ export default {
       email: '',
       password: '',
       show: false,
-      error: false
+      error: null,
+      verify: false,
     };
   },
   methods: {
@@ -135,9 +139,19 @@ export default {
         this.$router.push({ path: '/app/dashboard' })
       }).catch((err) => {
         _this.show = false
-        _this.error = true
-        //TODO: show error
-        console.error(err)
+
+        console.debug(err.response.data)
+
+        switch (err.response.data.code) {
+          case 'EML_NaN':
+            _this.error = `You haven't verified your email yet. If you haven't received it, click here to resend.`
+            _this.verify = true
+            break;
+          default:
+            _this.error = `The credentials you entered are not valid.`
+            break;
+        }
+
       })
     }
   }
