@@ -156,10 +156,12 @@
 
           <div class="flex flex-wrap py-3 ml-2">
             <div v-for="(item, i) in input.tags" :key="i">
-              <span class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+              <span v-on:click="removeTag(i)" class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
                 v-if="label.includes(item.id)" :style="'color: #fff; background-color: ' + item.color">{{
                   item.name
-                }}</span>
+                }}
+                <i class="fas fa-times close-icon"></i>  
+              </span>
             </div>
           </div>
 
@@ -687,6 +689,9 @@ export default {
     },
     closeAlert: function () {
       this.action.alert = false;
+    },
+    removeTag: function(i) {
+      this.input.tags.splice(i,1)
     },
     toggleTabs: function (tabNumber) {
       switch (tabNumber) {
