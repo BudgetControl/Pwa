@@ -1,6 +1,6 @@
 <script>
-import messages from '../en/messages.vue';
-import labels from '../en/labels.vue';
+import messages from '../es/messages.vue';
+import labels from '../es/labels.vue';
 
 
 export default 
