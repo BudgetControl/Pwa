@@ -3,22 +3,22 @@ import { createApp } from "vue";
 import { createWebHistory, createRouter } from "vue-router";
 
 // styles
-
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@/assets/styles/tailwind.css";
 
 // mouting point for the whole app
-
 import App from "@/App.vue";
 
-// layouts
+// translations
+import { createI18n } from 'vue-i18n'
+import translations from "@/i18n/translations.vue"
 
+// layouts
 import Admin from "@/layouts/Admin.vue";
 import Application from "@/layouts/Application.vue";
 import Auth from "@/layouts/Auth.vue";
 
 // views for Admin layout
-
 import Dashboard from "@/views/application/Dashboard.vue";
 import AddEntry from "@/views/application/AddEntry.vue";
 import MyPlannedEntries from "@/views/application/MyPlannedEntries.vue";
@@ -288,6 +288,17 @@ const router = createRouter({
   routes,
 });
 
+
+console.debug(translations)
+// language settings
+const i18n = createI18n({
+  locale: 'en',
+  fallbackLocale: 'it',
+  messages: translations,
+})
+
 const app = createApp(App);
+// languages
+app.use(i18n)
 app.use(router)
 app.mount("#app")
