@@ -77,6 +77,11 @@ async function resetPassword(token,password,confirm_password) {
 async function check() {
   //retrive access token header
   const response = await instance.get('/auth/check');
+
+  // Accedi all'header X-Custom-Header dalla risposta
+  const access_token = response.headers['Authorization'];
+  LocalStorageService.setToken(access_token.replace("Bearer ",""))
+
   return response.status;
 }
 
