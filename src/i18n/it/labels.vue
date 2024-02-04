@@ -81,7 +81,6 @@ export default {
     categories: 'Categorie',
     currency: 'Valuta',
     profile: 'Profilo',
-    about_us: 'Chi siamo',
     assistance: 'Assistenza'
 };
 

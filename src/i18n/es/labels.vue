@@ -12,7 +12,6 @@ export default {
     terms_of_service: 'Términos de servicio',
     link_privacy: 'Política de privacidad',
     term_conditions_text: 'Al registrarte o iniciar sesión con uno de los servicios mencionados anteriormente, aceptas nuestros {link_terms} y reconoces nuestra {link_privacy}, que describe cómo manejamos tus datos personales.',
-    about_us: 'Acerca de nosotros',
     blog: 'Blog',
     mit_license: 'Licencia MIT',
     docs: 'Documentación',

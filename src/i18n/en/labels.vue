@@ -81,7 +81,6 @@ export default {
     categories: 'Categories',
     currency: 'Currency',
     profile: 'Profile',
-    about_us: 'About us',
     assistance: 'Assistance'
 };
 
