@@ -258,11 +258,10 @@ const router = createRouter({
 });
 
 
-console.debug(translations)
 // language settings
 const i18n = createI18n({
-  locale: 'en',
-  fallbackLocale: 'it',
+  locale: 'it',
+  fallbackLocale: 'en',
   messages: translations,
 })
 

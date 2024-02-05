@@ -7,7 +7,7 @@
                     <input id="vue-checkbox-list" type="checkbox" v-model="action.show_planned" value="true"
                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                     <label for="vue-checkbox-list"
-                        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Show planned entries</label>
+                        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"> {{$t("labels.show_planned_entries")}}</label>
                 </div>
             </div>
 
@@ -76,7 +76,7 @@
                         <div class="w-full px-4 flex-1 text-right">
                             <span class="text-xs mt-2 block text-blueGray-700 rounded ">
                                 <span v-if="entry.planned == true"
-                                    class="'text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1 bg-red-200">PLANNED</span>
+                                    class="'text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1 bg-red-200">{{$t("labels.planned")}}</span>
                             </span>
                         </div>
                     </div>

@@ -84,7 +84,7 @@
                   class="fas fa-tv mr-2 text-sm"
                   :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
                 ></i>
-                Dashboard
+                {{$t("labels.dashboard")}}
               </a>
             </router-link>
           </li>
@@ -108,7 +108,7 @@
                   class="fas fa-tools mr-2 text-sm"
                   :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
                 ></i>
-                My Entries
+                {{$t("labels.my_entry")}}
               </a>
             </router-link>
           </li>
@@ -133,7 +133,7 @@
                   class="fas fa-tools mr-2 text-sm"
                   :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
                 ></i>
-                Add new entry
+                {{$t("labels.add_new_entry")}}
               </a>
             </router-link>
           </li>
@@ -187,7 +187,7 @@
                   class="fas fa-tools mr-2 text-sm"
                   :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
                 ></i>
-                Payee list
+                {{$t("labels.payee_list")}}
               </a>
             </router-link>
           </li>
@@ -211,7 +211,7 @@
                   class="fas fa-tools mr-2 text-sm"
                   :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
                 ></i>
-                Planned entry
+                {{$t("labels.planned_entry")}}
               </a>
             </router-link>
           </li>
@@ -235,7 +235,7 @@
                   class="fas fa-tools mr-2 text-sm"
                   :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
                 ></i>
-                Budgets
+                {{$t("labels.budgets")}}
               </a>
             </router-link>
           </li>
@@ -266,7 +266,7 @@
                   class="fas fa-tools mr-2 text-sm"
                   :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
                 ></i>
-                Settings
+                {{$t("labels.settings")}}
               </a>
             </router-link>
           </li>
