@@ -1,15 +1,6 @@
 <template>
   <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
     :class="[color === 'light' ? 'bg-white' : 'bg-emerald-900 text-white']">
-    <div class="rounded-t mb-0 px-4 py-3 border-0">
-      <div class="flex flex-wrap items-center">
-        <div class="lg:w-2/12 px-2">
-          <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-            Wallet
-          </h3>
-        </div>
-      </div>
-    </div>
 
     <EntriesTable ref="entry" />
     <!-- pagination -->

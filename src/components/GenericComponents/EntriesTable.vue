@@ -3,12 +3,7 @@
         <div class="block w-full overflow-x-auto">
 
             <div class="container px-4 mx-auto py-3 ">
-                <div class="flex items-center ps-3">
-                    <input id="vue-checkbox-list" type="checkbox" v-model="action.show_planned" value="true"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                    <label for="vue-checkbox-list"
-                        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Show planned entries</label>
-                </div>
+                    <EntriesFilter></EntriesFilter>
             </div>
 
             <div v-for="(entry, i) in entries" :key="i">
@@ -94,6 +89,7 @@ import react from "@/assets/img/react.jpg";
 import vue from "@/assets/img/react.jpg";
 import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue";
 import ApiService from '../../services/ApiService.vue';
+import EntriesFilter from "../Button/EntriesFilter.vue";
 
 export default {
     props: {
@@ -109,7 +105,7 @@ export default {
         }
     },
     components: {
-        EntryActionDropdown
+        EntryActionDropdown, EntriesFilter
     },
     data() {
         return {
