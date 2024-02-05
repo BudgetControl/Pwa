@@ -1,9 +1,11 @@
 # Budget Control - Vue Notus <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fdemos.creative-tim.com%2Fbudget-control%2F%23%2F&text=Start%20your%20development%20with%20a%20Free%20Tailwind%20CSS%20and%20VueJS%20UI%20Kit%20and%20Admin.%20Let%20Vue%20Notus%20amaze%20you%20with%20its%20cool%20features%20and%20build%20tools%20and%20get%20your%20project%20to%20a%20whole%20new%20level.%20" target="_blank">![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)</a>
 
 
-![version](https://img.shields.io/badge/version-2.1.2-blue.svg) ![license](https://img.shields.io/badge/license-MIT-blue.svg) <a href="https://github.com/BudgetControl/Application/issues?q=is%3Aopen+is%3Aissue" target="_blank">![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/budget-control.svg)</a> <a href="https://github.com/BudgetControl/Application/issues?q=is%3Aissue+is%3Aclosed" target="_blank">![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/budget-control.svg)</a> <a href="https://gitter.im/creative-tim-general/Lobby" target="_blank">![Join the chat at https://gitter.im/NIT-dgp/General](https://badges.gitter.im/NIT-dgp/General.svg)</a> <a href="https://discord.gg/E4aHAQy" target="_blank">![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)</a>
-
-![Vue Notus](https://github.com/creativetimofficial/public-assets/blob/master/budget-control/budget-control.jpg?raw=true)
+![version](https://img.shields.io/badge/version-2.1-blue.svg) ![license](https://img.shields.io/badge/license-MIT-blue.svg) <a 
+href="https://github.com/budgetcontrol/pwa/issues?q=is%3Aopen+is%3Aissue" target="_blank">![GitHub issues](https://img.shields.io/github/issues/budgetcontrol/Pwa)
+</a> <a href="https://github.com/budgetcontrol/pwa/issues?q=is%3Aissue+is%3Aclosed" target="_blank">![GitHub closed issues](https://img.shields.io/github/issues-closed/budgetcontrol/Pwa?color=green)
+</a> <a href="https://github.com/budgetcontrol/pwa/issues?q=is%3Aissue+is%3Aopen+label%3Abug" target="_blank">![GitHub issues by-label](https://img.shields.io/github/issues/budgetcontrol/Pwa/bug?color=red)
+</a><a href="https://discord.gg/TtMTeUbSpW" target="_blank">![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)</a>
 
 ### A beautiful UI Kit and Admin for Tailwind CSS and VueJS.
 
@@ -16,19 +18,21 @@ It is based on [Tailwind Starter Kit](https://www.mlabfactory.it/learning-lab/ta
 Speed up your web development with a beautiful product made by <a href="https://creative-tim.com/" target="_blank">Mlab Factory </a>.
 If you like bright and fresh colors, you will love this Free Tailwind CSS Template! It features a huge number of components that can help you create amazing websites.
 
-### Get Started
-
-- Install NodeJS **LTS** version from <a href="https://nodejs.org/en/?ref=creativetim">NodeJs Official Page</a>
-- Download the product on this page
-- Unzip the downloaded file to a folder in your computer
-- Open Terminal
-- Go to your file project (where you’ve unzipped the product)
-- (If you are on a linux based terminal) Simply run `npm run install:clean`
-- (If not) Run in terminal `npm install`
-- (If not) Run in terminal `npm run build:tailwind` (each time you add a new class, a class that does not exist in `src/assets/styles/tailwind.css`, you will need to run this command)
-- (If not) Run in terminal `npm run serve`
-- Navigate to https://localhost:8080
-- Check more about [Tailwind CSS](https://tailwindcss.com/?ref=creativetim)
+### Installations
+* Clone the repository on your computer with the command git clone git@github.com:BudgetControl/Pwa.git.
+* Enter the repository directory with the command cd Pwa.
+* checkout on the last stable version branch for dev environment
+* Copy file .env.example on .env 
+* You have three ways for execute pea application on local machine
+* 1 Install node JS on you machine and run `nom run install:clean`
+* 2 Creation of the dockerfile container with Node JS
+   docker-compose -f docker-compose.yml -f docker-compose.node.yml up -d
+* 3 Creation of the dockerfile container with Apache (PROD environment )
+   docker-compose -f docker-compose.yml up -d
+  * you must edit the /etc/host file with dev.budgetcontrol.cloud 127.0.0.1
+* Wait composer install into docker container are finished
+* Enjoy
+   insert url http://localhost
 
 ### Pages
 

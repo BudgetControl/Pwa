@@ -2,12 +2,13 @@
     <div>
         <div class="block w-full overflow-x-auto">
 
-            <div class="container px-4 mx-auto py-3 ">
-                    <EntriesFilter></EntriesFilter>
-            </div>
-
             <div v-for="(entry, i) in entries" :key="i">
-                <div v-if="(entry.planned && action.show_planned) || (!entry.planned)"
+                <div v-if="
+                    ((entry.planned && showPlanned)) || 
+                    ((entry.debit && showDebit)) || 
+                    ((entry.transfer && showTransfer)) ||
+                    (!entry.transfer) && (!entry.planned) && (!entry.debit) 
+                    "
                     class="container px-4 mx-auto py-3 border border-solid border-blueGray-100 shadow" :class="[
                         entry.payee
                             ? 'bg-blueGray-200'
@@ -89,11 +90,20 @@ import react from "@/assets/img/react.jpg";
 import vue from "@/assets/img/react.jpg";
 import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue";
 import ApiService from '../../services/ApiService.vue';
-import EntriesFilter from "../Button/EntriesFilter.vue";
 
 export default {
     props: {
         showPlanned: {
+            required: false,
+            default: false,
+            type: Boolean
+        },
+        showDebit: {
+            required: false,
+            default: false,
+            type: Boolean
+        },
+        showTransfer: {
             required: false,
             default: false,
             type: Boolean
@@ -105,7 +115,7 @@ export default {
         }
     },
     components: {
-        EntryActionDropdown, EntriesFilter
+        EntryActionDropdown
     },
     data() {
         return {

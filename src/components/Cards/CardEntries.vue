@@ -2,7 +2,15 @@
   <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
     :class="[color === 'light' ? 'bg-white' : 'bg-emerald-900 text-white']">
 
-    <EntriesTable ref="entry" />
+    <div class="container px-4 mx-auto py-3 ">
+                    <Entriesfilter 
+                    :showPlanned="this.showPlanned"
+                    :showTransfer="showTransfer"
+                    :showDebit="showDebit"
+                    ></Entriesfilter>
+            </div>
+
+    <EntriesTable ref="entry" :showPlanned="planned" :showTransfer="transfer" :showDebit="debit"/>
     <!-- pagination -->
     <div class="py-2" v-if="pagination.enabled">
       <Paginator ref="_paginator"></Paginator>
@@ -18,6 +26,7 @@ import axios from 'axios'
 import ApiServiceVue from '../../services/ApiService.vue';
 import Paginator from "../GenericComponents/Paginator.vue";
 import LocalStorageService from "../../services/LocalStorageService.vue";
+import Entriesfilter from "@/components/Button/EntriesFilter.vue";
 
 export default {
   props: {
@@ -33,6 +42,9 @@ export default {
     return {
       filter: "",
       wallet: 0,
+      planned: false,
+      transfer: false,
+      debit: false,
       selected: {
         account: 0
       },
@@ -45,7 +57,7 @@ export default {
     }
   },
   components: {
-    EntriesTable, Paginator
+    EntriesTable, Paginator, Entriesfilter
   },
   watch: {
     $route() {
@@ -105,6 +117,15 @@ export default {
       }).catch((error) => {
         console.error(error);
       })
+    },
+    showPlanned() {
+      this.planned = !this.planned
+    },
+    showTransfer() {
+      this.transfer = !this.transfer
+    },
+    showDebit() {
+      this.debit = !this.debit
     }
   },
 };
