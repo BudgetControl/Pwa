@@ -11,6 +11,7 @@ module.exports = {
       "./*.js",
       "./**/*.vue",
       "./*.vue",
+      "./node_modules/flowbite/**/*.js",
     ],
     options: {
       safelist: [],
@@ -94,6 +95,7 @@ module.exports = {
     "disabled",
   ],
   plugins: [
+    require('flowbite/plugin'),
     require("@tailwindcss/forms"),
     plugin(function ({ addComponents, theme }) {
       const screens = theme("screens", {});
