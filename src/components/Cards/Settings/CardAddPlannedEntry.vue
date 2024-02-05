@@ -14,14 +14,14 @@
                   <li class="nav-item">
                     <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(1)"
-                      v-bind:class="{ 'text-emerald-600 bg-white': action.openTab !== 1, 'text-white bg-emerald-600': action.openTab === 1 }">
+                      v-bind:class="{ 'text-emerald-600 ': action.openTab !== 1, 'text-white bg-emerald-600': action.openTab === 1 }">
                       EXPENSES
                     </a>
                   </li>
                   <li class="nav-item">
                     <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(2)"
-                      v-bind:class="{ 'text-emerald-600 bg-white': action.openTab !== 2, 'text-white bg-emerald-600': action.openTab === 2 }">
+                      v-bind:class="{ 'text-emerald-600 ': action.openTab !== 2, 'text-white bg-emerald-600': action.openTab === 2 }">
                       INCOMING
                     </a>
                   </li>
@@ -89,6 +89,16 @@
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
             </div>
           </div>
+
+          <div class="flex flex-wrap py-3 ml-2">
+            <div v-for="(item, i) in input.tags" :key="i">
+              <span class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                v-if="label.includes(item.id)" :style="'color: #fff; background-color: ' + item.color">{{
+                  item.name
+                }}</span>
+            </div>
+          </div>
+
         </div>
 
         <div class="flex flex-wrap py-3">
@@ -118,7 +128,7 @@
             </div>
 
             <div class="lg:w-3/12 px-2 w-full">
-              <span class="text-xs">Choose a payment method</span>
+              <span class="text-xs">Choose a method</span>
               <select v-model="payment_type" id="payment_type"
                 class="w-full border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                 <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ item.name }}</option>
@@ -159,7 +169,7 @@
 </template>
 
 <script>
-import ApiService from '../../services/ApiService.vue';
+import ApiService from '@/services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
@@ -251,7 +261,7 @@ export default {
     getCategory() {
       let _this = this
       ApiService.categories().then((res) => {
-        let data = res.data
+        let data = res
         data.forEach(function (r) {
           r.sub_category.forEach((item) => {
             _this.input.category.push(item)
@@ -274,19 +284,18 @@ export default {
     getEntry() {
       let _this = this
       this.action.reset = true
-
       this.toggleTabs(this.typeOfEntry)
 
       ApiService.getEntryDetail(this.entryId, this.isPlanned).then((res) => {
-        let model = res[0]
+        let model = res
 
         _this.amount = Math.abs(model.amount)
         if (model.type == 'incoming') {
-          _this.action.openTab = 1
+          _this.action.openTab = 2
         }
 
         if (model.type == 'expenses') {
-          _this.action.openTab = 2
+          _this.action.openTab = 1
         }
 
         if (model.type == 'transfer') {
@@ -326,7 +335,7 @@ export default {
     getLabels() {
       let _this = this
       ApiService.labels().then((res) => {
-        let data = res.data
+        let data = res
         data.forEach(function (r) {
           _this.input.tags.push(r)
         })
@@ -434,7 +443,7 @@ export default {
     getAccount() {
       let _this = this
       ApiService.accounts().then((res) => {
-        let data = res.data
+        let data = res
         data.forEach(function (r) {
           _this.input.account.push(r)
         })

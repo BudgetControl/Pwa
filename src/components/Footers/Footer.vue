@@ -65,7 +65,7 @@
                 <li>
                   <a
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://www.creative-tim.com/presentation?ref=vn-footer"
+                    href="https://www.mlabfactory.it/presentation?ref=vn-footer"
                   >
                     About Us
                   </a>
@@ -73,7 +73,7 @@
                 <li>
                   <a
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://blog.creative-tim.com?ref=vn-footer"
+                    href="https://blog.www.mlabfactory.it?ref=vn-footer"
                   >
                     Blog
                   </a>
@@ -89,7 +89,7 @@
                 <li>
                   <a
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://www.creative-tim.com/bootstrap-themes/free?ref=vn-footer"
+                    href="https://www.mlabfactory.it/bootstrap-themes/free?ref=vn-footer"
                   >
                     Free Products
                   </a>
@@ -106,7 +106,7 @@
                 <li>
                   <a
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://github.com/creativetimofficial/vue-notus/blob/main/LICENSE.md?ref=vn-footer"
+                    href="https://github.com/BudgetControl/Application/LICENSE.md?ref=vn-footer"
                   >
                     MIT License
                   </a>
@@ -114,7 +114,7 @@
                 <li>
                   <a
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://creative-tim.com/terms?ref=vn-footer"
+                    href="https://www.mlabfactory.it/terms?ref=vn-footer"
                   >
                     Terms & Conditions
                   </a>
@@ -122,7 +122,7 @@
                 <li>
                   <a
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://creative-tim.com/privacy?ref=vn-footer"
+                    href="https://www.mlabfactory.it/privacy?ref=vn-footer"
                   >
                     Privacy Policy
                   </a>
@@ -130,7 +130,7 @@
                 <li>
                   <a
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://creative-tim.com/contact-us?ref=vn-footer"
+                    href="https://www.mlabfactory.it/contact-us?ref=vn-footer"
                   >
                     Contact Us
                   </a>
@@ -148,10 +148,10 @@
           <div class="text-sm text-blueGray-500 font-semibold py-1">
             Copyright © {{ date }} Vue Notus by
             <a
-              href="https://www.creative-tim.com?ref=vn-footer"
+              href="https://www.mlabfactory.it?ref=vn-footer"
               class="text-blueGray-500 hover:text-blueGray-800"
             >
-              Creative Tim
+              Mlab Factory
             </a>
             .
           </div>

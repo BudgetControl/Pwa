@@ -9,7 +9,7 @@
         block: dropdownPopoverShow,
       }">
 
-      <router-link :to="`/app/add_entry?entry_id=${entryId}&${queryParams}`" v-slot="{ href, navigate, isActive }">
+      <router-link :to="`/app/${type}/${entryId}?${queryParams}`" v-slot="{ href, navigate, isActive }">
         <a :href="href" @click="navigate"
           class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700" :class="[
             isActive
@@ -34,7 +34,7 @@ import ApiService from "../../services/ApiService.vue";
 export default {
   props: {
     entryId: {
-      type: Number,
+      type: String,
       required: true
     },
     queryParams: {
@@ -47,12 +47,17 @@ export default {
     },
     index: {
       required: true
+    },
+    type: {
+      required: false,
+      type: String,
+      default: "emtry"
     }
   },
   data() {
     return {
       dropdownPopoverShow: false,
-      isPlanned : 0
+      isPlanned: 0
     };
   },
   methods: {
@@ -70,11 +75,25 @@ export default {
     deleteEntry() {
       this.dropdownPopoverShow = false;
       let isPlanned = this.queryParams == 'planned=true'
-      ApiService.deleteEntry(this.entryId,isPlanned).then(() => {
-        this.$emit('deleteItem', this.index)
-      }).catch((error) => {
-        console.error(error);
-      })
+
+      switch (this.type) {
+        case 'planned_entry':
+        case 'entry':
+          ApiService.deleteEntry(this.entryId, isPlanned).then(() => {
+            this.$emit('deleteItem', this.index)
+          }).catch((error) => {
+            console.error(error);
+          })
+          break;
+        case 'model':
+          ApiService.deleteModel(this.entryId).then(() => {
+            this.$emit('deleteItem', this.index)
+          }).catch((error) => {
+            console.error(error);
+          })
+          break;
+      }
+
     }
   }
 };

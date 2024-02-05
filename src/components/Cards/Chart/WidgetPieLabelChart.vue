@@ -130,7 +130,7 @@ export default {
           window.myBarLabel = new Chart(ctx, config);
 
         }).catch((error) => {
-          console.error(error);
+          console.info(error);
         })
 
       });

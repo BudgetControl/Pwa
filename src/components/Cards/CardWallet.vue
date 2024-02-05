@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="'?account=' + statIdWallet" v-slot="{ href, navigate, isActive }">
+    <router-link :to="'/app/entries?account=' + statIdWallet" v-slot="{ href, navigate, isActive }">
         <a :href="href" @click="navigate"
             :class="[
                 isActive
@@ -30,8 +30,8 @@ export default {
             required: true
         },
         statWallet: {
-            type: String,
-            default: "2000",
+            type: Number,
+            default: 2000,
             required: true
         },
         statColor: {

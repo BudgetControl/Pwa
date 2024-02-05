@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import LocalStorageService from './LocalStorageService.vue';
 
 const DOMAIN = process.env.VUE_APP_API_PATH_V2;
 
@@ -9,9 +10,9 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('auth-token');
+    const token = LocalStorageService.getToken()
     if (token) {
-      config.headers['X-ACCESS-TOKEN'] = token;
+       config.headers['Authorization'] = `Bearer ${token}`;
     }
     return config;
   },
@@ -80,6 +81,37 @@ async function expensesLabelTable(data) {
   return response.data;
 }
 
+async function createBudget(data) {
+  const response = await instance.post('/api/budget/create',data);
+  return response.data;
+}
+
+async function updateBudget(data,id) {
+  const response = await instance.put(`/api/budget/update/${id}`,data);
+  return response.data;
+}
+
+async function getBudgets() {
+  const response = await instance.get('/api/budget/stats');
+  return response.data;
+}
+
+async function getBudget(id) {
+
+  if(id !== undefined) {
+      id = `/${id}`
+  } else {
+    id = ''
+  }
+  const response = await instance.get(`/api/budget/stats${id}`);
+  return response.data;
+}
+
+async function deleteBudget(id) {
+  const response = await instance.delete(`/api/budget/${id}`);
+  return response.data;
+}
+
 async function expensesLabelCategory(data) {
   const config = {
     params: {
@@ -97,7 +129,12 @@ export default {
   incomingExpensesLine,
   expensesLabelLine,
   expensesLabelCategory,
-  expensesLabelTable
+  expensesLabelTable,
+  getBudgets,
+  getBudget,
+  createBudget,
+  deleteBudget,
+  updateBudget
 }
 
 </script>

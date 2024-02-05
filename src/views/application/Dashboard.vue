@@ -21,15 +21,22 @@
     <div class="flex flex-wrap mt-4">
       <CardCategoryResume />
     </div>
+
+    <div class="flex flex-wrap mt-4">
+      <CardBudget />
+    </div>
+
   </div>
 </template>
 <script>
 import FilterBar from "@/components/Navbars/FilterBar.vue";
-import CardBarChart from "@/components/Cards/Chart/CardBarChart.vue";
-import CardLine_IncomingExpensesChart from "@/components/Cards/Chart/CardLine_IncomingExpensesChart.vue";
+import CardBarChart from "@/components/Cards/Chart/WidgetBarChart.vue";
+import CardLine_IncomingExpensesChart from "@/components/Cards/Chart/WidgetLine_IncomingExpensesChart.vue";
+import CardPieLabelChart from "../../components/Cards/Chart/WidgetPieLabelChart.vue";
+import CardCategoryResume from "../../components/Cards/Chart/WidgetCategoryResume.vue";
 import AuthService from "../../services/AuthService.vue";
-import CardPieLabelChart from "../../components/Cards/Chart/CardPieLabelChart.vue";
-import CardCategoryResume from "../../components/Cards/Chart/CardCategoryResume.vue";
+import LocalStorageService from "../../services/LocalStorageService.vue";
+import CardBudget from "../../components/Cards/Chart/WidgetBudget.vue";
 
 export default {
   name: "dashboard-page",
@@ -38,25 +45,18 @@ export default {
     CardBarChart,
     CardLine_IncomingExpensesChart,
     CardPieLabelChart,
-    CardCategoryResume
+    CardCategoryResume,
+    CardBudget
   },
   data() {
     return {
       openTab: 1
     }
   },
-  async beforeMount() {
-    try {
-      const _this = this
-      AuthService.check().catch((response) => {
-        console.log("res", response)
-        localStorage.clear();
-        _this.$router.push({ path: 'auth' })
-      });
-    } catch {
-      localStorage.clear();
-      this.$router.push({ path: 'auth' })
-    }
+  mounted: function () {
+    AuthService.settings().then((res) => {
+      LocalStorageService.set('user_settings',res)
+    })
   },
   methods: {
     toggleTabs: function (tabNumber) {
