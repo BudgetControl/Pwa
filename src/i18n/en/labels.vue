@@ -81,7 +81,10 @@ export default {
     categories: 'Categories',
     currency: 'Currency',
     profile: 'Profile',
-    assistance: 'Assistance'
+    assistance: 'Assistance',
+
+    my_entry: 'My entry',
+    planned_entry: 'Planned entry'
 };
 
 </script>
