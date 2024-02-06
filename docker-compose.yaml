@@ -11,6 +11,7 @@ services:
         - budgetcontrol_network  
       volumes:
           - ./:/app
+          - /app/node_modules
 #      port 80 should not be configured because it is occupied by nginx proxy if you use the core docker-compose
 #      see --> https://github.com/BudgetControl/Pwa/blob/master/docker-compose.yaml
 #      ports:
