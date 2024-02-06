@@ -5,11 +5,8 @@
 </template>
 
 <script>
-import {initFlowbite} from 'flowbite'
 
 export default {
-  onMounted() {
-    initFlowbite()
-}
+
 }
 </script>
