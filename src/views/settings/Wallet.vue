@@ -102,7 +102,7 @@ export default {
         getWallets() {
 
             ApiService.accounts("?trashed=1").then((res) => {
-                res.data.forEach(e => {
+                res.forEach(e => {
                     this.wallets.push(e)
                 });
             })

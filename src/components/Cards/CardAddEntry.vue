@@ -63,7 +63,7 @@
             <select v-model="account" id="account" required
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option value="-1">Choose Wallet account</option>
-              <option value="0" v-if="!action.hidecategory && !action.hidetransfer_to">Out of wallet</option>
+              <option value="0" v-if="action.openTab === 3">Out of wallet</option>
               <option v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
           </div>
@@ -96,7 +96,6 @@
 
           <div class="px-2 py-2 w-full lg:w-12/12" v-if="action.openTab == 4">
             <input v-model="debit_name" type="text" placeholder="Name" id="debit" v-if="debit == 'njn76298fm'"
-              :disabled="action.disabled_debit_name"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
 
@@ -157,10 +156,12 @@
 
           <div class="flex flex-wrap py-3 ml-2">
             <div v-for="(item, i) in input.tags" :key="i">
-              <span class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+              <span v-on:click="removeTag(i)" class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
                 v-if="label.includes(item.id)" :style="'color: #fff; background-color: ' + item.color">{{
                   item.name
-                }}</span>
+                }}
+                <i class="fas fa-times close-icon"></i>  
+              </span>
             </div>
           </div>
 
@@ -234,7 +235,7 @@
         </div>
       </div>
 
-      <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500" v-if="this.action.alert">
+      <div :class="'text-white px-6 py-4 border-0 rounded relative mb-4' + action.alert_color" v-if="this.action.alert">
         <span class="text-xl inline-block mr-5 align-middle">
           <i class="fas fa-bell"></i>
         </span>
@@ -284,6 +285,7 @@ export default {
         openTab: 1,
         alert: false,
         alert_message: null,
+        alert_color: 'bg-red-500',
         hidecategory: false,
         hidedebit: false,
         dateUpdated: false,
@@ -351,8 +353,8 @@ export default {
     }
 
     const settings = LocalStorageService.get("user_settings")
-    this.currency = settings.settings.currency_id
-    this.payment_type = settings.settings.payment_type_id
+    this.currency = settings.currency.id
+    this.payment_type = settings.paymentType.id
 
   },
   methods: {
@@ -514,9 +516,9 @@ export default {
         amount: this.amount,
         note: this.note,
         label: this.label,
-        account: this.account,
-        category: this.category,
-        currency: this.currency,
+        account_id: this.account,
+        category_id: this.category,
+        currency_id: this.currency,
         type: this.type,
         payment_type: this.payment_type,
       }
@@ -527,14 +529,14 @@ export default {
 
       ApiService.setModel(data, this.entryId).then(() => {
         _this.action.alert = true
+        _this.action.alert_color = 'bg-emerald-600'
         _this.action.alert_message = "Modello salvato correttamente"
-        setTimeout(_this.action.alert = false, 3000)
       })
     },
 
     validateBefore() {
 
-      if (this.account == 0 && this.action.openTab != 3) {
+      if (this.account == -1 && this.action.openTab != 3) {
         alert("Please choose a wallet account")
         return false
       }
@@ -558,7 +560,7 @@ export default {
       if (this.action.openTab == 3) {
 
         if (this.account == -1) {
-          alert("Please choose a wallet account")
+          alert("Please choose a wallet accounts")
           return false
         }
 
@@ -644,15 +646,10 @@ export default {
         ApiService.setEntry(this.type, data, this.isPlanned, this.entryId).then(() => {
           _this.date = null,
             _this.amount = null,
-            _this.category = data.category_id,
             _this.label = [],
             _this.note = null,
-            _this.currency = 1,
-            _this.account = data.account_id,
-            _this.payment_type = 1,
             _this.model = [],
             _this.newlabel = null,
-
             _this.action.alert = true
           _this.action.alert_message = _this.type + " inserito correttamente"
 
@@ -684,7 +681,7 @@ export default {
     getAccount() {
       let _this = this
       ApiService.accounts().then((res) => {
-        let data = res.data
+        let data = res
         data.forEach(function (r) {
           _this.input.account.push(r)
         })
@@ -692,6 +689,9 @@ export default {
     },
     closeAlert: function () {
       this.action.alert = false;
+    },
+    removeTag: function(i) {
+      this.input.tags.splice(i,1)
     },
     toggleTabs: function (tabNumber) {
       switch (tabNumber) {

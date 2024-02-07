@@ -14,7 +14,7 @@ export default {
             AuthServiceVue.logout() // Adjust the URL as needed
                 .then(() => {
                     LocalStorageService.clear()
-                    _this.$router.push({ path: '/' })
+                    _this.$router.push({ path: '/app/auth/login' })
                 })
                 .catch(error => {
                     console.error(error);

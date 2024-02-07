@@ -76,7 +76,7 @@ export default {
             const userSettings = LocalStorageService.get("user_settings")
             const _this = this
             const data = {
-                "user_id": userSettings.settings.user_id,
+                "user_id": userSettings.user_profile.id,
                 "text": this.text
             }
 

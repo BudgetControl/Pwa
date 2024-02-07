@@ -62,7 +62,7 @@
           <li class="flex items-center" v-if="!token">
             <router-link
               class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
-              to="/auth/register"
+              to="/app/auth/register"
             >
               <i
                 class="text-blueGray-400 far fa-solid fa-right-to-bracket text-lg leading-lg mr-2"

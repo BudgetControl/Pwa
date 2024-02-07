@@ -12,7 +12,7 @@ instance.interceptors.request.use(
   (config) => {
     const token = LocalStorageService.getToken()
     if (token) {
-      config.headers['X-ACCESS-TOKEN'] = token;
+       config.headers['Authorization'] = `Bearer ${token}`;
     }
     return config;
   },
@@ -22,7 +22,7 @@ instance.interceptors.request.use(
 );
 
 async function login(email, password) {
-  const response = await instance.post('/auth/login', {
+  const response = await instance.post('/auth/authenticate', {
     email: email,
     password: password
   });
@@ -36,11 +36,12 @@ async function verify(email) {
   return response.data;
 }
 
-async function register(name, password, email) {
+async function register(name, password,confirm_password, email) {
   const response = await instance.post('/auth/register', {
     name: name,
     password: password,
-    email: email
+    email: email,
+    password_confirmation: confirm_password
   });
   return response.data;
 }
@@ -65,9 +66,10 @@ async function recoveryPassword(email) {
   return response.data;
 }
 
-async function resetPassword(token,password) {
+async function resetPassword(token,password,confirm_password) {
   const response = await instance.put(`/auth/recovery/${token}`, {
-    password: password
+    password: password,
+    password_confirmation: confirm_password
   });
   return response.data;
 }
@@ -75,7 +77,11 @@ async function resetPassword(token,password) {
 async function check() {
   //retrive access token header
   const response = await instance.get('/auth/check');
-  return response.status;
+  // Accedi all'header X-Custom-Header dalla risposta
+  const access_token = response.headers.authorization;
+  LocalStorageService.setToken(access_token.replace("Bearer ",""))
+
+  return response;
 }
 
 async function confirm(token) {

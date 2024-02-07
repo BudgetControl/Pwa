@@ -56,7 +56,7 @@ export default {
             color: null,
             opentab: null,
             action: {
-                archived: false
+                archived: true
             },
             modal: {
                 id: null,

@@ -18,17 +18,10 @@
         <div class="container px-4 mx-auto py-3 border border-solid border-blueGray-100 shadow"
             v-for="(entry, i) in this.entries" :key="i">
             <div class="flex flex-wrap">
-                <div class="w-full px-4 flex-1">
-                    <i :class="'block text-lightBlue-400 ' + entry.category.icon"> <span
-                            class="px-2 text-blueGray-700 rounded ">
-                            {{ entry.category.name }}</span></i>
-                    <span class="text-xs block rounded" :class="[entry.payee ? 'text-blueGray-900' : 'text-blueGray-400']">(
-                        {{ entry.account }} )
-                        {{
-                            entry.payee
-                        }}</span>
+                <div class="w-full flex-1 text-xs">
+                <p class="text-xs block rounded font-bold px-4"><span class="text-emerald-500"></span>{{ entry.note }}</p>
                 </div>
-                <div class="w-full px-4 flex-1 text-right">
+                <div class="w-full flex-1 text-right">
                     <span class="text-sm block text-blueGray-700 rounded ">
                         {{ entry.amount }} <i :class="'fas fa-circle ' + entry.color_amount + ' mr-2'"></i>
                     </span>
@@ -43,7 +36,6 @@
 
             <div class="flex flex-wrap">
                 <div class="flex-l w-full px-4">
-                    <p class="text-xs block rounded"><span class="text-emerald-500">Note:</span>{{ entry.note }}</p>
                     <p class="text-xs block rounded"><span class="text-emerald-500">Next execution time:</span> {{ entry.date }}</p>
                     <p class="text-xs block rounded" v-if="entry.end_date"><span class="text-emerald-500">End time:</span> {{ entry.end_date }}</p>
                 </div>
@@ -55,6 +47,14 @@
                     class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1 text-emerald-600 bg-emerald-200">
                     {{entry.planning}}
                 </span>
+
+                <span v-for="(label, i) in entry.labels"
+                                v-on:click="$router.push(`/app/entries?label=${label.id}`)" :key="i"
+                                class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                                :style="'color: #fff; background-color: ' + label.color">{{
+                                    label.name
+                                }}</span>
+
                 </div>
             </div>
         </div>
@@ -111,7 +111,20 @@ export default {
                             icon: e.sub_category.category.icon
                         },
                         payee: null,
+                        labels: []
                     }
+                    
+                    e.label.forEach((l) => {
+                        if (l.name != "") {
+                            info.labels.push(
+                                {
+                                    id: l.id,
+                                    name: l.name,
+                                    color: l.color
+                                }
+                            )
+                        }
+                    });
 
                     this.entries.push(info)
 

@@ -182,6 +182,8 @@ export default {
         },
 
         async saveModal() {
+            this.validate()
+
             const data = {
                 name: this.modal.name,
                 color: this.modal.color,
@@ -221,6 +223,25 @@ export default {
         },
         checkMove: function (e) {
             this.sortingList = e.relatedContext.list;
+        },
+
+        validate() {
+            if (this.modal.type == 0) {
+                alert("Please choose a right wallet type")
+                return false
+            }
+
+            if (this.modal.name == null) {
+                alert("Please insert a wallet name")
+                return false
+            }
+
+            if (this.modal.currency == 0) {
+                alert("Please choose a wallet currency")
+                return false
+            }
+
+            return true
         }
     }
 };

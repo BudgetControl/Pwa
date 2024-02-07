@@ -20,35 +20,12 @@
 <script>
 
 import HeaderButton from '@/components/Button/HeaderButton.vue';
-import ApiService from '@/services/ApiService.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
 import CardAddEntry from '../../../components/Cards/CardAddEntry.vue';
 
 export default {
     components: {
         HeaderButton, CardAddEntry
-    },
-    data() {
-        return {
-            sortingList: [],
-            showModal: false,
-            color: "#c5c526",
-            form: {
-                type: ['Cash', 'Bank', 'Credit Card', 'Credit Card Revolving', 'Saving', 'Investment'],
-                currency: []
-            },
-            modal: {
-                id: null,
-                name: null,
-                color: "#c5c526",
-                invoiceDate: null,
-                type: [0],
-                currency: [0],
-                exclude_stats: false,
-                installment: 0,
-                balance: 0
-            }
-        }
     },
     methods: {
         getComponentData() {
@@ -64,26 +41,6 @@ export default {
                     value: this.activeNames
                 }
             };
-        },
-        async saveModal() {
-            const data = {
-                name: this.modal.name,
-                color: this.modal.color,
-                date: this.modal.invoiceDate,
-                type: this.modal.type,
-                installementValue: this.modal.installment,
-                installment: this.installment,
-                currency: this.modal.currency,
-                balance: this.modal.balance,
-                exclude_from_stats: this.modal.exclude_stats,
-                sorting: this.modal.sorting
-            }
-
-            const _this = this
-            ApiService.setAccount(data, this.modal.id).then(() => {
-                _this.$router.push({ path: '/app/settings/label' })
-            })
-
         },
     }
 };

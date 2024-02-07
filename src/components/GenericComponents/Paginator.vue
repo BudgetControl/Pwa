@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import LocalStorageService from '../../services/LocalStorageService.vue'
 export default {
     data() {
         return {
@@ -41,7 +42,7 @@ export default {
             }
         },
         invokeEntry() {
-            window.localStorage.setItem('current_page',this.pagination.current) 
+            LocalStorageService.set('current_page', this.pagination.current)
             this.$parent.invoke()
         }
     }

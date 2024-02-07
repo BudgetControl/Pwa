@@ -11,7 +11,7 @@
                 Sign in with
               </h6>
             </div>
-            <div class="btn-wrapper text-center">
+            <!-- <div class="btn-wrapper text-center">
               <button
                 class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                 type="button">
@@ -24,7 +24,7 @@
                 <img alt="..." class="w-5 mr-1" :src="google" />
                 Google
               </button>
-            </div>
+            </div> -->
             <hr class="mt-6 border-b-1 border-blueGray-300" />
           </div>
           <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
@@ -38,8 +38,8 @@
                   Could not log in
                 </div>
                 <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
-                  maybe you lost your password or your email is not verified. <br />
-                  <VerifyEmailButton :email=this.email class="font-bold"></VerifyEmailButton>
+                  {{ error }} <br />
+                  <VerifyEmailButton v-if="verify" :email=this.email class="font-bold"></VerifyEmailButton>
                 </div>
               </div>
 
@@ -61,16 +61,8 @@
                   placeholder="Password" />
               </div>
               <div class="text-blueGray-400 mb-3 font-bold">
-                <small>Lost your passowrd ? <a href="/auth/recovery-password">recovery here</a></small>
-              </div>
-              <div>
-                <label class="inline-flex items-center cursor-pointer">
-                  <input id="customCheckLogin" type="checkbox"
-                    class="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150" />
-                  <span class="ml-2 text-sm font-semibold text-blueGray-600">
-                    Remember me
-                  </span>
-                </label>
+                <small>Lost your passowrd ? <router-link to="/app/auth/recovery-password">recovery
+                    here</router-link></small>
               </div>
 
               <div class="text-center mt-6">
@@ -85,12 +77,12 @@
         </div>
         <div class="flex flex-wrap mt-6 relative">
           <div class="w-1/2">
-            <a href="javascript:void(0)" class="text-blueGray-200">
+            <router-link to="/app/auth/recovery-password" class="text-blueGray-200">
               <small>Forgot password?</small>
-            </a>
+            </router-link>
           </div>
           <div class="w-1/2 text-right">
-            <router-link to="/auth/register" class="text-blueGray-200">
+            <router-link to="/app/auth/register" class="text-blueGray-200">
               <small>Create new account</small>
             </router-link>
           </div>
@@ -100,16 +92,18 @@
 
 
     <div class="flex flex-wrap mt-6 relative text-blueGray-200 justify-center mt-10 text-xs">
-          <p>Registrandoti o connettendoti con uno dei suddetti servizi,
-            acconsenti ai nostri <a class="font-bold text-decoration-line" href="https://www.budgetcontrol.cloud/terms-of-service/">Termini di Servizio</a> e
-            riconosci la nostra <a class="font-bold text-decoration-line" href="https://www.budgetcontrol.cloud/security-policy/">Informativa sulla Privacy</a>,
-            che descrive come gestiamo i tuoi dati personali.</p>
-        </div>
+      <p>Registrandoti o connettendoti con uno dei suddetti servizi,
+        acconsenti ai nostri <a class="font-bold text-decoration-line"
+          href="https://www.budgetcontrol.cloud/terms-of-service/">Termini di Servizio</a> e
+        riconosci la nostra <a class="font-bold text-decoration-line"
+          href="https://www.budgetcontrol.cloud/security-policy/">Informativa sulla Privacy</a>,
+        che descrive come gestiamo i tuoi dati personali.</p>
+    </div>
   </div>
 </template>
 <script>
-import facebook from "@/assets/img/github.svg";
-import google from "@/assets/img/google.svg";
+//import facebook from "@/assets/img/github.svg";
+//import google from "@/assets/img/google.svg";
 import AuthService from "../../services/AuthService.vue";
 import loading from 'vue-full-loading'
 import VerifyEmailButton from "../../components/Auth/VerifyEmailButton.vue";
@@ -124,10 +118,9 @@ export default {
     return {
       email: '',
       password: '',
-      facebook,
-      google,
       show: false,
-      error: false
+      error: null,
+      verify: false,
     };
   },
   methods: {
@@ -141,14 +134,24 @@ export default {
 
       AuthService.login(email, password).then((response) => {
         //save token in local storage
-        LocalStorageService.setToken(response.token.plainTextToken);
+        LocalStorageService.setToken(response.access_token);
         //redirecto to dashboard
         this.$router.push({ path: '/app/dashboard' })
       }).catch((err) => {
         _this.show = false
-        _this.error = true
-        //TODO: show error
-        console.error(err)
+
+        console.debug(err.response.data)
+
+        switch (err.response.data.code) {
+          case 'EML_NaN':
+            _this.error = `You haven't verified your email yet. If you haven't received it, click here to resend.`
+            _this.verify = true
+            break;
+          default:
+            _this.error = `The credentials you entered are not valid.`
+            break;
+        }
+
       })
     }
   }
