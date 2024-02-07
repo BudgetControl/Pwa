@@ -2,7 +2,7 @@ version: '2.2'
 
 services:
     femodule:
-      image: budgetcontrol-application:node-${VUE_APP_VERSION}
+      image: budgetcontrol-pwa:node-${VUE_APP_VERSION}
       container_name: budgetcontrol-pwa
       build:
         context: .
