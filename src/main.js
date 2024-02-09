@@ -53,6 +53,7 @@ import Register from "@/views/auth/Register.vue";
 import RecoveryPassword from "@/views/auth/RecoveryPassword.vue";
 import ResetPassword from "@/views/auth/ResetPassword.vue";
 import AuthConfirm from "@/views/auth/Confirm.vue";
+import AuthToken from "@/views/auth/Token.vue";
 
 // views without layouts
 
@@ -242,7 +243,11 @@ const routes = [
       {
         path: "/app/auth/confirm/:token",
         component: AuthConfirm,
-      }
+      },
+      {
+        path: "/app/auth/token",
+        component: AuthToken,
+      },
     ],
   },
   {
