@@ -84,6 +84,20 @@ async function check() {
   return response;
 }
 
+async function providerUri(provider) {
+  //retrive access token header
+  const response = await instance.get(`/auth/authenticate/${provider}`);
+
+  return response.data;
+}
+
+async function token(code) {
+  //retrive access token header
+  const response = await instance.get(`/auth/token/?code=${code}`);
+
+  return response.data;
+}
+
 async function confirm(token) {
   //retrive access token header
   const response = await instance.get(`/auth/confirm/${token}`);
@@ -129,7 +143,9 @@ export default {
   profile,
   deleteUser,
   deleteDataUser,
-  settings
+  settings,
+  providerUri,
+  token
 }
 
 </script>

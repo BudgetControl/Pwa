@@ -1,6 +1,8 @@
 # Budget Control - Vue Notus <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fdemos.creative-tim.com%2Fbudget-control%2F%23%2F&text=Start%20your%20development%20with%20a%20Free%20Tailwind%20CSS%20and%20VueJS%20UI%20Kit%20and%20Admin.%20Let%20Vue%20Notus%20amaze%20you%20with%20its%20cool%20features%20and%20build%20tools%20and%20get%20your%20project%20to%20a%20whole%20new%20level.%20" target="_blank">![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)</a>
 
 
+
+![Vue Notus](https://github.com/creativetimofficial/public-assets/blob/master/budget-control/budget-control.jpg?raw=true)
 ![version](https://img.shields.io/badge/version-2.1-blue.svg) ![license](https://img.shields.io/badge/license-MIT-blue.svg) <a 
 href="https://github.com/budgetcontrol/pwa/issues?q=is%3Aopen+is%3Aissue" target="_blank">![GitHub issues](https://img.shields.io/github/issues/budgetcontrol/Pwa)
 </a> <a href="https://github.com/budgetcontrol/pwa/issues?q=is%3Aissue+is%3Aclosed" target="_blank">![GitHub closed issues](https://img.shields.io/github/issues-closed/budgetcontrol/Pwa?color=green)
