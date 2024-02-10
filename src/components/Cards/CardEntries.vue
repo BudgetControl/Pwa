@@ -2,7 +2,7 @@
   <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
     :class="[color === 'light' ? 'bg-white' : 'bg-emerald-900 text-white']">
 
-    <div class="container px-4 mx-auto py-3 ">
+    <div class="container px-4 mx-auto py-3">
                     <Entriesfilter 
                     :showPlanned="this.showPlanned"
                     :showTransfer="showTransfer"
