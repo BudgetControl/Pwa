@@ -2,20 +2,23 @@
 
     <ul class="relative flex flex-wrap items-center justify-between px-5 py-5 navbar-expand-lg rounded">
     <li>
-        <input @click="showPlanned()" type="checkbox" id="show-planned" value="" class="hidden peer" required="">
-        <label for="show-planned" class="min-w-20 ml-5 uppercase text-xs inline-flex items-center justify-between p-2 bg-gray-100 border-2 cursor-pointer peer-checked:border-emerald-600">                           
+        <input @click="showPlanned()" type="checkbox" id="show-planned" value="" class="hidden peer" required="" v-model="isCheckedPlanned">
+        <label for="show-planned" class="min-w-20 ml-5 uppercase text-xs inline-flex items-center justify-between p-2 bg-gray-100 border-2 cursor-pointer"
+        :class="{ 'border-emerald-600': isCheckedPlanned === true }">                           
         planned
         </label>
     </li>
     <li>
-        <input @click="showTransfer()" type="checkbox" id="show-transfer" value="" class="hidden peer">
-        <label for="show-transfer" class="min-w-20 ml-5 uppercase text-xs inline-flex items-center justify-between p-2 bg-gray-100 border-2 border-gray-200  cursor-pointe peer-checked:border-emerald-600 ">
+        <input @click="showTransfer()" type="checkbox" id="show-transfer" value="" class="hidden peer"  v-model="isCheckedTransfer">
+        <label for="show-transfer" class="min-w-20 ml-5 uppercase text-xs inline-flex items-center justify-between p-2 bg-gray-100 border-2 cursor-pointer"
+        :class="{ 'border-emerald-600': isCheckedTransfer === true }">  
             transfer
         </label>
     </li>
     <li>
-        <input @click="showDebit()" type="checkbox" id="show debit" value="" class="hidden peer">
-        <label for="show debit" class="min-w-20 ml-5 uppercase text-xs inline-flex items-center justify-between p-2 bg-gray-100 border-2 border-gray-200  cursor-pointer peer-checked:border-emerald-600">
+        <input @click="showDebit()" type="checkbox" id="show debit" value="" class="hidden peer"  v-model="isCheckedDebit">  
+        <label for="show debit" class="min-w-20 ml-5 uppercase text-xs inline-flex items-center justify-between p-2 bg-gray-100 border-2 cursor-pointer"
+        :class="{ 'border-emerald-600': isCheckedDebit === true }" >
             debit
         </label>
     </li>
@@ -31,6 +34,14 @@ export default {
         showTransfer: Function,
         showDebit: Function,
   },
+  data(){
+    return {
+        isCheckedPlanned: false,
+        isCheckedTransfer: false,
+        isCheckedDebit: false,
+    }
+
+  }
 }
 </script>
 
