@@ -4,7 +4,7 @@
             <div class="tab-content tab-space">
 
                 <div class="border p-2 mt-2" v-if="budgets.week.length != 0">
-                    <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
+                    <span class="text-xs font-semibold inline-block text-blueGray-400">
                         WEEK
                     </span>
 
@@ -17,7 +17,7 @@
                                 </span>
                             </div>
                             <div class="text-right">
-                                <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
+                                <span class="text-xs font-semibold inline-block text-blueGray-400">
                                    ({{ budget.budget }}) {{ budget.difference }}{{ currency }} -
                                 </span>
                                 <span class="text-xs font-semibold inline-block text-emerald-600">
@@ -25,10 +25,10 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded" v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 80, 'bg-red-200': budget.percentage >= 80 }" >
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded" v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 60, 'bg-red-200': budget.percentage >= 80, 'bg-amber-100': budget.percentage >= 60 && budget.percentage <= 80 }" >
                             <div :style="'width:' + budget.percentage + '%'"
                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center" 
-                                v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 80, 'bg-red-600': budget.percentage >= 80 }" >
+                                v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 60, 'bg-red-600': budget.percentage >= 80,'bg-amber-400': budget.percentage >= 60 && budget.percentage <= 80  }" >
                             </div>
                         </div>
 
@@ -43,7 +43,7 @@
 
                 <div class="border p-2 mt-2" v-if="budgets.month.length != 0">
 
-                    <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
+                    <span class="text-xs font-semibold inline-block text-blueGray-400">
                         MONTH
                     </span>
 
@@ -56,7 +56,7 @@
                                 </span>
                             </div>
                             <div class="text-right">
-                                <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
+                                <span class="text-xs font-semibold inline-block text-blueGray-400">
                                    ({{ budget.budget }}) {{ budget.difference }}{{ currency }} -
                                 </span>
                                 <span class="text-xs font-semibold inline-block text-emerald-600">
@@ -64,10 +64,10 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded " v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 80, 'bg-red-200': budget.percentage >= 80 }" >
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded " v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 60, 'bg-red-200': budget.percentage >= 80, 'bg-amber-100': budget.percentage >= 60 && budget.percentage <= 80 }" >
                             <div :style="'width:' + budget.percentage + '%'"
                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
-                                v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 80, 'bg-red-600': budget.percentage >= 80 }" >
+                                v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 60, 'bg-red-600': budget.percentage >= 80,'bg-amber-400': budget.percentage >= 60 && budget.percentage <= 80  }" >
                             </div>
                         </div>
 
@@ -81,7 +81,7 @@
 
 
                 <div class="border p-2 mt-2 mb-2" v-if="budgets.year.length != 0">
-                    <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
+                    <span class="text-xs font-semibold inline-block text-blueGray-400">
                         YEAR
                     </span>
 
@@ -94,7 +94,7 @@
                                 </span>
                             </div>
                             <div class="text-right">
-                                <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
+                                <span class="text-xs font-semibold inline-block text-blueGray-400">
                                    ({{ budget.budget }}) {{ budget.difference }}{{ currency }} -
                                 </span>
 
@@ -103,10 +103,10 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded" v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 80, 'bg-red-200': budget.percentage >= 80 }" >
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded" v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 60, 'bg-red-200': budget.percentage >= 80, 'bg-amber-100': budget.percentage >= 60 && budget.percentage <= 80 }" >
                             <div :style="'width:' + budget.percentage + '%'"
                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
-                                v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 80, 'bg-red-600': budget.percentage >= 80 }" >
+                                v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 60, 'bg-red-600': budget.percentage >= 80,'bg-amber-400': budget.percentage >= 60 && budget.percentage <= 80  }" >
                             </div>
                         </div>
 
@@ -119,7 +119,7 @@
                 </div>
 
                 <div class="border p-2 mt-2 mb-2" v-if="budgets.custom.length != 0">
-                    <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
+                    <span class="text-xs font-semibold inline-block text-blueGray-400">
                         YEAR
                     </span>
 
@@ -132,7 +132,7 @@
                                 </span>
                             </div>
                             <div class="text-right">
-                                <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
+                                <span class="text-xs font-semibold inline-block text-blueGray-400">
                                    ({{ budget.budget }}) {{ budget.difference }}{{ currency }} -
                                 </span>
 
@@ -141,10 +141,10 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded" v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 80, 'bg-red-200': budget.percentage >= 80 }" >
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded" v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 60, 'bg-red-200': budget.percentage >= 80, 'bg-amber-100': budget.percentage >= 60 && budget.percentage <= 80 }" >
                             <div :style="'width:' + budget.percentage + '%'"
                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
-                                v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 80, 'bg-red-600': budget.percentage >= 80 }" >
+                                v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 60, 'bg-red-600': budget.percentage >= 80,'bg-amber-400': budget.percentage >= 60 && budget.percentage <= 80  }" >
                             </div>
                         </div>
 
@@ -218,3 +218,16 @@ export default {
 </script>
   
   
+
+
+<style scoped>
+/** missing css style */
+
+.bg-amber-100 {
+background-color: #fef3c7;
+}
+
+.bg-amber-400 {
+  background-color: #fbbf24;
+}
+</style>
