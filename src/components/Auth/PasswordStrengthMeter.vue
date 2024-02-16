@@ -34,7 +34,8 @@ export default {
         'w-3 bg-red-300',           // 3
         'w-5 bg-orange-500',        // 5
         'w-7 bg-emerald-500',       // 7
-        'w-9 bg-lightBlue-500'      // 9
+        'w-9 bg-lightBlue-500',     // 9
+        'w-10 bg-lightBlue-500'      // 9
       ]
     }
   },
@@ -110,6 +111,9 @@ export default {
 }
 
 .w-9 {
+  width: 100%;
+}
+.w-10 {
   width: 100%;
 }
 </style>
