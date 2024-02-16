@@ -4,6 +4,8 @@
 
             <div v-for="(entry, i) in entries" :key="i">
                 <div v-if="
+                    ((entry.incoming && showIncoming)) || 
+                    ((entry.expenses && ShowExpenses)) || 
                     ((entry.planned && showPlanned)) || 
                     ((entry.debit && showDebit)) || 
                     ((entry.transfer && showTransfer)) ||
@@ -108,6 +110,16 @@ export default {
             default: false,
             type: Boolean
         },
+        showExpenses: {
+            required: false,
+            default: true,
+            type: Boolean
+        },
+        showIncoming: {
+            required: false,
+            default: true,
+            type: Boolean
+        },
         isModel: {
             required: false,
             default: false,
@@ -195,6 +207,9 @@ export default {
                         labels: labels,
                         payee: null,
                         transfer: r.type == 'transfer' ? true : false,
+                        debit: r.type == 'debit' ? true : false,
+                        incoming: r.type == 'incoming' ? true : false,
+                        expenses: r.type == 'expenses' ? true : false,
                         type: r.type,
                         name: r.name
                     }
