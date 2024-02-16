@@ -55,8 +55,8 @@ export default {
         isCheckedPlanned: false,
         isCheckedTransfer: false,
         isCheckedDebit: false,
-        isCheckedIncoming: false,
-        isCheckedExpenses: false,
+        isCheckedIncoming: true,
+        isCheckedExpenses: true,
     }
 
   }
