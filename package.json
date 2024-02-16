@@ -32,6 +32,7 @@
     "core-js": "3.9.1",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
+    "tailwind-colors": "^1.1.0",
     "vue": "^3.3.4",
     "vue-accessible-color-picker": "^4.1.4",
     "vue-full-loading": "^1.2.1",
