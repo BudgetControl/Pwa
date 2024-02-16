@@ -197,7 +197,6 @@ export default {
                         type_amount: r.amount <= 0 ? "expenses" : "incoming",
                         account: r.account.name,
                         note: r.note,
-                        planned: r.planned == 0 ? false : true,
                         category: {
                             name: r.sub_category.name,
                             id: r.sub_category.id,
@@ -207,8 +206,9 @@ export default {
                         payee: null,
                         transfer: r.type == 'transfer' ? true : false,
                         debit: r.type == 'debit' ? true : false,
-                        incoming: r.type == 'incoming' ? true : false,
-                        expenses: r.type == 'expenses' ? true : false,
+                        incoming: r.type == 'incoming' && r.planned == 0 ? true : false,
+                        expenses: r.type == 'expenses' && r.planned == 0 ? true : false,
+                        planned: r.planned == 0 ? false : true,
                         type: r.type,
                         name: r.name
                     }
