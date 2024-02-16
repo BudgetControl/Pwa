@@ -7,10 +7,12 @@
                     :showPlanned="this.showPlanned"
                     :showTransfer="showTransfer"
                     :showDebit="showDebit"
+                    :showIncoming="showIncoming"
+                    :showExpenses="showExpenses"
                     ></Entriesfilter>
             </div>
 
-    <EntriesTable ref="entry" :showPlanned="planned" :showTransfer="transfer" :showDebit="debit"/>
+    <EntriesTable ref="entry" :showPlanned="planned" :showTransfer="transfer" :showDebit="debit" :showIncoming="incoming" :showExpenses="expenses"/>
     <!-- pagination -->
     <div class="py-2" v-if="pagination.enabled">
       <Paginator ref="_paginator"></Paginator>
@@ -44,6 +46,8 @@ export default {
       wallet: 0,
       planned: false,
       transfer: false,
+      expenses: true,
+      incoming: true,
       debit: false,
       selected: {
         account: 0
@@ -123,6 +127,12 @@ export default {
     },
     showTransfer() {
       this.transfer = !this.transfer
+    },
+    showIncoming() {
+      this.incoming = !this.incoming
+    },
+    showExpenses() {
+      this.expenses = !this.expenses
     },
     showDebit() {
       this.debit = !this.debit

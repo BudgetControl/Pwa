@@ -5,7 +5,7 @@
             <div v-for="(entry, i) in entries" :key="i">
                 <div v-if="
                     ((entry.incoming && showIncoming)) || 
-                    ((entry.expenses && ShowExpenses)) || 
+                    ((entry.expenses && showExpenses)) || 
                     ((entry.planned && showPlanned)) || 
                     ((entry.debit && showDebit)) || 
                     ((entry.transfer && showTransfer))
