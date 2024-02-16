@@ -1,6 +1,6 @@
 <template>
 
-    <ul class="relative flex px-5 py-5 navbar-expand-lg text-center">
+    <ul class="relative flex px-5 py-5 navbar-expand-lg text-center overflow-x-auto ">
         <li class="flex-l w-full m-1">
         <input @click="showIncoming()" type="checkbox" id="show-incoming" value="" class="hidden peer" required="" v-model="isCheckedIncoming">
         <label for="show-incoming" class="w-full  uppercase text-xs inline-flex p-2 bg-gray-100 border-2 cursor-pointer"
