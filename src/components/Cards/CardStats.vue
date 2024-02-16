@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg"
+    class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg peer-checked:border-blue-600 hover:border-blue-600"
   >
     <div class="flex-auto p-4">
       <div class="flex flex-wrap">

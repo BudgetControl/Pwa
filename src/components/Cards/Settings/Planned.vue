@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="flex-l">
-                    <EntryActionDropdown :entryId="entry.id" type="planned_entry" queryParams="planned=true" />
+                    <EntryActionDropdown :entryId="entry.id" type="planned_entry" queryParams="planned=true" :index=i @deleteItem="deleteItemFromArray" />
                 </div>
 
             </div>
@@ -89,6 +89,10 @@ export default {
         this.invoke()
     },
     methods: {
+
+        deleteItemFromArray(index) {
+            this.entries.splice(index, 1);
+        },
         invoke() {
 
             let currentPage = window.localStorage.getItem('current_page') == null ? 0 : window.localStorage.getItem('current_page')

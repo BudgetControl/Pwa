@@ -1,17 +1,18 @@
 <template>
   <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
     :class="[color === 'light' ? 'bg-white' : 'bg-emerald-900 text-white']">
-    <div class="rounded-t mb-0 px-4 py-3 border-0">
-      <div class="flex flex-wrap items-center">
-        <div class="lg:w-2/12 px-2">
-          <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-            Wallet
-          </h3>
-        </div>
-      </div>
-    </div>
 
-    <EntriesTable ref="entry" />
+    <div class="container px-4 mx-auto py-3">
+                    <Entriesfilter 
+                    :showPlanned="this.showPlanned"
+                    :showTransfer="showTransfer"
+                    :showDebit="showDebit"
+                    :showIncoming="showIncoming"
+                    :showExpenses="showExpenses"
+                    ></Entriesfilter>
+            </div>
+
+    <EntriesTable ref="entry" :showPlanned="planned" :showTransfer="transfer" :showDebit="debit" :showIncoming="incoming" :showExpenses="expenses"/>
     <!-- pagination -->
     <div class="py-2" v-if="pagination.enabled">
       <Paginator ref="_paginator"></Paginator>
@@ -27,6 +28,7 @@ import axios from 'axios'
 import ApiServiceVue from '../../services/ApiService.vue';
 import Paginator from "../GenericComponents/Paginator.vue";
 import LocalStorageService from "../../services/LocalStorageService.vue";
+import Entriesfilter from "@/components/Button/EntriesFilter.vue";
 
 export default {
   props: {
@@ -42,6 +44,11 @@ export default {
     return {
       filter: "",
       wallet: 0,
+      planned: false,
+      transfer: false,
+      expenses: true,
+      incoming: true,
+      debit: false,
       selected: {
         account: 0
       },
@@ -54,7 +61,7 @@ export default {
     }
   },
   components: {
-    EntriesTable, Paginator
+    EntriesTable, Paginator, Entriesfilter
   },
   watch: {
     $route() {
@@ -114,6 +121,21 @@ export default {
       }).catch((error) => {
         console.error(error);
       })
+    },
+    showPlanned() {
+      this.planned = !this.planned
+    },
+    showTransfer() {
+      this.transfer = !this.transfer
+    },
+    showIncoming() {
+      this.incoming = !this.incoming
+    },
+    showExpenses() {
+      this.expenses = !this.expenses
+    },
+    showDebit() {
+      this.debit = !this.debit
     }
   },
 };

@@ -2,17 +2,14 @@
     <div>
         <div class="block w-full overflow-x-auto">
 
-            <div class="container px-4 mx-auto py-3 ">
-                <div class="flex items-center ps-3">
-                    <input id="vue-checkbox-list" type="checkbox" v-model="action.show_planned" value="true"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                    <label for="vue-checkbox-list"
-                        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Show planned entries</label>
-                </div>
-            </div>
-
             <div v-for="(entry, i) in entries" :key="i">
-                <div v-if="(entry.planned && action.show_planned) || (!entry.planned)"
+                <div v-if="
+                    ((entry.incoming && showIncoming)) || 
+                    ((entry.expenses && showExpenses)) || 
+                    ((entry.planned && showPlanned)) || 
+                    ((entry.debit && showDebit)) || 
+                    ((entry.transfer && showTransfer))
+                    "
                     class="container px-4 mx-auto py-3 border border-solid border-blueGray-100 shadow" :class="[
                         entry.payee
                             ? 'bg-blueGray-200'
@@ -102,6 +99,26 @@ export default {
             default: false,
             type: Boolean
         },
+        showDebit: {
+            required: false,
+            default: false,
+            type: Boolean
+        },
+        showTransfer: {
+            required: false,
+            default: false,
+            type: Boolean
+        },
+        showExpenses: {
+            required: false,
+            default: true,
+            type: Boolean
+        },
+        showIncoming: {
+            required: false,
+            default: true,
+            type: Boolean
+        },
         isModel: {
             required: false,
             default: false,
@@ -180,7 +197,6 @@ export default {
                         type_amount: r.amount <= 0 ? "expenses" : "incoming",
                         account: r.account.name,
                         note: r.note,
-                        planned: r.planned == 0 ? false : true,
                         category: {
                             name: r.sub_category.name,
                             id: r.sub_category.id,
@@ -189,6 +205,10 @@ export default {
                         labels: labels,
                         payee: null,
                         transfer: r.type == 'transfer' ? true : false,
+                        debit: r.type == 'debit' ? true : false,
+                        incoming: r.type == 'incoming' && r.planned == 0 ? true : false,
+                        expenses: r.type == 'expenses' && r.planned == 0 ? true : false,
+                        planned: r.planned == 0 ? false : true,
                         type: r.type,
                         name: r.name
                     }
