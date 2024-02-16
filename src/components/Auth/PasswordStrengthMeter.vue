@@ -31,10 +31,10 @@ export default {
       ],
       value:[
         'w-1 bg-red-500',           // 0
-        'w-2 bg-red-300',           // 3
-        'w-3 bg-orange-500',        // 5
-        'w-4 bg-emerald-500',       // 7
-        'w-5 bg-lightBlue-500'      // 9
+        'w-3 bg-red-300',           // 3
+        'w-5 bg-orange-500',        // 5
+        'w-7 bg-emerald-500',       // 7
+        'w-9 bg-lightBlue-500'      // 9
       ]
     }
   },
