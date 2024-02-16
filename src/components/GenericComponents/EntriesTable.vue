@@ -8,8 +8,7 @@
                     ((entry.expenses && ShowExpenses)) || 
                     ((entry.planned && showPlanned)) || 
                     ((entry.debit && showDebit)) || 
-                    ((entry.transfer && showTransfer)) ||
-                    (!entry.transfer) && (!entry.planned) && (!entry.debit) 
+                    ((entry.transfer && showTransfer))
                     "
                     class="container px-4 mx-auto py-3 border border-solid border-blueGray-100 shadow" :class="[
                         entry.payee
