@@ -9,7 +9,7 @@
         </label>
     </li>
     <li class="flex-l w-full m-1">
-        <input @click="showPExpenses()" type="checkbox" id="show-expenses" value="" class="hidden peer" required="" v-model="isCheckedExpenses">
+        <input @click="showExpenses()" type="checkbox" id="show-expenses" value="" class="hidden peer" required="" v-model="isCheckedExpenses">
         <label for="show-expenses" class="w-full  uppercase text-xs inline-flex p-2 bg-gray-100 border-2 cursor-pointer"
         :class="{ 'border-emerald-600': isCheckedExpenses === true }">                           
         expenses
