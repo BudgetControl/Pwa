@@ -48,7 +48,7 @@ export default {
     };
   },
     async mounted() {
-      const token = this.$route.params.code
+      const token = this.$route.query.code
       const _this = this
 
       this.show = false
