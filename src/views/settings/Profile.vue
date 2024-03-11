@@ -148,16 +148,6 @@ export default {
     DeleteButton, DeleteSoftButtonVue
   },
   async beforeMount() {
-    try {
-      AuthService.check().catch((response) => {
-        console.log("res", response)
-        localStorage.clear();
-      });
-    } catch {
-      localStorage.clear();
-      this.$router.push({ path: '/' })
-    }
-
     const storage = LocalStorageService.get('user_settings')
     this.currency = storage.currency.icon
   },
