@@ -67,7 +67,6 @@ import Landing from "@/views/Landing.vue";
 const routes = [
   {
     path: "/app",
-    redirect: "/app/dashboard",
     name: 'app',
     component: Application,
     children: [

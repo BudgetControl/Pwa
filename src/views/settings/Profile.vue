@@ -148,7 +148,7 @@ export default {
     DeleteButton, DeleteSoftButtonVue
   },
   async beforeMount() {
-    const storage = LocalStorageService.get('user_settings')
+    const storage = LocalStorageService.get('settings')
     this.currency = storage.currency.icon
   },
   async mounted() {

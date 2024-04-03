@@ -136,8 +136,11 @@ export default {
       AuthService.login(email, password).then((response) => {
         //save token in local storage
         LocalStorageService.setToken(response.access_token);
-        //redirecto to dashboard
-        this.$router.push({ path: '/app/dashboard' })
+
+        AuthService.userInfo().then(() => {
+          _this.$router.push({ path: '/app/dashboard' })
+        })
+
       }).catch((err) => {
         _this.show = false
 
@@ -161,7 +164,9 @@ export default {
       this.show = true
       this.error = false
 
-      AuthService.providerUri('Google').catch(() => {
+      AuthService.providerUri('Google').then((resp)=>{
+        window.location.href = resp.uri
+      }).catch(() => {
         _this.show = false
         _this.error = `Sorry an error occurred, try later`
       })
