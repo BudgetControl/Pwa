@@ -46,6 +46,8 @@ import Model from "@/views/settings/Model.vue";
 import ModelCard from "@/views/settings/Cards/ModelCard.vue";
 import Assistance from "@/views/settings/Assistance.vue";
 import AboutUs from "@/views/settings/AboutUs.vue";
+import Workspace from "@/views/settings/Workspace.vue";
+import WorkspaceCard from "@/views/settings/Cards/WorkspaceCard.vue";
 
 // views for Auth layout
 import Login from "@/views/auth/Login.vue";
@@ -65,7 +67,6 @@ import Landing from "@/views/Landing.vue";
 const routes = [
   {
     path: "/app",
-    redirect: "/app/dashboard",
     name: 'app',
     component: Application,
     children: [
@@ -214,6 +215,14 @@ const routes = [
       {
         path: "/app/settings/about-us",
         component: AboutUs,
+      },
+      {
+        path: "/app/settings/workspace",
+        component: Workspace,
+      },
+      {
+        path: "/app/settings/workspace/:id",
+        component: WorkspaceCard,
       },
     ]
   },

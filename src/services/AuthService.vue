@@ -8,21 +8,8 @@ const instance = axios.create({
   baseURL: DOMAIN
 });
 
-instance.interceptors.request.use(
-  (config) => {
-    const token = LocalStorageService.getToken()
-    if (token) {
-       config.headers['Authorization'] = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
 async function login(email, password) {
-  const response = await instance.post('/auth/authenticate', {
+  const response = await instance.post('/api/auth/authenticate', {
     email: email,
     password: password
   });
@@ -30,14 +17,14 @@ async function login(email, password) {
 }
 
 async function verify(email) {
-  const response = await instance.post('/auth/verify-email',{
+  const response = await instance.post('/api/auth/verify-email',{
     email: email
   });
   return response.data;
 }
 
 async function register(name, password,confirm_password, email) {
-  const response = await instance.post('/auth/register', {
+  const response = await instance.post('/api/auth/register', {
     name: name,
     password: password,
     email: email,
@@ -47,12 +34,12 @@ async function register(name, password,confirm_password, email) {
 }
 
 async function logout() {
-  const response = await instance.get('/auth/logout');
+  const response = await instance.get('/api/auth/logout');
   return response.data;
 }
 
 async function authenticate(email, password) {
-  const response = await instance.post('/auth/authenticate', {
+  const response = await instance.post('/api/auth/api/authenticate', {
     email: email,
     password: password
   });
@@ -60,14 +47,14 @@ async function authenticate(email, password) {
 }
 
 async function recoveryPassword(email) {
-  const response = await instance.post('/auth/recovery', {
+  const response = await instance.post('/api/auth/recovery', {
     email: email,
   });
   return response.data;
 }
 
 async function resetPassword(token,password,confirm_password) {
-  const response = await instance.put(`/auth/recovery/${token}`, {
+  const response = await instance.put(`/api/auth/recovery/${token}`, {
     password: password,
     password_confirmation: confirm_password
   });
@@ -76,50 +63,58 @@ async function resetPassword(token,password,confirm_password) {
 
 async function check() {
   //retrive access token header
-  const response = await instance.get('/auth/check');
-  // Accedi all'header X-Custom-Header dalla risposta
-  const access_token = response.headers.authorization;
-  LocalStorageService.setToken(access_token.replace("Bearer ",""))
+  const response = await instance.get('/api/auth/check', {
+    headers: {
+      'Authorization': `Bearer ${LocalStorageService.getToken()}`,
+      'X-BC-Token': LocalStorageService.getUserToken()
+    }
+  });
+
+  if(response.status === 200) {
+    // Accedi all'header X-Custom-Header dalla risposta
+    const access_token = response.data.authToken;
+    LocalStorageService.setToken(access_token)
+  }
 
   return response;
 }
 
 async function providerUri(provider) {
   //retrive access token header
-  const response = await instance.get(`/auth/authenticate/${provider}`);
+  const response = await instance.get(`/api/auth/authenticate/${provider}`);
 
   return response.data;
 }
 
 async function token(code) {
   //retrive access token header
-  const response = await instance.get(`/auth/token/?code=${code}`);
+  const response = await instance.get(`/api/auth/token?code=${code}`);
 
   return response.data;
 }
 
 async function confirm(token) {
   //retrive access token header
-  const response = await instance.get(`/auth/confirm/${token}`);
+  const response = await instance.get(`/api/auth/confirm/${token}`);
   return response.status;
 }
 
 async function profile() {
   //retrive access token header
-  const response = await instance.get(`/auth/profile`);
+  const response = await instance.get(`/api/auth/profile`);
   return response;
 }
 
 async function deleteUser() {
   //retrive access token header
-  const response = await instance.delete(`/auth/delete`);
+  const response = await instance.delete(`/api/auth/delete`);
   return response;
 }
 
 
 async function deleteDataUser() {
   //retrive access token header
-  const response = await instance.delete(`/auth/data/delete`);
+  const response = await instance.delete(`/api/auth/data/delete`);
   return response;
 }
 
@@ -127,6 +122,20 @@ async function deleteDataUser() {
 async function settings() {
   //retrive access token header
   const response = await instance.get(`/api/user/settings`);
+  return response.data;
+}
+
+async function userInfo() {
+  //retrive access token header
+  const response = await instance.get('/api/auth/user-info', {
+    headers: {
+      'Authorization': `Bearer ${LocalStorageService.getToken()}`
+    }
+  });
+
+  LocalStorageService.setUserToken(response.data.token);
+  LocalStorageService.setUser(response.data.userInfo);
+
   return response.data;
 }
 
@@ -145,7 +154,8 @@ export default {
   deleteDataUser,
   settings,
   providerUri,
-  token
+  token,
+  userInfo
 }
 
 </script>

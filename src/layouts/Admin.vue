@@ -30,7 +30,6 @@
 import HeaderMenu from "@/components/Navbars/HeaderMenu.vue";
 import Sidebar from "@/components/Sidebar/Sidebar.vue";
 import FooterAdmin from "@/components/Footers/FooterAdmin.vue";
-import AuthService from "@/services/AuthService.vue";
 
 export default {
   name: "admin-layout",
@@ -39,19 +38,6 @@ export default {
     Sidebar,
     FooterAdmin,
   },
-  async beforeMount() {
-    try {
-      const _this = this
-      AuthService.check().catch((response) => {
-        console.log("res", response)
-        localStorage.clear();
-        _this.$router.push({ path: '/app/auth/login' })
-      });
-    } catch {
-      localStorage.clear();
-      this.$router.push({ path: '/app/auth/login' })
-    }
-  }
 };
 </script>
 

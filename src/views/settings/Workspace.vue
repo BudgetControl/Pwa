@@ -3,10 +3,10 @@
         <div class="container mx-auto px-4">
             <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
                 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
-                    <HeaderButton back="/app/settings" title="Currency settings" />
+                    <HeaderButton back="/app/settings" title="Workspace settings" />
 
                     <div class="container px-4 mx-auto ">
-                        <p class="px-2 mb-2 text-sm font-medium text-gray-400 dark:text-gray-500">Set your default currency
+                        <p class="px-2 mb-2 text-sm font-medium text-gray-400 dark:text-gray-500">Set up your workspaces
                         </p>
                     </div>
                     <!-- labels -->

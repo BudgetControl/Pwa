@@ -2,7 +2,7 @@
 
 function check(name) {
     const storage = localStorage.getItem(name)
-    if(storage === null) {
+    if (storage === null) {
         return false
     }
 
@@ -14,22 +14,46 @@ function getToken() {
 }
 
 function setToken(value) {
-    localStorage.setItem('auth-token',btoa(value))
+    localStorage.setItem('auth-token', btoa(value))
+}
+
+function setUser(value) {
+    this.set('user', value)
+    this.set('settings', JSON.parse(value.workspace_settings.data))
+}
+
+function setUserToken(value) {
+    localStorage.setItem('user-token', value)
+}
+
+function getUserToken() {
+    return localStorage.getItem('user-token')
+}
+
+function getUser() {
+    return this.get('user')
 }
 
 function set(name, value) {
-    if(this.check('auth-token') === true) {
-        const hash = this.hash(name)
-        localStorage.setItem(hash,btoa(encodeURI(JSON.stringify(value))))
+    if (this.check('auth-token') === true) {
+        localStorage.setItem(name, btoa(encodeURI(JSON.stringify(value))))
     }
 }
 
-function hash(name) {
-    return btoa(localStorage.getItem('auth-token')+name)
+function getWorkspaceId() {
+    return localStorage.getItem('workspace-id')
+}
+
+function setWorkspaceId(value) {
+    localStorage.setItem('workspace-id', value)
 }
 
 function get(name) {
-    return JSON.parse(decodeURI(atob(localStorage.getItem(this.hash(name)))))
+    const storage = localStorage.getItem(name)
+    if(storage === null) {
+        return null
+    }
+    return JSON.parse(decodeURI(atob(storage)))
 }
 
 function clear() {
@@ -37,18 +61,23 @@ function clear() {
 }
 
 function deleteItem(name) {
-    return localStorage.removeItem(this.hash(name))
+    return localStorage.removeItem(name)
 }
 
 export default {
-  check,
-  get,
-  set,
-  clear,
-  getToken,
-  setToken,
-  hash,
-  deleteItem
+    check,
+    get,
+    set,
+    clear,
+    getToken,
+    setToken,
+    deleteItem,
+    setUser,
+    getUser,
+    setUserToken,
+    getUserToken,
+    setWorkspaceId,
+    getWorkspaceId
 }
 
 </script>

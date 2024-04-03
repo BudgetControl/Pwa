@@ -16,7 +16,6 @@
 <script>
 import Navbar from "@/components/Navbars/IndexNavbar.vue";
 import FooterSmall from "@/components/Footers/FooterSmall.vue";
-import AuthService from "@/services/AuthService.vue";
 import registerBg2 from "@/assets/img/register_bg_2.png";
 
 export default {
@@ -28,14 +27,6 @@ export default {
   components: {
     Navbar,
     FooterSmall,
-  },
-  mounted() {
-        const _this = this
-        AuthService.check().then(() => {
-          _this.$router.push({ path: '/app/dashboard' })
-        }).catch(() => {
-          localStorage.clear();
-        });
   },
 };
 </script>

@@ -48,15 +48,17 @@ export default {
     };
   },
     async mounted() {
-      const token = this.$route.params.code
+      const code = window.location.href.split('code=')[1]
       const _this = this
 
       this.show = false
       this.error = false
 
-      AuthService.token(token).then((response) => {
+      AuthService.token(code).then((response) => {
         LocalStorageService.setToken(response.access_token);
-        _this.$router.push({ path: '/app/dashboard' })
+        AuthService.userInfo().then(() => {
+          _this.$router.push({ path: '/app/dashboard' })
+        })
       }).catch((err) => {
         _this.show = false
         _this.error = true

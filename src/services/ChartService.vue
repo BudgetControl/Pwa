@@ -13,6 +13,7 @@ instance.interceptors.request.use(
     const token = LocalStorageService.getToken()
     if (token) {
        config.headers['Authorization'] = `Bearer ${token}`;
+       config.headers['X-BC-Token']= LocalStorageService.getUserToken()
     }
     return config;
   },
@@ -21,33 +22,13 @@ instance.interceptors.request.use(
   }
 );
 
-async function incomingLineYear(data) {
-  const config = {
-    params: {
-      date_time : data
-    }
-  }
-  const response = await instance.get('/api/chart/line/incoming/year',config);
-  return response.data;
-}
-
-async function incomingBarByCategory(data) {
-  const config = {
-    params: {
-      date_time : data
-    }
-  }
-  const response = await instance.get('/api/chart/bar/incoming/category',config);
-  return response.data;
-}
-
 async function expensesBarByCategory(data) {
   const config = {
     params: {
       date_time : data
     }
   }
-  const response = await instance.get('/api/chart/bar/expenses/category',config);
+  const response = await instance.get('/api/stats/chart/bar/expenses/category',config);
   return response.data;
 }
 
@@ -57,7 +38,7 @@ async function incomingExpensesLine(data) {
       date_time : data
     }
   }
-  const response = await instance.get('/api/chart/line/incoming-expenses',config);
+  const response = await instance.get('/api/stats/chart/bar/incoming/category',config); //FIXME:
   return response.data;
 }
 
@@ -67,17 +48,7 @@ async function expensesLabelLine(data) {
       date_time : data
     }
   }
-  const response = await instance.get('/api/chart/bar/expenses/label',config);
-  return response.data;
-}
-
-async function expensesLabelTable(data) {
-  const config = {
-    params: {
-      date_time : data
-    }
-  }
-  const response = await instance.get('/api/chart/table/expenses/label',config);
+  const response = await instance.get('/api/stats/chart/bar/expenses/label',config);
   return response.data;
 }
 
@@ -118,18 +89,15 @@ async function expensesLabelCategory(data) {
       date_time : data
     }
   }
-  const response = await instance.get('/api/chart/table/expenses/category',config);
+  const response = await instance.get('/api/stats/chart/table/expenses/category',config);
   return response.data;
 }
 
 export default {
-  incomingLineYear,
-  incomingBarByCategory,
   expensesBarByCategory,
   incomingExpensesLine,
   expensesLabelLine,
   expensesLabelCategory,
-  expensesLabelTable,
   getBudgets,
   getBudget,
   createBudget,

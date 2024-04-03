@@ -174,7 +174,11 @@ export default {
 
     },
     getMonthIncoming() {
-      StatsService.incoming().then((resp) => {
+      const date_time = new Date()
+      const start_date = date_time.getFullYear() + '-' + (date_time.getMonth() + 1) + '-01'
+      const end_date = date_time.getFullYear() + '-' + (date_time.getMonth() + 1) + '-' + date_time.getDate()
+
+      StatsService.incoming(`?start_date=${start_date}&end_date=${end_date}`).then((resp) => {
         let data = resp.data
         this.incoming.statTitle = data.total
         this.incoming.statPercent = data.percentage
