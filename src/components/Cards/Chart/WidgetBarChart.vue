@@ -126,7 +126,7 @@ export default {
 
 
         ChartService.expensesBarByCategory(data).then((resp) => {
-          resp.series.forEach(element => {
+          resp.bar.forEach(element => {
 
             labels.push(element.label)
             colors.push(element.color)

@@ -14,8 +14,8 @@
         class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
         to="/app/dashboard">
         <label for="workspace">
-          <select v-model="workspace" id="workspace" 
-          class="block appearance-none w-full py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+          <select v-model="workspace" id="workspace"
+            class="block appearance-none w-full py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
             <option v-for="(w, i) in workspaces" :key="i" :value="w.uuid">{{ w.name }}</option>
           </select>
         </label>
@@ -199,6 +199,7 @@ import WorkspaceService from "../../services/WorkspaceService.vue";
 export default {
   data() {
     return {
+      workspace: "",
       collapseShow: "hidden",
       workspaces: []
     };
@@ -216,6 +217,9 @@ export default {
         response.forEach((e) => {
           _this.workspaces.push(e)
         })
+        if (_this.workspaces.length > 0) {
+          _this.workspace = _this.workspaces[0].uuid;
+        }
       })
     }
   },

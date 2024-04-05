@@ -120,13 +120,13 @@ export default {
 
       ChartServiceVue.expensesLabelCategory(data).then((resp) => {
 
-        resp.series.forEach(element => {
+        resp.rows.forEach(element => {
 
           this.elements.push({
             label: element.label,
-            amount: element.value,
-            amount_before: element.value_previus,
-            bounce_rate: element.bounce_rate
+            amount: element.amount,
+            amount_before: element.prevAmount,
+            bounce_rate: element.bounceRate
           })
 
         });

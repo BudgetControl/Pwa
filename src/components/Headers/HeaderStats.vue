@@ -4,8 +4,8 @@
     <div class="px-1 md:px-10 mx-auto w-full">
       <div id="statsWallet">
         <div class="px-2 flex overflow-x-auto mb-2">
-          <CardWallet v-for="w in wallets" :key="w.account_id" :statTitle="w.account_label" :statWallet="w.total_wallet"
-            :statColor="w.color" :statIdWallet="w.account_id"></CardWallet>
+          <CardWallet v-for="w in wallets" :key="w.id" :statTitle="w.name" :statWallet="w.balance"
+            :statColor="w.color" :statIdWallet="w.uuid"></CardWallet>
         </div>
         <!-- Card stats -->
         <div class="flex overflow-x-auto">
@@ -138,7 +138,7 @@ export default {
     },
     getWallet() {
       StatsService.total().then((resp) => {
-        let data = resp.data
+        let data = resp
         this.wallet.statTitle = data.total
 
       }).catch((error) => {
@@ -148,7 +148,7 @@ export default {
 
     getHealth() {
       StatsService.health().then((resp) => {
-        let data = resp.data
+        let data = resp
         this.health.statTitle = data.total
 
         if (data.total <= 0) {
@@ -165,7 +165,7 @@ export default {
     getWalletPlanned() {
       StatsService.planned().then((resp) => {
 
-        let data = resp.data
+        let data = resp
         this.walletPlanned.statTitle = data.total
 
       }).catch((error) => {
@@ -179,7 +179,7 @@ export default {
       const end_date = date_time.getFullYear() + '-' + (date_time.getMonth() + 1) + '-' + date_time.getDate()
 
       StatsService.incoming(`?start_date=${start_date}&end_date=${end_date}`).then((resp) => {
-        let data = resp.data
+        let data = resp
         this.incoming.statTitle = data.total
         this.incoming.statPercent = data.percentage
         this.incoming.statArrow = data.percentage <= 0 ? "down" : "up"
@@ -191,7 +191,7 @@ export default {
     },
     getMonthexpenses() {
       StatsService.expenses().then((resp) => {
-        let data = resp.data
+        let data = resp
         this.expenses.statTitle = data.total
         this.expenses.statPercent = data.percentage
         this.expenses.statArrow = data.percentage < 0 ? "down" : "up"
@@ -204,7 +204,7 @@ export default {
     getWallets() {
       this.wallets = []
       StatsService.wallets().then((resp) => {
-        let data = resp.data
+        let data = resp
         data.forEach(e => {
             this.wallets.push(e)
         });

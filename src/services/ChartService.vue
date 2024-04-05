@@ -38,17 +38,17 @@ async function incomingExpensesLine(data) {
       date_time : data
     }
   }
-  const response = await instance.get('/api/stats/chart/bar/incoming/category',config); //FIXME:
+  const response = await instance.get('/api//stats/chart/line/incoming-expenses',config);
   return response.data;
 }
 
-async function expensesLabelLine(data) {
+async function expensesLabelApplePie(data) {
   const config = {
     params: {
       date_time : data
     }
   }
-  const response = await instance.get('/api/stats/chart/bar/expenses/label',config);
+  const response = await instance.get('/api/stats/chart/apple-pie/expenses/label',config);
   return response.data;
 }
 
@@ -96,7 +96,7 @@ async function expensesLabelCategory(data) {
 export default {
   expensesBarByCategory,
   incomingExpensesLine,
-  expensesLabelLine,
+  expensesLabelApplePie,
   expensesLabelCategory,
   getBudgets,
   getBudget,

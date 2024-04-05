@@ -67,7 +67,7 @@ export default {
             let updateSettings = LocalStorageService.get("settings")
             LocalStorageService.deleteItem("settings")
             ApiService.setDefaultCurrency(id);
-            updatesettings.currency_id = id
+            updateSettings.currency_id = id
             LocalStorageService.set('settings', updateSettings)
         }
     },
