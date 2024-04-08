@@ -2,25 +2,51 @@
     <section class="relative py-16 bg-blueGray-200">
         <div class="container mx-auto px-4">
             <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
-                <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
+                <div
+                    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
                     <HeaderButton back="/app/settings/label" title="Label settings" />
 
                     <div class="relative p-6 flex-auto">
                         <!-- Regular Input -->
                         <div class="mb-3 pt-0">
-                            <input type="text" placeholder="Category name" v-model="modal.name"
+                            <input type="text" placeholder="Workspace name" v-model="modal.name"
                                 class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                         </div>
 
                         <div class="mb-3 pt-0">
-                            <span class="text-xs text-blueGray-400">Label color</span>
-                            <color-picker :visible-formats="['hex']" :color="modal.color" @color-change="updateColor" />
+                            <label for="exclude_stats">
+                                Default currency
+                                <select
+                                    class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                    v-model="modal.currency">
+                                    <option v-for="(item, k) in currencies" :key="k" :value="item.code">{{ item.name }}
+                                    </option>
+                                </select>
+                            </label>
                         </div>
 
                         <div class="mb-3 pt-0">
                             <label for="exclude_stats">
-                                <input v-model="modal.archive" type="checkbox" class="p-1 border rounded"
-                                    id="exclude_stats" :value="true" checked> Archive label
+                                Default payment type
+                                <select
+                                    class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                    v-model="modal.payment_type">
+                                    <option v-for="(item, k) in payment_types" :key="k" :value="item.id">{{ item.name }}
+                                    </option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <div class="mb-3 pt-0">
+                            <label for="exclude_stats">
+                                Share workspace with
+                                <div v-for="(item, i) in sharedWith" :key="i">
+                                    <span v-on:click="remove(i)"
+                                        class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1">
+                                        {{ item.name }}
+                                        <i class="fas fa-times close-icon"></i>
+                                    </span>
+                                </div>
                             </label>
                         </div>
 
@@ -41,77 +67,57 @@
 
 <script>
 import HeaderButton from '@/components/Button/HeaderButton.vue';
-import ApiService from '@/services/ApiService.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
-import { ColorPicker } from 'vue-accessible-color-picker';
+import ApiServiceVue from '../../../services/ApiService.vue';
+import WorkspaceService from '../../../services/WorkspaceService.vue';
 
 export default {
     components: {
-        HeaderButton, ColorPicker
+        HeaderButton
     },
     data() {
         return {
-            color: null,
-            form: {
-                type: ['incoming', 'expenses', 'investments'],
-            },
+            payment_types: [],
+            currencies: [],
+            sharedWith: [],
             modal: {
-                id: null,
-                name: null,
-                archive: false
+                name: '',
+                archive: false,
+                shareWith: [],
+                currency: 'USD',
+                payment_type: 'credit_card',
             }
         }
     },
     mounted: function () {
-        this.openModal(this.$route.params.id, this.$route.params.subId)
+        this.getCurrencies()
+        this.getPaymentTypes()
+        if (this.$route.params.id) {
+            this.getWorkspaceDetail()
+        }
     },
     methods: {
-        showSub(id) {
-            if (this.opentab == id) {
-                this.opentab = null
-            } else {
-                this.opentab = id
-            }
-
-        },
-        openModal(id) {
-            ApiService.label(id).then((resp) => {
-                resp = resp[0]
-                this.modal.id = resp.id
-                this.modal.name = resp.name
-                this.modal.archive = resp.archive
-                this.modal.color = resp.color
-            })
-        },
-
         saveModal() {
-            const _this = this
-            ApiService.setLabel(this.modal.id, this.modal).then(() => {
-                _this.$router.push({path : '/app/settings/label'})
+            console.log(this.modal)
+        },
+        getCurrencies() {
+            ApiServiceVue.currencies().then((res) => {
+                this.currencies = res.data
             })
         },
-        updateColor(eventData) {
-            this.modal.color = eventData.cssColor
+        getPaymentTypes() {
+            ApiServiceVue.paymentstype().then((res) => {
+                this.payment_types = res.data
+            })
         },
+        getWorkspaceDetail() {
+            WorkspaceService.get(this.$route.params.id).then((res) => {
+                this.modal.name = res.workspace.name
+            })
+        },
+        remove(i) {
+            this.sharedWith.splice(i, 1)
+        }
     }
 };
 </script>
-
-<style>
-.vacp-color-input-group {
-    display: none !important;
-}
-
-.vacp-copy-button {
-    display: none !important;
-}
-
-.expenses {
-    color: red
-}
-
-.incoming {
-    color: green
-}
-</style>
-  
