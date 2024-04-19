@@ -93,7 +93,7 @@ async function providerUri(provider) {
 
 async function token(code) {
   //retrive access token header
-  const response = await instance.get(`/api/auth/token/?code=${code}`);
+  const response = await instance.get(`/api/auth/token?code=${code}`);
 
   return response.data;
 }
