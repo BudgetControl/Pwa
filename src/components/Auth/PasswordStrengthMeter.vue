@@ -54,11 +54,11 @@ export default {
 
       // Aggiungi punteggio per la lunghezza della password
       if (password.length <= 8) {
-        score = 0;
+        score = -1;
       }
 
       // Aggiungi punteggio per la lunghezza della password
-      if (password.length >= 8) {
+      if (password.length >= 10) {
         score += 1;
       }
 
