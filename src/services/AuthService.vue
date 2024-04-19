@@ -79,7 +79,9 @@ async function check() {
   const response = await instance.get('/api/auth/check');
   // Accedi all'header X-Custom-Header dalla risposta
   const access_token = response.headers.authorization;
-  LocalStorageService.setToken(access_token.replace("Bearer ",""))
+  if(access_token) {
+    LocalStorageService.setToken(access_token);
+  }
 
   return response;
 }
