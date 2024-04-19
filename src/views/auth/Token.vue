@@ -48,8 +48,8 @@ export default {
     };
   },
     async mounted() {
-      const token = this.$route.params.code
       const _this = this
+      const token = _this.$route.query.code
 
       this.show = false
       this.error = false
