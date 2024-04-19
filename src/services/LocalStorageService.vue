@@ -10,7 +10,11 @@ function check(name) {
 }
 
 function getToken() {
-    return atob(localStorage.getItem('auth-token'))
+    const token = localStorage.getItem('auth-token')
+    if(token === null) {
+        return null
+    }
+    return atob(token)
 }
 
 function setToken(value) {
