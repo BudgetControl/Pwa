@@ -161,7 +161,7 @@ export default {
       this.show = true
       this.error = false
 
-      AuthService.providerUri('Google').catch(() => {
+      AuthService.providerUri('google').catch(() => {
         _this.show = false
         _this.error = `Sorry an error occurred, try later`
       })
