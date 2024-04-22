@@ -60,14 +60,14 @@ async function authenticate(email, password) {
 }
 
 async function recoveryPassword(email) {
-  const response = await instance.post('/api/auth/recovery', {
+  const response = await instance.post('/api/auth/reset-password', {
     email: email,
   });
   return response.data;
 }
 
 async function resetPassword(token,password,confirm_password) {
-  const response = await instance.put(`/api/auth/recovery/${token}`, {
+  const response = await instance.put(`/api/auth/reset-password/${token}`, {
     password: password,
     password_confirmation: confirm_password
   });
