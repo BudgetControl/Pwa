@@ -37,7 +37,7 @@ async function verify(email) {
 }
 
 async function register(name, password,confirm_password, email) {
-  const response = await instance.post('/api/auth/register', {
+  const response = await instance.post('/api/auth/sign-up', {
     name: name,
     password: password,
     email: email,
@@ -93,9 +93,9 @@ async function providerUri(provider) {
   return response.data;
 }
 
-async function token(code) {
+async function token(code, provider) {
   //retrive access token header
-  const response = await instance.get(`/api/auth/token?code=${code}`);
+  const response = await instance.get(`/api/auth/authenticate/token/${provider}?code=${code}`);
 
   return response.data;
 }

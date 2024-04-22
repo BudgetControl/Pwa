@@ -54,7 +54,7 @@ export default {
       this.show = false
       this.error = false
 
-      AuthService.token(token).then((response) => {
+      AuthService.token(token, 'google').then((response) => {
         LocalStorageService.setToken(response.access_token);
         _this.$router.push({ path: '/app/dashboard' })
       }).catch((err) => {
