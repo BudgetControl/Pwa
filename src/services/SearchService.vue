@@ -22,12 +22,12 @@ instance.interceptors.request.use(
 );
 
 async function getAll(data,page) {
-  const response = await instance.get(`/search/all?page=${page}`,data);
+  const response = await instance.get(`/api/search/all?page=${page}`,data);
   return response.data;
 }
 
 async function filter(data,page) {
-  const response = await instance.post(`/search/filter?page=${page}`,data);
+  const response = await instance.post(`/api/search/filter?page=${page}`,data);
   return response.data;
 }
 

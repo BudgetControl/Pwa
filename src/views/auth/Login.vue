@@ -161,7 +161,9 @@ export default {
       this.show = true
       this.error = false
 
-      AuthService.providerUri('google').catch(() => {
+      AuthService.providerUri('google').then((resp) => {
+        window.location.href = resp.uri
+      }).catch(() => {
         _this.show = false
         _this.error = `Sorry an error occurred, try later`
       })
