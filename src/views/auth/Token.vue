@@ -50,11 +50,12 @@ export default {
     async mounted() {
       const code = window.location.href.split('code=')[1]
       const _this = this
+      const token = _this.$route.query.code
 
       this.show = false
       this.error = false
 
-      AuthService.token(code).then((response) => {
+      AuthService.token(token, 'google').then((response) => {
         LocalStorageService.setToken(response.access_token);
         AuthService.userInfo().then(() => {
           _this.$router.push({ path: '/app/dashboard' })

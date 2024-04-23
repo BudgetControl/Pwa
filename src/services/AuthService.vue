@@ -24,7 +24,7 @@ async function verify(email) {
 }
 
 async function register(name, password,confirm_password, email) {
-  const response = await instance.post('/api/auth/register', {
+  const response = await instance.post('/api/auth/sign-up', {
     name: name,
     password: password,
     email: email,
@@ -39,7 +39,7 @@ async function logout() {
 }
 
 async function authenticate(email, password) {
-  const response = await instance.post('/api/auth/api/authenticate', {
+  const response = await instance.post('/api/auth/authenticate', {
     email: email,
     password: password
   });
@@ -47,14 +47,14 @@ async function authenticate(email, password) {
 }
 
 async function recoveryPassword(email) {
-  const response = await instance.post('/api/auth/recovery', {
+  const response = await instance.post('/api/auth/reset-password', {
     email: email,
   });
   return response.data;
 }
 
 async function resetPassword(token,password,confirm_password) {
-  const response = await instance.put(`/api/auth/recovery/${token}`, {
+  const response = await instance.put(`/api/auth/reset-password/${token}`, {
     password: password,
     password_confirmation: confirm_password
   });
@@ -86,9 +86,9 @@ async function providerUri(provider) {
   return response.data;
 }
 
-async function token(code) {
+async function token(code, provider) {
   //retrive access token header
-  const response = await instance.get(`/api/auth/token?code=${code}`);
+  const response = await instance.get(`/api/auth/authenticate/token/${provider}?code=${code}`);
 
   return response.data;
 }

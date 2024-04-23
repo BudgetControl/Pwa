@@ -164,7 +164,7 @@ export default {
       this.show = true
       this.error = false
 
-      AuthService.providerUri('Google').then((resp)=>{
+      AuthService.providerUri('google').then((resp) => {
         window.location.href = resp.uri
       }).catch(() => {
         _this.show = false
