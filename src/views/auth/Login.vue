@@ -135,7 +135,7 @@ export default {
 
       AuthService.login(email, password).then((response) => {
         //save token in local storage
-        LocalStorageService.setToken(response.access_token);
+        LocalStorageService.setToken(response.token);
 
         AuthService.userInfo().then(() => {
           _this.$router.push({ path: '/app/dashboard' })

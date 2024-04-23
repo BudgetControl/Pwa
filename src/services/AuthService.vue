@@ -38,14 +38,6 @@ async function logout() {
   return response.data;
 }
 
-async function authenticate(email, password) {
-  const response = await instance.post('/api/auth/authenticate', {
-    email: email,
-    password: password
-  });
-  return response.data;
-}
-
 async function recoveryPassword(email) {
   const response = await instance.post('/api/auth/reset-password', {
     email: email,
@@ -143,7 +135,6 @@ export default {
   login,
   register,
   logout,
-  authenticate,
   check,
   recoveryPassword,
   resetPassword,
