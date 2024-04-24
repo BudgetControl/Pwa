@@ -34,7 +34,11 @@ async function register(name, password,confirm_password, email) {
 }
 
 async function logout() {
-  const response = await instance.get('/api/auth/logout');
+  const response = await instance.get('/api/auth/logout', {
+    headers: {
+      'Authorization': `Bearer ${LocalStorageService.getToken()}`
+    }
+  });
   return response.data;
 }
 
