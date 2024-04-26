@@ -96,6 +96,7 @@
 import AuthService from "../../services/AuthService.vue";
 import loading from 'vue-full-loading'
 import PasswordStrengthMeter from "../../components/Auth/PasswordStrengthMeter.vue";
+import WorkspaceServiceVue from '../../services/WorkspaceService.vue';
 
 export default {
   components: {
@@ -122,13 +123,13 @@ export default {
       this.error = false
       AuthService.register(name, password,confirm_password, email).then(() => {
         //redirecto to dashboard
+        WorkspaceServiceVue.add('ws_'.name.replace(" ","-"))
         _this.$router.push({ path: '/app/auth/login?signin=1' })
       }).catch((err) => {
         const response = err.response.data
         _this.show = false
         _this.error = response.error
       })
-
     }
   }
 };

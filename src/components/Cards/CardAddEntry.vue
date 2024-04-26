@@ -352,9 +352,9 @@ export default {
       this.getDebit()
     }
 
-    const settings = LocalStorageService.get("user_settings")
-    this.currency = settings.currency.id
-    this.payment_type = settings.paymentType.id
+    const settings = LocalStorageService.get("settings")
+    this.currency = settings.currency_id
+    this.payment_type = settings. payment_type_id.id
 
   },
   methods: {

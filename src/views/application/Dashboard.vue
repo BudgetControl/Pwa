@@ -34,9 +34,10 @@ import CardBarChart from "@/components/Cards/Chart/WidgetBarChart.vue";
 import CardLine_IncomingExpensesChart from "@/components/Cards/Chart/WidgetLine_IncomingExpensesChart.vue";
 import CardPieLabelChart from "../../components/Cards/Chart/WidgetPieLabelChart.vue";
 import CardCategoryResume from "../../components/Cards/Chart/WidgetCategoryResume.vue";
-import AuthService from "../../services/AuthService.vue";
 import LocalStorageService from "../../services/LocalStorageService.vue";
 import CardBudget from "../../components/Cards/Chart/WidgetBudget.vue";
+import WorkspaceService from "../../services/WorkspaceService.vue";
+import WorkspaceServiceVue from "../../services/WorkspaceService.vue";
 
 export default {
   name: "dashboard-page",
@@ -54,8 +55,18 @@ export default {
     }
   },
   mounted: function () {
-    AuthService.settings().then((res) => {
-      LocalStorageService.set('user_settings',res)
+    const ws = LocalStorageService.getUser().workspaces[0]
+    WorkspaceService.get(ws.uuid).then((res) => {
+      const wsUuid = res.workspace.uuid
+      let settings = {
+        'workspace' : {
+          'name': res.workspace.name,
+          'uuid': wsUuid
+        }
+      }
+      LocalStorageService.set('workspace', settings)
+      LocalStorageService.setWorkspaceId(wsUuid)
+      WorkspaceServiceVue.activeWorkspace(wsUuid)
     })
   },
   methods: {

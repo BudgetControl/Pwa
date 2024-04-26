@@ -58,17 +58,17 @@ export default {
             res.data.forEach(e => {
                 this.currencies.push(e)
             });
-            const settings = LocalStorageService.get("user_settings")
+            const settings = LocalStorageService.get("settings")
             this.currency_id = settings.currency.icon
         })
     },
     methods: {
         setDefault(id) {
-            let updateSettings = LocalStorageService.get("user_settings")
-            LocalStorageService.deleteItem("user_settings")
+            let updateSettings = LocalStorageService.get("settings")
+            LocalStorageService.deleteItem("settings")
             ApiService.setDefaultCurrency(id);
-            updateSettings.currency.id = id
-            LocalStorageService.set('user_settings', updateSettings)
+            updateSettings.currency_id = id
+            LocalStorageService.set('settings', updateSettings)
         }
     },
 };

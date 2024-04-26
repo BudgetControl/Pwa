@@ -164,7 +164,7 @@ export default {
           resp.series.forEach(element => {
 
             let color = '#FF0000';
-            if (element.label == 'incoming') {
+            if (element.label == 'Incoming') {
               color = '#00FF00';
             }
 
@@ -177,11 +177,11 @@ export default {
               barThickness: 50,
             }
 
-            element.points.forEach(point => {
-              if (element.label == 'incoming') {
+            element.dataPoints.forEach(point => {
+              if (element.label == 'Incoming') {
                 config.data.labels.push(point.label)
               }
-              let value = point.x < 0 ? point.x * -1 : point.x
+              let value = point.xValue < 0 ? point.xValue * -1 : point.xValue
               dataset.data.push(value)
             })
 

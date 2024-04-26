@@ -99,13 +99,13 @@ export default {
           end: year + "/" + month + "/31"
         }]
 
-        ChartService.expensesLabelLine(date).then((resp) => {
+        ChartService.expensesLabelApplePie(date).then((resp) => {
 
           let labels = []
           let colors = []
           let values = []
 
-          resp.series.forEach(element => {
+          resp.field.forEach(element => {
 
             labels.push(element.label)
             colors.push(element.color)

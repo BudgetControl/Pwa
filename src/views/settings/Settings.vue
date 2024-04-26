@@ -3,6 +3,14 @@
     <div class="container mx-auto px-4">
       <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
         <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
+
+          <router-link to="/app/settings/workspace"
+            class="active:bg-emerald-600 font-bold text-sm px-6 py-3 m-5 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+            <i class="fas fa-solid fa-chart-pie fa-lg text-emerald-500 mr-2 "><span
+                class="p-2 text-black text-lg">Workspace</span></i>
+            <p class="text-xs text-blueGray-400">Manage your workspaces.</p>
+          </router-link>
+
           <router-link to="/app/settings/wallet"
             class="active:bg-emerald-600 font-bold text-sm px-6 py-3 m-5 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
             <i class="fas fa-solid fa-wallet fa-lg text-emerald-500 mr-2 "><span

@@ -13,6 +13,8 @@ instance.interceptors.request.use(
     const token = LocalStorageService.getToken()
     if (token) {
        config.headers['Authorization'] = `Bearer ${token}`;
+       config.headers['X-BC-Token'] = LocalStorageService.getUserToken()
+       config.headers['X-BC-WS'] = LocalStorageService.getWorkspaceId()
     }
     return config;
   },
@@ -21,8 +23,8 @@ instance.interceptors.request.use(
   }
 );
 
-async function incoming() {
-  const response = await instance.get('/api/stats/incoming');
+async function incoming(params) {
+  const response = await instance.get('/api/stats/incoming' + params);
   return response.data;
 }
 
