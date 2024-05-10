@@ -194,7 +194,8 @@ export default {
             const _this = this
             ChartServiceVue.getBudgets().then((resp) => {
                 resp.forEach((data) => {
-                    switch (data.config.period) {
+                    const period = data.budget.configuration.period
+                    switch (period) {
                         case 'weekly':
                             _this.budgets.week.push(data)
                             break;
