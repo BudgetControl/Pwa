@@ -63,7 +63,7 @@ async function updateBudget(data,id) {
 }
 
 async function getBudgets() {
-  const response = await instance.get('/api/budget/stats');
+  const response = await instance.get('/api/budgets/stats');
   return response.data;
 }
 
@@ -74,7 +74,7 @@ async function getBudget(id) {
   } else {
     id = ''
   }
-  const response = await instance.get(`/api/budget/stats${id}`);
+  const response = await instance.get(`/api/budget/${id}`);
   return response.data;
 }
 
