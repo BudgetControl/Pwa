@@ -52,7 +52,7 @@
                                     Start date
                                 </label>
 
-                                <VueDatePicker v-model="data.start_date"></VueDatePicker>
+                                <VueDatePicker v-model="data.period_start"></VueDatePicker>
                             </div>
 
                             <div class="lg:w-6/12 px-2 py-2 w-full">
@@ -62,7 +62,7 @@
                                     End date
                                 </label>
 
-                                <VueDatePicker v-model="data.end_date"></VueDatePicker>
+                                <VueDatePicker v-model="data.period_end"></VueDatePicker>
 
                             </div>
 
@@ -78,8 +78,8 @@
                                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                     v-model="data.account">
                                     <option v-for="account in input.account" :key="account.id" :value="account.id">{{
-                                        account.name
-                                    }}</option>
+                                    account.name
+                                }}</option>
                                 </select>
 
                             </div>
@@ -93,9 +93,10 @@
                                 <select multiple
                                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                     v-model="data.category">
-                                    <option v-for="category in input.category" :key="category.id" :value="category.id">{{
-                                        category.name
-                                    }}
+                                    <option v-for="category in input.category" :key="category.id" :value="category.id">
+                                        {{
+                                    category.name
+                                }}
                                     </option>
                                 </select>
 
@@ -174,8 +175,23 @@
                                     :checked="data.notification" value="true"
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                 <label for="vue-checkbox-list"
-                                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Enable
+                                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    Enable
                                     email notification</label>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap py-3" v-if="data.notification">
+                            <div class="lg:w-12/12 px-2 w-full">
+                                
+                                <select v-model="data.emails" multiple
+                                    class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                    <option
+                                        class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                                        value="marco.defelice890@gmail.com"> marco.defelice890@gmail.com
+                                    </option>
+                                </select>
+
                             </div>
                         </div>
 
@@ -203,13 +219,11 @@
 
                     </div>
                 </div>
-
             </div>
-
         </div>
     </form>
 </template>
-  
+
 <script>
 import '@vuepic/vue-datepicker/dist/main.css'
 import ApiService from '../../../services/ApiService.vue';
@@ -234,12 +248,13 @@ export default {
                 label: [],
                 type: [],
                 period: null,
-                start_date: null,
-                end_date: null,
+                period_start: null,
+                period_end: null,
                 amount: 0,
                 name: null,
                 note: null,
                 notification: false,
+                emails: []
             }
         }
     },
@@ -258,15 +273,16 @@ export default {
         getBudget() {
             const _this = this
             ChartServiceVue.getBudget(this.id).then((resp) => {
-                _this.data.name = resp.config.name
-                _this.data.note = resp.config.note
-                _this.data.amount = resp.budget
-                _this.data.period = resp.config.period
-                _this.data.account = resp.config.account
-                _this.data.category = resp.config.category
-                _this.data.label = resp.config.label
-                _this.data.type = resp.config.type
+                _this.data.name = resp.name
+                _this.data.note = resp.description
+                _this.data.amount = resp.amount
+                _this.data.period = resp.configuration.period
+                _this.data.account = resp.configuration.accounts
+                _this.data.category = resp.configuration.categories
+                _this.data.label = resp.configuration.tags
+                _this.data.type = resp.configuration.types
                 _this.data.notification = resp.notification
+                _this.data.emails = resp.emails
             })
         },
         getLabels() {
@@ -304,7 +320,21 @@ export default {
         set() {
 
             if (this.validate() === true) {
-                const data = this.data
+                const data = {
+                    "name": this.data.name,
+                    "amount": this.data.amount,
+                    "description": this.data.note,
+                    "configuration": {
+                        "period": this.data.period,
+                        "categories": this.data.category,
+                        "tags": this.data.label,
+                        "types": this.data.type,
+                        "accounts": this.data.account,
+                    },
+                    "notification": this.data.notification,
+                    "emails": this.data.emails,
+                }
+
                 const _this = this
                 ChartServiceVue.createBudget(data).then(() => {
                     //return
@@ -314,9 +344,22 @@ export default {
         },
         update() {
             if (this.validate() === true) {
-                const data = this.data
+                const data = {
+                    "name": this.data.name,
+                    "amount": this.data.amount,
+                    "description": this.data.note,
+                    "configuration": {
+                        "period": this.data.period,
+                        "categories": this.data.category,
+                        "tags": this.data.label,
+                        "types": this.data.type,
+                        "accounts": this.data.account,
+                    },
+                    "notification": this.data.notification,
+                    "emails": this.data.emails,
+                }
                 const _this = this
-                ChartServiceVue.updateBudget(data,this.id).then(() => {
+                ChartServiceVue.updateBudget(data, this.id).then(() => {
                     //return
                     _this.$router.push({ path: '/app/budgets' })
                 })
@@ -341,12 +384,12 @@ export default {
 
             if (this.data.period == "one_shot") {
 
-                if (this.data.start_date == null) {
+                if (this.data.period_start == null) {
                     alert("Please insert a start date for a budget")
                     return false
                 }
 
-                if (this.data.end_date == null) {
+                if (this.data.period_end == null) {
                     alert("Please insert a end date for a budget")
                     return false
                 }
@@ -359,7 +402,7 @@ export default {
 };
 
 </script>
-  
+
 <style scoped>
 .dp__input {
     border: none !important

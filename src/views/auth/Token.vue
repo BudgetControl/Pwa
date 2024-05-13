@@ -48,7 +48,6 @@ export default {
     };
   },
     async mounted() {
-      const code = window.location.href.split('code=')[1]
       const _this = this
       const token = _this.$route.query.code
 

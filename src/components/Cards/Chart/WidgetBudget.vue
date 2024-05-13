@@ -8,25 +8,25 @@
                         WEEK
                     </span>
 
-                    <div class="relative pt-1" v-for="budget in budgets.week" :key="budget.id">
+                    <div class="relative pt-1" v-for="budget in budgets.week" :key="budget.budget.uuid">
                         <div class="flex mb-2 items-center justify-between">
                             <div>
                                 <span
                                     class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200">
-                                    {{ budget.config.name }}
+                                    {{ budget.budget.name }}
                                 </span>
                             </div>
                             <div class="text-right">
                                 <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
-                                   ({{ budget.budget }}) {{ budget.difference }}{{ currency }} -
+                                   ({{ budget.budget.amount }}) {{ budget.totalSpent }}{{ currency }} -
                                 </span>
                                 <span class="text-xs font-semibold inline-block text-emerald-600">
-                                    {{ budget.percentage }}%
+                                    {{ budget.totalRemainingPercentage }}%
                                 </span>
                             </div>
                         </div>
                         <div class="overflow-hidden h-2 mb-4 text-xs flex rounded" v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 80, 'bg-red-200': budget.percentage >= 80 }" >
-                            <div :style="'width:' + budget.percentage + '%'"
+                            <div :style="'width:' + budget.totalSpentPercentage"
                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center" 
                                 v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 80, 'bg-red-600': budget.percentage >= 80 }" >
                             </div>
@@ -34,7 +34,7 @@
 
                         <div class="mb-4">
                             <span class="text-xs font-semibold inline-block text-blueGray-400">
-                                {{ budget.config.note }}
+                                {{ budget.description }}
                             </span>
                         </div>
                     </div>
@@ -47,25 +47,25 @@
                         MONTH
                     </span>
 
-                    <div class="relative pt-1"  v-for="budget in budgets.month" :key="budget.id">
+                    <div class="relative pt-1"  v-for="budget in budgets.month" :key="budget.budget.uuid">
                         <div class="flex mb-2 items-center justify-between">
                             <div>
                                 <span
                                     class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200">
-                                    {{ budget.config.name }}
+                                    {{ budget.budget.name }}
                                 </span>
                             </div>
                             <div class="text-right">
                                 <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
-                                   ({{ budget.budget }}) {{ budget.difference }}{{ currency }} -
+                                    ({{ budget.budget.amount }}) {{ budget.totalSpent }}{{ currency }} -
                                 </span>
                                 <span class="text-xs font-semibold inline-block text-emerald-600">
-                                    {{ budget.percentage }}%
+                                    {{ budget.totalRemainingPercentage }}%
                                 </span>
                             </div>
                         </div>
                         <div class="overflow-hidden h-2 mb-4 text-xs flex rounded " v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 80, 'bg-red-200': budget.percentage >= 80 }" >
-                            <div :style="'width:' + budget.percentage + '%'"
+                            <div :style="'width:' + budget.totalSpentPercentage"
                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
                                 v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 80, 'bg-red-600': budget.percentage >= 80 }" >
                             </div>
@@ -73,7 +73,7 @@
 
                         <div class="mb-4">
                             <span class="text-xs font-semibold inline-block text-blueGray-400">
-                                {{ budget.config.note }}
+                                {{ budget.description }}
                             </span>
                         </div>
                     </div>
@@ -85,26 +85,26 @@
                         YEAR
                     </span>
 
-                    <div class="relative pt-1" v-for="budget in budgets.year" :key="budget.id">
+                    <div class="relative pt-1" v-for="budget in budgets.year" :key="budget.budget.uuid">
                         <div class="flex mb-2 items-center justify-between">
                             <div>
                                 <span
                                     class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200">
-                                    {{ budget.config.name }}
+                                    {{ budget.budget.name }}
                                 </span>
                             </div>
                             <div class="text-right">
                                 <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
-                                   ({{ budget.budget }}) {{ budget.difference }}{{ currency }} -
+                                    ({{ budget.budget.amount }}) {{ budget.totalSpent }}{{ currency }} -
                                 </span>
 
                                 <span class="text-xs font-semibold inline-block text-emerald-600">
-                                    {{ budget.percentage }}%
+                                    {{ budget.totalRemainingPercentage }}%
                                 </span>
                             </div>
                         </div>
                         <div class="overflow-hidden h-2 mb-4 text-xs flex rounded" v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 80, 'bg-red-200': budget.percentage >= 80 }" >
-                            <div :style="'width:' + budget.percentage + '%'"
+                            <div :style="'width:' + budget.totalSpentPercentage"
                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
                                 v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 80, 'bg-red-600': budget.percentage >= 80 }" >
                             </div>
@@ -112,7 +112,7 @@
 
                         <div class="mb-4">
                             <span class="text-xs font-semibold inline-block text-blueGray-400">
-                                {{ budget.config.note }}
+                                {{ budget.description }}
                             </span>
                         </div>
                     </div>
@@ -123,26 +123,26 @@
                         YEAR
                     </span>
 
-                    <div class="relative pt-1" v-for="budget in budgets.custom" :key="budget.id">
+                    <div class="relative pt-1" v-for="budget in budgets.custom" :key="budget.budget.uuid">
                         <div class="flex mb-2 items-center justify-between">
                             <div>
                                 <span
                                     class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200">
-                                    {{ budget.config.name }}
+                                    {{ budget.budget.name }}
                                 </span>
                             </div>
                             <div class="text-right">
                                 <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
-                                   ({{ budget.budget }}) {{ budget.difference }}{{ currency }} -
+                                    ({{ budget.budget.amount }}) {{ budget.totalSpent }}{{ currency }} -
                                 </span>
 
                                 <span class="text-xs font-semibold inline-block text-emerald-600">
-                                    {{ budget.percentage }}%
+                                    {{ budget.totalRemainingPercentage }}%
                                 </span>
                             </div>
                         </div>
                         <div class="overflow-hidden h-2 mb-4 text-xs flex rounded" v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 80, 'bg-red-200': budget.percentage >= 80 }" >
-                            <div :style="'width:' + budget.percentage + '%'"
+                            <div :style="'width:' + budget.totalSpentPercentage"
                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
                                 v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 80, 'bg-red-600': budget.percentage >= 80 }" >
                             </div>
@@ -150,7 +150,7 @@
 
                         <div class="mb-4">
                             <span class="text-xs font-semibold inline-block text-blueGray-400">
-                                {{ budget.config.note }}
+                                {{ budget.description }}
                             </span>
                         </div>
                     </div>
@@ -194,7 +194,9 @@ export default {
             const _this = this
             ChartServiceVue.getBudgets().then((resp) => {
                 resp.forEach((data) => {
-                    switch (data.config.period) {
+                    const period = data.budget.configuration.period
+                    data.percentage = data.totalSpentPercentage.replace('%', '')
+                    switch (period) {
                         case 'weekly':
                             _this.budgets.week.push(data)
                             break;
