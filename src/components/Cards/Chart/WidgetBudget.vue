@@ -26,7 +26,7 @@
                             </div>
                         </div>
                         <div class="overflow-hidden h-2 mb-4 text-xs flex rounded" v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 80, 'bg-red-200': budget.percentage >= 80 }" >
-                            <div :style="'width:' + budget.budget.totalSpentPercentage"
+                            <div :style="'width:' + budget.totalSpentPercentage"
                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center" 
                                 v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 80, 'bg-red-600': budget.percentage >= 80 }" >
                             </div>
@@ -65,7 +65,7 @@
                             </div>
                         </div>
                         <div class="overflow-hidden h-2 mb-4 text-xs flex rounded " v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 80, 'bg-red-200': budget.percentage >= 80 }" >
-                            <div :style="'width:' + budget.budget.totalSpentPercentage"
+                            <div :style="'width:' + budget.totalSpentPercentage"
                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
                                 v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 80, 'bg-red-600': budget.percentage >= 80 }" >
                             </div>
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                         <div class="overflow-hidden h-2 mb-4 text-xs flex rounded" v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 80, 'bg-red-200': budget.percentage >= 80 }" >
-                            <div :style="'width:' + budget.budget.totalSpentPercentage"
+                            <div :style="'width:' + budget.totalSpentPercentage"
                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
                                 v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 80, 'bg-red-600': budget.percentage >= 80 }" >
                             </div>
@@ -142,7 +142,7 @@
                             </div>
                         </div>
                         <div class="overflow-hidden h-2 mb-4 text-xs flex rounded" v-bind:class="{ 'bg-emerald-200 ': budget.percentage <= 80, 'bg-red-200': budget.percentage >= 80 }" >
-                            <div :style="'width:' + budget.budget.totalSpentPercentage"
+                            <div :style="'width:' + budget.totalSpentPercentage"
                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
                                 v-bind:class="{ 'bg-emerald-600 ': budget.percentage <= 80, 'bg-red-600': budget.percentage >= 80 }" >
                             </div>
@@ -195,7 +195,7 @@ export default {
             ChartServiceVue.getBudgets().then((resp) => {
                 resp.forEach((data) => {
                     const period = data.budget.configuration.period
-                    data.percentage = data.budget.totalSpentPercentage.replace('%', '')
+                    data.percentage = data.totalSpentPercentage.replace('%', '')
                     switch (period) {
                         case 'weekly':
                             _this.budgets.week.push(data)
