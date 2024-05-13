@@ -24,7 +24,7 @@
                             </div>
                             <div class="text-right">
                                 <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
-                                    ({{ budget.budget.amount }}) {{ budget.totalSpentPercentage }}{{ currency }} -
+                                    ({{ budget.budget.amount }}) {{ budget.totalSpent }}{{ currency }} -
                                 </span>
                                 <span class="text-xs font-semibold inline-block text-emerald-600">
                                     {{ budget.budget.totalRemainingPercentage }}%
@@ -65,7 +65,7 @@
                             </div>
                             <div class="text-right">
                                 <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
-                                    ({{ budget.budget.amount }}) {{ budget.totalSpentPercentage }}{{ currency }} - -
+                                    ({{ budget.budget.amount }}) {{ budget.totalSpent }}{{ currency }} - -
                                 </span>
                                 <span class="text-xs font-semibold inline-block text-emerald-600">
                                     {{ budget.budget.totalRemainingPercentage }}%
@@ -105,7 +105,7 @@
                             </div>
                             <div class="text-right">
                                 <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
-                                    ({{ budget.budget.amount }}) {{ budget.totalSpentPercentage }}{{ currency }} - -
+                                    ({{ budget.budget.amount }}) {{ budget.totalSpent }}{{ currency }} - -
                                 </span>
 
                                 <span class="text-xs font-semibold inline-block text-emerald-600">
@@ -145,7 +145,7 @@
                             </div>
                             <div class="text-right">
                                 <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
-                                    ({{ budget.budget.amount }}) {{ budget.totalSpentPercentage }}{{ currency }} - -
+                                    ({{ budget.budget.amount }}) {{ budget.totalSpent }}{{ currency }} - -
                                 </span>
 
                                 <span class="text-xs font-semibold inline-block text-emerald-600">
@@ -212,6 +212,7 @@ export default {
             ChartServiceVue.getBudgets().then((resp) => {
                 resp.forEach((data) => {
                     const period = data.budget.configuration.period
+                    data.percentage = data.budget.totalSpentPercentage.replace('%', '')
                     switch (period) {
                         case 'weekly':
                             _this.budgets.week.push(data)
