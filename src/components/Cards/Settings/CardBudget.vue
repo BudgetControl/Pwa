@@ -19,7 +19,7 @@
                             <div>
                                 <span
                                     class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200">
-                                    {{ budget.name }}
+                                    {{ budget.budget.name }}
                                 </span>
                             </div>
                             <div class="text-right">
@@ -27,7 +27,7 @@
                                     ({{ budget.budget.amount }}) {{ budget.totalSpent }}{{ currency }} -
                                 </span>
                                 <span class="text-xs font-semibold inline-block text-emerald-600">
-                                    {{ budget.budget.totalRemainingPercentage }}%
+                                    {{ budget.totalRemainingPercentage }}%
                                 </span>
                             </div>
                         </div>
@@ -60,15 +60,15 @@
                             <div>
                                 <span
                                     class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200">
-                                    {{ budget.name }}
+                                    {{ budget.budget.name }}
                                 </span>
                             </div>
                             <div class="text-right">
                                 <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
-                                    ({{ budget.budget.amount }}) {{ budget.totalSpent }}{{ currency }} - -
+                                    ({{ budget.budget.amount }}) {{ budget.totalSpent }}{{ currency }}
                                 </span>
                                 <span class="text-xs font-semibold inline-block text-emerald-600">
-                                    {{ budget.budget.totalRemainingPercentage }}%
+                                    {{ budget.totalRemainingPercentage }}%
                                 </span>
                             </div>
                         </div>
@@ -100,16 +100,16 @@
                             <div>
                                 <span
                                     class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200">
-                                    {{ budget.name }}
+                                    {{ budget.budget.name }}
                                 </span>
                             </div>
                             <div class="text-right">
                                 <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
-                                    ({{ budget.budget.amount }}) {{ budget.totalSpent }}{{ currency }} - -
+                                    ({{ budget.budget.amount }}) {{ budget.totalSpent }}{{ currency }}
                                 </span>
 
                                 <span class="text-xs font-semibold inline-block text-emerald-600">
-                                    {{ budget.budget.totalRemainingPercentage }}%
+                                    {{ budget.totalRemainingPercentage }}%
                                 </span>
                             </div>
                         </div>
@@ -140,16 +140,16 @@
                             <div>
                                 <span
                                     class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200">
-                                    {{ budget.name }}
+                                    {{ budget.budget.name }}
                                 </span>
                             </div>
                             <div class="text-right">
                                 <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
-                                    ({{ budget.budget.amount }}) {{ budget.totalSpent }}{{ currency }} - -
+                                    ({{ budget.budget.amount }}) {{ budget.totalSpent }}{{ currency }}
                                 </span>
 
                                 <span class="text-xs font-semibold inline-block text-emerald-600">
-                                    {{ budget.budget.totalRemainingPercentage }}%
+                                    {{ budget.totalRemainingPercentage }}%
                                 </span>
                             </div>
                         </div>

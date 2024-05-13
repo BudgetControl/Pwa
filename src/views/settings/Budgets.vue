@@ -19,7 +19,7 @@
                                             <div>
                                                 <span
                                                     class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200">
-                                                    {{ budget.name }}
+                                                    {{ budget.budget.name }}
                                                 </span>
                                             </div>
                                             <div class="text-right">
@@ -51,7 +51,7 @@
                                             <div>
                                                 <span
                                                     class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200">
-                                                    {{ budget.name }}
+                                                    {{ budget.budget.name }}
                                                 </span>
                                             </div>
                                             <div class="text-right">
@@ -82,7 +82,7 @@
                                             <div>
                                                 <span
                                                     class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200">
-                                                    {{ budget.name }}
+                                                    {{ budget.budget.name }}
                                                 </span>
                                             </div>
                                             <div class="text-right">

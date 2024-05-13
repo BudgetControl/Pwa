@@ -273,15 +273,16 @@ export default {
         getBudget() {
             const _this = this
             ChartServiceVue.getBudget(this.id).then((resp) => {
-                _this.data.name = resp.config.name
-                _this.data.note = resp.config.note
-                _this.data.amount = resp.budget
-                _this.data.period = resp.config.period
-                _this.data.account = resp.config.account
-                _this.data.category = resp.config.category
-                _this.data.label = resp.config.label
-                _this.data.type = resp.config.type
+                _this.data.name = resp.name
+                _this.data.note = resp.description
+                _this.data.amount = resp.amount
+                _this.data.period = resp.configuration.period
+                _this.data.account = resp.configuration.accounts
+                _this.data.category = resp.configuration.categories
+                _this.data.label = resp.configuration.tags
+                _this.data.type = resp.configuration.types
                 _this.data.notification = resp.notification
+                _this.data.emails = resp.emails
             })
         },
         getLabels() {
