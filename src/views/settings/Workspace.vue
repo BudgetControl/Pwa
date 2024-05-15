@@ -55,13 +55,16 @@ export default {
     },
     mounted: function () {
         const _this = this
-        WorkspaceServiceVue.list().then((res) => {
+        WorkspaceServiceVue.listByUser().then((res) => {
             _this.workspaces = res
         })
     },
     methods: {
         openModal(id) {
-            this.$router.push({ path: `/app/settings/workspace/edit/${id}` })
+            if(id === null)
+                this.$router.push({ path: `/app/settings/workspace/add` })
+            else
+                this.$router.push({ path: `/app/settings/workspace/edit/${id}` })
         },
     },
 };

@@ -31,6 +31,11 @@ async function list() {
   return response.data;
 }
 
+async function listByUser() {
+  const response = await instance.get(`/api/workspace/by-user/list`);
+  return response.data;
+}
+
 async function add(data) {
   const response = await instance.post(`/api/workspace/create`,data);
   return response.data;
@@ -39,7 +44,11 @@ async function add(data) {
 async function activeWorkspace(id) {
   const response = await instance.patch(`/api/workspace/activate/${id}`);
   return response.data;
+}
 
+async function update(id, data) {
+  const response = await instance.put(`/api/workspace/update/${id}`, data);
+  return response.data;
 }
 
 
@@ -47,7 +56,9 @@ export default {
   get,
   list,
   add,
-  activeWorkspace
+  activeWorkspace,
+  update,
+  listByUser
 }
 
 </script>
