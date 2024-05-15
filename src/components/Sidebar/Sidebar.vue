@@ -9,18 +9,15 @@
         type="button" v-on:click="toggleCollapseShow('bg-white m-2 py-3 px-6')">
         <i class="fas fa-bars"></i>
       </button>
-      <!-- Brand -->
-      <router-link
-        class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-        to="/app/dashboard">
-        <label for="workspace">
-          <select v-model="workspace" id="workspace"
-            class="block appearance-none w-full py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-            <option v-for="(w, i) in workspaces" :key="i" :value="w.uuid">{{ w.name }}</option>
-          </select>
-        </label>
 
-      </router-link>
+      <!-- Brand -->
+      <label for="workspace">
+        <select v-model="workspace" id="workspace" @change="changeWorkspace"
+          class="block appearance-none w-full py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+          <option v-for="(w, i) in workspaces" :key="i" :value="w.uuid">{{ w.name }}</option>
+        </select>
+      </label>
+
       <!-- User -->
       <ul class="md:hidden items-center flex flex-wrap list-none">
         <li class="inline-block relative">
@@ -195,11 +192,13 @@ import NotificationDropdown from "@/components/Dropdowns/NotificationDropdown.vu
 import UserDropdown from "@/components/Dropdowns/UserDropdown.vue";
 import LogoutButton from "../Auth/LogoutButton.vue";
 import WorkspaceService from "../../services/WorkspaceService.vue";
+import LocalStorageServiceVue from '../../services/LocalStorageService.vue';
+import AuthService from '../../services/AuthService.vue';
 
 export default {
   data() {
     return {
-      workspace: "",
+      workspace: null,
       collapseShow: "hidden",
       workspaces: []
     };
@@ -217,9 +216,14 @@ export default {
         response.forEach((e) => {
           _this.workspaces.push(e)
         })
-        if (_this.workspaces.length > 0) {
-          _this.workspace = _this.workspaces[0].uuid;
-        }
+        _this.workspace = LocalStorageServiceVue.getWorkspaceId()
+      })
+    },
+    changeWorkspace() {
+      const _this = this
+      LocalStorageServiceVue.setWorkspaceId(_this.workspace)
+      AuthService.userInfo().then(() => {
+        _this.$router.go(0)
       })
     }
   },

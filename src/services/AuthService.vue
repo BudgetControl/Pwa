@@ -17,13 +17,13 @@ async function login(email, password) {
 }
 
 async function verify(email) {
-  const response = await instance.post('/api/auth/verify-email',{
+  const response = await instance.post('/api/auth/verify-email', {
     email: email
   });
   return response.data;
 }
 
-async function register(name, password,confirm_password, email) {
+async function register(name, password, confirm_password, email) {
   const response = await instance.post('/api/auth/sign-up', {
     name: name,
     password: password,
@@ -49,7 +49,7 @@ async function recoveryPassword(email) {
   return response.data;
 }
 
-async function resetPassword(token,password,confirm_password) {
+async function resetPassword(token, password, confirm_password) {
   const response = await instance.put(`/api/auth/reset-password/${token}`, {
     password: password,
     password_confirmation: confirm_password
@@ -66,7 +66,7 @@ async function check() {
     }
   });
 
-  if(response.status === 200) {
+  if (response.status === 200) {
     // Accedi all'header X-Custom-Header dalla risposta
     const access_token = response.data.authToken;
     LocalStorageService.setToken(access_token)
@@ -125,13 +125,25 @@ async function userInfo() {
   //retrive access token header
   const response = await instance.get('/api/auth/user-info', {
     headers: {
-      'Authorization': `Bearer ${LocalStorageService.getToken()}`
+      'Authorization': `Bearer ${LocalStorageService.getToken()}`,
+      'X-WS': LocalStorageService.getWorkspaceId()
     }
   });
 
   LocalStorageService.setUserToken(response.data.token);
   LocalStorageService.setUser(response.data.userInfo);
 
+  return response.data;
+}
+
+async function userInfoByEmail(email) {
+  //retrive access token header
+  const response = await instance.get(`/api/auth/user-info/by-email/${email}`, {
+    headers: {
+      'Authorization': `Bearer ${LocalStorageService.getToken()}`,
+      'X-BC-Token': LocalStorageService.getUserToken()
+    }
+  });
   return response.data;
 }
 
@@ -150,7 +162,8 @@ export default {
   settings,
   providerUri,
   token,
-  userInfo
+  userInfo,
+  userInfoByEmail
 }
 
 </script>

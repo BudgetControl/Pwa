@@ -221,6 +221,10 @@ const routes = [
         component: Workspace,
       },
       {
+        path: "/app/settings/workspace/add",
+        component: WorkspaceCard,
+      },
+      {
         path: "/app/settings/workspace/edit/:id",
         component: WorkspaceCard,
       },
