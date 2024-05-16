@@ -56,6 +56,16 @@ export default {
 
       AuthService.token(token, 'google').then((response) => {
         LocalStorageService.setToken(response.access_token);
+        // Get the workspace id from the local storage
+        const ws = LocalStorageService.getWorkspaceId()
+        let currentWsUuid = response.workspaces[0].uuid
+        response.workspaces.forEach(workspace => {
+          if(workspace.uuid === ws) {
+            currentWsUuid = ws
+          }
+        });
+        LocalStorageService.setWorkspaceId(currentWsUuid)
+
         AuthService.userInfo().then(() => {
           _this.$router.push({ path: '/app/dashboard' })
         })
