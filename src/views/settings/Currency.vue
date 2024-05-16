@@ -59,7 +59,7 @@ export default {
                 this.currencies.push(e)
             });
             const settings = LocalStorageService.get("settings")
-            this.currency_id = settings.currency.icon
+            this.currency_id = settings.currency_id
         })
     },
     methods: {
