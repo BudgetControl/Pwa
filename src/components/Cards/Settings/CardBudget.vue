@@ -54,8 +54,6 @@ import ChartServiceVue from '../../../services/ChartService.vue'
 import BudgetComponent from '../../GenericComponents/BudgetComponent.vue'
 
 export default {
-    components: {
-    },
     data() {
         return {
             budgets: {
