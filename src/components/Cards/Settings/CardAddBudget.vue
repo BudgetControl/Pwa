@@ -40,11 +40,12 @@
                                     <option value="monthly">monthly</option>
                                     <option value="yearly">yearly</option>
                                     <option value="one_shot">one shot</option>
+                                    <option value="recursively">recursive</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="flex flex-wrap" v-if="data.period == 'one_shot'">
+                        <div class="flex flex-wrap" v-if="data.period == 'one_shot' || data.period == 'recursively'">
                             <div class="lg:w-6/12 px-2 py-2 w-full">
 
                                 <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -358,6 +359,8 @@ export default {
                         "tags": this.data.label,
                         "types": this.data.type,
                         "accounts": this.data.account,
+                        "period_start": this.data.period_start,
+                        "period_end": this.data.period_end, 
                     },
                     "notification": this.data.notification,
                     "emails": this.data.emails,
@@ -386,7 +389,7 @@ export default {
                 return false
             }
 
-            if (this.data.period == "one_shot") {
+            if (this.data.period == "one_shot" || this.data.period == "recursively") {
 
                 if (this.data.period_start == null) {
                     alert("Please insert a start date for a budget")
@@ -395,6 +398,12 @@ export default {
 
                 if (this.data.period_end == null) {
                     alert("Please insert a end date for a budget")
+                    return false
+                }
+
+                // check if start date is less than end date
+                if (this.data.period_start > this.data.period_end) {
+                    alert("Start date must be less than end date")
                     return false
                 }
 
