@@ -18,9 +18,7 @@
 </template>
 <script>
 import { createPopper } from "@popperjs/core";
-import axios from 'axios'
-// const X_API_KEY = { "X-API-KEY": "7221" };
-const DOMAIN = process.env.VUE_APP_API_PATH_V2;
+import ApiService from "../../services/ApiService.vue";
 
 export default {
   props: {
@@ -32,6 +30,9 @@ export default {
     icon: {
       type: String,
       default: "fa-ellipsis-v",
+    },
+    index: {
+      required: true
     }
   },
   data() {
@@ -52,8 +53,9 @@ export default {
       }
     },
     deleteEntry() {
-      axios.delete(DOMAIN + "/api/debit/" + this.entryId).then((resp) => {
-        console.log(resp)
+      this.dropdownPopoverShow = false;
+      ApiService.deletePayee(this.entryId).then(() => {
+        this.$emit('deleteItem', this.index)
       }).catch((error) => {
         console.error(error);
       })

@@ -11,20 +11,6 @@
                 Sign up with
               </h6>
             </div>
-            <div class="btn-wrapper text-center">
-              <button
-                class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                type="button">
-                <img alt="..." class="w-5 mr-1" :src="facebook" />
-                Facebook
-              </button>
-              <button
-                class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                type="button">
-                <img alt="..." class="w-5 mr-1" :src="google" />
-                Google
-              </button>
-            </div>
             <hr class="mt-6 border-b-1 border-blueGray-300" />
           </div>
           <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
@@ -35,9 +21,10 @@
 
               <div role="alert" v-if="error">
                 <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-                  Ops ... si è verificato un errore
+                  Oops... an error occurred
                 </div>
                 <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                  {{ error }}
                 </div>
               </div>
               <div class="relative w-full mb-3">
@@ -67,6 +54,17 @@
                   placeholder="Password" />
               </div>
 
+
+              <div class="relative w-full mb-3">
+                  <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                    Confirm Password
+                  </label>
+                  <input v-model="confirm_password" type="password"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Confirm Password" />
+                    <PasswordStrengthMeter :password="password" ref="passwordStreight" />
+                </div>
+
               <div>
                 <label class="inline-flex items-center cursor-pointer">
                   <input id="customCheckLogin" type="checkbox"
@@ -95,55 +93,43 @@
   </div>
 </template>
 <script>
-import facebook from "@/assets/img/github.svg";
-import google from "@/assets/img/google.svg";
 import AuthService from "../../services/AuthService.vue";
 import loading from 'vue-full-loading'
-
+import PasswordStrengthMeter from "../../components/Auth/PasswordStrengthMeter.vue";
+import WorkspaceServiceVue from '../../services/WorkspaceService.vue';
 
 export default {
   components: {
-    loading
+    loading,
+    PasswordStrengthMeter
   },
   data() {
     return {
-      facebook,
-      google,
       show: false,
-      error: false
+      error: false,
+      password: null,
+      confirm_password: null
     };
-  },
-  mounted() {
-      //retrive access token header
-      this.show = true
-      AuthService.check().then(() => [
-        this.$router.push({ path: '/app/dashboard' })
-      ]).catch(() => {
-        this.show = false
-      })
   },
   methods: {
     async submit() {
       let email = this.email;
       let password = this.password;
       let name = this.name;
+      const confirm_password = this.confirm_password
       const _this = this
 
       this.show = true
       this.error = false
-      AuthService.register(name, password, email).then((response) => {
-        //save token in local storage
-        localStorage.setItem("auth-token", response.token.plainTextToken);
+      AuthService.register(name, password,confirm_password, email).then(() => {
         //redirecto to dashboard
-        _this.$router.push({ path: '/app/dashboard' })
+        WorkspaceServiceVue.add('ws_'.name.replace(" ","-"))
+        _this.$router.push({ path: '/app/auth/login?signin=1' })
       }).catch((err) => {
+        const response = err.response.data
         _this.show = false
-        _this.error = true
-        //TODO: show error
-        console.error(err)
+        _this.error = response.error
       })
-
-
     }
   }
 };
