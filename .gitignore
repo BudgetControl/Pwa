@@ -5,7 +5,7 @@ node_modules
 # local env files
 .env.local
 .env.*.local
-
+.env
 # Log files
 npm-debug.log*
 yarn-debug.log*
@@ -21,3 +21,4 @@ yarn-error.log*
 *.sw?
 
 commit.sh
+src/assets/*

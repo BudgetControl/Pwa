@@ -9,7 +9,7 @@
             <form>
                 <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
                     Service to import: <br />
-                    <span class="inline-block ml-5 text-xs"> <a :href="this.DOMAIN + '/download-csv-template'">Download an exaple
+                    <span class="inline-block ml-5 text-xs"> <a :href="this.DOMAIN + '/import/download-csv-template'">Download an example
                             csv file</a></span><br/>
                     <span class="inline-block ml-5 text-xs"> <a :href="this.DOMAIN + '/entries/export'">Download all data into
                     csv file</a></span>
@@ -116,8 +116,8 @@ export default {
         getLabels() {
             let _this = this
 
-            ApiService.label().then((res) => {
-                let data = res.data
+            ApiService.labels().then((res) => {
+                let data = res
                 data.forEach(function (r) {
                     _this.input.tags.push(r)
                 })
@@ -150,8 +150,8 @@ export default {
 
         getAccount() {
             const _this = this
-            ApiService.account().then((res) => {
-                let data = res.data
+            ApiService.accounts().then((res) => {
+                let data = res
                 data.forEach(function (r) {
                     _this.accounts.push(r)
                 })

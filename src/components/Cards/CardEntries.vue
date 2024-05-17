@@ -8,38 +8,25 @@
             Wallet
           </h3>
         </div>
-        <div class="lg:w-8/12 px-2">
-          <input v-model="wallet" type="tel" placeholder="0,00 €"
-            class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-        </div>
-        <div class="lg:w-2/12 px-2">
-          <button v-on:click="fixWallet()"
-            class="text-emerald-500 bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-            type="button">
-            FIX WALLET
-          </button>
-        </div>
-        <div class="lg:w-2/12 px-2">
-          <button v-on:click="$refs.entries.resetFilter()" v-if="action.reset"
-            class="text-emerald-500 bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-            type="button">
-            RESET FILTER
-          </button>
-        </div>
       </div>
     </div>
 
-    <EntriesTable ref="entries" />
+    <EntriesTable ref="entry" />
+    <!-- pagination -->
+    <div class="py-2" v-if="pagination.enabled">
+      <Paginator ref="_paginator"></Paginator>
+    </div>
+    <!-- end pagination -->
 
   </div>
 </template>
 <script>
 
 import EntriesTable from "@/components/GenericComponents/EntriesTable.vue";
-
 import axios from 'axios'
-// const X_API_KEY = { "X-API-KEY": "7221" }
-const DOMAIN = process.env.VUE_APP_API_PATH
+import ApiServiceVue from '../../services/ApiService.vue';
+import Paginator from "../GenericComponents/Paginator.vue";
+import LocalStorageService from "../../services/LocalStorageService.vue";
 
 export default {
   props: {
@@ -58,54 +45,68 @@ export default {
       selected: {
         account: 0
       },
+      pagination: {
+        enabled: false
+      },
       action: {
         reset: true
       },
     }
   },
   components: {
-    EntriesTable
+    EntriesTable, Paginator
   },
   watch: {
-    '$route.params.account_id': function (account_id) {
-      this.selected.account = account_id === undefined ? this.selected.account : account_id
-      this.getWallet(account_id)
-    },
-    '$route.params.filter_type': function () {
-      this.getWallet(0)
+    $route() {
+      this.invoke()
     }
   },
   mounted() {
-    let categoryID = this.$route.params.account_id
-    if(categoryID == undefined) {
-      categoryID = 0
-    }
-    this.getWallet(categoryID)
+    LocalStorageService.set('current_page', 0)
+    this.invoke()
   },
   methods: {
-    getWallet(account_id) {
-      axios.get(DOMAIN + "/api/stats/wallet/" + account_id).then((resp) => {
-        let data = resp.data.data
-        this.wallet = data.total.toFixed(2)
-      }).catch((error) => {
-        console.error(error);
-      })
-    },
-    fixWallet() {
+    invoke() {
+      let _this = this
 
-      let data = {
-        amount: this.wallet,
-        account_id: this.selected.account
+      let filter = ''
+
+      if (this.$route.query.account !== undefined) {
+        filter += `&filter[account]=${this.$route.query.account}`
       }
 
-      axios.post(DOMAIN + "/api/stats/wallet", data).then((resp) => {
-        //TODO: inserire un messaggio
-        console.log(resp)
-      }).catch((error) => {
-        this.action.alert = true
-        this.action.alert_message = "Ops... An error occured"
-        console.error(error);
+      if (this.$route.query.category !== undefined) {
+        filter += `&filter[category]=${this.$route.query.category}`
+      }
+
+      if (this.$route.query.type !== undefined) {
+        filter += `&filter[type]=${this.$route.query.type}`
+      }
+
+      if (this.$route.query.label !== undefined) {
+        filter += `&filter[label]=${this.$route.query.label}`
+      }
+
+      if (filter != '') {
+        this.action.reset = true
+      } else {
+        this.action.reset = false
+      }
+
+      let currentPage = LocalStorageService.get('current_page') == null ? 0 : LocalStorageService.get('current_page')
+      ApiServiceVue.getEntry(currentPage, filter).then((res) => {
+        if (res.data.length > 0) {
+          _this.$refs.entry.buildEntriesTable(res.data)
+        }
+
+        if (currentPage == 0) {
+          this.pagination.enabled = res.paginate
+        }
+        if (this.$refs._paginator !== undefined) {
+          this.$refs._paginator.hasMorePage = res.hasMorePages
+        }
       })
+
     },
     get(path, callBack) {
       axios.get(path).then((resp) => {
@@ -114,7 +115,7 @@ export default {
         console.error(error);
       })
     }
-  }
+  },
 };
 </script>
 

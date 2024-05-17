@@ -11,10 +11,10 @@
           >
             Copyright © {{ date }}
             <a
-              href="https://www.creative-tim.com?ref=vn-footer-admin"
+              href="https://www.mlabfactory.it?ref=vn-footer-admin"
               class="text-blueGray-500 hover:text-blueGray-700 text-sm font-semibold py-1"
             >
-              Creative Tim
+              Mlab Factory
             </a>
           </div>
         </div>
@@ -22,15 +22,15 @@
           <ul class="flex flex-wrap list-none md:justify-end justify-center">
             <li>
               <a
-                href="https://www.creative-tim.com?ref=vn-footer-admin"
+                href="https://www.mlabfactory.it?ref=vn-footer-admin"
                 class="text-blueGray-600 hover:text-blueGray-800 text-sm font-semibold block py-1 px-3"
               >
-                Creative Tim
+                Mlab Factory
               </a>
             </li>
             <li>
               <a
-                href="https://www.creative-tim.com/presentation?ref=vn-footer-admin"
+                href="https://www.mlabfactory.it/presentation?ref=vn-footer-admin"
                 class="text-blueGray-600 hover:text-blueGray-800 text-sm font-semibold block py-1 px-3"
               >
                 About Us
@@ -38,7 +38,7 @@
             </li>
             <li>
               <a
-                href="http://blog.creative-tim.com?ref=vn-footer-admin"
+                href="http://blog.www.mlabfactory.it?ref=vn-footer-admin"
                 class="text-blueGray-600 hover:text-blueGray-800 text-sm font-semibold block py-1 px-3"
               >
                 Blog
@@ -46,7 +46,7 @@
             </li>
             <li>
               <a
-                href="https://github.com/creativetimofficial/vue-notus/blob/main/LICENSE.md?ref=vn-footer-admin"
+                href="https://github.com/BudgetControl/Application/LICENSE.md?ref=vn-footer-admin"
                 class="text-blueGray-600 hover:text-blueGray-800 text-sm font-semibold block py-1 px-3"
               >
                 MIT License

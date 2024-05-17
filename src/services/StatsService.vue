@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import LocalStorageService from './LocalStorageService.vue';
 
 const DOMAIN = process.env.VUE_APP_API_PATH_V2;
 
@@ -9,9 +10,11 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('auth-token');
+    const token = LocalStorageService.getToken()
     if (token) {
-      config.headers['access_token'] = token;
+       config.headers['Authorization'] = `Bearer ${token}`;
+       config.headers['X-BC-Token'] = LocalStorageService.getUserToken()
+       config.headers['X-BC-WS'] = LocalStorageService.getWorkspaceId()
     }
     return config;
   },
@@ -20,8 +23,8 @@ instance.interceptors.request.use(
   }
 );
 
-async function incoming() {
-  const response = await instance.get('/api/stats/incoming');
+async function incoming(params) {
+  const response = await instance.get('/api/stats/incoming' + params);
   return response.data;
 }
 
@@ -45,13 +48,19 @@ async function planned() {
   return response.data;
 }
 
+async function health() {
+  const response = await instance.get('/api/stats/health');
+  return response.data;
+}
+
 
 export default {
   incoming,
   expenses,
   total,
   wallets,
-  planned
+  planned,
+  health
 }
 
 </script>
