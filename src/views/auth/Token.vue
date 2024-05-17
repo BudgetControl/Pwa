@@ -55,7 +55,7 @@ export default {
       this.error = false
 
       AuthService.token(token, 'google').then((response) => {
-        LocalStorageService.setToken(response.access_token);
+        LocalStorageService.setToken(response.token);
         // Get the workspace id from the local storage
         const ws = LocalStorageService.getWorkspaceId()
         let currentWsUuid = response.workspaces[0].uuid
