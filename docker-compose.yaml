@@ -2,7 +2,6 @@ version: '2.2'
 
 services:
     femodule:
-      image: budgetcontrol-pwa:node-${VUE_APP_VERSION}
       container_name: budgetcontrol-pwa
       build:
         context: .
@@ -12,10 +11,6 @@ services:
       volumes:
           - ./:/app
           - /app/node_modules
-#      port 80 should not be configured because it is occupied by nginx proxy if you use the core docker-compose
-#      see --> https://github.com/BudgetControl/Pwa/blob/master/docker-compose.yaml
-#      ports:
-#        - 80:8080
 
 networks:
   budgetcontrol_network:
