@@ -1,0 +1,10 @@
+{
+  "name": "Budget Control",
+  "icons": [
+    {
+      "src": "apple-icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

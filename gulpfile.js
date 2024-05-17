@@ -2,23 +2,23 @@ const gulp = require("gulp");
 const gap = require("gulp-append-prepend");
 
 gulp.task("licenses", async function () {
-  // this is to add Creative Tim licenses in the production mode for the minified js
+  // this is to add Mlab Factory licenses in the production mode for the minified js
   gulp
     .src("dist/js/*.js", { base: "./" })
     .pipe(
       gap.prependText(`/*!
 
 =========================================================
-* Vue Notus - v1.1.0 based on Tailwind Starter Kit by Creative Tim
+* Vue Notus - v1.1.0 based on Tailwind Starter Kit by Mlab Factory
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vue-notus
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/vue-notus/blob/main/LICENSE.md)
+* Product Page: https://www.mlabfactory.it/product/budget-control
+* Copyright 2021 Mlab Factory (https://www.mlabfactory.it)
+* Licensed under MIT (https://github.com/BudgetControl/Application/blob/main/LICENSE.md)
 
-* Tailwind Starter Kit Page: https://www.creative-tim.com/learning-lab/tailwind-starter-kit/presentation
+* Tailwind Starter Kit Page: https://www.mlabfactory.it/learning-lab/tailwind-starter-kit/presentation
 
-* Coded by Creative Tim
+* Coded by Mlab Factory
 
 =========================================================
 
@@ -28,23 +28,23 @@ gulp.task("licenses", async function () {
     )
     .pipe(gulp.dest("./", { overwrite: true }));
 
-  // this is to add Creative Tim licenses in the production mode for the minified html
+  // this is to add Mlab Factory licenses in the production mode for the minified html
   gulp
     .src("dist/index.html", { base: "./" })
     .pipe(
       gap.prependText(`<!--
 
 =========================================================
-* Vue Notus - v1.1.0 based on Tailwind Starter Kit by Creative Tim
+* Vue Notus - v1.1.0 based on Tailwind Starter Kit by Mlab Factory
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vue-notus
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/vue-notus/blob/main/LICENSE.md)
+* Product Page: https://www.mlabfactory.it/product/budget-control
+* Copyright 2021 Mlab Factory (https://www.mlabfactory.it)
+* Licensed under MIT (https://github.com/BudgetControl/Application/LICENSE.md)
 
-* Tailwind Starter Kit Page: https://www.creative-tim.com/learning-lab/tailwind-starter-kit/presentation
+* Tailwind Starter Kit Page: https://www.mlabfactory.it/learning-lab/tailwind-starter-kit/presentation
 
-* Coded by Creative Tim
+* Coded by Mlab Factory
 
 =========================================================
 
@@ -54,23 +54,23 @@ gulp.task("licenses", async function () {
     )
     .pipe(gulp.dest("./", { overwrite: true }));
 
-  // this is to add Creative Tim licenses in the production mode for the minified css
+  // this is to add Mlab Factory licenses in the production mode for the minified css
   gulp
     .src("dist/css/*.css", { base: "./" })
     .pipe(
       gap.prependText(`/*!
 
 =========================================================
-* Vue Notus - v1.1.0 based on Tailwind Starter Kit by Creative Tim
+* Vue Notus - v1.1.0 based on Tailwind Starter Kit by Mlab Factory
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vue-notus
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/vue-notus/blob/main/LICENSE.md)
+* Product Page: https://www.mlabfactory.it/product/budget-control
+* Copyright 2021 Mlab Factory (https://www.mlabfactory.it)
+* Licensed under MIT (hhttps://github.com/BudgetControl/Application/LICENSE.md)
 
-* Tailwind Starter Kit Page: https://www.creative-tim.com/learning-lab/tailwind-starter-kit/presentation
+* Tailwind Starter Kit Page: https://www.mlabfactory.it/learning-lab/tailwind-starter-kit/presentation
 
-* Coded by Creative Tim
+* Coded by Mlab Factory
 
 =========================================================
 

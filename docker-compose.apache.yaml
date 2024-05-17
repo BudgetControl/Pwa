@@ -1,0 +1,16 @@
+version: '2.2'
+
+services:
+    femodule:
+      image: budgetcontrol-pwa:apache-${VUE_APP_VERSION}
+      container_name: budgetcontrol-pwa
+      build:
+        context: .
+        dockerfile: Dockerfile.apache
+      volumes:
+          - ./:/usr/src/app
+      restart: unless-stopped
+      networks:
+        - budgetcontrol_network    
+      command: tail -F /var/www/error.log  
+    

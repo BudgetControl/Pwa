@@ -1,0 +1,27 @@
+FROM php:8.2.7-apache
+
+WORKDIR /var/www/htdocs
+
+RUN mkdir /var/www/logs
+RUN touch /var/www/logs/error.log
+
+## NODE INSTALLATION
+
+RUN apt install -y curl
+RUN curl -fsSL https://deb.nodesource.com/setup_21.x | bash - && apt-get install -y nodejs
+
+COPY . /var/www/htdocs/
+RUN npm install && npm run build
+
+###########################################
+# apache conf
+###########################################
+
+COPY bin/apache/budgetcontrol.dev.conf /etc/apache2/sites-available/budgetcontrol-default.conf
+RUN a2ensite budgetcontrol-default.conf
+RUN a2enmod rewrite
+RUN chown -R www-data:www-data /var/www/htdocs/dist
+RUN chmod -R 775 /var/www/htdocs/dist
+COPY bin/apache/htaccess.conf /var/www/htdocs/dist/.htaccess
+
+RUN service apache2 restart
