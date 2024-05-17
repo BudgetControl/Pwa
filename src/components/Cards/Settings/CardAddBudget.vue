@@ -283,6 +283,8 @@ export default {
                 _this.data.type = resp.configuration.types
                 _this.data.notification = resp.notification
                 _this.data.emails = resp.emails
+                _this.data.period_start = resp.configuration.period_start
+                _this.data.period_end = resp.configuration.period_end
             })
         },
         getLabels() {
@@ -330,6 +332,8 @@ export default {
                         "tags": this.data.label,
                         "types": this.data.type,
                         "accounts": this.data.account,
+                        "period_start": this.data.period_start,
+                        "period_end": this.data.period_end,
                     },
                     "notification": this.data.notification,
                     "emails": this.data.emails,
