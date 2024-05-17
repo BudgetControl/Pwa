@@ -1,3 +1,4 @@
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 import { createApp } from "vue";
 import { createWebHistory, createRouter } from "vue-router";
 
@@ -13,119 +14,260 @@ import App from "@/App.vue";
 // layouts
 
 import Admin from "@/layouts/Admin.vue";
+import Application from "@/layouts/Application.vue";
 import Auth from "@/layouts/Auth.vue";
 
 // views for Admin layout
 
-import Dashboard from "@/views/admin/Dashboard.vue";
-import AddEntry from "@/views/admin/AddEntry.vue";
-import Settings from "@/views/admin/Settings.vue";
-import MyEntries from "@/views/admin/MyEntries.vue";
-import ImportEntries from "@/views/admin/ImportEntries.vue";
-import SearchEntries from "@/views/admin/SearchEntries.vue";
-import EntriesResume from "@/views/admin/EntriesResume.vue";
+import Dashboard from "@/views/application/Dashboard.vue";
+import AddEntry from "@/views/application/AddEntry.vue";
+import MyPlannedEntries from "@/views/application/MyPlannedEntries.vue";
+import AddPlannedEntry from "@/views/application/AddPlannedEntry.vue";
+import PayeeList from "@/views/application/PayeeList.vue";
+import MyEntries from "@/views/application/MyEntries.vue";
+import ImportEntries from "@/views/application/ImportEntries.vue";
+import SearchEntries from "@/views/application/SearchEntries.vue";
+import EntriesResume from "@/views/application/EntriesResume.vue";
+import Budgets from "@/views/application/Budgets.vue";
+import AddBudgets from "@/components/Cards/Settings/CardAddBudget.vue";
+
+// settings layout
+
+import Profile from "@/views/settings/Profile.vue";
+import Settings from "@/views/settings/Settings.vue";
+import Wallet from "@/views/settings/Wallet.vue";
+import WalletCard from "@/views/settings/Cards/WalletCard.vue";
+import Category from "@/views/settings/Category.vue";
+import CategoryCard from "@/views/settings/Cards/CategoryCard.vue";
+import Label from "@/views/settings/Label.vue";
+import LabelCard from "@/views/settings/Cards/LabelCard.vue";
+import Currency from "@/views/settings/Currency.vue";
+import Model from "@/views/settings/Model.vue";
+import ModelCard from "@/views/settings/Cards/ModelCard.vue";
+import Assistance from "@/views/settings/Assistance.vue";
+import AboutUs from "@/views/settings/AboutUs.vue";
+import Workspace from "@/views/settings/Workspace.vue";
+import WorkspaceCard from "@/views/settings/Cards/WorkspaceCard.vue";
 
 // views for Auth layout
-
 import Login from "@/views/auth/Login.vue";
 import Register from "@/views/auth/Register.vue";
+import RecoveryPassword from "@/views/auth/RecoveryPassword.vue";
+import ResetPassword from "@/views/auth/ResetPassword.vue";
+import AuthConfirm from "@/views/auth/Confirm.vue";
+import AuthToken from "@/views/auth/Token.vue";
 
 // views without layouts
 
 import Landing from "@/views/Landing.vue";
-import Profile from "@/views/Profile.vue";
 // import Index from "@/views/Index.vue";
-
-//vuex store data
-import store from "./store";
 
 // routes
 
 const routes = [
   {
-    path: "/admin",
-    redirect: "/admin/dashboard",
-    component: Admin,
+    path: "/app",
+    name: 'app',
+    component: Application,
     children: [
       {
-        path: "/admin/dashboard",
+        path: "/app/dashboard",
         component: Dashboard,
       },
+
       {
-        path: "/admin/add_entry",
+        path: "/app/entry/:entry_id",
+        name: 'edit_entry',
+        component: AddEntry,
+      },
+
+      {
+        path: "/app/entry",
+        name: 'entry',
         component: AddEntry,
       },
       {
-        path: "/admin/entries/:account_id",
-        component: MyEntries,
-        children: [
-          {
-            path: "/admin/entries/type/:filter_type",
-            component: MyEntries,
-          },
-          {
-            path: "/admin/entries/:account_id/category-:category_id",
-            component: MyEntries,
-          },
-          {
-            path: "/admin/entries/:account_id/label-:label_id",
-            component: MyEntries,
-          }
-        ]
+        path: "/app/planned_entry/:entry_id",
+        name: 'planned_entry',
+        component: AddPlannedEntry,
       },
       {
-        path: "/admin/import",
+        path: "/app/planned_entry",
+        name: 'add_planned_entry',
+        component: AddPlannedEntry,
+      },
+      {
+        path: "/app/planned-entries",
+        name: 'planned-entries',
+        component: MyPlannedEntries,
+      },
+      {
+        path: "/app/payee",
+        name: 'payee',
+        component: PayeeList,
+      },
+
+      {
+        path: "/app/budgets",
+        component: Budgets,
+      },
+
+      {
+        path: "/app/budgets/new",
+        component: AddBudgets,
+      },
+
+
+      {
+        path: "/app/budgets/edit/:id",
+        component: AddBudgets,
+      },
+
+      {
+        path: "/app/entries",
+        component: MyEntries,
+      },
+      {
+        path: "/app/import",
         component: ImportEntries,
       },
       {
-        path: "/admin/search",
+        path: "/app/search",
         component: SearchEntries,
       },
 
       {
-        path: "/see_all/:type",
+        path: "/app/see_all/:type",
         component: EntriesResume,
-      },
-      {
-        path: "/admin/settings/",
-        component: Settings,
-        children: [
-          {
-            path: "/admin/settings/:setting_type",
-            component: Settings,
-          }
-        ]
       },
     ],
   },
+
   {
-    path: "/auth",
-    redirect: "/auth/login",
+    path: "/app/settings",
+    component: Admin,
+    children: [
+      {
+        path: "/app/settings",
+        component: Settings,
+      },
+      {
+        path: "/app/settings/wallet",
+        component: Wallet,
+      },
+      {
+        path: "/app/settings/wallet/edit/:id",
+        component: WalletCard,
+      },
+      {
+        path: "/app/settings/wallet/edit/",
+        component: WalletCard,
+      },
+      {
+        path: "/app/settings/category",
+        component: Category,
+      },
+      {
+        path: "/app/settings/category/edit/:id/:subId",
+        component: CategoryCard,
+      },
+
+      {
+        path: "/app/settings/label",
+        component: Label,
+      },
+      {
+        path: "/app/settings/label/edit/:id",
+        component: LabelCard,
+      },
+      {
+        path: "/app/settings/category/edit/",
+        component: CategoryCard,
+      },
+      {
+        path: "/app/settings/currency/",
+        component: Currency,
+      },
+      {
+        path: "/app/settings/currency/add",
+        component: Currency,
+      },
+      {
+        path: "/app/model/:entry_id",
+        component: ModelCard,
+      },
+      {
+        path: "/app/settings/model/add",
+        component: ModelCard,
+      },
+      {
+        path: "/app/settings/model/",
+        component: Model,
+      },
+      {
+        path: "/app/settings/profile",
+        component: Profile,
+      },
+      {
+        path: "/app/settings/assistance",
+        component: Assistance,
+      },
+      {
+        path: "/app/settings/about-us",
+        component: AboutUs,
+      },
+      {
+        path: "/app/settings/workspace",
+        component: Workspace,
+      },
+      {
+        path: "/app/settings/workspace/add",
+        component: WorkspaceCard,
+      },
+      {
+        path: "/app/settings/workspace/edit/:id",
+        component: WorkspaceCard,
+      },
+    ]
+  },
+
+  {
+    path: "/app/auth",
+    name: "auth",
+    redirect: "/app/auth/login",
     component: Auth,
     children: [
       {
-        path: "/auth/login",
+        path: "/app/auth/login",
         component: Login,
       },
       {
-        path: "/auth/register",
+        path: "/app/auth/register",
         component: Register,
+      },
+      {
+        path: "/app/auth/recovery-password",
+        component: RecoveryPassword,
+      },
+      {
+        path: "/app/auth/reset-password/:token",
+        component: ResetPassword,
+      },
+      {
+        path: "/app/auth/confirm/:token",
+        component: AuthConfirm,
+      },
+      {
+        path: "/app/auth/token",
+        component: AuthToken,
       },
     ],
   },
   {
-    path: "/landing",
+    path: "/app/landing",
     component: Landing,
   },
-  {
-    path: "/profile",
-    component: Profile,
-  },
-  {
-    path: "/",
-    component: Admin,
-  },
-  { path: "/:pathMatch(.*)*", redirect: "/" },
+  { path: "/:pathMatch(.*)*", redirect: "/app" },
 ];
 
 const router = createRouter({
@@ -134,6 +276,5 @@ const router = createRouter({
 });
 
 const app = createApp(App);
-app.use(store)
 app.use(router)
 app.mount("#app")

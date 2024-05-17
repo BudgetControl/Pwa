@@ -6,7 +6,7 @@
       ref="btnDropdownRef"
       v-on:click="toggleDropdown($event)"
     >
-      Demo Pages
+    Budget Control
     </a>
     <div
       ref="popoverDropdownRef"
@@ -19,28 +19,28 @@
       <span
         class="text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
       >
-        Admin Layout
+        App
       </span>
       <router-link
-        to="/admin/dashboard"
+        to="/app/dashboard"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
         Dashboard
       </router-link>
       <router-link
-        to="/admin/settings"
+        to="/app/settings"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
         Settings
       </router-link>
       <router-link
-        to="/admin/tables"
+        to="/app/tables"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
         Tables
       </router-link>
       <router-link
-        to="/admin/maps"
+        to="/app/maps"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
         Maps
@@ -49,16 +49,16 @@
       <span
         class="text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
       >
-        Auth Layout
+        Auth login
       </span>
       <router-link
-        to="/auth/login"
+        to="/app/auth/login"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
         Login
       </router-link>
       <router-link
-        to="/auth/register"
+        to="/app/auth/register"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
         Register

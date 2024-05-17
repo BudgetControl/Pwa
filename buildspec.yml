@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+ install:
+  runtime-versions:
+    nodejs: 18
+  commands:
+    - npm install
+
+ build:
+   commands:
+     - echo Install application
+     - npm run build-dev
+
+ post_build:
+   commands:
+     - echo Run test
+
+artifacts:
+  files:
+    - '**/*'
+  name: application-$(date +%Y-%m-%d)

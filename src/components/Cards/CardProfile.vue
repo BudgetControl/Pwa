@@ -56,7 +56,7 @@
         </div>
         <div class="mb-2 text-blueGray-600 mt-10">
           <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
-          Solution Manager - Creative Tim Officer
+          Solution Manager - Mlab Factory Officer
         </div>
         <div class="mb-2 text-blueGray-600">
           <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>
