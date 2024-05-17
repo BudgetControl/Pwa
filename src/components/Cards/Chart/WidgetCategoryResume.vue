@@ -124,9 +124,9 @@ export default {
 
           this.elements.push({
             label: element.label,
-            amount: element.amount,
-            amount_before: element.prevAmount,
-            bounce_rate: element.bounceRate
+            amount: element.amount.toFixed(2),
+            amount_before: element.prevAmount.toFixed(2),
+            bounce_rate: element.bounceRate.toFixed(2)
           })
 
         });
