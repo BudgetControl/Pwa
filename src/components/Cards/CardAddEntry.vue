@@ -69,9 +69,9 @@
           </div>
 
           <div class="px-2 py-2 w-full" :class="{
-            'lg:w-4/12': action.openTab == 4,
-            'lg:w-6/12': action.openTab != 4,
-          }">
+          'lg:w-4/12': action.openTab == 4,
+          'lg:w-6/12': action.openTab != 4,
+        }">
 
             <select v-if="action.hidecategory == false" v-model="category" id="category"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
@@ -101,7 +101,7 @@
 
           <div class="px-2 py-2 lg:w-6/12" v-if="action.openTab == 4">
             <label for="incoming" class="uppercase text-blueGray-600 text-xs font-bold mb-2">
-              INCOMING  
+              INCOMING
               <input type="radio" id="incoming" value="+"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
                 v-model="action.debit_type" />
@@ -110,7 +110,7 @@
 
           <div class="px-2 py-2 lg:w-6/12" v-if="action.openTab == 4">
             <label for="expenses" class="uppercase text-blueGray-600 text-xs font-bold mb-2">
-              EXPENSES  
+              EXPENSES
               <input type="radio" id="expenses" value="-"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
                 v-model="action.debit_type" />
@@ -156,11 +156,12 @@
 
           <div class="flex flex-wrap py-3 ml-2">
             <div v-for="(item, i) in input.tags" :key="i">
-              <span v-on:click="removeTag(i)" class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+              <span v-on:click="removeTag(i)"
+                class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
                 v-if="label.includes(item.id)" :style="'color: #fff; background-color: ' + item.color">{{
-                  item.name
-                }}
-                <i class="fas fa-times close-icon"></i>  
+          item.name
+        }}
+                <i class="fas fa-times close-icon"></i>
               </span>
             </div>
           </div>
@@ -451,7 +452,7 @@ export default {
           _this.action.hidecategory = true
           _this.action.hidetransfer_to = true
           _this.debit = model.payee.name
-          if(model.amount >= 0) {
+          if (model.amount >= 0) {
             _this.action.debit_type = '+'
           }
         }
@@ -638,7 +639,7 @@ export default {
         }
 
         if (this.type == "debit") {
-          if(this.action.debit_type == '-') {
+          if (this.action.debit_type == '-') {
             data.amount = this.amount * -1
           }
         }
@@ -650,13 +651,9 @@ export default {
             _this.note = null,
             _this.model = [],
             _this.newlabel = null,
-            _this.action.alert = true
-          _this.action.alert_message = _this.type + " inserito correttamente"
-
-          _this.action.dateUpdated = false
+            _this.action.dateUpdated = false
           localStorage.setItem("new_entry", true)
           this.time()
-          setTimeout(_this.action.alert = false, 3000)
 
         }).catch((reason) => {
 
@@ -690,8 +687,8 @@ export default {
     closeAlert: function () {
       this.action.alert = false;
     },
-    removeTag: function(i) {
-      this.input.tags.splice(i,1)
+    removeTag: function (i) {
+      this.input.tags.splice(i, 1)
     },
     toggleTabs: function (tabNumber) {
       switch (tabNumber) {
