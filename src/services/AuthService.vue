@@ -68,7 +68,7 @@ async function check() {
 
   if (response.status === 200) {
     // Accedi all'header X-Custom-Header dalla risposta
-    const access_token = response.data.authToken;
+    const access_token = response.data.token;
     LocalStorageService.setToken(access_token)
   }
 

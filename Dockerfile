@@ -1,4 +1,4 @@
-FROM node:lts-alpine AS npm
+FROM node:18.20.2 AS npm
 
 WORKDIR /app
 
