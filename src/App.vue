@@ -13,8 +13,8 @@ export default {
     // first check if user is logged
         AuthService.userInfo().then(() => {
           _this.$router.push('/dashboard');
-        }).then(() => {
-          _this.$router.push('/login');
+        }).catch(() => {
+          _this.$router.push({path : '/app/auth/login'});
         });
   },
 }

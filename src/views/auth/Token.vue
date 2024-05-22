@@ -68,6 +68,9 @@ export default {
 
         AuthService.userInfo().then(() => {
           _this.$router.push({ path: '/app/dashboard' })
+        }).catch(() => {
+          _this.error = true
+          _this.message = false
         })
       }).catch((err) => {
         _this.show = false
