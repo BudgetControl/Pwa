@@ -344,6 +344,8 @@ export default {
                 ChartServiceVue.createBudget(data).then(() => {
                     //return
                     _this.$router.push({ path: '/app/budgets' })
+                }).catch(() => {
+                    alert("Error creating budget")
                 })
             }
         },
@@ -369,6 +371,8 @@ export default {
                 ChartServiceVue.updateBudget(data, this.id).then(() => {
                     //return
                     _this.$router.push({ path: '/app/budgets' })
+                }).catch(() => {
+                    alert("Error updating budget")
                 })
             }
         },
