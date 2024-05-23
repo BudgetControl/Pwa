@@ -147,12 +147,12 @@ export default {
 
         AuthService.userInfo().then(() => {
           _this.$router.push({ path: '/app/dashboard' })
+        }).catch(() => {
+            _this.error = "Opne an error occurring, please try again"
         })
 
       }).catch((err) => {
         _this.show = false
-
-        console.debug(err.response.data)
 
         switch (err.response.data.code) {
           case 'EML_NaN':

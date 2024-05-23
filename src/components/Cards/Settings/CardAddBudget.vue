@@ -184,12 +184,12 @@
 
                         <div class="flex flex-wrap py-3" v-if="data.notification">
                             <div class="lg:w-12/12 px-2 w-full">
-                                
+
                                 <select v-model="data.emails" multiple
                                     class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                                    <option
-                                        class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
-                                        value="marco.defelice890@gmail.com"> marco.defelice890@gmail.com
+                                    <option v-for="(email, id) in input.emails" :key="id" :value="email.email"
+                                        class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1">
+                                        {{ email.name }}
                                     </option>
                                 </select>
 
@@ -230,6 +230,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import ApiService from '../../../services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import ChartServiceVue from '../../../services/ChartService.vue';
+import LocalStorageServiceVue from '../../../services/LocalStorageService.vue';
 
 export default {
     components: {
@@ -241,6 +242,7 @@ export default {
                 account: [],
                 category: [],
                 tags: [],
+                emails: []
             },
             id: null,
             data: {
@@ -265,6 +267,7 @@ export default {
         this.getLabels()
         this.id = this.$route.params.id
         this.getBudget()
+        this.getEmails()
     },
     methods: {
         deleteBudget() {
@@ -320,6 +323,12 @@ export default {
                 })
             })
         },
+        getEmails() {
+            const storage = LocalStorageServiceVue.getUser().shared_with
+            for (const [key, value] of Object.entries(storage)) {
+                this.input.emails.push(value)
+            }
+        },
         set() {
 
             if (this.validate() === true) {
@@ -344,6 +353,8 @@ export default {
                 ChartServiceVue.createBudget(data).then(() => {
                     //return
                     _this.$router.push({ path: '/app/budgets' })
+                }).catch(() => {
+                    alert("Error creating budget")
                 })
             }
         },
@@ -360,7 +371,7 @@ export default {
                         "types": this.data.type,
                         "accounts": this.data.account,
                         "period_start": this.data.period_start,
-                        "period_end": this.data.period_end, 
+                        "period_end": this.data.period_end,
                     },
                     "notification": this.data.notification,
                     "emails": this.data.emails,
@@ -369,6 +380,8 @@ export default {
                 ChartServiceVue.updateBudget(data, this.id).then(() => {
                     //return
                     _this.$router.push({ path: '/app/budgets' })
+                }).catch(() => {
+                    alert("Error updating budget")
                 })
             }
         },
