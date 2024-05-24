@@ -231,10 +231,11 @@ import ApiService from '../../../services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import ChartServiceVue from '../../../services/ChartService.vue';
 import LocalStorageServiceVue from '../../../services/LocalStorageService.vue';
+import AlertModal from '../../GenericComponents/AlertModal.vue';
 
 export default {
     components: {
-        VueDatePicker
+        VueDatePicker, AlertModal
     },
     data() {
         return {
@@ -260,6 +261,11 @@ export default {
                 emails: []
             }
         }
+    },
+    created() {
+        window.alert = (message, type = 'success') => {
+            this.$refs.alertModal.show(message, type);
+        };
     },
     mounted() {
         this.getCategory()
@@ -352,9 +358,9 @@ export default {
                 const _this = this
                 ChartServiceVue.createBudget(data).then(() => {
                     //return
-                    _this.$router.push({ path: '/app/budgets' })
+                    alert("Budget created", 'success')
                 }).catch(() => {
-                    alert("Error creating budget")
+                    alert("Error creating budget", 'error')
                 })
             }
         },
@@ -379,44 +385,44 @@ export default {
                 const _this = this
                 ChartServiceVue.updateBudget(data, this.id).then(() => {
                     //return
-                    _this.$router.push({ path: '/app/budgets' })
+                    alert("Budget updated", 'success')
                 }).catch(() => {
-                    alert("Error updating budget")
+                    alert("Error updating budget", 'error')
                 })
             }
         },
 
         validate() {
             if (this.data.period == "_") {
-                alert("Please choose a right period")
+                alert("Please choose a right period", 'error')
                 return false
             }
 
             if (this.data.amount == 0) {
-                alert("Please insert a budget")
+                alert("Please insert a budget", 'error')
                 return false
             }
 
             if (this.data.name == null) {
-                alert("Please insert a budget name")
+                alert("Please insert a budget name", 'error')
                 return false
             }
 
             if (this.data.period == "one_shot" || this.data.period == "recursively") {
 
                 if (this.data.period_start == null) {
-                    alert("Please insert a start date for a budget")
+                    alert("Please insert a start date for a budget", 'error')
                     return false
                 }
 
                 if (this.data.period_end == null) {
-                    alert("Please insert a end date for a budget")
+                    alert("Please insert a end date for a budget", 'error')
                     return false
                 }
 
                 // check if start date is less than end date
                 if (this.data.period_start > this.data.period_end) {
-                    alert("Start date must be less than end date")
+                    alert("Start date must be less than end date", 'error')
                     return false
                 }
 
