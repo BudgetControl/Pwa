@@ -64,7 +64,6 @@ export default {
             currentWsUuid = ws
           }
         });
-        LocalStorageService.setWorkspaceId(currentWsUuid)
 
         const currentWSInStore = LocalStorageService.getWorkspaceId()
         if(currentWSInStore !== currentWsUuid) {

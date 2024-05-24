@@ -21,7 +21,7 @@
                         : 'text-white hover:text-blueGray-500',
                     ]"
                   >
-                   Add new Entry
+                   ADD
                   </a>
                 </router-link>
               </li>
@@ -40,7 +40,7 @@
                         : 'text-white hover:text-blueGray-500',
                     ]"
                   >
-                   My Entries
+                   SHOW
                   </a>
                 </router-link>
               </li>
@@ -59,7 +59,7 @@
                         : 'text-white hover:text-blueGray-500',
                     ]"
                   >
-                    Search Entries
+                    SEARCH
                   </a>
                 </router-link>
               </li>

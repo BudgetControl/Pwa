@@ -64,8 +64,11 @@ export default {
           'uuid': wsUuid
         }
       }
+      if(LocalStorageService.getWorkspaceId() === null) {
+        LocalStorageService.setWorkspaceId(wsUuid)
+      }
+
       LocalStorageService.set('workspace', settings)
-      LocalStorageService.setWorkspaceId(wsUuid)
       WorkspaceServiceVue.activeWorkspace(wsUuid)
     })
   },

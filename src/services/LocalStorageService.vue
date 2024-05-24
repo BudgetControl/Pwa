@@ -61,7 +61,12 @@ function get(name) {
 }
 
 function clear() {
-    return localStorage.clear()
+    this.deleteItem('auth-token')
+    this.deleteItem('user')
+    this.deleteItem('user-token')
+    this.deleteItem('current_page')
+    this.deleteItem('settings')
+    this.deleteItem('workspace')
 }
 
 function deleteItem(name) {

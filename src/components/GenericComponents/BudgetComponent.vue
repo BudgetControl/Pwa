@@ -5,16 +5,16 @@
                 <div>
                     <span
                         class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200">
-                        {{ budget.budget.name }}
+                        {{ budget.budget.name }} {{ budget.budget.amount }} {{ currency }}
                     </span>
                 </div>
                 <div class="text-right">
                     <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
-                        ({{ budget.budget.amount }}) {{ budget.totalSpent }}{{ currency }} -
+                        {{ budget.totalRemaining }}{{ currency }}
                     </span>
 
                     <span class="text-xs font-semibold inline-block text-emerald-600">
-                        {{ budget.totalRemainingPercentage }}
+                         {{ budget.totalRemainingPercentage }}
                     </span>
                 </div>
             </div>
@@ -47,22 +47,8 @@ export default {
             required: true
         }
     },
-    data () {
-        return {
-            budget: {
-                totalRemaining: 0,
-                totalSpent: 0,
-                totalSpentPercentage: 0,
-                totalRemainingPercentage: 0
-            }
-        }
-    },
     mounted() {
-        this.budget.totalRemaining = this.data.totalRemaining < 0 ? 0 : this.data.totalRemaining
-        this.budget.totalSpent = this.data.totalSpent
-        this.budget.totalSpentPercentage = this.data.totalSpentPercentage
-        this.budget.totalRemainingPercentage = this.data.totalRemainingPercentage < 0 ? 0 : this.data.totalRemainingPercentage
-
+        this.budget.totalRemaining = this.budget.totalRemaining < 0 ? 0 : this.budget.totalRemaining
     }
 }
 </script>
