@@ -3,9 +3,9 @@
     <div
       class="container relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0 flex-auto p-4">
       <div class="flex flex-wrap py-3">
-        <div class="lg:w-6/12 px-2" v-if="this.isModel === false">
+        <div class="lg:w-6/12 px-2 w-full " v-if="this.isModel === false">
           <select v-model="model" v-on:change="retriveModel()" id="model" v-if="action.models"
-            class="border-0 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+            class="w-full border-0 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
             <option value="0">Choose a model</option>
             <option v-for="(item, k) in input.model" :key="k" :value="item.uuid">{{ item.name }}</option>
           </select>
