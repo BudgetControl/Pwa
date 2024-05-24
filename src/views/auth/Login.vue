@@ -143,7 +143,6 @@ export default {
             currentWsUuid = ws
           }
         });
-        LocalStorageService.setWorkspaceId(currentWsUuid)
 
         AuthService.userInfo().then(() => {
           _this.$router.push({ path: '/app/dashboard' })

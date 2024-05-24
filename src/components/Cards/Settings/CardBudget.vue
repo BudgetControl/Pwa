@@ -10,7 +10,7 @@
 
             <!--content-->
             <div class="border p-2 mt-2" v-if="budgets.week.length != 0">
-                <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
+                <span class="text-xs font-semibold inline-block text-blueGray-400 ">
                     WEEK
                 </span>
                 
@@ -20,7 +20,7 @@
 
             <div class="border p-2 mt-2" v-if="budgets.month.length != 0">
 
-                <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
+                <span class="text-xs font-semibold inline-block text-blueGray-400 ">
                     MONTH
                 </span>
                 
@@ -29,7 +29,7 @@
 
 
             <div class="border p-2 mt-2 mb-2" v-if="budgets.year.length != 0">
-                <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
+                <span class="text-xs font-semibold inline-block text-blueGray-400 ">
                     YEAR
                 </span>
                
@@ -37,7 +37,7 @@
             </div>
 
             <div class="border p-2 mt-2 mb-2" v-if="budgets.custom.length != 0">
-                <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
+                <span class="text-xs font-semibold inline-block text-blueGray-400 ">
                     ONE SHOT BUDGET
                 </span>
                 

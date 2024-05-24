@@ -35,6 +35,7 @@
     "gulp-append-prepend": "1.0.8",
     "vue": "^3.3.4",
     "vue-accessible-color-picker": "^4.1.4",
+    "vue-device-detector": "^1.1.6",
     "vue-full-loading": "^1.2.1",
     "vue-router": "4.0.5",
     "vuedraggable": "^4.1.0"

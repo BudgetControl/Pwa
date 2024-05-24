@@ -223,7 +223,7 @@ export default {
       const _this = this
       LocalStorageServiceVue.setWorkspaceId(_this.workspace)
       AuthService.userInfo().then(() => {
-        _this.$router.go(0)
+        _this.$router.push({path : '/app/dashboard'})
       }).catch(() => {
         _this.$router.push({path : '/app/auth/login'});
       })
