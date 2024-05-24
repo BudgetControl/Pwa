@@ -135,7 +135,7 @@
 
         <div v-if="!action.showDetails">
           <button v-on:click="action.showDetails = true"
-              class="w-full text-xs py-3 bg-yellow-500 text-white active:bg-amber-600 font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+              class="w-full text-xs py-1 bg-yellow-500 text-white active:bg-amber-600 font-bold uppercase rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
               type="button">
               SHOW DETAILS
             </button>
@@ -268,7 +268,6 @@ import ApiService from '../../services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import LocalStorageService from '../../services/LocalStorageService.vue';
-import { device } from "vue-device-detector"
 
 export default {
   props: {
