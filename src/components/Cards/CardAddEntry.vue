@@ -18,7 +18,7 @@
             class="relative flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-emerald-500 rounded">
             <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
               <div class="w-full" id="example-navbar-info">
-                <ul class="flex flex-col lg:flex-row list-none ml-auto w-full justify-center">
+                <ul class="flex flex-row list-none ml-auto justify-center">
                   <li class="nav-item">
                     <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(1)"
@@ -123,15 +123,25 @@
             <input v-model="amount" type="tel" placeholder="0,00 €" id="amount"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
-          <div class="lg:w-6/12 px-2 py-2 w-full">
+
+          <div v-if="action.showDetails" class="lg:w-6/12 px-2 py-2 w-full">
             <select v-model="currency"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option v-for="item in input.currency" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
           </div>
+
         </div>
 
-        <div class="row border rounded border-blueGray-500 py-3 border-dashed">
+        <div v-if="!action.showDetails">
+          <button v-on:click="action.showDetails = true"
+              class="w-full text-xs py-3 bg-yellow-500 text-white active:bg-amber-600 font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+              type="button">
+              SHOW DETAILS
+            </button>
+        </div>
+
+        <div v-if="action.showDetails" class="row border rounded border-blueGray-500 py-3 border-dashed">
           <div class="flex flex-wrap">
             <div class="lg:w-12/12 px-2 w-full text-center">
               <label class="text-xs w-full" for="tags">Choose one of currently tags</label>
@@ -168,9 +178,9 @@
 
         </div>
 
-        <div class="flex flex-wrap py-3">
+        <div v-if="action.showDetails" class="flex flex-wrap py-3">
           <div class="lg:w-8/12 px-2 w-full">
-            <textarea v-model="note" type="text" placeholder="Add here your note" required id="note" rows="2"
+            <textarea v-model="note" type="text" placeholder="Add here your note" id="note" rows="2"
               class="border-0 px-3 py-5 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
           </div>
 
@@ -180,7 +190,7 @@
               <VueDatePicker v-model="date"></VueDatePicker>
             </div>
 
-            <div class="flex flex-wrap">
+            <div class="flex flex-wrap" v-if="action.showDetails">
               <div class="w-full" v-bind:class="{ 'lg:w-6/12 ': isModel === false, 'lg:w-12/12': isModel === true }">
                 <select v-model="payment_type" id="payment_type"
                   class="w-full border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
@@ -258,6 +268,7 @@ import ApiService from '../../services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import LocalStorageService from '../../services/LocalStorageService.vue';
+import { device } from "vue-device-detector"
 
 export default {
   props: {
@@ -292,7 +303,9 @@ export default {
         dateUpdated: false,
         hidetransfer_to: false,
         disabled_debit_name: true,
-        debit_type: '-'
+        debit_type: '-',
+        showDetails: false,
+        isMobile: false
       },
       date: null,
       amount: null,
@@ -334,6 +347,8 @@ export default {
   },
   mounted() {
     this.action.openTab = 1
+    this.action.isMobile = this.checkIfMobile()
+    this.action.showDetails = !this.action.isMobile
     this.time()
     this.getCategory()
     this.getCurrency()
@@ -553,11 +568,6 @@ export default {
         return false
       }
 
-      if (this.note == null) {
-        alert("Please insert a note description")
-        return false
-      }
-
       if (this.action.openTab == 3) {
 
         if (this.account == -1) {
@@ -731,6 +741,13 @@ export default {
 
       }
       this.action.openTab = tabNumber
+    },
+    checkIfMobile() {
+      if (window.innerWidth <= 768) {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
 };
