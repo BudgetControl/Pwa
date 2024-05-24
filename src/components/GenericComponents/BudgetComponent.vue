@@ -38,7 +38,7 @@
 <script>
 export default {
     props: {
-        budget: {
+        data: {
             type: Object,
             required: true
         },
