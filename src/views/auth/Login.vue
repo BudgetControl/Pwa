@@ -145,6 +145,11 @@ export default {
         });
         LocalStorageService.setWorkspaceId(currentWsUuid)
 
+        const currentWSInStore = LocalStorageService.getWorkspaceId()
+        if(currentWSInStore !== currentWsUuid) {
+          LocalStorageService.setWorkspaceId(currentWsUuid)
+        }
+
         AuthService.userInfo().then(() => {
           _this.$router.push({ path: '/app/dashboard' })
         }).catch(() => {

@@ -38,7 +38,7 @@
 <script>
 export default {
     props: {
-        budget: {
+        data: {
             type: Object,
             required: true
         },
@@ -46,6 +46,23 @@ export default {
             type: String,
             required: true
         }
+    },
+    data () {
+        return {
+            budget: {
+                totalRemaining: 0,
+                totalSpent: 0,
+                totalSpentPercentage: 0,
+                totalRemainingPercentage: 0
+            }
+        }
+    },
+    mounted() {
+        this.budget.totalRemaining = this.data.totalRemaining < 0 ? 0 : this.data.totalRemaining
+        this.budget.totalSpent = this.data.totalSpent
+        this.budget.totalSpentPercentage = this.data.totalSpentPercentage
+        this.budget.totalRemainingPercentage = this.data.totalRemainingPercentage < 0 ? 0 : this.data.totalRemainingPercentage
+
     }
 }
 </script>
