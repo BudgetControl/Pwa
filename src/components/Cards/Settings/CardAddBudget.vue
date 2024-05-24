@@ -325,9 +325,9 @@ export default {
         },
         getEmails() {
             const storage = LocalStorageServiceVue.getUser().shared_with
-            for (const [key, value] of Object.entries(storage)) {
-                this.input.emails.push(value)
-            }
+            storage.forEach((item) => {
+                this.input.emails.push(item)
+            })
         },
         set() {
 
