@@ -166,7 +166,7 @@
 
           <div class="flex flex-wrap py-3 ml-2">
             <div v-for="(item, i) in input.tags" :key="i">
-              <span v-on:click="removeTag(i)"
+              <span v-on:click="removeTag(item)"
                 class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
                 v-if="label.includes(item.id)" :style="'color: #fff; background-color: ' + item.color">{{
           item.name
@@ -696,8 +696,13 @@ export default {
     closeAlert: function () {
       this.action.alert = false;
     },
-    removeTag: function (i) {
-      this.input.tags.splice(i, 1)
+    removeTag: function (el) {
+      //remove item form label with el.id
+      this.label.forEach((item, i) => {
+        if (item == el.id) {
+          this.label.splice(i, 1)
+        }
+      })
     },
     toggleTabs: function (tabNumber) {
       switch (tabNumber) {
