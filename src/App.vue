@@ -1,6 +1,6 @@
 <template>
   <div class="e" id="app">
-    <button v-if="deferredPrompt" @click="installPWA" class="install-button">Install PWA</button>
+    <button v-if="deferredPrompt" @click="installPWA" class="install-button">Install APP</button>
     <router-view />
   </div>
 </template>
