@@ -92,10 +92,11 @@
 
           <div class="flex flex-wrap py-3 ml-2">
             <div v-for="(item, i) in input.tags" :key="i">
-              <span class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+              <span
+                class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
                 v-if="label.includes(item.id)" :style="'color: #fff; background-color: ' + item.color">{{
-                  item.name
-                }}</span>
+                        item.name
+                      }}</span>
             </div>
           </div>
 
@@ -151,7 +152,8 @@
         </div>
       </div>
 
-      <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500" v-if="this.action.alert">
+      <div :class="'text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500' + action.alert_color"
+        v-if="this.action.alert">
         <span class="text-xl inline-block mr-5 align-middle">
           <i class="fas fa-bell"></i>
         </span>
@@ -200,6 +202,7 @@ export default {
         hidedebit: false,
         dateUpdated: false,
         hidetransfer_to: false,
+        alert_color: 'bg-red-500',
       },
       date: null,
       amount: null,
@@ -414,12 +417,8 @@ export default {
             _this.model = [],
             _this.newlabel = null,
 
-            _this.action.alert = true
-          _this.action.alert_message = _this.type + " inserito correttament e"
-
-          _this.action.dateUpdated = false
+            _this.action.dateUpdated = false
           this.time()
-          setTimeout(_this.action.alert = false, 3000)
 
         }).catch((reason) => {
 

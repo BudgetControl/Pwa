@@ -3,9 +3,9 @@
     <div
       class="container relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0 flex-auto p-4">
       <div class="flex flex-wrap py-3">
-        <div class="lg:w-6/12 px-2" v-if="this.isModel === false">
+        <div class="lg:w-6/12 px-2 w-full " v-if="this.isModel === false">
           <select v-model="model" v-on:change="retriveModel()" id="model" v-if="action.models"
-            class="border-0 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+            class="w-full border-0 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
             <option value="0">Choose a model</option>
             <option v-for="(item, k) in input.model" :key="k" :value="item.uuid">{{ item.name }}</option>
           </select>
@@ -18,7 +18,7 @@
             class="relative flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-emerald-500 rounded">
             <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
               <div class="w-full" id="example-navbar-info">
-                <ul class="flex flex-col lg:flex-row list-none ml-auto w-full justify-center">
+                <ul class="flex flex-row list-none ml-auto justify-center">
                   <li class="nav-item">
                     <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(1)"
@@ -69,9 +69,9 @@
           </div>
 
           <div class="px-2 py-2 w-full" :class="{
-            'lg:w-4/12': action.openTab == 4,
-            'lg:w-6/12': action.openTab != 4,
-          }">
+          'lg:w-4/12': action.openTab == 4,
+          'lg:w-6/12': action.openTab != 4,
+        }">
 
             <select v-if="action.hidecategory == false" v-model="category" id="category"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
@@ -101,7 +101,7 @@
 
           <div class="px-2 py-2 lg:w-6/12" v-if="action.openTab == 4">
             <label for="incoming" class="uppercase text-blueGray-600 text-xs font-bold mb-2">
-              INCOMING  
+              INCOMING
               <input type="radio" id="incoming" value="+"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
                 v-model="action.debit_type" />
@@ -110,7 +110,7 @@
 
           <div class="px-2 py-2 lg:w-6/12" v-if="action.openTab == 4">
             <label for="expenses" class="uppercase text-blueGray-600 text-xs font-bold mb-2">
-              EXPENSES  
+              EXPENSES
               <input type="radio" id="expenses" value="-"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
                 v-model="action.debit_type" />
@@ -123,15 +123,25 @@
             <input v-model="amount" type="tel" placeholder="0,00 €" id="amount"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
-          <div class="lg:w-6/12 px-2 py-2 w-full">
+
+          <div v-if="action.showDetails" class="lg:w-6/12 px-2 py-2 w-full">
             <select v-model="currency"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option v-for="item in input.currency" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
           </div>
+
         </div>
 
-        <div class="row border rounded border-blueGray-500 py-3 border-dashed">
+        <div v-if="!action.showDetails">
+          <button v-on:click="action.showDetails = true"
+              class="w-full text-xs py-1 bg-yellow-500 text-white active:bg-amber-600 font-bold uppercase rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+              type="button">
+              SHOW DETAILS
+            </button>
+        </div>
+
+        <div v-if="action.showDetails" class="row border rounded border-blueGray-500 py-3 border-dashed">
           <div class="flex flex-wrap">
             <div class="lg:w-12/12 px-2 w-full text-center">
               <label class="text-xs w-full" for="tags">Choose one of currently tags</label>
@@ -156,20 +166,21 @@
 
           <div class="flex flex-wrap py-3 ml-2">
             <div v-for="(item, i) in input.tags" :key="i">
-              <span v-on:click="removeTag(i)" class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+              <span v-on:click="removeTag(i)"
+                class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
                 v-if="label.includes(item.id)" :style="'color: #fff; background-color: ' + item.color">{{
-                  item.name
-                }}
-                <i class="fas fa-times close-icon"></i>  
+          item.name
+        }}
+                <i class="fas fa-times close-icon"></i>
               </span>
             </div>
           </div>
 
         </div>
 
-        <div class="flex flex-wrap py-3">
+        <div v-if="action.showDetails" class="flex flex-wrap py-3">
           <div class="lg:w-8/12 px-2 w-full">
-            <textarea v-model="note" type="text" placeholder="Add here your note" required id="note" rows="2"
+            <textarea v-model="note" type="text" placeholder="Add here your note" id="note" rows="2"
               class="border-0 px-3 py-5 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
           </div>
 
@@ -179,7 +190,7 @@
               <VueDatePicker v-model="date"></VueDatePicker>
             </div>
 
-            <div class="flex flex-wrap">
+            <div class="flex flex-wrap" v-if="action.showDetails">
               <div class="w-full" v-bind:class="{ 'lg:w-6/12 ': isModel === false, 'lg:w-12/12': isModel === true }">
                 <select v-model="payment_type" id="payment_type"
                   class="w-full border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
@@ -291,7 +302,9 @@ export default {
         dateUpdated: false,
         hidetransfer_to: false,
         disabled_debit_name: true,
-        debit_type: '-'
+        debit_type: '-',
+        showDetails: false,
+        isMobile: false
       },
       date: null,
       amount: null,
@@ -333,6 +346,8 @@ export default {
   },
   mounted() {
     this.action.openTab = 1
+    this.action.isMobile = this.checkIfMobile()
+    this.action.showDetails = !this.action.isMobile
     this.time()
     this.getCategory()
     this.getCurrency()
@@ -451,7 +466,7 @@ export default {
           _this.action.hidecategory = true
           _this.action.hidetransfer_to = true
           _this.debit = model.payee.name
-          if(model.amount >= 0) {
+          if (model.amount >= 0) {
             _this.action.debit_type = '+'
           }
         }
@@ -552,11 +567,6 @@ export default {
         return false
       }
 
-      if (this.note == null) {
-        alert("Please insert a note description")
-        return false
-      }
-
       if (this.action.openTab == 3) {
 
         if (this.account == -1) {
@@ -638,7 +648,7 @@ export default {
         }
 
         if (this.type == "debit") {
-          if(this.action.debit_type == '-') {
+          if (this.action.debit_type == '-') {
             data.amount = this.amount * -1
           }
         }
@@ -650,13 +660,9 @@ export default {
             _this.note = null,
             _this.model = [],
             _this.newlabel = null,
-            _this.action.alert = true
-          _this.action.alert_message = _this.type + " inserito correttamente"
-
-          _this.action.dateUpdated = false
+            _this.action.dateUpdated = false
           localStorage.setItem("new_entry", true)
           this.time()
-          setTimeout(_this.action.alert = false, 3000)
 
         }).catch((reason) => {
 
@@ -690,8 +696,8 @@ export default {
     closeAlert: function () {
       this.action.alert = false;
     },
-    removeTag: function(i) {
-      this.input.tags.splice(i,1)
+    removeTag: function (i) {
+      this.input.tags.splice(i, 1)
     },
     toggleTabs: function (tabNumber) {
       switch (tabNumber) {
@@ -734,6 +740,13 @@ export default {
 
       }
       this.action.openTab = tabNumber
+    },
+    checkIfMobile() {
+      if (window.innerWidth <= 768) {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
 };
