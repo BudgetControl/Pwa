@@ -48,7 +48,8 @@ export default {
         }
     },
     mounted() {
-        this.budget.totalRemaining = this.budget.totalRemaining < 0 ? 0 : this.budget.totalRemaining
+        const data = this.budget
+        this.budget.totalRemaining = data.totalRemaining < 0 ? 0 : data.totalRemaining
     }
 }
 </script>
