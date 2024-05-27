@@ -132,7 +132,11 @@ export default {
     share_workspace_with: 'Share workspace with',
     share: 'Share',
     remove: 'remove',
-    workspace_shared_with: 'Workspace shared with'
+    workspace_shared_with: 'Workspace shared with',
+    choose_a_category: 'Choose a category',
+    payment_confirm: 'Payment confirmation',
+    my_planned: 'Planned',
+    my_health: 'Health',
 };
 
 </script>

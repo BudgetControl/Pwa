@@ -132,6 +132,10 @@ export default {
     share_workspace_with: 'Condividi spazio di lavoro con',
     share: 'Condividi',
     remove: 'Rimuovi',
-    workspace_shared_with: 'Spazio di lavoro condiviso con'
+    workspace_shared_with: 'Spazio di lavoro condiviso con',
+    choose_a_category: 'Scegli una categoria',
+    payment_confirm: 'Conferma pagamento',
+    my_planned: 'Pianificati',
+    my_health: 'Salute economica',
 }
 </script>
