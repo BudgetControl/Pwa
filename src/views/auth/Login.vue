@@ -129,6 +129,7 @@ export default {
       let email = this.email;
       let password = this.password;
       const _this = this
+      console.debug(this.$t("messages.wrong_password"))
 
       this.show = true
       this.error = false
@@ -152,7 +153,7 @@ export default {
         AuthService.userInfo().then(() => {
           _this.$router.push({ path: '/app/dashboard' })
         }).catch(() => {
-            _this.error = "Opne an error occurring, please try again"
+            _this.error = this.$t('messages.generic_error')
         })
 
       }).catch((err) => {
@@ -160,11 +161,11 @@ export default {
 
         switch (err.response.data.code) {
           case 'EML_NaN':
-            _this.error = `You haven't verified your email yet. If you haven't received it, click here to resend.`
+            _this.error = this.$t('messages.login.not_verified_email')
             _this.verify = true
             break;
           default:
-            _this.error = `The credentials you entered are not valid.`
+            _this.error = ''
             break;
         }
 
@@ -180,7 +181,7 @@ export default {
         window.location.href = resp.uri
       }).catch(() => {
         _this.show = false
-        _this.error = `Sorry an error occurred, try later`
+        _this.error = this.$t('messages.generic_error')
       })
     }
   }

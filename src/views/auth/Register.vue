@@ -8,20 +8,20 @@
           <div class="rounded-t mb-0 px-6 py-6">
             <div class="text-center mb-3">
               <h6 class="text-blueGray-500 text-sm font-bold">
-                Sign up with
+                {{ $t('labels.sign_up_with') }}
               </h6>
             </div>
             <hr class="mt-6 border-b-1 border-blueGray-300" />
           </div>
           <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
             <div class="text-blueGray-400 text-center mb-3 font-bold">
-              <small>Or sign up with credentials</small>
+              <small>{{ $t('labels.or_sign_in_with_credentials') }} </small>
             </div>
             <form @submit="submit" action="javascript:void(0)">
 
               <div role="alert" v-if="error">
                 <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-                  Oops... an error occurred
+                  {{ $t('labels.generic_error') }}
                 </div>
                 <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
                   {{ error }}
@@ -29,7 +29,7 @@
               </div>
               <div class="relative w-full mb-3">
                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                  Name
+                  {{ $t('labels.name') }}
                 </label>
                 <input v-model="name" type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
@@ -38,7 +38,7 @@
 
               <div class="relative w-full mb-3">
                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                  Email
+                  {{ $t('labels.email') }}
                 </label>
                 <input v-model="email" type="email"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
@@ -47,7 +47,7 @@
 
               <div class="relative w-full mb-3">
                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                  Password
+                  {{ $t('labels.password') }}
                 </label>
                 <input v-model="password" type="password"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
@@ -57,7 +57,7 @@
 
               <div class="relative w-full mb-3">
                   <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                    Confirm Password
+                    {{ $t('labels.confirm_password') }}
                   </label>
                   <input v-model="confirm_password" type="password"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
@@ -70,9 +70,9 @@
                   <input id="customCheckLogin" type="checkbox"
                     class="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150" />
                   <span class="ml-2 text-sm font-semibold text-blueGray-600">
-                    I agree with the
+                    {{ $t('labels.i_agree_with_the') }}
                     <a href="javascript:void(0)" class="text-emerald-500">
-                      Privacy Policy
+                      {{ $t('labels.privacy_policy') }}
                     </a>
                   </span>
                 </label>
@@ -82,7 +82,7 @@
                 <button
                   class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                   type="submit">
-                  Create Account
+                  {{ $t('labels.create_account') }}
                 </button>
               </div>
             </form>

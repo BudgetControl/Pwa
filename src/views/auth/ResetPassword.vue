@@ -8,7 +8,7 @@
           <div class="rounded-t mb-0 px-6 py-6">
             <div class="text-center mb-3">
               <h6 class="text-blueGray-500 text-sm font-bold">
-                Set new password
+                {{ $t('labels.set_new_password') }}
               </h6>
             </div>
             <hr class="mt-6 border-b-1 border-blueGray-300" />
@@ -19,7 +19,7 @@
 
                 <div role="alert" v-if="error">
                   <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-                    Oops... an error occurred
+                    {{ $t('labels.generic_error') }}
                   </div>
                   <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
                     {{ error_message }}
@@ -28,7 +28,7 @@
 
                 <div class="relative w-full mb-3">
                   <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                    Password
+                    {{ $t('labels.password') }}
                   </label>
                   <input v-model="password" type="password"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
@@ -37,7 +37,7 @@
 
                 <div class="relative w-full mb-3">
                   <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                    Confirm Password
+                    {{ $t('labels.confirm_password') }}
                   </label>
                   <input v-model="confirm_password" type="password"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
@@ -49,7 +49,7 @@
                   <button
                     class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                     type="submit">
-                    Set new password
+                    {{ $t('labels.set_new_password') }}
                   </button>
                 </div>
               </form>

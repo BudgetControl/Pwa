@@ -10,7 +10,7 @@
                     <div class="container px-4 mx-auto ">
                         <div class=" border border-dotted m-1">
 
-                            <p>Write here your question</p>
+                            {{ $t('text.assistance.write_question') }}
 
                             <div class=" flex-wrap py-3">
                                 <div class="lg:w-12/12 px-2 w-full">
@@ -25,7 +25,7 @@
                                     <button
                                         class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         v-on:click="sendRequest()" type="button">
-                                        Send a request
+                                        {{ $t('labels.send_a_request') }}
                                     </button>
                                 </div>
                             </div>
@@ -80,9 +80,9 @@ export default {
             }
 
             ApiService.assistance(data).then(() => {
-                alert("Thanks for your request, we will contact you soon", "success")
+                alert(this.$t('text.assistance.thanks'), "success")
             }).catch(() => {
-                alert("Ops an error occurred, try later", "error")
+                alert(this.$t('labels.generic_error'), "error")
             })
         },
     }

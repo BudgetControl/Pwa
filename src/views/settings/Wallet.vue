@@ -13,7 +13,7 @@
                             </div>
                             <div class="flex lg:w-10/12 p-2">
                                 <p>
-                                    Add new wallet
+                                    {{ $t('labels.add_new_wallet') }}
                                 </p>
                             </div>
                         </div>
@@ -28,7 +28,7 @@
                                         <input id="vue-checkbox-list" type="checkbox" v-model="action.order" value="true"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="vue-checkbox-list"
-                                            class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Change order</label>
+                                            class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"> {{ $t('labels.change_order') }}</label>
                                     </div>
                                 </li>
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600 flex lg:w3/12 px-4">
@@ -36,7 +36,7 @@
                                         <input id="react-checkbox-list" type="checkbox" v-model="action.archived" value="true"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         <label for="react-checkbox-list"
-                                            class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Show archived</label>
+                                            class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ $t('labels.show_archived') }}</label>
                                     </div>
                                 </li>
                             </ul>

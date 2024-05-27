@@ -10,7 +10,7 @@
             <div class="flex flex-wrap items-center">
               <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                 <h3 class="font-semibold text-base text-blueGray-700">
-                  Resume of all entries
+                  {{ $t('labels.reasume_of_all_entries') }}
                 </h3>
               </div>
             </div>
@@ -22,19 +22,19 @@
                 <tr>
                   <th width="200"
                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                    {{ $route.params.type }} NAME
+                    {{ $route.params.type }} {{ $t('labels.name') }}
                   </th>
                   <th
                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                    AMOUNT
+                    {{ $t('labels.amount') }}
                   </th>
                   <th
                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                    AMOUNT BEFORE
+                    {{ $t('labels.amount_before') }}
                   </th>
                   <th
                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                    BOUNCE RATE
+                    {{ $t('labels.bounce_rate') }}
                   </th>
                 </tr>
               </thead>
@@ -86,19 +86,19 @@
                 <tr>
                   <th width="200"
                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                    {{ $route.params.type }} NAME
+                    {{ $route.params.type }}  {{ $t('labels.name') }}
                   </th>
                   <th
                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                    AMOUNT
+                    {{ $t('labels.amount') }}
                   </th>
                   <th
                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                    AMOUNT BEFORE
+                    {{ $t('labels.amount_before') }}
                   </th>
                   <th
                     class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                    BOUNCE RATE
+                    {{ $t('labels.bounce_rate') }}
                   </th>
                 </tr>
               </thead>
