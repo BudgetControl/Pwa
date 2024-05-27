@@ -258,7 +258,7 @@
           <span>×</span>
         </button>
       </div>
-
+      <AlertModal ref="alertModal" />
     </div>
   </form>
 </template>
@@ -268,6 +268,7 @@ import ApiService from '../../services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import LocalStorageService from '../../services/LocalStorageService.vue';
+import AlertModal from '../GenericComponents/AlertModal.vue';
 
 export default {
   props: {
@@ -342,7 +343,12 @@ export default {
     }
   },
   components: {
-    VueDatePicker
+    VueDatePicker, AlertModal
+  },
+  created() {
+    window.alert = (message, type = 'success') => {
+      this.$refs.alertModal.show(message, type);
+    };
   },
   mounted() {
     this.action.openTab = 1
@@ -543,50 +549,50 @@ export default {
       }
 
       ApiService.setModel(data, this.entryId).then(() => {
-        _this.action.alert = true
-        _this.action.alert_color = 'bg-emerald-600'
-        _this.action.alert_message = "Modello salvato correttamente"
+        alert("Model saved correctly", "success")
+      }).catch(() => {
+        alert("Ops... An error occured", "error")
       })
     },
 
     validateBefore() {
 
       if (this.account == -1 && this.action.openTab != 3) {
-        alert("Please choose a wallet account")
+        alert("Please choose a wallet account", "error")
         return false
       }
 
       if (this.category == 0) {
-        alert("Please choose a right category")
+        alert("Please choose a right category", "error")
         return false
       }
 
       let num = this.amount + 9
       if (this.amount == null || isNaN(num)) {
-        alert("Please insert amount value")
+        alert("Please insert amount value", "error")
         return false
       }
 
       if (this.action.openTab == 3) {
 
         if (this.account == -1) {
-          alert("Please choose a wallet accounts")
+          alert("Please choose a wallet accounts", "error")
           return false
         }
 
         if (this.account == this.transferto) {
-          alert("Please choose a different wallet to transfer")
+          alert("Please choose a different wallet to transfer", "error")
           return false
         }
 
         if (this.account == this.transferto) {
-          alert("Please choose a different wallet to transfer")
+          alert("Please choose a different wallet to transfer", "error")
           return false
         }
 
 
         if (this.transferto == '-1') {
-          alert("Please choose a wallet to transfer to")
+          alert("Please choose a wallet to transfer to", "error")
           return false
         }
 
@@ -594,17 +600,17 @@ export default {
 
       if (this.action.openTab == 4) {
         if (this.debit == 'njn76298fm' && this.debit_name == null) {
-          alert("Please insert a valid debt Name")
+          alert("Please insert a valid debt Name", "error")
           return false
         }
 
         if (this.account == this.transferto) {
-          alert("Please choose a different wallet to transfer")
+          alert("Please choose a different wallet to transfer", "error")
           return false
         }
 
         if (this.account == this.transferto) {
-          alert("Please choose a different wallet to transfer")
+          alert("Please choose a different wallet to transfer", "error")
           return false
         }
 
@@ -664,11 +670,11 @@ export default {
           localStorage.setItem("new_entry", true)
           this.time()
 
+          alert("Entry saved correctly", "success")
+
         }).catch((reason) => {
 
-          this.action.alert = true
-          this.action.alert_message = "Ops... An error occured"
-          console.error(reason);
+          alert("Ops... An error occured", "error")
 
         })
 

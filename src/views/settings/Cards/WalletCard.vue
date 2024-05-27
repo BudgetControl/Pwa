@@ -97,10 +97,11 @@ import ApiService from '@/services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { ColorPicker } from 'vue-accessible-color-picker';
+import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
 
 export default {
     components: {
-        HeaderButton, VueDatePicker, ColorPicker
+        HeaderButton, VueDatePicker, ColorPicker, AlertModal
     },
     data() {
         return {
@@ -129,6 +130,11 @@ export default {
         this.getCurrency()
         this.openModal(this.$route.params.id)
     },
+    created() {
+        window.alert = (message, type = 'success') => {
+            this.$refs.alertModal.show(message, type);
+        };
+    },
     methods: {
         handleChange() {
             console.log('changed');
@@ -139,11 +145,13 @@ export default {
         archiveWallet() {
             if (window.confirm("Are you shure do you want archive these wallet ?")) {
                 ApiService.deleteWallet(this.$route.params.id)
+                alert("Wallet archived", "success")
                 this.$router.push({ path: '/app/settings/wallet' })
             }
         },
         restoreWallet() {
             ApiService.restoreWallet(this.$route.params.id)
+            alert("Wallet restored", "success")
             this.$router.push({ path: '/app/settings/wallet' })
         },
         getComponentData() {
@@ -200,6 +208,7 @@ export default {
             const _this = this
 
             ApiService.setAccount(data, this.modal.id).then(() => {
+                alert("Wallet saved", "success")
                 _this.$router.push({ path: '/app/settings/wallet' })
             })
 
@@ -227,17 +236,17 @@ export default {
 
         validate() {
             if (this.modal.type == 0) {
-                alert("Please choose a right wallet type")
+                alert("Please choose a right wallet type", "error")
                 return false
             }
 
             if (this.modal.name == null) {
-                alert("Please insert a wallet name")
+                alert("Please insert a wallet name", "error")
                 return false
             }
 
             if (this.modal.currency == 0) {
-                alert("Please choose a wallet currency")
+                alert("Please choose a wallet currency", "error")
                 return false
             }
 

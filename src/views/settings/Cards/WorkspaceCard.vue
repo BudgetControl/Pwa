@@ -87,10 +87,11 @@ import ApiServiceVue from '../../../services/ApiService.vue';
 import WorkspaceService from '../../../services/WorkspaceService.vue';
 import AuthServiceVue from '../../../services/AuthService.vue';
 import LocalStorageServiceVue from '../../../services/LocalStorageService.vue';
+import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
 
 export default {
     components: {
-        HeaderButton
+        HeaderButton, AlertModal
     },
     data() {
         return {
@@ -113,14 +114,21 @@ export default {
             this.getWorkspaceDetail()
         }
     },
+    created() {
+        window.alert = (message, type = 'success') => {
+            this.$refs.alertModal.show(message, type);
+        };
+    },
     methods: {
         saveModal() {
             if(this.$route.params.id) {
                 WorkspaceService.update(this.$route.params.id, this.modal).then(() => {
+                    alert('Workspace updated')
                     this.$router.push('/app/settings/workspace')
                 })
             } else {
                 WorkspaceService.add(this.modal).then(() => {
+                    alert('Workspace added')
                     this.$router.push('/app/settings/workspace')
                 })
             }
@@ -159,6 +167,7 @@ export default {
                     res.email = email
                     this.modal.shareWith.push(res)
                 }).catch(() => {
+                    alert('User not found', 'error')
                     alert('User not found')
                 })
             }
