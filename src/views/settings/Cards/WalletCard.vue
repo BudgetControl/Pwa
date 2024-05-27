@@ -87,6 +87,7 @@
                     </div>
                 </div>
             </div>
+            <AlertModal ref="alertModal" />
         </div>
     </section>
 </template>

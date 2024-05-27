@@ -167,6 +167,7 @@
       </div>
 
     </div>
+    <AlertModal ref="alertModal" />
   </form>
 </template>
 

@@ -222,6 +222,7 @@
                 </div>
             </div>
         </div>
+      <AlertModal ref="alertModal" />
     </form>
 </template>
 
@@ -355,7 +356,6 @@ export default {
                     "emails": this.data.emails,
                 }
 
-                const _this = this
                 ChartServiceVue.createBudget(data).then(() => {
                     //return
                     alert("Budget created", 'success')
@@ -382,7 +382,6 @@ export default {
                     "notification": this.data.notification,
                     "emails": this.data.emails,
                 }
-                const _this = this
                 ChartServiceVue.updateBudget(data, this.id).then(() => {
                     //return
                     alert("Budget updated", 'success')

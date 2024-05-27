@@ -149,7 +149,7 @@ export default {
   },
   async beforeMount() {
     const storage = LocalStorageService.get('settings')
-    this.currency = storage.currency.icon
+    this.currency = storage.currency_id || '€'
   },
   async mounted() {
     const _this = this

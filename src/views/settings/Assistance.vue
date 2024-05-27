@@ -43,6 +43,7 @@
                 </div>
             </div>
         </div>
+        <AlertModal ref="alertModal" />
     </section>
 </template>
 <script>
@@ -73,7 +74,6 @@ export default {
     methods: {
         sendRequest() {
             const userSettings = LocalStorageService.get("settings")
-            const _this = this
             const data = {
                 "user_id": userSettings.user_profile.id,
                 "text": this.text

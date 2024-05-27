@@ -531,7 +531,6 @@ export default {
       })
     },
     setModel() {
-      let _this = this
       let data = {
         name: this.name,
         amount: this.amount,
@@ -672,7 +671,7 @@ export default {
 
           alert("Entry saved correctly", "success")
 
-        }).catch((reason) => {
+        }).catch(() => {
 
           alert("Ops... An error occured", "error")
 

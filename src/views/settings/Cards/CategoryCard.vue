@@ -41,6 +41,7 @@
                 </div>
             </div>
         </div>
+        <AlertModal ref="alertModal" />
     </section>
 </template>
 
@@ -52,7 +53,7 @@ import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
 
 export default {
     components: {
-        HeaderButton,
+        HeaderButton, AlertModal
     },
     data() {
         return {
