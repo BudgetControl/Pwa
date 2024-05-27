@@ -1,11 +1,12 @@
 <template>
   <div class="e" id="app">
-    <div  v-if="deferredPrompt"  class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-lightBlue-500">
+    <div  v-if="deferredPrompt" id="alert-message"  class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-lightBlue-500">
       <span class="inline-block align-middle mr-8">
         <b class="capitalize">Hey!</b> Install our app to get the best experience.
       <button @click="installPWA">Click Here</button>
       </span>
       <button
+        v-on:click="closeAlert()"
         class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none">
         <span>×</span>
       </button>
@@ -62,3 +63,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+#alert-message {
+  z-index: 9999;
+}
+</style>
