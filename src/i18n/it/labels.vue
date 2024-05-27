@@ -26,7 +26,7 @@ export default {
     add_new_model: 'Aggiungi nuovo modello',
     my_entries: 'Le mie voci',
     search_entries: 'Cerca voci',
-    payee_list: 'Elenco beneficiari',
+    payee_list: 'Elenco debiti',
     planned_entries: 'Voci pianificate',
     budgets: 'Budget',
     settings: 'Impostazioni',
@@ -65,6 +65,7 @@ export default {
     account: 'Account',
     category: 'Categoria',
     label: 'Etichetta',
+    labels: 'Etichette',
     entry_type: 'Tipo di voce',
     enable_email_notification: 'Abilita notifica email',
     save_budget: 'Salva budget',
@@ -87,7 +88,7 @@ export default {
     profile: 'Profilo',
     assistance: 'Assistenza',
     my_entry: 'La mia voce',
-    planned_entry: 'Voce pianificata',
+    planned_entry: 'Pianificati',
     add: 'Aggiungi',
     model: 'Modello',
     wallet: 'Portafoglio',
@@ -137,5 +138,7 @@ export default {
     payment_confirm: 'Conferma pagamento',
     my_planned: 'Pianificati',
     my_health: 'Salute economica',
+    workspace: 'Workspace',
+
 }
 </script>

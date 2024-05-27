@@ -66,6 +66,7 @@ export default {
     account: 'Cuenta',
     category: 'Categoría',
     label: 'Etiqueta',
+    labels: 'Etiquetas',
     entry_type: 'Tipo de entrada',
     enable_email_notification: 'Habilitar notificación por correo electrónico',
     save_budget: 'Guardar presupuesto',
@@ -137,5 +138,7 @@ export default {
     payment_confirm: 'Confirmación de pago',
     my_planned: 'Mi planificado',
     my_health: 'Salud económica',
+    workspace: 'Workspace',
+
 }
 </script>

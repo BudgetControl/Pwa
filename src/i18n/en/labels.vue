@@ -65,6 +65,7 @@ export default {
     account: 'Account',
     category: 'Category',
     label: 'Label',
+    labels: 'Labels',
     entry_type: 'Entry type',
     note: 'Note',
     enable_email_notification: 'Enable email notification',
@@ -137,6 +138,7 @@ export default {
     payment_confirm: 'Payment confirmation',
     my_planned: 'Planned',
     my_health: 'Health',
+    workspace: 'Workspace',
 };
 
 </script>
