@@ -1,11 +1,11 @@
 <template>
     <div class="relative pt-1">
-        <router-link :to="'/app/budgets/edit/' + localBudget.localBudget.uuid" class="relative pt-1">
+        <router-link :to="'/app/budgets/edit/' + localBudget.budget.uuid" class="relative pt-1">
             <div class="flex mb-2 items-center justify-between">
                 <div>
                     <span
                         class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200">
-                        {{ localBudget.localBudget.name }} {{ localBudget.localBudget.amount }} {{ currency }}
+                        {{ localBudget.budget.name }} {{ localBudget.budget.amount }} {{ currency }}
                     </span>
                 </div>
                 <div class="text-right">
