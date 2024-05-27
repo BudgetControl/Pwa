@@ -135,7 +135,6 @@ export default {
     payment_deadline: 'Fecha límite de pago',
     credit_card_installment: 'Cuota de tarjeta de crédito',
     wallet_color: 'Color de la billetera',
-    wallet_settings: 'Configuraciones de la billetera',
     workspace_settings: 'Configuraciones del espacio de trabajo',
     default_currency: 'Moneda predeterminada',
     default_payment_type: 'Tipo de pago predeterminado',

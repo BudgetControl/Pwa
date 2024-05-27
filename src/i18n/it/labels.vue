@@ -135,7 +135,6 @@ export default {
     payment_deadline: 'Scadenza pagamento',
     credit_card_installment: 'Rata della carta di credito',
     wallet_color: 'Colore portafoglio',
-    wallet_settings: 'Impostazioni portafoglio',
     workspace_settings: 'Impostazioni spazio di lavoro',
     default_currency: 'Valuta predefinita',
     default_payment_type: 'Tipo di pagamento predefinito',
