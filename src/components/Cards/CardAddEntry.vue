@@ -669,7 +669,7 @@ export default {
           localStorage.setItem("new_entry", true)
           this.time()
 
-          alert(this.$t('messages.enctry_Saved'), "success")
+          alert(this.$t('messages.entry_saved'), "success")
 
         }).catch(() => {
 
