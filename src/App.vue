@@ -21,7 +21,13 @@ import AuthService from './services/AuthService.vue';
 export default {
   data() {
     return {
-      deferredPrompt: null
+      deferredPrompt: null,
+      selectedLanguage: this.$i18n.locale,
+      languages: {
+        en: 'English',
+        es: 'Spanish',
+        it: 'Italian',
+      }
     };
   },
   mounted: async function () {
@@ -46,6 +52,9 @@ export default {
   methods: {
     closeAlert: function(){
       this.deferredPrompt = false;
+    },
+    changeLanguage() {
+      this.$i18n.locale = this.selectedLanguage;
     },
     installPWA() {
       if (this.deferredPrompt) {

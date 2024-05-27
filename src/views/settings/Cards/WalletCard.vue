@@ -3,7 +3,7 @@
         <div class="container mx-auto px-4">
             <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
                 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
-                    <HeaderButton back="/app/settings/wallet" title="Wallet settings" />
+                    <HeaderButton back="/app/settings/wallet" :title="$t('labels.wallet_settings')" />
 
                     <!-- modal -->
                     <div class="container px-4 mx-auto">
@@ -24,7 +24,7 @@
                             <select
                                 class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 v-model="modal.currency">
-                                <option value="0">Choose a currency</option>
+                                <option value="0">{{ $t('labels.choose_currency') }}</option>
                                 <option v-for="(item, k) in form.currency" :key="k" :value="item.id">{{
                                     item.name }}</option>
                             </select>
@@ -34,19 +34,19 @@
                             <select
                                 class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 v-model="modal.type">
-                                <option value="0">Choose a wallet type</option>
+                                <option value="0">{{ $t('labels.choose_wallet_type') }}</option>
                                 <option v-for="(item, k) in form.type" :key="k" :value="item">{{ item }}
                                 </option>
                             </select>
                         </div>
 
                         <div class="mb-3 pt-0" v-if="modal.type == 'Credit Card' || modal.type == 'Credit Card Revolving'">
-                            <span class="text-xs text-blueGray-400">Payment deadline</span>
+                            <span class="text-xs text-blueGray-400">{{ $t('labels.payment_deadline') }}</span>
                             <VueDatePicker v-model="modal.invoiceDate"></VueDatePicker>
                         </div>
 
                         <div class="mb-3 pt-0" v-if="modal.type == 'Credit Card' || modal.type == 'Credit Card Revolving'">
-                            <span class="text-xs text-blueGray-400">Credit card installment</span>
+                            <span class="text-xs text-blueGray-400">{{ $t('labels.credit_card_installment') }}</span>
                             <input type="text" placeholder="500.00 €" v-model="modal.installment"
                                 class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                         </div>
@@ -54,12 +54,12 @@
                         <div class="mb-3 pt-0">
                             <label for="exclude_stats">
                                 <input v-model="modal.exclude_stats" type="checkbox" class="p-1 border rounded"
-                                    id="exclude_stats" :value="true" checked> Exclude from stats
+                                    id="exclude_stats" :value="true" checked>{{ $t('labels.exclude_from_stats') }}
                             </label>
                         </div>
 
                         <div class="mb-3 pt-0">
-                            <span class="text-xs text-blueGray-400">Wallet color</span>
+                            <span class="text-xs text-blueGray-400">{{ $t('labels.wallet_color') }}</span>
                             <color-picker :visible-formats="['hex']" :color="modal.color" @color-change="updateColor" />
                         </div>
 
@@ -70,19 +70,19 @@
                         <button v-if="$route.params.id && restore === false"
                             class="bg-red-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button" v-on:click="archiveWallet()">
-                            Archive Wallet
+                            {{ $t('labels.archive') }}
                         </button>
 
                         <button v-if="$route.params.id && restore === true"
                             class="bg-lightBlue-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button" v-on:click="restoreWallet()">
-                            Restore Wallet
+                            {{ $t('labels.restore') }}
                         </button>
 
                         <button
                             class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button" v-on:click="saveModal()">
-                            Save Changes
+                            {{ $t('labels.save') }}
                         </button>
                     </div>
                 </div>
@@ -144,15 +144,15 @@ export default {
             this.activeNames = value;
         },
         archiveWallet() {
-            if (window.confirm("Are you shure do you want archive these wallet ?")) {
+            if (window.confirm(this.$t('messages.wallet.are_you_sure'))) {
                 ApiService.deleteWallet(this.$route.params.id)
-                alert("Wallet archived", "success")
+                alert(this.$t('messages.wallet.archived'), "success")
                 this.$router.push({ path: '/app/settings/wallet' })
             }
         },
         restoreWallet() {
             ApiService.restoreWallet(this.$route.params.id)
-            alert("Wallet restored", "success")
+            alert(this.$t('messages.wallet.restored'), "success")
             this.$router.push({ path: '/app/settings/wallet' })
         },
         getComponentData() {
@@ -209,7 +209,7 @@ export default {
             const _this = this
 
             ApiService.setAccount(data, this.modal.id).then(() => {
-                alert("Wallet saved", "success")
+                alert(this.$t('messages.wallet.saved'), "success")
                 _this.$router.push({ path: '/app/settings/wallet' })
             })
 
@@ -237,17 +237,17 @@ export default {
 
         validate() {
             if (this.modal.type == 0) {
-                alert("Please choose a right wallet type", "error")
+                alert(this.$t('messages.wallet.wrong_wallet'), "error")
                 return false
             }
 
             if (this.modal.name == null) {
-                alert("Please insert a wallet name", "error")
+                alert(this.$t('messages.wallet.wallet_name'), "error")
                 return false
             }
 
             if (this.modal.currency == 0) {
-                alert("Please choose a wallet currency", "error")
+                alert(this.$t('messages.wallet.wallet_currency'), "error")
                 return false
             }
 

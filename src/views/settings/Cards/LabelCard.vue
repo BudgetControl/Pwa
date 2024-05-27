@@ -13,14 +13,14 @@
                         </div>
 
                         <div class="mb-3 pt-0">
-                            <span class="text-xs text-blueGray-400">Label color</span>
+                            <span class="text-xs text-blueGray-400">  {{ $t('labels.label_color') }}</span>
                             <color-picker :visible-formats="['hex']" :color="modal.color" @color-change="updateColor" />
                         </div>
 
                         <div class="mb-3 pt-0">
                             <label for="exclude_stats">
                                 <input v-model="modal.archive" type="checkbox" class="p-1 border rounded"
-                                    id="exclude_stats" :value="true" checked> Archive label
+                                    id="exclude_stats" :value="true" checked>  {{ $t('labels.archive') }}
                             </label>
                         </div>
 
@@ -30,7 +30,7 @@
                         <button
                             class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button" v-on:click="saveModal()">
-                            Save Changes
+                            {{ $t('labels.save') }}
                         </button>
                     </div>
                 </div>

@@ -8,7 +8,7 @@
           <div class="rounded-t mb-0 px-6 py-6">
             <div class="text-center mb-3">
               <h6 class="text-blueGray-500 text-sm font-bold">
-                Recovery your password
+                {{ $t('labels.recovery_your_password') }}
               </h6>
             </div>
             <hr class="mt-6 border-b-1 border-blueGray-300" />
@@ -19,7 +19,7 @@
 
                 <div role="alert" v-if="error">
                   <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-                    Oops... an error occurred
+                    {{ $t('labels.generic_error') }}
                   </div>
                   <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
                     {{ error_message }}
@@ -31,13 +31,13 @@
                     <i class="fas fa-bell"></i>
                   </span>
                   <span class="inline-block mr-8">
-                    We have sent you an email :-)
+                    {{ $t('labels.we_have_sent_you_an_email') }}
                   </span>
                 </div>
 
                 <div class="relative w-full mb-3">
                   <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                    Email
+                    {{ $t('labels.email') }}
                   </label>
                   <input v-model="email" type="email"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
@@ -48,7 +48,7 @@
                   <button
                     class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                     type="submit">
-                    Send my password
+                    {{ $t('labels.send_my_password') }}
                   </button>
                 </div>
               </form>
@@ -89,10 +89,7 @@ export default {
         _this.show = false
         _this.error = true
         _this.message = false
-
         _this.error_message = err.response.data.error
-
-        console.debug(err)
       })
     }
   }

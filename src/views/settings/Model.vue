@@ -12,7 +12,7 @@
                             </div>
                             <div class="flex lg:w-10/12 p-2">
                                 <p>
-                                    Add new model entry
+                                    {{ $t('labels.add_new_model') }}
                                 </p>
                             </div>
                         </div>

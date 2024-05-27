@@ -17,22 +17,19 @@
                                     </div>
                                     <div class="w-full justify-center flex">
                                         <span
-                                            class="text-sm block my-4 p-3 text-blueGray-700 border-blueGray-100">Budget
-                                            Control of Mlabfacotry version {{ version }}</span>
+                                            class="text-sm block my-4 p-3 text-blueGray-700 border-blueGray-100">{{ $t('text.about_us.version') }}</span>
                                     </div>
                                 </div>
 
                                 <div class="flex flex-wrap">
                                     <div class="w-full px-2 flex-1 text-xs">
-                                        <b>Personal finance manager</b>
-                                        <p>Budget Control by Mlabfactory is a personal finance management tool that helps you track your spending, so you can stay in control and achieve your goals.</p>
-                                    </div>
+                                        {{ $t('text.about_us.personal_finance') }}
+                                         </div>
                                 </div>
 
                                 <div class="flex flex-wrap mt-5">
                                     <div class="w-full px-2 flex-1 text-xs">
-                                        <b>Budget Control information</b>
-                                        <p>Mlabfactory is a professional developer based in Italy, Milan has been operating and developing applications since 2008. Find out more about the team</p><a href="http://mlabfactory.it">Mlabfacotry.it</a>
+                                        {{ $t('text.about_us.information') }}
                                     </div>
                                 </div>
                             </div>
@@ -41,7 +38,7 @@
                                 <div class="flex justify-center px-2 w-full">
                                     <a href="https://www.budgetcontrol.cloud"
                                         class="text-center w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
-                                        Visit our website
+                                        {{ $t('text.about_us.visit_our_website') }}
                                     </a>
                                 </div>
                             </div>

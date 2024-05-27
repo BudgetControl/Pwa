@@ -6,7 +6,9 @@
                     <HeaderButton back="/app/settings" title="Currency settings" />
 
                     <div class="container px-4 mx-auto ">
-                        <p class="px-2 mb-2 text-sm font-medium text-gray-400 dark:text-gray-500">Set your default currency
+                        <p class="px-2 mb-2 text-sm font-medium text-gray-400 dark:text-gray-500">
+                            {{ $t('labels.set_your_default_currecny') }}
+                            
                         </p>
                     </div>
                     <!-- labels -->
