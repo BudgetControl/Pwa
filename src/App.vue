@@ -1,6 +1,15 @@
 <template>
   <div class="e" id="app">
-    <button v-if="deferredPrompt" @click="installPWA" class="install-button">Install APP</button>
+    <div  v-if="deferredPrompt"  class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-lightBlue-500">
+      <span class="inline-block align-middle mr-8">
+        <b class="capitalize">Hey!</b> Install our app to get the best experience.
+      <button @click="installPWA">Click Here</button>
+      </span>
+      <button
+        class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none">
+        <span>×</span>
+      </button>
+    </div>
     <router-view />
   </div>
 </template>
@@ -17,11 +26,11 @@ export default {
   mounted: async function () {
     const _this = this
     // first check if user is logged
-        AuthService.userInfo().then(() => {
-          _this.$router.push('/dashboard');
-        }).catch(() => {
-          _this.$router.push({path : '/app/auth/login'});
-        });
+    AuthService.userInfo().then(() => {
+      _this.$router.push('/dashboard');
+    }).catch(() => {
+      _this.$router.push({ path: '/app/auth/login' });
+    });
   },
   created() {
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -34,6 +43,9 @@ export default {
     });
   },
   methods: {
+    closeAlert: function(){
+      this.deferredPrompt = false;
+    },
     installPWA() {
       if (this.deferredPrompt) {
         this.deferredPrompt.prompt();
@@ -50,18 +62,3 @@ export default {
   },
 }
 </script>
-
-<style>
-.install-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 10px 20px;
-  background-color: #4DBA87;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  z-index: 9999;
-}
-</style>
