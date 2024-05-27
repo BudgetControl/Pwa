@@ -44,6 +44,7 @@ import HeaderButton from '@/components/Button/HeaderButton.vue';
 import ApiService from '@/services/ApiService.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { ColorPicker } from 'vue-accessible-color-picker';
+import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
 
 export default {
     components: {
@@ -65,6 +66,11 @@ export default {
     mounted: function () {
         this.openModal(this.$route.params.id, this.$route.params.subId)
     },
+    created() {
+    window.alert = (message, type = 'success') => {
+      this.$refs.alertModal.show(message, type);
+    };
+  },
     methods: {
         showSub(id) {
             if (this.opentab == id) {
@@ -87,6 +93,7 @@ export default {
         saveModal() {
             const _this = this
             ApiService.setLabel(this.modal.id, this.modal).then(() => {
+                alert('Label updated')
                 _this.$router.push({path : '/app/settings/label'})
             })
         },
