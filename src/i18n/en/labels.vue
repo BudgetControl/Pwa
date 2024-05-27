@@ -74,7 +74,6 @@ export default {
     add_new_wallet: 'Add new wallet',
     change_order: 'Change order',
     show_archived: 'Show archived',
-    wallet_settings: 'Wallet settings',
     category_settings: 'Category settings',
     add_new_category: 'Add new category',
     category_name: 'Category name',
