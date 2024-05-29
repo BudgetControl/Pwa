@@ -140,6 +140,7 @@ export default {
     my_health: 'Salud económica',
     workspace: 'Workspace',
     entry_saved: 'Entrada guardada exitosamente',
+    could_not_log_in: 'No puedo conectarme'
 
 }
 </script>

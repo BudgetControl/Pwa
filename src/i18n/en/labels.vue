@@ -140,6 +140,8 @@ export default {
     my_health: 'Health',
     workspace: 'Workspace',
     entry_saved: 'Entry saved successfully',
+    could_not_log_in: 'I can not log in'
+
 };
 
 </script>

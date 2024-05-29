@@ -138,7 +138,9 @@ export default {
     my_planned: 'Geplant',
     my_health: 'Meine Gesundheit',
     workspace: 'Workspace',
-    enter_saved: 'Eintrag erfolgreich gespeichert'
+    enter_saved: 'Eintrag erfolgreich gespeichert',
+    could_not_log_in: 'Ich kann mich nicht anmelden',
+
 
 };
 </script>

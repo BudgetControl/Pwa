@@ -139,7 +139,8 @@ export default {
     my_planned: 'Pianificati',
     my_health: 'Salute economica',
     workspace: 'Workspace',
-    entry_saved: 'Voce salvata correttamente'
+    entry_saved: 'Voce salvata correttamente',
+    could_not_log_in: 'Non riesco ad accedere'
 
 }
 </script>
