@@ -140,8 +140,12 @@ export default {
     my_health: 'Health',
     workspace: 'Workspace',
     entry_saved: 'Entry saved successfully',
-    could_not_log_in: 'I can not log in'
-
+    could_not_log_in: 'I can not log in',
+    send_my_password: 'Send my password',
+    recovery_your_password: 'Recovery your password',
+    name: 'Name',
+    confirm_password: 'Confirm password',
+    privacy_policy: 'Privacy & Policy'
 };
 
 </script>

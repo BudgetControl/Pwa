@@ -140,7 +140,13 @@ export default {
     my_health: 'Salute economica',
     workspace: 'Workspace',
     entry_saved: 'Voce salvata correttamente',
-    could_not_log_in: 'Non riesco ad accedere'
+    could_not_log_in: 'Non riesco ad accedere',
+    send_my_password: 'Invia una nuova password',
+    recovery_your_password: 'Recupera la tua password',
+    name: 'Nome',
+    confirm_password: 'Conferma password',
+    privacy_policy: 'Privacy & Policy'
+
 
 }
 </script>
