@@ -145,7 +145,8 @@ export default {
     recovery_your_password: 'Recupera la tua password',
     name: 'Nome',
     confirm_password: 'Conferma password',
-    privacy_policy: 'Privacy & Policy'
+    privacy_policy: 'Privacy & Policy',
+    create_account: 'Crea un nuovo account'
 
 
 }

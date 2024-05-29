@@ -144,8 +144,9 @@ export default {
     send_my_password: 'Enviar mi contraseña',
     recovery_your_password: 'Recuperar tu contraseña',
     name: 'Nombre',
-    confirm_password: 'Confirmar contraseña',
-    privacy_policy: 'Privacy & Policy'
+    confirm_password: 'Conferma password',
+    privacy_policy: 'Privacy & Policy',
+    create_account: 'Crear una cuenta nueva',
 
 }
 </script>

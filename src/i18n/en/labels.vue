@@ -145,7 +145,8 @@ export default {
     recovery_your_password: 'Recovery your password',
     name: 'Name',
     confirm_password: 'Confirm password',
-    privacy_policy: 'Privacy & Policy'
+    privacy_policy: 'Privacy & Policy',
+    create_account: 'Create new account'
 };
 
 </script>
