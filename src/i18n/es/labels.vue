@@ -89,7 +89,7 @@ export default {
     profile: 'Perfil',
     assistance: 'Asistencia',
     my_entry: 'Mi entrada',
-    planned_entry: 'Entrada planificada',
+    planned: 'Entrada planificada',
     add: 'Agregar',
     model: 'Modelo',
     wallet: 'Billetera',
@@ -139,6 +139,7 @@ export default {
     my_planned: 'Mi planificado',
     my_health: 'Salud económica',
     workspace: 'Workspace',
+    entry_saved: 'Entrada guardada exitosamente',
 
 }
 </script>

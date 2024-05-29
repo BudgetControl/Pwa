@@ -88,7 +88,7 @@ export default {
     profile: 'Profile',
     assistance: 'Assistance',
     my_entry: 'My entry',
-    planned_entry: 'Planned entry',
+    planned: 'Planned entry',
     add: 'Add',
     model: 'Model',
     wallet: 'Wallet',
@@ -139,6 +139,7 @@ export default {
     my_planned: 'Planned',
     my_health: 'Health',
     workspace: 'Workspace',
+    entry_saved: 'Entry saved successfully',
 };
 
 </script>

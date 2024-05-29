@@ -88,7 +88,7 @@ export default {
     profile: 'Profilo',
     assistance: 'Assistenza',
     my_entry: 'La mia voce',
-    planned_entry: 'Pianificati',
+    planned: 'Pianificati',
     add: 'Aggiungi',
     model: 'Modello',
     wallet: 'Portafoglio',
@@ -139,6 +139,7 @@ export default {
     my_planned: 'Pianificati',
     my_health: 'Salute economica',
     workspace: 'Workspace',
+    entry_saved: 'Voce salvata correttamente'
 
 }
 </script>

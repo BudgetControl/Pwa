@@ -89,7 +89,7 @@ export default {
     profile: 'Profil',
     assistance: 'Hilfe',
     my_entry: 'Mein Eintrag',
-    planned_entry: 'Geplanter Eintrag',
+    planned: 'Geplanter Eintrag',
     add: 'Hinzufügen',
     model: 'Modell',
     wallet: 'Wallet',
@@ -138,6 +138,7 @@ export default {
     my_planned: 'Geplant',
     my_health: 'Meine Gesundheit',
     workspace: 'Workspace',
+    enter_saved: 'Eintrag erfolgreich gespeichert'
 
 };
 </script>
