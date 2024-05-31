@@ -6,7 +6,7 @@
                     <HeaderButton back="/app/settings" title="Workspace settings" />
 
                     <div class="container px-4 mx-auto ">
-                        <p class="px-2 mb-2 text-sm font-medium text-gray-400 dark:text-gray-500">Set up your workspaces
+                        <p class="px-2 mb-2 text-sm font-medium text-gray-400 dark:text-gray-500">{{ $t('labels.set_up_your_workspaces') }}
                         </p>
 
                         <div class="container px-4 mx-auto" v-on:click="openModal(null)">
@@ -16,7 +16,7 @@
                             </div>
                             <div class="flex lg:w-10/12 p-2">
                                 <p>
-                                    Add new workspace
+                                    {{ $t('labels.add_new_workspace') }}
                                 </p>
                             </div>
                         </div>

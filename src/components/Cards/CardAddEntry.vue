@@ -6,7 +6,7 @@
         <div class="lg:w-6/12 px-2 w-full " v-if="this.isModel === false">
           <select v-model="model" v-on:change="retriveModel()" id="model" v-if="action.models"
             class="w-full border-0 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-            <option value="0">Choose a model</option>
+            <option value="0">{{ $t('labels.choose_a_model') }}</option>
             <option v-for="(item, k) in input.model" :key="k" :value="item.uuid">{{ item.name }}</option>
           </select>
         </div>
@@ -23,28 +23,28 @@
                     <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(1)"
                       v-bind:class="{ 'text-emerald-600 ': action.openTab !== 1, 'text-white bg-emerald-600': action.openTab === 1 }">
-                      EXPENSES
+                      {{ $t('labels.expenses') }}
                     </a>
                   </li>
                   <li class="nav-item">
                     <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(2)"
                       v-bind:class="{ 'text-emerald-600 ': action.openTab !== 2, 'text-white bg-emerald-600': action.openTab === 2 }">
-                      INCOMING
+                      {{ $t('labels.incoming') }}
                     </a>
                   </li>
                   <li class="nav-item" v-if="isModel === false">
                     <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(3)"
                       v-bind:class="{ 'text-emerald-600 ': action.openTab !== 3, 'text-white bg-emerald-600': action.openTab === 3 }">
-                      TRANSFER
+                      {{ $t('labels.transfer') }}
                     </a>
                   </li>
                   <li class="nav-item" v-if="isModel === false">
                     <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(4)"
                       v-bind:class="{ 'text-emerald-600 ': action.openTab !== 4, 'text-white bg-emerald-600': action.openTab === 4 }">
-                      DEBIT
+                      {{ $t('labels.debit') }}
                     </a>
                   </li>
                 </ul>
@@ -62,8 +62,8 @@
 
             <select v-model="account" id="account" required
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-              <option value="-1">Choose Wallet account</option>
-              <option value="0" v-if="action.openTab === 3">Out of wallet</option>
+              <option value="-1">{{ $t('labels.choose_wallet_account') }}</option>
+              <option value="0" v-if="action.openTab === 3">{{ $t('labels.out_of_Wallet') }}</option>
               <option v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
           </div>
@@ -75,33 +75,33 @@
 
             <select v-if="action.hidecategory == false" v-model="category" id="category"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
-              <option value="0">Choose a category</option>
-              <option v-for="item in input.category" :key="item.id" :value="item.id">{{ item.name }}</option>
+              <option value="0">{{ $t('labels.choose_a_category') }}</option>
+              <option v-for="item in input.category" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}</option>
             </select>
 
             <select v-if="action.hidecategory == true && !action.hidetransfer_to" v-model="transferto" id="transferto"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
-              <option value="-1">Choose a wallet to transfer to</option>
-              <option value="0">Out of wallet</option>
+              <option value="-1">{{ $t('labels.choose_a_wallet_to_transfer_to') }}</option>
+              <option value="0">{{ $t('labels.out_of_Wallet') }}</option>
               <option v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
 
             <select v-model="debit" v-if="action.hidetransfer_to"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
-              <option value="0">Choose an option</option>
-              <option value="njn76298fm">Create new debt</option>
+              <option value="0">{{ $t('labels.choose_an_option') }}</option>
+              <option value="njn76298fm">{{ $t('labels.create_new_debit') }}</option>
               <option v-for="item in input.debit" :key="item.id" :value="item.name">{{ item.name }}</option>
             </select>
           </div>
 
           <div class="px-2 py-2 w-full lg:w-12/12" v-if="action.openTab == 4">
-            <input v-model="debit_name" type="text" placeholder="Name" id="debit" v-if="debit == 'njn76298fm'"
+            <input v-model="debit_name" type="text" placeholder="{{ $t('labels.debit_name') }}" id="debit" v-if="debit == 'njn76298fm'"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
 
           <div class="px-2 py-2 lg:w-6/12" v-if="action.openTab == 4">
             <label for="incoming" class="uppercase text-blueGray-600 text-xs font-bold mb-2">
-              INCOMING
+              {{ $t('labels.incoming') }}
               <input type="radio" id="incoming" value="+"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
                 v-model="action.debit_type" />
@@ -110,7 +110,7 @@
 
           <div class="px-2 py-2 lg:w-6/12" v-if="action.openTab == 4">
             <label for="expenses" class="uppercase text-blueGray-600 text-xs font-bold mb-2">
-              EXPENSES
+              {{ $t('labels.expenses') }}
               <input type="radio" id="expenses" value="-"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
                 v-model="action.debit_type" />
@@ -127,7 +127,7 @@
           <div v-if="action.showDetails" class="lg:w-6/12 px-2 py-2 w-full">
             <select v-model="currency"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-              <option v-for="item in input.currency" :key="item.id" :value="item.id">{{ item.name }}</option>
+              <option v-for="item in input.currency" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}</option>
             </select>
           </div>
 
@@ -137,14 +137,14 @@
           <button v-on:click="action.showDetails = true"
               class="w-full text-xs py-1 bg-yellow-500 text-white active:bg-amber-600 font-bold uppercase rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
               type="button">
-              SHOW DETAILS
+              {{ $t('labels.show_details') }}
             </button>
         </div>
 
         <div v-if="action.showDetails" class="row border rounded border-blueGray-500 py-3 border-dashed">
           <div class="flex flex-wrap">
             <div class="lg:w-12/12 px-2 w-full text-center">
-              <label class="text-xs w-full" for="tags">Choose one of currently tags</label>
+              <label class="text-xs w-full" for="tags">{{ $t('labels.choose_one_of_currently_tags') }}</label>
               <select v-model="label" multiple id="tags"
                 class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                 <option
@@ -194,14 +194,14 @@
               <div class="w-full" v-bind:class="{ 'lg:w-6/12 ': isModel === false, 'lg:w-12/12': isModel === true }">
                 <select v-model="payment_type" id="payment_type"
                   class="w-full border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                  <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ item.name }}</option>
+                  <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}</option>
                 </select>
               </div>
               <div class="lg:w-6/12 w-full ">
                 <div v-if="isModel === false"
                   class="border-0 mt-2 px-2 py-2 text-center placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                   <label for="confirmed" id="confirm" v-if="!isPlanned">
-                    payment confirm <input v-model="confirmed" type="checkbox" id="confirmed" value="1" checked>
+                    {{ $t('labels.payment_confirm') }} <input v-model="confirmed" type="checkbox" id="confirmed" value="1" checked>
                   </label>
                 </div>
               </div>
@@ -229,7 +229,7 @@
             <button v-on:click="setModel()"
               class="w-full text-xs py-3 bg-yellow-500 text-white active:bg-amber-600 font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
               type="button">
-              SAVE TEMPLATE
+              {{ $t('labels.save_template') }}
             </button>
           </div>
         </div>
@@ -241,7 +241,7 @@
           <button v-on:click="setEntry()"
             class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
             type="button">
-            INSERT NEW ENTRY
+            {{ $t('labels.insert_new_entry') }}
           </button>
         </div>
       </div>
@@ -258,7 +258,7 @@
           <span>×</span>
         </button>
       </div>
-
+      <AlertModal ref="alertModal" />
     </div>
   </form>
 </template>
@@ -268,6 +268,7 @@ import ApiService from '../../services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import LocalStorageService from '../../services/LocalStorageService.vue';
+import AlertModal from '../GenericComponents/AlertModal.vue';
 
 export default {
   props: {
@@ -342,7 +343,12 @@ export default {
     }
   },
   components: {
-    VueDatePicker
+    VueDatePicker, AlertModal
+  },
+  created() {
+    window.alert = (message, type = 'success') => {
+      this.$refs.alertModal.show(message, type);
+    };
   },
   mounted() {
     this.action.openTab = 1
@@ -525,7 +531,6 @@ export default {
       })
     },
     setModel() {
-      let _this = this
       let data = {
         name: this.name,
         amount: this.amount,
@@ -543,50 +548,50 @@ export default {
       }
 
       ApiService.setModel(data, this.entryId).then(() => {
-        _this.action.alert = true
-        _this.action.alert_color = 'bg-emerald-600'
-        _this.action.alert_message = "Modello salvato correttamente"
+        alert(this.$t('messages.model_saved'), "success")
+      }).catch(() => {
+        alert(this.$t('messages.generic_error'), "error")
       })
     },
 
     validateBefore() {
 
       if (this.account == -1 && this.action.openTab != 3) {
-        alert("Please choose a wallet account")
+        alert(this.$t('messages.validation.choose_wallet'), "error")
         return false
       }
 
       if (this.category == 0) {
-        alert("Please choose a right category")
+        alert(this.$t('messages.validation.choose_category'), "error")
         return false
       }
 
       let num = this.amount + 9
       if (this.amount == null || isNaN(num)) {
-        alert("Please insert amount value")
+        alert(this.$t('messages.validation.insert_amount'), "error")
         return false
       }
 
       if (this.action.openTab == 3) {
 
         if (this.account == -1) {
-          alert("Please choose a wallet accounts")
+          alert(this.$t('messages.validation.choose_wallet'), "error")
           return false
         }
 
         if (this.account == this.transferto) {
-          alert("Please choose a different wallet to transfer")
+          alert(this.$t('messages.validation.choose_wallet_transfer'), "error")
           return false
         }
 
         if (this.account == this.transferto) {
-          alert("Please choose a different wallet to transfer")
+          alert(this.$t('messages.validation.choose_wallet_transfer'), "error")
           return false
         }
 
 
         if (this.transferto == '-1') {
-          alert("Please choose a wallet to transfer to")
+          alert(this.$t('messages.validation.choose_wallet_transfer'), "error")
           return false
         }
 
@@ -594,17 +599,17 @@ export default {
 
       if (this.action.openTab == 4) {
         if (this.debit == 'njn76298fm' && this.debit_name == null) {
-          alert("Please insert a valid debt Name")
+          alert(this.$t('messages.validation.insert_payee'), "error")
           return false
         }
 
         if (this.account == this.transferto) {
-          alert("Please choose a different wallet to transfer")
+          alert(this.$t('messages.validation.choose_choose_wallet_transferallet'), "error")
           return false
         }
 
         if (this.account == this.transferto) {
-          alert("Please choose a different wallet to transfer")
+          alert(this.$t('messages.validation.choose_wallet_transfer'), "error")
           return false
         }
 
@@ -664,11 +669,11 @@ export default {
           localStorage.setItem("new_entry", true)
           this.time()
 
-        }).catch((reason) => {
+          alert(this.$t('messages.entry_saved'), "success")
 
-          this.action.alert = true
-          this.action.alert_message = "Ops... An error occured"
-          console.error(reason);
+        }).catch(() => {
+
+          alert(this.$t('messages.generic_error'), "error")
 
         })
 

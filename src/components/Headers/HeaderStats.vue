@@ -12,7 +12,7 @@
           <div class="min-w px-2">
             <router-link to="/app/entries" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
-                <card-stats statSubtitle="WALLET" :statTitle="wallet.statTitle + ' €'" statIconColor="bg-lightBlue-500" />
+                <card-stats :statSubtitle="$t('labels.wallet')" :statTitle="wallet.statTitle + ' €'" statIconColor="bg-lightBlue-500" />
               </a>
             </router-link>
           </div>
@@ -20,7 +20,7 @@
           <div class="min-w px-2">
             <router-link to="/app/entries?type=planned" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
-                <card-stats statSubtitle="MY PLANNED" :statTitle="walletPlanned.statTitle + ' €'"
+                <card-stats :statSubtitle="$t('labels.my_planned')" :statTitle="walletPlanned.statTitle + ' €'"
                   :statArrow="walletPlanned.statArrow" :statPercent="walletPlanned.statPercent"
                   statIconName="fas fa-money-bill" statIconColor="bg-teal-500" />
               </a>
@@ -29,7 +29,7 @@
 
           <div class="min-w px-2">
             <a>
-              <card-stats statSubtitle="MY HEALTH" :statTitle="health.statTitle + ' €'" :statArrow="health.statArrow"
+              <card-stats :statSubtitle="$t('labels.my_health')" :statTitle="health.statTitle + ' €'" :statArrow="health.statArrow"
                 :statPercent="health.statPercent" statIconName="fas fa-heart" :statIconColor=health.iconColor />
             </a>
           </div>
@@ -37,7 +37,7 @@
           <div class="min-w px-2">
             <router-link to="/app/entries?type=incoming" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
-                <card-stats statSubtitle="MY INCOMING" :statTitle="incoming.statTitle + ' €'"
+                <card-stats :statSubtitle="$t('labels.incoming')" :statTitle="incoming.statTitle + ' €'"
                   :statArrow="incoming.statArrow" :statPercent="incoming.statPercent"
                   :statPercentColor="incoming.statPercentColor" statDescripiron="Last month" statIconName="fas fa-coins"
                   statIconColor="bg-lightBlue-500" />
@@ -48,7 +48,7 @@
           <div class="min-w px-2">
             <router-link to="/app/entries?type=expenses" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
-                <card-stats statSubtitle="MY EXPENSES" :statTitle="expenses.statTitle + ' €'"
+                <card-stats :statSubtitle="$t('labels.expenses')" :statTitle="expenses.statTitle + ' €'"
                   :statArrow="expenses.statArrow" :statPercent="expenses.statPercent"
                   :statPercentColor="expenses.statPercentColor" statDescripiron="Last month"
                   statIconName="fas fa-hand-holding-usd" statIconColor="bg-red-500" />

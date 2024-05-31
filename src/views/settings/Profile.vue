@@ -17,26 +17,26 @@
               <div class="px-4 flex-1 mb-5">
                 <a href="/app/dashboard"
                   class="bg-emerald-500 active:bg-emerald-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150">
-                  Dashboard
+                  {{ $t('labels.dashboard') }}
                 </a>
               </div>
               <div class="px-4 flex-1 mb-5">
                 <a href="/app/settings"
                   class="bg-emerald-500 active:bg-emerald-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150">
-                  Settings
+                  {{ $t('labels.settings') }}
                 </a>
               </div>
               <div class="px-4 flex-1 mb-5">
                 <a href="/app/entry"
                   class="bg-emerald-500 active:bg-emerald-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-2 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150">
-                  Add new entry
+                  {{ $t('labels.add_new_entry') }}
                 </a>
               </div>
 
               <div class="px-4 flex-1 mb-5">
                 <a href="/app/entries"
                   class="bg-emerald-500 active:bg-emerald-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150">
-                  My entries
+                  {{ $t('labels.my_entries') }}
                 </a>
               </div>
 
@@ -54,19 +54,19 @@
                 <span class="text-xl font-bold block uppercase tracking-wide text-emerald-600">
                   {{ user.wallet.incoming }} {{ this.currency }}
                 </span>
-                <span class="text-sm text-blueGray-400">Incoming</span>
+                <span class="text-sm text-blueGray-400">{{ $t('labels.incoming') }}</span>
               </div>
               <div class="lg:mr-4 p-3 text-center text-red-500">
                 <span class="text-xl font-bold block uppercase tracking-wide">
                   {{ user.wallet.expenses }} {{ this.currency }}
                 </span>
-                <span class="text-sm text-blueGray-400">Expenses</span>
+                <span class="text-sm text-blueGray-400">{{ $t('labels.expenses') }}</span>
               </div>
               <div class="lg:mr-4 p-3 text-center">
                 <span class="text-xl font-bold block uppercase tracking-wide " :class="user.wallet.health_color">
                   {{ user.wallet.health }} {{ this.currency }}
                 </span>
-                <span class="text-sm">Health</span>
+                <span class="text-sm">{{ $t('labels.health') }}</span>
               </div>
             </div>
           </div>
@@ -89,7 +89,7 @@
                   {{ user.suggestions }}
                 </p>
                 <a href="javascript:void(0)" class="font-normal text-emerald-500" v-if="user.suggestions">
-                  Show more
+                  {{ $t('labels.show_more') }}
                 </a>
               </div>
             </div>
@@ -101,12 +101,7 @@
             </div>
 
             <div class="flex flex-wrap mt-6 relative justify-center mt-10 text-xs">
-              <p>Registrandoti o connettendoti con uno dei suddetti servizi,
-                acconsenti ai nostri <a class="font-bold text-decoration-line"
-                  href="https://www.budgetcontrol.cloud/terms-of-service/">Termini di Servizio</a> e
-                riconosci la nostra <a class="font-bold text-decoration-line"
-                  href="https://www.budgetcontrol.cloud/security-policy/">Informativa sulla Privacy</a>,
-                che descrive come gestiamo i tuoi dati personali.</p>
+              {{ $t('text.profile.plocy') }}
             </div>
 
           </div>
@@ -149,7 +144,7 @@ export default {
   },
   async beforeMount() {
     const storage = LocalStorageService.get('settings')
-    this.currency = storage.currency.icon
+    this.currency = storage.currency_id || '€'
   },
   async mounted() {
     const _this = this

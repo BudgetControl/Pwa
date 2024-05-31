@@ -8,7 +8,7 @@
           <div class="rounded-t mb-0 px-6 py-6">
             <div class="text-center mb-3">
               <h6 class="text-blueGray-500 text-sm font-bold">
-                Sign in with
+                {{ $t('labels.sign_in_with') }}
               </h6>
             </div>
             <div class="btn-wrapper text-center">
@@ -29,13 +29,13 @@
           </div>
           <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
             <div class="text-blueGray-400 text-center mb-3 font-bold">
-              <small>Or sign in with credentials</small>
+              <small>{{ $t('labels.or_sign_in_with_credentials') }}</small>
             </div>
             <form @submit="submit()" action="javascript:void(0)">
 
               <div role="alert" v-if="error">
                 <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-                  Could not log in
+                  {{ $t('labels.could_not_log_in') }}
                 </div>
                 <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
                   {{ error }} <br />
@@ -61,15 +61,14 @@
                   placeholder="Password" />
               </div>
               <div class="text-blueGray-400 mb-3 font-bold">
-                <small>Lost your passowrd ? <router-link to="/app/auth/recovery-password">recovery
-                    here</router-link></small>
+                <small>{{ $t('labels.lost_your_password') }} <router-link to="/app/auth/recovery-password">>{{ $t('labels.recovery_here') }}</router-link></small>
               </div>
 
               <div class="text-center mt-6">
                 <button
                   class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                   type="submit">
-                  Sign In
+                  {{ $t('labels.sign_in') }}
                 </button>
               </div>
             </form>
@@ -78,12 +77,12 @@
         <div class="flex flex-wrap mt-6 relative">
           <div class="w-1/2">
             <router-link to="/app/auth/recovery-password" class="text-blueGray-200">
-              <small>Forgot password?</small>
+              <small>{{ $t('labels.forgot_password') }}</small>
             </router-link>
           </div>
           <div class="w-1/2 text-right">
             <router-link to="/app/auth/register" class="text-blueGray-200">
-              <small>Create new account</small>
+              <small>{{ $t('labels.create_new_account') }}</small>
             </router-link>
           </div>
         </div>
@@ -92,12 +91,7 @@
 
 
     <div class="flex flex-wrap mt-6 relative text-blueGray-200 justify-center mt-10 text-xs">
-      <p>Registrandoti o connettendoti con uno dei suddetti servizi,
-        acconsenti ai nostri <a class="font-bold text-decoration-line"
-          href="https://www.budgetcontrol.cloud/terms-of-service/">Termini di Servizio</a> e
-        riconosci la nostra <a class="font-bold text-decoration-line"
-          href="https://www.budgetcontrol.cloud/security-policy/">Informativa sulla Privacy</a>,
-        che descrive come gestiamo i tuoi dati personali.</p>
+      {{ $t('text.profile.policy') }}
     </div>
   </div>
 </template>
@@ -129,6 +123,7 @@ export default {
       let email = this.email;
       let password = this.password;
       const _this = this
+      console.debug(this.$t("messages.wrong_password"))
 
       this.show = true
       this.error = false
@@ -152,7 +147,7 @@ export default {
         AuthService.userInfo().then(() => {
           _this.$router.push({ path: '/app/dashboard' })
         }).catch(() => {
-            _this.error = "Opne an error occurring, please try again"
+            _this.error = this.$t('messages.generic_error')
         })
 
       }).catch((err) => {
@@ -160,11 +155,11 @@ export default {
 
         switch (err.response.data.code) {
           case 'EML_NaN':
-            _this.error = `You haven't verified your email yet. If you haven't received it, click here to resend.`
+            _this.error = this.$t('messages.login.not_verified_email')
             _this.verify = true
             break;
           default:
-            _this.error = `The credentials you entered are not valid.`
+            _this.error = ''
             break;
         }
 
@@ -180,7 +175,7 @@ export default {
         window.location.href = resp.uri
       }).catch(() => {
         _this.show = false
-        _this.error = `Sorry an error occurred, try later`
+        _this.error = this.$t('messages.generic_error')
       })
     }
   }
