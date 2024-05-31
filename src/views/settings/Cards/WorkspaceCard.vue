@@ -4,7 +4,7 @@
             <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
                 <div
                     class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
-                    <HeaderButton back="/app/settings/workspace" title="Label settings" />
+                    <HeaderButton back="/app/settings/workspace" :title="$nextTick('labels.workspace_settings')" />
 
                     <div class="relative p-6 flex-auto">
                         <!-- Regular Input -->
@@ -15,7 +15,7 @@
 
                         <div class="mb-3 pt-0">
                             <label for="exclude_stats">
-                                Default currency
+                                {{ $t('labels.default_currency') }}
                                 <select
                                     class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                     v-model="modal.currency">
@@ -27,7 +27,7 @@
 
                         <div class="mb-3 pt-0">
                             <label for="exclude_stats">
-                                Default payment type
+                                {{ $t('labels.default_payment_type') }}
                                 <select
                                     class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                     v-model="modal.payment_type">
@@ -38,7 +38,7 @@
                         </div>
 
                         <div class="mb-3 pt-0 ">
-                            <div>Share workspace with</div>
+                            <div>{{ $t('labels.share_workspace_with') }}</div>
                             <div class="flex">
                                 <div class="lg:w-6/12 w-full">
                                     <input type="email" placeholder="exmail@example.com" v-model="shareEmail"
@@ -48,17 +48,17 @@
                                     <button
                                         class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button" v-on:click="share()">
-                                        Share
+                                        {{ $t('labels.share') }}
                                     </button>
                                 </div>
                             </div>
                             <div class="container" v-if="modal.shareWith.length > 0">
-                                Workspace shared with
+                                {{ $t('labels.worksace_whared_with') }}
                                 <ul>
                                     <li v-for="(user, i) in modal.shareWith" :key="i">
                                         <span
                                             class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1 text-emerald-600 bg-emerald-200"
-                                            v-on:click="remove(modal.shareWith.indexOf(user.uuid))">REMOVE</span>
+                                            v-on:click="remove(modal.shareWith.indexOf(user.uuid))">{{ $t('labels.remove') }}</span>
                                         {{ user.name }}
                                     </li>
                                 </ul>
@@ -71,12 +71,13 @@
                         <button
                             class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button" v-on:click="saveModal()">
-                            Save Changes
+                            {{ $t('labels.save') }}
                         </button>
                     </div>
                 </div>
             </div>
         </div>
+        <AlertModal ref="alertModal" />
     </section>
 </template>
 
@@ -87,10 +88,11 @@ import ApiServiceVue from '../../../services/ApiService.vue';
 import WorkspaceService from '../../../services/WorkspaceService.vue';
 import AuthServiceVue from '../../../services/AuthService.vue';
 import LocalStorageServiceVue from '../../../services/LocalStorageService.vue';
+import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
 
 export default {
     components: {
-        HeaderButton
+        HeaderButton, AlertModal
     },
     data() {
         return {
@@ -113,14 +115,21 @@ export default {
             this.getWorkspaceDetail()
         }
     },
+    created() {
+        window.alert = (message, type = 'success') => {
+            this.$refs.alertModal.show(message, type);
+        };
+    },
     methods: {
         saveModal() {
             if(this.$route.params.id) {
                 WorkspaceService.update(this.$route.params.id, this.modal).then(() => {
+                    alert(this.$t('messages.workspace.updated'))
                     this.$router.push('/app/settings/workspace')
                 })
             } else {
                 WorkspaceService.add(this.modal).then(() => {
+                    alert(this.$t('messages.workspace.added'))
                     this.$router.push('/app/settings/workspace')
                 })
             }
@@ -159,7 +168,7 @@ export default {
                     res.email = email
                     this.modal.shareWith.push(res)
                 }).catch(() => {
-                    alert('User not found')
+                    alert(this.$t('messages.workspace.user_not_found'), 'error')
                 })
             }
             this.shareEmail = ''

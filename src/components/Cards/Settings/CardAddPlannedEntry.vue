@@ -167,6 +167,7 @@
       </div>
 
     </div>
+    <AlertModal ref="alertModal" />
   </form>
 </template>
 
@@ -174,6 +175,7 @@
 import ApiService from '@/services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+import AlertModal from '../../GenericComponents/AlertModal.vue';
 
 export default {
   props: {
@@ -239,7 +241,12 @@ export default {
     }
   },
   components: {
-    VueDatePicker
+    VueDatePicker, AlertModal
+  },
+  created() {
+    window.alert = (message, type = 'success') => {
+      this.$refs.alertModal.show(message, type);
+    };
   },
   mounted() {
     this.action.openTab = 1
@@ -348,23 +355,23 @@ export default {
     validateBefore() {
 
       if (this.account == 0) {
-        alert("Please choose a wallet account")
+        alert("Please choose a wallet account", "error")
         return false
       }
 
       if (this.category == 0) {
-        alert("Please choose a right category")
+        alert("Please choose a right category", "error")
         return false
       }
 
       let num = this.amount + 9
       if (this.amount == null || isNaN(num)) {
-        alert("Please insert amount value")
+        alert("Please insert amount value", "error")
         return false
       }
 
       if (this.note == null) {
-        alert("Please insert a note description")
+        alert("Please insert a note description", "error")
         return false
       }
 
@@ -420,11 +427,10 @@ export default {
             _this.action.dateUpdated = false
           this.time()
 
-        }).catch((reason) => {
+          alert('Entry saved successfully', "success")
 
-          this.action.alert = true
-          this.action.alert_message = "Ops... An error occured"
-          console.error(reason);
+        }).catch(() => {
+          alert('Ops an error occurred ...', "error")
 
         })
       }

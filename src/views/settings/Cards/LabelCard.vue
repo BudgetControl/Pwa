@@ -13,14 +13,14 @@
                         </div>
 
                         <div class="mb-3 pt-0">
-                            <span class="text-xs text-blueGray-400">Label color</span>
+                            <span class="text-xs text-blueGray-400">  {{ $t('labels.label_color') }}</span>
                             <color-picker :visible-formats="['hex']" :color="modal.color" @color-change="updateColor" />
                         </div>
 
                         <div class="mb-3 pt-0">
                             <label for="exclude_stats">
                                 <input v-model="modal.archive" type="checkbox" class="p-1 border rounded"
-                                    id="exclude_stats" :value="true" checked> Archive label
+                                    id="exclude_stats" :value="true" checked>  {{ $t('labels.archive') }}
                             </label>
                         </div>
 
@@ -30,12 +30,13 @@
                         <button
                             class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button" v-on:click="saveModal()">
-                            Save Changes
+                            {{ $t('labels.save') }}
                         </button>
                     </div>
                 </div>
             </div>
         </div>
+        <AlertModal ref="alertModal" />
     </section>
 </template>
 
@@ -44,10 +45,11 @@ import HeaderButton from '@/components/Button/HeaderButton.vue';
 import ApiService from '@/services/ApiService.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { ColorPicker } from 'vue-accessible-color-picker';
+import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
 
 export default {
     components: {
-        HeaderButton, ColorPicker
+        HeaderButton, ColorPicker, AlertModal
     },
     data() {
         return {
@@ -65,6 +67,11 @@ export default {
     mounted: function () {
         this.openModal(this.$route.params.id, this.$route.params.subId)
     },
+    created() {
+    window.alert = (message, type = 'success') => {
+      this.$refs.alertModal.show(message, type);
+    };
+  },
     methods: {
         showSub(id) {
             if (this.opentab == id) {
@@ -87,6 +94,7 @@ export default {
         saveModal() {
             const _this = this
             ApiService.setLabel(this.modal.id, this.modal).then(() => {
+                alert('Label updated')
                 _this.$router.push({path : '/app/settings/label'})
             })
         },

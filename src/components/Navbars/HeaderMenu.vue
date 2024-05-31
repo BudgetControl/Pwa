@@ -21,7 +21,7 @@
                         : 'text-white hover:text-blueGray-500',
                     ]"
                   >
-                   ADD
+                  {{ $t('labels.add') }}
                   </a>
                 </router-link>
               </li>
@@ -40,7 +40,7 @@
                         : 'text-white hover:text-blueGray-500',
                     ]"
                   >
-                   SHOW
+                  {{ $t('labels.show') }}
                   </a>
                 </router-link>
               </li>
@@ -59,7 +59,7 @@
                         : 'text-white hover:text-blueGray-500',
                     ]"
                   >
-                    SEARCH
+                  {{ $t('labels.search') }}
                   </a>
                 </router-link>
               </li>

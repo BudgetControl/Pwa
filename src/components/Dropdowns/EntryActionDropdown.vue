@@ -16,13 +16,13 @@
               ? 'text-emerald-500 hover:text-emerald-600'
               : 'text-blueGray-700 hover:text-blueGray-500',
           ]">
-          Edit
+          {{ $t('labels.edit') }}
         </a>
       </router-link>
 
       <a href="javascript:void(0)" v-on:click="deleteEntry()"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">
-        Delete
+        {{ $t('labels.delete') }}
       </a>
     </div>
   </div>

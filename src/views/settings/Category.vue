@@ -12,7 +12,7 @@
                             </div>
                             <div class="flex lg:w-10/12 p-2">
                                 <p>
-                                    Add new category
+                                    {{ $t('labels.add_new_category') }}
                                 </p>
                             </div>
                         </div>
