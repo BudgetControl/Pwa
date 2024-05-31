@@ -146,7 +146,8 @@ export default {
     name: 'Nome',
     confirm_password: 'Conferma password',
     privacy_policy: 'Privacy & Policy',
-    create_account: 'Crea un nuovo account'
+    create_account: 'Crea un nuovo account',
+    click_here: 'Clicca qui',
 
 
 }

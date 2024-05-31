@@ -146,7 +146,8 @@ export default {
     name: 'Name',
     confirm_password: 'Confirm password',
     privacy_policy: 'Privacy & Policy',
-    create_account: 'Create new account'
+    create_account: 'Create new account',
+    click_here: 'Haga clic',
 };
 
 </script>

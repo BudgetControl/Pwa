@@ -147,6 +147,7 @@ export default {
     confirm_password: 'Conferma password',
     privacy_policy: 'Privacy & Policy',
     create_account: 'Crear una cuenta nueva',
+    click_here: 'Clicca qui',
 
 }
 </script>

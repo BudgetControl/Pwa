@@ -2,8 +2,8 @@
   <div class="e" id="app">
     <div  v-if="deferredPrompt" id="alert-message"  class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-lightBlue-500">
       <span class="inline-block align-middle mr-8">
-        <b class="capitalize">Hey!</b> Install our app to get the best experience.
-      <button @click="installPWA">Click Here</button>
+        <b class="capitalize">{{ $t('text.install_app') }}
+      <button @click="installPWA">{{ $t('labels.click_here') }}</button>
       </span>
       <button
         v-on:click="closeAlert()"
@@ -41,12 +41,8 @@ export default {
   },
   created() {
     window.addEventListener('beforeinstallprompt', (e) => {
-      // Prevent the mini-infobar from appearing on mobile
       e.preventDefault();
-      // Stash the event so it can be triggered later.
       this.deferredPrompt = e;
-      // Optionally, update your UI to notify the user they can install the PWA
-      console.log('beforeinstallprompt event was fired.');
     });
   },
   methods: {
