@@ -18,7 +18,7 @@ export default {
     "pets": "animali domestici",
     "beauty_wellness": "bellezza & benessere",
     "stationery_tools": "cancelleria & utensili",
-    "home_garden": "casa_&_giardino",
+    "home_garden": "casa & giardino",
     "electronics_accessories": "elettronica, accessori",
     "pharmacy": "farmacia",
     "children": "figli",
