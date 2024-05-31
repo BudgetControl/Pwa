@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+    femodule:
+      platform: linux/x86_64
+      container_name: budgetcontrol-pwa
+      ports:
+        - "8080:80"
+      build:
+        context: .
+        dockerfile: Dockerfile.apache
+        args:
+        - APP_ENV=dev

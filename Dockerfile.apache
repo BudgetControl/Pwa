@@ -1,4 +1,4 @@
-FROM mlabfactory/php8-apache:v1.0
+FROM mlabfactory/php8-apache:v1.2
 
 WORKDIR /var/www/workdir
 
@@ -8,7 +8,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && apt-get install
 
 COPY . /var/www/workdir/
 RUN export NODE_OPTIONS=--openssl-legacy-provider
-RUN npm install && npm run build
+
+ARG APP_ENV
+RUN if [ "$APP_ENV" = "dev" ]; then npm run build-dev; else npm install && npm run build; fi
 
 ###########################################
 # apache conf
@@ -19,5 +21,8 @@ RUN chown -R www-data:www-data /var/www/workdir/dist
 RUN chmod -R 775 /var/www/workdir/dist
 COPY bin/apache/htaccess.conf /var/www/workdir/dist/.htaccess
 
+COPY bin/entrypoint.sh /var/www/script/entrypoint.sh
+RUN chmod +x /var/www/script/entrypoint.sh
 
 RUN service apache2 restart
+
