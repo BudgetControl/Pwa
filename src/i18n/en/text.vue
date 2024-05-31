@@ -27,6 +27,7 @@ export default {
         edit_profile: 'Edit your user profile.',
         learn: 'Learn more about our team.',
         write_us: 'Write us for assistance.',
-    }
+    },
+    install_app: 'Hey!</b> Install our app to get the best experience.',
 }
 </script>

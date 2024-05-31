@@ -33,7 +33,7 @@
           <li class="flex items-center">
             <a
               class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
-              href="https://www.mlabfactory.it/learning-lab/tailwind/vue/overview/notus?ref=vn-index-navbar"
+              href="https://www.budgetcontrol.cloud/documentation"
             >
               <i
                 class="text-blueGray-400 far fa-file-alt text-lg leading-lg mr-2"
@@ -96,7 +96,7 @@
           <li class="flex items-center">
             <a
               class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
-              href="https://github.com/BudgetControl/Application/budget-control?ref=vn-index-navbar"
+              href="https://github.com/BudgetControl/Core"
               target="_blank"
             >
               <i class="text-blueGray-400 fab fa-github text-lg leading-lg" />

@@ -88,7 +88,7 @@ export default {
     profile: 'Profile',
     assistance: 'Assistance',
     my_entry: 'My entry',
-    planned_entry: 'Planned entry',
+    planned: 'Planned entry',
     add: 'Add',
     model: 'Model',
     wallet: 'Wallet',
@@ -139,6 +139,15 @@ export default {
     my_planned: 'Planned',
     my_health: 'Health',
     workspace: 'Workspace',
+    entry_saved: 'Entry saved successfully',
+    could_not_log_in: 'I can not log in',
+    send_my_password: 'Send my password',
+    recovery_your_password: 'Recovery your password',
+    name: 'Name',
+    confirm_password: 'Confirm password',
+    privacy_policy: 'Privacy & Policy',
+    create_account: 'Create new account',
+    click_here: 'Haga clic',
 };
 
 </script>

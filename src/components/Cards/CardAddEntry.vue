@@ -76,7 +76,7 @@
             <select v-if="action.hidecategory == false" v-model="category" id="category"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option value="0">{{ $t('labels.choose_a_category') }}</option>
-              <option v-for="item in input.category" :key="item.id" :value="item.id">{{ item.name }}</option>
+              <option v-for="item in input.category" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}</option>
             </select>
 
             <select v-if="action.hidecategory == true && !action.hidetransfer_to" v-model="transferto" id="transferto"
@@ -127,7 +127,7 @@
           <div v-if="action.showDetails" class="lg:w-6/12 px-2 py-2 w-full">
             <select v-model="currency"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-              <option v-for="item in input.currency" :key="item.id" :value="item.id">{{ item.name }}</option>
+              <option v-for="item in input.currency" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}</option>
             </select>
           </div>
 
@@ -194,7 +194,7 @@
               <div class="w-full" v-bind:class="{ 'lg:w-6/12 ': isModel === false, 'lg:w-12/12': isModel === true }">
                 <select v-model="payment_type" id="payment_type"
                   class="w-full border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                  <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ item.name }}</option>
+                  <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}</option>
                 </select>
               </div>
               <div class="lg:w-6/12 w-full ">

@@ -89,7 +89,7 @@ export default {
     profile: 'Perfil',
     assistance: 'Asistencia',
     my_entry: 'Mi entrada',
-    planned_entry: 'Entrada planificada',
+    planned: 'Entrada planificada',
     add: 'Agregar',
     model: 'Modelo',
     wallet: 'Billetera',
@@ -139,6 +139,15 @@ export default {
     my_planned: 'Mi planificado',
     my_health: 'Salud económica',
     workspace: 'Workspace',
+    entry_saved: 'Entrada guardada exitosamente',
+    could_not_log_in: 'No puedo conectarme',
+    send_my_password: 'Enviar mi contraseña',
+    recovery_your_password: 'Recuperar tu contraseña',
+    name: 'Nombre',
+    confirm_password: 'Conferma password',
+    privacy_policy: 'Privacy & Policy',
+    create_account: 'Crear una cuenta nueva',
+    click_here: 'Clicca qui',
 
 }
 </script>

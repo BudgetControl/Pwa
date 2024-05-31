@@ -23,6 +23,7 @@ export default {
         edit_profile: 'Edita tu perfil de usuario.',
         learn: 'Aprende más sobre nuestro equipo.',
         write_us: 'Escríbenos para asistencia.',
-    }
+    },
+    install_app: 'Hey!</b> ¿Quieres instalar la aplicación?',
 }
 </script>
