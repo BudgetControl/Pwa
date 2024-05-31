@@ -90,8 +90,7 @@
     </div>
 
 
-    <div class="flex flex-wrap mt-6 relative text-blueGray-200 justify-center mt-10 text-xs">
-      {{ $t('text.profile.policy') }}
+    <div class="flex flex-wrap mt-6 relative text-blueGray-200 justify-center mt-10 text-xs" v-html="$t('text.profile.policy')">
     </div>
   </div>
 </template>

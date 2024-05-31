@@ -17,19 +17,18 @@
                                     </div>
                                     <div class="w-full justify-center flex">
                                         <span
-                                            class="text-sm block my-4 p-3 text-blueGray-700 border-blueGray-100">{{ $t('text.about_us.version') }}</span>
+                                            class="text-sm block my-4 p-3 text-blueGray-700 border-blueGray-100" v-html="$t('text.about_us.version')"></span>
                                     </div>
                                 </div>
 
                                 <div class="flex flex-wrap">
-                                    <div class="w-full px-2 flex-1 text-xs">
-                                        {{ $t('text.about_us.personal_finance') }}
+                                    <div class="w-full px-2 flex-1 text-xs" v-html="$t('text.about_us.personal_finance')">
+                                        
                                          </div>
                                 </div>
 
                                 <div class="flex flex-wrap mt-5">
-                                    <div class="w-full px-2 flex-1 text-xs">
-                                        {{ $t('text.about_us.information') }}
+                                    <div class="w-full px-2 flex-1 text-xs" v-html="$t('text.about_us.information')">
                                     </div>
                                 </div>
                             </div>
@@ -37,8 +36,10 @@
                             <div class="flex flex-wrap py-3">
                                 <div class="flex justify-center px-2 w-full">
                                     <a href="https://www.budgetcontrol.cloud"
-                                        class="text-center w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
-                                        {{ $t('text.about_us.visit_our_website') }}
+                                        class="text-center w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        v-html="$t('text.about_us.visit_our_website')"
+                                        >
+
                                     </a>
                                 </div>
                             </div>

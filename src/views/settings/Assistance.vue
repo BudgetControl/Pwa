@@ -9,9 +9,7 @@
                     <!-- labels -->
                     <div class="container px-4 mx-auto ">
                         <div class=" border border-dotted m-1">
-
-                            {{ $t('text.assistance.write_question') }}
-
+                            <div v-html="$t('text.assistance.write_question')"></div>
                             <div class=" flex-wrap py-3">
                                 <div class="lg:w-12/12 px-2 w-full">
                                     <textarea type="text" placeholder="Write here your question" v-model="text"

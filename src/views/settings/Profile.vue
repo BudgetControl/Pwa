@@ -100,8 +100,8 @@
               <DeleteButton />
             </div>
 
-            <div class="flex flex-wrap mt-6 relative justify-center mt-10 text-xs">
-              {{ $t('text.profile.plocy') }}
+            <div class="flex flex-wrap mt-6 relative justify-center mt-10 text-xs" v-html="$t('text.profile.plocy')">
+             
             </div>
 
           </div>

@@ -6,7 +6,7 @@ services:
       build:
         context: .
         dockerfile: Dockerfile.apache
-      image: budgetcontrol-pwa:apache
+      image: mlabfactory/php8-apache:v1.2
       volumes:
           - ./:/usr/src/app
       restart: unless-stopped

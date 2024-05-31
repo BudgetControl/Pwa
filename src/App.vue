@@ -2,7 +2,7 @@
   <div class="e" id="app">
     <div  v-if="deferredPrompt" id="alert-message"  class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-lightBlue-500">
       <span class="inline-block align-middle mr-8">
-        <b class="capitalize">{{ $t('text.install_app') }} </b>
+        <b class="capitalize" v-html="$t('text.install_app')"></b>
       <button @click="installPWA">{{ $t('labels.click_here') }}</button>
       </span>
       <button
