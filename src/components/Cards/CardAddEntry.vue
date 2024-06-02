@@ -404,7 +404,7 @@ export default {
           r.sub_category.forEach((item) => {
             _this.input.category.push({
               id: item.id,
-              name: $t('app.' + item.slug),
+              name: _this.$t('app.' + item.slug),
             })
           })
         })
