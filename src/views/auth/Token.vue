@@ -16,7 +16,7 @@
 
                 <div role="alert" v-if="error">
                   <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-                    Oops... an error occurred
+                    {{ $t('labels.generic_error') }}
                   </div>
                   <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
                     {{ error_message }}
@@ -44,7 +44,7 @@ export default {
     return {
       show: false,
       error: false,
-      error_message: 'Ops an error occurred, try later'
+      error_message: this.$t('labels.generic_error')
     };
   },
     async mounted() {

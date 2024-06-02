@@ -16,7 +16,7 @@
                             <select
                                 class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 v-model="modal.parent_category">
-                                <option value="0">Choose a parent category</option>
+                                <option value="0">{{ $t('labels.choose_parent_category') }}</option>
                                 <option v-for="(item, k) in categories" :key="k" :value="item.id">{{
                                     item.name }}</option>
                             </select>
@@ -25,7 +25,7 @@
                         <div class="mb-3 pt-0">
                             <label for="exclude_stats">
                                 <input v-model="modal.exclude_stats" type="checkbox" class="p-1 border rounded"
-                                    id="exclude_stats" :value="true" checked> Exclude from stats
+                                    id="exclude_stats" :value="true" checked>{{ $t('labels.exclude_from_stats') }}
                             </label>
                         </div>
 
@@ -35,12 +35,13 @@
                         <button
                             class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button" v-on:click="saveModal()">
-                            Save Changes
+                            {{ $t('labels.save') }}
                         </button>
                     </div>
                 </div>
             </div>
         </div>
+        <AlertModal ref="alertModal" />
     </section>
 </template>
 
@@ -48,10 +49,11 @@
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import ApiService from '@/services/ApiService.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
+import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
 
 export default {
     components: {
-        HeaderButton,
+        HeaderButton, AlertModal
     },
     data() {
         return {
@@ -71,6 +73,11 @@ export default {
     mounted: function () {
         this.openModal(this.$route.params.subId)
     },
+    created() {
+    window.alert = (message, type = 'success') => {
+      this.$refs.alertModal.show(message, type);
+    };
+  },
     methods: {
         showSub(id) {
             if (this.opentab == id) {
@@ -99,6 +106,7 @@ export default {
         saveModal() {
             const _this = this
             ApiService.setCategories(this.modal, this.modal.id).then(() => {
+                alert('Category saved')
                 _this.$router.push({path : '/app/settings/category'})
             })
         },

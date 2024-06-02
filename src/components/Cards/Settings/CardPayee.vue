@@ -70,7 +70,7 @@
 
 
     <div class="container px-4 mx-auto py-3">
-      <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">List of all payee </h3>
+      <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">{{ $t('labels.list_of_all_payee') }} </h3>
     </div>
 
 

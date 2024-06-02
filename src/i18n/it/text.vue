@@ -1,0 +1,29 @@
+<script>
+export default {
+    about_us: {
+        version: `Budget Control di Mlabfactory versione {{ version }}`,
+        personal_finance: `<b>Gestore di finanze personali</b><p>Budget Control di Mlabfactory è uno strumento di gestione delle finanze personali che ti aiuta a tenere traccia delle tue spese, così puoi mantenere il controllo e raggiungere i tuoi obiettivi.</p>`,
+        information: `<b>Informazioni su Budget Control</b><p>Mlabfactory è uno sviluppatore professionista con sede in Italia, Milano, che opera e sviluppa applicazioni dal 2008. Scopri di più sul team</p><a href="http://mlabfactory.it">Mlabfactory.it</a>`,
+        visit_our_website: 'Visita il nostro sito web',
+    },
+    assistance: {
+        write_question: `<p>Scrivi qui la tua domanda</p>`,
+        thanks: `Grazie per la tua richiesta. Ti risponderemo il prima possibile.`,
+    },
+    profile: {
+        policy: `<p>Registrandoti o connettendoti con uno dei suddetti servizi, acconsenti ai nostri <a class="font-bold text-decoration-line" href="https://www.budgetcontrol.cloud/terms-of-service/">Termini di Servizio</a> e riconosci la nostra <a class="font-bold text-decoration-line" href="https://www.budgetcontrol.cloud/security-policy/">Informativa sulla Privacy</a>, che descrive come gestiamo i tuoi dati personali.</p>`
+    },
+    settings: {
+        manage_your_workspace: 'Gestisci i tuoi spazi di lavoro.',
+        manage_wallets: 'Gestisci i portafogli, cambia le icone, il colore.',
+        manage_entry: 'Gestisci le tue categorie di entrata.',
+        customize_entry: 'Personalizza le etichette delle entrate.',
+        configure_model: 'Configura i modelli di entrata.',
+        set_currency: 'Imposta la tua valuta preferita.',
+        edit_profile: 'Modifica il tuo profilo utente.',
+        learn: 'Scopri di più sul nostro team.',
+        write_us: 'Scrivici per assistenza.',
+    },
+    install_app: 'Hey!</b> Vuoi installare l\'applicazione?',
+}
+</script>
