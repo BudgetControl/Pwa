@@ -21,7 +21,7 @@ export default {
     "home_garden": "casa & giardino",
     "electronics_accessories": "elettronica, accessori",
     "pharmacy": "farmacia",
-    "children": "figli",
+    "kids": "figli",
     "jewelry_accessories": "gioielli & accessori",
     "gift_expenses": "spese per regali",
     "family_help": "aiuto familiare",

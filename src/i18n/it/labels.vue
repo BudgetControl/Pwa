@@ -34,7 +34,7 @@ export default {
     expenses: 'Spese',
     incoming: 'Entrate',
     transfer: 'Trasferimento',
-    debit: 'Addebito',
+    debit: 'Debiti',
     choose_one_of_currently_tags: 'Scegli uno dei tag attuali',
     choose_a_wallet_to_transfer_to: 'Scegli un portafoglio a cui trasferire',
     choose_wallet_account: 'Scegli account del portafoglio',
