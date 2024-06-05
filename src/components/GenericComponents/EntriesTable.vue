@@ -33,7 +33,7 @@
                             <i v-on:click="$router.push(`/app/entries?category=${entry.category.id}`)"
                                 :class="'block text-lightBlue-400 ' + entry.category.icon"> <span
                                     class="px-2 text-blueGray-700 rounded ">
-                                    {{ entry.category.name }}</span></i>
+                                    {{ $t('category.' + entry.category.slug) }}</span></i>
                             <span class="text-xs block rounded"
                                 :class="[entry.payee ? 'text-blueGray-900' : 'text-blueGray-400']">( {{ entry.account }} )
                                 {{

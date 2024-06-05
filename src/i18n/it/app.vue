@@ -8,7 +8,6 @@ export default {
     "entertainment": "instrattenimento",
     "communication_pc": "comunicazione pc",
     "financial_expenses": "spese finanziarie",
-    "investments": "investimenti",
     "income": "introiti",
     "other": "altro",
     "bars_venues": "bar & locali",
@@ -78,7 +77,6 @@ export default {
     "rental_income": "entrate da affitto",
     "interest_dividends": "interessi, dividendi",
     "loans_rentals": "prestiti, noleggi",
-    "dues_grants": "quote & sovvenzioni",
     "gifts": "regali",
     "refunds": "rimborsi (tasse, acquisti)",
     "salary": "stipendio",
@@ -110,6 +108,10 @@ export default {
     "indonesian_rupiah": "rupia indonesiana",
     "brazilian_real": "real brasiliano",
     "mexican_peso": "peso messicano",
-    "argentine_peso": "peso argentino"
+    "argentine_peso": "peso argentino",
+    "dues_grants": "quote, sovvenzioni",
+    "pastry_shop": "bar, pasticceria",
+    "pub": "pub",
+
 }
 </script>
