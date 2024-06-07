@@ -148,6 +148,7 @@ export default {
     privacy_policy: 'Privacy & Policy',
     create_account: 'Crea un nuovo account',
     click_here: 'Clicca qui',
+    save_template: 'Salva modello',
 
 
 }
