@@ -17,6 +17,7 @@
 
 <script>
 import AuthService from './services/AuthService.vue';
+import LocalStorageService from './services/LocalStorageService.vue';
 
 export default {
   data() {
@@ -33,11 +34,16 @@ export default {
   mounted: async function () {
     const _this = this
     // first check if user is logged
-    AuthService.userInfo().then(() => {
-      _this.$router.push('/dashboard');
-    }).catch(() => {
-      _this.$router.push({ path: '/app/auth/login' });
-    });
+    if(LocalStorageService.getToken() && LocalStorageService.getWorkspaceId()) {
+      await AuthService.userInfo().then(
+        response => {
+          _this.$store.commit('setUser', response.userInfo);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
   },
   created() {
     window.addEventListener('beforeinstallprompt', (e) => {

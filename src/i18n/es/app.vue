@@ -8,7 +8,6 @@ export default {
     "entertainment": "entretenimiento",
     "communication_pc": "comunicación pc",
     "financial_expenses": "gastos financieros",
-    "investments": "inversiones",
     "income": "ingresos",
     "other": "otro",
     "bars_venues": "bares y locales",
@@ -107,6 +106,8 @@ export default {
     "indonesian_rupiah": "rupia indonesia",
     "brazilian_real": "real brasileño",
     "mexican_peso": "peso mexicano",
-    "argentine_peso": "peso argentino"
+    "argentine_peso": "peso argentino",
+    "pastry_shop": "pastelería",
+    "pub": "pub",
 }
 </script>

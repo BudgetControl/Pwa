@@ -108,7 +108,8 @@ export default {
                         category: {
                             name: e.sub_category.name,
                             id: e.sub_category.id,
-                            icon: e.sub_category.category.icon
+                            icon: e.sub_category.category.icon,
+                            slug: e.sub_category.category.slug
                         },
                         payee: null,
                         labels: []

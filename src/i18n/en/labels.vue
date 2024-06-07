@@ -148,6 +148,7 @@ export default {
     privacy_policy: 'Privacy & Policy',
     create_account: 'Create new account',
     click_here: 'Haga clic',
+    save_template: 'Save template',
 };
 
 </script>
