@@ -33,7 +33,7 @@
                             <i v-on:click="$router.push(`/app/entries?category=${entry.category.id}`)"
                                 :class="'block text-lightBlue-400 ' + entry.category.icon"> <span
                                     class="px-2 text-blueGray-700 rounded ">
-                                    {{ $t('category.' + entry.category.slug) }}</span></i>
+                                    {{ entry.category.name }} </span></i>
                             <span class="text-xs block rounded"
                                 :class="[entry.payee ? 'text-blueGray-900' : 'text-blueGray-400']">( {{ entry.account }} )
                                 {{
@@ -183,10 +183,9 @@ export default {
                         note: r.note,
                         planned: r.planned == 0 ? false : true,
                         category: {
-                            name: r.sub_category.name,
                             id: r.sub_category.id,
                             icon: r.sub_category.category.icon,
-                            slug: r.sub_category.slug
+                            name: $t('category.' + r.sub_category.slug)
                         },
                         labels: labels,
                         payee: null,
