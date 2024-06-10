@@ -54,7 +54,22 @@ export default {
       openTab: 1
     }
   },
-  mounted: function () {
+  mounted: async function () {
+    const _this = this
+    if(LocalStorageService.getToken() && LocalStorageService.getWorkspaceId()) {
+      await AuthService.userInfo().then(
+        response => {
+          _this.$store.commit('setUser', response.userInfo);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    } else {
+      // redirect to login
+      _this.$router.push({ path: '/app/auth/login' })
+    }
+
     const ws = LocalStorageService.getUser().workspaces[0]
     WorkspaceService.get(ws.uuid).then((res) => {
       const wsUuid = res.workspace.uuid

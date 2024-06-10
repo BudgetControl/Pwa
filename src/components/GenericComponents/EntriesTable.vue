@@ -185,7 +185,7 @@ export default {
                         category: {
                             id: r.sub_category.id,
                             icon: r.sub_category.category.icon,
-                            name: $t('category.' + r.sub_category.slug)
+                            name: _this.$t('category.' + r.sub_category.slug)
                         },
                         labels: labels,
                         payee: null,

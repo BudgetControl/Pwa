@@ -14,6 +14,7 @@ export default {
     },
     login: {
         not_verified_email: `Aún no has verificado tu correo electrónico. Si no lo has recibido, haz clic aquí para reenviarlo.`,
+        not_valid_password: `Las credenciales ingresadas no son válidas.`,
     },
     wallet: {
         are_you_sure: '¿Estás seguro de que quieres archivar esta billetera?',
