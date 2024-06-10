@@ -60,9 +60,8 @@ export default {
         _this.error = true
         _this.message = false
 
-        _this.error_message = err.response.data.error
+        _this.error_message = err.response.error
 
-        console.debug(err)
       })
     }
 };

@@ -4,7 +4,8 @@
     </loading>
     <div class="flex content-center items-center justify-center h-full">
       <div class="w-full lg:w-6/12 px-4">
-        <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
+        <div
+          class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
           <div class="rounded-t mb-0 px-6 py-6">
             <div class="text-center mb-3">
               <h6 class="text-blueGray-500 text-sm font-bold">
@@ -27,63 +28,73 @@
                   {{ error }}
                 </div>
               </div>
-              <div class="relative w-full mb-3">
-                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                  {{ $t('labels.name') }}
-                </label>
-                <input v-model="name" type="text"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  placeholder="Name" />
+
+              <div role="alert" id="message" v-if="message">
+                <div
+                  class="border border-t-0 border-lightBlue-400 rounded-b bg-lightBlue-100 px-4 py-3 text-lightBlue-700">
+                  ! {{ message }}.
+                </div>
               </div>
 
-              <div class="relative w-full mb-3">
-                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                  {{ $t('labels.email') }}
-                </label>
-                <input v-model="email" type="email"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  placeholder="Email" />
-              </div>
+              <div v-if="!message">
+                <div class="relative w-full mb-3">
+                  <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                    {{ $t('labels.name') }}
+                  </label>
+                  <input v-model="name" type="text"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Name" />
+                </div>
 
-              <div class="relative w-full mb-3">
-                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                  {{ $t('labels.password') }}
-                </label>
-                <input v-model="password" type="password"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  placeholder="Password" />
-              </div>
+                <div class="relative w-full mb-3">
+                  <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                    {{ $t('labels.email') }}
+                  </label>
+                  <input v-model="email" type="email"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Email" />
+                </div>
+
+                <div class="relative w-full mb-3">
+                  <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                    {{ $t('labels.password') }}
+                  </label>
+                  <input v-model="password" type="password"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Password" />
+                </div>
 
 
-              <div class="relative w-full mb-3">
+                <div class="relative w-full mb-3">
                   <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                     {{ $t('labels.confirm_password') }}
                   </label>
                   <input v-model="confirm_password" type="password"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Confirm Password" />
-                    <PasswordStrengthMeter :password="password" ref="passwordStreight" />
+                  <PasswordStrengthMeter :password="password" ref="passwordStreight" />
                 </div>
 
-              <div>
-                <label class="inline-flex items-center cursor-pointer">
-                  <input id="customCheckLogin" type="checkbox"
-                    class="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150" />
-                  <span class="ml-2 text-sm font-semibold text-blueGray-600">
-                    {{ $t('labels.i_agree_with_the') }}
-                    <a href="javascript:void(0)" class="text-emerald-500">
-                      {{ $t('labels.privacy_policy') }}
-                    </a>
-                  </span>
-                </label>
-              </div>
+                <div>
+                  <label class="inline-flex items-center cursor-pointer">
+                    <input id="customCheckLogin" required type="checkbox"
+                      class="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150" />
+                    <span class="ml-2 text-sm font-semibold text-blueGray-600">
+                      {{ $t('labels.i_agree_with_the') }}
+                      <a href="javascript:void(0)" class="text-emerald-500">
+                        {{ $t('labels.privacy_policy') }}
+                      </a>
+                    </span>
+                  </label>
+                </div>
 
-              <div class="text-center mt-6">
-                <button
-                  class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                  type="submit">
-                  {{ $t('labels.create_account') }}
-                </button>
+                <div class="text-center mt-6">
+                  <button
+                    class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                    type="submit">
+                    {{ $t('labels.create_account') }}
+                  </button>
+                </div>
               </div>
             </form>
           </div>
@@ -96,7 +107,6 @@
 import AuthService from "../../services/AuthService.vue";
 import loading from 'vue-full-loading'
 import PasswordStrengthMeter from "../../components/Auth/PasswordStrengthMeter.vue";
-import WorkspaceServiceVue from '../../services/WorkspaceService.vue';
 
 export default {
   components: {
@@ -108,7 +118,8 @@ export default {
       show: false,
       error: false,
       password: null,
-      confirm_password: null
+      confirm_password: null,
+      message: null
     };
   },
   methods: {
@@ -121,16 +132,22 @@ export default {
 
       this.show = true
       this.error = false
-      AuthService.register(name, password,confirm_password, email).then(() => {
-        //redirecto to dashboard
-        WorkspaceServiceVue.add('ws_'.name.replace(" ","-"))
-        _this.$router.push({ path: '/app/auth/login?signin=1' })
-      }).catch((err) => {
-        const response = err.response.data
+      AuthService.register(name, password, confirm_password, email).then(() => {
+        _this.message = _this.$t('labels.account_created')
+      }).catch(() => {
         _this.show = false
-        _this.error = response.error
+        _this.error = _this.$t('labels.generic_error')
       })
     }
   }
 };
 </script>
+
+<style scoped>
+#message {
+  background: rgba(10, 165, 233);
+  border: thin solid white;
+  margin-bottom: 10px;
+  color: white;
+}
+</style>

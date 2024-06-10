@@ -14,6 +14,7 @@ export default {
     },
     login: {
         not_verified_email: `You haven't verified your email yet. If you haven't received it, click here to resend.`,
+        not_valid_password: `The credentials you entered are not valid.`,
     },
     wallet: {
         are_you_sure: 'Are you shure do you want archive these wallet ?',
