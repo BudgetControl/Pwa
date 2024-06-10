@@ -29,6 +29,10 @@ export default {
         updated: 'Espacio de trabajo actualizado',
         added: 'Espacio de trabajo agregado',
         user_not_fount: 'Usuario no encontrado'
-    }
+    },
+    search: {
+        no_results: 'No se encontraron resultados',
+        please_set_date: 'Elija una fecha de inicio y fin',
+    },
 }
 </script>

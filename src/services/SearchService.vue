@@ -27,8 +27,8 @@ async function getAll(data,page) {
   return response.data;
 }
 
-async function filter(data,page) {
-  const response = await instance.post(`/api/search/filter?page=${page}`,data);
+async function filter(data) {
+  const response = await instance.post(`/api/find`,data);
   return response.data;
 }
 
