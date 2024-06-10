@@ -14,6 +14,7 @@ export default {
     },
     login: {
         not_verified_email: `Non hai ancora verificato il tuo indirizzo email. Se non hai ricevuto l'email, clicca qui per inviarla nuovamente.`,
+        not_valid_password: `Le credenziali inserite non sono valide.`,
     },
     wallet: {
         are_you_sure: 'Sei sicuro di voler archiviare questo portafoglio?',

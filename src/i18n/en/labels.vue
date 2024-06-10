@@ -147,8 +147,10 @@ export default {
     confirm_password: 'Confirm password',
     privacy_policy: 'Privacy & Policy',
     create_account: 'Create new account',
-    click_here: 'Haga clic',
+    click_here: 'Click here',
     save_template: 'Save template',
+    set_new_password: 'Set new password',
+    account_created: 'Account created successfully, check your email to confirm and activate your account',
 };
 
 </script>

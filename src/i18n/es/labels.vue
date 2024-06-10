@@ -149,6 +149,8 @@ export default {
     create_account: 'Crear una cuenta nueva',
     click_here: 'Clicca qui',
     save_template: 'Salva modello',
+    set_new_password: 'Establecer nueva contraseña',
+    account_created: 'Cuenta creada exitosamente, verifica tu correo electrónico para confirmarla y activar tu cuenta',
 
 }
 </script>
