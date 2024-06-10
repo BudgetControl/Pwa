@@ -38,6 +38,7 @@ import LocalStorageService from "../../services/LocalStorageService.vue";
 import CardBudget from "../../components/Cards/Chart/WidgetBudget.vue";
 import WorkspaceService from "../../services/WorkspaceService.vue";
 import WorkspaceServiceVue from "../../services/WorkspaceService.vue";
+import AuthService from "../../services/AuthService.vue";
 
 export default {
   name: "dashboard-page",

@@ -16,8 +16,6 @@
 </template>
 
 <script>
-import AuthService from './services/AuthService.vue';
-import LocalStorageService from './services/LocalStorageService.vue';
 
 export default {
   data() {
