@@ -17,6 +17,13 @@ jobs:
     steps:
         - name: Checkout
           uses: actions/checkout@v2
+
+        - name: Install Dependencies
+          run: npm install
+
+        - name: Build package
+          run: npm run build
+        
         - name: deploy file
           uses: wlixcc/SFTP-Deploy-Action@v1.2.4
           with:
@@ -24,7 +31,7 @@ jobs:
               server: ${{ secrets.SFTP_HOST }} 
               ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
               password: ${{ secrets.SFTP_PASSWORD }} 
-              local_path: '.'
-              remote_path: '/var/www/budgetcontrol/Pwa'
+              local_path: './dist/*'
+              remote_path: '/var/www/budgetcontrol/Pwa/dist'
               sftpArgs: '-o ConnectTimeout=5'
   
