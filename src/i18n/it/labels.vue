@@ -151,7 +151,12 @@ export default {
     save_template: 'Salva modello',
     set_new_password: 'Imposta nuova password',
     account_created: 'Account creato con successo, verifica la tua email per confermale ed attivare il tuo account',
-
+    search_by_text: 'Cerca per testo',
+    is_planned: 'È pianificato',
+    no: 'NO',
+    yes: 'SI',
+    date_interval: 'Intervallo di date',
+    type_of_transaction: 'Tipo di transazione',
 
 }
 </script>

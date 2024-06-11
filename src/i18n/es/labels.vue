@@ -151,6 +151,11 @@ export default {
     save_template: 'Salva modello',
     set_new_password: 'Establecer nueva contraseña',
     account_created: 'Cuenta creada exitosamente, verifica tu correo electrónico para confirmarla y activar tu cuenta',
-
+    search_by_text: 'Search by text',
+    is_planned: 'Is planned',
+    no: 'NO',
+    yes: 'YES',
+    date_interval: 'Date interval',
+    type_of_transaction: 'Type of transaction',
 }
 </script>
