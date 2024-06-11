@@ -151,6 +151,12 @@ export default {
     save_template: 'Save template',
     set_new_password: 'Set new password',
     account_created: 'Account created successfully, check your email to confirm and activate your account',
+    search_by_text: 'Search by text',
+    is_planned: 'Is planned',
+    no: 'NO',
+    yes: 'YES',
+    date_interval: 'Date interval',
+    type_of_transaction: 'Type of transaction',
 };
 
 </script>

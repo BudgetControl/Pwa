@@ -29,6 +29,10 @@ export default {
         updated: 'Workspace updated',
         added: 'Workspace added',
         user_not_fount: 'User not found'
-    }
+    },
+    search: {
+        no_results: 'No results found',
+        please_set_date: 'Please choose a date start and end',
+    },
 }
 </script>

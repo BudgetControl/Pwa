@@ -1,7 +1,7 @@
 <script>
 export default {
-    wrong_password: `Le credenziali inserite non sono valide.`,
-    email_not_verified: `Non hai ancora verificato il tuo indirizzo email. Se non hai ricevuto l'email, clicca qui per inviarla nuovamente.`,
+    wrong_password: `La password inserita non è corretta.`,
+    email_not_verified: `L'indirizzo email non è ancora verificato. Se non hai ricevuto l'email, clicca qui per inviarla nuovamente.`,
     model_saved: `Modello salvato con successo.`,
     entry_Saved: `Voce salvata con successo.`,
     generic_error: `Si è verificato un errore. Per favore riprova più tardi.`,
@@ -13,8 +13,8 @@ export default {
         insert_payee: 'Per favore inserisci un nome del beneficiario',
     },
     login: {
-        not_verified_email: `Non hai ancora verificato il tuo indirizzo email. Se non hai ricevuto l'email, clicca qui per inviarla nuovamente.`,
-        not_valid_password: `Le credenziali inserite non sono valide.`,
+        not_verified_email: `L'indirizzo email non è ancora verificato. Se non hai ricevuto l'email, clicca qui per inviarla nuovamente.`,
+        not_valid_password: `La password inserita non è corretta.`,
     },
     wallet: {
         are_you_sure: 'Sei sicuro di voler archiviare questo portafoglio?',
@@ -29,6 +29,10 @@ export default {
         updated: 'Spazio di lavoro aggiornato',
         added: 'Spazio di lavoro aggiunto',
         user_not_fount: 'Utente non trovato'
-    }
+    },
+    search: {
+        no_results: 'Nessun risultato trovato',
+        please_set_date: 'Scegli una data di inizio e fine',
+    },
 }
 </script>
