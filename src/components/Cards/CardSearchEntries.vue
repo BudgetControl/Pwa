@@ -49,7 +49,7 @@
                                 {{ $t('labels.date_interval') }}
                             </label>
                             <VueDatePicker v-model="action.date_time" :range="{ autoRange: 1 }" :options="input.month"
-                                :placeholder="$t('labels.date_interval')" />
+                                :placeholder="$t('labels.date_interval')" format="yyyy-MM-dd"  />
                         </div>
                     </div>
 
@@ -62,7 +62,7 @@
                             <select multiple
                                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 v-model="action.type">
-                                <option v-for="(type, k) in input.type" :key="k" :value="type">{{ type }}</option>
+                                <option v-for="(type, k) in input.type" :key="k" :value="type.id">{{ type.name }}</option>
                             </select>
                         </div>
                     </div>
@@ -225,10 +225,22 @@ export default {
         // this.action.date_time = formattedDate;
 
         this.input.type = [
-            this.$t('labels.incoming'),
-            this.$t('labels.expenses'),
-            this.$t('labels.transfer'),
-            this.$t('labels.debit')
+            {
+                name: this.$t('labels.incoming'),
+                id: 'incoming'
+            },
+            {
+                name: this.$t('labels.expenses'),
+                id: 'expenses'
+            },
+            {
+                name: this.$t('labels.transfer'),
+                id: 'transfer'
+            },
+            {
+                name: this.$t('labels.debit'),
+                id: 'debit'
+            }
         ]
 
     },
