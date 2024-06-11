@@ -1,8 +1,5 @@
 <template>
   <div class="mt-10">
-    <div class="py-5">
-      <FilterBar />
-    </div>
     <div class="flex flex-wrap">
       <div class="w-full">
         <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
@@ -29,7 +26,6 @@
   </div>
 </template>
 <script>
-import FilterBar from "@/components/Navbars/FilterBar.vue";
 import CardBarChart from "@/components/Cards/Chart/WidgetBarChart.vue";
 import CardLine_IncomingExpensesChart from "@/components/Cards/Chart/WidgetLine_IncomingExpensesChart.vue";
 import CardPieLabelChart from "../../components/Cards/Chart/WidgetPieLabelChart.vue";
@@ -43,7 +39,6 @@ import AuthService from "../../services/AuthService.vue";
 export default {
   name: "dashboard-page",
   components: {
-    FilterBar,
     CardBarChart,
     CardLine_IncomingExpensesChart,
     CardPieLabelChart,
