@@ -95,12 +95,6 @@ async function confirm(token) {
   return response.status;
 }
 
-async function profile() {
-  //retrive access token header
-  const response = await instance.get(`/api/auth/profile`);
-  return response;
-}
-
 async function deleteUser() {
   //retrive access token header
   const response = await instance.delete(`/api/auth/delete`);
@@ -136,9 +130,9 @@ async function userInfo() {
   return response.data;
 }
 
-async function userInfoByEmail(email) {
+async function userInfoByEmail() {
   //retrive access token header
-  const response = await instance.get(`/api/auth/user-info/by-email/${email}`, {
+  const response = await instance.get(`/api/auth/user-info/by-email/${LocalStorageService.getUser().email}`, {
     headers: {
       'Authorization': `Bearer ${LocalStorageService.getToken()}`,
       'X-BC-Token': LocalStorageService.getUserToken()
@@ -156,7 +150,6 @@ export default {
   resetPassword,
   verify,
   confirm,
-  profile,
   deleteUser,
   deleteDataUser,
   settings,
