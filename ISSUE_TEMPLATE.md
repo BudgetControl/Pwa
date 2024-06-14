@@ -7,7 +7,7 @@
 -->
 
 <!--
-Love Mlab Factory? Do you need Angular, React, Vuejs or HTML? You can visit:
+Love MlabFactory? Do you need Angular, React, Vuejs or HTML? You can visit:
 👉  https://www.mlabfactory.it/bundles?ref=vn-new-issue
 👉  https://www.mlabfactory.it?ref=vn-new-issue
 -->

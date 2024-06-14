@@ -151,14 +151,13 @@ export default {
 
     ApiServiceVue.currencies().then((resp) => {
       _this.currency = resp.data[_this.currency - 1 ].icon
-    }).catch((err) => {
+    }).catch(() => {
       _this.currency = "€"
     })
   },
   async mounted() {
     const _this = this
     AuthService.userInfoByEmail().then((resp) => {
-      resp = resp
       _this.user.name = resp.name
       _this.user.email = resp.email
 
@@ -188,9 +187,8 @@ export default {
         _this.user.wallet.expenses = resp.total.toFixed(2)
       })
 
-    }).catch((err) => {
+    }).catch(() => {
       this.$router.push({ path: '/' })
-      console.error(err)
     })
   },
 };

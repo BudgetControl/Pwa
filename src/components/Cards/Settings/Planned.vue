@@ -1,19 +1,9 @@
 <template>
     <div class="block w-full overflow-x-auto mt-10">
 
-        <div class="container x-4 mx-auto py-3">
-            <router-link to="/app/planned_entry?planned=true" v-slot="{ href, navigate, isActive }">
-                <a :href="href" @click="navigate"
-                    class="px-3 py-2 items-center text-xs bg-emerald-600 uppercase font-bold leading-snug text-white hover:opacity-75"
-                    :class="[
-                        isActive
-                            ? 'text-white hover:text-emerald-600'
-                            : 'text-white hover:text-white',
-                    ]">
-                    Add new Entry
-                </a>
-            </router-link>
-        </div>
+        <div class="container px-4 mx-auto py-3">
+                <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">{{ $t('labels.list_of_all_planned_entries') }} </h3>
+            </div>
 
         <div class="container px-4 mx-auto py-3 border border-solid border-blueGray-100 shadow"
             v-for="(entry, i) in this.entries" :key="i">

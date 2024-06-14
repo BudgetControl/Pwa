@@ -1,16 +1,29 @@
 <template>
   <div class="flex flex-wrap">
     <div class="w-full lg:w-12/12 px-4">
+      <HeaderMenu>
+        <MenuButton
+          :path="'/app/planned-entries?planned=true'"
+          :label="$t('labels.add')"
+        />
+
+        <MenuButton
+          :path="'/app/planned-entries'"
+          :label="$t('labels.show')"
+        />
+      </HeaderMenu>
       <CardAddEntry :entryId="this.$route.params.entry_id" :isPlanned="this.$route.query.planned" :typeOfEntry="this.$route.query.type" />
     </div>
   </div>
 </template>
 <script>
 import CardAddEntry from "@/components/Cards/Settings/CardAddPlannedEntry.vue";
+import HeaderMenu from "../../components/Navbars/HeaderMenu.vue";
+import MenuButton from "../../components/GenericComponents/MenuButton.vue";
 
 export default {
   components: {
-    CardAddEntry
+    CardAddEntry, HeaderMenu, MenuButton
   },
 };
 </script>

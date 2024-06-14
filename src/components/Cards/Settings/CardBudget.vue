@@ -2,19 +2,24 @@
     <div class="block w-full overflow-x-auto mt-10">
         <div class="container x-4 mx-auto py-3">
 
-            <router-link
-                class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                to="/app/budgets/new">
-                Create new budget
-            </router-link>
+            <div class="container px-4 mx-auto py-3">
+                <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">{{ $t('labels.list_of_all_budgets') }} </h3>
+            </div>
 
+            <div
+                v-if="budgets.week.length == 0 && budgets.month.length == 0 && budgets.year.length == 0 && budgets.custom.length == 0">
+                <div class="text-center">
+                    <p class="text-blueGray-400 text-lg">{{ $t('labels.no_budgets_found') }}</p>
+                </div>
+            </div>
             <!--content-->
             <div class="border p-2 mt-2" v-if="budgets.week.length != 0">
                 <span class="text-xs font-semibold inline-block text-blueGray-400 ">
                     WEEK
                 </span>
-                
-                <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.week" :key="budget.budget.uuid" />
+
+                <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.week"
+                    :key="budget.budget.uuid" />
             </div>
 
 
@@ -23,8 +28,9 @@
                 <span class="text-xs font-semibold inline-block text-blueGray-400 ">
                     MONTH
                 </span>
-                
-                <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.month" :key="budget.budget.uuid" />
+
+                <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.month"
+                    :key="budget.budget.uuid" />
             </div>
 
 
@@ -32,16 +38,18 @@
                 <span class="text-xs font-semibold inline-block text-blueGray-400 ">
                     YEAR
                 </span>
-               
-                <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.year" :key="budget.budget.uuid" />
+
+                <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.year"
+                    :key="budget.budget.uuid" />
             </div>
 
             <div class="border p-2 mt-2 mb-2" v-if="budgets.custom.length != 0">
                 <span class="text-xs font-semibold inline-block text-blueGray-400 ">
                     ONE SHOT BUDGET
                 </span>
-                
-                <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.custom" :key="budget.budget.uuid" />
+
+                <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.custom"
+                    :key="budget.budget.uuid" />
             </div>
 
         </div>
@@ -111,5 +119,3 @@ export default {
     }
 }
 </script>
-
-  

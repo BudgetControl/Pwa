@@ -151,7 +151,7 @@
               href="https://www.mlabfactory.it?ref=vn-footer"
               class="text-blueGray-500 hover:text-blueGray-800"
             >
-              Mlab Factory
+              MlabFactory
             </a>
             .
           </div>

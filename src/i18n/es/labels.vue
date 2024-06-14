@@ -165,6 +165,10 @@ export default {
     one_shot: 'Única vez',
     recursive: 'Recursivo',
     or_nsert_new_tag_name: 'O inserta un nuevo nombre de etiqueta',
-    add_here_your_note: 'Añade tu nota aquí',
+    no_budgets_found: 'No se encontraron presupuestos',
+    list_of_entries_of: 'Lista de entradas de',
+    no_payees_found: 'No se encontraron debedores',
+    list_of_all_budgets: 'Lista de todos los presupuestos',
+    list_of_all_planned_entries: 'Lista de todas las entradas planificadas',
 }
 </script>

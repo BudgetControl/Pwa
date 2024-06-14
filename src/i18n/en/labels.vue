@@ -165,7 +165,11 @@ export default {
     one_shot: 'One-shot',
     recursive: 'Recursive',
     or_nsert_new_tag_name: 'Or insert new TAG name',
-    add_here_your_note: 'Add here your note',
+    no_budgets_found: 'No budgets found',
+    list_of_entries_of: 'List of entries of',
+    no_payees_found: 'No payees found',
+    list_of_all_budgets: 'List of all budgets',
+    list_of_all_planned_entries: 'List of all planned entries',
 };
 
 </script>
