@@ -157,6 +157,11 @@ export default {
     yes: 'SI',
     date_interval: 'Intervallo di date',
     type_of_transaction: 'Tipo di transazione',
-
+    choose_period: 'Scegli un periodo',
+    weekly: 'Settimanale',
+    monthly: 'Mensile',
+    yearly: 'Annuale',
+    one_shot: 'Una tantum',
+    recursive: 'Ricorrente',
 }
 </script>

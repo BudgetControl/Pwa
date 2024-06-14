@@ -157,6 +157,12 @@ export default {
     yes: 'YES',
     date_interval: 'Date interval',
     type_of_transaction: 'Type of transaction',
+    choose_period: 'Choose a period',
+    weekly: 'Weekly',
+    monthly: 'Monthly',
+    yearly: 'Yearly',
+    one_shot: 'One-shot',
+    recursive: 'Recursive',
 };
 
 </script>
