@@ -17,7 +17,8 @@
                                     </div>
                                     <div class="w-full justify-center flex">
                                         <span
-                                            class="text-sm block my-4 p-3 text-blueGray-700 border-blueGray-100" v-html="$t('text.about_us.version')"></span><span>{{  version }}</span>
+                                            class="text-sm block my-4 text-blueGray-700 border-blueGray-100" v-html="$t('text.about_us.version')"></span>
+                                            <span class="text-sm block my-4  text-blueGray-700 border-blueGray-100 ml-2"> ( v{{  version }} )</span>
                                     </div>
                                 </div>
 
