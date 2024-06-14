@@ -110,7 +110,7 @@
                                     htmlFor="grid-password">
                                     {{ $t('labels.label') }}
                                 </label>
-                                <select v-model="data.tags" multiple
+                                <select v-model="data.label" multiple
                                     class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                                     <option
                                         class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
@@ -290,7 +290,7 @@ export default {
                 _this.data.label = resp.configuration.tags
                 _this.data.type = resp.configuration.types
                 _this.data.notification = resp.notification
-                _this.data.emails = resp.emails
+                _this.data.emails = resp.emails.length == 0 ? null : resp.emails
                 _this.data.period_start = resp.configuration.period_start
                 _this.data.period_end = resp.configuration.period_end
             })

@@ -171,6 +171,7 @@ export default {
     list_of_all_budgets: 'List of all budgets',
     list_of_all_planned_entries: 'List of all planned entries',
     set_your_default_currecny: 'Set your default currency',
+    update: 'Update',
 };
 
 </script>
