@@ -1,4 +1,24 @@
 <template>
+  <div>
+    <HeaderMenu>
+      <HeaderMenu>
+        <MenuButton
+          :path="'/app/entry'"
+          :label="$t('labels.add')"
+        />
+
+        <MenuButton
+          :path="'/app/entries'"
+          :label="$t('labels.show')"
+        />
+
+        <MenuButton
+          :path="'/app/search'"
+          :label="$t('labels.search')"
+        />
+      </HeaderMenu>
+    </HeaderMenu>
+  </div>
   <div class="mt-10">
     <div class="flex flex-wrap">
       <div class="w-full">
@@ -35,6 +55,8 @@ import CardBudget from "../../components/Cards/Chart/WidgetBudget.vue";
 import WorkspaceService from "../../services/WorkspaceService.vue";
 import WorkspaceServiceVue from "../../services/WorkspaceService.vue";
 import AuthService from "../../services/AuthService.vue";
+import HeaderMenu from '../../components/Navbars/HeaderMenu.vue';
+import MenuButton from '../../components/GenericComponents/MenuButton.vue';
 
 export default {
   name: "dashboard-page",
@@ -43,7 +65,9 @@ export default {
     CardLine_IncomingExpensesChart,
     CardPieLabelChart,
     CardCategoryResume,
-    CardBudget
+    CardBudget,
+    HeaderMenu,
+    MenuButton
   },
   data() {
     return {
