@@ -158,11 +158,14 @@ export default {
     date_interval: 'Date interval',
     type_of_transaction: 'Type of transaction',
     choose_period: 'Choose a period',
+    daily: 'Daily',
     weekly: 'Weekly',
     monthly: 'Monthly',
     yearly: 'Yearly',
     one_shot: 'One-shot',
     recursive: 'Recursive',
+    or_nsert_new_tag_name: 'Or insert new TAG name',
+    add_here_your_note: 'Add here your note',
 };
 
 </script>

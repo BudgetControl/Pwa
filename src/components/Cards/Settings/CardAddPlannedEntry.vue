@@ -15,14 +15,14 @@
                     <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(1)"
                       v-bind:class="{ 'text-emerald-600 ': action.openTab !== 1, 'text-white bg-emerald-600': action.openTab === 1 }">
-                      EXPENSES
+                      {{ $t('labels.expenses') }}
                     </a>
                   </li>
                   <li class="nav-item">
                     <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(2)"
                       v-bind:class="{ 'text-emerald-600 ': action.openTab !== 2, 'text-white bg-emerald-600': action.openTab === 2 }">
-                      INCOMING
+                      {{ $t('labels.incoming') }}
                     </a>
                   </li>
                 </ul>
@@ -39,7 +39,7 @@
 
             <select v-model="account" id="account" required
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-              <option value="0">Choose Wallet account</option>
+              <option value="0">{{ $t('labels.choose_wallet_account') }}</option>
               <option v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
           </div>
@@ -47,8 +47,8 @@
           <div class="px-2 py-2 w-full lg:w-6/12">
             <select v-model="category" id="category"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
-              <option value="0">Choose a category</option>
-              <option v-for="item in input.category" :key="item.id" :value="item.id">{{ item.name }}</option>
+              <option value="0">{{  $t('labels.choose_a_category') }}</option>
+              <option v-for="item in input.category" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}</option>
             </select>
           </div>
 
@@ -61,7 +61,7 @@
           <div class="lg:w-6/12 px-2 py-2 w-full">
             <select v-model="currency"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-              <option v-for="item in input.currency" :key="item.id" :value="item.id">{{ item.name }}</option>
+              <option v-for="item in input.currency" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}</option>
             </select>
           </div>
         </div>
@@ -69,8 +69,7 @@
         <div class="row border rounded border-blueGray-500 py-3 border-dashed">
           <div class="flex flex-wrap">
             <div class="lg:w-12/12 px-2 w-full text-center">
-              <label class="text-xs w-full" for="tags">Choose one of
-                currently tags</label>
+              <label class="text-xs w-full" for="tags">{{ $t('labels.choose_one_of_currently_tags') }}</label>
               <select v-model="label" multiple id="tags"
                 class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                 <option
@@ -85,7 +84,7 @@
 
           <div class="flex flex-wrap ">
             <div class="lg:w-12/12 px-2 w-full">
-              <input placeholder="Or nsert new TAG name" v-model="newlabel" type="text" id="tag"
+              <input :placeholder="$t('labels.or_nsert_new_tag_name')" v-model="newlabel" type="text" id="tag"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
             </div>
           </div>
@@ -104,35 +103,35 @@
 
         <div class="flex flex-wrap py-3">
           <div class="lg:w-12/12 px-2 w-full">
-            <textarea v-model="note" type="text" placeholder="Add here your note" required id="note" rows="2"
+            <textarea v-model="note" type="text" :placeholder="$t('labels.add_here_your_note')" required id="note" rows="2"
               class="border-0 px-3 py-5 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
           </div>
 
           <div class="flex w-full flex-wrap py-3">
             <div class="lg:w-3/12 px-2 w-full">
-              <span class="text-xs">Date start</span>
+              <span class="text-xs">{{ $t('labels.date_start') }}</span>
               <VueDatePicker v-model="date"></VueDatePicker>
 
             </div>
 
             <div class="lg:w-3/12 px-2 w-full">
-              <span class="text-xs">Date end</span>
+              <span class="text-xs">{{ $t('labels.date_end') }}</span>
               <VueDatePicker v-model="end_date_time"></VueDatePicker>
             </div>
 
             <div class="lg:w-3/12 px-2 w-full">
-              <span class="text-xs">Choose a frequency</span>
+              <span class="text-xs">{{ $t('labels.choose_frequency') }}</span>
               <select id="planning" v-model="planning"
                 class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                <option required v-for="(item, k) in input.planning" :key="k" :value="item">{{ item }}</option>
+                <option required v-for="(item, k) in input.planning" :key="k" :value="item.value">{{ item.label }}</option>
               </select>
             </div>
 
             <div class="lg:w-3/12 px-2 w-full">
-              <span class="text-xs">Choose a method</span>
+              <span class="text-xs">{{ $t('labels.choose_method') }}</span>
               <select v-model="payment_type" id="payment_type"
                 class="w-full border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ item.name }}</option>
+                <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}</option>
               </select>
             </div>
 
@@ -147,7 +146,7 @@
           <button v-on:click="setEntry()"
             class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
             type="button">
-            INSERT NEW ENTRY
+            {{ $t('labels.save') }}
           </button>
         </div>
       </div>
@@ -259,6 +258,26 @@ export default {
     if (this.entryId != null) {
       this.getEntry()
     }
+
+    this.input.planning = [
+      {
+        label: this.$t('labels.daily'),
+        value: 'daily'
+      },
+      {
+        label: this.$t('labels.weekly'),
+        value: 'weekly'
+      },
+      {
+        label: this.$t('labels.monthly'),
+        value: 'monthly'
+      },
+      {
+        label: this.$t('labels.yearly'),
+        value: 'yearly'
+      }
+    ]
+    
   },
   methods: {
     time() {
