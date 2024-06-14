@@ -112,6 +112,10 @@ export default {
     "dues_grants": "quote, sovvenzioni",
     "pastry_shop": "bar, pasticceria",
     "pub": "pub",
+    transportation: "trasporti",
+    investments: "investimenti",
+    food_beverages: "cibo & bevande",
+    computer_communication: "comunicazione pc",
 
 }
 </script>

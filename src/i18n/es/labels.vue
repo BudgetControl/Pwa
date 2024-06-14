@@ -170,5 +170,6 @@ export default {
     no_payees_found: 'No se encontraron debedores',
     list_of_all_budgets: 'Lista de todos los presupuestos',
     list_of_all_planned_entries: 'Lista de todas las entradas planificadas',
+    set_your_default_currecny: 'Set your default currency',
 }
 </script>

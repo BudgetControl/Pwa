@@ -3,7 +3,7 @@
         <div class="block w-full overflow-x-auto">
 
             <div class="container px-4 mx-auto py-3 ">
-                <div class="flex items-center ps-3">
+                <div class="flex items-center ps-3" v-if="isModel == false">
                     <input id="vue-checkbox-list" type="checkbox" v-model="action.show_planned" value="true"
                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                     <label for="vue-checkbox-list"
@@ -181,7 +181,7 @@ export default {
                         type_amount: r.amount <= 0 ? "expenses" : "incoming",
                         account: r.account.name,
                         note: r.note,
-                        planned: r.planned == 0 ? false : true,
+                        planned: r.planned == 0 || r.planned == undefined ? false : true,
                         category: {
                             id: r.sub_category.id,
                             icon: r.sub_category.category.icon,

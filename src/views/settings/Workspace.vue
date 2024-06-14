@@ -2,25 +2,22 @@
     <section class="relative py-16 bg-blueGray-200">
         <div class="container mx-auto px-4">
             <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
-                <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
+                <div
+                    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
                     <HeaderButton back="/app/settings" title="Workspace settings" />
 
                     <div class="container px-4 mx-auto ">
-                        <p class="px-2 mb-2 text-sm font-medium text-gray-400 dark:text-gray-500">{{ $t('labels.set_up_your_workspaces') }}
-                        </p>
+                        
 
                         <div class="container px-4 mx-auto" v-on:click="openModal(null)">
-                        <div class="flex border border-dotted m-1 bg-blueGray-200">
-                            <div class="flex lg:w-2/12 p-2">
-                                <i class="fas fa-plus fa-lg"></i>
-                            </div>
-                            <div class="flex lg:w-10/12 p-2">
-                                <p>
-                                    {{ $t('labels.add_new_workspace') }}
-                                </p>
-                            </div>
+
+                            <button
+                                class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                type="button">
+                                {{ $t('labels.add_new_workspace') }}
+                            </button>
+
                         </div>
-                    </div>
 
                     </div>
                     <!-- labels -->
@@ -28,7 +25,7 @@
 
                         <div class="flex border border-dotted m-1" v-on:click="openModal(item.uuid)">
                             <div class="flex lg:w-12/12 p-2">
-                               {{ item.name }}
+                                {{ item.name }}
                             </div>
                         </div>
 
@@ -61,7 +58,7 @@ export default {
     },
     methods: {
         openModal(id) {
-            if(id === null)
+            if (id === null)
                 this.$router.push({ path: `/app/settings/workspace/add` })
             else
                 this.$router.push({ path: `/app/settings/workspace/edit/${id}` })
@@ -77,5 +74,5 @@ export default {
 
 .vacp-copy-button {
     display: none !important;
-}</style>
-  
+}
+</style>

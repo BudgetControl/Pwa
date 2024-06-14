@@ -4,7 +4,7 @@
             <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
                 <div
                     class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
-                    <HeaderButton back="/app/settings/workspace" :title="$nextTick('labels.workspace_settings')" />
+                    <HeaderButton back="/app/settings/workspace" :title="$t('labels.workspace_settings')" />
 
                     <div class="relative p-6 flex-auto">
                         <!-- Regular Input -->
@@ -19,7 +19,7 @@
                                 <select
                                     class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                     v-model="modal.currency">
-                                    <option v-for="(item, k) in currencies" :key="k" :value="item.id">{{ item.name }}
+                                    <option v-for="(item, k) in currencies" :key="k" :value="item.id">{{ $t('app.' + item.slug) }}
                                     </option>
                                 </select>
                             </label>
@@ -31,7 +31,7 @@
                                 <select
                                     class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                     v-model="modal.payment_type">
-                                    <option v-for="(item, k) in payment_types" :key="k" :value="item.id">{{ item.name }}
+                                    <option v-for="(item, k) in payment_types" :key="k" :value="item.id">{{ $t('app.' + item.slug) }}
                                     </option>
                                 </select>
                             </label>

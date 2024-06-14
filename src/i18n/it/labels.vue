@@ -169,6 +169,7 @@ export default {
     list_of_entries_of: 'Elenco delle voci di',
     no_payees_found: 'Nessun debito trovato',
     list_of_all_budgets: 'Elenco di tutti i budget',
-    list_of_all_planned_entries: 'Elenco di tutte le voci pianificate'
+    list_of_all_planned_entries: 'Elenco di tutte le voci pianificate',
+    set_your_default_currecny: 'Imposta la tua valuta predefinita',
 }
 </script>

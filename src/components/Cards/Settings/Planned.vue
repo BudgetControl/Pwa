@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="flex-l">
-                    <EntryActionDropdown :entryId="entry.id" type="planned_entry" queryParams="planned=true" />
+                    <EntryActionDropdown :entryId="entry.id" type="planned_entry" queryParams="planned=true" :index=i @deleteItem="deleteItemFromArray" />
                 </div>
 
             </div>
@@ -35,16 +35,13 @@
                 <div class="flex-l w-full px-4">
                     <span
                     class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1 text-emerald-600 bg-emerald-200">
-                    {{entry.planning}}
+                    {{ $t('labels.' + entry.planning) }}
                 </span>
 
                 <span v-for="(label, i) in entry.labels"
-                                v-on:click="$router.push(`/app/entries?label=${label.id}`)" :key="i"
-                                class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
-                                :style="'color: #fff; background-color: ' + label.color">{{
-                                    label.name
-                                }}</span>
-
+                    v-on:click="$router.push(`/app/entries?label=${label.id}`)" :key="i"
+                    class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                    :style="'color: #fff; background-color: ' + label.color">{{ label.name }}</span>
                 </div>
             </div>
         </div>
@@ -79,6 +76,10 @@ export default {
         this.invoke()
     },
     methods: {
+
+        deleteItemFromArray(index) {
+            this.entries.splice(index, 1);
+        },
         invoke() {
 
             let currentPage = window.localStorage.getItem('current_page') == null ? 0 : window.localStorage.getItem('current_page')
