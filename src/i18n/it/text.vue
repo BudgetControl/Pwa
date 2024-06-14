@@ -1,7 +1,7 @@
 <script>
 export default {
     about_us: {
-        version: `Budget Control di Mlabfactory versione {{ version }}`,
+        version: `Budget Control di Mlabfactory versione `,
         personal_finance: `<b>Gestore di finanze personali</b><p>Budget Control di Mlabfactory è uno strumento di gestione delle finanze personali che ti aiuta a tenere traccia delle tue spese, così puoi mantenere il controllo e raggiungere i tuoi obiettivi.</p>`,
         information: `<b>Informazioni su Budget Control</b><p>Mlabfactory è uno sviluppatore professionista con sede in Italia, Milano, che opera e sviluppa applicazioni dal 2008. Scopri di più sul team</p><a href="http://mlabfactory.it">Mlabfactory.it</a>`,
         visit_our_website: 'Visita il nostro sito web',

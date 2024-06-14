@@ -19,7 +19,7 @@
               href="https://www.mlabfactory.it?ref=vn-footer-small"
               class="text-white hover:text-blueGray-300 text-sm font-semibold py-1"
             >
-              Mlab Factory
+              MlabFactory
             </a>
           </div>
         </div>
@@ -30,7 +30,7 @@
                 href="https://www.mlabfactory.it?ref=vn-footer-small"
                 class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
               >
-                Mlab Factory
+                MlabFactory
               </a>
             </li>
             <li>

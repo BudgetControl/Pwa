@@ -6,63 +6,7 @@
         <div class="container px-4 mx-auto flex flex-l w-full items-center justify-between">
           <div class="flex flex-l items-center w-full" id="example-navbar-info">
             <ul class="flex flex-l lg:flex-row list-none ml-auto w-full justify-center">
-              <li class="nav-item border border-solid border-blueGray-100 mx-2">
-                <router-link
-                  to="/app/entry"
-                  v-slot="{ href, navigate, isActive }"
-                >
-                  <a
-                    :href="href"
-                    @click="navigate"
-                    class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                    :class="[
-                      isActive
-                        ? 'text-white hover:text-emerald-600'
-                        : 'text-white hover:text-blueGray-500',
-                    ]"
-                  >
-                  {{ $t('labels.add') }}
-                  </a>
-                </router-link>
-              </li>
-              <li class="nav-item border border-solid border-blueGray-100 mx-2">
-                <router-link
-                  to="/app/entries"
-                  v-slot="{ href, navigate, isActive }"
-                >
-                  <a
-                    :href="href"
-                    @click="navigate"
-                    class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                    :class="[
-                      isActive
-                        ? 'text-white hover:text-emerald-600'
-                        : 'text-white hover:text-blueGray-500',
-                    ]"
-                  >
-                  {{ $t('labels.show') }}
-                  </a>
-                </router-link>
-              </li>
-              <li class="nav-item border border-solid border-blueGray-100 mx-2">
-                <router-link
-                  to="/app/search"
-                  v-slot="{ href, navigate, isActive }"
-                >
-                  <a
-                    :href="href"
-                    @click="navigate"
-                    class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                    :class="[
-                      isActive
-                        ? 'text-white hover:text-emerald-600'
-                        : 'text-white hover:text-blueGray-500',
-                    ]"
-                  >
-                  {{ $t('labels.search') }}
-                  </a>
-                </router-link>
-              </li>
+              <slot></slot>
             </ul>
           </div>
         </div>
@@ -75,7 +19,6 @@
 <script>
 
 export default {
-  components: {
-  },
+   name: 'HeaderMenu'
 };
 </script>

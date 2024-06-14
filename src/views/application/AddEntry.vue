@@ -1,16 +1,35 @@
 <template>
   <div class="flex flex-wrap">
     <div class="w-full lg:w-12/12 px-4">
+      <HeaderMenu>
+        <MenuButton
+          :path="'/app/entry'"
+          :label="$t('labels.add')"
+        />
+
+        <MenuButton
+          :path="'/app/entries'"
+          :label="$t('labels.show')"
+        />
+
+        <MenuButton
+          :path="'/app/search'"
+          :label="$t('labels.search')"
+        />
+      </HeaderMenu>
       <CardAddEntry :entryId="this.$route.params.entry_id" :typeOfEntry="this.$route.query.type" />
     </div>
   </div>
 </template>
+
 <script>
 import CardAddEntry from "@/components/Cards/CardAddEntry.vue";
+import MenuButton from "../../components/GenericComponents/MenuButton.vue";
+import HeaderMenu from "../../components/Navbars/HeaderMenu.vue";
 
 export default {
   components: {
-    CardAddEntry
+    CardAddEntry, HeaderMenu, MenuButton
   },
 };
 </script>

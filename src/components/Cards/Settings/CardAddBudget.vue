@@ -15,7 +15,7 @@
                             <div class="lg:w-4/12 px-2 py-2 w-full">
                                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                                     htmlFor="grid-password">
-                                    Budget name
+                                    {{ $t('labels.budget_name') }}
                                 </label>
                                 <input type="text" v-model="data.name" placeholder="Budget name"
                                     class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
@@ -23,7 +23,7 @@
                             <div class="lg:w-4/12 px-2 py-2 w-full">
                                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                                     htmlFor="grid-password">
-                                    Budget
+                                    {{ $t('labels.budget') }}
                                 </label>
                                 <input v-model="data.amount" type="tel" placeholder="0,00 €" id="amount"
                                     class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
@@ -31,16 +31,16 @@
                             <div class="lg:w-4/12 px-2 py-2 w-full">
                                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                                     htmlFor="grid-password">
-                                    Period
+                                    {{ $t('labels.period') }}
                                 </label>
                                 <select v-model="data.period" id="planning"
                                     class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                                    <option value="_">Choose a period</option>
-                                    <option value="weekly">Weekly</option>
-                                    <option value="monthly">monthly</option>
-                                    <option value="yearly">yearly</option>
-                                    <option value="one_shot">one shot</option>
-                                    <option value="recursively">recursive</option>
+                                    <option value="_"> {{ $t('labels.choose_period') }}</option>
+                                    <option value="weekly"> {{ $t('labels.weekly') }}</option>
+                                    <option value="monthly"> {{ $t('labels.monthly') }}</option>
+                                    <option value="yearly">{{ $t('labels.yearly') }}</option>
+                                    <option value="one_shot"> {{ $t('labels.one_shot') }}</option>
+                                    <option value="recursively"> {{ $t('labels.recursive') }}</option>
                                 </select>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
 
                                 <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
                                     htmlFor="grid-password">
-                                    Start date
+                                    {{ $t('labels.start_Date') }}
                                 </label>
 
                                 <VueDatePicker v-model="data.period_start"></VueDatePicker>
@@ -60,7 +60,7 @@
 
                                 <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
                                     htmlFor="grid-password">
-                                    End date
+                                    {{ $t('labels.end_date') }}
                                 </label>
 
                                 <VueDatePicker v-model="data.period_end"></VueDatePicker>
@@ -73,7 +73,7 @@
                             <div class="lg:w-6/12 px-2 py-2 w-full">
                                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                                     htmlFor="grid-password">
-                                    Account
+                                    {{ $t('labels.account') }}
                                 </label>
                                 <select multiple
                                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
@@ -89,15 +89,13 @@
 
                                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                                     htmlFor="grid-password">
-                                    Category
+                                    {{ $t('labels.category') }}
                                 </label>
                                 <select multiple
                                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                     v-model="data.category">
                                     <option v-for="category in input.category" :key="category.id" :value="category.id">
-                                        {{
-                                    category.name
-                                }}
+                                   {{ $t('app.' +  category.slug ) }}
                                     </option>
                                 </select>
 
@@ -110,7 +108,7 @@
 
                                 <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
                                     htmlFor="grid-password">
-                                    Label
+                                    {{ $t('labels.label') }}
                                 </label>
                                 <select v-model="data.tags" multiple
                                     class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
@@ -127,29 +125,29 @@
 
                                 <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
                                     htmlFor="grid-password">
-                                    Entry type
+                                    {{ $t('labels.entry_type') }}
                                 </label>
 
                                 <select v-model="data.type" multiple
                                     class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                                     <option
                                         class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
-                                        value="incoming"> incoming
+                                        value="incoming"> {{ $t('labels.incoming') }}
                                     </option>
 
                                     <option
                                         class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
-                                        value="expenses"> expenses
+                                        value="expenses"> {{ $t('labels.expenses') }}
                                     </option>
 
                                     <option
                                         class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
-                                        value="debit"> debit
+                                        value="debit"> {{ $t('labels.debit') }}
                                     </option>
 
                                     <option
                                         class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
-                                        value="transfer"> transfer
+                                        value="transfer"> {{ $t('labels.transfer') }}
                                     </option>
                                 </select>
 
@@ -177,8 +175,7 @@
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                 <label for="vue-checkbox-list"
                                     class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                    Enable
-                                    email notification</label>
+                                    {{ $t('labels.enable_email_notification') }}</label>
                             </div>
                         </div>
 
@@ -201,19 +198,19 @@
                                 <button v-on:click="set()" v-if="!id"
                                     class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="button">
-                                    SAVE BUDGET
+                                    {{ $t('labels.save') }}
                                 </button>
 
                                 <button v-on:click="update()" v-if="id"
                                     class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="button">
-                                    UPDATE BUDGET
+                                    {{ $t('labels.update') }}
                                 </button>
 
                                 <button v-on:click="deleteBudget()" v-if="id"
                                     class="w-full bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="button">
-                                    DELETE BUDGET
+                                    {{ $t('labels.delete') }}
                                 </button>
                             </div>
                         </div>

@@ -1,22 +1,18 @@
 <template>
     <section class="relative py-16 bg-blueGray-200">
         <div class="container mx-auto px-4">
-            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
                 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
                     <HeaderButton back="/app/settings" title="Wallet settings" />
 
                     <!-- wallets -->
                     <div class="container px-4 mx-auto" v-on:click="openModal(null)">
-                        <div class="flex border border-dotted m-1 bg-blueGray-200">
-                            <div class="flex lg:w-2/12 p-2">
-                                <i class="fas fa-plus fa-lg"></i>
-                            </div>
-                            <div class="flex lg:w-10/12 p-2">
-                                <p>
-                                    {{ $t('labels.add_new_wallet') }}
-                                </p>
-                            </div>
-                        </div>
+                        <button
+                                class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                type="button">
+                                {{ $t('labels.add_new_wallet') }}
+                            </button>
+
                     </div>
 
                     <div class="container px-4 mx-auto">
@@ -49,10 +45,10 @@
                                 <div class="flex border border-dotted m-1" v-on:click="openModal(element.id)"
                                 v-if="element.deleted_at == null || action.archived == true"
                                 >
-                                    <div class="flex lg:w-2/12 p-2" v-if="action.order">
+                                    <div class="flex p-2" v-if="action.order">
                                         <i class="fas fa-bars fa-lg"></i>
                                     </div>
-                                    <div class="flex lg:w-2/12 p-2">
+                                    <div class="flex p-2">
                                         <i class="fas fa-wallet fa-lg" :style="'color:' + element.color"></i>
                                     </div>
                                     <div class="flex lg:w-10/12 p-2">

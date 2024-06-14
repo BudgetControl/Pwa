@@ -157,6 +157,19 @@ export default {
     yes: 'SI',
     date_interval: 'Intervallo di date',
     type_of_transaction: 'Tipo di transazione',
-
+    choose_period: 'Scegli un periodo',
+    daily: 'Giornaliero',
+    weekly: 'Settimanale',
+    monthly: 'Mensile',
+    yearly: 'Annuale',
+    one_shot: 'Una tantum',
+    recursive: 'Ricorrente',
+    or_nsert_new_tag_name: 'Oppure inserisci un nuovo nome TAG',
+    no_budgets_found: 'Nessun budget trovato',
+    list_of_entries_of: 'Elenco delle voci di',
+    no_payees_found: 'Nessun debito trovato',
+    list_of_all_budgets: 'Elenco di tutti i budget',
+    list_of_all_planned_entries: 'Elenco di tutte le voci pianificate',
+    set_your_default_currecny: 'Imposta la tua valuta predefinita',
 }
 </script>

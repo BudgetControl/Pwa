@@ -14,7 +14,7 @@
               href="https://www.mlabfactory.it?ref=vn-footer-admin"
               class="text-blueGray-500 hover:text-blueGray-700 text-sm font-semibold py-1"
             >
-              Mlab Factory
+              MlabFactory
             </a>
           </div>
         </div>
@@ -25,7 +25,7 @@
                 href="https://www.mlabfactory.it?ref=vn-footer-admin"
                 class="text-blueGray-600 hover:text-blueGray-800 text-sm font-semibold block py-1 px-3"
               >
-                Mlab Factory
+                MlabFactory
               </a>
             </li>
             <li>

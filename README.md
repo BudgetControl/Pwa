@@ -15,9 +15,9 @@ Start your development with a Free Tailwind CSS and VueJS UI Kit and Admin. Let 
 
 Vue Notus is Free and Open Source. It features multiple HTML and VueJS elements and it comes with dynamic components for VueJS.
 
-It is based on [Tailwind Starter Kit](https://www.mlabfactory.it/learning-lab/tailwind-starter-kit/presentation?ref=vn-github-readme) by Mlab Factory, and it is build with both presentation pages, and pages for an admin dashboard.
+It is based on [Tailwind Starter Kit](https://www.mlabfactory.it/learning-lab/tailwind-starter-kit/presentation?ref=vn-github-readme) by MlabFactory, and it is build with both presentation pages, and pages for an admin dashboard.
 
-Speed up your web development with a beautiful product made by <a href="https://creative-tim.com/" target="_blank">Mlab Factory </a>.
+Speed up your web development with a beautiful product made by <a href="https://creative-tim.com/" target="_blank">MlabFactory </a>.
 If you like bright and fresh colors, you will love this Free Tailwind CSS Template! It features a huge number of components that can help you create amazing websites.
 
 ### Installations
@@ -114,7 +114,7 @@ The documentation for the Vue Notus is hosted at our <a href="https://www.mlabfa
 
 ## Quick start
 
-- <a href="https://www.mlabfactory.it/product/budget-control?ref=vn-github-readme" target="_blank">Download from Mlab Factory</a>.
+- <a href="https://www.mlabfactory.it/product/budget-control?ref=vn-github-readme" target="_blank">Download from MlabFactory</a>.
 - <a href="https://github.com/BudgetControl/Application" target="_blank">Check it on Github</a>.
 
 ## Files and Folder
@@ -210,7 +210,7 @@ We use GitHub Issues as the official bug tracker for the Vue Notus. Here are som
 
 ## Licensing
 
-- Copyright 2021 <a href="https://www.mlabfactory.it/?ref=vn-readme" target="_blank">Mlab Factory</a>
+- Copyright 2021 <a href="https://www.mlabfactory.it/?ref=vn-readme" target="_blank">MlabFactory</a>
 
 - Licensed under <a href="https://github.com/BudgetControl/Application/blob/main/LICENSE.md" target="_blank">MIT</a>
 
@@ -218,13 +218,13 @@ We use GitHub Issues as the official bug tracker for the Vue Notus. Here are som
 
 - <a href="https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w" target="_blank">Tutorials</a>
 - <a href="https://www.mlabfactory.it/affiliates/new?ref=vn-readme" target="_blank">Affiliate Program</a> (earn money)
-- <a href="http://blog.creative-tim.com/?ref=vn-readme" target="_blank">Blog Mlab Factory</a>
-- <a href="https://www.mlabfactory.it/templates/free?ref=vn-readme" target="_blank">Free Products</a> from Mlab Factory
-- <a href="https://www.mlabfactory.it/templates/premium?ref=vn-readme" target="_blank">Premium Products</a> from Mlab Factory
-- <a href="https://www.mlabfactory.it/templates/react?ref=vn-readme" target="_blank">React Products</a> from Mlab Factory
-- <a href="https://www.mlabfactory.it/templates/angular?ref=vn-readme" target="_blank">Angular Products</a> from Mlab Factory
-- <a href="https://www.mlabfactory.it/templates/vuejs?ref=vn-readme" target="_blank">VueJS Products</a> from Mlab Factory
-- <a href="https://www.mlabfactory.it/templates?ref=vn-readme" target="_blank">More products</a> from Mlab Factory
+- <a href="http://blog.creative-tim.com/?ref=vn-readme" target="_blank">Blog MlabFactory</a>
+- <a href="https://www.mlabfactory.it/templates/free?ref=vn-readme" target="_blank">Free Products</a> from MlabFactory
+- <a href="https://www.mlabfactory.it/templates/premium?ref=vn-readme" target="_blank">Premium Products</a> from MlabFactory
+- <a href="https://www.mlabfactory.it/templates/react?ref=vn-readme" target="_blank">React Products</a> from MlabFactory
+- <a href="https://www.mlabfactory.it/templates/angular?ref=vn-readme" target="_blank">Angular Products</a> from MlabFactory
+- <a href="https://www.mlabfactory.it/templates/vuejs?ref=vn-readme" target="_blank">VueJS Products</a> from MlabFactory
+- <a href="https://www.mlabfactory.it/templates?ref=vn-readme" target="_blank">More products</a> from MlabFactory
 - Check our Bundles <a href="https://www.mlabfactory.it/bundles?ref=vn-readme" target="_blank">here</a>
 - Check our awesome builder <a href="https://www.mlabfactory.it/builder/argon?ref=vn-readme" target="_blank">here</a>
 - Check Tailwind Starter Kit, the project behind this product <a href="https://www.mlabfactory.it/learning-lab/tailwind-starter-kit/presentation?ref=vn-readme" target="_blank">here</a>

@@ -1,15 +1,15 @@
 <template>
   <div class="block w-full overflow-x-auto mt-10">
     <div v-if="showModal"
-      class="overflow-x-hidden overflow-y-auto mx-auto absolute inset-0 z-50 outline-none focus:outline-none justify-center items-center flex w-full md:w-6/12 px-4 left">
+      class="overflow-x-hidden overflow-y-auto mx-auto absolute inset-0 z-50 outline-none focus:outline-none justify-center items-center flex w-full md:w-6/12 px-4">
       <div class="relative w-auto my-6 mx-auto w-full">
         <!--content-->
         <div
           class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
           <!--header-->
           <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-            <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-              List of entries of ( {{this.name}} )
+            <h3 class="text-blueGray-400 text-sm font-bold uppercase">
+              {{ $t('labels.list_of_entries_of') }} ( {{this.name}} )
             </h3>
           </div>
           <!--body-->
@@ -20,16 +20,16 @@
             <div class="container px-4 mx-auto py-3 border border-solid border-blueGray-100 shadow"
               v-for="(entry, i) in this.entries[this.index].entry" :key="i">
               <div class="flex flex-wrap">
-                <div class="flex-l w-full px-4">
-                  <span class="text-xs block text-emerald-500 rounded ">{{ entry.created_at }}</span>
+                <div class="flex-l w-full">
+                  <span class="text-xs block text-emerald-500 rounded ">{{ entry.date_time }}</span>
                 </div>
               </div>
               <div class="flex flex-wrap">
-                <div class="w-full px-4 flex-1">
+                <div class="w-full flex-1">
                   <span class="text-xs block rounded text-blueGray-900">
                     {{ entry.note }}</span>
                 </div>
-                <div class="w-full px-4 flex-1 text-right">
+                <div class="w-full flex-1 text-right">
                   <span class="text-sm block text-blueGray-700 rounded ">
                     {{ entry.amount }} <i class="fas fa-circle mr-2" :class="entry.amount >= 0 ? 'text-emerald-500' : 'text-red-500'"></i>
                   </span>
@@ -60,20 +60,22 @@
             <button
               class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button" v-on:click="toggleModal()">
-              Close
+              {{ $t('labels.close') }}
             </button>
           </div>
         </div>
       </div>
     </div>
 
-
-
     <div class="container px-4 mx-auto py-3">
-      <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">{{ $t('labels.list_of_all_payee') }} </h3>
+      <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">{{ $t('labels.list_of_all_payees') }} </h3>
     </div>
 
-
+    <div v-if="entries.length === 0">
+        <div class="text-center">
+            <p class="text-blueGray-400 text-lg">{{ $t('labels.no_payees_found') }}</p>
+        </div>
+    </div>
 
     <div class="container px-4 mx-auto py-3 border border-solid border-blueGray-100 shadow" :class="showModal ? 'opacity': ''"
       v-for="(entry, i) in this.entries" :key="i">
@@ -173,7 +175,7 @@ export default {
             color_amount: debitColor,
             name: e.name,
             amount: totalamout.toFixed(2) + " €",
-            entry: e.entry
+            entry: e.entry,
           }
 
           this.entries.push(info)

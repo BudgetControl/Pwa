@@ -159,7 +159,7 @@
 
           <div class="flex flex-wrap ">
             <div class="lg:w-12/12 px-2 w-full">
-              <input placeholder="Or nsert new TAG name" v-model="newlabel" type="text" id="tag"
+              <input :placeholder="$t('labels.or_nsert_new_tag_name')" v-model="newlabel" type="text" id="tag"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
             </div>
           </div>
@@ -180,7 +180,7 @@
 
         <div v-if="action.showDetails" class="flex flex-wrap py-3">
           <div class="lg:w-8/12 px-2 w-full">
-            <textarea v-model="note" type="text" placeholder="Add here your note" id="note" rows="2"
+            <textarea v-model="note" type="text" :placeholder="$t('labels.add_here_your_note')" id="note" rows="2"
               class="border-0 px-3 py-5 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
           </div>
 

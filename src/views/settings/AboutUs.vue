@@ -1,7 +1,7 @@
 <template>
     <section class="relative py-16 bg-blueGray-200">
         <div class="container mx-auto px-4">
-            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
                 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
                     <HeaderButton back="/app/settings" title="About Us" />
 
@@ -17,7 +17,8 @@
                                     </div>
                                     <div class="w-full justify-center flex">
                                         <span
-                                            class="text-sm block my-4 p-3 text-blueGray-700 border-blueGray-100" v-html="$t('text.about_us.version')"></span>
+                                            class="text-sm block my-4 text-blueGray-700 border-blueGray-100" v-html="$t('text.about_us.version')"></span>
+                                            <span class="text-sm block my-4  text-blueGray-700 border-blueGray-100 ml-2"> ( v{{  version }} )</span>
                                     </div>
                                 </div>
 

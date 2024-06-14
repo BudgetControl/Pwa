@@ -157,6 +157,20 @@ export default {
     yes: 'YES',
     date_interval: 'Date interval',
     type_of_transaction: 'Type of transaction',
+    choose_period: 'Choose a period',
+    daily: 'Daily',
+    weekly: 'Weekly',
+    monthly: 'Monthly',
+    yearly: 'Yearly',
+    one_shot: 'One-shot',
+    recursive: 'Recursive',
+    or_nsert_new_tag_name: 'Or insert new TAG name',
+    no_budgets_found: 'No budgets found',
+    list_of_entries_of: 'List of entries of',
+    no_payees_found: 'No payees found',
+    list_of_all_budgets: 'List of all budgets',
+    list_of_all_planned_entries: 'List of all planned entries',
+    set_your_default_currecny: 'Set your default currency',
 };
 
 </script>

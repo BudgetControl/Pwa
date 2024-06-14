@@ -1,7 +1,7 @@
 <template>
     <section class="relative py-16 bg-blueGray-200">
         <div class="container mx-auto px-4">
-            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
                 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
                     <HeaderButton back="/app/settings" title="Label settings" />
 
@@ -26,7 +26,7 @@
                     <!-- labels -->
                     <div class="container px-4 mx-auto " v-for="(item, k) in labels" :key="k" v-on:click="openModal(item.id)">
                         <div class="flex border border-dotted m-1" v-if="item.archive == 0 || action.archived == true">
-                            <div class="flex lg:w-2/12 p-2" :style="'background-color: '+item.color">
+                            <div class="flex p-2" :style="'background-color: '+item.color">
                             </div>
                             <div class="flex lg:w-10/12 p-2">
                                 <p>

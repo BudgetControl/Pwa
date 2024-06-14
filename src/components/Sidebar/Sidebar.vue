@@ -45,11 +45,18 @@
             ? 'text-emerald-500 hover:text-emerald-600'
             : 'text-blueGray-700 hover:text-blueGray-500',
         ]">
-                <i class="fas fa-tv mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
+                <i class="fas fa-columns mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
                 {{ $t('labels.dashboard') }}
               </a>
             </router-link>
           </li>
+
+        </ul>
+
+        <!-- Divider -->
+        <hr class="my-4 md:min-w-full" />
+
+        <ul class="md:flex-col md:min-w-full flex flex-col list-none">
 
           <li class="items-center" v-on:click="toggleCollapseShow('hidden')">
             <router-link to="/app/entries" v-slot="{ href, navigate, isActive }">
@@ -58,55 +65,12 @@
             ? 'text-emerald-500 hover:text-emerald-600'
             : 'text-blueGray-700 hover:text-blueGray-500',
         ]">
-                <i class="fas fa-tools mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
+                <i class="fas fa-coins mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
                 {{ $t('labels.my_entries') }}
               </a>
             </router-link>
           </li>
 
-          <li class="items-center" v-on:click="toggleCollapseShow('hidden')">
-            <router-link to="/app/entry" v-slot="{ href, navigate, isActive }">
-              <a :href="href" @click="navigate" class="text-xs uppercase py-3 font-bold block" :class="[
-          isActive
-            ? 'text-emerald-500 hover:text-emerald-600'
-            : 'text-blueGray-700 hover:text-blueGray-500',
-        ]">
-                <i class="fas fa-tools mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
-                {{ $t('labels.add_new_entry') }}
-              </a>
-            </router-link>
-          </li>
-
-          <!-- <li class="items-center">
-            <router-link
-              to="/app/import"
-              v-slot="{ href, navigate, isActive }"
-            >
-              <a
-                :href="href"
-                @click="navigate"
-                class="text-xs uppercase py-3 font-bold block"
-                :class="[
-                  isActive
-                    ? 'text-emerald-500 hover:text-emerald-600'
-                    : 'text-blueGray-700 hover:text-blueGray-500',
-                ]"
-              >
-                <i
-                  class="fas fa-tools mr-2 text-sm"
-                  :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
-                ></i>
-                Import Entries
-              </a>
-            </router-link>
-          </li> -->
-
-        </ul>
-
-        <!-- Divider -->
-        <hr class="my-4 md:min-w-full" />
-
-        <ul class="md:flex-col md:min-w-full flex flex-col list-none">
           <li class="items-center" v-on:click="toggleCollapseShow('hidden')">
             <router-link to="/app/payee" v-slot="{ href, navigate, isActive }">
               <a :href="href" @click="navigate" class="text-xs uppercase py-3 font-bold block" :class="[
@@ -114,7 +78,7 @@
             ? 'text-emerald-500 hover:text-emerald-600'
             : 'text-blueGray-700 hover:text-blueGray-500',
         ]">
-                <i class="fas fa-tools mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
+                <i class="fas fa-file-invoice mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
                 {{ $t('labels.payee_list') }}
               </a>
             </router-link>
@@ -127,7 +91,7 @@
             ? 'text-emerald-500 hover:text-emerald-600'
             : 'text-blueGray-700 hover:text-blueGray-500',
         ]">
-                <i class="fas fa-tools mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
+                <i class="fas fa-clipboard-check mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
                 {{ $t('labels.planned') }}
               </a>
             </router-link>
@@ -140,7 +104,7 @@
             ? 'text-emerald-500 hover:text-emerald-600'
             : 'text-blueGray-700 hover:text-blueGray-500',
         ]">
-                <i class="fas fa-tools mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
+                <i class="fas fa-clinic-medical mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
                 {{ $t('labels.budgets') }}
               </a>
             </router-link>
@@ -173,7 +137,7 @@
 
         <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
           <li class="items-center">
-            <i class="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"></i>
+            <i class="fas fa-sign-out-alt text-blueGray-300 mr-2 text-sm"></i>
             <LogoutButton class="px-2 text-xs font-bold uppercase "></LogoutButton>
           </li>
         </ul>

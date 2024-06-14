@@ -109,5 +109,9 @@ export default {
     "argentine_peso": "peso argentino",
     "pastry_shop": "pastelería",
     "pub": "pub",
+    transportation: "transportation",
+    investments: "investments",
+    food_beverages: "food & beverages",
+    computer_communication: "computer communication",
 }
 </script>

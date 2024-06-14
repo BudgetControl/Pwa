@@ -1,19 +1,9 @@
 <template>
     <div class="block w-full overflow-x-auto mt-10">
 
-        <div class="container x-4 mx-auto py-3">
-            <router-link to="/app/planned_entry?planned=true" v-slot="{ href, navigate, isActive }">
-                <a :href="href" @click="navigate"
-                    class="px-3 py-2 items-center text-xs bg-emerald-600 uppercase font-bold leading-snug text-white hover:opacity-75"
-                    :class="[
-                        isActive
-                            ? 'text-white hover:text-emerald-600'
-                            : 'text-white hover:text-white',
-                    ]">
-                    Add new Entry
-                </a>
-            </router-link>
-        </div>
+        <div class="container px-4 mx-auto py-3">
+                <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">{{ $t('labels.list_of_all_planned_entries') }} </h3>
+            </div>
 
         <div class="container px-4 mx-auto py-3 border border-solid border-blueGray-100 shadow"
             v-for="(entry, i) in this.entries" :key="i">
@@ -29,7 +19,7 @@
                 </div>
 
                 <div class="flex-l">
-                    <EntryActionDropdown :entryId="entry.id" type="planned_entry" queryParams="planned=true" />
+                    <EntryActionDropdown :entryId="entry.id" type="planned_entry" queryParams="planned=true" :index=i @deleteItem="deleteItemFromArray" />
                 </div>
 
             </div>
@@ -45,16 +35,13 @@
                 <div class="flex-l w-full px-4">
                     <span
                     class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1 text-emerald-600 bg-emerald-200">
-                    {{entry.planning}}
+                    {{ $t('labels.' + entry.planning) }}
                 </span>
 
                 <span v-for="(label, i) in entry.labels"
-                                v-on:click="$router.push(`/app/entries?label=${label.id}`)" :key="i"
-                                class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
-                                :style="'color: #fff; background-color: ' + label.color">{{
-                                    label.name
-                                }}</span>
-
+                    v-on:click="$router.push(`/app/entries?label=${label.id}`)" :key="i"
+                    class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                    :style="'color: #fff; background-color: ' + label.color">{{ label.name }}</span>
                 </div>
             </div>
         </div>
@@ -89,6 +76,10 @@ export default {
         this.invoke()
     },
     methods: {
+
+        deleteItemFromArray(index) {
+            this.entries.splice(index, 1);
+        },
         invoke() {
 
             let currentPage = window.localStorage.getItem('current_page') == null ? 0 : window.localStorage.getItem('current_page')
