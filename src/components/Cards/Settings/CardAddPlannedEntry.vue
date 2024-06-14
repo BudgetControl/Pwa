@@ -349,6 +349,7 @@ export default {
         _this.planning = model.planning
         _this.transfer_realtion = model.transfer_relation
         _this.planned = model.planning
+        _this.end_date_time = model.end_date_time
 
         if (model.transfer == 1) {
           _this.action.hidecategory = true
@@ -374,23 +375,18 @@ export default {
     validateBefore() {
 
       if (this.account == 0) {
-        alert("Please choose a wallet account", "error")
+        alert(this.$t('messages.validation.choose_wallet'), "error")
         return false
       }
 
       if (this.category == 0) {
-        alert("Please choose a right category", "error")
+        alert(this.$t('messages.validation.choose_category'), "error")
         return false
       }
 
       let num = this.amount + 9
       if (this.amount == null || isNaN(num)) {
-        alert("Please insert amount value", "error")
-        return false
-      }
-
-      if (this.note == null) {
-        alert("Please insert a note description", "error")
+        alert(this.$t('messages.validation.insert_amount'), "error")
         return false
       }
 
