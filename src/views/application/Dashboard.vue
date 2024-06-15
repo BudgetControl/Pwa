@@ -1,7 +1,6 @@
 <template>
   <div>
     <HeaderMenu>
-      <HeaderMenu>
         <MenuButton
           :path="'/app/entry'"
           :label="$t('labels.add')"
@@ -16,7 +15,6 @@
           :path="'/app/search'"
           :label="$t('labels.search')"
         />
-      </HeaderMenu>
     </HeaderMenu>
   </div>
   <div class="mt-10">
