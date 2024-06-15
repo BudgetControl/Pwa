@@ -155,7 +155,7 @@ export default {
         this.months.forEach(month => {
           data.push({
             start: year + "/" + month + "/01",
-            end: year + "/" + month + "/28"
+            end: year + "/" + month + "/" + new Date(year, month, 0).getDate(),
           })
         })
 
