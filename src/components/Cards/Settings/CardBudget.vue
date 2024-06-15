@@ -15,7 +15,7 @@
             <!--content-->
             <div class="border p-2 mt-2" v-if="budgets.week.length != 0">
                 <span class="text-xs font-semibold inline-block text-blueGray-400 ">
-                    WEEK
+                    {{ $t('labels.weekly') }}
                 </span>
 
                 <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.week"
@@ -26,7 +26,7 @@
             <div class="border p-2 mt-2" v-if="budgets.month.length != 0">
 
                 <span class="text-xs font-semibold inline-block text-blueGray-400 ">
-                    MONTH
+                    {{ $t('labels.monthly') }}
                 </span>
 
                 <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.month"
@@ -36,7 +36,7 @@
 
             <div class="border p-2 mt-2 mb-2" v-if="budgets.year.length != 0">
                 <span class="text-xs font-semibold inline-block text-blueGray-400 ">
-                    YEAR
+                    {{ $t('labels.yearly') }}
                 </span>
 
                 <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.year"
@@ -45,7 +45,7 @@
 
             <div class="border p-2 mt-2 mb-2" v-if="budgets.custom.length != 0">
                 <span class="text-xs font-semibold inline-block text-blueGray-400 ">
-                    ONE SHOT BUDGET
+                    {{ $t('labels.one_shot') }}
                 </span>
 
                 <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.custom"

@@ -1,5 +1,28 @@
 <template>
+  <div>
+    <HeaderMenu>
+      <HeaderMenu>
+        <MenuButton
+          :path="'/app/entry'"
+          :label="$t('labels.add')"
+        />
+
+        <MenuButton
+          :path="'/app/entries'"
+          :label="$t('labels.show')"
+        />
+
+        <MenuButton
+          :path="'/app/search'"
+          :label="$t('labels.search')"
+        />
+      </HeaderMenu>
+    </HeaderMenu>
+  </div>
   <div class="mt-10">
+    <div class="py-5">
+      <FilterBar />
+    </div>
     <div class="flex flex-wrap">
       <div class="w-full">
         <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
@@ -26,6 +49,7 @@
   </div>
 </template>
 <script>
+import FilterBar from "@/components/Navbars/FilterBar.vue";
 import CardBarChart from "@/components/Cards/Chart/WidgetBarChart.vue";
 import CardLine_IncomingExpensesChart from "@/components/Cards/Chart/WidgetLine_IncomingExpensesChart.vue";
 import CardPieLabelChart from "../../components/Cards/Chart/WidgetPieLabelChart.vue";
@@ -35,15 +59,20 @@ import CardBudget from "../../components/Cards/Chart/WidgetBudget.vue";
 import WorkspaceService from "../../services/WorkspaceService.vue";
 import WorkspaceServiceVue from "../../services/WorkspaceService.vue";
 import AuthService from "../../services/AuthService.vue";
+import HeaderMenu from '../../components/Navbars/HeaderMenu.vue';
+import MenuButton from '../../components/GenericComponents/MenuButton.vue';
 
 export default {
   name: "dashboard-page",
   components: {
+    FilterBar,
     CardBarChart,
     CardLine_IncomingExpensesChart,
     CardPieLabelChart,
     CardCategoryResume,
-    CardBudget
+    CardBudget,
+    HeaderMenu,
+    MenuButton
   },
   data() {
     return {
