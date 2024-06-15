@@ -16,7 +16,6 @@
           :label="$t('labels.search')"
         />
     </HeaderMenu>
-  </div>
   <div class="mt-10">
     <div class="py-5">
       <FilterBar />
@@ -43,8 +42,8 @@
     <div class="flex flex-wrap mt-4">
       <CardBudget />
     </div>
-
   </div>
+</div>
 </template>
 <script>
 import FilterBar from "@/components/Navbars/FilterBar.vue";
