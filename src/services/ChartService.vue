@@ -93,6 +93,16 @@ async function expensesLabelCategory(data) {
   return response.data;
 }
 
+async function getStatsEntries(data) {
+  const config = {
+    params: {
+      date_time : [data]
+    }
+  }
+  const response = await instance.get('/api/stats/chart/table/expenses/category',config);
+  return response.data;
+}
+
 export default {
   expensesBarByCategory,
   incomingExpensesLine,
@@ -102,7 +112,8 @@ export default {
   getBudget,
   createBudget,
   deleteBudget,
-  updateBudget
+  updateBudget,
+  getStatsEntries
 }
 
 </script>

@@ -683,13 +683,9 @@ export default {
           alert(this.$t('labels.entry_saved'), "success")
 
         }).catch(() => {
-
           alert(this.$t('messages.generic_error'), "error")
-
         })
-
       }
-
     },
     getCurrency() {
       let _this = this

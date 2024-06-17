@@ -172,5 +172,6 @@ export default {
     list_of_all_planned_entries: 'Elenco di tutte le voci pianificate',
     set_your_default_currecny: 'Imposta la tua valuta predefinita',
     update: 'Aggiorna',
+    stats: 'Statistiche',
 }
 </script>

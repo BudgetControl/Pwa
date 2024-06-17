@@ -30,6 +30,7 @@ import SearchEntries from "@/views/application/SearchEntries.vue";
 import EntriesResume from "@/views/application/EntriesResume.vue";
 import Budgets from "@/views/application/Budgets.vue";
 import AddBudgets from "@/components/Cards/Settings/CardAddBudget.vue";
+import Stats from "@/views/application/Stats.vue";
 
 // settings layout
 
@@ -148,6 +149,11 @@ const routes = [
       {
         path: "/app/search",
         component: SearchEntries,
+      },
+
+      {
+        path: "/app/stats",
+        component: Stats,
       },
 
       {
