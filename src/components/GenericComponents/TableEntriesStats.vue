@@ -1,110 +1,110 @@
 <template>
   <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-    
+
     <div class="block w-full overflow-x-auto">
-      <div v-if="elements.incoming.length > 0">
-        <div class="container px-4 mx-auto py-3">
-          <h3 class="text-blueGray-400 text-sm font-bold uppercase">{{ $t('labels.incoming') }} </h3>
-        </div>
 
-        <table class="items-center w-full bg-transparent border-collapse">
-          <thead>
-            <tr>
-              <th
-                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                {{ path }} NAME
-              </th>
-              <th
-                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                AMOUNT
-              </th>
-              <th
-                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                AMOUNT BEFORE
-              </th>
-              <th
-                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                BOUNCE RATE
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(d, i) in elements.incoming" :key="i">
-              <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                {{ d.label }}
-              </th>
-              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                {{ d.amount }}
-              </td>
-              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                {{ d.amount_before }}
-              </td>
-              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                <i class="fas mr-4" :class="[d.bounce_rate < 0 ? 'fa-arrow-down text-emerald-500' : 'fa-arrow-up text-red-500']
-                  "></i>
-                {{ d.bounce_rate }}%
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div v-if="elements.expenses.length > 0">
-
-        <div class="container px-4 mx-auto py-3">
-          <h3 class="text-blueGray-400 text-sm font-bold uppercase">{{ $t('labels.expenses') }} </h3>
-        </div>
-
-        <table class="items-center w-full bg-transparent border-collapse">
-          <thead>
-            <tr>
-              <th
-                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                {{ path }} NAME
-              </th>
-              <th
-                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                AMOUNT
-              </th>
-              <th
-                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                AMOUNT BEFORE
-              </th>
-              <th
-                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                BOUNCE RATE
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(d, i) in elements.expenses" :key="i">
-              <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                {{ d.label }}
-              </th>
-              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                {{ d.amount }}
-              </td>
-              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                {{ d.amount_before }}
-              </td>
-              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                <i class="fas mr-4" :class="[d.bounce_rate < 0 ? 'fa-arrow-down text-emerald-500' : 'fa-arrow-up text-red-500']
-                  "></i>
-                {{ d.bounce_rate }}%
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
+      <table class="items-center w-full bg-transparent border-collapse">
+        <thead>
+          <tr>
+            <th
+              class="px-6 bg-blueGray-100 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              {{ path }} NAME
+            </th>
+            <th
+              class="px-6 bg-blueGray-100 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              AMOUNT
+            </th>
+            <th
+              class="px-6 bg-blueGray-100 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              AMOUNT BEFORE
+            </th>
+            <th
+              class="px-6 bg-blueGray-100 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              BOUNCE RATE
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td
+              class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 uppercase font-semibold bg-blueGray-50">
+              {{ $t('labels.incoming') }}</td>
+            <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-blueGray-50">
+              {{ elements.stats.incoming.now }}
+            </td>
+            <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-blueGray-50">
+              {{ elements.stats.incoming.before }}
+            </td>
+            <td
+              class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-blueGray-50">
+              <i class="fas mr-4" :class="[elements.stats.incoming.bounce_rate < 0 ? 'fa-arrow-down text-emerald-500' : 'fa-arrow-up text-red-500']
+                "></i>
+              {{ elements.stats.incoming.bounce_rate }}%
+            </td>
+          </tr>
+          <tr v-for="(d, i) in elements.incoming" :key="i">
+            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+              {{ d.label }}
+            </td>
+            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+              {{ d.amount }}
+            </td>
+            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+              {{ d.amount_before }}
+            </td>
+            <td class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+              <i class="fas mr-4" :class="[d.bounce_rate < 0 ? 'fa-arrow-down text-emerald-500' : 'fa-arrow-up text-red-500']
+                "></i>
+              {{ d.bounce_rate }}%
+            </td>
+          </tr>
+          <tr>
+            <td
+              class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 uppercase font-semibold bg-blueGray-50">
+              {{ $t('labels.expenses') }}</td>
+            <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-blueGray-50">
+              {{ elements.stats.expenses.now }}
+            </td>
+            <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-blueGray-50">
+              {{ elements.stats.expenses.before }}
+            </td>
+            <td
+              class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-blueGray-50">
+              <i class="fas mr-4" :class="[elements.stats.expenses.bounce_rate < 0 ? 'fa-arrow-down text-emerald-500' : 'fa-arrow-up text-red-500']
+                "></i>
+              {{ elements.stats.expenses.bounce_rate }}%
+            </td>
+          </tr>
+          <tr v-for="(d, i) in elements.expenses" :key="i">
+            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+              {{ d.label }}
+            </td>
+            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+              {{ d.amount }}
+            </td>
+            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+              {{ d.amount_before }}
+            </td>
+            <td class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+              <i class="fas mr-4" :class="[d.bounce_rate < 0 ? 'fa-arrow-down text-emerald-500' : 'fa-arrow-up text-red-500']
+                "></i>
+              {{ d.bounce_rate }}%
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <AlertModal />
   </div>
 </template>
 
 <script>
-import ChartService from '../../services/ChartService.vue';
 import AlertModal from '../GenericComponents/AlertModal.vue';
+import StatsService from '../../services/StatsService.vue';
 
 export default {
   components: {
@@ -120,11 +120,23 @@ export default {
         categories: [],
         wallets: [],
         types: [],
-        currencies: 'eur',
+        currencies: null,
         paymentMethods: [],
         tags: [],
       },
       elements: {
+        stats: {
+          incoming: {
+            now: 0,
+            before: 0,
+            bounce_rate: 0,
+          },
+          expenses: {
+            now: 0,
+            before: 0,
+            bounce_rate: 0,
+          },
+        },
         incoming: [],
         expenses: [],
       },
@@ -138,30 +150,43 @@ export default {
   methods: {
     setGraph: function () {
 
-      const dateTime = {
-        start: this.options.date.start,
-        end: this.options.date.end
-      }
+      const options = this.options
+      this.elements.incoming = []
+      this.elements.expenses = []
 
-      ChartService.getStatsEntries(dateTime).then((resp) => {
+      StatsService.getStatsEntries(options).then((resp) => {
 
+        const categoryCount = resp.rows.length;
         resp.rows.forEach(element => {
 
-          if (element < 0) {
+          if (element.type === 'incoming') {
+
             this.elements.incoming.push({
-              label: element.label,
+              label: this.$t('app.' + element.label),
               amount: element.amount.toFixed(2),
               amount_before: element.prevAmount.toFixed(2),
               bounce_rate: element.bounceRate.toFixed(2)
             })
+
+            this.elements.stats.incoming.now = this.elements.incoming.reduce((total, expense) => total + parseFloat(expense.amount), 0).toFixed(2);
+            this.elements.stats.incoming.before = this.elements.incoming.reduce((total, expense) => total + parseFloat(expense.amount_before), 0).toFixed(2);
+            this.elements.stats.incoming.bounce_rate = this.elements.incoming.reduce((total, expense) => total + parseFloat(expense.bounce_rate), 0) / categoryCount;
+            this.elements.stats.incoming.bounce_rate = this.elements.stats.incoming.bounce_rate.toFixed(2)
+
           } else {
             this.elements.expenses.push({
-              label: element.label,
+              label: this.$t('app.' + element.label),
               amount: element.amount.toFixed(2),
               amount_before: element.prevAmount.toFixed(2),
               bounce_rate: element.bounceRate.toFixed(2)
             })
+
+            this.elements.stats.expenses.now = this.elements.expenses.reduce((total, expense) => total + parseFloat(expense.amount), 0).toFixed(2);
+            this.elements.stats.expenses.before = this.elements.expenses.reduce((total, expense) => total + parseFloat(expense.amount_before), 0).toFixed(2);
+            this.elements.stats.expenses.bounce_rate = this.elements.expenses.reduce((total, expense) => total + parseFloat(expense.bounce_rate), 0) / categoryCount;
+            this.elements.stats.expenses.bounce_rate = this.elements.stats.expenses.bounce_rate.toFixed(2)
           }
+
 
         });
       }).catch(() => {
@@ -171,6 +196,12 @@ export default {
     setOptions(options) {
       this.options.date.start = options.date.start
       this.options.date.end = options.date.end
+      this.options.categories = options.categories ?? []
+      this.options.accounts = options.wallets ?? []
+      this.options.types = options.types ?? []
+      this.options.currencies = options.currencies ?? null
+      this.options.paymentMethods = options.paymentMethods ?? []
+      this.options.tags = options.tags ?? []
     }
   }
 }

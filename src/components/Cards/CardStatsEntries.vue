@@ -20,12 +20,14 @@
           <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                {{ $t('labels.type_of_transaction') }}
+                {{ $t('labels.category') }}
               </label>
               <select multiple
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                v-model="action.type">
-                <option v-for="(type, k) in input.type" :key="k" :value="type.id">{{ type.name }}</option>
+                v-model="action.category">
+                <option v-for="category in input.category" :key="category.id" :value="category.id">
+                  {{ $t('app.' + category.slug) }}
+                </option>
               </select>
             </div>
           </div>
@@ -39,27 +41,12 @@
                 v-model="action.account">
                 <option v-for="account in input.account" :key="account.id" :value="account.id">{{
                   account.name
-                }}</option>
+                  }}</option>
               </select>
             </div>
           </div>
 
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                {{ $t('labels.category') }}
-              </label>
-              <select multiple
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                v-model="action.category">
-                <option v-for="category in input.category" :key="category.id" :value="category.id">
-                  {{ $t('app.' + category.slug) }}
-                </option>
-              </select>
-            </div>
-          </div>
-
-          <div class="w-full lg:w-6/12 px-4">
+          <div class="w-full lg:w-12/12 px-4">
             <div class="relative w-full mb-3">
               <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 {{ $t('labels.label') }}
@@ -125,7 +112,9 @@ export default {
         tags: null,
         text: null,
         planned: null,
-        date_time: null
+        date_time: null,
+        currencies: null,
+        paymentMethods: null,
       }
     }
   },
@@ -153,21 +142,30 @@ export default {
       }
     ]
 
+    this.invoke()
 
-    const year = new Date().getFullYear()
-    const month = new Date().getMonth() + 1
-
-    const options = {
-      date: {
-        start: year + "/" + month + "/01",
-        end: year + "/" + month + "/" + new Date(year, month, 0).getDate()
-      }
-    }
-
-    this.$refs.statsTable.setOptions(options)
-    this.$refs.statsTable.setGraph()
   },
   methods: {
+    invoke() {
+      const year = new Date().getFullYear()
+      const month = new Date().getMonth() + 1
+
+      const options = {
+        date: {
+          start: year + "/" + month + "/01",
+          end: year + "/" + month + "/" + new Date(year, month, 0).getDate()
+        },
+        categories: this.action.category,
+        wallets: this.action.account,
+        types: this.action.type,
+        currencies: this.action.currencies,
+        paymentMethods: this.action.paymentMethods,
+        tags: this.action.tags,
+      }
+
+      this.$refs.statsTable.setOptions(options)
+      this.$refs.statsTable.setGraph()
+    },
     getLabels() {
       let _this = this
       ApiService.labels().then((res) => {
