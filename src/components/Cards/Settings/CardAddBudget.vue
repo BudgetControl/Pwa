@@ -1,7 +1,23 @@
 <template>
+    <div >
+
+        <HeaderMenu>
+        <MenuButton
+          :path="'/app/budgets/new'"
+          :label="$t('labels.add')"
+        />
+
+        <MenuButton
+          :path="'/app/budgets'"
+          :label="$t('labels.show')"
+        />
+      </HeaderMenu>
+
+
     <form>
         <div
             class="container relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0 flex-auto p-4">
+
 
             <div class="flex flex-wrap py-3">
 
@@ -221,6 +237,8 @@
         </div>
       <AlertModal ref="alertModal" />
     </form>
+</div>
+
 </template>
 
 <script>
@@ -230,10 +248,12 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import ChartServiceVue from '../../../services/ChartService.vue';
 import LocalStorageServiceVue from '../../../services/LocalStorageService.vue';
 import AlertModal from '../../GenericComponents/AlertModal.vue';
+import MenuButton from '../../GenericComponents/MenuButton.vue';
+import HeaderMenu from '../../Navbars/HeaderMenu.vue';
 
 export default {
     components: {
-        VueDatePicker, AlertModal
+        VueDatePicker, AlertModal, MenuButton, HeaderMenu
     },
     data() {
         return {

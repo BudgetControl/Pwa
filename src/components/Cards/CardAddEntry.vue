@@ -377,6 +377,14 @@ export default {
     this.currency = settings.currency_id
     this.payment_type = settings.payment_type_id
 
+    // get payee from qeury string
+    const urlParams = this.$route.query
+    const payee = urlParams.show
+    
+    if (payee) {
+      this.toggleTabs(4)
+    }
+
   },
   methods: {
     time() {
