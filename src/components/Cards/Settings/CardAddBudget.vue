@@ -327,15 +327,7 @@ export default {
         getCategory() {
             let _this = this
             ApiService.categories().then((res) => {
-                let data = res
-                data.forEach(function (r) {
-                    r.sub_category.forEach((item) => {
-                        _this.input.category.push(item)
-                    })
-                })
-                _this.input.category.sort(function (a, b) {
-                    return a.name.localeCompare(b.name);
-                });
+                _this.input.category = res
             })
         },
         getAccount() {

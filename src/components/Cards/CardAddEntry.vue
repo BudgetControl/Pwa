@@ -407,18 +407,7 @@ export default {
     getCategory() {
       let _this = this
       ApiService.categories().then((res) => {
-        let data = res
-        data.forEach(function (r) {
-          r.sub_category.forEach((item) => {
-            _this.input.category.push({
-              id: item.id,
-              name: _this.$t('app.' + item.slug),
-            })
-          })
-        })
-        _this.input.category.sort(function (a, b) {
-          return a.name.localeCompare(b.name);
-        });
+        _this.input.category = res
       })
     },
     getPaymentType() {
