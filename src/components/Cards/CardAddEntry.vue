@@ -670,6 +670,9 @@ export default {
           this.time()
 
           alert(this.$t('labels.entry_saved'), "success")
+          this.$router.push({
+            path: '/app/entry'
+          })
 
         }).catch(() => {
 

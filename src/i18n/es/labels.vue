@@ -172,5 +172,7 @@ export default {
     list_of_all_planned_entries: 'Lista de todas las entradas planificadas',
     set_your_default_currecny: 'Set your default currency',
     update: 'Actualizar',
+    create_new_debit: 'Crear nuevo débito',
+    debit_name: 'Nombre del débito',
 }
 </script>
