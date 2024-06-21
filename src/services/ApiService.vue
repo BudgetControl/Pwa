@@ -88,22 +88,7 @@ async function deletePayee(id) {
 
 async function categories() {
   const response = await instance.get('/api/categories');
-  const _this = this
-  let categories = []
-  response.data.forEach(function (r) {
-    r.sub_category.forEach((item) => {
-      categories.push({
-        id: item.id,
-        name: item.slug,
-      })
-    })
-  })
-
-  categories.sort(function (a, b) {
-    return a.name.localeCompare(b.name);
-  });
-
-  return categories
+ return response.data
 
 }
 

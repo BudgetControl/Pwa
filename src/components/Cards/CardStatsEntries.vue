@@ -215,12 +215,16 @@ export default {
         let data = res
         data.forEach(function (r) {
           r.sub_category.forEach((item) => {
-            _this.input.category.push(item)
+            _this.input.category.push({
+              id: item.id,
+              name: _this.$t('app.' + item.slug),
+            })
           })
         })
         _this.input.category.sort(function (a, b) {
           return a.name.localeCompare(b.name);
         });
+
       })
     },
     getAccount() {

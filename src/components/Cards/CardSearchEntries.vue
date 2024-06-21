@@ -49,7 +49,7 @@
                                 {{ $t('labels.date_interval') }}
                             </label>
                             <VueDatePicker v-model="action.date_time" :range="{ autoRange: 1 }" :options="input.month"
-                                :placeholder="$t('labels.date_interval')" format="yyyy-MM-dd"  />
+                                :placeholder="$t('labels.date_interval')" format="yyyy-MM-dd" />
                         </div>
                     </div>
 
@@ -62,7 +62,8 @@
                             <select multiple
                                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 v-model="action.type">
-                                <option v-for="(type, k) in input.type" :key="k" :value="type.id">{{ type.name }}</option>
+                                <option v-for="(type, k) in input.type" :key="k" :value="type.id">{{ type.name }}
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -77,7 +78,7 @@
                                 v-model="action.account">
                                 <option v-for="account in input.account" :key="account.id" :value="account.id">{{
                                     account.name
-                                    }}</option>
+                                }}</option>
                             </select>
                         </div>
                     </div>
@@ -92,7 +93,7 @@
                                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 v-model="action.category">
                                 <option v-for="category in input.category" :key="category.id" :value="category.id">
-                                    {{ $t('app.' + item.name) }}
+                                    {{ item.name }}
                                 </option>
                             </select>
                         </div>
@@ -291,7 +292,19 @@ export default {
         getCategory() {
             let _this = this
             ApiService.categories().then((res) => {
-                _this.input.category = res
+                let data = res
+                data.forEach(function (r) {
+                    r.sub_category.forEach((item) => {
+                        _this.input.category.push({
+                            id: item.id,
+                            name: _this.$t('app.' + item.slug),
+                        })
+                    })
+                })
+                _this.input.category.sort(function (a, b) {
+                    return a.name.localeCompare(b.name);
+                });
+
             })
         },
         getAccount() {
