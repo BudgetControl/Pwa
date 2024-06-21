@@ -150,7 +150,7 @@ export default {
     this.currency = storage.currency_id || 2
 
     ApiServiceVue.currencies().then((resp) => {
-      _this.currency = resp.data[_this.currency - 1 ].icon
+      _this.currency = resp[_this.currency - 1 ].icon
     }).catch(() => {
       _this.currency = "€"
     })

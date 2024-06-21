@@ -1,226 +1,241 @@
 <template>
-    <form>
-        <div
-            class="container relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0 flex-auto p-4">
+    <div>
 
-            <div class="flex flex-wrap py-3">
+        <HeaderMenu>
+            <MenuButton :path="'/app/budgets/new'" :label="$t('labels.add')" />
 
-                <div class="w-full lg:w-12/12 px-4">
-
-                    <div
-                        class="container relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg border-0 flex-auto p-4">
+            <MenuButton :path="'/app/budgets'" :label="$t('labels.show')" />
+        </HeaderMenu>
 
 
-                        <div class="flex flex-wrap">
-                            <div class="lg:w-4/12 px-2 py-2 w-full">
-                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                    htmlFor="grid-password">
-                                    {{ $t('labels.budget_name') }}
-                                </label>
-                                <input type="text" v-model="data.name" placeholder="Budget name"
-                                    class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+        <form>
+            <div
+                class="container relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0 flex-auto p-4">
+
+
+                <div class="flex flex-wrap py-3">
+
+                    <div class="w-full lg:w-12/12 px-4">
+
+                        <div
+                            class="container relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg border-0 flex-auto p-4">
+
+
+                            <div class="flex flex-wrap">
+                                <div class="lg:w-4/12 px-2 py-2 w-full">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password">
+                                        {{ $t('labels.budget_name') }}
+                                    </label>
+                                    <input type="text" v-model="data.name" placeholder="Budget name"
+                                        class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                                </div>
+                                <div class="lg:w-4/12 px-2 py-2 w-full">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password">
+                                        {{ $t('labels.budget') }}
+                                    </label>
+                                    <input v-model="data.amount" type="tel" placeholder="0,00 €" id="amount"
+                                        class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                </div>
+                                <div class="lg:w-4/12 px-2 py-2 w-full">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password">
+                                        {{ $t('labels.period') }}
+                                    </label>
+                                    <select v-model="data.period" id="planning"
+                                        class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                        <option value="_"> {{ $t('labels.choose_period') }}</option>
+                                        <option value="weekly"> {{ $t('labels.weekly') }}</option>
+                                        <option value="monthly"> {{ $t('labels.monthly') }}</option>
+                                        <option value="yearly">{{ $t('labels.yearly') }}</option>
+                                        <option value="one_shot"> {{ $t('labels.one_shot') }}</option>
+                                        <option value="recursively"> {{ $t('labels.recursive') }}</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="lg:w-4/12 px-2 py-2 w-full">
-                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                    htmlFor="grid-password">
-                                    {{ $t('labels.budget') }}
-                                </label>
-                                <input v-model="data.amount" type="tel" placeholder="0,00 €" id="amount"
-                                    class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+
+                            <div class="flex flex-wrap"
+                                v-if="data.period == 'one_shot' || data.period == 'recursively'">
+                                <div class="lg:w-6/12 px-2 py-2 w-full">
+
+                                    <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password">
+                                        {{ $t('labels.start_Date') }}
+                                    </label>
+
+                                    <VueDatePicker v-model="data.period_start"></VueDatePicker>
+                                </div>
+
+                                <div class="lg:w-6/12 px-2 py-2 w-full">
+
+                                    <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password">
+                                        {{ $t('labels.end_date') }}
+                                    </label>
+
+                                    <VueDatePicker v-model="data.period_end"></VueDatePicker>
+
+                                </div>
+
                             </div>
-                            <div class="lg:w-4/12 px-2 py-2 w-full">
-                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                    htmlFor="grid-password">
-                                    {{ $t('labels.period') }}
-                                </label>
-                                <select v-model="data.period" id="planning"
-                                    class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                                    <option value="_"> {{ $t('labels.choose_period') }}</option>
-                                    <option value="weekly"> {{ $t('labels.weekly') }}</option>
-                                    <option value="monthly"> {{ $t('labels.monthly') }}</option>
-                                    <option value="yearly">{{ $t('labels.yearly') }}</option>
-                                    <option value="one_shot"> {{ $t('labels.one_shot') }}</option>
-                                    <option value="recursively"> {{ $t('labels.recursive') }}</option>
-                                </select>
+
+                            <div class="flex flex-wrap">
+                                <div class="lg:w-6/12 px-2 py-2 w-full">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password">
+                                        {{ $t('labels.account') }}
+                                    </label>
+                                    <select multiple
+                                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                        v-model="data.account">
+                                        <option v-for="account in input.account" :key="account.id" :value="account.id">
+                                            {{
+                                                account.name
+                                            }}</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="lg:w-6/12 px-2 py-2 w-full">
+
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password">
+                                        {{ $t('labels.category') }}
+                                    </label>
+                                    <select multiple
+                                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                        v-model="data.category">
+                                        <option v-for="category in input.category" :key="category.id"
+                                            :value="category.id">
+                                            {{ item.name }}
+                                        </option>
+                                    </select>
+
+                                </div>
+
                             </div>
+
+                            <div class="flex flex-wrap">
+                                <div class="lg:w-6/12 px-2 py-2 w-full">
+
+                                    <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password">
+                                        {{ $t('labels.label') }}
+                                    </label>
+                                    <select v-model="data.label" multiple
+                                        class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                        <option
+                                            class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                                            v-for="item in input.tags" :key="item.id" :value="item.id">
+                                            {{ item.name }}
+                                        </option>
+                                    </select>
+
+                                </div>
+
+                                <div class="lg:w-6/12 px-2 py-2 w-full">
+
+                                    <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password">
+                                        {{ $t('labels.entry_type') }}
+                                    </label>
+
+                                    <select v-model="data.type" multiple
+                                        class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                        <option
+                                            class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                                            value="incoming"> {{ $t('labels.incoming') }}
+                                        </option>
+
+                                        <option
+                                            class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                                            value="expenses"> {{ $t('labels.expenses') }}
+                                        </option>
+
+                                        <option
+                                            class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                                            value="debit"> {{ $t('labels.debit') }}
+                                        </option>
+
+                                        <option
+                                            class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                                            value="transfer"> {{ $t('labels.transfer') }}
+                                        </option>
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div class="flex flex-wrap">
+                                <div class="lg:w-12/12 px-2 py-2 w-full">
+                                    <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password">
+                                        Note
+                                    </label>
+
+                                    <textarea v-model="data.note"
+                                        class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                        rows="4" />
+                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap py-3">
+                                <div class="lg:w-12/12 px-2 w-full">
+                                    <input id="vue-checkbox-list" type="checkbox" v-model="data.notification"
+                                        :checked="data.notification" value="true"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                    <label for="vue-checkbox-list"
+                                        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                        {{ $t('labels.enable_email_notification') }}</label>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap py-3" v-if="data.notification">
+                                <div class="lg:w-12/12 px-2 w-full">
+
+                                    <select v-model="data.emails" multiple
+                                        class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                        <option v-for="(email, id) in input.emails" :key="id" :value="email.email"
+                                            class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1">
+                                            {{ email.name }}
+                                        </option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap py-3">
+                                <div class="lg:w-12/12 px-2 w-full">
+                                    <button v-on:click="set()" v-if="!id"
+                                        class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        type="button">
+                                        {{ $t('labels.save') }}
+                                    </button>
+
+                                    <button v-on:click="update()" v-if="id"
+                                        class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        type="button">
+                                        {{ $t('labels.update') }}
+                                    </button>
+
+                                    <button v-on:click="deleteBudget()" v-if="id"
+                                        class="w-full bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        type="button">
+                                        {{ $t('labels.delete') }}
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>
-
-                        <div class="flex flex-wrap" v-if="data.period == 'one_shot' || data.period == 'recursively'">
-                            <div class="lg:w-6/12 px-2 py-2 w-full">
-
-                                <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                    htmlFor="grid-password">
-                                    {{ $t('labels.start_Date') }}
-                                </label>
-
-                                <VueDatePicker v-model="data.period_start"></VueDatePicker>
-                            </div>
-
-                            <div class="lg:w-6/12 px-2 py-2 w-full">
-
-                                <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                    htmlFor="grid-password">
-                                    {{ $t('labels.end_date') }}
-                                </label>
-
-                                <VueDatePicker v-model="data.period_end"></VueDatePicker>
-
-                            </div>
-
-                        </div>
-
-                        <div class="flex flex-wrap">
-                            <div class="lg:w-6/12 px-2 py-2 w-full">
-                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                    htmlFor="grid-password">
-                                    {{ $t('labels.account') }}
-                                </label>
-                                <select multiple
-                                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                    v-model="data.account">
-                                    <option v-for="account in input.account" :key="account.id" :value="account.id">{{
-                                    account.name
-                                }}</option>
-                                </select>
-
-                            </div>
-
-                            <div class="lg:w-6/12 px-2 py-2 w-full">
-
-                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                    htmlFor="grid-password">
-                                    {{ $t('labels.category') }}
-                                </label>
-                                <select multiple
-                                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                    v-model="data.category">
-                                    <option v-for="category in input.category" :key="category.id" :value="category.id">
-                                   {{ $t('app.' +  category.slug ) }}
-                                    </option>
-                                </select>
-
-                            </div>
-
-                        </div>
-
-                        <div class="flex flex-wrap">
-                            <div class="lg:w-6/12 px-2 py-2 w-full">
-
-                                <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                    htmlFor="grid-password">
-                                    {{ $t('labels.label') }}
-                                </label>
-                                <select v-model="data.label" multiple
-                                    class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                                    <option
-                                        class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
-                                        v-for="item in input.tags" :key="item.id" :value="item.id">
-                                        {{ item.name }}
-                                    </option>
-                                </select>
-
-                            </div>
-
-                            <div class="lg:w-6/12 px-2 py-2 w-full">
-
-                                <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                    htmlFor="grid-password">
-                                    {{ $t('labels.entry_type') }}
-                                </label>
-
-                                <select v-model="data.type" multiple
-                                    class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                                    <option
-                                        class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
-                                        value="incoming"> {{ $t('labels.incoming') }}
-                                    </option>
-
-                                    <option
-                                        class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
-                                        value="expenses"> {{ $t('labels.expenses') }}
-                                    </option>
-
-                                    <option
-                                        class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
-                                        value="debit"> {{ $t('labels.debit') }}
-                                    </option>
-
-                                    <option
-                                        class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
-                                        value="transfer"> {{ $t('labels.transfer') }}
-                                    </option>
-                                </select>
-
-                            </div>
-
-                        </div>
-
-                        <div class="flex flex-wrap">
-                            <div class="lg:w-12/12 px-2 py-2 w-full">
-                                <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                    htmlFor="grid-password">
-                                    Note
-                                </label>
-
-                                <textarea v-model="data.note"
-                                    class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                    rows="4" />
-                            </div>
-                        </div>
-
-                        <div class="flex flex-wrap py-3">
-                            <div class="lg:w-12/12 px-2 w-full">
-                                <input id="vue-checkbox-list" type="checkbox" v-model="data.notification"
-                                    :checked="data.notification" value="true"
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                <label for="vue-checkbox-list"
-                                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                    {{ $t('labels.enable_email_notification') }}</label>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-wrap py-3" v-if="data.notification">
-                            <div class="lg:w-12/12 px-2 w-full">
-
-                                <select v-model="data.emails" multiple
-                                    class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                                    <option v-for="(email, id) in input.emails" :key="id" :value="email.email"
-                                        class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1">
-                                        {{ email.name }}
-                                    </option>
-                                </select>
-
-                            </div>
-                        </div>
-
-                        <div class="flex flex-wrap py-3">
-                            <div class="lg:w-12/12 px-2 w-full">
-                                <button v-on:click="set()" v-if="!id"
-                                    class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                    type="button">
-                                    {{ $t('labels.save') }}
-                                </button>
-
-                                <button v-on:click="update()" v-if="id"
-                                    class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                    type="button">
-                                    {{ $t('labels.update') }}
-                                </button>
-
-                                <button v-on:click="deleteBudget()" v-if="id"
-                                    class="w-full bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                    type="button">
-                                    {{ $t('labels.delete') }}
-                                </button>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
-        </div>
-      <AlertModal ref="alertModal" />
-    </form>
+            <AlertModal ref="alertModal" />
+        </form>
+    </div>
+
 </template>
 
 <script>
@@ -230,10 +245,12 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import ChartServiceVue from '../../../services/ChartService.vue';
 import LocalStorageServiceVue from '../../../services/LocalStorageService.vue';
 import AlertModal from '../../GenericComponents/AlertModal.vue';
+import MenuButton from '../../GenericComponents/MenuButton.vue';
+import HeaderMenu from '../../Navbars/HeaderMenu.vue';
 
 export default {
     components: {
-        VueDatePicker, AlertModal
+        VueDatePicker, AlertModal, MenuButton, HeaderMenu
     },
     data() {
         return {
@@ -310,12 +327,16 @@ export default {
                 let data = res
                 data.forEach(function (r) {
                     r.sub_category.forEach((item) => {
-                        _this.input.category.push(item)
+                        _this.input.category.push({
+                            id: item.id,
+                            name: _this.$t('app.' + item.slug),
+                        })
                     })
                 })
                 _this.input.category.sort(function (a, b) {
                     return a.name.localeCompare(b.name);
                 });
+
             })
         },
         getAccount() {

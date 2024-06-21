@@ -2,28 +2,30 @@
     <section class="relative py-16 bg-blueGray-200">
         <div class="container mx-auto px-4">
             <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
-                <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
+                <div
+                    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
                     <HeaderButton back="/app/settings" title="Category settings" />
 
-                    <div class="container px-4 mx-auto" v-on:click="openModal(null,null)">
+                    <div class="container px-4 mx-auto" v-on:click="openModal(null, null)">
 
                         <button
-                                class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                type="button">
-                                {{ $t('labels.add_new_category') }}
-                            </button>
+                            class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            type="button">
+                            {{ $t('labels.add_new_category') }}
+                        </button>
 
                     </div>
 
                     <!-- categories -->
-                    <div class="container px-4 mx-auto " v-for="(item, k) in categories" :key="k" v-on:click="showSub(k)">
+                    <div class="container px-4 mx-auto " v-for="(item, k) in categories" :key="k"
+                        v-on:click="showSub(k)">
                         <div class="flex border border-dotted m-1">
                             <div class="flex p-2">
                                 <i :class="'fa-lg ' + item.icon + ' ' + item.type"></i>
                             </div>
                             <div class="flex lg:w-10/12 p-2">
                                 <p>
-                                   {{ $t('app.' + item.slug)}}
+                                    {{ $t('app.' + item.slug) }}
                                 </p>
                             </div>
                         </div>
@@ -36,12 +38,12 @@
                                     </div>
                                     <div class="flex lg:w-10/12 p-2">
                                         <p class="w-full">
-                                            {{ subItem.name }}
+                                            {{ $t('app.' + subItem.name) }}
 
-                                        <span v-on:click="openModal(k,subItem.id)" v-if="subItem.custom == 1"
-                                            class="text-xs align-right font-semibold  py-1 px-2 rounded text-blueGray-600 bg-blueGray-200 uppercase">
-                                            edit
-                                        </span>
+                                            <span v-on:click="openModal(k, subItem.id)" v-if="subItem.custom == 1"
+                                                class="text-xs align-right font-semibold  py-1 px-2 rounded text-blueGray-600 bg-blueGray-200 uppercase">
+                                                edit
+                                            </span>
 
                                         </p>
                                     </div>
@@ -84,9 +86,20 @@ export default {
     },
     mounted: function () {
         ApiService.categories().then((res) => {
-            res.forEach(e => {
-                this.categories.push(e)
+            let data = res
+            let _this = this
+            data.forEach(function (r) {
+                r.sub_category.forEach((item) => {
+                    _this.category.push({
+                        id: item.id,
+                        name: _this.$t('app.' + item.slug),
+                    })
+                })
+            })
+            _this.category.sort(function (a, b) {
+                return a.name.localeCompare(b.name);
             });
+
         })
     },
     methods: {
@@ -98,12 +111,12 @@ export default {
             }
 
         },
-        openModal(id,subId) {
+        openModal(id, subId) {
             let path = '';
-            if(id !== null) {
+            if (id !== null) {
                 path = `${id}/${subId}`
             }
-            this.$router.push({path: `/app/settings/category/edit/${path}`})
+            this.$router.push({ path: `/app/settings/category/edit/${path}` })
         },
     }
 };
@@ -126,4 +139,3 @@ export default {
     color: green
 }
 </style>
-  

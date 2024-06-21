@@ -12,7 +12,7 @@ instance.interceptors.request.use(
   (config) => {
     const token = LocalStorageService.getToken()
     config.headers['Authorization'] = `Bearer ${token}`;
-    config.headers['X-BC-Token']= LocalStorageService.getUserToken()
+    config.headers['X-BC-Token'] = LocalStorageService.getUserToken()
     return config;
   },
   (error) => {
@@ -88,7 +88,8 @@ async function deletePayee(id) {
 
 async function categories() {
   const response = await instance.get('/api/categories');
-  return response.data;
+ return response.data
+
 }
 
 async function category(id) {
@@ -98,7 +99,7 @@ async function category(id) {
 
 async function paymentstype() {
   const response = await instance.get('/api/paymentstype');
-  return response.data;
+  return response.data.data;
 }
 
 async function model() {
@@ -143,7 +144,7 @@ async function setLabel(id, data) {
 
 async function currencies() {
   const response = await instance.get('/api/currencies');
-  return response.data;
+  return response.data.data;
 }
 
 async function setDefaultCurrency(id) {

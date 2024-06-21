@@ -3,7 +3,7 @@
     <div class="w-full lg:w-12/12 px-1">
       <HeaderMenu>
         <MenuButton
-          :path="'/app/payee/new'"
+          path="/app/entry?show=payee"
           :label="$t('labels.add')"
         />
 

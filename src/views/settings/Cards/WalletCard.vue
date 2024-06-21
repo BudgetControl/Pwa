@@ -219,7 +219,7 @@ export default {
         },
         getCurrency() {
             ApiService.currencies().then((res) => {
-                res.data.forEach(e => {
+                res.forEach(e => {
                     this.form.currency.push(e)
                 });
             })

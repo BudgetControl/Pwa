@@ -153,7 +153,7 @@ export default {
         let data = []
 
         this.months.forEach(month => {
-          data.push({
+            data.push({
             start: year + "/" + month + "/01",
             end: year + "/" + month + "/" + new Date(year, month, 0).getDate(),
           })
