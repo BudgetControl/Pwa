@@ -98,7 +98,7 @@ async function category(id) {
 
 async function paymentstype() {
   const response = await instance.get('/api/paymentstype');
-  return response.data;
+  return response.data.data;
 }
 
 async function model() {
@@ -143,7 +143,7 @@ async function setLabel(id, data) {
 
 async function currencies() {
   const response = await instance.get('/api/currencies');
-  return response.data;
+  return response.data.data;
 }
 
 async function setDefaultCurrency(id) {

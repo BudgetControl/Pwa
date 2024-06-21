@@ -60,6 +60,7 @@
               {{ d.bounce_rate }}%
             </td>
           </tr>
+          <tr><td colspan="4" > <hr/> </td></tr>
           <tr>
             <td
               class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 uppercase font-semibold bg-blueGray-50">

@@ -304,7 +304,7 @@ export default {
     getPaymentType() {
       let _this = this
       ApiService.paymentstype().then((res) => {
-        let data = res.data
+        let data = res
         data.forEach(function (r) {
           _this.input.payment_type.push(r)
         })
@@ -454,7 +454,7 @@ export default {
     getCurrency() {
       let _this = this
       ApiService.currencies().then((res) => {
-        let data = res.data
+        let data = res
         data.forEach(function (r) {
           _this.input.currency.push(r)
         })

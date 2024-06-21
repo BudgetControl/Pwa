@@ -62,6 +62,36 @@
             </div>
           </div>
 
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                {{ $t('labels.payment_type') }}
+              </label>
+              <select multiple
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                v-model="action.paymentTypes">
+                <option v-for="payment in input.paymentTypes" :key="payment.id" :value="payment.id">
+                 {{ $t('app.' + payment.slug) }}
+                  </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                {{ $t('labels.currency') }}
+              </label>
+              <select multiple
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                v-model="action.currencies">
+                <option v-for="currency in input.currencies" :key="currency.id" :value="currency.id">
+                 {{ $t('app.' + currency.slug) }}
+                  </option>
+              </select>
+            </div>
+          </div>
+
         </div>
 
         <hr class="mt-6 border-b-1 border-blueGray-300" />
@@ -104,6 +134,8 @@ export default {
         category: [],
         type: ["incoming", "expenses", "transfer", "debit"],
         tags: [],
+        currencies: [],
+        paymentTypes: [],
       },
       action: {
         account: null,
@@ -114,7 +146,7 @@ export default {
         planned: null,
         date_time: null,
         currencies: null,
-        paymentMethods: null,
+        paymentTypes: null,
       }
     }
   },
@@ -122,6 +154,8 @@ export default {
     this.getCategory()
     this.getAccount()
     this.getLabels()
+    this.getPaymentType()
+    this.getCurrencies()
 
     this.input.type = [
       {
@@ -198,6 +232,24 @@ export default {
         })
       })
     },
+    getPaymentType() {
+      let _this = this
+      ApiService.paymentstype().then((res) => {
+        let data = res
+        data.forEach(function (r) {
+          _this.input.paymentTypes.push(r)
+        })
+      })
+    },
+    getCurrencies() {
+      let _this = this
+      ApiService.currencies().then((res) => {
+        let data = res
+        data.forEach(function (r) {
+          _this.input.currencies.push(r)
+        })
+      })
+    }
   }
 };
 </script>

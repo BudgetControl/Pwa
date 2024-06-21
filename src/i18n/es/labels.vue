@@ -173,5 +173,6 @@ export default {
     set_your_default_currecny: 'Set your default currency',
     update: 'Actualizar',
     stats: 'Estadísticas',
+    payment_types: 'Tipos de pago',
 }
 </script>

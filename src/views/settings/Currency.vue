@@ -56,7 +56,7 @@ export default {
     },
     mounted: function () {
         ApiService.currencies().then((res) => {
-            res.data.forEach(e => {
+            res.forEach(e => {
                 this.currencies.push(e)
             });
             const settings = LocalStorageService.get("settings")
