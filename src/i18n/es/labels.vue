@@ -174,5 +174,7 @@ export default {
     update: 'Actualizar',
     stats: 'Estadísticas',
     payment_types: 'Tipos de pago',
+    create_new_debit: 'Crear nuevo débito',
+    debit_name: 'Nombre del débito',
 }
 </script>

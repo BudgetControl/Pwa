@@ -77,7 +77,7 @@
             <select v-if="action.hidecategory == false" v-model="category" id="category"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option value="0">{{ $t('labels.choose_a_category') }}</option>
-              <option v-for="item in input.category" :key="item.id" :value="item.id">{{ item.name }}</option>
+              <option v-for="item in input.category" :key="item.id" :value="item.id">{{ $t('app.' + item.name) }}</option>
             </select>
 
             <select v-if="action.hidecategory == true && !action.hidetransfer_to" v-model="transferto" id="transferto"
@@ -408,18 +408,7 @@ export default {
     getCategory() {
       let _this = this
       ApiService.categories().then((res) => {
-        let data = res
-        data.forEach(function (r) {
-          r.sub_category.forEach((item) => {
-            _this.input.category.push({
-              id: item.id,
-              name: _this.$t('app.' + item.slug),
-            })
-          })
-        })
-        _this.input.category.sort(function (a, b) {
-          return a.name.localeCompare(b.name);
-        });
+        _this.input.category = res
       })
     },
     getPaymentType() {
@@ -682,6 +671,9 @@ export default {
           this.time()
 
           alert(this.$t('labels.entry_saved'), "success")
+          this.$router.push({
+            path: '/app/entry'
+          })
 
         }).catch(() => {
           alert(this.$t('messages.generic_error'), "error")
