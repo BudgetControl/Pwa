@@ -1,5 +1,5 @@
 <template>
-    <div class="block w-full overflow-x-auto mt-10">
+    <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
         <div class="container x-4 mx-auto py-3">
 
             <div class="container px-4 mx-auto py-3">

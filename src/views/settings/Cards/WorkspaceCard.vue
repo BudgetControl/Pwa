@@ -136,12 +136,12 @@ export default {
         },
         getCurrencies() {
             ApiServiceVue.currencies().then((res) => {
-                this.currencies = res.data
+                this.currencies = res
             })
         },
         getPaymentTypes() {
             ApiServiceVue.paymentstype().then((res) => {
-                this.payment_types = res.data
+                this.payment_types = res
             })
         },
         getWorkspaceDetail() {

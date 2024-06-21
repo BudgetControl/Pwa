@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="flex lg:w-10/12 p-2">
                                         <p class="w-full">
-                                            {{ subItem.name }}
+                                            {{ $t('app.' + subItem.name) }}
 
                                         <span v-on:click="openModal(k,subItem.id)" v-if="subItem.custom == 1"
                                             class="text-xs align-right font-semibold  py-1 px-2 rounded text-blueGray-600 bg-blueGray-200 uppercase">
