@@ -26,7 +26,7 @@
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 v-model="action.category">
                 <option v-for="category in input.category" :key="category.id" :value="category.id">
-                  {{ $t('app.' + category.slug) }}
+                  {{ category.name}}
                 </option>
               </select>
             </div>
@@ -69,9 +69,9 @@
               </label>
               <select multiple
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                v-model="action.paymentTypes">
-                <option v-for="payment in input.paymentTypes" :key="payment.id" :value="payment.id">
-                 {{ $t('app.' + payment.slug) }}
+                v-model="action.payment_methods">
+                <option v-for="payment in input.payment_methods" :key="payment.id" :value="payment.id">
+                 {{ payment.name }}
                   </option>
               </select>
             </div>
@@ -86,7 +86,7 @@
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 v-model="action.currencies">
                 <option v-for="currency in input.currencies" :key="currency.id" :value="currency.id">
-                 {{ $t('app.' + currency.slug) }}
+                 {{ currency.name }}
                   </option>
               </select>
             </div>
@@ -135,7 +135,7 @@ export default {
         type: ["incoming", "expenses", "transfer", "debit"],
         tags: [],
         currencies: [],
-        paymentTypes: [],
+        payment_methods: [],
       },
       action: {
         account: null,
@@ -146,7 +146,7 @@ export default {
         planned: null,
         date_time: null,
         currencies: null,
-        paymentTypes: null,
+        payment_methods: null,
       }
     }
   },
@@ -193,7 +193,7 @@ export default {
         wallets: this.action.account,
         types: this.action.type,
         currencies: this.action.currencies,
-        paymentMethods: this.action.paymentMethods,
+        payment_methods: this.action.payment_methods,
         tags: this.action.tags,
       }
 
@@ -237,7 +237,13 @@ export default {
       ApiService.paymentstype().then((res) => {
         let data = res
         data.forEach(function (r) {
-          _this.input.paymentTypes.push(r)
+          _this.input.payment_methods.push({
+            id: r.id,
+            name: _this.$t('app.' + r.slug),
+          })
+          _this.input.payment_methods = _this.input.payment_methods.sort(function (a, b) {
+            return a.name.localeCompare(b.name);
+          });
         })
       })
     },
@@ -246,7 +252,13 @@ export default {
       ApiService.currencies().then((res) => {
         let data = res
         data.forEach(function (r) {
-          _this.input.currencies.push(r)
+          _this.input.currencies.push({
+            id: r.id,
+            name: _this.$t('app.' + r.slug),
+          })
+          _this.input.currencies = _this.input.currencies.sort(function (a, b) {
+            return a.name.localeCompare(b.name);
+          });
         })
       })
     }

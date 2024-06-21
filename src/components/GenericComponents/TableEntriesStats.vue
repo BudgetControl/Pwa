@@ -39,7 +39,7 @@
             </td>
             <td
               class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-blueGray-50">
-              <i class="fas mr-4" :class="[elements.stats.incoming.bounce_rate < 0 ? 'fa-arrow-down text-emerald-500' : 'fa-arrow-up text-red-500']
+              <i class="fas mr-4" :class="[elements.stats.incoming.bounce_rate > 0 ? 'fa-arrow-up text-emerald-500' : 'fa-arrow-down text-red-500']
                 "></i>
               {{ elements.stats.incoming.bounce_rate }}%
             </td>
@@ -55,7 +55,7 @@
               {{ d.amount_before }}
             </td>
             <td class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              <i class="fas mr-4" :class="[d.bounce_rate < 0 ? 'fa-arrow-down text-emerald-500' : 'fa-arrow-up text-red-500']
+              <i class="fas mr-4" :class="[d.bounce_rate > 0 ? 'fa-arrow-up text-emerald-500' : 'fa-arrow-down text-red-500']
                 "></i>
               {{ d.bounce_rate }}%
             </td>
@@ -122,7 +122,7 @@ export default {
         wallets: [],
         types: [],
         currencies: null,
-        paymentMethods: [],
+        payment_methods: [],
         tags: [],
       },
       elements: {
@@ -166,14 +166,16 @@ export default {
               label: this.$t('app.' + element.label),
               amount: element.amount.toFixed(2),
               amount_before: element.prevAmount.toFixed(2),
-              bounce_rate: element.bounceRate.toFixed(2)
+              bounce_rate: element.bounceRate.toFixed(2) * -1
             })
 
-            this.elements.stats.incoming.now = this.elements.incoming.reduce((total, expense) => total + parseFloat(expense.amount), 0).toFixed(2);
-            this.elements.stats.incoming.before = this.elements.incoming.reduce((total, expense) => total + parseFloat(expense.amount_before), 0).toFixed(2);
-            this.elements.stats.incoming.bounce_rate = this.elements.incoming.reduce((total, expense) => total + parseFloat(expense.bounce_rate), 0) / categoryCount;
+            this.elements.stats.incoming.now = this.elements.incoming.reduce((total, incoming) => total + parseFloat(incoming.amount), 0).toFixed(2);
+            this.elements.stats.incoming.before = this.elements.incoming.reduce((total, incoming) => total + parseFloat(incoming.amount_before), 0).toFixed(2);
+            this.elements.stats.incoming.bounce_rate = ((this.elements.stats.incoming.now - this.elements.stats.incoming.before) / this.elements.stats.incoming.before) * 100
+            if(isNaN(this.elements.stats.incoming.bounce_rate)){
+              this.elements.stats.incoming.bounce_rate = 0
+            }
             this.elements.stats.incoming.bounce_rate = this.elements.stats.incoming.bounce_rate.toFixed(2)
-
           } else {
             this.elements.expenses.push({
               label: this.$t('app.' + element.label),
@@ -184,7 +186,10 @@ export default {
 
             this.elements.stats.expenses.now = this.elements.expenses.reduce((total, expense) => total + parseFloat(expense.amount), 0).toFixed(2);
             this.elements.stats.expenses.before = this.elements.expenses.reduce((total, expense) => total + parseFloat(expense.amount_before), 0).toFixed(2);
-            this.elements.stats.expenses.bounce_rate = this.elements.expenses.reduce((total, expense) => total + parseFloat(expense.bounce_rate), 0) / categoryCount;
+            this.elements.stats.expenses.bounce_rate = ((this.elements.stats.expenses.now - this.elements.stats.expenses.before) / this.elements.stats.expenses.before) * 100
+            if(isNaN(this.elements.stats.expenses.bounce_rate)){
+              this.elements.stats.expenses.bounce_rate = 0
+            }
             this.elements.stats.expenses.bounce_rate = this.elements.stats.expenses.bounce_rate.toFixed(2)
           }
 
@@ -201,7 +206,7 @@ export default {
       this.options.accounts = options.wallets ?? []
       this.options.types = options.types ?? []
       this.options.currencies = options.currencies ?? null
-      this.options.paymentMethods = options.paymentMethods ?? []
+      this.options.payment_methods = options.payment_methods ?? []
       this.options.tags = options.tags ?? []
     }
   }
