@@ -175,7 +175,6 @@ export default {
     stats: 'Stats',
     payment_types: 'Payment types',
     create_new_debit: 'Create new debit',
-    debit_name: 'Debit name',
 };
 
 </script>

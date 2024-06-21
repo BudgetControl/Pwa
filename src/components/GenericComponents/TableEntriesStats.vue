@@ -157,7 +157,6 @@ export default {
 
       StatsService.getStatsEntries(options).then((resp) => {
 
-        const categoryCount = resp.rows.length;
         resp.rows.forEach(element => {
 
           if (element.type === 'incoming') {

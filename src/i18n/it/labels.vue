@@ -175,6 +175,5 @@ export default {
     stats: 'Statistiche',
     payment_types: 'Tipi di pagamento',
     create_new_debit: 'Crea nuovo debito',
-    debit_name: 'Nome debito',
 }
 </script>
