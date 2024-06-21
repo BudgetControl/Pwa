@@ -94,7 +94,7 @@ async function categories() {
     r.sub_category.forEach((item) => {
       categories.push({
         id: item.id,
-        name: _this.$t('app.' + item.slug),
+        name: item.slug,
       })
     })
   })

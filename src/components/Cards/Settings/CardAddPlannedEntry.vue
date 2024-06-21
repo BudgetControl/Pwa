@@ -48,7 +48,7 @@
             <select v-model="category" id="category"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option value="0">{{  $t('labels.choose_a_category') }}</option>
-              <option v-for="item in input.category" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}</option>
+              <option v-for="item in input.category" :key="item.id" :value="item.id">{{ $t('app.' + item.name) }}</option>
             </select>
           </div>
 

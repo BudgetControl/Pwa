@@ -111,7 +111,7 @@
                                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                     v-model="data.category">
                                     <option v-for="category in input.category" :key="category.id" :value="category.id">
-                                   {{ $t('app.' +  category.slug ) }}
+                                        {{ $t('app.' + item.name) }}
                                     </option>
                                 </select>
 
