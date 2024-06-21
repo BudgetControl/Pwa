@@ -1,16 +1,6 @@
 <template>
   <form>
-    <div
-      class="container relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0 flex-auto p-4">
-      <div class="flex flex-wrap py-3">
-        <div class="lg:w-6/12 px-2 w-full " v-if="this.isModel === false">
-          <select v-model="model" v-on:change="retriveModel()" id="model" v-if="action.models"
-            class="w-full border-0 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-            <option value="0">{{ $t('labels.choose_a_model') }}</option>
-            <option v-for="(item, k) in input.model" :key="k" :value="item.uuid">{{ item.name }}</option>
-          </select>
-        </div>
-      </div>
+    <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
       <div class="flex flex-wrap py-3">
         <!-- ##### menu ########### -->
         <div class="w-full">
@@ -57,7 +47,18 @@
       <div
         v-bind:class="{ 'bg-red-200': action.openTab === 1, 'bg-lightBlue-200': action.openTab === 2, 'bg-emerald-200': action.openTab === 3, 'bg-orange-200': action.openTab === 3 }"
         class="container relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg border-0 flex-auto p-4">
+
         <div class="flex flex-wrap">
+
+          <div class="lg:w-12/12 px-2 w-full "
+            v-if="this.isModel === false && input.model.length > 0 && (action.openTab === 2 || action.openTab === 1)">
+            <select v-model="model" v-on:change="retriveModel()" id="model" v-if="action.models"
+              class="w-full border-0 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+              <option value="0">{{ $t('labels.choose_a_model') }}</option>
+              <option v-for="(item, k) in input.model" :key="k" :value="item.uuid">{{ item.name }}</option>
+            </select>
+          </div>
+
           <div class="lg:w-6/12 px-2 py-2 w-full">
 
             <select v-model="account" id="account" required
@@ -69,9 +70,9 @@
           </div>
 
           <div class="px-2 py-2 w-full" :class="{
-          'lg:w-4/12': action.openTab == 4,
-          'lg:w-6/12': action.openTab != 4,
-        }">
+            'lg:w-4/12': action.openTab == 4,
+            'lg:w-6/12': action.openTab != 4,
+          }">
 
             <select v-if="action.hidecategory == false" v-model="category" id="category"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
@@ -95,7 +96,8 @@
           </div>
 
           <div class="px-2 py-2 w-full lg:w-12/12" v-if="action.openTab == 4">
-            <input v-model="debit_name" type="text" placeholder="{{ $t('labels.debit_name') }}" id="debit" v-if="debit == 'njn76298fm'"
+            <input v-model="debit_name" type="text" placeholder="{{ $t('labels.debit_name') }}" id="debit"
+              v-if="debit == 'njn76298fm'"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
 
@@ -127,7 +129,8 @@
           <div v-if="action.showDetails" class="lg:w-6/12 px-2 py-2 w-full">
             <select v-model="currency"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-              <option v-for="item in input.currency" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}</option>
+              <option v-for="item in input.currency" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}
+              </option>
             </select>
           </div>
 
@@ -135,10 +138,10 @@
 
         <div v-if="!action.showDetails">
           <button v-on:click="action.showDetails = true"
-              class="w-full text-xs py-1 bg-yellow-500 text-white active:bg-amber-600 font-bold uppercase rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
-              type="button">
-              {{ $t('labels.show_details') }}
-            </button>
+            class="w-full text-xs py-1 bg-yellow-500 text-white active:bg-amber-600 font-bold uppercase rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+            type="button">
+            {{ $t('labels.show_details') }}
+          </button>
         </div>
 
         <div v-if="action.showDetails" class="row border rounded border-blueGray-500 py-3 border-dashed">
@@ -169,8 +172,8 @@
               <span v-on:click="removeTag(item)"
                 class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
                 v-if="label.includes(item.id)" :style="'color: #fff; background-color: ' + item.color">{{
-          item.name
-        }}
+                  item.name
+                }}
                 <i class="fas fa-times close-icon"></i>
               </span>
             </div>
@@ -179,45 +182,43 @@
         </div>
 
         <div v-if="action.showDetails" class="flex flex-wrap py-3">
-          <div class="lg:w-8/12 px-2 w-full">
-            <textarea v-model="note" type="text" :placeholder="$t('labels.add_here_your_note')" id="note" rows="2"
-              class="border-0 px-3 py-5 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
-          </div>
 
-          <div class="lg:w-4/12 px-2 w-full mb-2">
+          <div class="mb-2 w-full flex flex-wrap">
 
-            <div class="flex flex-wrap" v-if="isModel === false">
+            <div class="lg:w-4/12 h44 bg-white rounded w-full mb-2" v-if="isModel === false">
               <VueDatePicker v-model="date"></VueDatePicker>
             </div>
 
-            <div class="flex flex-wrap" v-if="action.showDetails">
-              <div class="w-full" v-bind:class="{ 'lg:w-6/12 ': isModel === false, 'lg:w-12/12': isModel === true }">
-                <select v-model="payment_type" id="payment_type"
-                  class="w-full border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                  <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}</option>
-                </select>
-              </div>
-              <div class="lg:w-6/12 w-full ">
-                <div v-if="isModel === false"
-                  class="border-0 mt-2 px-2 py-2 text-center placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                  <label for="confirmed" id="confirm" v-if="!isPlanned">
-                    {{ $t('labels.payment_confirm') }} <input v-model="confirmed" type="checkbox" id="confirmed" value="1" checked>
-                  </label>
-                </div>
+            <div class="w-full lg:w-4/12 mb-2">
+              <select v-model="payment_type" id="payment_type"
+                class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ $t('app.' + item.slug)
+                  }}</option>
+              </select>
+            </div>
+            <div class="lg:w-4/12 w-full ">
+              <div v-if="isModel === false"
+                class="border-0 py-2 h44 text-center placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
+                <label for="confirmed" id="confirm" v-if="!isPlanned">
+                  {{ $t('labels.payment_confirm') }} <input v-model="confirmed" type="checkbox" id="confirmed" value="1"
+                    checked>
+                </label>
               </div>
             </div>
-
-
           </div>
 
-          <div class="lg:w-4/12 px-2" v-if="isPlanned">
+          <div class="lg:w-4/12 " v-if="isPlanned">
             <select id="planning" v-model="planning"
-              class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+              class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option></option>
               <option required v-for="(item, k) in input.planning" :key="k" :value="item">{{ item }}</option>
             </select>
           </div>
 
+          <div class="lg:w-12/12 w-full">
+            <textarea v-model="note" type="text" :placeholder="$t('labels.add_here_your_note')" id="note" rows="2"
+              class="border-0 px-3 py-5 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+          </div>
         </div>
 
         <div class="flex py-2 border border-solid border-blueGray-500 shadow rounded" v-if="isModel">
@@ -316,7 +317,7 @@ export default {
       currency: 1,
       account: "-1",
       payment_type: 1,
-      model: null,
+      model: 0,
       newlabel: null,
       planned: false,
       confirmed: true,
@@ -380,7 +381,7 @@ export default {
     // get payee from qeury string
     const urlParams = this.$route.query
     const payee = urlParams.show
-    
+
     if (payee) {
       this.toggleTabs(4)
     }
@@ -773,5 +774,12 @@ export default {
 <style scoped>
 .dp__input {
   border: none !important
+}
+
+.h44 {
+  height: 44px !important
+}
+input.dp__pointer.dp__input_readonly.dp__input.dp__input_icon_pad.dp__input_reg {
+  border: none !important;
 }
 </style>
