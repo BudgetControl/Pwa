@@ -81,12 +81,13 @@ export default {
     if(LocalStorageService.getToken() && LocalStorageService.getWorkspaceId()) {
       await AuthService.userInfo().then(
         response => {
-          _this.$store.commit('setUser', response.userInfo);
+          LocalStorageService.setUser(response.userInfo);
         },
         error => {
           console.log(error);
         }
-      ).catch(() => {
+      ).catch((e) => {
+        console.error(e)
         _this.$router.push({ path: '/app/auth/login' })
       })
     } else {
