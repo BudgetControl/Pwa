@@ -108,7 +108,7 @@
                                         v-model="data.category">
                                         <option v-for="category in input.category" :key="category.id"
                                             :value="category.id">
-                                            {{ item.name }}
+                                            {{ category.name }}
                                         </option>
                                     </select>
 

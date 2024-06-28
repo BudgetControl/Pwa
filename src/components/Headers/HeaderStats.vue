@@ -5,7 +5,7 @@
       <div id="statsWallet">
         <div class="px-2 flex overflow-x-auto mb-2">
           <CardWallet v-for="w in wallets" :key="w.id" :statTitle="w.name" :statWallet="w.balance"
-            :statColor="w.color" :statIdWallet="w.uuid"></CardWallet>
+            :statColor="w.color" :statIdWallet="w.id"></CardWallet>
         </div>
         <!-- Card stats -->
         <div class="flex overflow-x-auto">
