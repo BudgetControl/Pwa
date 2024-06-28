@@ -82,7 +82,7 @@ const routes = [
   {
     path: "/app",
     name: 'app',
-    redirect: "/app/dashboard",
+    redirect: "/app/entries",
     component: Application,
     children: [
       {
