@@ -76,6 +76,15 @@ export default {
       type: String,
       required: true
     },
+    options: {
+      legend: {
+        position: "bottom",
+        labels: {
+          fontColor: "#fff",
+        },
+      },
+      responsive: true,
+    },
   },
   data() {
     return {
@@ -151,4 +160,3 @@ export default {
   }
 }
 </script>
-
