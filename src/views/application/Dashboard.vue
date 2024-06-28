@@ -89,6 +89,7 @@ export default {
       ).catch((e) => {
         console.error(e)
         _this.$router.push({ path: '/app/auth/login' })
+      )
       })
     } else {
       // redirect to login
