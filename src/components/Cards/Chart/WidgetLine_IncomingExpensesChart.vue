@@ -164,12 +164,12 @@ export default {
           resp.series.forEach(element => {
 
             let color = '#FF0000';
-            if (element.label == 'Incoming') {
+            if (element.label == 'incoming') {
               color = '#00FF00';
             }
 
             let dataset = {
-              label: element.label,
+              label: this.$t('labels.' + element.label),
               backgroundColor: color,
               borderColor: color,
               data: [],
@@ -178,8 +178,9 @@ export default {
             }
 
             element.dataPoints.forEach(point => {
-              if (element.label == 'Incoming') {
-                config.data.labels.push(point.label)
+              if (element.label == 'incoming') {
+                const pointLabel = point.label.toLowerCase()
+                config.data.labels.push(this.$t('labels.months.' + pointLabel ))
               }
               let value = point.xValue < 0 ? point.xValue * -1 : point.xValue
               dataset.data.push(value)

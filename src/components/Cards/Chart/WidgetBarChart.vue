@@ -128,7 +128,7 @@ export default {
         ChartService.expensesBarByCategory(data).then((resp) => {
           resp.bar.forEach(element => {
 
-            labels.push(element.label)
+            labels.push(this.$t('app.' + element.label))
             colors.push(element.color)
             values.push(element.value * -1)
 

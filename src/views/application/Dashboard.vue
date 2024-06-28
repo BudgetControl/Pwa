@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="w-full xl:w-8/12 px-4">
-        <card-bar-chart path="category" title="Category" ID_GRAPH="category_all" />
+        <card-bar-chart path="category" :title="$t('labels.category')" ID_GRAPH="category_all" />
       </div>
       <div class="w-full xl:w-4/12 px-4">
         <CardPieLabelChart ID_GRAPH="label" />

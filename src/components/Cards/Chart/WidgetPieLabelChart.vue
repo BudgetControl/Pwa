@@ -4,7 +4,7 @@
       <div class="flex flex-wrap items-center">
         <div class="relative w-full max-w-full flex-grow flex-1">
           <h2 class="text-white text-xl font-semibold">
-            Expenses by Labels
+            {{ $t('labels.expenses') }}
           </h2>
           <h3 class="text-white text-xl font-semibold">
             {{ subTitle }}
@@ -114,7 +114,7 @@ export default {
           });
 
           let dataset = {
-            label: 'expenses by labels',
+            label: this.$t('labels.expenses'),
             backgroundColor: colors,
             data: values
           }
