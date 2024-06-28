@@ -99,11 +99,6 @@ export default {
               fontColor: "white",
             },
             legend: {
-              labels: {
-                fontColor: "white",
-              },
-              align: "end",
-              position: "bottom",
               display: false
             },
             maintainAspectRatio: false,
