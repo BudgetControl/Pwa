@@ -76,6 +76,15 @@ export default {
       type: String,
       required: true
     },
+    options: {
+      legend: {
+        position: "bottom",
+        labels: {
+          fontColor: "#fff",
+        },
+      },
+      responsive: true,
+    },
   },
   data() {
     return {
@@ -123,7 +132,7 @@ export default {
         resp.rows.forEach(element => {
 
           this.elements.push({
-            label: element.label,
+            label: this.$t('app.' + element.label),
             amount: element.amount.toFixed(2),
             amount_before: element.prevAmount.toFixed(2),
             bounce_rate: element.bounceRate.toFixed(2)
@@ -151,4 +160,3 @@ export default {
   }
 }
 </script>
-

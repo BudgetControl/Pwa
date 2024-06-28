@@ -134,6 +134,7 @@ export default {
       this.error = false
       AuthService.register(name, password, confirm_password, email).then(() => {
         _this.message = _this.$t('labels.account_created')
+        _this.show = false
       }).catch(() => {
         _this.show = false
         _this.error = _this.$t('labels.generic_error')

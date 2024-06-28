@@ -4,7 +4,7 @@
       <div class="flex flex-wrap items-center">
         <div class="relative w-full max-w-full flex-grow flex-1">
           <h2 class="text-white text-xl font-semibold">
-            Expenses by Labels
+            {{ $t('labels.expenses') }}
           </h2>
           <h3 class="text-white text-xl font-semibold">
             {{ subTitle }}
@@ -88,7 +88,10 @@ export default {
           },
           options: {
             legend: {
-              display: false,
+              position: "bottom",
+              labels: {
+                fontColor: "#fff",
+              },
             },
             responsive: true,
           },
@@ -101,25 +104,32 @@ export default {
 
         ChartService.expensesLabelApplePie(date).then((resp) => {
 
-          let labels = []
-          let colors = []
-          let values = []
-
-          resp.field.forEach(element => {
-
-            labels.push(element.label)
-            colors.push(element.color)
-            values.push(element.value * -1)
-
-          });
-
-          let dataset = {
-            label: 'expenses by labels',
-            backgroundColor: colors,
-            data: values
+          const datasetApplePie = {
+            labels: [],
+            colors: [],
+            values: []
           }
 
-          config.data.labels = labels
+          resp.field.forEach(element => {
+            datasetApplePie.labels.push(element.label)
+            datasetApplePie.colors.push(element.color)
+            datasetApplePie.values.push(element.value * -1)
+          });
+
+          datasetApplePie.values.sort((a, b) => a - b);
+          // get the first 5 elements
+          const elements = 5
+          datasetApplePie.labels = datasetApplePie.labels.slice(0, elements);
+          datasetApplePie.colors = datasetApplePie.colors.slice(0, elements);
+          datasetApplePie.values = datasetApplePie.values.slice(0, elements);
+
+          let dataset = {
+            label: this.$t('labels.expenses'),
+            backgroundColor: datasetApplePie.colors,
+            data: datasetApplePie.values
+          }
+
+          config.data.labels = datasetApplePie.labels
           config.data.datasets.push(dataset)
 
           var ctx = document.getElementById('bar_graph_' + this.ID_GRAPH).getContext("2d");

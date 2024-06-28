@@ -168,6 +168,10 @@ export default {
               bounce_rate: element.bounceRate.toFixed(2) * -1
             })
 
+            this.elements.incoming.sort(function (a, b) {
+                return a.label.localeCompare(b.label);
+            })
+
             this.elements.stats.incoming.now = this.elements.incoming.reduce((total, incoming) => total + parseFloat(incoming.amount), 0).toFixed(2);
             this.elements.stats.incoming.before = this.elements.incoming.reduce((total, incoming) => total + parseFloat(incoming.amount_before), 0).toFixed(2);
             this.elements.stats.incoming.bounce_rate = ((this.elements.stats.incoming.now - this.elements.stats.incoming.before) / this.elements.stats.incoming.before) * 100
@@ -190,6 +194,11 @@ export default {
               this.elements.stats.expenses.bounce_rate = 0
             }
             this.elements.stats.expenses.bounce_rate = this.elements.stats.expenses.bounce_rate.toFixed(2)
+
+            this.elements.expenses.sort(function (a, b) {
+                return a.label.localeCompare(b.label);
+            })
+
           }
 
 
