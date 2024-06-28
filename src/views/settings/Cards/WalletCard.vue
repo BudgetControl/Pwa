@@ -206,11 +206,10 @@ export default {
                 sorting: this.modal.sorting
             }
 
-            const _this = this
-
             ApiService.setAccount(data, this.modal.id).then(() => {
                 alert(this.$t('messages.wallet.saved'), "success")
-                _this.$router.push({ path: '/app/settings/wallet' })
+            }).catch(() => {
+                alert(this.$t('messages.generic_error'), "error")
             })
 
         },
