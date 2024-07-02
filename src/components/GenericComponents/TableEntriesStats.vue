@@ -8,19 +8,19 @@
           <tr>
             <th
               class="px-6 bg-blueGray-100 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-              {{ path }} NAME
+              {{ $t('labels.name') }}
             </th>
             <th
               class="px-6 bg-blueGray-100 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-              AMOUNT
+              {{ $t('labels.amount') }}
             </th>
             <th
               class="px-6 bg-blueGray-100 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-              AMOUNT BEFORE
+              {{ $t('labels.amount_before') }}
             </th>
             <th
               class="px-6 bg-blueGray-100 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-              BOUNCE RATE
+              {{ $t('labels.bounce_rate') }}
             </th>
           </tr>
         </thead>
@@ -155,6 +155,14 @@ export default {
       this.elements.incoming = []
       this.elements.expenses = []
 
+      // clear stats
+      this.elements.stats.incoming.now = 0
+      this.elements.stats.incoming.before = 0
+      this.elements.stats.incoming.bounce_rate = 0
+      this.elements.stats.expenses.now = 0
+      this.elements.stats.expenses.before = 0
+      this.elements.stats.expenses.bounce_rate = 0
+
       StatsService.getStatsEntries(options).then((resp) => {
 
         resp.rows.forEach(element => {
@@ -200,8 +208,6 @@ export default {
             })
 
           }
-
-
         });
       }).catch(() => {
         alert(this.$t('messages.generic_error'), "error")

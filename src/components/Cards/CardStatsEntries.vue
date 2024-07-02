@@ -12,7 +12,7 @@
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 {{ $t('labels.date_interval') }}
               </label>
-              <VueDatePicker v-model="action.date_time" :range="{ autoRange: 1 }" :options="input.month"
+              <VueDatePicker v-model="action.date_time" range :options="input.month"
                 :placeholder="$t('labels.date_interval')" format="yyyy-MM-dd" />
             </div>
           </div>
@@ -65,7 +65,7 @@
           <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                {{ $t('labels.payment_type') }}
+                {{ $t('labels.payment_types') }}
               </label>
               <select multiple
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
@@ -181,14 +181,25 @@ export default {
   },
   methods: {
     invoke() {
+
       const year = new Date().getFullYear()
       const month = new Date().getMonth() + 1
 
-      const options = {
-        date: {
+      let date
+      if(this.action.date_time == null) {
+        date = {
           start: year + "/" + month + "/01",
           end: year + "/" + month + "/" + new Date(year, month, 0).getDate()
-        },
+        }
+      } else {
+        date = {
+          start: this.action.date_time[0],
+          end: this.action.date_time[1]
+        }
+      }
+
+      const options = {
+        date: date,
         categories: this.action.category,
         wallets: this.action.account,
         types: this.action.type,
