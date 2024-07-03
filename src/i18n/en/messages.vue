@@ -24,6 +24,10 @@ export default {
         wrong_Wallet: 'Please choose a right wallet type',
         wallet_name: 'Please insert a wallet name',
         wallet_currency: 'Please choose a wallet currency',
+        invoice_date: 'Please choose a invoice date',
+        closing_date: 'Please choose a closing date',
+        payment_account: 'Please choose a payment account',
+        installment: 'Please choose a installment value',
     },
     workspace: {
         updated: 'Workspace updated',

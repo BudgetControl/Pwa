@@ -2,7 +2,8 @@
     <section class="relative py-16 bg-blueGray-200">
         <div class="container mx-auto px-4">
             <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
-                <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
+                <div
+                    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
                     <HeaderButton back="/app/settings/wallet" :title="$t('labels.wallet_settings')" />
 
                     <!-- modal -->
@@ -40,12 +41,31 @@
                             </select>
                         </div>
 
-                        <div class="mb-3 pt-0" v-if="modal.type == 'Credit Card' || modal.type == 'Credit Card Revolving'">
+                        <div class="mb-3 pt-0"
+                            v-if="modal.type == 'Credit Card' || modal.type == 'Credit Card Revolving'">
+                            <span class="text-xs text-blueGray-400">{{ $t('labels.closing_account_statement') }}</span>
+                            <VueDatePicker v-model="modal.closingAccountDate"></VueDatePicker>
+                        </div>
+
+                        <div class="mb-3 pt-0"
+                            v-if="modal.type == 'Credit Card' || modal.type == 'Credit Card Revolving'">
                             <span class="text-xs text-blueGray-400">{{ $t('labels.payment_deadline') }}</span>
                             <VueDatePicker v-model="modal.invoiceDate"></VueDatePicker>
                         </div>
 
-                        <div class="mb-3 pt-0" v-if="modal.type == 'Credit Card' || modal.type == 'Credit Card Revolving'">
+                        <div class="mb-3 pt-0"
+                            v-if="modal.type == 'Credit Card' || modal.type == 'Credit Card Revolving'">
+                            <span class="text-xs text-blueGray-400">{{ $t('labels.account_payment') }}</span>
+                            <select v-model="modal.accountPayment" id="account" 
+                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                <option value="-1">{{ $t('labels.choose_wallet_account') }}</option>
+                                <option v-for="item in wallets" :key="item.id" :value="item.id">{{ item.name }}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3 pt-0"
+                            v-if="modal.type == 'Credit Card Revolving'">
                             <span class="text-xs text-blueGray-400">{{ $t('labels.credit_card_installment') }}</span>
                             <input type="text" placeholder="500.00 €" v-model="modal.installment"
                                 class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
@@ -110,6 +130,7 @@ export default {
             showModal: false,
             color: "#c5c526",
             restore: false,
+            wallets: [],
             form: {
                 type: ['Cash', 'Bank', 'Credit Card', 'Credit Card Revolving', 'Saving', 'Investment'],
                 currency: []
@@ -119,6 +140,8 @@ export default {
                 name: null,
                 color: "#c5c526",
                 invoiceDate: null,
+                closingAccountDate: null,
+                accountPayment: '-1',
                 type: [0],
                 currency: [0],
                 exclude_stats: false,
@@ -130,6 +153,7 @@ export default {
     mounted: function () {
         this.getCurrency()
         this.openModal(this.$route.params.id)
+        this.getWallets()
     },
     created() {
         window.alert = (message, type = 'success') => {
@@ -155,6 +179,13 @@ export default {
             alert(this.$t('messages.wallet.restored'), "success")
             this.$router.push({ path: '/app/settings/wallet' })
         },
+        getWallets() {
+            ApiService.accounts("?filer[type]=bank").then((res) => {
+                res.forEach(e => {
+                    this.wallets.push(e)
+                });
+            })
+        },
         getComponentData() {
             return {
                 on: {
@@ -175,7 +206,9 @@ export default {
                     this.modal.id = resp.id
                     this.modal.name = resp.name
                     this.modal.color = resp.color
-                    this.modal.invoiceDate = resp.date
+                    this.modal.invoiceDate = resp.invoice_date
+                    this.modal.closingAccountDate = resp.closing_date
+                    this.modal.accountPayment = resp.payment_date
                     this.modal.type = resp.type
                     this.modal.currency = resp.currency
                     this.modal.exclude_stats = resp.exclude_from_stats
@@ -191,12 +224,15 @@ export default {
         },
 
         async saveModal() {
-            this.validate()
-
+            if (!this.validate()) {
+                return
+            }
             const data = {
                 name: this.modal.name,
                 color: this.modal.color,
-                date: this.modal.invoiceDate,
+                invoice_date: this.modal.invoiceDate,
+                closing_ate: this.modal.closingAccountDate,
+                payment_ate: this.modal.accountPayment,
                 type: this.modal.type,
                 installementValue: this.modal.installment,
                 installment: this.installment,
@@ -250,6 +286,31 @@ export default {
                 return false
             }
 
+            if (this.modal.type == 'Credit Card' || this.modal.type == 'Credit Card Revolving') {
+                if (this.modal.invoiceDate == null) {
+                    alert(this.$t('messages.wallet.invoice_date'), "error")
+                    return false
+                }
+
+                if (this.modal.closingAccountDate == null) {
+                    alert(this.$t('messages.wallet.closing_date'), "error")
+                    return false
+                }
+
+                if(this.modal.accountPayment == '-1') {
+                    alert(this.$t('messages.wallet.payment_account'), "error")
+                    return false
+                }
+
+            }
+
+            if (this.modal.type == 'Credit Card' || this.modal.type == 'Credit Card Revolving') {
+                if (this.modal.installment == 0) {
+                    alert(this.$t('messages.wallet.installment'), "error")
+                    return false
+                }
+            }
+
             return true
         }
     }
@@ -265,4 +326,3 @@ export default {
     display: none !important;
 }
 </style>
-  

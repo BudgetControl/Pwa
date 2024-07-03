@@ -199,6 +199,8 @@ export default {
         november: 'Novembre',
         dec: 'Dic',
         december: 'Dicembre',
-    }
+    },
+    closing_account_statement: 'Chiusura estratto conto',
+    account_payment: 'Conto di pagamento',
 }
 </script>
