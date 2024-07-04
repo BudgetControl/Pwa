@@ -7,11 +7,10 @@
 </template>
 <script>
 import CardStatsEntries from "@/components/Cards/CardStatsEntries.vue";
-import MenuButton from "../../components/GenericComponents/MenuButton.vue";
 
 export default {
   components: {
-    CardStatsEntries, MenuButton
+    CardStatsEntries
   },
 };
 </script>
