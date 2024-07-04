@@ -166,6 +166,8 @@ export default {
             let color = '#FF0000';
             if (element.label == 'incoming') {
               color = '#00FF00';
+            } else if (element.label == 'debit') {
+              color = '#c6c6c6';
             }
 
             let dataset = {
