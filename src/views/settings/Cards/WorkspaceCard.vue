@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="container" v-if="modal.shareWith.length > 0">
-                                {{ $t('labels.worksace_whared_with') }}
+                                {{ $t('labels.workspace_whared_with') }}
                                 <ul>
                                     <li v-for="(user, i) in modal.shareWith" :key="i">
                                         <span
