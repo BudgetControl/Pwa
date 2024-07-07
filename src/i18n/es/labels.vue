@@ -199,6 +199,8 @@ export default {
         november: 'Noviembre',
         dec: 'Dic',
         december: 'Diciembre',
-    }
+    },
+    start_date: 'Fecha de inicio',
+    end_date: 'Fecha de finalización',
 }
 </script>
