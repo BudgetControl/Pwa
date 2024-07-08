@@ -25,10 +25,17 @@
 import CardEntries from "@/components/Cards/CardEntries.vue";
 import MenuButton from "../../components/GenericComponents/MenuButton.vue";
 import HeaderMenu from "../../components/Navbars/HeaderMenu.vue";
+import LocalStorageService from "../../services/LocalStorageService.vue";
 
 export default {
   components: {
     CardEntries, HeaderMenu, MenuButton
   },
+
+  mounted() {
+      if(!LocalStorageService.getToken()) {
+        this.$router.push({ path: "/app/auth/login" });
+      }
+  }
 };
 </script>
