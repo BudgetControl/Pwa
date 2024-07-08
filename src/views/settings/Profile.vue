@@ -93,9 +93,6 @@
                 </a>
               </div>
             </div>
-            <div class="text-xs text-red-500 mb-2">
-              <DeleteSoftButtonVue />
-            </div>
             <div class="text-xs text-red-500">
               <DeleteButton />
             </div>
