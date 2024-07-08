@@ -31,7 +31,7 @@
       <div class="w-full xl:w-8/12 px-4">
         <card-bar-chart path="category" :title="$t('labels.category')" ID_GRAPH="category_all" />
       </div>
-      <div class="w-full xl:w-4/12 px-4">
+      <div class="w-full xl:w-4/12 px-4" id="apple-pie-chart">
         <CardPieLabelChart ID_GRAPH="label" />
       </div>
     </div>
@@ -118,3 +118,5 @@ export default {
   }
 };
 </script>
+
+<style> @media (max-width: 767px) { #apple-pie-chart { display: none; } } </style>
