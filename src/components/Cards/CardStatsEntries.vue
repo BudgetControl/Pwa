@@ -114,18 +114,18 @@
     </div>
 
     <div class="flex-auto p-4">
-      <TableEntriesStats ref="statsTable" />
+      <TableEntries ref="statsTable" />
     </div>
   </div>
 </template>
 <script>
-import TableEntriesStats from '../GenericComponents/TableEntriesStats.vue';
+import TableEntries from '../GenericComponents/TableEntries.vue';
 import ApiService from '../../services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 
 export default {
   components: {
-    TableEntriesStats, VueDatePicker
+    TableEntries, VueDatePicker
   },
   data() {
     return {

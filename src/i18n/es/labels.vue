@@ -202,5 +202,6 @@ export default {
     },
     start_date: 'Fecha de inicio',
     end_date: 'Fecha de finalización',
+    show_entries: 'Mostrar entradas',
 }
 </script>

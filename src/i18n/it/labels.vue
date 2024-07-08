@@ -202,5 +202,6 @@ export default {
     },
     start_date: 'Data di inizio',
     end_date: 'Data di fine',
+    show_entries: 'Mostra voci',
 }
 </script>
