@@ -169,9 +169,9 @@ export default {
                 }
             };
         },
-        openModal(id) {
-            if (id != null) {
-                ApiService.account(id).then((resp) => {
+        openModal(uuid) {
+            if (uuid != null) {
+                ApiService.account(uuid).then((resp) => {
                     this.modal.id = resp.id
                     this.modal.name = resp.name
                     this.modal.color = resp.color
@@ -205,8 +205,12 @@ export default {
                 exclude_from_stats: this.modal.exclude_stats,
                 sorting: this.modal.sorting
             }
+            let walletUuid = null
+            if(this.$route.params.id) {
+                walletUuid = this.$route.params.id
+            }
 
-            ApiService.setAccount(data, this.modal.id).then(() => {
+            ApiService.setAccount(data, walletUuid).then(() => {
                 alert(this.$t('messages.wallet.saved'), "success")
             }).catch(() => {
                 alert(this.$t('messages.generic_error'), "error")

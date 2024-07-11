@@ -42,7 +42,7 @@
                     <draggable :list="wallets" group="wallet" @end="saveSorting" :move="checkMove" :disabled="!action.order" >
                         <template #item="{ element }">
                             <div class="container px-4 mx-auto ">
-                                <div class="flex border border-dotted m-1" v-on:click="openModal(element.id)"
+                                <div class="flex border border-dotted m-1" v-on:click="openModal(element.uuid)"
                                 v-if="element.deleted_at == null || action.archived == true"
                                 >
                                     <div class="flex p-2" v-if="action.order">
