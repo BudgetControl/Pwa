@@ -163,7 +163,7 @@ async function deleteWallet(uuid) {
 }
 
 async function restoreWallet(uuid) {
-  const response = await instance.get(`/api/wallet/restore/${uuid}`);
+  const response = await instance.patch(`/api/wallet/restore/${uuid}`);
   return response.data;
 }
 
@@ -173,7 +173,7 @@ async function account(uuid) {
 }
 
 async function setAccount(data, uuid) {
-  if (id != null) {
+  if (uuid != null) {
     const response = await instance.put(`/api/wallet/update/${uuid}`, data);
     return response.data;
   } else {
@@ -194,7 +194,7 @@ async function setCategories(data, id) {
 }
 
 async function setAccountSorting(uuid, sorting) {
-  const response = await instance.put(`/api/wallet/sorting/${uuid}`, { 'sorting': sorting });
+  const response = await instance.patch(`/api/wallet/sorting/${uuid}`, { 'sorting': sorting });
   return response.data;
 }
 

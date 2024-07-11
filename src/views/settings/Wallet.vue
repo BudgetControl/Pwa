@@ -97,7 +97,7 @@ export default {
         },
         getWallets() {
 
-            ApiService.accounts("?trashed=1").then((res) => {
+            ApiService.accounts("?filter[trashed]=1").then((res) => {
                 res.forEach(e => {
                     this.wallets.push(e)
                 });

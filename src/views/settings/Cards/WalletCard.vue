@@ -111,7 +111,7 @@ export default {
             color: "#c5c526",
             restore: false,
             form: {
-                type: ['Cash', 'Bank', 'Credit Card', 'Credit Card Revolving', 'Saving', 'Investment'],
+                type: ['bank','cache', 'credit-card', 'credit-card-revolving', 'investment', 'loan', 'other', 'prepaid-card'],
                 currency: []
             },
             modal: {
@@ -231,7 +231,7 @@ export default {
             let i = 0;
             this.sortingList.forEach((e) => {
                 i++;
-                ApiService.setAccountSorting(e.id, i)
+                ApiService.setAccountSorting(e.uuid, i)
             })
         },
         checkMove: function (e) {
