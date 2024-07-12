@@ -93,7 +93,11 @@ export default {
     },
     methods: {
         openModal(id) {
-            this.$router.push({ path: `/app/settings/wallet/edit/${id}` })
+            if(id === null) {
+                this.$router.push({ path: `/app/settings/wallet/add` })
+            } else {
+                this.$router.push({ path: `/app/settings/wallet/edit/${id}` })
+            }
         },
         getWallets() {
 

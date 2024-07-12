@@ -24,6 +24,10 @@ export default {
         wrong_Wallet: 'Por favor, elija un tipo de billetera correcto',
         wallet_name: 'Por favor, ingrese un nombre para la billetera',
         wallet_currency: 'Por favor, elija una moneda para la billetera',
+        invoice_date: 'Por favor, elija una fecha de factura',
+        closing_date: 'Por favor, elija una fecha de cierre',
+        payment_account: 'Por favor, elija una cuenta de pago',
+        installment: 'Por favor, elija un valor de cuota',
     },
     workspace: {
         updated: 'Espacio de trabajo actualizado',

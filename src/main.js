@@ -176,6 +176,10 @@ const routes = [
         component: Wallet,
       },
       {
+        path: "/app/settings/wallet/add",
+        component: WalletCard,
+      },
+      {
         path: "/app/settings/wallet/edit/:id",
         component: WalletCard,
       },
