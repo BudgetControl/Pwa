@@ -153,31 +153,31 @@ async function setDefaultCurrency(id) {
 }
 
 async function accounts(queryParams = '') {
-  const response = await instance.get(`/api/accounts${queryParams}`);
+  const response = await instance.get(`/api/wallet/list${queryParams}`);
   return response.data;
 }
 
-async function deleteWallet(id) {
-  const response = await instance.delete(`/api/accounts/${id}`);
+async function deleteWallet(uuid) {
+  const response = await instance.delete(`/api/wallet/${uuid}`);
   return response.data;
 }
 
-async function restoreWallet(id) {
-  const response = await instance.get(`/api/account-restore/${id}`);
+async function restoreWallet(uuid) {
+  const response = await instance.patch(`/api/wallet/restore/${uuid}`);
   return response.data;
 }
 
-async function account(id) {
-  const response = await instance.get(`/api/accounts/${id}`);
+async function account(uuid) {
+  const response = await instance.get(`/api/wallet/show/${uuid}`);
   return response.data;
 }
 
-async function setAccount(data, id) {
-  if (id != null) {
-    const response = await instance.put(`/api/accounts/${id}`, data);
+async function setAccount(data, uuid) {
+  if (uuid != null) {
+    const response = await instance.put(`/api/wallet/update/${uuid}`, data);
     return response.data;
   } else {
-    const response = await instance.post('/api/accounts', data);
+    const response = await instance.post('/api/wallet/create', data);
     return response.data;
   }
 }
@@ -193,8 +193,8 @@ async function setCategories(data, id) {
   }
 }
 
-async function setAccountSorting(id, sorting) {
-  const response = await instance.put(`/api/sorting-account/${id}`, { 'sorting': sorting });
+async function setAccountSorting(uuid, sorting) {
+  const response = await instance.patch(`/api/wallet/sorting/${uuid}`, { 'sorting': sorting });
   return response.data;
 }
 

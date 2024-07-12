@@ -202,5 +202,8 @@ export default {
     },
     closing_account_statement: 'Chiusura estratto conto',
     account_payment: 'Conto di pagamento',
+    start_date: 'Data di inizio',
+    end_date: 'Data di fine',
+    show_entries: 'Mostra voci',
 }
 </script>

@@ -202,6 +202,9 @@ export default {
         december: 'December',
     },
     account_payment: 'Account payment',
+    start_date: 'Start date',
+    end_date: 'End date',
+    show_entries: 'Show entries',
 };
 
 </script>

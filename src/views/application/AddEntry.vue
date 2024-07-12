@@ -8,15 +8,23 @@
         />
 
         <MenuButton
+          v-if="this.$route.query.show !== 'payee'"
           :path="'/app/entries'"
           :label="$t('labels.show')"
         />
 
         <MenuButton
+          v-if="this.$route.query.show === 'payee'"
+          :path="'/app/payee'"
+          :label="$t('labels.show')"
+        />
+
+        <MenuButton v-if="this.$route.query.show !== 'payee'"
           :path="'/app/search'"
           :label="$t('labels.search')"
         />
       </HeaderMenu>
+
       <CardAddEntry :entryId="this.$route.params.entry_id" :typeOfEntry="this.$route.query.type" />
     </div>
   </div>

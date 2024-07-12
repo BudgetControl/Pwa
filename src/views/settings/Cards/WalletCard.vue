@@ -132,7 +132,7 @@ export default {
             restore: false,
             wallets: [],
             form: {
-                type: ['Cash', 'Bank', 'Credit Card', 'Credit Card Revolving', 'Saving', 'Investment'],
+                type: ['bank','cache', 'credit-card', 'credit-card-revolving', 'investment', 'loan', 'other', 'prepaid-card'],
                 currency: []
             },
             modal: {
@@ -200,9 +200,9 @@ export default {
                 }
             };
         },
-        openModal(id) {
-            if (id != null) {
-                ApiService.account(id).then((resp) => {
+        openModal(uuid) {
+            if (uuid != null) {
+                ApiService.account(uuid).then((resp) => {
                     this.modal.id = resp.id
                     this.modal.name = resp.name
                     this.modal.color = resp.color
@@ -241,8 +241,12 @@ export default {
                 exclude_from_stats: this.modal.exclude_stats,
                 sorting: this.modal.sorting
             }
+            let walletUuid = null
+            if(this.$route.params.id) {
+                walletUuid = this.$route.params.id
+            }
 
-            ApiService.setAccount(data, this.modal.id).then(() => {
+            ApiService.setAccount(data, walletUuid).then(() => {
                 alert(this.$t('messages.wallet.saved'), "success")
             }).catch(() => {
                 alert(this.$t('messages.generic_error'), "error")
@@ -263,7 +267,7 @@ export default {
             let i = 0;
             this.sortingList.forEach((e) => {
                 i++;
-                ApiService.setAccountSorting(e.id, i)
+                ApiService.setAccountSorting(e.uuid, i)
             })
         },
         checkMove: function (e) {

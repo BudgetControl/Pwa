@@ -202,5 +202,8 @@ export default {
     },
     closing_account_statement: 'Closing account statement',
     account_payment: 'Pago de cuenta',
+    start_date: 'Fecha de inicio',
+    end_date: 'Fecha de finalización',
+    show_entries: 'Mostrar entradas',
 }
 </script>
