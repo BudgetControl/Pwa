@@ -97,7 +97,12 @@ async function confirm(token) {
 
 async function deleteUser() {
   //retrive access token header
-  const response = await instance.delete(`/api/auth/delete`);
+  const response = await instance.delete(`/api/auth/delete`, {
+    headers: {
+      'Authorization': `Bearer ${LocalStorageService.getToken()}`,
+      'X-WS': LocalStorageService.getWorkspaceId()
+    }
+  });
   return response;
 }
 
