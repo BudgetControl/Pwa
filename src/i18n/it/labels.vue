@@ -205,5 +205,8 @@ export default {
     start_date: 'Data di inizio',
     end_date: 'Data di fine',
     show_entries: 'Mostra voci',
+    wallet_name: 'Nome del portafoglio',
+    balance_wallet: 'Saldo del portafoglio',
+    wallet_type: 'Tipo di portafoglio',
 }
 </script>

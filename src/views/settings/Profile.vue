@@ -112,7 +112,6 @@
 import AuthService from "@/services/AuthService.vue";
 import DeleteButton from "../../components/Auth/DeleteButton.vue";
 import userProfile from "@/assets/img/flat-business-man-user-profile.jpeg";
-import DeleteSoftButtonVue from '../../components/Auth/DeleteSoftButton.vue';
 import LocalStorageService from "../../services/LocalStorageService.vue";
 import StatsService from "../../services/StatsService.vue";
 import ApiServiceVue from '../../services/ApiService.vue';
@@ -139,7 +138,7 @@ export default {
     };
   },
   components: {
-    DeleteButton, DeleteSoftButtonVue
+    DeleteButton
   },
   async beforeMount() {
     const _this = this

@@ -205,6 +205,9 @@ export default {
     start_date: 'Start date',
     end_date: 'End date',
     show_entries: 'Show entries',
+    wallet_name: 'Wallet name',
+    balance_wallet: 'Balance wallet',
+    wallet_type: 'Wallet type',
 };
 
 </script>

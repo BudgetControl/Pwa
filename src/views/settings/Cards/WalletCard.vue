@@ -12,16 +12,19 @@
 
                         <!-- Regular Input -->
                         <div class="mb-3 pt-0">
+                            <span class="text-xs text-blueGray-400">{{ $t('labels.wallet_name') }}</span>
                             <input type="text" placeholder="Wallet name" v-model="modal.name"
                                 class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                         </div>
 
                         <div class="mb-3 pt-0">
-                            <input type="text" placeholder="Balance wallet" v-model="modal.balance"
+                            <span class="text-xs text-blueGray-400">{{ $t('labels.balance_wallet') }}</span>
+                            <input type="text" placeholder="1000.00" v-model="modal.balance"
                                 class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                         </div>
 
                         <div class="mb-3 pt-0">
+                            <span class="text-xs text-blueGray-400">{{ $t('labels.currency') }}</span>
                             <select
                                 class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 v-model="modal.currency">
@@ -32,6 +35,7 @@
                         </div>
 
                         <div class="mb-3 pt-0">
+                            <span class="text-xs text-blueGray-400">{{ $t('labels.wallet_type') }}</span>
                             <select
                                 class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 v-model="modal.type">
@@ -42,19 +46,19 @@
                         </div>
 
                         <div class="mb-3 pt-0"
-                            v-if="modal.type == 'Credit Card' || modal.type == 'Credit Card Revolving'">
+                            v-if="modal.type == 'credit-card' || modal.type == 'credit-card-revolving'">
                             <span class="text-xs text-blueGray-400">{{ $t('labels.closing_account_statement') }}</span>
-                            <VueDatePicker v-model="modal.closingAccountDate"></VueDatePicker>
+                            <VueDatePicker v-model="modal.closingAccountDate" format="MM-dd-yyyy"></VueDatePicker>
                         </div>
 
                         <div class="mb-3 pt-0"
-                            v-if="modal.type == 'Credit Card' || modal.type == 'Credit Card Revolving'">
+                            v-if="modal.type == 'credit-card' || modal.type == 'credit-card-revolving'">
                             <span class="text-xs text-blueGray-400">{{ $t('labels.payment_deadline') }}</span>
-                            <VueDatePicker v-model="modal.invoiceDate"></VueDatePicker>
+                            <VueDatePicker v-model="modal.invoiceDate" format="MM-dd-yyyy"></VueDatePicker>
                         </div>
 
                         <div class="mb-3 pt-0"
-                            v-if="modal.type == 'Credit Card' || modal.type == 'Credit Card Revolving'">
+                            v-if="modal.type == 'credit-card' || modal.type == 'credit-card-revolving'">
                             <span class="text-xs text-blueGray-400">{{ $t('labels.account_payment') }}</span>
                             <select v-model="modal.accountPayment" id="account" 
                                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
@@ -65,7 +69,7 @@
                         </div>
 
                         <div class="mb-3 pt-0"
-                            v-if="modal.type == 'Credit Card Revolving'">
+                            v-if="modal.type == 'credit-card-revolving'">
                             <span class="text-xs text-blueGray-400">{{ $t('labels.credit_card_installment') }}</span>
                             <input type="text" placeholder="500.00 €" v-model="modal.installment"
                                 class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
@@ -73,8 +77,8 @@
 
                         <div class="mb-3 pt-0">
                             <label for="exclude_stats">
-                                <input v-model="modal.exclude_stats" type="checkbox" class="p-1 border rounded"
-                                    id="exclude_stats" :value="true" checked>{{ $t('labels.exclude_from_stats') }}
+                                <input v-model="modal.exclude_stats" type="checkbox" class="p-1 border rounded "
+                                    id="exclude_stats" :value="true" checked> <span class="text-xs text-blueGray-400">{{ $t('labels.exclude_from_stats') }}</span>
                             </label>
                         </div>
 
@@ -290,7 +294,7 @@ export default {
                 return false
             }
 
-            if (this.modal.type == 'Credit Card' || this.modal.type == 'Credit Card Revolving') {
+            if (this.modal.type == 'credit-card' || this.modal.type == 'credit-card-revolving') {
                 if (this.modal.invoiceDate == null) {
                     alert(this.$t('messages.wallet.invoice_date'), "error")
                     return false
@@ -308,7 +312,7 @@ export default {
 
             }
 
-            if (this.modal.type == 'Credit Card' || this.modal.type == 'Credit Card Revolving') {
+            if (this.modal.type == 'credit-card' || this.modal.type == 'credit-card-revolving') {
                 if (this.modal.installment == 0) {
                     alert(this.$t('messages.wallet.installment'), "error")
                     return false

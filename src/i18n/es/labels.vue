@@ -205,5 +205,8 @@ export default {
     start_date: 'Fecha de inicio',
     end_date: 'Fecha de finalización',
     show_entries: 'Mostrar entradas',
+    wallet_name: 'Nombre de la billetera',
+    balance_wallet: 'Saldo de la billetera',
+    wallet_type: 'Tipo de billetera',
 }
 </script>
