@@ -24,6 +24,10 @@ export default {
         wrong_Wallet: 'Per favore scegli un tipo di portafoglio corretto',
         wallet_name: 'Per favore inserisci un nome per il portafoglio',
         wallet_currency: 'Per favore scegli una valuta per il portafoglio',
+        invoice_date: 'Per favore scegli una data di fatturazione',
+        closing_date: 'Per favore scegli una data di chiusura',
+        payment_account: 'Per favore scegli un conto di pagamento',
+        installment: 'Per favore scegli un valore di rata',
     },
     workspace: {
         updated: 'Spazio di lavoro aggiornato',

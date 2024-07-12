@@ -175,6 +175,7 @@ export default {
     stats: 'Stats',
     payment_types: 'Payment types',
     create_new_debit: 'Create new debit',
+    closing_account_statement: 'Closing account statement',
     months: {
         jan: 'Jan',
         january: 'January',
@@ -200,6 +201,7 @@ export default {
         dec: 'Dec',
         december: 'December',
     },
+    account_payment: 'Account payment',
     start_date: 'Start date',
     end_date: 'End date',
     show_entries: 'Show entries',
