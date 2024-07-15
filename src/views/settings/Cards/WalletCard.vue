@@ -48,13 +48,13 @@
                         <div class="mb-3 pt-0"
                             v-if="modal.type == 'credit-card' || modal.type == 'credit-card-revolving'">
                             <span class="text-xs text-blueGray-400">{{ $t('labels.closing_account_statement') }}</span>
-                            <VueDatePicker v-model="modal.closingAccountDate" format="MM-dd-yyyy"></VueDatePicker>
+                            <VueDatePicker v-model="modal.closingAccountDate" ></VueDatePicker>
                         </div>
 
                         <div class="mb-3 pt-0"
                             v-if="modal.type == 'credit-card' || modal.type == 'credit-card-revolving'">
                             <span class="text-xs text-blueGray-400">{{ $t('labels.payment_deadline') }}</span>
-                            <VueDatePicker v-model="modal.invoiceDate" format="MM-dd-yyyy"></VueDatePicker>
+                            <VueDatePicker v-model="modal.invoiceDate" ></VueDatePicker>
                         </div>
 
                         <div class="mb-3 pt-0"
@@ -212,11 +212,11 @@ export default {
                     this.modal.color = resp.color
                     this.modal.invoiceDate = resp.invoice_date
                     this.modal.closingAccountDate = resp.closing_date
-                    this.modal.accountPayment = resp.payment_date
+                    this.modal.accountPayment = resp.payment_account
                     this.modal.type = resp.type
                     this.modal.currency = resp.currency
                     this.modal.exclude_stats = resp.exclude_from_stats
-                    this.modal.installment = resp.installementValue
+                    this.modal.installment = resp.installement_value
                     this.modal.balance = resp.balance
                     this.modal.deleted = resp.deleted_at
 
