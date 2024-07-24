@@ -1,0 +1,21 @@
+.hide-content {
+    .amount {
+        @media (max-width: 767px) {
+            filter: blur(4px);
+        }
+    }
+    #statsWallet {
+        .amount {
+            @media (max-width: 767px) {
+                filter: blur(4px);
+            }
+        }
+    }
+    #entries-table {
+        .amount {
+            @media (max-width: 767px) {
+                filter: blur(4px);
+            }
+        }
+    }
+}
