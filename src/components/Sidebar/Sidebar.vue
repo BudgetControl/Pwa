@@ -21,10 +21,7 @@
       <!-- User -->
       <ul class="md:hidden items-center flex flex-wrap list-none">
         <li class="inline-block relative">
-          <notification-dropdown />
-        </li>
-        <li class="inline-block relative">
-          <user-dropdown />
+          <EyeButton />
         </li>
       </ul>
       <!-- Collapse -->
@@ -165,12 +162,11 @@
 </template>
 
 <script>
-import NotificationDropdown from "@/components/Dropdowns/NotificationDropdown.vue";
-import UserDropdown from "@/components/Dropdowns/UserDropdown.vue";
 import LogoutButton from "../Auth/LogoutButton.vue";
 import WorkspaceService from "../../services/WorkspaceService.vue";
 import LocalStorageServiceVue from '../../services/LocalStorageService.vue';
 import AuthService from '../../services/AuthService.vue';
+import EyeButton from "@/components/GenericComponents/EyeButton.vue";
 
 export default {
   data() {
@@ -207,9 +203,8 @@ export default {
     }
   },
   components: {
-    NotificationDropdown,
-    UserDropdown,
-    LogoutButton
+    EyeButton,
+    LogoutButton,
   },
 };
 </script>

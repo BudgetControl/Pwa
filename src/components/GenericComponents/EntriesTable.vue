@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="block w-full overflow-x-auto">
+        <div class="block w-full overflow-x-auto" id="entries-table" >
 
             <div class="container px-4 mx-auto py-3 ">
                 <div class="flex items-center ps-3" v-if="isModel == false">
@@ -42,7 +42,7 @@
                         </div>
                         <div class="w-full px-4 flex-1 text-right">
                             <span v-on:click="$router.push(`/app/entries?type=${entry.type_amount}`)"
-                                class="text-sm block text-blueGray-700 rounded ">
+                                class="text-sm block text-blueGray-700 rounded amount">
                                 {{ entry.amount }} <i :class="'fas fa-circle ' + entry.color_amount + ' mr-2'"></i>
                             </span>
 
