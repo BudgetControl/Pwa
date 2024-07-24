@@ -28,13 +28,13 @@
                             <span v-if="isModel == true" class="text-xs block uppercase font-bold rounded ">{{ entry.name }}</span>
                         </div>
                     </div>
-                    <div class="flex flex-wrap">
+                    <div>
                         <div class="w-full px-4 flex-1">
                             <i v-on:click="$router.push(`/app/entries?category=${entry.category.id}`)"
                                 :class="'block text-lightBlue-400 ' + entry.category.icon"> <span
                                     class="px-2 text-blueGray-700 rounded ">
                                     {{ entry.category.name }} </span></i>
-                            <span class="text-xs block rounded"
+                            <span class="text-xs rounded"
                                 :class="[entry.payee ? 'text-blueGray-900' : 'text-blueGray-400']">( {{ entry.account }} )
                                 {{
                                     entry.payee
@@ -61,9 +61,9 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-wrap">
+                    <div>
                         <div class="w-full px-4 flex-1">
-                            <span class="text-xs mt-2 block text-blueGray-700 rounded ">
+                            <span class="text-xs mt-2 text-blueGray-700 rounded ">
                                 <span v-for="(label, i) in entry.labels"
                                     v-on:click="$router.push(`/app/entries?label=${label.id}`)" :key="i"
                                     class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
