@@ -28,7 +28,7 @@
                             <span v-if="isModel == true" class="text-xs block uppercase font-bold rounded ">{{ entry.name }}</span>
                         </div>
                     </div>
-                    <div>
+                    <div class="flex">
                         <div class="w-full px-4 flex-1">
                             <i v-on:click="$router.push(`/app/entries?category=${entry.category.id}`)"
                                 :class="'block text-lightBlue-400 ' + entry.category.icon"> <span
@@ -61,7 +61,7 @@
                         </div>
                     </div>
 
-                    <div class="flex">
+                    <div>
                         <div class="w-full px-4 flex-1">
                             <span class="text-xs mt-2 text-blueGray-700 rounded ">
                                 <span v-for="(label, i) in entry.labels"
