@@ -61,7 +61,7 @@
                         </div>
                     </div>
 
-                    <div>
+                    <div class="flex">
                         <div class="w-full px-4 flex-1">
                             <span class="text-xs mt-2 text-blueGray-700 rounded ">
                                 <span v-for="(label, i) in entry.labels"
