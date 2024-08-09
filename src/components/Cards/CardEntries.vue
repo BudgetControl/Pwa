@@ -13,7 +13,7 @@
 
     <EntriesTable ref="entry" />
     <!-- pagination -->
-    <div class="py-2" v-if="pagination.enabled">
+    <div class="py-2">
       <Paginator ref="_paginator"></Paginator>
     </div>
     <!-- end pagination -->
@@ -43,7 +43,7 @@ export default {
       filter: "",
       wallet: 0,
       selected: {
-        account: 0
+        wallet: 0
       },
       pagination: {
         enabled: false
@@ -62,29 +62,26 @@ export default {
     }
   },
   mounted() {
-    LocalStorageService.set('current_page', 0)
+    LocalStorageService.set('current_page', 1)
     this.invoke()
   },
   methods: {
     invoke() {
       let _this = this
 
-      let filter = ''
+      const lastDayOfCurrentMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate()
+      let filter = `&filters[date_time]=<=|${new Date().getFullYear()}-${new Date().getMonth() + 1}-${lastDayOfCurrentMonth}T23:59:59`
 
-      if (this.$route.query.account !== undefined) {
-        filter += `&filter[account]=${this.$route.query.account}`
+      if (this.$route.query.wallet !== undefined) {
+        filter += `&filters[wallet]=${this.$route.query.wallet}`
       }
 
       if (this.$route.query.category !== undefined) {
-        filter += `&filter[category]=${this.$route.query.category}`
+        filter += `&filters[category_id]=${this.$route.query.category}`
       }
 
       if (this.$route.query.type !== undefined) {
-        filter += `&filter[type]=${this.$route.query.type}`
-      }
-
-      if (this.$route.query.label !== undefined) {
-        filter += `&filter[label]=${this.$route.query.label}`
+        filter += `&filters[type]=${this.$route.query.type}`
       }
 
       if (filter != '') {
@@ -93,17 +90,14 @@ export default {
         this.action.reset = false
       }
 
-      let currentPage = LocalStorageService.get('current_page') == null ? 0 : LocalStorageService.get('current_page')
+      let currentPage = LocalStorageService.get('current_page') == null ? 1 : LocalStorageService.get('current_page')
       ApiServiceVue.getEntry(currentPage, filter).then((res) => {
         if (res.data.length > 0) {
           _this.$refs.entry.buildEntriesTable(res.data)
         }
-
-        if (currentPage == 0) {
-          this.pagination.enabled = res.paginate
-        }
+        
         if (this.$refs._paginator !== undefined) {
-          this.$refs._paginator.hasMorePage = res.hasMorePages
+          this.$refs._paginator.hasMorePage = currentPage < res.last_page 
         }
       })
 

@@ -21,7 +21,7 @@ instance.interceptors.request.use(
 );
 
 async function setEntry(type, data, isPlanned, uuid) {
-  let url = `/api/${type}`
+  let url = `/api/entry/${type}`
   if (isPlanned == true || isPlanned == 'true') {
     url = `/api/planning-recursively`
   }
@@ -38,7 +38,7 @@ async function setEntry(type, data, isPlanned, uuid) {
 }
 
 async function getEntry(page, filter) {
-  const response = await instance.get(`/api/entry?page=${page}${filter}`);
+  const response = await instance.get(`/api/entry?per_page=20&page=${page}${filter}`);
   return response.data;
 }
 
