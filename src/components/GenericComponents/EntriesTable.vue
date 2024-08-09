@@ -28,14 +28,14 @@
                             <span v-if="isModel == true" class="text-xs block uppercase font-bold rounded ">{{ entry.name }}</span>
                         </div>
                     </div>
-                    <div>
+                    <div class="flex">
                         <div class="w-full px-4 flex-1">
                             <i v-on:click="$router.push(`/app/entries?category=${entry.category.id}`)"
                                 :class="'block text-lightBlue-400 ' + entry.category.icon"> <span
                                     class="px-2 text-blueGray-700 rounded ">
                                     {{ entry.category.name }} </span></i>
                             <span class="text-xs rounded"
-                                :class="[entry.payee ? 'text-blueGray-900' : 'text-blueGray-400']">( {{ entry.account }} )
+                                :class="[entry.payee ? 'text-blueGray-900' : 'text-blueGray-400']">( {{ entry.wallet }} )
                                 {{
                                     entry.payee
                                 }}</span>
@@ -123,7 +123,7 @@ export default {
             planned: false,
             wallet: null,
             selected: {
-                account: 0
+                wallet: 0
             },
             action: {
                 reset: false,
@@ -131,7 +131,7 @@ export default {
             },
             input: {
                 tags: [],
-                account: [],
+                wallet: [],
             }
         };
     },
@@ -139,13 +139,13 @@ export default {
         deleteItemFromArray(index) {
             this.entries.splice(index, 1);
         },
-        getAccount() {
+        getwallet() {
             let _this = this
 
-            ApiService.accounts().then((res) => {
+            ApiService.wallets().then((res) => {
                 let data = res
                 data.forEach(function (r) {
-                    _this.input.account.push(r)
+                    _this.input.wallet.push(r)
                 })
             })
         },
@@ -179,7 +179,7 @@ export default {
                         amount: parseFloat(r.amount).toFixed(2) + " " + currency.icon,
                         color_amount: r.amount <= 0 ? "text-red-500" : "text-emerald-500",
                         type_amount: r.amount <= 0 ? "expenses" : "incoming",
-                        account: r.account.name,
+                        wallet: r.wallet.name,
                         note: r.note,
                         planned: r.planned == 0 || r.planned == undefined ? false : true,
                         category: {
@@ -195,7 +195,7 @@ export default {
                     }
 
                     if (r.transfer_to != null) {
-                        info.account = r.account.name + " <-> " + r.transfer_to.name
+                        info.wallet = r.wallet.name + " <-> " + r.transfer_to.name
                     }
 
                     if (r.payee != null) {

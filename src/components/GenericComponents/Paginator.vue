@@ -23,7 +23,7 @@ export default {
     data() {
         return {
             pagination: {
-                current: 0,
+                current: 1,
                 hasMorePage: true
             }
         }
@@ -36,7 +36,7 @@ export default {
             }
         },
         previus() {
-            if(this.pagination.current != 0) {
+            if(this.pagination.current != 1) {
                 this.pagination.current--
                 this.invokeEntry()
             }
