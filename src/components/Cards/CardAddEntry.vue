@@ -84,7 +84,7 @@
             <select v-if="action.hidecategory == true && !action.hidetransfer_to" v-model="transferto" id="transferto"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option value="-1">{{ $t('labels.choose_a_wallet_to_transfer_to') }}</option>
-              <option value="0">{{ $t('labels.out_of_Wallet') }}</option>
+              <option value="0">{{ $t('labels.out_of_wallet') }}</option>
               <option v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
 
@@ -92,7 +92,7 @@
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option value="0">{{ $t('labels.choose_an_option') }}</option>
               <option value="njn76298fm">{{ $t('labels.create_new_debit') }}</option>
-              <option v-for="item in input.debit" :key="item.id" :value="item.name">{{ item.name }}</option>
+              <option v-for="item in input.debit" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
           </div>
 
@@ -103,18 +103,18 @@
           </div>
 
           <div class="px-2 py-2 lg:w-6/12" v-if="action.openTab == 4">
-            <label for="incoming" class="uppercase text-blueGray-600 text-xs font-bold mb-2">
+            <label for="income" class="uppercase text-blueGray-600 text-xs font-bold mb-2">
               {{ $t('labels.incoming') }}
-              <input type="radio" id="incoming" value="+"
+              <input type="radio" id="income" value="+"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
                 v-model="action.debit_type" />
             </label>
           </div>
 
           <div class="px-2 py-2 lg:w-6/12" v-if="action.openTab == 4">
-            <label for="expenses" class="uppercase text-blueGray-600 text-xs font-bold mb-2">
+            <label for="expense" class="uppercase text-blueGray-600 text-xs font-bold mb-2">
               {{ $t('labels.expenses') }}
-              <input type="radio" id="expenses" value="-"
+              <input type="radio" id="expense" value="-"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
                 v-model="action.debit_type" />
             </label>
@@ -288,7 +288,7 @@ export default {
     },
     typeOfEntry: {
       type: String,
-      default: 'expenses'
+      default: 'expense'
     }
   },
   data() {
@@ -311,7 +311,7 @@ export default {
       },
       date: null,
       amount: null,
-      type: "expenses",
+      type: "expense",
       category: 0,
       label: [],
       note: null,
@@ -451,7 +451,7 @@ export default {
 
       this.toggleTabs(this.typeOfEntry)
       ApiService.getEntryDetail(this.entryId, this.isPlanned).then((res) => {
-        let model = res[0]
+        let model = res
 
         _this.amount = Math.abs(model.amount)
         if (model.type == 'incoming') {
@@ -470,7 +470,7 @@ export default {
         _this.category = model.sub_category.id
         _this.note = model.note
         _this.currency = model.currency_id
-        _this.account = model.account.id
+        _this.account = model.wallet.id
         _this.payment_type = model.payment_type
         _this.waranty = model.waranty == 1 ? true : false
         _this.confirmed = model.confirmed == 1 ? true : false
@@ -510,11 +510,11 @@ export default {
         const model = res
         const _this = this
         _this.amount = model.amount
-        if (model.type == "expenses") {
+        if (model.type == "expense") {
           this.amount = model.amount * -1
         }
 
-        if (model.type == "incoming") {
+        if (model.type == "income") {
           this.action.openTab = 2
         }
 
@@ -661,9 +661,15 @@ export default {
           transfer_realtion: this.transfer_relation,
           end_date_time: this.end_date_time
         }
+        let path = this.type
 
         if (this.type == "expenses") {
+          path = 'expense'
           data.amount = this.amount * -1
+        }
+
+        if(this.type == "incoming") {
+          path = 'income'
         }
 
         if (this.type == "debit") {
@@ -672,7 +678,7 @@ export default {
           }
         }
 
-        ApiService.setEntry(this.type, data, this.isPlanned, this.entryId).then(() => {
+        ApiService.setEntry(path, data, this.isPlanned, this.entryId).then(() => {
           _this.date = null,
             _this.amount = null,
             _this.label = [],
@@ -725,8 +731,8 @@ export default {
     toggleTabs: function (tabNumber) {
       switch (tabNumber) {
         case 1:
-        case 'expenses':
-          this.type = "expenses"
+        case 'expense':
+          this.type = "expense"
           this.category = 0
           this.debit = 0
           this.debit_name = null
@@ -734,8 +740,8 @@ export default {
           this.action.hidetransfer_to = false
           break;
         case 2:
-        case 'incoming':
-          this.type = "incoming"
+        case 'income':
+          this.type = "income"
           this.debit = 0
           this.category = 0
           this.debit_name = null
