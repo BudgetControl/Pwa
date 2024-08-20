@@ -6,10 +6,10 @@ export default {
     entry_Saved: `Entry saved successfully.`,
     generic_error: `An error occurred. Please try again later.`,
     validation: {
-        choose_Wallet: 'Please choose a wallet account',
-        choose_Category: 'Please choose a category',
+        choose_wallet: 'Please choose a wallet account',
+        choose_category: 'Please choose a category',
         insert_amount: 'Please insert amount value',
-        choose_Wallet_transfer: 'Please choose a different wallet to transfer',
+        choose_wallet_transfer: 'Please choose a different wallet to transfer',
         insert_payee: 'Please insert a payee name',
     },
     login: {
