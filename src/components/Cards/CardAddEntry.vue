@@ -554,10 +554,6 @@ export default {
         payment_type: this.payment_type,
       }
 
-      if (this.type == "expenses") {
-        data.amount = this.amount * -1
-      }
-
       ApiService.setModel(data, this.entryId).then(() => {
         alert(this.$t('messages.model_saved'), "success")
       }).catch(() => {
