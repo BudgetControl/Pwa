@@ -123,7 +123,7 @@
         </div>
         <div class="flex flex-wrap">
           <div class="lg:w-6/12 px-2 py-2 w-full">
-            <input v-model="amount" type="tel" placeholder="0,00 €" id="amount"
+            <input v-on:change="amountCast()" v-model="amount" type="tel" placeholder="0.00" id="amount"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
 
@@ -410,13 +410,11 @@ export default {
       let _this = this
       ApiService.categories().then((res) => {
         let data = res
-        data.forEach(function (r) {
-          r.sub_category.forEach((item) => {
+        data.forEach(function (item) {
             _this.input.category.push({
               id: item.id,
               name: _this.$t('app.' + item.slug),
             })
-          })
         })
         _this.input.category.sort(function (a, b) {
           return a.name.localeCompare(b.name);
@@ -427,8 +425,7 @@ export default {
     getPaymentType() {
       let _this = this
       ApiService.paymentstype().then((res) => {
-        let data = res
-        data.forEach(function (r) {
+        res.forEach(function (r) {
           _this.input.payment_type.push(r)
         })
       })
@@ -663,12 +660,12 @@ export default {
         }
         let path = this.type
 
-        if (this.type == "expenses") {
+        if (this.type == "expense") {
           path = 'expense'
           data.amount = this.amount * -1
         }
 
-        if(this.type == "incoming") {
+        if(this.type == "income") {
           path = 'income'
         }
 
@@ -769,6 +766,11 @@ export default {
 
       }
       this.action.openTab = tabNumber
+    },
+    amountCast() {
+      if (this.amount != null) {
+        this.amount = this.amount.replace(",", ".")
+      }
     },
     checkIfMobile() {
       if (window.innerWidth <= 768) {
