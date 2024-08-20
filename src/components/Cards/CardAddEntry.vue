@@ -507,9 +507,6 @@ export default {
         const model = res
         const _this = this
         _this.amount = model.amount
-        if (model.type == "expense") {
-          this.amount = model.amount * -1
-        }
 
         if (model.type == "income") {
           this.action.openTab = 2
@@ -552,6 +549,10 @@ export default {
         currency_id: this.currency,
         type: this.type,
         payment_type: this.payment_type,
+      }
+
+      if (this.type == "expenses") {
+        data.amount = this.amount * -1
       }
 
       ApiService.setModel(data, this.entryId).then(() => {
