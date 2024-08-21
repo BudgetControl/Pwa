@@ -506,9 +506,9 @@ export default {
 
         const model = res
         const _this = this
-        _this.amount = model.amount
+        _this.amount = model.amount.replace('-', '')
 
-        if (model.type == "income") {
+        if (model.type == "incoming") {
           this.action.openTab = 2
         }
 
@@ -657,12 +657,12 @@ export default {
         }
         let path = this.type
 
-        if (this.type == "expense") {
+        if (this.type == "expenses") {
           path = 'expense'
           data.amount = this.amount * -1
         }
 
-        if(this.type == "income") {
+        if(this.type == "incoming") {
           path = 'income'
         }
 
@@ -725,8 +725,8 @@ export default {
     toggleTabs: function (tabNumber) {
       switch (tabNumber) {
         case 1:
-        case 'expense':
-          this.type = "expense"
+        case 'expenses':
+          this.type = "expenses"
           this.category = 0
           this.debit = 0
           this.debit_name = null
@@ -734,8 +734,8 @@ export default {
           this.action.hidetransfer_to = false
           break;
         case 2:
-        case 'income':
-          this.type = "income"
+        case 'incoming':
+          this.type = "incoming"
           this.debit = 0
           this.category = 0
           this.debit_name = null
