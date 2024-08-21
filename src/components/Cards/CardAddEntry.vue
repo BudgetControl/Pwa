@@ -506,7 +506,11 @@ export default {
 
         const model = res
         const _this = this
-        _this.amount = model.amount.replace('-', '')
+        _this.amount = model.amount
+
+        if (model.type == "expenses") {
+          _this.amount = _this.amount * -1
+        }
 
         if (model.type == "incoming") {
           this.action.openTab = 2
