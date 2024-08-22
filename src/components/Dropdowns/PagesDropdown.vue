@@ -33,23 +33,10 @@
       >
         Settings
       </router-link>
-      <router-link
-        to="/app/tables"
-        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-      >
-        Tables
-      </router-link>
-      <router-link
-        to="/app/maps"
-        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-      >
-        Maps
-      </router-link>
       <div class="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
       <span
         class="text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
       >
-        Auth login
       </span>
       <router-link
         to="/app/auth/login"
@@ -64,23 +51,6 @@
         Register
       </router-link>
       <div class="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
-      <span
-        class="text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
-      >
-        No Layout
-      </span>
-      <router-link
-        to="/landing"
-        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-      >
-        Landing
-      </router-link>
-      <router-link
-        to="/profile"
-        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-      >
-        Profile
-      </router-link>
     </div>
   </div>
 </template>

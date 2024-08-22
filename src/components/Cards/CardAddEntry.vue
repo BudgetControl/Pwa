@@ -411,10 +411,12 @@ export default {
       ApiService.categories().then((res) => {
         let data = res
         data.forEach(function (item) {
+          item.sub_category.forEach(function (sub) {
             _this.input.category.push({
-              id: item.id,
-              name: _this.$t('app.' + item.slug),
+              id: sub.id,
+              name: _this.$t('app.' + sub.slug),
             })
+          })
         })
         _this.input.category.sort(function (a, b) {
           return a.name.localeCompare(b.name);
@@ -666,7 +668,7 @@ export default {
           data.amount = this.amount * -1
         }
 
-        if(this.type == "incoming") {
+        if (this.type == "incoming") {
           path = 'income'
         }
 
