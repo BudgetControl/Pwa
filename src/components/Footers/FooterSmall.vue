@@ -35,7 +35,7 @@
             </li>
             <li>
               <a
-                href="https://www.mlabfactory.it/presentation?ref=bc-app-small"
+                href="https://www.budgetcontrol.it/about-budgetcontrol?ref=bc-app-small"
                 class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
               >
                 About Us
@@ -43,18 +43,10 @@
             </li>
             <li>
               <a
-                href="http://blog.www.mlabfactory.it?ref=bc-app-small"
+                href="https://github.com/BudgetControl/Pwa?tab=AGPL-3.0-1-ov-file#readme?ref=bc-app-small"
                 class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
               >
-                Blog
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://github.com/BudgetControl/Application/LICENSE.md?ref=bc-app-small"
-                class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
-              >
-                MIT License
+                AGPL-3.0 license
               </a>
             </li>
           </ul>

@@ -65,17 +65,9 @@
                 <li>
                   <a
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://www.mlabfactory.it/presentation?ref=bc-app"
+                    href="https://www.budgetcontrol.it/about-budgetcontrol?ref=bc-app"
                   >
                     About Us
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://blog.www.mlabfactory.it?ref=bc-app"
-                  >
-                    Blog
                   </a>
                 </li>
                 <li>
@@ -106,9 +98,9 @@
                 <li>
                   <a
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://github.com/BudgetControl/Application/LICENSE.md?ref=bc-app"
+                    href="https://github.com/BudgetControl/Pwa?tab=AGPL-3.0-1-ov-file#readme?ref=bc-app"
                   >
-                    MIT License
+                    AGPL-3.0 license
                   </a>
                 </li>
                 <li>
