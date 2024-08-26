@@ -29,19 +29,6 @@
         :class="[navbarOpen ? 'block' : 'hidden']"
         id="example-navbar-warning"
       >
-        <ul class="flex flex-col lg:flex-row list-none mr-auto">
-          <li class="flex items-center">
-            <a
-              class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
-              href="https://www.budgetcontrol.cloud/documentation"
-            >
-              <i
-                class="text-blueGray-400 far fa-file-alt text-lg leading-lg mr-2"
-              />
-              Docs
-            </a>
-          </li>
-        </ul>
         <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
           <li class="flex items-center" v-if="token">
             <index-dropdown />
@@ -65,7 +52,7 @@
               to="/app/auth/register"
             >
               <i
-                class="text-blueGray-400 far fa-solid fa-right-to-bracket text-lg leading-lg mr-2"
+                class="text-blueGray-400 far fas fa-sign-in-alt text-lg leading-lg mr-2"
               />
               Sign up
             </router-link>
