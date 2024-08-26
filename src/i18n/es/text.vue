@@ -11,7 +11,7 @@ export default {
         thanks: `Gracias por tu solicitud. Nos pondremos en contacto contigo lo antes posible.`,
     },
     profile: {
-        policy: `<p>Registrándote o conectándote con uno de los servicios mencionados, consientes nuestros <a class="font-bold text-decoration-line" href="https://www.budgetcontrol.cloud/terms-of-service/">Términos de Servicio</a> y reconoces nuestra <a class="font-bold text-decoration-line" href="https://www.budgetcontrol.cloud/security-policy/">Política de Privacidad</a>, que describe cómo manejamos tus datos personales.</p>`
+        policy: `<p>Registrándote o conectándote con uno de los servicios mencionados, consientes nuestros <a class="font-bold text-decoration-line" href="https://www.budgetcontrol.cloud/terms/">Términos de Servicio</a> y reconoces nuestra <a class="font-bold text-decoration-line" href="https://www.budgetcontrol.cloud/privacy/">Política de Privacidad</a>, que describe cómo manejamos tus datos personales.</p>`
     },
     settings: {
         manage_your_workspace: 'Gestiona tus espacios de trabajo.',
