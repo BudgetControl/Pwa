@@ -65,7 +65,7 @@
                 <li>
                   <a
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://www.budgetcontrol.it/about-budgetcontrol?ref=bc-app"
+                    href="https://www.budgetcontrol.cloud/about-budgetcontrol?ref=bc-app"
                   >
                     About Us
                   </a>

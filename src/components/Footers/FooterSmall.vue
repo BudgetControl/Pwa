@@ -35,7 +35,7 @@
             </li>
             <li>
               <a
-                href="https://www.budgetcontrol.it/about-budgetcontrol?ref=bc-app-small"
+                href="https://www.budgetcontrol.cloud/about-budgetcontrol?ref=bc-app-small"
                 class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
               >
                 About Us
