@@ -62,7 +62,7 @@ async function getEntryDetail(id, isPlanned) {
 }
 
 async function getEntryFromAccount(id) {
-  const response = await instance.get('/api/entry/account/' + id);
+  const response = await instance.get('/api/entry?filters[wallet_id]=' + id);
   return response.data;
 }
 
@@ -103,21 +103,21 @@ async function paymentstype() {
 }
 
 async function model() {
-  const response = await instance.get('/api/model');
+  const response = await instance.get('/api/entry/model');
   return response.data;
 }
 
 async function getModel(id) {
-  const response = await instance.get(`/api/model/${id}`);
+  const response = await instance.get(`/api/entry/model/${id}`);
   return response.data;
 }
 
 async function setModel(data, id) {
   if (id != null) {
-    const response = await instance.put(`/api/model/${id}`, data);
+    const response = await instance.put(`/api/entry/model/${id}`, data);
     return response.data;
   } else {
-    const response = await instance.post('/api/model', data);
+    const response = await instance.post('/api/entry/model', data);
     return response.data;
   }
 
