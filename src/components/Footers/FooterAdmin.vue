@@ -30,7 +30,7 @@
             </li>
             <li>
               <a
-                href="https://www.budgetcontrol.it/about-budgetcontrol?ref=bc-app-admin"
+                href="https://www.budgetcontrol.cloud/about-budgetcontrol?ref=bc-app-admin"
                 class="text-blueGray-600 hover:text-blueGray-800 text-sm font-semibold block py-1 px-3"
               >
                 About Us
