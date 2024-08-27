@@ -20,6 +20,18 @@ instance.interceptors.request.use(
   }
 );
 
+instance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    console.error('API Error:', error.response ? error.response.data : error.message);
+    
+    alert('An error occurred during the API request. Check the console for more details.', 'error');
+    return Promise.reject(error);
+  }
+);
+
 async function setEntry(type, data, isPlanned, uuid) {
   let url = `/api/entry/${type}`
   if (isPlanned == true || isPlanned == 'true') {
