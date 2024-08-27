@@ -26,8 +26,8 @@
                 Google
               </button>
             </div>
-            <hr class="mt-6 border-b-1 border-blueGray-300" />
-          </div> -->
+            <hr class="mt-6 border-b-1 border-blueGray-300" /> -->
+          </div>
           <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
             <!-- <div class="text-blueGray-400 text-center mb-3 font-bold">
               <small>{{ $t('labels.or_sign_in_with_credentials') }}</small>
