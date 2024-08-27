@@ -12,13 +12,13 @@
                 {{ $t('labels.sign_in_with') }}
               </h6>
             </div>
-            <div class="btn-wrapper text-center">
-              <!-- <button
+            <!-- <div class="btn-wrapper text-center">
+              <button
                 class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                 type="button">
                 <img alt="..." class="w-5 mr-1" :src="facebook" />
                 Facebook
-              </button> -->
+              </button>
               <button @click="signInGoogle()"
                 class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md items-center font-bold text-xs ease-linear transition-all duration-150 w-full text-center"
                 type="button">
@@ -27,11 +27,11 @@
               </button>
             </div>
             <hr class="mt-6 border-b-1 border-blueGray-300" />
-          </div>
+          </div> -->
           <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-            <div class="text-blueGray-400 text-center mb-3 font-bold">
+            <!-- <div class="text-blueGray-400 text-center mb-3 font-bold">
               <small>{{ $t('labels.or_sign_in_with_credentials') }}</small>
-            </div>
+            </div> -->
             <form @submit="submit()" action="javascript:void(0)">
 
               <div role="alert" v-if="error">
@@ -96,6 +96,7 @@ import AuthService from "../../services/AuthService.vue";
 import loading from 'vue-full-loading'
 import VerifyEmailButton from "../../components/Auth/VerifyEmailButton.vue";
 import LocalStorageService from "../../services/LocalStorageService.vue";
+import { Browser } from '@capacitor/browser';
 
 export default {
   components: {
@@ -176,7 +177,7 @@ export default {
       this.error = false
 
       AuthService.providerUri('google').then((resp) => {
-        window.location.href = resp.uri
+        Browser.open({ url: resp.uri });
       }).catch(() => {
         _this.show = false
         _this.error = this.$t('messages.generic_error')
