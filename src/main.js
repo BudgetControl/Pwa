@@ -78,7 +78,24 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+// Capacitor plugins
 
+import { App as CapacitorApp } from '@capacitor/app';
+import { Browser } from '@capacitor/browser';
+
+CapacitorApp.addListener('appUrlOpen', function (data) {
+
+  if (data.url.includes('/app-auth-token')) {
+    Browser.close();
+
+    const url = new URL(data.url);
+    const token = url.searchParams.get('token');
+    console.log('Navigating to token route:', token);
+    router.push({ path: '/app/auth/token?token='+ token });
+
+  }
+
+});
 
 // routes
 
