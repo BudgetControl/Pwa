@@ -40,7 +40,7 @@ gulp.task("licenses", async function () {
 
 * Product Page: https://www.mlabfactory.it/product/budget-control
 * Copyright 2021 MlabFactory (https://www.mlabfactory.it)
-* Licensed under MIT (https://github.com/BudgetControl/Application/LICENSE.md)
+* Licensed under MIT (https://github.com/BudgetControl/Pwa?tab=AGPL-3.0-1-ov-file#readme)
 
 * Tailwind Starter Kit Page: https://www.mlabfactory.it/learning-lab/tailwind-starter-kit/presentation
 
@@ -66,7 +66,7 @@ gulp.task("licenses", async function () {
 
 * Product Page: https://www.mlabfactory.it/product/budget-control
 * Copyright 2021 MlabFactory (https://www.mlabfactory.it)
-* Licensed under MIT (hhttps://github.com/BudgetControl/Application/LICENSE.md)
+* Licensed under MIT (hhttps://github.com/BudgetControl/Pwa?tab=AGPL-3.0-1-ov-file#readme)
 
 * Tailwind Starter Kit Page: https://www.mlabfactory.it/learning-lab/tailwind-starter-kit/presentation
 

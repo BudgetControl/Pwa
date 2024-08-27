@@ -311,7 +311,7 @@ export default {
       },
       date: null,
       amount: null,
-      type: "expense",
+      type: "expenses",
       category: 0,
       label: [],
       note: null,

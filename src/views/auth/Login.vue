@@ -19,9 +19,9 @@
                 Facebook
               </button> -->
               <button @click="signInGoogle()"
-                class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
+                class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md items-center font-bold text-xs ease-linear transition-all duration-150 w-full text-center"
                 type="button">
-                <img alt="SignIn with Google" class="w-5 mr-1" :src="google" />
+                <img alt="SignIn with Google" class="w-5 mr-1 inline-flex" :src="google" />
                 Google
               </button>
             </div>
@@ -44,18 +44,12 @@
               </div>
 
               <div class="relative w-full mb-3">
-                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                  Email
-                </label>
                 <input type="email" v-model="email"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Email" />
               </div>
 
               <div class="relative w-full mb-3">
-                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                  Password
-                </label>
                 <input type="password" v-model="password"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Password" />

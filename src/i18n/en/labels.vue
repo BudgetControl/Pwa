@@ -18,7 +18,7 @@ export default {
     term_conditions_text: 'By registering or logging in with one of the aforementioned services, you consent to our {link_terms} and acknowledge our {link_privacy}, which outlines how we handle your personal data.',
     about_us: 'About Us',
     blog: 'Blog',
-    mit_license: 'MIT License',
+    mit_license: 'AGPL-3.0 license',
     docs: 'Docs',
     loading: 'Loading',
     dashboard: 'Dashboard',

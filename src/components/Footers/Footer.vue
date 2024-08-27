@@ -65,7 +65,7 @@
                 <li>
                   <a
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://www.mlabfactory.it/presentation?ref=vn-footer"
+                    href="https://www.budgetcontrol.cloud/about-budgetcontrol?ref=bc-app"
                   >
                     About Us
                   </a>
@@ -73,15 +73,7 @@
                 <li>
                   <a
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://blog.www.mlabfactory.it?ref=vn-footer"
-                  >
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://www.github.com/creativetimofficial?ref=vn-footer"
+                    href="https://www.github.com/creativetimofficial?ref=bc-app"
                   >
                     Github
                   </a>
@@ -89,7 +81,7 @@
                 <li>
                   <a
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://www.mlabfactory.it/bootstrap-themes/free?ref=vn-footer"
+                    href="https://www.mlabfactory.it/bootstrap-themes/free?ref=bc-app"
                   >
                     Free Products
                   </a>
@@ -106,15 +98,15 @@
                 <li>
                   <a
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://github.com/BudgetControl/Application/LICENSE.md?ref=vn-footer"
+                    href="https://github.com/BudgetControl/Pwa?tab=AGPL-3.0-1-ov-file#readme?ref=bc-app"
                   >
-                    MIT License
+                    AGPL-3.0 license
                   </a>
                 </li>
                 <li>
                   <a
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://www.mlabfactory.it/terms?ref=vn-footer"
+                    href="https://www.mlabfactory.it/terms?ref=bc-app"
                   >
                     Terms & Conditions
                   </a>
@@ -122,7 +114,7 @@
                 <li>
                   <a
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://www.mlabfactory.it/privacy?ref=vn-footer"
+                    href="https://www.mlabfactory.it/privacy?ref=bc-app"
                   >
                     Privacy Policy
                   </a>
@@ -130,7 +122,7 @@
                 <li>
                   <a
                     class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                    href="https://www.mlabfactory.it/contact-us?ref=vn-footer"
+                    href="https://www.mlabfactory.it/contact-us?ref=bc-app"
                   >
                     Contact Us
                   </a>
@@ -148,7 +140,7 @@
           <div class="text-sm text-blueGray-500 font-semibold py-1">
             Copyright © {{ date }} Vue Notus by
             <a
-              href="https://www.mlabfactory.it?ref=vn-footer"
+              href="https://www.mlabfactory.it?ref=bc-app"
               class="text-blueGray-500 hover:text-blueGray-800"
             >
               MlabFactory

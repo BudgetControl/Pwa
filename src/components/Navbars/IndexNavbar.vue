@@ -29,19 +29,6 @@
         :class="[navbarOpen ? 'block' : 'hidden']"
         id="example-navbar-warning"
       >
-        <ul class="flex flex-col lg:flex-row list-none mr-auto">
-          <li class="flex items-center">
-            <a
-              class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
-              href="https://www.budgetcontrol.cloud/documentation"
-            >
-              <i
-                class="text-blueGray-400 far fa-file-alt text-lg leading-lg mr-2"
-              />
-              Docs
-            </a>
-          </li>
-        </ul>
         <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
           <li class="flex items-center" v-if="token">
             <index-dropdown />
@@ -65,7 +52,7 @@
               to="/app/auth/register"
             >
               <i
-                class="text-blueGray-400 far fa-solid fa-right-to-bracket text-lg leading-lg mr-2"
+                class="text-blueGray-400 far fas fa-sign-in-alt text-lg leading-lg mr-2"
               />
               Sign up
             </router-link>
@@ -74,7 +61,7 @@
           <li class="flex items-center">
             <a
               class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
-              href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdemos.www.mlabfactory.it%2Fbudget-control%2F%23%2F"
+              href="https://www.facebook.com/profile.php?id=61564453328542"
               target="_blank"
             >
               <i class="text-blueGray-400 fab fa-facebook text-lg leading-lg" />
@@ -85,22 +72,11 @@
           <li class="flex items-center">
             <a
               class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
-              href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fdemos.www.mlabfactory.it%2Fbudget-control%2F%23%2F&text=Start%20your%20development%20with%20a%20Free%20Tailwind%20CSS%20and%20VueJS%20UI%20Kit%20and%20Admin.%20Let%20Vue%20Notus%20amaze%20you%20with%20its%20cool%20features%20and%20build%20tools%20and%20get%20your%20project%20to%20a%20whole%20new%20level.%20"
+              href="https://x.com/BudgetControl24"
               target="_blank"
             >
               <i class="text-blueGray-400 fab fa-twitter text-lg leading-lg" />
               <span class="lg:hidden inline-block ml-2">Tweet</span>
-            </a>
-          </li>
-
-          <li class="flex items-center">
-            <a
-              class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
-              href="https://github.com/BudgetControl/Core"
-              target="_blank"
-            >
-              <i class="text-blueGray-400 fab fa-github text-lg leading-lg" />
-              <span class="lg:hidden inline-block ml-2">Star</span>
             </a>
           </li>
         </ul>
