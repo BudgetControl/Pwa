@@ -2,9 +2,10 @@
   <div class="container mx-auto px-4 h-full">
     <loading :show="show">
     </loading>
-    <div class="flex content-center items-center justify-center h-full">
+    <div class="flex content-center items-center justify-center h-full ">
       <div class="w-full lg:w-4/12 px-4">
-        <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
+        <div
+          class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
           <div class="rounded-t mb-0 px-6 py-6">
             <div class="text-center mb-3">
               <h6 class="text-blueGray-500 text-sm font-bold">
@@ -57,31 +58,34 @@
 
               <div class="text-center mt-6">
                 <button
-                  class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                  class="bg-emerald-600 text-white active:bg-emerald-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                   type="submit">
                   {{ $t('labels.sign_in') }}
                 </button>
               </div>
             </form>
-          </div>
-        </div>
-        <div class="flex flex-wrap mt-6 relative">
-          <div class="w-1/2">
-            <router-link to="/app/auth/recovery-password" class="text-blueGray-200">
-              <small>{{ $t('labels.forgot_password') }}</small>
-            </router-link>
-          </div>
-          <div class="w-1/2 text-right">
-            <router-link to="/app/auth/register" class="text-blueGray-200">
-              <small>{{ $t('labels.create_new_account') }}</small>
-            </router-link>
+
+            <div class="flex flex-wrap mt-6 relative">
+              <div class="w-1/2">
+                <router-link to="/app/auth/recovery-password">
+                  <small>{{ $t('labels.forgot_password') }}</small>
+                </router-link>
+              </div>
+              <div class="w-1/2 text-right">
+                <router-link to="/app/auth/register">
+                  <small>{{ $t('labels.create_new_account') }}</small>
+                </router-link>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
     </div>
 
 
-    <div class="flex flex-wrap mt-6 relative text-blueGray-200 justify-center mt-10 text-xs" v-html="$t('text.profile.policy')">
+    <div class="flex flex-wrap mt-6 relative radius bg-blueGray-200 justify-center mt-10 text-xs p-2"
+      v-html="$t('text.profile.policy')">
     </div>
   </div>
 </template>
@@ -124,20 +128,20 @@ export default {
         const ws = LocalStorageService.getWorkspaceId()
         let currentWsUuid = response.workspaces[0].uuid
         response.workspaces.forEach(workspace => {
-          if(workspace.uuid === ws) {
+          if (workspace.uuid === ws) {
             currentWsUuid = ws
           }
         });
 
         const currentWSInStore = LocalStorageService.getWorkspaceId()
-        if(currentWSInStore !== currentWsUuid) {
+        if (currentWSInStore !== currentWsUuid) {
           LocalStorageService.setWorkspaceId(currentWsUuid)
         }
 
         AuthService.userInfo().then(() => {
           _this.$router.push({ path: '/app/dashboard' })
         }).catch(() => {
-            _this.error = this.$t('messages.generic_error')
+          _this.error = this.$t('messages.generic_error')
         })
 
       }).catch((err) => {
@@ -149,7 +153,7 @@ export default {
             _this.verify = true
             break;
           default:
-            _this.error =  this.$t('messages.login.not_valid_password')
+            _this.error = this.$t('messages.login.not_valid_password')
             break;
         }
 

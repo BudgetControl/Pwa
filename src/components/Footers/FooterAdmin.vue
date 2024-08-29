@@ -7,14 +7,14 @@
       >
         <div class="w-full md:w-4/12 px-4">
           <div
-            class="text-sm text-blueGray-500 font-semibold py-1 text-center md:text-left"
+            class="text-sm font-semibold text-white py-1 text-center md:text-left"
           >
             Copyright © {{ date }}
             <a
-              href="https://www.mlabfactory.it?ref=bc-app-admin"
+              href="https://www.budgetcontrol.cloud?ref=bc-app-admin"
               class="text-blueGray-500 hover:text-blueGray-700 text-sm font-semibold py-1"
             >
-              MlabFactory
+            BudgetControl
             </a>
           </div>
         </div>
