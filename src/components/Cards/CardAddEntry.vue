@@ -1,6 +1,6 @@
 <template>
   <form>
-    <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+    <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg items-center">
       <div class="flex flex-wrap py-3">
         <!-- ##### menu ########### -->
         <div class="w-full">
@@ -168,7 +168,7 @@
             </div>
           </div>
 
-          <div class="flex flex-wrap py-3 ml-2">
+          <div class="flex flex-wrap py-3 ml-2 w-full">
             <div v-for="(item, i) in input.tags" :key="i">
               <span v-on:click="removeTag(item)"
                 class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
