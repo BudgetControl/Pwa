@@ -140,17 +140,17 @@ async function labels(queryParams) {
     queryParams = '';
   }
 
-  const response = await instance.get(`/api/labels${queryParams}`);
+  const response = await instance.get(`/api/label/list${queryParams}`);
   return response.data;
 }
 
 async function label(id) {
-  const response = await instance.get(`/api/labels/${id}`);
+  const response = await instance.get(`/api/label/${id}`);
   return response.data;
 }
 
 async function setLabel(id, data) {
-  const response = await instance.put(`/api/labels/${id}`, data);
+  const response = await instance.put(`/api/label/${id}`, data);
   return response.data;
 }
 
