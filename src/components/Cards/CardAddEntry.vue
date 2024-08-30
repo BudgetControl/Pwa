@@ -399,7 +399,7 @@ export default {
     },
     getDebit() {
       let _this = this
-      ApiService.payee().then((res) => {
+      ApiService.debt().then((res) => {
         let data = res
         data.forEach(function (r) {
           _this.input.debit.push(r)

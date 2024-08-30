@@ -88,13 +88,13 @@ async function debit(page) {
   return response.data;
 }
 
-async function payee() {
-  const response = await instance.get(`/api/payee`);
+async function debt() {
+  const response = await instance.get(`/api/debt`);
   return response.data;
 }
 
-async function deletePayee(id) {
-  const response = await instance.delete(`/api/payee/${id}`);
+async function deleteDebt(id) {
+  const response = await instance.delete(`/api/debt/${id}`);
   return response.data;
 }
 
@@ -255,8 +255,8 @@ export default {
   getEntryFromAccount,
   getPlannedEntry,
   setPlannedEntry,
-  payee,
-  deletePayee,
+  debt,
+  deleteDebt,
   setAccount,
   setAccountSorting,
   setCategories,
