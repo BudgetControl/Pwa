@@ -89,7 +89,7 @@ async function debit(page) {
 }
 
 async function debt() {
-  const response = await instance.get(`/api/debt`);
+  const response = await instance.get(`/api/payees`);
   return response.data;
 }
 
