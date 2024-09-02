@@ -20,6 +20,18 @@ instance.interceptors.request.use(
   }
 );
 
+instance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    console.error('API Error:', error.response ? error.response.data : error.message);
+    
+    alert('An error occurred during the API request. Check the console for more details.', 'error');
+    return Promise.reject(error);
+  }
+);
+
 async function setEntry(type, data, isPlanned, uuid) {
   let url = `/api/entry/${type}`
   if (isPlanned == true || isPlanned == 'true') {
@@ -76,18 +88,24 @@ async function debit(page) {
   return response.data;
 }
 
-async function payee() {
-  const response = await instance.get(`/api/payee`);
+async function debt() {
+  const response = await instance.get(`/api/payees`);
   return response.data;
 }
 
-async function deletePayee(id) {
-  const response = await instance.delete(`/api/payee/${id}`);
+async function deleteDebt(id) {
+  const response = await instance.delete(`/api/debt/${id}`);
   return response.data;
+}
+
+async function subCategories() {
+  const response = await instance.get('/api/categories');
+ return response.data
+
 }
 
 async function categories() {
-  const response = await instance.get('/api/categories');
+  const response = await instance.get('/api/categories-subcategories');
  return response.data
 
 }
@@ -98,8 +116,8 @@ async function category(id) {
 }
 
 async function paymentstype() {
-  const response = await instance.get('/api/paymentstype');
-  return response.data.data;
+  const response = await instance.get('/api/payment-types');
+  return response.data;
 }
 
 async function model() {
@@ -128,23 +146,23 @@ async function labels(queryParams) {
     queryParams = '';
   }
 
-  const response = await instance.get(`/api/labels${queryParams}`);
+  const response = await instance.get(`/api/label/list${queryParams}`);
   return response.data;
 }
 
 async function label(id) {
-  const response = await instance.get(`/api/labels/${id}`);
+  const response = await instance.get(`/api/label/${id}`);
   return response.data;
 }
 
 async function setLabel(id, data) {
-  const response = await instance.put(`/api/labels/${id}`, data);
+  const response = await instance.put(`/api/label/${id}`, data);
   return response.data;
 }
 
 async function currencies() {
   const response = await instance.get('/api/currencies');
-  return response.data.data;
+  return response.data;
 }
 
 async function setDefaultCurrency(id) {
@@ -243,13 +261,14 @@ export default {
   getEntryFromAccount,
   getPlannedEntry,
   setPlannedEntry,
-  payee,
-  deletePayee,
+  debt,
+  deleteDebt,
   setAccount,
   setAccountSorting,
   setCategories,
   account,
   category,
+  subCategories,
   setLabel,
   setDefaultCurrency,
   getModel,

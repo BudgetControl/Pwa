@@ -64,6 +64,9 @@ import AuthToken from "@/views/auth/Token.vue";
 import Landing from "@/views/Landing.vue";
 // import Index from "@/views/Index.vue";
 
+
+import VueGtag from "vue-gtag";
+
 // 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -309,6 +312,12 @@ const i18n = createI18n({
 })
 
 const app = createApp(App);
+
+app.config.productionTip = false;
+app.use(VueGtag, {
+  config: { id: process.env.VUE_APP_GOOGLE_ANALYTICS },
+});
+
 // languages
 app.use(i18n)
 app.use(router)

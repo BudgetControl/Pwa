@@ -27,7 +27,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "@popperjs/core": "2.9.1",
     "@vue/compiler-sfc": "^3.3.4",
-    "@vuepic/vue-datepicker": "^7.0.0",
+    "@vuepic/vue-datepicker": "^9.0.2",
     "axios": "^1.3.6",
     "chart.js": "2.9.4",
     "core-js": "3.9.1",
@@ -37,6 +37,7 @@
     "vue-accessible-color-picker": "^4.1.4",
     "vue-device-detector": "^1.1.6",
     "vue-full-loading": "^1.2.1",
+    "vue-gtag": "^2.0.1",
     "vue-i18n": "^9.13.1",
     "vue-router": "4.0.5",
     "vuedraggable": "^4.1.0"

@@ -8,11 +8,11 @@
 
                     <div class="container px-4 mx-auto" v-on:click="openModal(null, null)">
 
-                        <button
+                        <!-- <button
                             class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button">
                             {{ $t('labels.add_new_category') }}
-                        </button>
+                        </button> -->
 
                     </div>
 
@@ -32,7 +32,7 @@
 
 
                         <div v-if="opentab == k">
-                            <div class="container px-4 mx-auto " v-for="(subItem, kk) in item.sub_category" :key="kk">
+                            <div class="container px-4 mx-auto " v-for="(subItem, kk) in item.subCategories" :key="kk">
                                 <div class="flex border border-dotted m-1">
                                     <div class="flex p-2">
                                     </div>
@@ -40,10 +40,10 @@
                                         <p class="w-full">
                                             {{ $t('app.' + subItem.name) }}
 
-                                            <span v-on:click="openModal(k, subItem.id)" v-if="subItem.custom == 1"
+                                            <!-- <span v-on:click="openModal(k, subItem.id)" v-if="subItem.custom == 1"
                                                 class="text-xs align-right font-semibold  py-1 px-2 rounded text-blueGray-600 bg-blueGray-200 uppercase">
                                                 edit
-                                            </span>
+                                            </span> -->
 
                                         </p>
                                     </div>
@@ -86,14 +86,11 @@ export default {
     },
     mounted: function () {
         ApiService.categories().then((res) => {
-            let data = res
             let _this = this
-            data.forEach(function (r) {
-                r.sub_category.forEach((item) => {
-                    _this.category.push({
-                        id: item.id,
-                        name: _this.$t('app.' + item.slug),
-                    })
+            res.forEach(function (item) {
+                _this.category.push({
+                    id: item.id,
+                    name: _this.$t('app.' + item.slug),
                 })
             })
             _this.category.sort(function (a, b) {

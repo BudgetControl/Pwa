@@ -148,7 +148,7 @@ export default {
       this.entries.splice(index, 1);
     },
     getPlannedEntries() {
-      ApiService.payee().then((resp) => {
+      ApiService.debt().then((resp) => {
         let debitColor = "text-red-500"
 
         resp.forEach(e => {
