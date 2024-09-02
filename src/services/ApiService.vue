@@ -98,8 +98,14 @@ async function deleteDebt(id) {
   return response.data;
 }
 
-async function categories() {
+async function subCategories() {
   const response = await instance.get('/api/categories');
+ return response.data
+
+}
+
+async function categories() {
+  const response = await instance.get('/api/categories-subcategories');
  return response.data
 
 }
@@ -262,6 +268,7 @@ export default {
   setCategories,
   account,
   category,
+  subCategories,
   setLabel,
   setDefaultCurrency,
   getModel,
