@@ -73,7 +73,7 @@ export default {
       let filter = `&filters[date_time]=<=|${new Date().getFullYear()}-${new Date().getMonth() + 1}-${lastDayOfCurrentMonth}T23:59:59`
 
       if (this.$route.query.wallet !== undefined) {
-        filter += `&filters[wallet]=${this.$route.query.wallet}`
+        filter += `&filters[wallet_id]=${this.$route.query.wallet}`
       }
 
       if (this.$route.query.category !== undefined) {
