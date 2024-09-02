@@ -88,7 +88,7 @@ export default {
         ApiService.categories().then((res) => {
             let data = res
             let _this = this
-            data.forEach(function (r) {
+            data.forEach(function (item) {
                 _this.category.push({
                     id: item.id,
                     name: _this.$t('app.' + item.slug),
