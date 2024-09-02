@@ -311,9 +311,9 @@ const i18n = createI18n({
 // GOOGLE ANALYTICS
 
 import VueGtag from "vue-gtag";
-Vue.config.productionTip = false;
+app.config.productionTip = false;
 
-Vue.use(VueGtag, {
+app.use(VueGtag, {
   config: { id: process.env.VUE_APP_GOOGLE_ANALYTICS },
 });
 
