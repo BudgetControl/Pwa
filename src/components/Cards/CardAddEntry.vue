@@ -410,12 +410,10 @@ export default {
       let _this = this
       ApiService.categories().then((res) => {
         let data = res
-        data.forEach(function (item) {
-          item.sub_category.forEach(function (sub) {
-            _this.input.category.push({
-              id: sub.id,
-              name: _this.$t('app.' + sub.slug),
-            })
+        data.forEach(function (sub) {
+          _this.input.category.push({
+            id: sub.id,
+            name: _this.$t('app.' + sub.slug),
           })
         })
         _this.input.category.sort(function (a, b) {

@@ -47,7 +47,7 @@
           <div class="px-2 py-2 w-full lg:w-6/12">
             <select v-model="category" id="category"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
-              <option value="0">{{  $t('labels.choose_a_category') }}</option>
+              <option value="0">{{ $t('labels.choose_a_category') }}</option>
               <option v-for="item in input.category" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
           </div>
@@ -61,7 +61,8 @@
           <div class="lg:w-6/12 px-2 py-2 w-full">
             <select v-model="currency"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-              <option v-for="item in input.currency" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}</option>
+              <option v-for="item in input.currency" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}
+              </option>
             </select>
           </div>
         </div>
@@ -94,8 +95,8 @@
               <span
                 class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
                 v-if="label.includes(item.id)" :style="'color: #fff; background-color: ' + item.color">{{
-                        item.name
-                      }}</span>
+                  item.name
+                }}</span>
             </div>
           </div>
 
@@ -103,7 +104,8 @@
 
         <div class="flex flex-wrap py-3">
           <div class="lg:w-12/12 px-2 w-full">
-            <textarea v-model="note" type="text" :placeholder="$t('labels.add_here_your_note')" required id="note" rows="2"
+            <textarea v-model="note" type="text" :placeholder="$t('labels.add_here_your_note')" required id="note"
+              rows="2"
               class="border-0 px-3 py-5 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
           </div>
 
@@ -123,7 +125,8 @@
               <span class="text-xs">{{ $t('labels.choose_frequency') }}</span>
               <select id="planning" v-model="planning"
                 class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                <option required v-for="(item, k) in input.planning" :key="k" :value="item.value">{{ item.label }}</option>
+                <option required v-for="(item, k) in input.planning" :key="k" :value="item.value">{{ item.label }}
+                </option>
               </select>
             </div>
 
@@ -131,7 +134,8 @@
               <span class="text-xs">{{ $t('labels.choose_method') }}</span>
               <select v-model="payment_type" id="payment_type"
                 class="w-full border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}</option>
+                <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}
+                </option>
               </select>
             </div>
 
@@ -277,7 +281,7 @@ export default {
         value: 'yearly'
       }
     ]
-    
+
   },
   methods: {
     time() {
@@ -291,12 +295,10 @@ export default {
       let _this = this
       ApiService.categories().then((res) => {
         let data = res
-        data.forEach(function (r) {
-          r.sub_category.forEach((item) => {
-            _this.input.category.push({
-              id: item.id,
-              name: _this.$t('app.' + item.slug),
-            })
+        data.forEach(function (sub) {
+          _this.input.category.push({
+            id: sub.id,
+            name: _this.$t('app.' + sub.slug),
           })
         })
         _this.input.category.sort(function (a, b) {

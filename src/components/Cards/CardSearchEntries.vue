@@ -78,7 +78,7 @@
                                 v-model="action.account">
                                 <option v-for="account in input.account" :key="account.id" :value="account.id">{{
                                     account.name
-                                }}</option>
+                                    }}</option>
                             </select>
                         </div>
                     </div>
@@ -293,29 +293,28 @@ export default {
             let _this = this
             ApiService.categories().then((res) => {
                 let data = res
-                data.forEach(function (r) {
-                    r.sub_category.forEach((item) => {
-                        _this.input.category.push({
-                            id: item.id,
-                            name: _this.$t('app.' + item.slug),
-                        })
+                data.forEach(function (sub) {
+                    _this.input.category.push({
+                        id: sub.id,
+                        name: _this.$t('app.' + sub.slug),
                     })
                 })
-                _this.input.category.sort(function (a, b) {
-                    return a.name.localeCompare(b.name);
-                });
+            })
+            _this.input.category.sort(function (a, b) {
+                return a.name.localeCompare(b.name);
+            });
 
+        })
+    },
+    getAccount() {
+        let _this = this
+        ApiService.accounts().then((res) => {
+            let data = res
+            data.forEach(function (r) {
+                _this.input.account.push(r)
             })
-        },
-        getAccount() {
-            let _this = this
-            ApiService.accounts().then((res) => {
-                let data = res
-                data.forEach(function (r) {
-                    _this.input.account.push(r)
-                })
-            })
-        },
-    }
+        })
+    },
+}
 }
 </script>
