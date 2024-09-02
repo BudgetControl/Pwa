@@ -25,7 +25,7 @@
                             </div>
                             <div class="flex lg:w-10/12 p-2">
                                 <p>
-                                    {{ $t('app.' + item.slug) }}
+                                    {{item.name}}
                                 </p>
                             </div>
                         </div>
@@ -38,12 +38,12 @@
                                     </div>
                                     <div class="flex lg:w-10/12 p-2">
                                         <p class="w-full">
-                                            {{ $t('app.' + subItem.name) }}
+                                            {{ $t('app.' + subItem.slug) }}
 
-                                            <!-- <span v-on:click="openModal(k, subItem.id)" v-if="subItem.custom == 1"
+                                            <span v-on:click="openModal(k, subItem.id)" v-if="subItem.custom == 1"
                                                 class="text-xs align-right font-semibold  py-1 px-2 rounded text-blueGray-600 bg-blueGray-200 uppercase">
                                                 edit
-                                            </span> -->
+                                            </span>
 
                                         </p>
                                     </div>
@@ -88,12 +88,14 @@ export default {
         ApiService.categories().then((res) => {
             let _this = this
             res.forEach(function (item) {
-                _this.category.push({
+                _this.categories.push({
                     id: item.id,
                     name: _this.$t('app.' + item.slug),
+                    icon: item.icon,
+                    subCategories: item.subCategories,
                 })
             })
-            _this.category.sort(function (a, b) {
+            _this.categories.sort(function (a, b) {
                 return a.name.localeCompare(b.name);
             });
 
