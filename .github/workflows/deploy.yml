@@ -21,6 +21,10 @@ jobs:
         - name: Install Dependencies
           run: npm install
 
+        - name: Set Environment Variable
+          run: echo "VUE_APP_GOOGLE_ANALYTICS=${{ secrets.GTAG_ANALITYC }} " >> .env
+          run: echo "VUE_APP_VERSION=2.9.0 " >> .env
+
         - name: Build package
           run: npm run build
         
