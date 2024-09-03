@@ -27,7 +27,7 @@ instance.interceptors.response.use(
   (error) => {
     console.error('API Error:', error.response ? error.response.data : error.message);
     
-    alert('An error occurred during the API request. Check the console for more details.', 'error');
+    console.warning('An error occurred during the API request. Check the console for more details.');
     return Promise.reject(error);
   }
 );
