@@ -291,7 +291,7 @@ export default {
         },
         getCategory() {
             let _this = this
-            ApiService.categories().then((res) => {
+            ApiService.subCategories().then((res) => {
                 let data = res
                 data.forEach(function (sub) {
                     _this.input.category.push({
