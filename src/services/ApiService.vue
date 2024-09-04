@@ -121,7 +121,7 @@ async function paymentstype() {
 }
 
 async function model() {
-  const response = await instance.get('/api/entry/model');
+  const response = await instance.get('/api/entry/model?order[name]=asc');
   return response.data;
 }
 
@@ -143,7 +143,7 @@ async function setModel(data, id) {
 
 async function labels(queryParams) {
   if (queryParams === undefined) {
-    queryParams = '';
+    queryParams = '?order[name]=asc';
   }
 
   const response = await instance.get(`/api/label/list${queryParams}`);
