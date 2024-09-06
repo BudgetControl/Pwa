@@ -708,7 +708,7 @@ export default {
     },
     getAccount() {
       let _this = this
-      ApiService.accounts().then((res) => {
+      ApiService.accounts('?order[name]=asc').then((res) => {
         let data = res
         data.forEach(function (r) {
           _this.input.account.push(r)
