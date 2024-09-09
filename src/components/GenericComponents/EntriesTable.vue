@@ -172,10 +172,13 @@ export default {
                     });
 
                     const currency = r.currency
+                    const date_Time = new Date(r.date_time)
+                    const formattedDate = date_Time.toISOString().slice(0, 19).replace('T', ' ')
+
                     let info = {
                         uuid: r.uuid,
                         id: r.id,
-                        date: r.date_time,
+                        date: formattedDate,
                         amount: parseFloat(r.amount).toFixed(2) + " " + currency.icon,
                         color_amount: r.amount <= 0 ? "text-red-500" : "text-emerald-500",
                         type_amount: r.amount <= 0 ? "expenses" : "incoming",

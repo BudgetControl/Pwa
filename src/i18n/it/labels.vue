@@ -208,5 +208,7 @@ export default {
     wallet_name: 'Nome del portafoglio',
     balance_wallet: 'Saldo del portafoglio',
     wallet_type: 'Tipo di portafoglio',
+    next_execution_time: 'Prossimo data di esecuzione',
+    end_time: 'Data di fine',
 }
 </script>

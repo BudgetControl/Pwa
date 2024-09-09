@@ -26,11 +26,25 @@ instance.interceptors.response.use(
   },
   (error) => {
     console.error('API Error:', error.response ? error.response.data : error.message);
-    
+
     console.warn('An error occurred during the API request. Check the console for more details.');
     return Promise.reject(error);
   }
 );
+
+async function setPlannedEntry(data, uuid) {
+  let url = `/api/entry/planned`
+
+  let response
+  if (uuid !== null && uuid !== undefined) {
+    url = `${url}/${uuid}`
+    response = await instance.put(url, data);
+  } else {
+    response = await instance.post(url, data);
+  }
+
+  return response.data;
+}
 
 async function setEntry(type, data, isPlanned, uuid) {
   let url = `/api/entry/${type}`
@@ -100,13 +114,13 @@ async function deleteDebt(id) {
 
 async function subCategories() {
   const response = await instance.get('/api/categories');
- return response.data
+  return response.data
 
 }
 
 async function categories() {
   const response = await instance.get('/api/categories-subcategories');
- return response.data
+  return response.data
 
 }
 
@@ -223,11 +237,6 @@ async function importData(data) {
 
 async function getPlannedEntry(page) {
   const response = await instance.get(`/api/entry/planned?page=${page}`);
-  return response.data;
-}
-
-async function setPlannedEntry(data) {
-  const response = await instance.post('/api/entry/planned', data);
   return response.data;
 }
 
