@@ -35,7 +35,7 @@ instance.interceptors.response.use(
 async function setEntry(type, data, isPlanned, uuid) {
   let url = `/api/entry/${type}`
   if (isPlanned == true || isPlanned == 'true') {
-    url = `/api/planning-recursively`
+    url = `/api/entry/planned`
   }
 
   let response
@@ -57,7 +57,7 @@ async function getEntry(page, filter) {
 async function deleteEntry(id, isPlanned) {
   let url = `/api/entry/${id}`
   if (isPlanned == true || isPlanned == 'true') {
-    url = `/api/planning-recursively/${id}`
+    url = `/api/entry/planned/${id}`
   }
 
   const response = await instance.delete(url);
@@ -67,7 +67,7 @@ async function deleteEntry(id, isPlanned) {
 async function getEntryDetail(id, isPlanned) {
   let url = `/api/entry/${id}`
   if (isPlanned == true || isPlanned == 'true') {
-    url = `/api/planning-recursively/${id}`
+    url = `/api/entry/planned/${id}`
   }
   const response = await instance.get(url);
   return response.data;
@@ -222,12 +222,12 @@ async function importData(data) {
 }
 
 async function getPlannedEntry(page) {
-  const response = await instance.get(`/api/planning-recursively?page=${page}`);
+  const response = await instance.get(`/api/entry/planned?page=${page}`);
   return response.data;
 }
 
 async function setPlannedEntry(data) {
-  const response = await instance.post('/api/planning-recursively', data);
+  const response = await instance.post('/api/entry/planned', data);
   return response.data;
 }
 
