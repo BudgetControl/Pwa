@@ -26,8 +26,8 @@
 
             <div class="flex flex-wrap">
                 <div class="flex-l w-full px-4">
-                    <p class="text-xs block rounded"><span class="text-emerald-500">Next execution time:</span> {{ entry.date }}</p>
-                    <p class="text-xs block rounded" v-if="entry.end_date"><span class="text-emerald-500">End time:</span> {{ entry.end_date }}</p>
+                    <p class="text-xs block rounded"><span class="text-emerald-500">{{ $t('labels.next_execution_time')}}:</span> {{ entry.date }}</p>
+                    <p class="text-xs block rounded" v-if="entry.end_date"><span class="text-emerald-500">{{ $t('labels.end_time')}}:</span> {{ entry.end_date }}</p>
                 </div>
             </div>
 
@@ -84,15 +84,18 @@ export default {
 
             let currentPage = window.localStorage.getItem('current_page') == null ? 0 : window.localStorage.getItem('current_page')
             ApiServiceVue.getPlannedEntry(currentPage).then((resp) => {
-                resp.data.forEach(e => {
+                resp.forEach(e => {
+                    const date_time = new Date(e.date_time)
+                    const formattedDate = date_time.toISOString().split('T')[0];
+
                     let info = {
                         id: e.uuid,
-                        date: e.date_time,
+                        date: formattedDate,
                         end_date: (e.end_date_time == null) ? null : e.end_date_time,
                         amount: e.amount.toFixed(2) + " €",
                         color_amount: e.amount <= 0 ? "text-red-500" : "text-emerald-500",
                         type_amount: e.amount <= 0 ? "expenses" : "incoming",
-                        account: e.account.name,
+                        wallet: e.wallet.name,
                         note: e.note,
                         planning: e.planning,
                         planned: e.planned == 0 ? false : true,

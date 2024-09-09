@@ -684,6 +684,7 @@ export default {
             _this.model = [],
             _this.newlabel = null,
             _this.action.dateUpdated = false
+
           localStorage.setItem("new_entry", true)
           this.time()
 

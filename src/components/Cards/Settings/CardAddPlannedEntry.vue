@@ -345,7 +345,7 @@ export default {
         _this.category = model.sub_category.id
         _this.note = model.note
         _this.currency = model.currency_id
-        _this.account = model.account.id
+        _this.account = model.wallet.id
         _this.payment_type = model.payment_type
         _this.waranty = model.waranty == 1 ? true : false
         _this.confirmed = model.confirmed == 1 ? true : false
@@ -426,14 +426,15 @@ export default {
           geolocalization: this.geolocalization,
           planning: this.planning,
           transfer_realtion: this.transfer_relation,
-          end_date_time: this.end_date_time
+          end_date_time: this.end_date_time,
+          type: this.type,
         }
 
         if (this.type == "expenses") {
           data.amount = this.amount * -1
         }
 
-        ApiService.setEntry(this.type, data, this.isPlanned, this.entryId).then(() => {
+        ApiService.setPlannedEntry(data, this.entryId).then(() => {
           _this.date = null,
             _this.amount = null,
             _this.category = data.category_id,

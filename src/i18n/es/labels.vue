@@ -208,5 +208,7 @@ export default {
     wallet_name: 'Nombre de la billetera',
     balance_wallet: 'Saldo de la billetera',
     wallet_type: 'Tipo de billetera',
+    next_execution_time: 'Próxima dia de ejecución',
+    end_time: 'Dia de finalización',
 }
 </script>

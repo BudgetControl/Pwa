@@ -208,6 +208,8 @@ export default {
     wallet_name: 'Wallet name',
     balance_wallet: 'Balance wallet',
     wallet_type: 'Wallet type',
+    next_execution_time: 'Next execution day',
+    end_time: 'End day',
 };
 
 </script>
