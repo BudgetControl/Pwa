@@ -159,7 +159,7 @@ export default {
                 data.forEach(function (r) {
 
                     let labels = []
-                    r.label.forEach((l) => {
+                    r.labels.forEach((l) => {
                         if (l.name != "") {
                             labels.push(
                                 {

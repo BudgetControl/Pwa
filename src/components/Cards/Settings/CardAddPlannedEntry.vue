@@ -179,6 +179,7 @@ import ApiService from '@/services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import AlertModal from '../../GenericComponents/AlertModal.vue';
+import libs from '../../../Libs.vue';
 
 export default {
   props: {
@@ -403,16 +404,31 @@ export default {
     setEntry() {
 
       if (this.validateBefore()) {
-        let label = this.label
+        let label = []
         let _this = this
 
         if (this.label.length == 0 && this.newlabel != null) {
-          label = [this.newlabel]
+          const tags = this.newlabel.split(',')
+          tags.forEach(function (r) {
+            label.push({
+              name: r,
+              color: libs.generateRandomColor()
+            })
+          })
+        } else {
+          this.label.forEach(function (r) {
+            label.push({
+              name: this.input.tags.find(x => x.id == r).name,
+              color: null
+            })
+          })
         }
+
+
         let data = {
           amount: this.amount,
           note: this.note,
-          label: label,
+          labels: label,
           account_id: this.account,
           category_id: this.category,
           currency_id: this.currency,
