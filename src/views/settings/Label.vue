@@ -24,7 +24,7 @@
                     </div>
 
                     <!-- labels -->
-                    <div class="container px-4 mx-auto " v-for="(item, k) in labels" :key="k" v-on:click="openModal(item.id)">
+                    <div class="container px-4 mx-auto " v-for="(item, k) in labels" :key="k" v-on:click="openModal(item.uuid)">
                         <div class="flex border border-dotted m-1" v-if="item.archive == 0 || action.archived == true">
                             <div class="flex p-2" :style="'background-color: '+item.color">
                             </div>

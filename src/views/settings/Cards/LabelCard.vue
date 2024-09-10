@@ -8,7 +8,7 @@
                     <div class="relative p-6 flex-auto">
                         <!-- Regular Input -->
                         <div class="mb-3 pt-0">
-                            <input type="text" placeholder="Category name" v-model="modal.name"
+                            <input type="text" placeholder="" v-model="modal.name"
                                 class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                         </div>
 
@@ -83,17 +83,17 @@ export default {
         },
         openModal(id) {
             ApiService.label(id).then((resp) => {
-                resp = resp[0]
                 this.modal.id = resp.id
                 this.modal.name = resp.name
                 this.modal.archive = resp.archive
                 this.modal.color = resp.color
+                this.modal.uuid = resp.uuid
             })
         },
 
         saveModal() {
             const _this = this
-            ApiService.setLabel(this.modal.id, this.modal).then(() => {
+            ApiService.setLabel(this.modal.uuid, this.modal).then(() => {
                 alert('Label updated')
                 _this.$router.push({path : '/app/settings/label'})
             })
