@@ -494,7 +494,7 @@ export default {
           _this.transferto = model.transfer_id
         }
 
-        model.label.forEach((item) => {
+        model.labels.forEach((item) => {
           _this.label.push(item.id)
         });
       })
@@ -527,7 +527,7 @@ export default {
         _this.action.reset = true
         _this.label = []
 
-        model.label.forEach((item) => {
+        model.labels.forEach((item) => {
           _this.label.push(item.id)
         });
 
