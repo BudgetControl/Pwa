@@ -109,7 +109,7 @@ export default {
                         labels: []
                     }
                     
-                    e.label.forEach((l) => {
+                    e.labels.forEach((l) => {
                         if (l.name != "") {
                             info.labels.push(
                                 {
