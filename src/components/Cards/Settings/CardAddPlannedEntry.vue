@@ -364,7 +364,7 @@ export default {
         }
 
         model.label.forEach((item) => {
-          _this.label.push(item.id)
+          _this.labels.push(item.id)
         });
       })
 
@@ -418,7 +418,7 @@ export default {
         } else {
           this.label.forEach(function (r) {
             label.push({
-              name: this.input.tags.find(x => x.id == r).name,
+              name: _this.input.tags.find(x => x.id == r).name,
               color: null
             })
           })

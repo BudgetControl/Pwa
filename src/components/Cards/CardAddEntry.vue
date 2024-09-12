@@ -494,7 +494,7 @@ export default {
           _this.transferto = model.transfer_id
         }
 
-        model.label.forEach((item) => {
+        model.labels.forEach((item) => {
           _this.label.push(item.id)
         });
       })
@@ -527,7 +527,7 @@ export default {
         _this.action.reset = true
         _this.label = []
 
-        model.label.forEach((item) => {
+        model.labels.forEach((item) => {
           _this.label.push(item.id)
         });
 
@@ -544,11 +544,12 @@ export default {
       })
     },
     setModel() {
+      const label = labels(this)
       let data = {
         name: this.name,
         amount: this.amount,
         note: this.note,
-        label: this.label,
+        labels: label,
         account_id: this.account,
         category_id: this.category,
         currency_id: this.currency,
@@ -635,25 +636,8 @@ export default {
     setEntry() {
 
       if (this.validateBefore()) {
-        let label = []
-        let _this = this
-
-        if (this.label.length == 0 && this.newlabel != null) {
-          const tags = this.newlabel.split(',')
-          tags.forEach(function (r) {
-            label.push({
-              name: r,
-              color: libs.generateRandomColor()
-            })
-          })
-        } else {
-          this.label.forEach(function (r) {
-            label.push({
-              name: _this.input.tags.find(x => x.id == r).id,
-              color: null
-            })
-          })
-        }
+        const _this = this
+        const label = labels(this)
 
         let data = {
           amount: this.amount,
@@ -798,6 +782,28 @@ export default {
     }
   },
 };
+
+function labels(_this) {
+  let label = []
+  if (_this.label.length == 0 && _this.newlabel != null) {
+    const tags = _this.newlabel.split(',')
+    tags.forEach(function (r) {
+      label.push({
+        name: r,
+        color: libs.generateRandomColor()
+      })
+    })
+  } else {
+    _this.label.forEach(function (r) {
+      label.push({
+        name: _this.input.tags.find(x => x.id == r).id,
+        color: null
+      })
+    })
+  }
+
+  return label
+}
 
 </script>
 
