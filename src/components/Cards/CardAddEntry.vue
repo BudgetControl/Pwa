@@ -495,7 +495,7 @@ export default {
         }
 
         model.labels.forEach((item) => {
-          _this.label.push(item.id)
+          _this.labels.push(item.id)
         });
       })
 
@@ -528,7 +528,7 @@ export default {
         _this.label = []
 
         model.labels.forEach((item) => {
-          _this.label.push(item.id)
+          _this.labels.push(item.id)
         });
 
       })

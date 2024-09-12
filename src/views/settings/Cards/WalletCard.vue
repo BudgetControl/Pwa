@@ -238,7 +238,7 @@ export default {
                 closing_date: this.modal.closingAccountDate,
                 payment_account: this.modal.accountPayment,
                 type: this.modal.type,
-                installementValue: this.modal.installment,
+                installement_value: this.modal.installment,
                 installment: this.installment,
                 currency: this.modal.currency,
                 balance: this.modal.balance,
