@@ -7,13 +7,12 @@
 
             <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
               <div class="relative">
-                <img alt="..." :src="userProfile"
-                  class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px bg-white" />
+                  <Avatar class="mt-10" :name="user.name" variant="beam" size="120"/>
               </div>
             </div>
           </div>
 
-          <div class="text-center mt-12 mt-32 flex flex-wrap justify-center">
+          <div class="text-center mt-12 flex flex-wrap justify-center">
             <div class="px-4 flex">
               <a href="/app/dashboard"
                 class="bg-emerald-500 active:bg-emerald-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150">
@@ -111,20 +110,19 @@
 
 import AuthService from "@/services/AuthService.vue";
 import DeleteButton from "../../components/Auth/DeleteButton.vue";
-import userProfile from "@/assets/img/flat-business-man-user-profile.jpeg";
 import LocalStorageService from "../../services/LocalStorageService.vue";
 import StatsService from "../../services/StatsService.vue";
 import ApiServiceVue from '../../services/ApiService.vue';
+import Avatar from "vue-boring-avatars";
 
 export default {
   data() {
     return {
-      userProfile,
       user: {
         currency: '$',
         photo: null,
         suggestion: null,
-        name: null,
+        name: "",
         email: null,
         wallet: {
           total: 0,
@@ -138,7 +136,7 @@ export default {
     };
   },
   components: {
-    DeleteButton
+    DeleteButton, Avatar
   },
   async beforeMount() {
     const _this = this
