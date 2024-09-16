@@ -48,7 +48,7 @@
                                 htmlFor="grid-password">
                                 {{ $t('labels.date_interval') }}
                             </label>
-                            <VueDatePicker v-model="action.date_time" :range="{ autoRange: 1 }" :options="input.month"
+                            <VueDatePicker v-model="action.date_time" :range="{ maxRange: 364 }" :options="input.month" :required=true
                                 :placeholder="$t('labels.date_interval')" format="yyyy-MM-dd" />
                         </div>
                     </div>
