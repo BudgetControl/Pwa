@@ -58,6 +58,11 @@ async function getStatsEntries(data) {
   return response.data;
 }
 
+async function getEntryList(data) {
+  const response = await instance.post('/api/stats/entries',data);
+  return response.data;
+}
+
 export default {
   incoming,
   expenses,
@@ -65,6 +70,7 @@ export default {
   wallets,
   planned,
   health,
+  getEntryList,
   getStatsEntries
 }
 

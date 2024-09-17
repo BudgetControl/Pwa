@@ -36,6 +36,7 @@
 </template>
 
 <script>
+
 export default {
     props: {
         budget: {

@@ -18,7 +18,7 @@
                     {{ $t('labels.weekly') }}
                 </span>
 
-                <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.week"
+                <Budget :budget="budget" :currency="currency" v-for="budget in budgets.week"
                     :key="budget.budget.uuid" />
             </div>
 
@@ -29,7 +29,7 @@
                     {{ $t('labels.monthly') }}
                 </span>
 
-                <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.month"
+                <Budget :budget="budget" :currency="currency" v-for="budget in budgets.month"
                     :key="budget.budget.uuid" />
             </div>
 
@@ -39,7 +39,7 @@
                     {{ $t('labels.yearly') }}
                 </span>
 
-                <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.year"
+                <Budget :budget="budget" :currency="currency" v-for="budget in budgets.year"
                     :key="budget.budget.uuid" />
             </div>
 
@@ -48,7 +48,7 @@
                     {{ $t('labels.one_shot') }}
                 </span>
 
-                <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.custom"
+                <Budget :budget="budget" :currency="currency" v-for="budget in budgets.custom"
                     :key="budget.budget.uuid" />
             </div>
 
@@ -58,8 +58,8 @@
 <script>
 
 import LocalStorageServiceVue from '../../../services/LocalStorageService.vue'
-import ChartServiceVue from '../../../services/ChartService.vue'
-import BudgetComponent from '../../GenericComponents/BudgetComponent.vue'
+import BudgetService from '../../../services/BudgetService.vue';
+import Budget from '../../Budget/Budget.vue'
 
 export default {
     data() {
@@ -74,7 +74,7 @@ export default {
         }
     },
     components: {
-        BudgetComponent
+        Budget
     },
     mounted() {
         this.init()
@@ -93,7 +93,7 @@ export default {
         },
         init: function () {
             const _this = this
-            ChartServiceVue.getBudgets().then((resp) => {
+            BudgetService.getBudgets().then((resp) => {
                 resp.forEach((data) => {
                     const period = data.budget.configuration.period
                     data.percentage = data.totalSpentPercentage.replace('%', '')
