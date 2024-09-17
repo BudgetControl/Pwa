@@ -220,6 +220,7 @@ export default {
     workspace_whared_with: 'Workspace shared with',
     user_not_found: 'User not found',
     list_of_voices: 'List of voices',
+    no_voices_found: 'No voices found',
 };
 
 </script>
