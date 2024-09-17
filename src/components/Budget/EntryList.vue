@@ -1,5 +1,9 @@
 <template>
     <div class="container">
+
+        <div v-if="entries === false" class="row border p-5 border-dotted m-1">
+            {{  $t('labels.no_voices_found') }}
+        </div>
         <EntriesTable ref="entry" />
     </div>
 </template>
@@ -21,10 +25,7 @@ export default {
     },
     data() {
         return {
-            entries: [],
-            action: {
-                reset: true
-            }
+            entries: null
         }
     },
     mounted() {
@@ -35,7 +36,10 @@ export default {
             const uuid = this.uuid
             BudgetService.getEntryList(uuid).then((res) => {
                 if (res.length > 0) {
+                    this.entries = true
                     this.$refs.entry.buildEntriesTable(res)
+                } else {
+                    this.entries = false
                 }
             })
         }

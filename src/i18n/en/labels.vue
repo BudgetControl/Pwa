@@ -211,6 +211,7 @@ export default {
     next_execution_time: 'Next execution day',
     end_time: 'End day',
     list_of_voices: 'List of voices',
+    no_voices_found: 'No voices found',
 };
 
 </script>
