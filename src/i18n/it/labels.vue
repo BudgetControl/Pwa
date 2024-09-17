@@ -210,5 +210,6 @@ export default {
     wallet_type: 'Tipo di portafoglio',
     next_execution_time: 'Prossimo data di esecuzione',
     end_time: 'Data di fine',
+    list_of_voices: 'Elenco delle voci',
 }
 </script>

@@ -30,7 +30,7 @@
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import ApiService from '@/services/ApiService.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
-import EntriesTable from '../../components/GenericComponents/EntriesTable.vue';
+import EntriesTable from '../../components/Entry/EntriesTable.vue';
 
 export default {
     components: {
