@@ -88,12 +88,8 @@ export default {
         LocalStorage.setWorkspaceId(wsUuid)
       }
 
-<<<<<<< HEAD
-      LocalStorageService.set('workspace', settings)
-=======
       LocalStorage.set('workspace', settings)
       WorkspaceServiceVue.activeWorkspace(wsUuid)
->>>>>>> 071db47 (WIP)
 
     })
   },

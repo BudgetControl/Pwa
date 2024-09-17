@@ -228,5 +228,6 @@ export default {
     no_entries_found: 'Nessuna voce trovata',
     credit_card_installement: 'Rata della carta di credito',
     choose_planned_type: 'Scegli un tipo pianificato',
+    list_of_voices: 'Elenco delle voci',
 }
 </script>
