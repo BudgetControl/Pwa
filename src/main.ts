@@ -3,69 +3,69 @@ import { createApp } from "vue";
 import { createWebHistory, createRouter } from "vue-router";
 
 // styles
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import "@/assets/styles/tailwind.css";
-import "@/assets/styles/custom.scss";
+// import ".fortawesome/fontawesome-free/css/all.min.css";
+import "./assets/styles/tailwind.css";
+import "./assets/styles/custom.scss";
 
 // mouting point for the whole app
-import App from "@/App.vue";
+import App from "./App.vue";
 
 // translations
 import { createI18n } from 'vue-i18n'
-import translations from "@/i18n/translations.vue"
+import translations from "./i18n/translations.vue"
 
 // layouts
-import Admin from "@/layouts/Admin.vue";
-import Application from "@/layouts/Application.vue";
-import Auth from "@/layouts/Auth.vue";
+import Admin from "./layouts/Admin.vue";
+import Application from "./layouts/Application.vue";
+import Auth from "./layouts/Auth.vue";
 
 // views for Admin layout
-import Dashboard from "@/views/application/Dashboard.vue";
-import AddEntry from "@/views/application/AddEntry.vue";
-import MyPlannedEntries from "@/views/application/MyPlannedEntries.vue";
-import AddPlannedEntry from "@/views/application/AddPlannedEntry.vue";
-import PayeeList from "@/views/application/PayeeList.vue";
-import MyEntries from "@/views/application/MyEntries.vue";
-import ImportEntries from "@/views/application/ImportEntries.vue";
-import SearchEntries from "@/views/application/SearchEntries.vue";
-import EntriesResume from "@/views/application/EntriesResume.vue";
-import Budgets from "@/views/application/Budgets.vue";
-import AddBudgets from "@/components/Cards/Settings/CardAddBudget.vue";
-import Stats from "@/views/application/Stats.vue";
+import Dashboard from "./views/application/Dashboard.vue";
+import AddEntry from "./views/application/AddEntry.vue";
+import MyPlannedEntries from "./views/application/MyPlannedEntries.vue";
+import AddPlannedEntry from "./views/application/AddPlannedEntry.vue";
+import PayeeList from "./views/application/PayeeList.vue";
+import MyEntries from "./views/application/MyEntries.vue";
+import ImportEntries from "./views/application/ImportEntries.vue";
+import SearchEntries from "./views/application/SearchEntries.vue";
+import EntriesResume from "./views/application/EntriesResume.vue";
+import Budgets from "./views/application/Budgets.vue";
+import AddBudgets from "./components/Cards/Settings/CardAddBudget.vue";
+import Stats from "./views/application/Stats.vue";
 
 // settings layout
 
-import Profile from "@/views/settings/Profile.vue";
-import Settings from "@/views/settings/Settings.vue";
-import Wallet from "@/views/settings/Wallet.vue";
-import WalletCard from "@/views/settings/Cards/WalletCard.vue";
-import Category from "@/views/settings/Category.vue";
-import CategoryCard from "@/views/settings/Cards/CategoryCard.vue";
-import Label from "@/views/settings/Label.vue";
-import LabelCard from "@/views/settings/Cards/LabelCard.vue";
-import Currency from "@/views/settings/Currency.vue";
-import Model from "@/views/settings/Model.vue";
-import ModelCard from "@/views/settings/Cards/ModelCard.vue";
-import Assistance from "@/views/settings/Assistance.vue";
-import AboutUs from "@/views/settings/AboutUs.vue";
-import Workspace from "@/views/settings/Workspace.vue";
-import WorkspaceCard from "@/views/settings/Cards/WorkspaceCard.vue";
+import Profile from "./views/settings/Profile.vue";
+import Settings from "./views/settings/Settings.vue";
+import Wallet from "./views/settings/Wallet.vue";
+import WalletCard from "./views/settings/Cards/WalletCard.vue";
+import Category from "./views/settings/Category.vue";
+import CategoryCard from "./views/settings/Cards/CategoryCard.vue";
+import Label from "./views/settings/Label.vue";
+import LabelCard from "./views/settings/Cards/LabelCard.vue";
+import Currency from "./views/settings/Currency.vue";
+import Model from "./views/settings/Model.vue";
+import ModelCard from "./views/settings/Cards/ModelCard.vue";
+import Assistance from "./views/settings/Assistance.vue";
+import AboutUs from "./views/settings/AboutUs.vue";
+import Workspace from "./views/settings/Workspace.vue";
+import WorkspaceCard from "./views/settings/Cards/WorkspaceCard.vue";
 
 // views for Auth layout
-import Login from "@/views/auth/Login.vue";
-import Register from "@/views/auth/Register.vue";
-import RecoveryPassword from "@/views/auth/RecoveryPassword.vue";
-import ResetPassword from "@/views/auth/ResetPassword.vue";
-import AuthConfirm from "@/views/auth/Confirm.vue";
-import AuthToken from "@/views/auth/Token.vue";
+import Login from "./views/auth/Login.vue";
+import Register from "./views/auth/Register.vue";
+import RecoveryPassword from "./views/auth/RecoveryPassword.vue";
+import ResetPassword from "./views/auth/ResetPassword.vue";
+import AuthConfirm from "./views/auth/Confirm.vue";
+import AuthToken from "./views/auth/Token.vue";
 
 // views without layouts
 
-import Landing from "@/views/Landing.vue";
-// import Index from "@/views/Index.vue";
+import Landing from "./views/Landing.vue";
+// import Index from "./views/Index.vue";
 
 
-import VueGtag from "vue-gtag";
+// import VueGtag from "vue-gtag";
 
 // 
 if ('serviceWorker' in navigator) {
@@ -313,10 +313,10 @@ const i18n = createI18n({
 
 const app = createApp(App);
 
-app.config.productionTip = false;
-app.use(VueGtag, {
-  config: { id: process.env.VUE_APP_GOOGLE_ANALYTICS },
-});
+// app.config.productionTip = false;
+// app.use(VueGtag, {
+//   config: { id: process.env.VUE_APP_GOOGLE_ANALYTICS },
+// });
 
 // languages
 app.use(i18n)
