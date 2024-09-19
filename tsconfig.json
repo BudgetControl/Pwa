@@ -14,7 +14,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "include": ["src/**/*.ts", "src/**/*.vue", "src/**/*.model.vue"],
+    "include": ["src/**/*.ts", "src/**/*.vue", "src/**/*.model.ts", "src/**/*.store.ts"],
     "exclude": ["node_modules"]
   }
   
