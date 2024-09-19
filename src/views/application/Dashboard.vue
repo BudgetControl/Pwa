@@ -30,15 +30,14 @@
   </div>
 </template>
 <script>
-import CardLine_IncomingExpensesChart from "@/components/Charts/WidgetLine_IncomingExpensesChart.vue";
-import WidgetTable from "@/components/Charts/WidgetTable.vue";
-import LocalStorageService from "@/services/LocalStorageService.vue";
-import CardBudget from "@/components/Charts/WidgetBudget.vue";
-import WorkspaceService from "@/services/WorkspaceService.vue";
-import WorkspaceServiceVue from "@/services/WorkspaceService.vue";
-import AuthService from "@/services/AuthService.vue";
-import HeaderMenu from '@/components/Navbars/HeaderMenu.vue';
-import MenuButton from '@/components/GenericComponents/MenuButton.vue';
+import CardLine_IncomingExpensesChart from "@/components/Cards/Chart/WidgetLine_IncomingExpensesChart.vue";
+import CardBudget from "../../components/Cards/Chart/WidgetBudget.vue";
+import WorkspaceService from "../../services/WorkspaceService.vue";
+import WorkspaceServiceVue from "../../services/WorkspaceService.vue";
+import AuthService from "../../services/AuthService.vue";
+import HeaderMenu from '../../components/Navbars/HeaderMenu.vue';
+import MenuButton from '../../components/GenericComponents/MenuButton.vue';
+import LocalStorage from '../..//utils/local-storage'
 import AverageStats from "../../components/Charts/AverageStats.vue";
 import WidgetBarChartVue from '../../components/Charts/WidgetBarChart.vue';
 
@@ -60,7 +59,7 @@ export default {
   },
   mounted: async function () {
     const _this = this
-    if (LocalStorageService.getToken() && LocalStorageService.getWorkspaceId()) {
+    if(LocalStorage.getToken() && LocalStorage.getWorkspaceId()) {
       await AuthService.userInfo().then(
         response => {
           LocalStorage.setUser(response);
@@ -87,8 +86,8 @@ export default {
           'uuid': wsUuid
         }
       }
-      if (LocalStorageService.getWorkspaceId() === null) {
-        LocalStorageService.setWorkspaceId(wsUuid)
+      if(LocalStorage.getWorkspaceId() === null) {
+        LocalStorage.setWorkspaceId(wsUuid)
       }
 
       LocalStorage.set('workspace', settings)
