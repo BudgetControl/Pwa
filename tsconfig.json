@@ -9,12 +9,12 @@
       "experimentalDecorators": true,
       "skipLibCheck": true,
       "noImplicitAny": false,
-      "allowJs": true
+      "allowJs": true,
     },
     "paths": {
       "@/*": ["src/*"]
     },
-    "include": ["src/**/*.ts", "src/**/*.vue", "src/**/*.model.ts", "src/**/*.store.ts"],
+    "include": ["src/**/*.ts", "src/**/*.vue"],
     "exclude": ["node_modules"]
   }
   
