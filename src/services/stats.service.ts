@@ -1,8 +1,9 @@
 import ApiService from './api.service';
+import type { WsConfiguration, Workspace } from '../models/workspace.model';
 
-class StatsService extends ApiService {
+class WorkspaceService extends ApiService {
 
-    async incoming(params) {
+    async incoming(params: string) {
         const response = await this.instance.get('/api/stats/incoming' + params);
         return response.data;
     }
@@ -32,35 +33,8 @@ class StatsService extends ApiService {
         return response.data;
     }
 
-    async getStatsEntries(data) {
-        const response = await this.instance.post('/api/stats/entries', data);
-        return response.data;
-    }
-
-    async getAverageExpenses() {
-        const response = await this.instance.get('/api/stats/average-expenses');
-        return response.data;
-    }
-
-    async getAverageIncoming() {
-        const response = await this.instance.get('/api/stats/average-incoming');
-        return response.data;
-    }
-
-    async getAverageSavings() {
-        const response = await this.instance.get('/api/stats/average-savings');
-        return response.data;
-    }
-
-    async getPlannedExpenses() {
-        const response = await this.instance.get('/api/stats/total-loan-installments');
-        return response.data;
-    }
-
-    async getEntryList(data) {
+    async getStatsEntries(data: any) { //FIXME:
         const response = await this.instance.post('/api/stats/entries', data);
         return response.data;
     }
 }
-
-export default StatsService;
