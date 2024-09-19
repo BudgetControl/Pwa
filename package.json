@@ -35,6 +35,7 @@
     "gulp": "5.0.0",
     "gulp-append-prepend": "1.0.8",
     "pinia": "^2.2.2",
+    "pinia-plugin-persistedstate": "^4.0.2",
     "vue": "^3.4.29",
     "vue-accessible-color-picker": "^4.1.4",
     "vue-boring-avatars": "^1.4.0",
