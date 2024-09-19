@@ -30,16 +30,18 @@
   </div>
 </template>
 <script>
-import CardLine_IncomingExpensesChart from "@/components/Charts/WidgetLine_IncomingExpensesChart.vue";
-import CardBudget from "../../components/Charts/WidgetBudget.vue";
-import WorkspaceService from "../../services/workspace.service";
-import AuthService from "../../services/auth.service";
+import FilterBar from "@/components/Navbars/FilterBar.vue";
+import CardBarChart from "@/components/Cards/Chart/WidgetBarChart.vue";
+import CardLine_IncomingExpensesChart from "@/components/Cards/Chart/WidgetLine_IncomingExpensesChart.vue";
+import CardPieLabelChart from "../../components/Cards/Chart/WidgetPieLabelChart.vue";
+import CardCategoryResume from "../../components/Cards/Chart/WidgetCategoryResume.vue";
+import CardBudget from "../../components/Cards/Chart/WidgetBudget.vue";
+import WorkspaceService from "../../services/WorkspaceService.vue";
+import WorkspaceServiceVue from "../../services/WorkspaceService.vue";
+import AuthService from "../../services/AuthService.vue";
 import HeaderMenu from '../../components/Navbars/HeaderMenu.vue';
 import MenuButton from '../../components/GenericComponents/MenuButton.vue';
-import AverageStats from "../../components/Charts/AverageStats.vue";
-import WidgetBarChartVue from '../../components/Charts/WidgetBarChart.vue';
-import { getHeaderTokens } from "../../utils/headers-token";
-import { useAppSettings } from "../../storage/settings.store";
+import LocalStorage from '../..//utils/local-storage'
 
 export default {
   name: "dashboard-page",
@@ -67,13 +69,10 @@ export default {
   },
   mounted: async function () {
     const _this = this
-    const tokens = getHeaderTokens()
-    const authService = new AuthService(tokens)
-
-    if(tokens.auth.token && tokens.workspace.uuid) {
-      await authService.userInfo().then(
+    if(LocalStorage.getToken() && LocalStorage.getWorkspaceId()) {
+      await AuthService.userInfo().then(
         response => {
-          this.settings.user = response
+          LocalStorage.setUser(response);
         },
         error => {
           console.log(error);
@@ -86,10 +85,8 @@ export default {
       _this.$router.push({ path: '/app/auth/login' })
     }
 
-    const ws = tokens.workspace.uuid
-    const headers = getHeaderTokens()
-    const workspaceService = new WorkspaceService(headers)
-    workspaceService.get(ws).then((res) => {
+    const ws = LocalStorage.getUser().workspaces[0]
+    WorkspaceService.get(ws.uuid).then((res) => {
       const wsUuid = res.workspace.uuid
       let settings = {
         'workspace': {
@@ -97,11 +94,12 @@ export default {
           'uuid': wsUuid
         }
       }
-      if(tokens.workspace.uuid == {}) {
-        tokens.workspace = res.workspace
+      if(LocalStorage.getWorkspaceId() === null) {
+        LocalStorage.setWorkspaceId(wsUuid)
       }
 
-      workspaceService.activeWorkspace(wsUuid)
+      LocalStorage.set('workspace', settings)
+      WorkspaceServiceVue.activeWorkspace(wsUuid)
     })
   },
   methods: {
