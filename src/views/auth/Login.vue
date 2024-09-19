@@ -114,6 +114,15 @@ export default {
     loading,
     VerifyEmailButton
   },
+  setup() {
+    const useAuthStore = useAuthStore()
+    const useWorkspaceStore = useWorkspaceStore()
+
+    return {
+      useAuthStore,
+      useWorkspaceStore
+    }
+  },
   data() {
     return {
       google,
