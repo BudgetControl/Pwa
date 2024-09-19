@@ -95,12 +95,22 @@ import google from "@/assets/img/google.svg";
 import AuthService from "../../services/AuthService.vue";
 import loading from 'vue-full-loading'
 import VerifyEmailButton from "../../components/Auth/VerifyEmailButton.vue";
-import LocalStorageService from "../../services/LocalStorageService.vue";
+import { useAuthStore } from "../../storage/auth-token.store";
+import { useWorkspaceStore } from "../../storage/workspace.store";
 
 export default {
   components: {
     loading,
     VerifyEmailButton
+  },
+  setup() {
+    const useAuthStore = useAuthStore()
+    const useWorkspaceStore = useWorkspaceStore()
+
+    return {
+      useAuthStore,
+      useWorkspaceStore
+    }
   },
   data() {
     return {
@@ -117,49 +127,26 @@ export default {
       let email = this.email;
       let password = this.password;
       const _this = this
-      console.debug(this.$t("messages.wrong_password"))
 
       this.show = true
       this.error = false
 
-      //first of all we should check if User is already logged in
-      const token = LocalStorageService.getToken()
-      if (token === null) {
+      AuthService.login(email, password).then((response) => {
 
-        AuthService.login(email, password).then((response) => {
-          //save token in local storage
-          LocalStorageService.setToken(response.token);
-          const ws = LocalStorageService.getWorkspaceId()
-          let currentWsUuid = response.workspaces[0].uuid
-          response.workspaces.forEach(workspace => {
-            if (workspace.uuid === ws) {
-              currentWsUuid = ws
-            }
-          });
+        //save token in local storage
+        this.useAuthStore.set(response.token);
+        const ws = this.useWorkspaceStore.get()?.uuid
 
-          const currentWSInStore = LocalStorageService.getWorkspaceId()
-          if (currentWSInStore !== currentWsUuid) {
-            LocalStorageService.setWorkspaceId(currentWsUuid)
+        let currentWsUuid = response.workspaces[0].uuid //default workspace is first occurence
+        response.workspaces.forEach(workspace => {
+          if (workspace.uuid === ws) {
+            currentWsUuid = ws
           }
 
-          AuthService.userInfo().then(() => {
-            _this.$router.push({ path: '/app/dashboard' })
-          }).catch(() => {
-            _this.error = this.$t('messages.generic_error')
-          })
-
-        }).catch((err) => {
-          _this.show = false
-
-          switch (err.response.data.code) {
-            case 'EML_NaN':
-              _this.error = this.$t('messages.login.not_verified_email')
-              _this.verify = true
-              break;
-            default:
-              _this.error = this.$t('messages.login.not_valid_password')
-              break;
-          }
+        const currentWSInStore = this.useWorkspaceStore.get()
+        if(currentWSInStore === null || currentWSInStore.uuid !== currentWsUuid) {
+         this.useWorkspaceStore.set(response.workspaces.find(ws => ws.uuid === currentWsUuid))
+        }
 
         })
       } else {
@@ -168,6 +155,19 @@ export default {
         this.$router.push({ path: '/app/dashboard' })
       }
 
+      }).catch((err) => {
+        _this.show = false
+
+        switch (err.response.data.code) {
+          case 'EML_NaN':
+            _this.error = this.$t('messages.login.not_verified_email')
+            _this.verify = true
+            break;
+          default:
+            _this.error = this.$t('messages.login.not_valid_password')
+            break;
+        }
+      })
     },
     async signInGoogle() {
       const _this = this
