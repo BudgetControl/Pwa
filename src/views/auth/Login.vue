@@ -95,12 +95,22 @@ import google from "@/assets/img/google.svg";
 import AuthService from "../../services/AuthService.vue";
 import loading from 'vue-full-loading'
 import VerifyEmailButton from "../../components/Auth/VerifyEmailButton.vue";
-import LocalStorageService from "../../services/LocalStorageService.vue";
+import { useAuthStore } from "../../storage/auth-token.store";
+import { useWorkspaceStore } from "../../storage/workspace.store";
 
 export default {
   components: {
     loading,
     VerifyEmailButton
+  },
+  setup() {
+    const useAuthStore = useAuthStore()
+    const useWorkspaceStore = useWorkspaceStore()
+
+    return {
+      useAuthStore,
+      useWorkspaceStore
+    }
   },
   data() {
     return {
@@ -117,25 +127,26 @@ export default {
       let email = this.email;
       let password = this.password;
       const _this = this
-      console.debug(this.$t("messages.wrong_password"))
 
       this.show = true
       this.error = false
 
       AuthService.login(email, password).then((response) => {
+
         //save token in local storage
-        LocalStorageService.setToken(response.token);
-        const ws = LocalStorageService.getWorkspaceId()
-        let currentWsUuid = response.workspaces[0].uuid
+        this.useAuthStore.set(response.token);
+        const ws = this.useWorkspaceStore.get()?.uuid
+
+        let currentWsUuid = response.workspaces[0].uuid //default workspace is first occurence
         response.workspaces.forEach(workspace => {
           if (workspace.uuid === ws) {
             currentWsUuid = ws
           }
         });
 
-        const currentWSInStore = LocalStorageService.getWorkspaceId()
-        if (currentWSInStore !== currentWsUuid) {
-          LocalStorageService.setWorkspaceId(currentWsUuid)
+        const currentWSInStore = this.useWorkspaceStore.get()
+        if(currentWSInStore === null || currentWSInStore.uuid !== currentWsUuid) {
+         this.useWorkspaceStore.set(response.workspaces.find(ws => ws.uuid === currentWsUuid))
         }
 
         AuthService.userInfo().then(() => {
@@ -156,7 +167,6 @@ export default {
             _this.error = this.$t('messages.login.not_valid_password')
             break;
         }
-
       })
     },
     async signInGoogle() {
