@@ -322,9 +322,6 @@ const app = createApp(App);
 //   config: { id: process.env.VUE_APP_GOOGLE_ANALYTICS },
 // });
 
-const pinia = createPinia();
-pinia.use(piniaPluginPersistedstate);
-
 // languages
 app.use(pinia);
 app.use(i18n)
