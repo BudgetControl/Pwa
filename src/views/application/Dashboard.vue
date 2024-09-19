@@ -30,11 +30,7 @@
   </div>
 </template>
 <script>
-import FilterBar from "@/components/Navbars/FilterBar.vue";
-import CardBarChart from "@/components/Cards/Chart/WidgetBarChart.vue";
 import CardLine_IncomingExpensesChart from "@/components/Cards/Chart/WidgetLine_IncomingExpensesChart.vue";
-import CardPieLabelChart from "../../components/Cards/Chart/WidgetPieLabelChart.vue";
-import CardCategoryResume from "../../components/Cards/Chart/WidgetCategoryResume.vue";
 import CardBudget from "../../components/Cards/Chart/WidgetBudget.vue";
 import WorkspaceService from "../../services/WorkspaceService.vue";
 import WorkspaceServiceVue from "../../services/WorkspaceService.vue";
