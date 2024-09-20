@@ -87,7 +87,7 @@
 
 <script>
 import IndexDropdown from "@/components/Dropdowns/IndexDropdown.vue";
-import LocalStorageService from "../../services/LocalStorageService.vue";
+import { getHeaderTokens } from "../../utils/headers-token";
 
 export default {
   data() {
@@ -97,7 +97,8 @@ export default {
     };
   },
   mounted() {
-    this.token = LocalStorageService.getToken()
+    const tokens = getHeaderTokens();
+    this.token = tokens.auth.token;
   },
   methods: {
     setNavbarOpen: function () {

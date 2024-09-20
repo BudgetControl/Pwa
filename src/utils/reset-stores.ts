@@ -1,16 +1,16 @@
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../storage/auth-token.store';
 import { useWorkspaceStore } from '../storage/workspace.store';
-import { useEye } from '../storage/settings.store';
+import { useAppSettings } from '../storage/settings.store';
 
 export function resetAllStores() {
   const authStore = useAuthStore();
   const workspaceStore = useWorkspaceStore();
-  const eyeStore = useEye();
+  const appSettings = useAppSettings();
   
   authStore.$reset();
   workspaceStore.$reset();
-  eyeStore.$reset();
+  appSettings.$reset();
 
   localStorage.clear();
 }

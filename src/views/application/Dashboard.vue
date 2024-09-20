@@ -37,9 +37,10 @@ import WorkspaceServiceVue from "../../services/WorkspaceService.vue";
 import AuthService from "../../services/AuthService.vue";
 import HeaderMenu from '../../components/Navbars/HeaderMenu.vue';
 import MenuButton from '../../components/GenericComponents/MenuButton.vue';
-import LocalStorage from '../..//utils/local-storage'
 import AverageStats from "../../components/Charts/AverageStats.vue";
 import WidgetBarChartVue from '../../components/Charts/WidgetBarChart.vue';
+import { getHeaderTokens } from "../../utils/headers-token";
+import { useAppSettings } from "../../storage/settings.store";
 
 export default {
   name: "dashboard-page",
@@ -52,6 +53,14 @@ export default {
     AverageStats,
     WidgetBarChartVue
   },
+  setup() {
+    const settingsStore = useAppSettings()
+    const settings = settingsStore.get()
+
+    return {
+      settings
+    }
+  },
   data() {
     return {
       openTab: 1,
@@ -59,10 +68,12 @@ export default {
   },
   mounted: async function () {
     const _this = this
-    if(LocalStorage.getToken() && LocalStorage.getWorkspaceId()) {
+    const tokens = getHeaderTokens()
+
+    if(tokens.auth.token && tokens.workspace.uuid) {
       await AuthService.userInfo().then(
         response => {
-          LocalStorage.setUser(response);
+          this.settings.user = response
         },
         error => {
           console.log(error);
@@ -75,7 +86,7 @@ export default {
       _this.$router.push({ path: '/app/auth/login' })
     }
 
-    const ws = LocalStorage.getUser().workspaces[0]
+    const ws = tokens.workspace.uuid
     WorkspaceService.get(ws.uuid).then((res) => {
       const wsUuid = res.workspace.uuid
       let settings = {
@@ -84,11 +95,10 @@ export default {
           'uuid': wsUuid
         }
       }
-      if(LocalStorage.getWorkspaceId() === null) {
-        LocalStorage.setWorkspaceId(wsUuid)
+      if(tokens.workspace.uuid == {}) {
+        tokens.workspace = res.workspace
       }
 
-      LocalStorage.set('workspace', settings)
       WorkspaceServiceVue.activeWorkspace(wsUuid)
 
     })

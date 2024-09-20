@@ -7,12 +7,12 @@
 
 
 <script>
-import { useEye } from '../../storage/settings.store';
+import { useAppSettings } from '../../storage/settings.store';
 
 export default {
   setup() {
-    const eyeStore = useEye();
-    eyeStore.state = eyeStore.get();
+    const eyeStore = useAppSettings();
+    eyeStore.state = eyeStore.getEye();
     return {
       eyeStore
     };
@@ -23,18 +23,18 @@ export default {
     };
   },
   mounted() {
-    this.hideIcon = this.eyeStore.state;
+    this.hideIcon = this.eyeStore.settings.eye_settings;
     this.updateBodyClass();
   },
   methods: {
     toggleHide(event) {
       event.preventDefault();
-      this.eyeStore.state = !this.hideIcon
+      this.eyeStore.settings.eye_settings = !this.hideIcon
       this.updateBodyClass();
-      this.eyeStore.set(this.eyeStore.state);
+      this.eyeStore.setEye(this.eyeStore.settings.eye_settings);
     },
     updateBodyClass() {
-      if (this.eyeStore.state) {
+      if (this.eyeStore.settings.eye_settings) {
         document.body.classList.add('hide-content');
         this.hideIcon = true;
       } else {

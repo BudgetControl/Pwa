@@ -1,17 +1,28 @@
 import { defineStore } from 'pinia'
+import { AppSettings } from '../types/app-settings.type';
+import { User } from '../types/user.type';
 
-const STORE_NAME = 'eye-settings';
+const STORE_NAME = 'app-settings';
 
-export const useEye = defineStore(STORE_NAME, {
+export const useAppSettings = defineStore(STORE_NAME, {
     state: () => ({
-      state: true as boolean
+      settings: {} as AppSettings
     }),
     actions: {
-      set(value: boolean) {
-          this.state = value
+      get(): AppSettings {
+        return this.settings
       },
-      get(): boolean{
-        return this.state
+      getEye(): boolean{
+        return this.settings.eye_settings
+      },
+      getCurrency(): number {
+        return this.settings.currency_id
+      },
+      getPaymentType(): number {
+        return this.settings.payment_type_id
+      },
+      getUser(): User {
+        return this.settings.user
       },
       resetState() {
         this.$reset();
