@@ -32,9 +32,8 @@
 <script>
 import CardLine_IncomingExpensesChart from "@/components/Cards/Chart/WidgetLine_IncomingExpensesChart.vue";
 import CardBudget from "../../components/Cards/Chart/WidgetBudget.vue";
-import WorkspaceService from "../../services/WorkspaceService.vue";
-import WorkspaceServiceVue from "../../services/WorkspaceService.vue";
-import AuthService from "../../services/AuthService.vue";
+import WorkspaceService from "../../services/workspace.service";
+import AuthService from "../../services/auth.service";
 import HeaderMenu from '../../components/Navbars/HeaderMenu.vue';
 import MenuButton from '../../components/GenericComponents/MenuButton.vue';
 import LocalStorage from '../..//utils/local-storage'
@@ -66,9 +65,10 @@ export default {
   mounted: async function () {
     const _this = this
     const tokens = getHeaderTokens()
+    const authService = new AuthService(tokens)
 
     if(tokens.auth.token && tokens.workspace.uuid) {
-      await AuthService.userInfo().then(
+      await authService.userInfo().then(
         response => {
           this.settings.user = response
         },
@@ -86,7 +86,9 @@ export default {
     }
 
     const ws = tokens.workspace.uuid
-    WorkspaceService.get(ws.uuid).then((res) => {
+    const headers = getHeaderTokens()
+    const workspaceService = new WorkspaceService(headers)
+    workspaceService.get(ws).then((res) => {
       const wsUuid = res.workspace.uuid
       let settings = {
         'workspace': {
