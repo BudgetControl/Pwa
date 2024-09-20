@@ -327,6 +327,7 @@ export default {
   setup() {
     const settingsStore = useAppSettings()
     const settings = settingsStore.get()
+    
     const refreshApp = useRefreshStore()
     const headers = getHeaderTokens()
     const apiService = new CoreService(headers)
