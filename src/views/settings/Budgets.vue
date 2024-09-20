@@ -36,8 +36,9 @@
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
 import LocalStorageServiceVue from '../../services/LocalStorageService.vue';
-import BudgetService from '../../../services/BudgetService.vue';
-import Budget from '../../components/Budget/Budget.vue';
+import ChartService from '../../services/chart.service';
+import BudgetComponent from '../../components/GenericComponents/BudgetComponent.vue';
+import { getHeaderTokens } from '../../utils/headers-token';
 
 export default {
     components: {
@@ -70,7 +71,9 @@ export default {
         },
         init: function () {
             const _this = this
-            BudgetService.getBudgets().then((resp) => {
+            const headers = getHeaderTokens()
+            const chartService = new ChartService(headers)
+            chartService.getBudgets().then((resp) => {
                 resp.forEach((data) => {
                     switch (data.planning) {
                         case 'weekly':

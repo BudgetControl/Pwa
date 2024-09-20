@@ -22,6 +22,7 @@
   </div>
 </template>
 <script>
+import { useRouter } from "vue-router";
 import CardEntries from "@/components/Cards/CardEntries.vue";
 import MenuButton from "../../components/GenericComponents/MenuButton.vue";
 import HeaderMenu from "../../components/Navbars/HeaderMenu.vue";
@@ -33,7 +34,7 @@ export default {
   },
   setup() {
     const authStore = useAuthStore();
-    authStore.authToken = authStore.getAuthToken();
+    authStore.authToken = authStore.get();
 
     const router = useRouter();
 

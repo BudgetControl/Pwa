@@ -78,7 +78,8 @@
 
 <script>
 import AlertModal from '../GenericComponents/AlertModal.vue';
-import StatsService from '../../services/StatsService.vue';
+import StatsService from '../../services/stats.service'
+import { getHeaderTokens } from '../../utils/headers-token';
 
 export default {
   components: {
@@ -128,7 +129,9 @@ export default {
       this.elements.stats.incoming.now = 0
       this.elements.stats.expenses.now = 0
 
-      StatsService.getStatsEntries(options).then((resp) => {
+      const headers = getHeaderTokens()
+      const statsService = new StatsService(headers)
+      statsService.getStatsEntries(options).then((resp) => {
 
         resp.rows.forEach(element => {
 

@@ -4,15 +4,18 @@
 </template>
   
 <script>
-import AuthServiceVue from '../../services/AuthService.vue';
-
+import { AuthService } from '../../services/auth.service';
+import { getHeaderTokens } from '../../utils/headers-token';
 
 export default {
     methods: {
         async deleteAllData() {
             const _this = this
+            const header = getHeaderTokens()
+            const authService= new AuthService(header)
+
             if(confirm("Are you sure you want to delete data ? Only data wil be deleted")) {
-                AuthServiceVue.deleteDataUser() // Adjust the URL as needed
+                authService.deleteDataUser() // Adjust the URL as needed
                 .then(() => {
                     _this.$router.push({ path: '/' })
                 })

@@ -45,9 +45,10 @@
 </template>
   
 <script>
-import LocalStorageServiceVue from '../../services/LocalStorageService.vue'
-import Budget from '../Budget/Budget.vue'
-import BudgetService from '../../services/BudgetService.vue';
+import ChartService from '../../../services/chart.service'
+import LocalStorageServiceVue from '../../../services/LocalStorageService.vue'
+import Budget from '../../GenericComponents/BudgetComponent.vue'
+import { getHeaderTokens } from '../../../utils/headers-token';
 
 export default {
     data() {
@@ -78,7 +79,9 @@ export default {
     methods: {
         init: function () {
             const _this = this
-            BudgetService.getBudgets().then((resp) => {
+            const headers = getHeaderTokens()
+            const chartService = new ChartService(headers)
+            chartService.getBudgets().then((resp) => {
                 resp.forEach((data) => {
                     const period = data.budget.configuration.period
                     data.percentage = data.totalSpentPercentage.replace('%', '')

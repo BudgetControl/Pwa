@@ -68,7 +68,8 @@
 </template>
 
 <script>
-import ChartServiceVue from '@/services/ChartService.vue'
+import ChartService from '../../../services/chart.service'
+import { getHeaderTokens } from '../../../utils/headers-token';
 
 export default {
   props: {
@@ -132,7 +133,9 @@ export default {
         end: year + "/" + month + "/31"
       }]
 
-      ChartServiceVue.expensesLabelCategory(data).then((resp) => {
+      const headers = getHeaderTokens()
+            const chartService = new ChartService(headers)
+            chartService.expensesLabelCategory(data).then((resp) => {
 
         resp.rows.forEach(element => {
 
