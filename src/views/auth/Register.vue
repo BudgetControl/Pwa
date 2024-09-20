@@ -104,9 +104,10 @@
   </div>
 </template>
 <script>
-import AuthService from "../../services/AuthService.vue";
+import AuthService from "../../services/auth.service";
 import loading from 'vue-full-loading'
 import PasswordStrengthMeter from "../../components/Auth/PasswordStrengthMeter.vue";
+import { getHeaderTokens } from "../../utils/headers-token";
 
 export default {
   components: {
@@ -129,10 +130,12 @@ export default {
       let name = this.name;
       const confirm_password = this.confirm_password
       const _this = this
+      const header = getHeaderTokens()
+      const authService = new AuthService(header)
 
       this.show = true
       this.error = false
-      AuthService.register(name, password, confirm_password, email).then(() => {
+      authService.register(name, password, confirm_password, email).then(() => {
         _this.message = _this.$t('labels.account_created')
         _this.show = false
       }).catch(() => {

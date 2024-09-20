@@ -39,7 +39,8 @@
 
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
-import WorkspaceServiceVue from '../../services/WorkspaceService.vue';
+import WorkspaceService from "../../services/workspace.service";
+import { getHeaderTokens } from '../../utils/headers-token';
 
 export default {
     components: {
@@ -52,6 +53,8 @@ export default {
     },
     mounted: function () {
         const _this = this
+        const headers = getHeaderTokens()
+        const WorkspaceServiceVue = new WorkspaceService(headers)
         WorkspaceServiceVue.listByUser().then((res) => {
             _this.workspaces = res
         })

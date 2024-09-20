@@ -57,8 +57,9 @@
   </div>
 </template>
 <script>
-import AuthService from "../../services/AuthService.vue";
+import AuthService from "../../services/auth.service";
 import loading from 'vue-full-loading'
+import { getHeaderTokens } from "../../utils/headers-token";
 
 
 export default {
@@ -77,10 +78,12 @@ export default {
     async submit() {
       let email = this.email;
       const _this = this
+      const header = getHeaderTokens()
+      const authService = new AuthService(header)
 
       this.show = false
       this.error = false
-      AuthService.recoveryPassword(email).then(() => {
+      authService.recoveryPassword(email).then(() => {
         _this.message = true
       }).catch((err) => {
         _this.show = false

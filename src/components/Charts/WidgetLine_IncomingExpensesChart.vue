@@ -22,7 +22,8 @@
 </template>
 <script>
 import Chart from "chart.js";
-import ChartService from "@/services/ChartService.vue";
+import ChartService from "../../../services/chart.service";
+import { getHeaderTokens } from "../../../utils/headers-token";
 
 export default {
   props: {
@@ -159,7 +160,9 @@ export default {
           })
         })
 
-        ChartService.incomingExpensesLine(data).then((resp) => {
+        const headers = getHeaderTokens()
+            const chartService = new ChartService(headers)
+            chartService.incomingExpensesLine(data).then((resp) => {
 
           resp.series.forEach(element => {
 

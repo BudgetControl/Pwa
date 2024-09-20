@@ -266,13 +266,14 @@
 </template>
 
 <script>
-import ApiService from '../../services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { useAppSettings } from '../../storage/settings.store';
 import { useRefreshStore } from '../../storage/refresh';
 import AlertModal from '../GenericComponents/AlertModal.vue';
 import libs from '../../Libs.vue';
+import CoreService from '../../services/core.service';
+import { getHeaderTokens } from '../../utils/headers-token';
 
 export default {
   props: {
@@ -295,10 +296,13 @@ export default {
   },
   setup() {
     const settingsStore = useAppSettings()
-    const settings = settingsStore.getSettings()
+    const settings = settingsStore.get()
     const refreshApp = useRefreshStore()
+    const headers = getHeaderTokens()
+    const apiService = new CoreService(headers)
+
     return {
-      settings, refreshApp
+      settings, refreshApp, apiService, headers
     }
   },
   data() {
@@ -408,7 +412,7 @@ export default {
     },
     getDebit() {
       let _this = this
-      ApiService.debt().then((res) => {
+      this.apiService.debt().then((res) => {
         let data = res
         data.forEach(function (r) {
           _this.input.debit.push(r)
@@ -417,7 +421,7 @@ export default {
     },
     getCategory() {
       let _this = this
-      ApiService.subCategories().then((res) => {
+      this.apiService.subCategories().then((res) => {
         let data = res
         data.forEach(function (sub) {
           _this.input.category.push({
@@ -433,7 +437,7 @@ export default {
     },
     getPaymentType() {
       let _this = this
-      ApiService.paymentstype().then((res) => {
+      this.apiService.paymentstype().then((res) => {
         res.forEach(function (r) {
           _this.input.payment_type.push(r)
         })
@@ -441,7 +445,7 @@ export default {
     },
     getModels() {
       let _this = this
-      ApiService.model().then((res) => {
+      this.apiService.model().then((res) => {
         let data = res
         if (data.length > 0) {
           _this.action.models = true
@@ -456,7 +460,7 @@ export default {
       this.action.reset = true
 
       this.toggleTabs(this.typeOfEntry)
-      ApiService.getEntryDetail(this.entryId, this.isPlanned).then((res) => {
+      this.apiService.getEntryDetail(this.entryId, this.isPlanned).then((res) => {
         let model = res
 
         _this.amount = Math.abs(model.amount)
@@ -511,7 +515,7 @@ export default {
     retriveModel() {
       const id = this.entryId === null ? this.model : this.entryId
 
-      ApiService.getModel(id).then((res) => {
+      this.apiService.getModel(id).then((res) => {
 
         const model = res
         const _this = this
@@ -544,7 +548,7 @@ export default {
     },
     getLabels() {
       let _this = this
-      ApiService.labels().then((res) => {
+      this.apiService.labels().then((res) => {
         let data = res
         data.forEach(function (r) {
           _this.input.tags.push(r)
@@ -569,7 +573,7 @@ export default {
         data.amount = this.amount * -1
       }
 
-      ApiService.setModel(data, this.entryId).then(() => {
+      this.apiService.setModel(data, this.entryId).then(() => {
         alert(this.$t('messages.model_saved'), "success")
       }).catch(() => {
         alert(this.$t('messages.generic_error'), "error")
@@ -683,7 +687,7 @@ export default {
           }
         }
 
-        ApiService.setEntry(path, data, this.isPlanned, this.entryId).then(() => {
+        this.apiService.setEntry(path, data, this.isPlanned, this.entryId).then(() => {
           _this.date = null,
             _this.amount = null,
             _this.label = [],
@@ -707,7 +711,7 @@ export default {
     },
     getCurrency() {
       let _this = this
-      ApiService.currencies().then((res) => {
+      this.apiService.currencies().then((res) => {
         let data = res
         data.forEach(function (r) {
           _this.input.currency.push(r)
@@ -716,7 +720,7 @@ export default {
     },
     getAccount() {
       let _this = this
-      ApiService.accounts('?order[name]=asc').then((res) => {
+      this.apiService.accounts('?order[name]=asc').then((res) => {
         let data = res
         data.forEach(function (r) {
           _this.input.account.push(r)

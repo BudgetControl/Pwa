@@ -24,9 +24,10 @@
 
 import EntriesTable from "@/components/Entry/EntriesTable.vue";
 import axios from 'axios'
-import ApiServiceVue from '../../services/ApiService.vue';
 import Paginator from "../GenericComponents/Paginator.vue";
 import LocalStorageService from "../../services/LocalStorageService.vue";
+import CoreService from "../../services/core.service";
+import { getHeaderTokens } from "../../utils/headers-token";
 
 export default {
   props: {
@@ -91,7 +92,9 @@ export default {
       }
 
       let currentPage = LocalStorageService.get('current_page') == null ? 1 : LocalStorageService.get('current_page')
-      ApiServiceVue.getEntry(currentPage, filter).then((res) => {
+      const headers = getHeaderTokens()
+      const coreService = new CoreService(headers)
+      coreService.getEntry(currentPage, filter).then((res) => {
         if (res.data.length > 0) {
           _this.$refs.entry.buildEntriesTable(res.data)
         }

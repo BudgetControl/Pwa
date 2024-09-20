@@ -84,15 +84,22 @@
 <script>
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
-import ApiServiceVue from '../../../services/ApiService.vue';
-import WorkspaceService from '../../../services/WorkspaceService.vue';
-import AuthServiceVue from '../../../services/AuthService.vue';
-import LocalStorageServiceVue from '../../../services/LocalStorageService.vue';
+import AuthService from "../../../services/auth.service";
 import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
+import { getHeaderTokens } from '../../../utils/headers-token';
+import { useAppSettings } from '../../../storage/settings.store';
+import WorkspaceService from '../../../services/workspace.service';
 
 export default {
     components: {
         HeaderButton, AlertModal
+    },
+    setup() {
+        const tokens = getHeaderTokens()
+        const appSettings = useAppSettings()
+        return {
+            tokens, appSettings
+        }
     },
     data() {
         return {
@@ -123,34 +130,39 @@ export default {
     methods: {
         saveModal() {
             if(this.$route.params.id) {
-                WorkspaceService.update(this.$route.params.id, this.modal).then(() => {
+                const workspaceService = new WorkspaceService(this.tokens)
+                workspaceService.update(this.$route.params.id, this.modal).then(() => {
                     alert(this.$t('messages.workspace.updated'))
                     this.$router.push('/app/settings/workspace')
                 })
             } else {
-                WorkspaceService.add(this.modal).then(() => {
+                const workspaceService = new WorkspaceService(this.tokens)
+                workspaceService.add(this.modal).then(() => {
                     alert(this.$t('messages.workspace.added'))
                     this.$router.push('/app/settings/workspace')
                 })
             }
         },
         getCurrencies() {
-            ApiServiceVue.currencies().then((res) => {
+            const authService = new AuthService(this.tokens)
+            authService.currencies().then((res) => {
                 this.currencies = res
             })
         },
         getPaymentTypes() {
-            ApiServiceVue.paymentstype().then((res) => {
+            const authService = new AuthService(this.tokens)
+            authService.paymentstype().then((res) => {
                 this.payment_types = res
             })
         },
         getWorkspaceDetail() {
-            WorkspaceService.get(this.$route.params.id).then((res) => {
+            const workspaceService = new WorkspaceService(this.tokens)
+                workspaceService.get(this.$route.params.id).then((res) => {
                 this.modal.name = res.workspace.name
                 this.modal.currency = res.settings.data.currency_id
                 this.modal.payment_type = res.settings.data.payment_type_id
                 res.workspace.users.forEach((item) => {
-                    const user = LocalStorageServiceVue.getUser()
+                    const user = this.appSettings.settings.user
                     if(item.uuid !== user.uuid) {
                         this.modal.shareWith.push(item)
                     }
@@ -163,6 +175,8 @@ export default {
         share() {
             //check if is a valid email
             const email = this.shareEmail
+            const authService = new AuthService(this.tokens)
+
             if (this.shareEmail.length > 0 && this.shareEmail.includes('@') && this.shareEmail.includes('.') && this.shareEmail.length > 5) {
                 AuthServiceVue.userInfoByEmail(email).then((res) => {
                     this.modal.shareWith.push(res)
