@@ -138,7 +138,7 @@ export default {
 
         //save token in local storage
         header.auth.token = response.token;
-        const ws = this.appSettings.settings.user.current_ws
+        const ws = this.appSettings.settings.current_ws ? this.appSettings.settings.current_ws.uuid : null
 
         let currentWsUuid = response.workspaces[0].uuid //default workspace is first occurence
         response.workspaces.forEach(workspace => {
@@ -146,9 +146,8 @@ export default {
             currentWsUuid = ws
           }
 
-        const currentWSInStore = this.appSettings.settings.user.current_ws
-        if(currentWSInStore === null || currentWSInStore.uuid !== currentWsUuid) {
-          this.appSettings.settings.user.current_ws = response.workspaces.find(ws => ws.uuid === currentWsUuid)
+        if(ws === null || ws.uuid !== currentWsUuid) {
+          this.appSettings.settings.current_ws = response.workspaces.find(ws => ws === response.workspaces[0])
         }
 
         authService.userInfo().then(() => {
