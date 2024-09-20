@@ -1,17 +1,17 @@
 import { defineStore } from 'pinia'
-import { Workspace } from '../models/workspace.model'
+import { Workspace } from '../types/workspace.type'
 
 const STORE_NAME = 'workspace'
 
 export const useWorkspaceStore = defineStore(STORE_NAME, {
     state: () => ({
-      workspace: null as Workspace | null
+      workspace: {} as Workspace
     }),
     actions: {
       set(workspace: Workspace) {
         this.workspace = workspace
       },
-      get(): Workspace | null {
+      get(): Workspace {
         return this.workspace
       },
       resetState() {

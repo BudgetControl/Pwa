@@ -269,7 +269,8 @@
 import ApiService from '../../services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
-import LocalStorageService from '../../services/LocalStorageService.vue';
+import { useAppSettings } from '../../storage/settings.store';
+import { useRefreshStore } from '../../storage/refresh';
 import AlertModal from '../GenericComponents/AlertModal.vue';
 import libs from '../../Libs.vue';
 
@@ -290,6 +291,14 @@ export default {
     typeOfEntry: {
       type: String,
       default: 'expense'
+    }
+  },
+  setup() {
+    const settingsStore = useAppSettings()
+    const settings = settingsStore.getSettings()
+    const refreshApp = useRefreshStore()
+    return {
+      settings, refreshApp
     }
   },
   data() {
@@ -376,9 +385,8 @@ export default {
       this.getDebit()
     }
 
-    const settings = LocalStorageService.get("settings")
-    this.currency = settings.currency_id
-    this.payment_type = settings.payment_type_id
+    this.currency = this.settings.currency_id
+    this.payment_type = this.settings.payment_type_id
 
     // get payee from qeury string
     const urlParams = this.$route.query
@@ -684,7 +692,7 @@ export default {
             _this.newlabel = null,
             _this.action.dateUpdated = false
 
-          localStorage.setItem("new_entry", true)
+          refreshApp.set(true)
           this.time()
 
           alert(this.$t('labels.entry_saved'), "success")

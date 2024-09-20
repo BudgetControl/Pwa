@@ -90,7 +90,7 @@
   </div>
 </template>
 <script>
-//import facebook from "@/assets/img/github.svg";
+
 import google from "@/assets/img/google.svg";
 import AuthService from "../../services/AuthService.vue";
 import loading from 'vue-full-loading'
@@ -99,18 +99,18 @@ import { useAuthStore } from "../../storage/auth-token.store";
 import { useWorkspaceStore } from "../../storage/workspace.store";
 
 export default {
+  setup() {
+    const authStore = useAuthStore()
+    const workspaceStore = useWorkspaceStore()
+
+    return {
+      authStore,
+      workspaceStore
+    }
+  },
   components: {
     loading,
     VerifyEmailButton
-  },
-  setup() {
-    const useAuthStore = useAuthStore()
-    const useWorkspaceStore = useWorkspaceStore()
-
-    return {
-      useAuthStore,
-      useWorkspaceStore
-    }
   },
   data() {
     return {
@@ -134,8 +134,8 @@ export default {
       AuthService.login(email, password).then((response) => {
 
         //save token in local storage
-        this.useAuthStore.set(response.token);
-        const ws = this.useWorkspaceStore.get()?.uuid
+        this.authStore.set(response.token);
+        const ws = this.workspaceStore.get()?.uuid
 
         let currentWsUuid = response.workspaces[0].uuid //default workspace is first occurence
         response.workspaces.forEach(workspace => {
@@ -144,15 +144,17 @@ export default {
           }
         });
 
-        const currentWSInStore = this.useWorkspaceStore.get()
+        const currentWSInStore = this.workspaceStore.get()
         if(currentWSInStore === null || currentWSInStore.uuid !== currentWsUuid) {
-         this.useWorkspaceStore.set(response.workspaces.find(ws => ws.uuid === currentWsUuid))
+         this.workspaceStore.set(response.workspaces.find(ws => ws.uuid === currentWsUuid))
         }
 
         AuthService.userInfo().then(() => {
           _this.$router.push({ path: '/app/dashboard' })
-        }).catch(() => {
+        }).catch((error) => {
+          console.error(error)
           _this.error = this.$t('messages.generic_error')
+          _this.show = false
         })
 
       }).catch((err) => {
