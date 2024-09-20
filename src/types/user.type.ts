@@ -9,7 +9,6 @@ export interface User {
     deleted_at: string | null;
     sub: string;
     workspaces: Workspace[];
-    current_ws: string;
     workspace_settings: WsSettings;
     shared_with: {
         email: string;
