@@ -1,5 +1,5 @@
 import ApiService from './api.service';
-import type { WsConfiguration, Workspace } from '../models/workspace.model';
+import type { WsConfiguration, Workspace } from '../types/workspace.type';
 
 class WorkspaceService extends ApiService {
 
