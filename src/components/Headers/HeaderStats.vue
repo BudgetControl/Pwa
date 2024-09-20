@@ -65,10 +65,19 @@
 import CardStats from "@/components/Cards/CardStats.vue";
 import CardWallet from "@/components/Cards/CardWallet.vue";
 import StatsService from "../../services/StatsService.vue";
+import { useRefreshStore } from "../../storage/refresh";
 
 export default {
   components: {
     CardStats, CardWallet
+  },
+  setup() {
+    const refreshApp = useRefreshStore()
+    refreshApp.state = refreshApp.get()
+
+    return {
+      refreshApp
+    }
   },
   data() {
     return {
@@ -108,26 +117,15 @@ export default {
     }
   },
   watch: {
-    "$store.state.actions.updatestats": function (updatestats) {
-      if (updatestats === true) {
+    "refreshApp.state": function () {
         this.update()
-      }
     },
   },
   mounted() {
     this.update()
     let _this = this
-    setInterval(function() {
-      _this.handleStorageChange()
-    },'1000')
   },
   methods: {
-    handleStorageChange() {
-        if (localStorage.getItem("new_entry") == 'true') {
-          this.update()
-          localStorage.setItem("new_entry", false)
-        }
-    },
     update() {
       this.getMonthIncoming()
       this.getMonthexpenses()

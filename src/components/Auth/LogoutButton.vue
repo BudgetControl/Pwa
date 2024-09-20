@@ -5,7 +5,7 @@
   
 <script>
 import AuthServiceVue from '../../services/AuthService.vue';
-import LocalStorageService from '../../services/LocalStorageService.vue';
+import { resetAllStores } from '../../utils/reset-stores';
 
 export default {
     methods: {
@@ -13,7 +13,7 @@ export default {
             const _this = this
             AuthServiceVue.logout() // Adjust the URL as needed
                 .then(() => {
-                    LocalStorageService.clear()
+                    resetAllStores.resetAllStores()
                     _this.$router.push({ path: '/app/auth/login' })
                 })
                 .catch(error => {

@@ -25,17 +25,35 @@
 import CardEntries from "@/components/Cards/CardEntries.vue";
 import MenuButton from "../../components/GenericComponents/MenuButton.vue";
 import HeaderMenu from "../../components/Navbars/HeaderMenu.vue";
-import LocalStorageService from "../../services/LocalStorageService.vue";
+import { useAuthStore } from "../../storage/auth-token.store";
 
 export default {
   components: {
     CardEntries, HeaderMenu, MenuButton
   },
+  setup() {
+    const authStore = useAuthStore();
+    authStore.authToken = authStore.getAuthToken();
 
-  mounted() {
-      if(!LocalStorageService.getToken()) {
-        this.$router.push({ path: "/app/auth/login" });
+    const router = useRouter();
+
+    if (!authStore.authToken) {
+      router.push({ path: "/app/auth/login" });
+    }
+
+    return {
+      authStore, router
+    };
+  },
+  watch: {
+    'authStore.authToken': {
+      immediate: true,
+      handler(newVal) {
+        if (!newVal) {
+          this.$router.push({ path: "/app/auth/login" });
+        }
       }
+    }
   }
 };
 </script>
