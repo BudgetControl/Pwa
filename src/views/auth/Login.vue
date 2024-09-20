@@ -96,17 +96,18 @@ import AuthService from "../../services/auth.service";
 import loading from 'vue-full-loading'
 import VerifyEmailButton from "../../components/Auth/VerifyEmailButton.vue";
 import { useAuthStore } from "../../storage/auth-token.store";
-import { useWorkspaceStore } from "../../storage/workspace.store";
 import { getHeaderTokens } from "../../utils/headers-token";
+import { useAppSettings } from "../../storage/settings.store";
 
 export default {
   setup() {
     const authStore = useAuthStore()
-    const workspaceStore = useWorkspaceStore()
+    const appSettings = useAppSettings()
+    appSettings.settings = appSettings.get()
 
     return {
       authStore,
-      workspaceStore
+      appSettings
     }
   },
   components: {
@@ -137,7 +138,7 @@ export default {
 
         //save token in local storage
         header.auth.token = response.token;
-        const ws = this.workspaceStore.get()?.uuid
+        const ws = this.appSettings.settings.user.current_ws
 
         let currentWsUuid = response.workspaces[0].uuid //default workspace is first occurence
         response.workspaces.forEach(workspace => {
@@ -145,9 +146,9 @@ export default {
             currentWsUuid = ws
           }
 
-        const currentWSInStore = this.workspaceStore.get()
+        const currentWSInStore = this.appSettings.settings.user.current_ws
         if(currentWSInStore === null || currentWSInStore.uuid !== currentWsUuid) {
-         this.workspaceStore.set(response.workspaces.find(ws => ws.uuid === currentWsUuid))
+          this.appSettings.settings.user.current_ws = response.workspaces.find(ws => ws.uuid === currentWsUuid)
         }
 
         authService.userInfo().then(() => {
