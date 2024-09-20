@@ -64,8 +64,9 @@
 <script>
 import CardStats from "@/components/Cards/CardStats.vue";
 import CardWallet from "@/components/Cards/CardWallet.vue";
-import StatsService from "../../services/StatsService.vue";
 import { useRefreshStore } from "../../storage/refresh";
+import StatsService from '../../services/stats.service';
+import { getHeaderTokens } from "../../utils/headers-token";
 
 export default {
   components: {
@@ -75,8 +76,10 @@ export default {
     const refreshApp = useRefreshStore()
     refreshApp.state = refreshApp.get()
 
+    const headers = getHeaderTokens()
+
     return {
-      refreshApp
+      refreshApp, headers
     }
   },
   data() {
@@ -135,7 +138,8 @@ export default {
       this.getHealth()
     },
     getWallet() {
-      StatsService.total().then((resp) => {
+      const statsService = new StatsService(this.headers)
+      statsService.total().then((resp) => {
         let data = resp
         this.wallet.statTitle = data.total.toFixed(2)
 
@@ -145,7 +149,8 @@ export default {
     },
 
     getHealth() {
-      StatsService.health().then((resp) => {
+      const statsService = new StatsService(this.headers)
+      statsService.health().then((resp) => {
         let data = resp
         this.health.statTitle = data.total.toFixed(2)
 
@@ -161,7 +166,8 @@ export default {
     },
 
     getWalletPlanned() {
-      StatsService.planned().then((resp) => {
+      const statsService = new StatsService(this.headers)
+      statsService.planned().then((resp) => {
 
         let data = resp
         this.walletPlanned.statTitle = data.total.toFixed(2)
@@ -176,7 +182,8 @@ export default {
       const start_date = date_time.getFullYear() + '-' + (date_time.getMonth() + 1) + '-01'
       const end_date = date_time.getFullYear() + '-' + (date_time.getMonth() + 1) + '-' + date_time.getDate()
 
-      StatsService.incoming(`?start_date=${start_date}&end_date=${end_date}`).then((resp) => {
+      const statsService = new StatsService(this.headers)
+      statsService.incoming(`?start_date=${start_date}&end_date=${end_date}`).then((resp) => {
         let data = resp
         this.incoming.statTitle = data.total.toFixed(2)
         this.incoming.statPercent = data.percentage
@@ -188,7 +195,8 @@ export default {
       })
     },
     getMonthexpenses() {
-      StatsService.expenses().then((resp) => {
+      const statsService = new StatsService(this.headers)
+      statsService.expenses().then((resp) => {
         let data = resp
         this.expenses.statTitle = data.total.toFixed(2)
         this.expenses.statPercent = data.percentage
@@ -201,7 +209,8 @@ export default {
     },
     getWallets() {
       this.wallets = []
-      StatsService.wallets().then((resp) => {
+      const statsService = new StatsService(this.headers)
+      statsService.wallets().then((resp) => {
         let data = resp
         data.forEach(e => {
             const walletType = e.type

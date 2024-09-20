@@ -105,7 +105,8 @@
 
 <script>
 import AlertModal from '../GenericComponents/AlertModal.vue';
-import StatsService from '../../services/StatsService.vue';
+import { getHeaderTokens } from '../../utils/headers-token';
+import StatsService from '../../services/stats.service'
 
 export default {
   components: {
@@ -163,7 +164,9 @@ export default {
       this.elements.stats.expenses.before = 0
       this.elements.stats.expenses.bounce_rate = 0
 
-      StatsService.getStatsEntries(options).then((resp) => {
+      const headers = getHeaderTokens()
+      const statsService = new StatsService(headers)
+      statsService.getStatsEntries(options).then((resp) => {
 
         resp.rows.forEach(element => {
 
