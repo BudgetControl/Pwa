@@ -92,11 +92,12 @@
 <script>
 
 import google from "@/assets/img/google.svg";
-import AuthService from "../../services/AuthService.vue";
+import AuthService from "../../services/auth.service";
 import loading from 'vue-full-loading'
 import VerifyEmailButton from "../../components/Auth/VerifyEmailButton.vue";
 import { useAuthStore } from "../../storage/auth-token.store";
 import { useWorkspaceStore } from "../../storage/workspace.store";
+import { getHeaderTokens } from "../../utils/headers-token";
 
 export default {
   setup() {
@@ -127,14 +128,15 @@ export default {
       let email = this.email;
       let password = this.password;
       const _this = this
+      const header = getHeaderTokens()
+      const authService = new AuthService(header)
 
       this.show = true
       this.error = false
-
-      AuthService.login(email, password).then((response) => {
+      await authService.login(email, password).then((response) => {
 
         //save token in local storage
-        this.authStore.set(response.token);
+        header.auth.token = response.token;
         const ws = this.workspaceStore.get()?.uuid
 
         let currentWsUuid = response.workspaces[0].uuid //default workspace is first occurence
@@ -149,7 +151,7 @@ export default {
          this.workspaceStore.set(response.workspaces.find(ws => ws.uuid === currentWsUuid))
         }
 
-        AuthService.userInfo().then(() => {
+        authService.userInfo().then(() => {
           _this.$router.push({ path: '/app/dashboard' })
         }).catch((error) => {
           console.error(error)

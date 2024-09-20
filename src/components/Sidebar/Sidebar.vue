@@ -163,10 +163,11 @@
 
 <script>
 import LogoutButton from "../Auth/LogoutButton.vue";
-import WorkspaceService from "../../services/WorkspaceService.vue";
 import LocalStorageServiceVue from '../../services/LocalStorageService.vue';
-import AuthService from '../../services/AuthService.vue';
 import EyeButton from "@/components/GenericComponents/EyeButton.vue";
+import AuthService from "../../services/auth.service";
+import { getHeaderTokens } from "../../utils/headers-token";
+import WorkspaceService from "../../services/workspace.service";
 
 export default {
   data() {
@@ -185,7 +186,9 @@ export default {
     },
     workspaceList: function () {
       const _this = this
-      WorkspaceService.list().then((response) => {
+      const header = getHeaderTokens()
+      const workspaceService = new WorkspaceService(header)
+      workspaceService.list().then((response) => {
         response.forEach((e) => {
           _this.workspaces.push(e)
         })
@@ -194,8 +197,11 @@ export default {
     },
     changeWorkspace() {
       const _this = this
-      LocalStorageServiceVue.setWorkspaceId(_this.workspace)
-      AuthService.userInfo().then(() => {
+      const header = getHeaderTokens()
+      const authService = new AuthService(header)
+
+      header.workspace.uuid = _this.workspace
+      authService.userInfo().then(() => {
         _this.$router.go(0);
       }).catch(() => {
         _this.$router.push({path : '/app/auth/login'});

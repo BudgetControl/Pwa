@@ -31,9 +31,10 @@
   </div>
 </template>
 <script>
-import AuthService from "../../services/AuthService.vue";
 import loading from 'vue-full-loading'
 import LocalStorageService from "../../services/LocalStorageService.vue";
+import AuthService from "../../services/auth.service";
+import { getHeaderTokens } from '../../utils/headers-token';
 
 
 export default {
@@ -50,11 +51,13 @@ export default {
     async mounted() {
       const _this = this
       const token = _this.$route.query.code
+      const header = getHeaderTokens()
+      const authService = new AuthService(header)
 
       this.show = false
       this.error = false
 
-      AuthService.token(token, 'google').then((response) => {
+      authService.token(token, 'google').then((response) => {
         LocalStorageService.setToken(response.token);
         // Get the workspace id from the local storage
         const ws = LocalStorageService.getWorkspaceId()
@@ -70,7 +73,7 @@ export default {
           LocalStorageService.setWorkspaceId(currentWsUuid)
         }
 
-        AuthService.userInfo().then(() => {
+        authService.userInfo().then(() => {
           _this.$router.push({ path: '/app/dashboard' })
         }).catch(() => {
           _this.error = true

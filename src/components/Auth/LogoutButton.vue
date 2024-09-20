@@ -4,14 +4,18 @@
 </template>
   
 <script>
-import AuthServiceVue from '../../services/AuthService.vue';
+import { AuthService } from '../../services/auth.service';
 import { resetAllStores } from '../../utils/reset-stores';
+import { getHeaderTokens } from '../../utils/headers-token';
 
 export default {
     methods: {
         async logout() {
             const _this = this
-            AuthServiceVue.logout() // Adjust the URL as needed
+            const header = getHeaderTokens()
+            const authService = new AuthService(header)
+
+            authService.logout() // Adjust the URL as needed
                 .then(() => {
                     resetAllStores.resetAllStores()
                     _this.$router.push({ path: '/app/auth/login' })
