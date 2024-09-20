@@ -9,13 +9,13 @@
                         <div class="px-4 py-5 flex-auto">
                             <div class="tab-content tab-space">
 
-                                <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.week" :key="budget.id" />
+                                <Budget :budget="budget" :currency="currency" v-for="budget in budgets.week" :key="budget.id" />
 
-                                <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.month" :key="budget.id" />
+                                <Budget :budget="budget" :currency="currency" v-for="budget in budgets.month" :key="budget.id" />
 
-                                <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.year" :key="budget.id" />
+                                <Budget :budget="budget" :currency="currency" v-for="budget in budgets.year" :key="budget.id" />
                                 
-                                <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.custom" :key="budget.id" />
+                                <Budget :budget="budget" :currency="currency" v-for="budget in budgets.custom" :key="budget.id" />
 
                                 <a class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     href="/app/settings/budget">
@@ -36,12 +36,12 @@
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
 import LocalStorageServiceVue from '../../services/LocalStorageService.vue';
-import ChartServiceVue from '../../services/ChartService.vue';
-import BudgetComponent from '../../components/GenericComponents/BudgetComponent.vue';
+import BudgetService from '../../../services/BudgetService.vue';
+import Budget from '../../components/Budget/Budget.vue';
 
 export default {
     components: {
-        HeaderButton, BudgetComponent
+        HeaderButton, Budget
     },
     data() {
         return {
@@ -70,7 +70,7 @@ export default {
         },
         init: function () {
             const _this = this
-            ChartServiceVue.getBudgets().then((resp) => {
+            BudgetService.getBudgets().then((resp) => {
                 resp.forEach((data) => {
                     switch (data.planning) {
                         case 'weekly':

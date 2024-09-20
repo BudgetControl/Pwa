@@ -173,7 +173,7 @@
 </template>
 
 <script>
-import EntriesTable from "@/components/GenericComponents/EntriesTable.vue";
+import EntriesTable from "@/components/Entry/EntriesTable.vue";
 import SearchService from "../../services/SearchService.vue";
 import ApiService from "../../services/ApiService.vue";
 import Paginator from "../GenericComponents/Paginator.vue";
