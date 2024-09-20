@@ -5,16 +5,16 @@
   
 <script>
 import AuthServiceVue from '../../services/AuthService.vue';
-import LocalStorageService from '../../services/LocalStorageService.vue';
+import { resetAllStores } from '../../utils/reset-stores';
 
 export default {
     methods: {
         async deleteAllData() {
             const _this = this
             if(confirm("Are you sure you want to delete user ? All data and your user wil be deleted")) {
-                AuthServiceVue.deleteUser() // Adjust the URL as needed
+                AuthServiceVue.deleteUser()
                 .then(() => {
-                    LocalStorageService.clear()
+                    resetAllStores.resetAllStores()
                     _this.$router.push({ path: '/app/auth/login' })
                 })
                 .catch(error => {
