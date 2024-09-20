@@ -114,15 +114,6 @@ export default {
     loading,
     VerifyEmailButton
   },
-  setup() {
-    const useAuthStore = useAuthStore()
-    const useWorkspaceStore = useWorkspaceStore()
-
-    return {
-      useAuthStore,
-      useWorkspaceStore
-    }
-  },
   data() {
     return {
       google,
@@ -154,6 +145,7 @@ export default {
           if (workspace.uuid === ws) {
             currentWsUuid = ws
           }
+        });
 
         if(ws === null || ws.uuid !== currentWsUuid) {
           this.appSettings.settings.current_ws = response.workspaces.find(ws => ws === response.workspaces[0])
@@ -166,11 +158,6 @@ export default {
           _this.error = this.$t('messages.generic_error')
           _this.show = false
         })
-      } else {
-        // redirect to dashboard
-        console.debug('User is already logged in')
-        this.$router.push({ path: '/app/dashboard' })
-      }
 
       }).catch((err) => {
         _this.show = false

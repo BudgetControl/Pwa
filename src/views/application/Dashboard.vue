@@ -65,10 +65,12 @@ export default {
   },
   mounted: async function () {
     const _this = this
-    if(LocalStorage.getToken() && LocalStorage.getWorkspaceId()) {
+    const tokens = getHeaderTokens()
+
+    if(tokens.auth.token && tokens.workspace.uuid) {
       await AuthService.userInfo().then(
         response => {
-          LocalStorage.setUser(response);
+          this.settings.user = response
         },
         error => {
           console.error(error);
@@ -83,7 +85,7 @@ export default {
       _this.$router.push({ path: '/app/auth/login' })
     }
 
-    const ws = LocalStorage.getUser().workspaces[0]
+    const ws = tokens.workspace.uuid
     WorkspaceService.get(ws.uuid).then((res) => {
       const wsUuid = res.workspace.uuid
       let settings = {
@@ -92,11 +94,10 @@ export default {
           'uuid': wsUuid
         }
       }
-      if(LocalStorage.getWorkspaceId() === null) {
-        LocalStorage.setWorkspaceId(wsUuid)
+      if(tokens.workspace.uuid == {}) {
+        tokens.workspace = res.workspace
       }
 
-      LocalStorage.set('workspace', settings)
       WorkspaceServiceVue.activeWorkspace(wsUuid)
     })
   },
