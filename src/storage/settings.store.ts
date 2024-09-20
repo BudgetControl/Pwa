@@ -16,10 +16,10 @@ export const useAppSettings = defineStore(STORE_NAME, {
         return this.settings.eye_settings
       },
       getCurrency(): number {
-        return this.settings.currency_id
+        return this.settings.user.workspace_settings.data.currency_id
       },
       getPaymentType(): number {
-        return this.settings.payment_type_id
+        return this.settings.user.workspace_settings.data.payment_type_id
       },
       getUser(): User {
         return this.settings.user
