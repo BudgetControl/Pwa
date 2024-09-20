@@ -5,7 +5,7 @@
   
 <script>
 import AuthServiceVue from '../../services/AuthService.vue';
-import LocalStorageService from '../../services/LocalStorageService.vue';
+
 
 export default {
     methods: {
@@ -14,7 +14,6 @@ export default {
             if(confirm("Are you sure you want to delete data ? Only data wil be deleted")) {
                 AuthServiceVue.deleteDataUser() // Adjust the URL as needed
                 .then(() => {
-                    LocalStorageService.clear()
                     _this.$router.push({ path: '/' })
                 })
                 .catch(error => {

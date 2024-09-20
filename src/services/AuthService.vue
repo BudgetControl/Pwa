@@ -1,6 +1,8 @@
 <script>
 import axios from 'axios';
-import LocalStorageService from './LocalStorageService.vue';
+import { getHeaderTokens } from '../utils/headers-token';
+import { useAuthStore } from '../storage/auth-token.store';
+import { useWorkspaceStore } from '../storage/workspace.store';
 
 const DOMAIN = process.env.VUE_APP_API_PATH_V2;
 
@@ -34,9 +36,12 @@ async function register(name, password, confirm_password, email) {
 }
 
 async function logout() {
+  const authToken = useAuthStore()
+  authToken.token = authToken.get()
+
   const response = await instance.get('/api/auth/logout', {
     headers: {
-      'Authorization': `Bearer ${LocalStorageService.getToken()}`
+      'Authorization': `Bearer ${authToken.token}`,
     }
   });
   return response.data;
@@ -59,9 +64,12 @@ async function resetPassword(token, password, confirm_password) {
 
 async function check() {
   //retrive access token header
+  const tokens = getHeaderTokens()
+  authToken.token = authToken.get()
+
   const response = await instance.get('/api/auth/check', {
     headers: {
-      'Authorization': `Bearer ${LocalStorageService.getToken()}`,
+      'Authorization': `Bearer ${token.auth}`,
       'X-BC-Token': LocalStorageService.getUserToken()
     }
   });
@@ -69,7 +77,7 @@ async function check() {
   if (response.status === 200) {
     // Accedi all'header X-Custom-Header dalla risposta
     const access_token = response.data.token;
-    LocalStorageService.setToken(access_token)
+    authToken.set(access_token);
   }
 
   return response;
@@ -97,10 +105,12 @@ async function confirm(token) {
 
 async function deleteUser() {
   //retrive access token header
+  const tokens = getHeaderTokens()
+
   const response = await instance.delete(`/api/auth/delete`, {
     headers: {
-      'Authorization': `Bearer ${LocalStorageService.getToken()}`,
-      'X-WS': LocalStorageService.getWorkspaceId()
+      'Authorization': `Bearer ${tokens.auth.token}}`,
+      'X-WS': tokens.workspace.uuid
     }
   });
   return response;
@@ -122,15 +132,21 @@ async function settings() {
 
 async function userInfo() {
   //retrive access token header
+  const workspaceStore = useWorkspaceStore()
+  workspaceStore.workspace = workspaceStore.get()
+
+  const auth = useAuthStore()
+  auth.authToken = auth.get()
+
   const response = await instance.get('/api/auth/user-info', {
     headers: {
-      'Authorization': `Bearer ${LocalStorageService.getToken()}`,
-      'X-WS': LocalStorageService.getWorkspaceId()
+      'Authorization': `Bearer ${auth.authToken.token}`,
+      'X-WS': workspaceStore.workspace.uuid,
     }
   });
 
-  LocalStorageService.setUserToken(response.data.token);
-  LocalStorageService.setUser(response.data.userInfo);
+  // LocalStorageService.setUserToken(response.data.token);
+  // LocalStorageService.setUser(response.data.userInfo);
 
   return response.data;
 }
@@ -139,8 +155,8 @@ async function userInfoByEmail(email) {
   //retrive access token header
   const response = await instance.get(`/api/auth/user-info/by-email/${email}`, {
     headers: {
-      'Authorization': `Bearer ${LocalStorageService.getToken()}`,
-      'X-BC-Token': LocalStorageService.getUserToken()
+      'Authorization': `Bearer ${tokens.auth.token}`,
+      'X-BC-Token': tokens.bcAuth.token
     }
   });
   return response.data;
