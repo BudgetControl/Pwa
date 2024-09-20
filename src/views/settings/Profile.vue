@@ -108,12 +108,13 @@
 </template>
 <script>
 
-import AuthService from "@/services/AuthService.vue";
 import DeleteButton from "../../components/Auth/DeleteButton.vue";
 import LocalStorageService from "../../services/LocalStorageService.vue";
-import StatsService from "../../services/StatsService.vue";
 import ApiServiceVue from '../../services/ApiService.vue';
 import Avatar from "vue-boring-avatars";
+import AuthService from "../../services/auth.service";
+import { getHeaderTokens } from '../../utils/headers-token';
+import StatsService from '../../services/stats.service';
 
 export default {
   data() {
@@ -156,14 +157,16 @@ export default {
       _this.user.name = resp.name
       _this.user.email = resp.email
 
-      StatsService.health().then(resp => {
+      const headers = getHeaderTokens()
+      const statsService = new StatsService(headers)
+      statsService.health().then(resp => {
         _this.user.wallet.health = resp.total.toFixed(2)
         if (_this.user.wallet.health <= 0) {
           _this.user.wallet.health_color = 'text-red-500'
         }
       })
 
-      StatsService.total().then(resp => {
+      statsService.total().then(resp => {
         _this.user.wallet.total = resp.total.toFixed(2)
         if (_this.user.wallet.total <= 0) {
           _this.user.wallet.total_color = 'text-red-500'
@@ -174,11 +177,11 @@ export default {
       const start_date = date_time.getFullYear() + '-' + (date_time.getMonth() + 1) + '-01'
       const end_date = date_time.getFullYear() + '-' + (date_time.getMonth() + 1) + '-' + date_time.getDate()
 
-      StatsService.incoming(`?start_date=${start_date}&end_date=${end_date}`).then((resp) => {
+      statsService.incoming(`?start_date=${start_date}&end_date=${end_date}`).then((resp) => {
         _this.user.wallet.incoming = resp.total.toFixed(2)
       })
 
-      StatsService.expenses().then(resp => {
+      statsService.expenses().then(resp => {
         _this.user.wallet.expenses = resp.total.toFixed(2)
       })
 

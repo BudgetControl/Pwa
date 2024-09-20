@@ -31,8 +31,9 @@
   </div>
 </template>
 <script>
-import AuthService from "../../services/AuthService.vue";
+import AuthService from "../../services/auth.service";
 import loading from 'vue-full-loading'
+import { getHeaderTokens } from "../../utils/headers-token";
 
 
 export default {
@@ -49,11 +50,13 @@ export default {
     async mounted() {
       const token = this.$route.params.token
       const _this = this
+      const header = getHeaderTokens()
+      const authService = new AuthService(header)
 
       this.show = false
       this.error = false
 
-      AuthService.confirm(token).then(() => {
+      authService.confirm(token).then(() => {
         _this.$router.push({ path: '/app/login' })
       }).catch((err) => {
         _this.show = false
