@@ -90,7 +90,6 @@ export default {
   wallets,
   planned,
   health,
-  getStatsEntries,
   getAverageExpenses,
   getAverageIncoming,
   getAverageSavings,
