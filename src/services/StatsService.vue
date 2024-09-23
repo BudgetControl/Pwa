@@ -78,6 +78,11 @@ async function getPlannedExpenses() {
   return response.data;
 }
 
+async function getEntryList(data) {
+  const response = await instance.post('/api/stats/entries',data);
+  return response.data;
+}
+
 export default {
   incoming,
   expenses,
@@ -89,7 +94,9 @@ export default {
   getAverageExpenses,
   getAverageIncoming,
   getAverageSavings,
-  getPlannedExpenses
+  getPlannedExpenses,
+  getEntryList,
+  getStatsEntries
 }
 
 </script>

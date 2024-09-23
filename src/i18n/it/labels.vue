@@ -215,5 +215,7 @@ export default {
     average_savings: 'Risparmi medi',
     your_planned_expenses: 'Spese pianificate',
     average_expenses: 'Spese medie',
+    list_of_voices: 'Elenco delle voci',
+    no_voices_found: 'Nessuna voce trovata',
 }
 </script>

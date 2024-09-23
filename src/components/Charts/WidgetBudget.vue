@@ -8,7 +8,7 @@
                         {{ $t('labels.weekly') }}
                     </span>
 
-                    <BudgetComponent v-for="budget in budgets.week" :key="budget.budget.uuid" :budget="budget" :currency="currency" />
+                    <Budget v-for="budget in budgets.week" :key="budget.budget.uuid" :budget="budget" :currency="currency" />
 
                 </div>
 
@@ -19,7 +19,7 @@
                         {{ $t('labels.monthly') }}
                     </span>
 
-                    <BudgetComponent v-for="budget in budgets.month" :key="budget.budget.uuid" :budget="budget" :currency="currency" />
+                    <Budget v-for="budget in budgets.month" :key="budget.budget.uuid" :budget="budget" :currency="currency" />
                 </div>
 
 
@@ -28,7 +28,7 @@
                         {{ $t('labels.yearly') }}
                     </span>
 
-                    <BudgetComponent v-for="budget in budgets.year" :key="budget.budget.uuid" :budget="budget" :currency="currency" />
+                    <Budget v-for="budget in budgets.year" :key="budget.budget.uuid" :budget="budget" :currency="currency" />
                 </div>
 
                 <div class="border p-2 mt-2 mb-2" v-if="budgets.custom.length != 0">
@@ -36,7 +36,7 @@
                         {{ $t('labels.recursive') }}
                     </span>
 
-                    <BudgetComponent v-for="budget in budgets.custom" :key="budget.budget.uuid" :budget="budget" :currency="currency" />
+                    <Budget v-for="budget in budgets.custom" :key="budget.budget.uuid" :budget="budget" :currency="currency" />
                 </div>
 
             </div>
@@ -45,9 +45,9 @@
 </template>
   
 <script>
-import ChartServiceVue from '@/services/ChartService.vue'
-import LocalStorageServiceVue from '@/services/LocalStorageService.vue'
-import BudgetComponent from '@/components/GenericComponents/BudgetComponent.vue'
+import LocalStorageServiceVue from '../../../services/LocalStorageService.vue'
+import Budget from '../../Budget/Budget.vue'
+import BudgetService from '../../../services/BudgetService.vue';
 
 export default {
     data() {
@@ -62,7 +62,7 @@ export default {
         }
     },
     components: {
-        BudgetComponent
+        Budget
     },
     mounted() {
         this.init()
@@ -78,7 +78,7 @@ export default {
     methods: {
         init: function () {
             const _this = this
-            ChartServiceVue.getBudgets().then((resp) => {
+            BudgetService.getBudgets().then((resp) => {
                 resp.forEach((data) => {
                     const period = data.budget.configuration.period
                     data.percentage = data.totalSpentPercentage.replace('%', '')
