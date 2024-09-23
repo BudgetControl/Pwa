@@ -40,6 +40,11 @@
           </tr>
         </thead>
         <tbody>
+          <tr v-if="elements.length == 0">
+            <td colspan="4" class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-center">
+              {{ $t('labels.no_data_found') }}
+            </td>
+          </tr>
           <tr v-for="(d, i) in elements" :key="i">
             <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
               {{ d.label }}
@@ -63,7 +68,7 @@
 </template>
 
 <script>
-import ChartServiceVue from '../../../services/ChartService.vue'
+import ChartServiceVue from '@/services/ChartService.vue'
 
 export default {
   props: {
