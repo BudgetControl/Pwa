@@ -45,9 +45,9 @@
 </template>
   
 <script>
-import ChartServiceVue from '@/services/ChartService.vue'
-import LocalStorageServiceVue from '@/services/LocalStorageService.vue'
-import BudgetComponent from '@/components/GenericComponents/BudgetComponent.vue'
+import LocalStorageServiceVue from '../../services/LocalStorageService.vue'
+import Budget from '../Budget/Budget.vue'
+import BudgetService from '../../services/BudgetService.vue';
 
 export default {
     data() {
