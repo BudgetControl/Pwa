@@ -58,6 +58,26 @@ async function getStatsEntries(data) {
   return response.data;
 }
 
+async function getAverageExpenses() {
+  const response = await instance.get('/api/stats/average-expenses');
+  return response.data;
+}
+
+async function getAverageIncoming() {
+  const response = await instance.get('/api/stats/average-incoming');
+  return response.data;
+}
+
+async function getAverageSavings() {
+  const response = await instance.get('/api/stats/average-savings');
+  return response.data;
+}
+
+async function getPlannedExpenses() {
+  const response = await instance.get('/api/stats/total/planned/remaining');
+  return response.data;
+}
+
 export default {
   incoming,
   expenses,
@@ -65,7 +85,11 @@ export default {
   wallets,
   planned,
   health,
-  getStatsEntries
+  getStatsEntries,
+  getAverageExpenses,
+  getAverageIncoming,
+  getAverageSavings,
+  getPlannedExpenses
 }
 
 </script>

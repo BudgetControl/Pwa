@@ -210,6 +210,11 @@ export default {
     wallet_type: 'Wallet type',
     next_execution_time: 'Next execution day',
     end_time: 'End day',
+    no_data_found: 'No data found',
+    average_expenses: 'Average expenses',
+    average_savings: 'Average savings',
+    your_planned_expenses: 'Your planned expenses',
+    average_incoming: 'Average incoming',
 };
 
 </script>

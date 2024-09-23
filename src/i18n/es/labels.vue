@@ -210,5 +210,10 @@ export default {
     wallet_type: 'Tipo de billetera',
     next_execution_time: 'Próxima dia de ejecución',
     end_time: 'Dia de finalización',
+    no_data_found: 'No se encontraron datos',
+    average_incoming: 'Ingresos promedio',
+    average_expenses: 'Gastos promedio',
+    average_savings: 'Ahorros promedio',
+    your_planned_expenses: 'Gastos planificados',
 }
 </script>

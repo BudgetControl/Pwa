@@ -33,7 +33,7 @@
 
                 <div class="border p-2 mt-2 mb-2" v-if="budgets.custom.length != 0">
                     <span class="text-xs font-semibold inline-block text-blueGray-400 ">
-                        {{ $t('labels.one_shot') }}
+                        {{ $t('labels.recursive') }}
                     </span>
 
                     <BudgetComponent v-for="budget in budgets.custom" :key="budget.budget.uuid" :budget="budget" :currency="currency" />
@@ -45,9 +45,9 @@
 </template>
   
 <script>
-import ChartServiceVue from '../../../services/ChartService.vue'
-import LocalStorageServiceVue from '../../../services/LocalStorageService.vue'
-import BudgetComponent from '../../GenericComponents/BudgetComponent.vue'
+import ChartServiceVue from '@/services/ChartService.vue'
+import LocalStorageServiceVue from '@/services/LocalStorageService.vue'
+import BudgetComponent from '@/components/GenericComponents/BudgetComponent.vue'
 
 export default {
     data() {

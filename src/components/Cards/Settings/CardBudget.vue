@@ -45,7 +45,7 @@
 
             <div class="border p-2 mt-2 mb-2" v-if="budgets.custom.length != 0">
                 <span class="text-xs font-semibold inline-block text-blueGray-400 ">
-                    {{ $t('labels.one_shot') }}
+                    {{ $t('labels.recursive') }}
                 </span>
 
                 <BudgetComponent :budget="budget" :currency="currency" v-for="budget in budgets.custom"

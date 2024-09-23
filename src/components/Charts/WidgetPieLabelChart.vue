@@ -1,10 +1,10 @@
 <template>
-  <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-700 text-white">
+  <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-700">
     <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
       <div class="flex flex-wrap items-center">
         <div class="relative w-full max-w-full flex-grow flex-1">
           <h2 class="text-white text-xl font-semibold">
-            {{ title }}
+            {{ $t('labels.expenses') }}
           </h2>
           <h3 class="text-white text-xl font-semibold">
             {{ subTitle }}
@@ -13,15 +13,16 @@
       </div>
     </div>
     <div class="p-4 flex-auto">
+      <!-- Chart -->
       <div class="relative h-350-px">
-        <canvas class="text-white" :id="'bar-chart_' + ID_GRAPH"></canvas>
+        <canvas :id="'bar_graph_' + ID_GRAPH"></canvas>
       </div>
     </div>
   </div>
 </template>
 <script>
 import Chart from "chart.js";
-import ChartService from "../../../services/ChartService.vue";
+import ChartService from "@/services/ChartService.vue";
 
 export default {
   props: {
@@ -35,15 +36,12 @@ export default {
     },
     category: {
       type: Array,
-      required: false,
-      default: null
+      required: true
     },
     ID_GRAPH: {
       type: String,
       required: true
     }
-  },
-  watch: {
   },
   data() {
     return {
@@ -60,10 +58,11 @@ export default {
     const _this = this
     setInterval(function () {
       _this.checkLocalStorageUpdate()
-    }, 2000)
+    }, 1000)
   },
   methods: {
     setGraph() {
+
       let date = new Date
       let month = localStorage.getItem('chart-month')
       let year = localStorage.getItem('chart-year')
@@ -77,79 +76,74 @@ export default {
       }
 
       month = this.months[month]
-
       this.subTitle = year + "/" + month
 
       this.$nextTick(function () {
-        if (window.myBar !== undefined) {
-          this.datasets = []
-          window.myBar.destroy()
-        }
 
         let config = {
-          type: "bar",
+          type: "pie",
           data: {
             labels: [],
             datasets: [],
           },
           options: {
-            title: {
-              display: false,
-              text: "Entries stats",
-              fontColor: "white",
-            },
             legend: {
-              display: false
+              position: "bottom",
+              labels: {
+                fontColor: "#fff",
+              },
             },
-            maintainAspectRatio: false,
             responsive: true,
-            hover: {
-              mode: "nearest",
-              intersect: false,
-            },
           },
         };
 
-        const data = [{
+        const date = [{
           start: year + "/" + month + "/01",
           end: year + "/" + month + "/31"
         }]
 
-        let labels = []
-        let colors = []
-        let values = []
+        ChartService.expensesLabelApplePie(date).then((resp) => {
 
+          const datasetApplePie = {
+            labels: [],
+            colors: [],
+            values: []
+          }
 
-        ChartService.expensesBarByCategory(data).then((resp) => {
-          resp.bar.forEach(element => {
-
-            labels.push(this.$t('app.' + element.label))
-            colors.push(element.color)
-            values.push(element.value * -1)
-
+          resp.field.forEach(element => {
+            datasetApplePie.labels.push(element.label)
+            datasetApplePie.colors.push(element.color)
+            datasetApplePie.values.push(element.value * -1)
           });
 
+          datasetApplePie.values.sort((a, b) => a - b);
+          // get the first 5 elements
+          const elements = 5
+          datasetApplePie.labels = datasetApplePie.labels.slice(0, elements);
+          datasetApplePie.colors = datasetApplePie.colors.slice(0, elements);
+          datasetApplePie.values = datasetApplePie.values.slice(0, elements);
+
           let dataset = {
-            label: 'expenses',
-            backgroundColor: colors,
-            data: values,
-            fill: true,
+            label: this.$t('labels.expenses'),
+            backgroundColor: datasetApplePie.colors,
+            data: datasetApplePie.values
           }
 
+          config.data.labels = datasetApplePie.labels
           config.data.datasets.push(dataset)
-          config.data.labels = labels
 
-          var ctx = document.getElementById("bar-chart_" + this.ID_GRAPH).getContext("2d");
-          if (window.myBar !== undefined) {
-            window.myBar.destroy()
+          var ctx = document.getElementById('bar_graph_' + this.ID_GRAPH).getContext("2d");
+          if (window.myBarLabel !== undefined) {
+            window.myBarLabel.destroy()
           }
 
-          window.myBar = new Chart(ctx, config);
+          window.myBarLabel = new Chart(ctx, config);
 
         }).catch((error) => {
           console.info(error);
         })
-      })
+
+      });
     },
     checkLocalStorageUpdate() {
       const year = localStorage.getItem('chart-year')

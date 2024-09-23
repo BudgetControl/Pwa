@@ -210,5 +210,10 @@ export default {
     wallet_type: 'Tipo di portafoglio',
     next_execution_time: 'Prossimo data di esecuzione',
     end_time: 'Data di fine',
+    no_data_found: 'Nessun dato trovato',
+    average_incoming: 'Entrate medie',
+    average_savings: 'Risparmi medi',
+    your_planned_expenses: 'Spese pianificate',
+    average_expenses: 'Spese medie',
 }
 </script>
