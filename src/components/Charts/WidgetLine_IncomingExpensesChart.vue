@@ -22,7 +22,7 @@
 </template>
 <script>
 import Chart from "chart.js";
-import ChartService from "../../../services/ChartService.vue";
+import ChartService from "@/services/ChartService.vue";
 
 export default {
   props: {
