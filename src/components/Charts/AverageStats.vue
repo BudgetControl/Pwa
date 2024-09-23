@@ -27,12 +27,21 @@
 </template>
 
 <script>
-import StatsService from '../../services/StatsService.vue';
 import CardStats from '@/components/Cards/CardStats.vue';
+import StatsService from '../../services/stats.service';
+import { getHeaderTokens } from '../../utils/headers-token';
 
 export default {
     components: {
         CardStats
+    },
+    setump() {
+        const headers = getHeaderTokens()
+        const statsService = new StatsService(headers)
+
+        return {
+            statsService
+        }
     },
     data() {
         return {
@@ -60,7 +69,7 @@ export default {
     },
     methods: {
         getAverageIncoming: function () {
-            StatsService.getAverageIncoming().then((resp) => {
+            this.statsService.getAverageIncoming().then((resp) => {
                 let data = resp
                 this.stats.averageIncoming.statTitle = data.total.toFixed(2)
             }).catch((error) => {
@@ -68,7 +77,7 @@ export default {
             })
         },
         getAverageExpenses: function () {
-            StatsService.getAverageExpenses().then((resp) => {
+            this.statsService.getAverageExpenses().then((resp) => {
                 let data = resp
                 const total = data.total * -1
                 this.stats.averageExpenses.statTitle = total.toFixed(2)
@@ -77,7 +86,7 @@ export default {
             })
         },
         getAverageSavings: function () {
-            StatsService.getAverageSavings().then((resp) => {
+            this.statsService.getAverageSavings().then((resp) => {
                 let data = resp
                 const total = data.total * -1
                 this.stats.averageSavings.statTitle = total.toFixed(2)
@@ -86,7 +95,7 @@ export default {
             })
         },
         getPlannedExpenses: function () {
-            StatsService.getPlannedExpenses().then((resp) => {
+            this.statsService.getPlannedExpenses().then((resp) => {
                 let data = resp
                 const total = data.total * -1
                 this.stats.plannedExpenses.statTitle = total.toFixed(2)

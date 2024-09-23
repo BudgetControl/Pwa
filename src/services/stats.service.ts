@@ -32,37 +32,35 @@ class StatsService extends ApiService {
         return response.data;
     }
 
-    
+    async getStatsEntries(data) {
+        const response = await this.instance.post('/api/stats/entries', data);
+        return response.data;
+    }
 
-async getStatsEntries(data) {
-    const response = await this.instance.post('/api/stats/entries',data);
-    return response.data;
-  }
-  
-  async getAverageExpenses() {
-    const response = await this.instance.get('/api/stats/average-expenses');
-    return response.data;
-  }
-  
-  async getAverageIncoming() {
-    const response = await this.instance.get('/api/stats/average-incoming');
-    return response.data;
-  }
-  
-  async getAverageSavings() {
-    const response = await this.instance.get('/api/stats/average-savings');
-    return response.data;
-  }
-  
-  async getPlannedExpenses() {
-    const response = await this.instance.get('/api/stats/total/planned/remaining');
-    return response.data;
-  }
-  
-  async getEntryList(data) {
-    const response = await this.instance.post('/api/stats/entries',data);
-    return response.data;
-  }
+    async getAverageExpenses() {
+        const response = await this.instance.get('/api/stats/average-expenses');
+        return response.data;
+    }
+
+    async getAverageIncoming() {
+        const response = await this.instance.get('/api/stats/average-incoming');
+        return response.data;
+    }
+
+    async getAverageSavings() {
+        const response = await this.instance.get('/api/stats/average-savings');
+        return response.data;
+    }
+
+    async getPlannedExpenses() {
+        const response = await this.instance.get('/api/stats/total/planned/remaining');
+        return response.data;
+    }
+
+    async getEntryList(data) {
+        const response = await this.instance.post('/api/stats/entries', data);
+        return response.data;
+    }
 }
 
 export default StatsService;
