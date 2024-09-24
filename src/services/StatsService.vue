@@ -95,7 +95,7 @@ async function getAverageSavings() {
 }
 
 async function getPlannedExpenses() {
-  const response = await instance.get('/api/stats/total/planned/remaining');
+  const response = await instance.get('/api/stats/total-loan-installments');
   return response.data;
 }
 
