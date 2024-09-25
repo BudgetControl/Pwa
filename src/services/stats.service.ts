@@ -53,7 +53,7 @@ class StatsService extends ApiService {
     }
 
     async getPlannedExpenses() {
-        const response = await this.instance.get('/api/stats/total/planned/remaining');
+        const response = await this.instance.get('/api/stats/total-loan-installments');
         return response.data;
     }
 

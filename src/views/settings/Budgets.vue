@@ -36,8 +36,8 @@
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
 import LocalStorageServiceVue from '../../services/LocalStorageService.vue';
-import ChartService from '../../services/chart.service';
-import BudgetComponent from '../../components/GenericComponents/BudgetComponent.vue';
+import ChartService from '@/services/chart.service';
+import Budget from '../../components/Budget/Budget.vue';
 import { getHeaderTokens } from '../../utils/headers-token';
 
 export default {

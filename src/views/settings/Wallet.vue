@@ -68,13 +68,22 @@
 <script>
 
 import HeaderButton from '@/components/Button/HeaderButton.vue';
-import ApiService from '@/services/ApiService.vue';
+import CoreService from '../../services/core.service';
 import '@vuepic/vue-datepicker/dist/main.css'
 import draggable from 'vuedraggable'
+import { getHeaderTokens } from '../../utils/headers-token';
 
 export default {
     components: {
         HeaderButton, draggable
+    },
+    setup() {
+        const headers = getHeaderTokens()
+        const apiService = new CoreService(headers)
+
+        return {
+            apiService
+        }
     },
     data() {
         return {
@@ -101,7 +110,7 @@ export default {
         },
         getWallets() {
 
-            ApiService.accounts("?filter[trashed]=1&order[name]=asc").then((res) => {
+            this.apiService.accounts("?filter[trashed]=1&order[name]=asc").then((res) => {
                 res.forEach(e => {
                     this.wallets.push(e)
                 });
@@ -111,7 +120,7 @@ export default {
             let i = 0;
             this.sortingList.forEach((e) => {
                 i++;
-                ApiService.setAccountSorting(e.id, i)
+                this.apiService.setAccountSorting(e.id, i)
             })
         },
         checkMove: function (e) {

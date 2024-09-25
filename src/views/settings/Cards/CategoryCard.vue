@@ -47,13 +47,22 @@
 
 <script>
 import HeaderButton from '@/components/Button/HeaderButton.vue';
-import ApiService from '@/services/ApiService.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
 import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
+import CoreService from '../../../services/core.service';
+import { getHeaderTokens } from '@/utils/headers-token';
 
 export default {
     components: {
         HeaderButton, AlertModal
+    },
+    setup() {
+        const headers = getHeaderTokens()
+        const apiService = new CoreService(headers)
+
+        return {
+            apiService
+        }
     },
     data() {
         return {
@@ -92,7 +101,7 @@ export default {
                 id = ''
             }
 
-            ApiService.category(id).then((resp) => {
+            this.apiService.category(id).then((resp) => {
                 this.categories.push(resp)
             })
         },
@@ -105,7 +114,7 @@ export default {
         },
         saveModal() {
             const _this = this
-            ApiService.setCategories(this.modal, this.modal.id).then(() => {
+            this.apiService.setCategories(this.modal, this.modal.id).then(() => {
                 alert('Category saved')
                 _this.$router.push({path : '/app/settings/category'})
             })

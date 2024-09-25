@@ -42,14 +42,23 @@
 
 <script>
 import HeaderButton from '@/components/Button/HeaderButton.vue';
-import ApiService from '@/services/ApiService.vue';
+import CoreService from '../../../services/core.service';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { ColorPicker } from 'vue-accessible-color-picker';
 import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
+import { getHeaderTokens } from '@/utils/headers-token';
 
 export default {
     components: {
         HeaderButton, ColorPicker, AlertModal
+    },
+    setup() {
+        const headers = getHeaderTokens()
+        const apiService = new CoreService(headers)
+
+        return {
+            apiService
+        }
     },
     data() {
         return {
@@ -82,7 +91,7 @@ export default {
 
         },
         openModal(id) {
-            ApiService.label(id).then((resp) => {
+            this.apiService.label(id).then((resp) => {
                 this.modal.id = resp.id
                 this.modal.name = resp.name
                 this.modal.archive = resp.archive
@@ -93,7 +102,7 @@ export default {
 
         saveModal() {
             const _this = this
-            ApiService.setLabel(this.modal.uuid, this.modal).then(() => {
+            this.apiService.setLabel(this.modal.uuid, this.modal).then(() => {
                 alert('Label updated')
                 _this.$router.push({path : '/app/settings/label'})
             })

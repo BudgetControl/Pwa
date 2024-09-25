@@ -86,7 +86,7 @@ import HeaderButton from '@/components/Button/HeaderButton.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
 import AuthService from "../../../services/auth.service";
 import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
-import { getHeaderTokens } from '../../../utils/headers-token';
+import { getHeaderTokens } from '@/utils/headers-token';
 import { useAppSettings } from '../../../storage/settings.store';
 import WorkspaceService from '../../../services/workspace.service';
 

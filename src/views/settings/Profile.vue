@@ -110,7 +110,6 @@
 
 import DeleteButton from "../../components/Auth/DeleteButton.vue";
 import LocalStorageService from "../../services/LocalStorageService.vue";
-import ApiServiceVue from '../../services/ApiService.vue';
 import Avatar from "vue-boring-avatars";
 import AuthService from "../../services/auth.service";
 import { getHeaderTokens } from '../../utils/headers-token';

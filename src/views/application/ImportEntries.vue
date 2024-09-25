@@ -5,13 +5,4 @@
       </div>
     </div>
   </template>
-  <script>
-  import CardImport from "@/components/Cards/CardImport.vue";
-  
-  export default {
-    components: {
-        CardImport
-    },
-  };
-  </script>
   

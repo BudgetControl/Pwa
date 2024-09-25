@@ -29,7 +29,8 @@
 </template>
 <script>
 import { createPopper } from "@popperjs/core";
-import ApiService from "../../services/ApiService.vue";
+import CoreService from "../../services/core.service";
+import { getHeaderTokens } from "../../utils/headers-token";
 
 export default {
   props: {
@@ -54,6 +55,14 @@ export default {
       default: "emtry"
     }
   },
+  setup() {
+        const headers = getHeaderTokens()
+        const apiService = new CoreService(headers)
+
+        return {
+            apiService
+        }
+    },
   data() {
     return {
       dropdownPopoverShow: false,
@@ -79,14 +88,14 @@ export default {
       switch (this.type) {
         case 'planned_entry':
         case 'entry':
-          ApiService.deleteEntry(this.entryId, isPlanned).then(() => {
+          this.apiService.deleteEntry(this.entryId, isPlanned).then(() => {
             this.$emit('deleteItem', this.index)
           }).catch((error) => {
             console.error(error);
           })
           break;
         case 'model':
-          ApiService.deleteModel(this.entryId).then(() => {
+          this.apiService.deleteModel(this.entryId).then(() => {
             this.$emit('deleteItem', this.index)
           }).catch((error) => {
             console.error(error);
