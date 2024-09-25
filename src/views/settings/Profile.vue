@@ -151,7 +151,8 @@ export default {
   },
   async mounted() {
     const _this = this
-    AuthService.userInfoByEmail().then((resp) => {
+    const userEmail = LocalStorageService.getUser().email;
+    AuthService.userInfoByEmail(userEmail).then((resp) => {
       _this.user.name = resp.name
       _this.user.email = resp.email
 

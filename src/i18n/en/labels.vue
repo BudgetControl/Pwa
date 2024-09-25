@@ -217,6 +217,8 @@ export default {
     average_incoming: 'Average incoming',
     list_of_voices: 'List of voices',
     no_voices_found: 'No voices found',
+    workspace_whared_with: 'Workspace shared with',
+    user_not_found: 'User not found',
 };
 
 </script>
