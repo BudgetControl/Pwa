@@ -150,7 +150,7 @@ export default {
     click_here: 'Clicca qui',
     save_template: 'Salva modello',
     set_new_password: 'Imposta nuova password',
-    account_created: 'Account creato con successo, verifica la tua email per confermale ed attivare il tuo account',
+    account_created: 'Account creato con successo, verifica la tua email per confermare ed attivare il tuo account',
     search_by_text: 'Cerca per testo',
     is_planned: 'È pianificato',
     no: 'NO',
@@ -215,5 +215,9 @@ export default {
     average_savings: 'Risparmi medi',
     your_planned_expenses: 'Spese pianificate',
     average_expenses: 'Spese medie',
+    list_of_voices: 'Elenco delle voci',
+    no_voices_found: 'Nessuna voce trovata',
+    workspace_whared_with: 'Spazio di lavoro condiviso con',
+    user_not_found: 'Utente non trovato',
 }
 </script>

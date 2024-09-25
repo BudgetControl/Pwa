@@ -164,11 +164,10 @@ export default {
             //check if is a valid email
             const email = this.shareEmail
             if (this.shareEmail.length > 0 && this.shareEmail.includes('@') && this.shareEmail.includes('.') && this.shareEmail.length > 5) {
-                AuthServiceVue.userInfoByEmail(this.shareEmail).then((res) => {
-                    res.email = email
-                    this.modal.shareWith.push(res)
+                AuthServiceVue.userInfoByEmail(email).then((res) => {
+                    this.modal.shareWith.push(res.email)
                 }).catch(() => {
-                    alert(this.$t('messages.workspace.user_not_found'), 'error')
+                    alert(this.$t('labels.user_not_found'), 'error')
                 })
             }
             this.shareEmail = ''

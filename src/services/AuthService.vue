@@ -135,9 +135,9 @@ async function userInfo() {
   return response.data;
 }
 
-async function userInfoByEmail() {
+async function userInfoByEmail(email) {
   //retrive access token header
-  const response = await instance.get(`/api/auth/user-info/by-email/${LocalStorageService.getUser().email}`, {
+  const response = await instance.get(`/api/auth/user-info/by-email/${email}`, {
     headers: {
       'Authorization': `Bearer ${LocalStorageService.getToken()}`,
       'X-BC-Token': LocalStorageService.getUserToken()
