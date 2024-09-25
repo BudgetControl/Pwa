@@ -175,11 +175,12 @@
 </template>
 
 <script>
-import ApiService from '@/services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import AlertModal from '../../GenericComponents/AlertModal.vue';
 import libs from '../../../Libs.vue';
+import CoreService from '../../../services/core.service';
+import { getHeaderTokens } from '@/utils/headers-token';
 
 export default {
   props: {
@@ -196,6 +197,14 @@ export default {
       default: 'expenses'
     }
   },
+  setup() {
+        const headers = getHeaderTokens()
+        const apiService = new CoreService(headers)
+
+        return {
+            apiService
+        }
+    },
   data() {
     return {
       action: {
@@ -294,7 +303,7 @@ export default {
     },
     getCategory() {
       let _this = this
-      ApiService.subCategories().then((res) => {
+      this.apiService.subCategories().then((res) => {
         let data = res
         data.forEach(function (sub) {
           _this.input.category.push({
@@ -310,7 +319,7 @@ export default {
     },
     getPaymentType() {
       let _this = this
-      ApiService.paymentstype().then((res) => {
+      this.apiService.paymentstype().then((res) => {
         let data = res
         data.forEach(function (r) {
           _this.input.payment_type.push(r)
@@ -322,7 +331,7 @@ export default {
       this.action.reset = true
       this.toggleTabs(this.typeOfEntry)
 
-      ApiService.getEntryDetail(this.entryId, this.isPlanned).then((res) => {
+      this.apiService.getEntryDetail(this.entryId, this.isPlanned).then((res) => {
         let model = res
 
         _this.amount = Math.abs(model.amount)
@@ -371,7 +380,7 @@ export default {
     },
     getLabels() {
       let _this = this
-      ApiService.labels().then((res) => {
+      this.apiService.labels().then((res) => {
         let data = res
         data.forEach(function (r) {
           _this.input.tags.push(r)
@@ -450,7 +459,7 @@ export default {
           data.amount = this.amount * -1
         }
 
-        ApiService.setPlannedEntry(data, this.entryId).then(() => {
+        this.apiService.setPlannedEntry(data, this.entryId).then(() => {
           _this.date = null,
             _this.amount = null,
             _this.category = data.category_id,
@@ -476,7 +485,7 @@ export default {
     },
     getCurrency() {
       let _this = this
-      ApiService.currencies().then((res) => {
+      this.apiService.currencies().then((res) => {
         let data = res
         data.forEach(function (r) {
           _this.input.currency.push(r)
@@ -485,7 +494,7 @@ export default {
     },
     getAccount() {
       let _this = this
-      ApiService.accounts('?order[name]=asc').then((res) => {
+      this.apiService.accounts('?order[name]=asc').then((res) => {
         let data = res
         data.forEach(function (r) {
           _this.input.account.push(r)

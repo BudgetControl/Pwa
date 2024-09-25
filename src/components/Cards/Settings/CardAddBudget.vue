@@ -46,7 +46,7 @@
 
 <script>
 import '@vuepic/vue-datepicker/dist/main.css'
-import ChartService from '../../../services/chart.service';
+import ChartService from '@/services/chart.service';
 import LocalStorageServiceVue from '../../../services/LocalStorageService.vue';
 import MenuButton from '../../GenericComponents/MenuButton.vue';
 import HeaderMenu from '../../Navbars/HeaderMenu.vue';
