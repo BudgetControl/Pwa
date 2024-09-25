@@ -49,6 +49,7 @@ import ChartService from '@/services/chart.service'
 import Budget from '@/components/Budget/Budget.vue'
 import { getHeaderTokens } from '@/utils/headers-token';
 
+
 export default {
     data() {
         return {
