@@ -231,11 +231,12 @@
 
 <script>
 import '@vuepic/vue-datepicker/dist/main.css'
-import ApiService from '../../services/ApiService.vue';
+import CoreService from '../../services/core.service';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import LocalStorageServiceVue from '../../services/LocalStorageService.vue';
 import BudgetService from '../../services/BudgetService.vue';
 import AlertModal from '../GenericComponents/AlertModal.vue';
+import { getHeaderTokens } from '../../utils/headers-token';
 
 export default {
     components: {
@@ -246,6 +247,14 @@ export default {
             type: String,
             default: null,
             required: true
+        }
+    },
+    setup() {
+        const headers = getHeaderTokens()
+        const apiService = new CoreService(headers)
+
+        return {
+            apiService
         }
     },
     data() {
@@ -310,7 +319,7 @@ export default {
         },
         getLabels() {
             let _this = this
-            ApiService.labels().then((res) => {
+            this.apiService.labels().then((res) => {
                 let data = res
                 data.forEach(function (r) {
                     _this.input.tags.push(r)
@@ -319,7 +328,7 @@ export default {
         },
         getCategory() {
             let _this = this
-            ApiService.subCategories().then((res) => {
+            this.apiService.subCategories().then((res) => {
                 let data = res
                 data.forEach(function (sub) {
                     _this.input.category.push({
@@ -335,7 +344,7 @@ export default {
         },
         getAccount() {
             let _this = this
-            ApiService.accounts('?order[name]=asc').then((res) => {
+            this.apiService.accounts('?order[name]=asc').then((res) => {
                 let data = res
                 data.forEach(function (r) {
                     _this.input.account.push(r)

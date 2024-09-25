@@ -175,14 +175,23 @@
 <script>
 import EntriesTable from "@/components/Entry/EntriesTable.vue";
 import SearchService from "../../services/SearchService.vue";
-import ApiService from "../../services/ApiService.vue";
 import Paginator from "../GenericComponents/Paginator.vue";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import AlertModal from '../GenericComponents/AlertModal.vue';
+import CoreService from "../../services/core.service";
+import { getHeaderTokens } from "../../utils/headers-token";
 
 export default {
     components: {
         EntriesTable, Paginator, VueDatePicker, AlertModal
+    },
+    setup() {
+        const headers = getHeaderTokens()
+        const apiService = new CoreService(headers)
+
+        return {
+            apiService
+        }
     },
     data() {
         return {
@@ -282,7 +291,7 @@ export default {
         },
         getLabels() {
             let _this = this
-            ApiService.labels().then((res) => {
+            this.apiService.labels().then((res) => {
                 let data = res
                 data.forEach(function (r) {
                     _this.input.tags.push(r)
@@ -291,7 +300,7 @@ export default {
         },
         getCategory() {
             let _this = this
-            ApiService.subCategories().then((res) => {
+            this.apiService.subCategories().then((res) => {
                 let data = res
                 data.forEach(function (sub) {
                     _this.input.category.push({
@@ -307,7 +316,7 @@ export default {
         },
         getAccount() {
             let _this = this
-            ApiService.accounts('?order[name]=asc').then((res) => {
+            this.apiService.accounts('?order[name]=asc').then((res) => {
                 let data = res
                 data.forEach(function (r) {
                     _this.input.account.push(r)

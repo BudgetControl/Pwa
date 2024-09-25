@@ -26,7 +26,7 @@
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 v-model="action.category">
                 <option v-for="category in input.category" :key="category.id" :value="category.id">
-                  {{ category.name}}
+                  {{ category.name }}
                 </option>
               </select>
             </div>
@@ -41,7 +41,7 @@
                 v-model="action.account">
                 <option v-for="account in input.account" :key="account.id" :value="account.id">{{
                   account.name
-                  }}</option>
+                }}</option>
               </select>
             </div>
           </div>
@@ -71,8 +71,8 @@
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 v-model="action.payment_methods">
                 <option v-for="payment in input.payment_methods" :key="payment.id" :value="payment.id">
-                 {{ payment.name }}
-                  </option>
+                  {{ payment.name }}
+                </option>
               </select>
             </div>
           </div>
@@ -86,8 +86,8 @@
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 v-model="action.currencies">
                 <option v-for="currency in input.currencies" :key="currency.id" :value="currency.id">
-                 {{ currency.name }}
-                  </option>
+                  {{ currency.name }}
+                </option>
               </select>
             </div>
           </div>
@@ -120,12 +120,21 @@
 </template>
 <script>
 import TableEntries from '../GenericComponents/TableEntries.vue';
-import ApiService from '../../services/ApiService.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
+import CoreService from '../../services/core.service';
+import { getHeaderTokens } from '../../utils/headers-token';
 
 export default {
   components: {
     TableEntries, VueDatePicker
+  },
+  setup() {
+    const headers = getHeaderTokens()
+    const apiService = new CoreService(headers)
+
+    return {
+      apiService
+    }
   },
   data() {
     return {
@@ -186,7 +195,7 @@ export default {
       const month = new Date().getMonth() + 1
 
       let date
-      if(this.action.date_time == null) {
+      if (this.action.date_time == null) {
         date = {
           start: year + "/" + month + "/01",
           end: year + "/" + month + "/" + new Date(year, month, 0).getDate()
@@ -213,7 +222,7 @@ export default {
     },
     getLabels() {
       let _this = this
-      ApiService.labels().then((res) => {
+      this.apiService.labels().then((res) => {
         let data = res
         data.forEach(function (r) {
           _this.input.tags.push(r)
@@ -222,7 +231,7 @@ export default {
     },
     getCategory() {
       let _this = this
-      ApiService.subCategories().then((res) => {
+      this.apiService.subCategories().then((res) => {
         let data = res
         data.forEach(function (sub) {
           _this.input.category.push({
@@ -238,7 +247,7 @@ export default {
     },
     getAccount() {
       let _this = this
-      ApiService.accounts('?order[name]=asc').then((res) => {
+      this.apiService.accounts('?order[name]=asc').then((res) => {
         let data = res
         data.forEach(function (r) {
           _this.input.account.push(r)
@@ -247,7 +256,7 @@ export default {
     },
     getPaymentType() {
       let _this = this
-      ApiService.paymentstype().then((res) => {
+      this.apiService.paymentstype().then((res) => {
         let data = res
         data.forEach(function (r) {
           _this.input.payment_methods.push({
@@ -262,7 +271,7 @@ export default {
     },
     getCurrencies() {
       let _this = this
-      ApiService.currencies().then((res) => {
+      this.apiService.currencies().then((res) => {
         let data = res
         data.forEach(function (r) {
           _this.input.currencies.push({
