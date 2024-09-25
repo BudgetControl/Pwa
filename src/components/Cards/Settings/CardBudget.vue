@@ -58,9 +58,9 @@
 <script>
 
 import LocalStorageServiceVue from '../../../services/LocalStorageService.vue'
-import ChartService from '../../../services/chart.service'
-import { getHeaderTokens } from '../../../utils/headers-token';
-import Budget from '../../GenericComponents/BudgetComponent.vue'
+import ChartService from '@/services/chart.service'
+import { getHeaderTokens } from '@/utils/headers-token';
+import Budget from '@/components/Budget/Budget.vue'
 
 export default {
     data() {

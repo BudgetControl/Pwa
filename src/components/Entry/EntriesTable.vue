@@ -102,7 +102,8 @@ import sketch from "@/assets/img/sketch.jpg";
 import react from "@/assets/img/react.jpg";
 import vue from "@/assets/img/react.jpg";
 import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue";
-import ApiService from '../../services/ApiService.vue';
+import CoreService from "../../services/core.service";
+import { getHeaderTokens } from "../../utils/headers-token";
 
 export default {
     props: {
@@ -119,6 +120,14 @@ export default {
     },
     components: {
         EntryActionDropdown
+    },
+    setup() {
+        const headers = getHeaderTokens()
+        const apiService = new CoreService(headers)
+
+        return {
+            apiService
+        }
     },
     data() {
         return {
@@ -151,7 +160,7 @@ export default {
         getwallet() {
             let _this = this
 
-            ApiService.wallets().then((res) => {
+            this.apiService.wallets().then((res) => {
                 let data = res
                 data.forEach(function (r) {
                     _this.input.wallet.push(r)

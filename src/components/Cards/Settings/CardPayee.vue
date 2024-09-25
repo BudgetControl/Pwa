@@ -49,13 +49,22 @@
 </template>
 <script>
 
-//import PayeeActionDropdown from "@/components/Dropdowns/PayeeActionDropdown.vue";
-import ApiService from '../../../services/ApiService.vue';
+import PayeeActionDropdown from "@/components/Dropdowns/PayeeActionDropdown.vue";
+import CoreService from "../../../services/core.service";
+import { getHeaderTokens } from "@/utils/headers-token";
 
 export default {
   components: {
     //PayeeActionDropdown
   },
+  setup() {
+        const headers = getHeaderTokens()
+        const apiService = new CoreService(headers)
+
+        return {
+            apiService
+        }
+    },
   data() {
     return {
       entries: [],
@@ -80,7 +89,7 @@ export default {
       this.entries.splice(index, 1);
     },
     getPlannedEntries() {
-      ApiService.debtsList().then((resp) => {
+      this.apiService.debtsList().then((resp) => {
         let debitColor = "text-red-500"
 
         resp.forEach(e => {
