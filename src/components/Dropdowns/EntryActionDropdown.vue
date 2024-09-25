@@ -16,8 +16,40 @@
 </template>
 <script>
 import { createPopper } from "@popperjs/core";
+import CoreService from "../../services/core.service";
+import { getHeaderTokens } from "../../utils/headers-token";
 
 export default {
+  props: {
+    entryId: {
+      type: String,
+      required: true
+    },
+    queryParams: {
+      type: String,
+      default: ""
+    },
+    icon: {
+      type: String,
+      default: "fa-ellipsis-v",
+    },
+    index: {
+      required: true
+    },
+    type: {
+      required: false,
+      type: String,
+      default: "emtry"
+    }
+  },
+  setup() {
+        const headers = getHeaderTokens()
+        const apiService = new CoreService(headers)
+
+        return {
+            apiService
+        }
+    },
   data() {
     return {
       dropdownPopoverShow: false,

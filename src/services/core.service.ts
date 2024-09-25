@@ -72,6 +72,11 @@ class CoreService extends ApiService {
         return response.data;
     }
 
+    async debtsList() {
+        const response = await this.instance.get(`/api/debits`);
+        return response.data;
+    }
+
     async debt() {
         const response = await this.instance.get(`/api/payees`);
         return response.data;

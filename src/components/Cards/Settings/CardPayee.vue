@@ -88,12 +88,22 @@
 </template>
 <script>
 
-import ApiService from '../../../services/ApiService.vue';
-import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue";
-import Action from "@/components/Dropdowns/Action.vue";
-import ConfirmModal from '../../GenericComponents/ConfirmModal.vue';
+import PayeeActionDropdown from "@/components/Dropdowns/PayeeActionDropdown.vue";
+import CoreService from "../../../services/core.service";
+import { getHeaderTokens } from "@/utils/headers-token";
 
 export default {
+  components: {
+    //PayeeActionDropdown
+  },
+  setup() {
+        const headers = getHeaderTokens()
+        const apiService = new CoreService(headers)
+
+        return {
+            apiService
+        }
+    },
   data() {
     return {
       entries: [],
@@ -122,7 +132,7 @@ export default {
       this.$router.push({ name: 'entries', query: { filter_wallet: uuid } })
     },
     getPlannedEntries() {
-      ApiService.debtsList().then((resp) => {
+      this.apiService.debtsList().then((resp) => {
         let debitColor = "text-red-500"
 
         resp.forEach(e => {

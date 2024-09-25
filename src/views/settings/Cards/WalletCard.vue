@@ -125,16 +125,25 @@
 <script>
 
 import HeaderButton from '@/components/Button/HeaderButton.vue';
-import ApiService from '@/services/ApiService.vue';
+import CoreService from '../../../services/core.service';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { ColorPicker } from 'vue-accessible-color-picker';
+import { getHeaderTokens } from '@/utils/headers-token';
 import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
 import ConfirmModal from '@/components/GenericComponents/ConfirmModal.vue';
 
 export default {
     components: {
         HeaderButton, VueDatePicker, ColorPicker, AlertModal, ConfirmModal
+    },
+    setup() {
+        const headers = getHeaderTokens()
+        const apiService = new CoreService(headers)
+
+        return {
+            apiService
+        }
     },
     data() {
         return {
@@ -196,12 +205,12 @@ export default {
             }
         },
         restoreWallet() {
-            ApiService.restoreWallet(this.$route.params.id)
+            this.apiService.restoreWallet(this.$route.params.id)
             alert(this.$t('messages.wallet.restored'), "success")
             this.$router.push({ path: '/app/settings/wallet' })
         },
         getWallets() {
-            ApiService.accounts("?filer[type]=bank").then((res) => {
+            this.apiService.accounts("?filer[type]=bank").then((res) => {
                 res.forEach(e => {
                     this.wallets.push(e)
                 });
@@ -223,9 +232,7 @@ export default {
         },
         openModal(uuid) {
             if (uuid != null) {
-                ApiService.account(uuid).then((resp) => {
-                    const currencySymbol = this.form.currencies.find(e => e.id == resp.currency).icon
-
+                this.apiService.account(uuid).then((resp) => {
                     this.modal.id = resp.id
                     this.modal.name = resp.name
                     this.modal.color = resp.color
@@ -281,7 +288,7 @@ export default {
                 walletUuid = this.$route.params.id
             }
 
-            ApiService.setAccount(data, walletUuid).then(() => {
+            this.apiService.setAccount(data, walletUuid).then(() => {
                 alert(this.$t('messages.wallet.saved'), "success")
             }).catch(() => {
                 alert(this.$t('messages.generic_error'), "error")
@@ -292,7 +299,7 @@ export default {
             this.modal.color = eventData.cssColor
         },
         getCurrency() {
-            ApiService.currencies().then((res) => {
+            this.apiService.currencies().then((res) => {
                 res.forEach(e => {
                     this.form.currencies.push(e)
                 });
@@ -302,7 +309,7 @@ export default {
             let i = 0;
             this.sortingList.forEach((e) => {
                 i++;
-                ApiService.setAccountSorting(e.uuid, i)
+                this.apiService.setAccountSorting(e.uuid, i)
             })
         },
         checkMove: function (e) {

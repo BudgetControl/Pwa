@@ -107,8 +107,9 @@ import react from "@/assets/img/react.jpg";
 import vue from "@/assets/img/react.jpg";
 import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue";
 import Action from "@/components/Dropdowns/Action.vue";
-import ApiService from '../../services/ApiService.vue';
 import ConfirmModal from '@/components/GenericComponents/ConfirmModal.vue';
+import CoreService from "../../services/core.service";
+import { getHeaderTokens } from "../../utils/headers-token";
 
 export default {
     props: {
@@ -125,6 +126,14 @@ export default {
     },
     components: {
         EntryActionDropdown, Action, ConfirmModal
+    },
+    setup() {
+        const headers = getHeaderTokens()
+        const apiService = new CoreService(headers)
+
+        return {
+            apiService
+        }
     },
     data() {
         return {
@@ -190,7 +199,7 @@ export default {
         getwallet() {
             let _this = this
 
-            ApiService.wallets().then((res) => {
+            this.apiService.wallets().then((res) => {
                 let data = res
                 data.forEach(function (r) {
                     _this.input.wallet.push(r)
