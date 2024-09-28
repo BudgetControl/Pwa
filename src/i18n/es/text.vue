@@ -24,6 +24,6 @@ export default {
         learn: 'Aprende más sobre nuestro equipo.',
         write_us: 'Escríbenos para asistencia.',
     },
-    install_app: 'Hey!</b> ¿Quieres instalar la aplicación?',
+    install_app: 'Hey! ¿Quieres instalar la aplicación?',
 }
 </script>
