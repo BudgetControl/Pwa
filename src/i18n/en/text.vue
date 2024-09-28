@@ -28,6 +28,6 @@ export default {
         learn: 'Learn more about our team.',
         write_us: 'Write us for assistance.',
     },
-    install_app: 'Hey!</b> Install our app to get the best experience.',
+    install_app: 'Hey! Install our app to get the best experience.',
 }
 </script>

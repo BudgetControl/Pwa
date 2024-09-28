@@ -171,6 +171,8 @@ export default {
                         }
                     });
 
+
+
                     const currency = r.currency
 
                     let formattedDate = null

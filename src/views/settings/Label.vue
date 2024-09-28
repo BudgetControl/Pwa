@@ -69,7 +69,7 @@ export default {
         }
     },
     mounted: function () {
-        ApiService.labels('?archive=1').then((res) => {
+        ApiService.labels('?archive=1&order[name]=asc').then((res) => {
             res.forEach(e => {
                 this.labels.push(e)
             });

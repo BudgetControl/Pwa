@@ -145,6 +145,8 @@ export default {
 
         });
 
+        this.elements.sort((a, b) => a.label.localeCompare(b.label));
+
       }).catch((error) => {
         console.info(error);
       })
