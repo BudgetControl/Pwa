@@ -165,7 +165,7 @@ export default {
             const email = this.shareEmail
             if (this.shareEmail.length > 0 && this.shareEmail.includes('@') && this.shareEmail.includes('.') && this.shareEmail.length > 5) {
                 AuthServiceVue.userInfoByEmail(email).then((res) => {
-                    this.modal.shareWith.push(res.email)
+                    this.modal.shareWith.push(res)
                 }).catch(() => {
                     alert(this.$t('labels.user_not_found'), 'error')
                 })
