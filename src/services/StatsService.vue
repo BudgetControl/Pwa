@@ -74,12 +74,12 @@ async function getAverageSavings() {
 }
 
 async function getPlannedExpenses() {
-  const response = await instance.get('/api/stats/total-loan-installments');
+  const response = await instance.get('/api/stats/total/planned/monthly');
   return response.data;
 }
 
 async function getEntryList(data) {
-  const response = await instance.post('/api/stats/total/planned/monthly',data);
+  const response = await instance.post('/api/stats/entries',data);
   return response.data;
 }
 
