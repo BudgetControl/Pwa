@@ -79,7 +79,7 @@ async function getPlannedExpenses() {
 }
 
 async function getEntryList(data) {
-  const response = await instance.post('/api/stats/entries',data);
+  const response = await instance.post('/api/stats/total/planned/monthly',data);
   return response.data;
 }
 
