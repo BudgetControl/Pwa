@@ -78,6 +78,11 @@ async function getPlannedExpenses() {
   return response.data;
 }
 
+async function getEntryList(data) {
+  const response = await instance.post('/api/stats/total/planned/monthly',data);
+  return response.data;
+}
+
 export default {
   incoming,
   expenses,
