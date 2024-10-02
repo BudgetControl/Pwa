@@ -24,7 +24,7 @@ export default {
   props: {
     entryId: {
       type: String,
-      default: 0,
+      default: "",
       required: true
     },
     icon: {
