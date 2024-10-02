@@ -30,7 +30,7 @@
     "axios": "^1.7.4",
     "chart.js": "2.9.4",
     "core-js": "3.9.1",
-    "gulp": "4.0.2",
+    "gulp": "5.0.0",
     "gulp-append-prepend": "1.0.8",
     "vue": "^3.3.4",
     "vue-accessible-color-picker": "^4.1.4",
