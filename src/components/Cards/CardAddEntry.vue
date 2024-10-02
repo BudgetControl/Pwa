@@ -467,9 +467,9 @@ export default {
         _this.type = model.type
         _this.category = model.sub_category.id
         _this.note = model.note
-        _this.currency = model.currency_id
+        _this.currency = model.currency.id
         _this.account = model.wallet.id
-        _this.payment_type = model.payment_type
+        _this.payment_type = model.payment_type.id
         _this.waranty = model.waranty == 1 ? true : false
         _this.confirmed = model.confirmed == 1 ? true : false
         _this.action.dateUpdated = true
@@ -501,8 +501,7 @@ export default {
 
     },
     retriveModel() {
-      const id = this.entryId === null ? this.model : this.entryId
-
+      const id = this.model
       ApiService.getModel(id).then((res) => {
 
         const model = res
@@ -518,11 +517,11 @@ export default {
         }
 
         _this.type = model.type
-        _this.category = model.category_id
+        _this.category = model.sub_category.id
         _this.note = model.note
-        _this.currency = model.currency_id
-        _this.account = model.account_id
-        _this.payment_type = model.payment_type
+        _this.currency = model.currency.id
+        _this.account = model.wallet.id
+        _this.payment_type = model.payment_type.id
         _this.name = model.name
         _this.action.reset = true
         _this.label = []
@@ -785,7 +784,9 @@ export default {
 
 function labels(_this) {
   let label = []
-  if (_this.label.length == 0 && _this.newlabel != null) {
+
+  // first check if new label is set and add it to the label array
+  if (_this.newlabel != null) {
     const tags = _this.newlabel.split(',')
     tags.forEach(function (r) {
       label.push({
@@ -793,7 +794,10 @@ function labels(_this) {
         color: libs.generateRandomColor()
       })
     })
-  } else {
+  } 
+  
+  // then check if the defaults labels is set and add it to the label array
+  if (_this.label.length > 0) {
     _this.label.forEach(function (r) {
       label.push({
         name: _this.input.tags.find(x => x.id == r).id,
