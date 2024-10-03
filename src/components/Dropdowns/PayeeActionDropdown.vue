@@ -23,8 +23,8 @@ import ApiService from "../../services/ApiService.vue";
 export default {
   props: {
     entryId: {
-      type: Number,
-      default: 0,
+      type: String,
+      default: "",
       required: true
     },
     icon: {

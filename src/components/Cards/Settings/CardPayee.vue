@@ -97,7 +97,7 @@
         </div>
 
         <div class="flex-l">
-          <PayeeActionDropdown :entryId="entry.id" :index=i @deleteItem="deleteItemFromArray" />
+          <PayeeActionDropdown :entryId="entry.uuid" :index=i @deleteItem="deleteItemFromArray" />
         </div>
 
       </div>
@@ -170,7 +170,7 @@ export default {
           
 
           let info = {
-            id: e.id,
+            uuid: e.uuid,
             date: e.date_time,
             color_amount: debitColor,
             name: e.name,

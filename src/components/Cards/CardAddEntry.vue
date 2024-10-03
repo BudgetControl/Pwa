@@ -83,7 +83,7 @@
 
             <select v-if="action.hidecategory == true && !action.hidetransfer_to" v-model="transferto" id="transferto"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
-              <option value="-1">{{ $t('labels.choose_a_wallet_to_transfer_to') }}</option>
+              <option :value=false>{{ $t('labels.choose_a_wallet_to_transfer_to') }}</option>
               <option value="0">{{ $t('labels.out_of_wallet') }}</option>
               <option v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
@@ -325,7 +325,7 @@ export default {
       confirmed: true,
       waranty: false,
       uuid: null,
-      transferto: "-1",
+      transferto: false,
       geolocalization: "",
       name: "",
       debit_name: null,
@@ -604,7 +604,7 @@ export default {
         }
 
 
-        if (this.transferto == '-1') {
+        if (this.transferto == false) {
           alert(this.$t('messages.validation.choose_wallet_transfer'), "error")
           return false
         }
