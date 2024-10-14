@@ -124,7 +124,7 @@ export default {
 
       //first of all we should check if User is already logged in
       const token = LocalStorageService.getToken()
-      if (token) {
+      if (token === null) {
 
         AuthService.login(email, password).then((response) => {
           //save token in local storage
