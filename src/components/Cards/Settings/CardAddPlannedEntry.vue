@@ -345,9 +345,9 @@ export default {
         _this.type = model.type
         _this.category = model.sub_category.id
         _this.note = model.note
-        _this.currency = model.currency_id
+        _this.currency = model.currency.id
         _this.account = model.wallet.id
-        _this.payment_type = model.payment_type
+        _this.payment_type = model.payment_type.id
         _this.waranty = model.waranty == 1 ? true : false
         _this.confirmed = model.confirmed == 1 ? true : false
         _this.action.dateUpdated = true

@@ -66,10 +66,12 @@ export default {
           LocalStorageService.setUser(response.userInfo);
         },
         error => {
-          console.log(error);
+          console.error(error);
+          LocalStorageService.clear()
+          _this.$router.push({ path: '/app/auth/login' })
         }
       ).catch((e) => {
-        console.error(e)
+        console.debug(e)
         _this.$router.push({ path: '/app/auth/login' })
       })
     } else {

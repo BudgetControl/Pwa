@@ -122,42 +122,52 @@ export default {
       this.show = true
       this.error = false
 
-      AuthService.login(email, password).then((response) => {
-        //save token in local storage
-        LocalStorageService.setToken(response.token);
-        const ws = LocalStorageService.getWorkspaceId()
-        let currentWsUuid = response.workspaces[0].uuid
-        response.workspaces.forEach(workspace => {
-          if (workspace.uuid === ws) {
-            currentWsUuid = ws
+      //first of all we should check if User is already logged in
+      const token = LocalStorageService.getToken()
+      if (token === null) {
+
+        AuthService.login(email, password).then((response) => {
+          //save token in local storage
+          LocalStorageService.setToken(response.token);
+          const ws = LocalStorageService.getWorkspaceId()
+          let currentWsUuid = response.workspaces[0].uuid
+          response.workspaces.forEach(workspace => {
+            if (workspace.uuid === ws) {
+              currentWsUuid = ws
+            }
+          });
+
+          const currentWSInStore = LocalStorageService.getWorkspaceId()
+          if (currentWSInStore !== currentWsUuid) {
+            LocalStorageService.setWorkspaceId(currentWsUuid)
           }
-        });
 
-        const currentWSInStore = LocalStorageService.getWorkspaceId()
-        if (currentWSInStore !== currentWsUuid) {
-          LocalStorageService.setWorkspaceId(currentWsUuid)
-        }
+          AuthService.userInfo().then(() => {
+            _this.$router.push({ path: '/app/dashboard' })
+          }).catch(() => {
+            _this.error = this.$t('messages.generic_error')
+          })
 
-        AuthService.userInfo().then(() => {
-          _this.$router.push({ path: '/app/dashboard' })
-        }).catch(() => {
-          _this.error = this.$t('messages.generic_error')
+        }).catch((err) => {
+          _this.show = false
+
+          switch (err.response.data.code) {
+            case 'EML_NaN':
+              _this.error = this.$t('messages.login.not_verified_email')
+              _this.verify = true
+              break;
+            default:
+              _this.error = this.$t('messages.login.not_valid_password')
+              break;
+          }
+
         })
+      } else {
+        // redirect to dashboard
+        console.debug('User is already logged in')
+        this.$router.push({ path: '/app/dashboard' })
+      }
 
-      }).catch((err) => {
-        _this.show = false
-
-        switch (err.response.data.code) {
-          case 'EML_NaN':
-            _this.error = this.$t('messages.login.not_verified_email')
-            _this.verify = true
-            break;
-          default:
-            _this.error = this.$t('messages.login.not_valid_password')
-            break;
-        }
-
-      })
     },
     async signInGoogle() {
       const _this = this
