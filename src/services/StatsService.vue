@@ -93,7 +93,9 @@ export default {
   getAverageExpenses,
   getAverageIncoming,
   getAverageSavings,
-  getPlannedExpenses
+  getPlannedExpenses,
+  getEntryList,
+  getStatsEntries
 }
 
 </script>
