@@ -47,7 +47,7 @@
 <script>
 import '@vuepic/vue-datepicker/dist/main.css'
 import ChartService from '@/services/chart.service';
-import LocalStorageServiceVue from '../../../services/LocalStorageService.vue';
+import { useAppSettings } from '../../../storage/settings.store';
 import MenuButton from '../../GenericComponents/MenuButton.vue';
 import HeaderMenu from '../../Navbars/HeaderMenu.vue';
 import CoreService from '../../../services/core.service';
@@ -59,8 +59,10 @@ export default {
     setup() {
         const headers = getHeaderTokens()
         const coreService = new CoreService(headers)
+        const appSettings = useAppSettings()
+
         return {
-            headers, coreService
+            headers, coreService, appSettings
         }
     },
     data() {
@@ -164,7 +166,7 @@ export default {
             })
         },
         getEmails() {
-            const storage = LocalStorageServiceVue.getUser().shared_with
+            const storage = this.appSettings.getUser().shared_with
             storage.forEach((item) => {
                 this.input.emails.push(item)
             })
