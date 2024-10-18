@@ -37,7 +37,6 @@ import HeaderButton from '@/components/Button/HeaderButton.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { useAppSettings } from '../../storage/settings.store';
 import ChartService from '@/services/chart.service';
-import Budget from '../../components/Budget/Budget.vue';
 import { getHeaderTokens } from '../../utils/headers-token';
 
 export default {
@@ -61,7 +60,7 @@ export default {
                 currency_id: appSettings.get().currency_id
             }
         }
-    }
+    },
     mounted() {
         this.init()
 

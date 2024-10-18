@@ -234,9 +234,9 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import CoreService from '../../services/core.service';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import { useAppSettings } from '../../storage/settings.store';
-import BudgetService from '../../services/BudgetService.vue';
 import AlertModal from '../GenericComponents/AlertModal.vue';
 import { getHeaderTokens } from '../../utils/headers-token';
+import BudgetService from '../../services/budget.service';
 
 export default {
     components: {
@@ -253,9 +253,10 @@ export default {
         const headers = getHeaderTokens()
         const apiService = new CoreService(headers)
         const appSettings = useAppSettings()
+        const budgetService = new BudgetService(headers)
 
         return {
-            apiService, appSettings
+            apiService, appSettings, budgetService
         }
     },
     data() {

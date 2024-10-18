@@ -219,7 +219,5 @@ export default {
     no_voices_found: 'Nessuna voce trovata',
     workspace_whared_with: 'Spazio di lavoro condiviso con',
     user_not_found: 'Utente non trovato',
-    list_of_voices: 'Elenco delle voci',
-    no_voices_found: 'Nessuna voce trovata',
 }
 </script>
