@@ -32,6 +32,7 @@
 <script>
 import CardLine_IncomingExpensesChart from "@/components/Charts/WidgetLine_IncomingExpensesChart.vue";
 import CardBudget from "../../components/Charts/WidgetBudget.vue";
+import WidgetTable from "../../components/Charts/WidgetTable.vue";
 import WorkspaceService from "../../services/workspace.service";
 import AuthService from "../../services/auth.service";
 import HeaderMenu from '../../components/Navbars/HeaderMenu.vue';

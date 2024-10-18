@@ -100,13 +100,13 @@ export default {
 
       const headers = getHeaderTokens()
       const coreService = new CoreService(headers)
-      coreService.getEntry(current_page, filter).then((res) => {
+      coreService.getEntry(this.current_page, filter).then((res) => {
         if (res.data.length > 0) {
           _this.$refs.entry.buildEntriesTable(res.data)
         }
         
         if (this.$refs._paginator !== undefined) {
-          this.$refs._paginator.hasMorePage = current_page < res.last_page 
+          this.$refs._paginator.hasMorePage = this.current_page < res.last_page 
         }
       })
 
