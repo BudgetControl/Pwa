@@ -52,6 +52,8 @@ import MenuButton from '../../GenericComponents/MenuButton.vue';
 import HeaderMenu from '../../Navbars/HeaderMenu.vue';
 import CoreService from '../../../services/core.service';
 import { getHeaderTokens } from '../../../utils/headers-token';
+import Setting from '../../Budget/Setting.vue';
+import EntryList from '../../Budget/EntryList.vue';
 
 export default {
     components: {

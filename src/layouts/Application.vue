@@ -16,6 +16,7 @@
   import Sidebar from "@/components/Sidebar/Sidebar.vue";
   import HeaderStats from "@/components/Headers/HeaderStats.vue";
   import FooterAdmin from "@/components/Footers/FooterAdmin.vue";
+  import { getHeaderTokens } from "../utils/headers-token";
   
   export default {
     name: "admin-layout",
@@ -25,6 +26,13 @@
       HeaderStats,
       FooterAdmin,
     },
+  mounted() {
+    const hasHeader = getHeaderTokens();
+    console.log('hasHeader', hasHeader);
+    if (!hasHeader.auth.token) {
+      this.$router.push({ path: "/auth/login" });
+    }
+  },
   methods: {
     parentFunction() {
       console.log('Funzione del componente genitore chiamata');
