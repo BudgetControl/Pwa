@@ -298,12 +298,12 @@ export default {
     },
     methods: {
         deleteBudget() {
-            BudgetService.deleteBudget(this.id)
+            this.budgetService.deleteBudget(this.id)
             this.$router.push({ path: '/app/budgets' })
         },
         getBudget() {
             const _this = this
-            BudgetService.getBudget(this.id).then((resp) => {
+            this.budgetService.getBudget(this.id).then((resp) => {
                 _this.data.name = resp.name
                 _this.data.note = resp.description
                 _this.data.amount = resp.amount
@@ -378,7 +378,7 @@ export default {
                     "emails": this.data.emails,
                 }
 
-                BudgetService.createBudget(data).then(() => {
+                this.budgetService.createBudget(data).then(() => {
                     //return
                     alert("Budget created", 'success')
                 }).catch(() => {
@@ -404,7 +404,7 @@ export default {
                     "notification": this.data.notification,
                     "emails": this.data.emails,
                 }
-                BudgetService.updateBudget(data, this.id).then(() => {
+                this.budgetService.updateBudget(data, this.id).then(() => {
                     //return
                     alert("Budget updated", 'success')
                 }).catch(() => {

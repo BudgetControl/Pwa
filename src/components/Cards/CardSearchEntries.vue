@@ -174,7 +174,7 @@
 
 <script>
 import EntriesTable from "@/components/Entry/EntriesTable.vue";
-import SearchService from "../../services/SearchService.vue";
+import SearchService from "../../services/search.service";
 import Paginator from "../GenericComponents/Paginator.vue";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import AlertModal from '../GenericComponents/AlertModal.vue';
@@ -188,9 +188,10 @@ export default {
     setup() {
         const headers = getHeaderTokens()
         const apiService = new CoreService(headers)
+        const searchService = new SearchService(headers)
 
         return {
-            apiService
+            apiService, searchService
         }
     },
     data() {
@@ -260,7 +261,7 @@ export default {
             let currentPage = window.localStorage.getItem('current_page') == null ? 0 : window.localStorage.getItem('current_page')
 
             if (this.validate() === true) {
-                SearchService.filter(data, currentPage).then((res) => {
+                this.searchService.filter(data, currentPage).then((res) => {
                     _this.$refs.entryIncoming.entries = []
 
                     if (res.length > 0) {
