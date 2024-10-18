@@ -88,7 +88,7 @@ const routes = [
   {
     path: "/app",
     name: 'app',
-    redirect: "/app/entries",
+    redirect: "/app/auth/login",
     component: Application,
     children: [
       {
