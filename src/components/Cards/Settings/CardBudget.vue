@@ -57,7 +57,7 @@
 </template>
 <script>
 
-import LocalStorageServiceVue from '../../../services/LocalStorageService.vue'
+import { useAppSettings } from '../../../storage/settings.store';
 import ChartService from '@/services/chart.service'
 import { getHeaderTokens } from '@/utils/headers-token';
 import Budget from '@/components/Budget/Budget.vue'
@@ -77,12 +77,21 @@ export default {
     components: {
         Budget
     },
+    setup() {
+        const appSettings = useAppSettings()
+        const settings = {
+            currency_id: appSettings.get().currency_id
+        }
+
+        return {
+            settings
+        }
+    },
     mounted() {
         this.init()
 
         try {
-            const userconfig = LocalStorageServiceVue.get("user_setting")
-            this.currency = userconfig.settings.currency_id
+            this.currency = this.settings.currency_id
         } catch (e) {
             console.info(e)
         }
