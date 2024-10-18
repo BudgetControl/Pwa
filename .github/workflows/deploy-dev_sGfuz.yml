@@ -32,7 +32,7 @@ jobs:
               password: ${{ secrets.SFTP_PASSWORD }}
               port: ${{ secrets.SFTP_PORT }} 
               local_path: './dist/*'
-              remote_path: '/var/www/budgetcontrol/Pwa/dist'
+              remote_path: '/var/www/budgetcontrol/Pwa_sGfuz/dist'
               sftpArgs: '-o ConnectTimeout=5'
 
         - name: copy dist folder into container
@@ -42,5 +42,5 @@ jobs:
             username: ${{ secrets.SFTP_USER }}
             password: ${{ secrets.SFTP_PASSWORD }}
             port: ${{ secrets.SFTP_PORT }}
-            script: docker cp /var/www/budgetcontrol/Pwa_sGfuz/dist/. budgetcontrol-pwa:/var/www/workdir/dist/
+            script: docker cp /var/www/budgetcontrol/Pwa_sGfuz/dist/. budgetcontrol-pwa_sGfuz:/var/www/workdir/dist/
   
