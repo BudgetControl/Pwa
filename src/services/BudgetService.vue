@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
-import LocalStorageService from './LocalStorageService.vue';
+import { useAppSettings } from '../storage/settings.store';
+
 const DOMAIN = process.env.VUE_APP_API_PATH_V2;
 
 const instance = axios.create({

@@ -25,7 +25,7 @@
 import EntriesTable from "@/components/Entry/EntriesTable.vue";
 import axios from 'axios'
 import Paginator from "../GenericComponents/Paginator.vue";
-import LocalStorageService from "../../services/LocalStorageService.vue";
+import { useAppSettings } from '../../storage/settings.store';
 import CoreService from "../../services/core.service";
 import { getHeaderTokens } from "../../utils/headers-token";
 
@@ -38,6 +38,14 @@ export default {
         return ["light", "dark"].indexOf(value) !== -1;
       },
     },
+  },
+  setup() {
+    const appSettings = useAppSettings()
+    const current_page = appSettings.get().current_page
+
+    return {
+      appSettings, current_page
+    }
   },
   data() {
     return {
@@ -63,7 +71,6 @@ export default {
     }
   },
   mounted() {
-    LocalStorageService.set('current_page', 1)
     this.invoke()
   },
   methods: {
