@@ -35,7 +35,7 @@
 
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
-import LocalStorageServiceVue from '../../services/LocalStorageService.vue';
+import { useAppSettings } from '../../storage/settings.store';
 import ChartService from '@/services/chart.service';
 import Budget from '../../components/Budget/Budget.vue';
 import { getHeaderTokens } from '../../utils/headers-token';
@@ -54,12 +54,19 @@ export default {
             currency: '€'
         }
     },
+    setup() {
+        const appSettings = useAppSettings()
+        return {
+            settings: {
+                currency_id: appSettings.get().currency_id
+            }
+        }
+    }
     mounted() {
         this.init()
 
         try {
-            const userconfig = LocalStorageServiceVue.get("user_setting")
-            this.currency = userconfig.settings.currency_id
+            this.currency = this.settings.currency_id
         } catch (e) {
             console.info(e)
         }

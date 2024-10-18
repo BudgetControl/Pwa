@@ -23,3 +23,8 @@ export interface WsSettings {
     deleted_at: string | null
     uuid: string
 }
+
+export interface sharedWorkspace {
+    name: string
+    email: string
+}

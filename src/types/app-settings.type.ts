@@ -1,5 +1,5 @@
 import { User } from './user.type';
-import { Workspace } from './workspace.type';
+import { Workspace, sharedWorkspace } from './workspace.type';
 
 export interface AppSettings {
     currency_id: number;
@@ -8,4 +8,5 @@ export interface AppSettings {
     current_ws: Workspace;
     user: User;
     workspaces: Workspace[];
+    current_entry_page: number;
 }

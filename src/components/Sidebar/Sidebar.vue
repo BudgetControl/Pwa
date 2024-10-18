@@ -163,7 +163,7 @@
 
 <script>
 import LogoutButton from "../Auth/LogoutButton.vue";
-import LocalStorageServiceVue from '../../services/LocalStorageService.vue';
+import { useAppSettings } from '../../storage/settings.store';
 import EyeButton from "@/components/GenericComponents/EyeButton.vue";
 import AuthService from "../../services/auth.service";
 import { getHeaderTokens } from "../../utils/headers-token";
@@ -176,6 +176,12 @@ export default {
       collapseShow: "hidden",
       workspaces: []
     };
+  },
+  setup() {
+    const appSettings = useAppSettings()
+    return {
+      appSettings
+    }
   },
   mounted() {
     this.workspaceList()
@@ -192,7 +198,7 @@ export default {
         response.forEach((e) => {
           _this.workspaces.push(e)
         })
-        _this.workspace = LocalStorageServiceVue.getWorkspaceId()
+        _this.workspace = this.appSettings.getWorkspace()
       })
     },
     changeWorkspace() {

@@ -49,7 +49,7 @@
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
 import CoreService from '../../services/core.service';
-import LocalStorageService from '../../services/LocalStorageService.vue';
+import { useAppSettings } from '../../storage/settings.store';
 import AlertModal from '../../components/GenericComponents/AlertModal.vue';
 import { getHeaderTokens } from '../../utils/headers-token';
 
@@ -60,9 +60,10 @@ export default {
     setup() {
         const headers = getHeaderTokens()
         const apiService = new CoreService(headers)
+        const appSettings = useAppSettings()
 
         return {
-            apiService
+            apiService, appSettings
         }
     },
     data() {
@@ -80,7 +81,7 @@ export default {
     },
     methods: {
         sendRequest() {
-            const userSettings = LocalStorageService.get("settings")
+            const userSettings = this.appSettings.getUser().uuid
             const data = {
                 "user_id": userSettings.user_profile.id,
                 "text": this.text

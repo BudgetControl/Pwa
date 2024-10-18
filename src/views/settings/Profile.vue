@@ -109,7 +109,7 @@
 <script>
 
 import DeleteButton from "../../components/Auth/DeleteButton.vue";
-import LocalStorageService from "../../services/LocalStorageService.vue";
+import { useAppSettings } from '../../storage/settings.store';
 import Avatar from "vue-boring-avatars";
 import AuthService from "../../services/auth.service";
 import { getHeaderTokens } from '../../utils/headers-token';
@@ -138,10 +138,20 @@ export default {
   components: {
     DeleteButton, Avatar
   },
+  setup() {
+    const appSettings = useAppSettings()
+    const settings = {
+      currency_id: appSettings.get().currency_id,
+      user_email: appSettings.getUser().email
+    }
+
+    return {
+      appSettings, settings
+    }
+  },
   async beforeMount() {
     const _this = this
-    const storage = LocalStorageService.get('settings')
-    this.currency = storage.currency_id || 2
+    this.currency = this.settings.currency_id || 2
 
     ApiServiceVue.currencies().then((resp) => {
       _this.currency = resp[_this.currency - 1 ].icon
@@ -151,7 +161,7 @@ export default {
   },
   async mounted() {
     const _this = this
-    const userEmail = LocalStorageService.getUser().email;
+    const userEmail = this.settings.user_email;
     AuthService.userInfoByEmail(userEmail).then((resp) => {
       _this.user.name = resp.name
       _this.user.email = resp.email

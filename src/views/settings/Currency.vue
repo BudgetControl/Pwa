@@ -42,7 +42,7 @@
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import CoreService from '../../services/core.service';
 import '@vuepic/vue-datepicker/dist/main.css'
-import LocalStorageService from '../../services/LocalStorageService.vue';
+import { useAppSettings } from '../../storage/settings.store';
 import { getHeaderTokens } from '../../utils/headers-token';
 
 export default {
@@ -52,9 +52,13 @@ export default {
     setup() {
         const headers = getHeaderTokens()
         const apiService = new CoreService(headers)
+        const appSettings = useAppSettings()
+        const settings = {
+            currency_id : appSettings.get().currency_id
+        }
 
         return {
-            apiService
+            apiService, settings, appSettings
         }
     },
     data() {
@@ -68,17 +72,14 @@ export default {
             res.forEach(e => {
                 this.currencies.push(e)
             });
-            const settings = LocalStorageService.get("settings")
-            this.currency_id = settings.currency_id
+            this.currency_id = this.settings.currency_id
         })
     },
     methods: {
         setDefault(id) {
-            let updateSettings = LocalStorageService.get("settings")
-            LocalStorageService.deleteItem("settings")
             this.apiService.setDefaultCurrency(id);
             updateSettings.currency_id = id
-            LocalStorageService.set('settings', updateSettings)
+            this.appSettings.set({ currency_id: id })
         }
     },
 };
