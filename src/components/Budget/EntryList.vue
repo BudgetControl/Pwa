@@ -10,7 +10,8 @@
 </template>
 
 <script>
-import BudgetService from '../../services/BudgetService.vue';
+import BudgetService from '../../services/budget.service';
+import { getHeaderTokens } from '../../utils/headers-token';
 import EntriesTable from '../Entry/EntriesTable.vue';
 import Budget from '../../components/Budget/Budget.vue';
 
@@ -23,6 +24,14 @@ export default {
             type: String,
             default: null,
             required: true
+        }
+    },
+    setup() {
+        const headers = getHeaderTokens()
+        const apiService = new BudgetService(headers)
+
+        return {
+            apiService
         }
     },
     data() {
@@ -45,7 +54,7 @@ export default {
         },
         async getEntries() {
             const uuid = this.uuid
-            BudgetService.getEntryList(uuid).then((res) => {
+            this.apiService.getEntryList(uuid).then((res) => {
                 if (res.length > 0) {
                     this.entries = true
                     this.$refs.entry.buildEntriesTable(res)
