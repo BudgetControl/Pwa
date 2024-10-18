@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { AppSettings } from '../types/app-settings.type';
 import { User } from '../types/user.type';
+import { Workspace } from '../types/workspace.type';
 
 const STORE_NAME = 'app-settings';
 
@@ -26,6 +27,9 @@ export const useAppSettings = defineStore(STORE_NAME, {
       },
       resetState() {
         this.$reset();
+      },
+      getWorkspace(): Workspace {
+        return this.settings.current_ws
       }
     },
     persist: true
