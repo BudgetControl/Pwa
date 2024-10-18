@@ -51,6 +51,7 @@ import LocalStorageServiceVue from '../../../services/LocalStorageService.vue';
 import MenuButton from '../../GenericComponents/MenuButton.vue';
 import HeaderMenu from '../../Navbars/HeaderMenu.vue';
 import CoreService from '../../../services/core.service';
+import { getHeaderTokens } from '../../../utils/headers-token';
 
 export default {
     components: {
