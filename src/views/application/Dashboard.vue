@@ -37,7 +37,6 @@ import WorkspaceService from "../../services/workspace.service";
 import AuthService from "../../services/auth.service";
 import HeaderMenu from '../../components/Navbars/HeaderMenu.vue';
 import MenuButton from '../../components/GenericComponents/MenuButton.vue';
-import LocalStorage from '../..//utils/local-storage'
 
 export default {
   name: "dashboard-page",
