@@ -11,10 +11,10 @@ import { useAppSettings } from '../../storage/settings.store';
 
 export default {
   setup() {
-    const eyeStore = useAppSettings();
-    eyeStore.state = eyeStore.getEye();
+    const appSettings = useAppSettings();
+    appSettings.state = appSettings.getEye();
     return {
-      eyeStore
+      appSettings
     };
   },
   data() {
@@ -23,18 +23,18 @@ export default {
     };
   },
   mounted() {
-    this.hideIcon = this.eyeStore.settings.eye_settings;
+    this.hideIcon = this.appSettings.settings.eye_settings;
     this.updateBodyClass();
   },
   methods: {
     toggleHide(event) {
       event.preventDefault();
-      this.eyeStore.settings.eye_settings = !this.hideIcon
+      this.appSettings.settings.eye_settings = !this.hideIcon
       this.updateBodyClass();
-      this.eyeStore.setEye(this.eyeStore.settings.eye_settings);
+      this.appSettings.setEye(this.appSettings.settings.eye_settings);
     },
     updateBodyClass() {
-      if (this.eyeStore.settings.eye_settings) {
+      if (this.appSettings.settings.eye_settings) {
         document.body.classList.add('hide-content');
         this.hideIcon = true;
       } else {
