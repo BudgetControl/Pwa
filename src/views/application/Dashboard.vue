@@ -37,6 +37,10 @@ import WorkspaceService from "../../services/workspace.service";
 import AuthService from "../../services/auth.service";
 import HeaderMenu from '../../components/Navbars/HeaderMenu.vue';
 import MenuButton from '../../components/GenericComponents/MenuButton.vue';
+import AverageStats from '../../components/Charts/AverageStats.vue';
+import WidgetBarChartVue from '../../components/Charts/WidgetBarChart.vue';
+import { useAppSettings } from '../../storage/settings.store';
+import { getHeaderTokens } from '../../utils/headers-token';
 
 export default {
   name: "dashboard-page",
@@ -86,8 +90,7 @@ export default {
     }
 
     const ws = tokens.workspace.uuid
-    const headers = getHeaderTokens()
-    const workspaceService = new WorkspaceService(headers)
+    const workspaceService = new WorkspaceService(tokens)
     workspaceService.get(ws).then((res) => {
       const wsUuid = res.workspace.uuid
       let settings = {

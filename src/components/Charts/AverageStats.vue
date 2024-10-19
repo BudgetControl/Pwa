@@ -35,7 +35,7 @@ export default {
     components: {
         CardStats
     },
-    setump() {
+    setup() {
         const headers = getHeaderTokens()
         const statsService = new StatsService(headers)
 
