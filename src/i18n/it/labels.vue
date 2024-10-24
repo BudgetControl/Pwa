@@ -219,5 +219,7 @@ export default {
     no_voices_found: 'Nessuna voce trovata',
     workspace_whared_with: 'Spazio di lavoro condiviso con',
     user_not_found: 'Utente non trovato',
+    end_of_month: 'Fine mese',
+    
 }
 </script>
