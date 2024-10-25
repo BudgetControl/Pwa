@@ -123,7 +123,7 @@
         </div>
         <div class="flex flex-wrap">
           <div class="lg:w-6/12 px-2 py-2 w-full">
-            <input v-on:change="amountCast()" v-model="amount" type="tel" placeholder="0.00" id="amount"
+            <input v-on:change="amountCast()" v-model="amount" type="tel" placeholder="0" id="amount"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
 

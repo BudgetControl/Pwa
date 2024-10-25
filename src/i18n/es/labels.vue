@@ -221,5 +221,7 @@ export default {
     user_not_found: 'Usuario no encontrado',
     save_as_model: 'Guardar como modelo',
     write_temlate_name: 'Escribe el nombre del modelo',
+    end_of_month: 'Fin de mes',
+    ticket_value: 'Valor del voucher',
 }
 </script>

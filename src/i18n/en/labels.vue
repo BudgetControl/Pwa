@@ -221,6 +221,8 @@ export default {
     user_not_found: 'User not found',
     save_as_model: 'Save as model',
     write_temlate_name: 'Write the template name',
+    end_of_month: 'End of month',
+    ticket_value: 'Voucher value',
 };
 
 </script>
