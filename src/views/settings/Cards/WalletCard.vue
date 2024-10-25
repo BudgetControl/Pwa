@@ -18,18 +18,12 @@
                         </div>
 
                         <div class="mb-3 pt-0">
-                            <span class="text-xs text-blueGray-400">{{ $t('labels.balance_wallet') }}</span>
-                            <input type="text" placeholder="1000.00" v-model="modal.balance"
-                                class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
-                        </div>
-
-                        <div class="mb-3 pt-0">
                             <span class="text-xs text-blueGray-400">{{ $t('labels.currency') }}</span>
                             <select
                                 class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 v-model="modal.currency">
                                 <option value="0">{{ $t('labels.choose_currency') }}</option>
-                                <option v-for="(item, k) in form.currency" :key="k" :value="item.id">{{
+                                <option v-for="(item, k) in form.currencies" :key="k" :value="item.id">{{
                                     item.name }}</option>
                             </select>
                         </div>
@@ -75,6 +69,12 @@
                                 class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                         </div>
 
+                        <div class="mb-3 pt-0" v-if="modal.type == 'voucher'">
+                            <span class="text-xs text-blueGray-400">{{ $t('labels.ticket_value') }}</span>
+                            <input type="text" placeholder="10.00 €" v-model="modal.voucher_value"
+                                class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
+                        </div>
+
                         <div class="mb-3 pt-0">
                             <label for="exclude_stats">
                                 <input v-model="modal.exclude_stats" type="checkbox" class="p-1 border rounded "
@@ -85,6 +85,12 @@
                         <div class="mb-3 pt-0">
                             <span class="text-xs text-blueGray-400">{{ $t('labels.wallet_color') }}</span>
                             <color-picker :visible-formats="['hex']" :color="modal.color" @color-change="updateColor" />
+                        </div>
+
+                        <div class="mb-3 pt-0">
+                            <span class="text-xs text-blueGray-400">{{ $t('labels.balance_wallet') }}</span><span class="text-xs text-blueGray-400" v-if="modal.type == 'voucher'"> : ({{ voucher_balance_value }})</span>
+                            <input type="text" placeholder="0" v-model="modal.balance"
+                                class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                         </div>
 
                     </div>
@@ -135,9 +141,10 @@ export default {
             color: "#c5c526",
             restore: false,
             wallets: [],
+            voucher_balance_value: null,
             form: {
-                type: ['bank','cache', 'credit-card', 'credit-card-revolving', 'investment', 'loan', 'other', 'prepaid-card'],
-                currency: []
+                type: ['bank','cache', 'credit-card', 'credit-card-revolving', 'investment', 'loan', 'other', 'prepaid-card', 'voucher'],
+                currencies: []
             },
             modal: {
                 id: null,
@@ -146,11 +153,12 @@ export default {
                 invoiceDate: null,
                 closingAccountDate: null,
                 accountPayment: '-1',
-                type: [0],
-                currency: [0],
+                type: "bank",
+                currency: 2,
                 exclude_stats: false,
                 installment: 0,
-                balance: 0
+                balance: null,
+                voucher_value: null,
             }
         }
     },
@@ -158,6 +166,7 @@ export default {
         this.getCurrency()
         this.openModal(this.$route.params.id)
         this.getWallets()
+        this.modal.color = '#' + Math.floor(Math.random() * 16777215).toString(16);
     },
     created() {
         window.alert = (message, type = 'success') => {
@@ -207,6 +216,8 @@ export default {
         openModal(uuid) {
             if (uuid != null) {
                 ApiService.account(uuid).then((resp) => {
+                    const currencySymbol = this.form.currencies.find(e => e.id == resp.currency).icon
+
                     this.modal.id = resp.id
                     this.modal.name = resp.name
                     this.modal.color = resp.color
@@ -219,6 +230,12 @@ export default {
                     this.modal.installment = resp.installement_value
                     this.modal.balance = resp.balance
                     this.modal.deleted = resp.deleted_at
+                    this.modal.voucher_value = resp.voucher_value
+
+                    if(resp.type == 'voucher') {
+                        this.voucher_balance_value = `${resp.balance.value_in_valut} ${currencySymbol}`
+                        this.modal.balance = resp.balance.value_in_voucher
+                    }
 
                     if (resp.deleted_at != null) {
                         this.restore = true
@@ -241,9 +258,10 @@ export default {
                 installement_value: this.modal.installment,
                 installment: this.installment,
                 currency: this.modal.currency,
-                balance: this.modal.balance,
+                balance: this.modal.balance ? this.modal.balance : 0,
                 exclude_from_stats: this.modal.exclude_stats,
-                sorting: this.modal.sorting
+                sorting: this.modal.sorting,
+                voucher_value: this.modal.voucher_value
             }
             let walletUuid = null
             if(this.$route.params.id) {
@@ -263,7 +281,7 @@ export default {
         getCurrency() {
             ApiService.currencies().then((res) => {
                 res.forEach(e => {
-                    this.form.currency.push(e)
+                    this.form.currencies.push(e)
                 });
             })
         },
@@ -315,6 +333,13 @@ export default {
             if (this.modal.type == 'credit-card' || this.modal.type == 'credit-card-revolving') {
                 if (this.modal.installment == 0) {
                     alert(this.$t('messages.wallet.installment'), "error")
+                    return false    
+                }
+            }
+
+            if(this.modal.type == 'ticket') {
+                if (this.modal.voucher_value == null) {
+                    alert(this.$t('messages.wallet.voucher_value'), "error")
                     return false
                 }
             }
