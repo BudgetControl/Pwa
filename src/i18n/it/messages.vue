@@ -28,6 +28,7 @@ export default {
         closing_date: 'Per favore scegli una data di chiusura',
         payment_account: 'Per favore scegli un conto di pagamento',
         installment: 'Per favore scegli un valore di rata',
+        voucher_value: 'Per favore inserisci un valore del buono',
     },
     workspace: {
         updated: 'Spazio di lavoro aggiornato',

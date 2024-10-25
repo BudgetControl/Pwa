@@ -123,7 +123,7 @@
         </div>
         <div class="flex flex-wrap">
           <div class="lg:w-6/12 px-2 py-2 w-full">
-            <input v-on:change="amountCast()" v-model="amount" type="tel" placeholder="0.00" id="amount"
+            <input v-on:change="amountCast()" v-model="amount" type="tel" placeholder="0" id="amount"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
 
@@ -220,11 +220,18 @@
             <textarea v-model="note" type="text" :placeholder="$t('labels.add_here_your_note')" id="note" rows="2"
               class="border-0 px-3 py-5 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
           </div>
+
+          <div class="lg:w-12/12 w-full">
+            <label for="save_as_model" id="save_as_model" v-if="!isPlanned">
+              <input v-model="action.save_as_model" type="checkbox" id="save_as_model" :value=true
+                    checked>
+                </label>  {{ $t('labels.save_as_model') }} 
+          </div>
         </div>
 
-        <div class="flex py-2 border border-solid border-blueGray-500 shadow rounded" v-if="isModel">
+        <div class="flex py-2 border border-solid border-blueGray-500 shadow rounded" v-if="isModel || action.save_as_model === true">
           <div class="lg:w-8/12 px-2 w-full">
-            <input v-model="name" type="text" placeholder="save these settings as a template"
+            <input v-model="name" type="text" :placeholder="$t('labels.write_temlate_name')" id="name"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
           <div class="lg:w-4/12 px-2 w-full">
@@ -308,7 +315,9 @@ export default {
         disabled_debit_name: true,
         debit_type: '-',
         showDetails: false,
-        isMobile: false
+        isMobile: false,
+        save_as_model: false,
+        modelId: null,
       },
       date: null,
       amount: null,
@@ -368,6 +377,7 @@ export default {
     }
 
     if (this.entryId != null && this.isModel === true) {
+      this.action.modelId = this.entryId
       this.retriveModel()
     }
 
@@ -501,7 +511,7 @@ export default {
 
     },
     retriveModel() {
-      const id = this.model
+      const id = this.action.modelId || this.model
       ApiService.getModel(id).then((res) => {
 
         const model = res
@@ -525,6 +535,8 @@ export default {
         _this.name = model.name
         _this.action.reset = true
         _this.label = []
+        _this.action.save_as_model = true
+        _this.action.modelId = model.uuid
 
         model.labels.forEach((item) => {
           _this.label.push(item.id)
@@ -544,6 +556,10 @@ export default {
     },
     setModel() {
       const label = labels(this)
+      const modelId = this.action.modelId
+
+      this.validateBefore()
+
       let data = {
         name: this.name,
         amount: this.amount,
@@ -560,7 +576,7 @@ export default {
         data.amount = this.amount * -1
       }
 
-      ApiService.setModel(data, this.entryId).then(() => {
+      ApiService.setModel(data, modelId).then(() => {
         alert(this.$t('messages.model_saved'), "success")
       }).catch(() => {
         alert(this.$t('messages.generic_error'), "error")

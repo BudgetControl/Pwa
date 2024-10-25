@@ -5,7 +5,7 @@
       <div id="statsWallet">
         <div class="px-2 flex overflow-x-auto mb-2">
           <CardWallet v-for="w in wallets" :key="w.id" :statTitle="w.name" :statWallet="w.balance"
-            :statColor="w.color" :statIdWallet="w.id"></CardWallet>
+            :statColor="w.color" :statIdWallet="w.id" :currency="w.currency"></CardWallet>
         </div>
         <!-- Card stats -->
         <div class="flex overflow-x-auto">
@@ -20,7 +20,7 @@
           <div class="min-w px-2">
             <router-link to="/app/entries?type=planned" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
-                <card-stats :statSubtitle="$t('labels.my_planned')" :statTitle="walletPlanned.statTitle + ' €'"
+                <card-stats :statSubtitle="$t('labels.end_of_month')" :statTitle="walletPlanned.statTitle + ' €'"
                   :statArrow="walletPlanned.statArrow" :statPercent="walletPlanned.statPercent"
                   statIconName="fas fa-money-bill" statIconColor="bg-teal-500" />
               </a>
@@ -206,7 +206,23 @@ export default {
       StatsService.wallets().then((resp) => {
         let data = resp
         data.forEach(e => {
-            this.wallets.push(e)
+            const walletType = e.type
+            let balance = e.balance
+            let currency = e.currency.icon
+            if(walletType === 'voucher') {
+              balance = e.balance.value_in_voucher
+              currency = `(${e.balance.value_in_valut} ${e.currency.icon})`
+            }
+
+            const wallet = {
+              id: e.id,
+              name: e.name,
+              balance: balance,
+              color: e.color,
+              currency: currency
+            }
+
+            this.wallets.push(wallet)
         });
       }).catch((error) => {
         console.error(error);

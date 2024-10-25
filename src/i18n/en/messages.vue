@@ -28,6 +28,7 @@ export default {
         closing_date: 'Please choose a closing date',
         payment_account: 'Please choose a payment account',
         installment: 'Please choose a installment value',
+        voucher_value: 'Please insert a voucher value',
     },
     workspace: {
         updated: 'Workspace updated',

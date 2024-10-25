@@ -219,6 +219,10 @@ export default {
     no_voices_found: 'No voices found',
     workspace_whared_with: 'Workspace shared with',
     user_not_found: 'User not found',
+    save_as_model: 'Save as model',
+    write_temlate_name: 'Write the template name',
+    end_of_month: 'End of month',
+    ticket_value: 'Voucher value',
 };
 
 </script>
