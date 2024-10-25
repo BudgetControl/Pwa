@@ -227,9 +227,8 @@
                     checked>
                 </label>  {{ $t('labels.save_as_model') }} 
           </div>
-        </div>
 
-        <div class="flex py-2 border border-solid border-blueGray-500 shadow rounded" v-if="isModel || action.save_as_model === true">
+              <div class="flex py-2 border border-solid border-blueGray-500 shadow rounded" v-if="isModel || action.save_as_model === true">
           <div class="lg:w-8/12 px-2 w-full">
             <input v-model="name" type="text" :placeholder="$t('labels.write_temlate_name')" id="name"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
@@ -241,6 +240,7 @@
               {{ $t('labels.save_template') }}
             </button>
           </div>
+        </div>
         </div>
 
       </div>
