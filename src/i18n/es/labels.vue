@@ -220,5 +220,6 @@ export default {
     workspace_whared_with: 'Espacio de trabajo compartido con',
     user_not_found: 'Usuario no encontrado',
     end_of_month: 'Fin de mes',
+    ticket_value: 'Valor del voucher',
 }
 </script>

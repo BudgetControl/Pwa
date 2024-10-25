@@ -14,7 +14,7 @@
                     class="text-xs font-semibold block text-center py-1 px-2 uppercase rounded-full uppercase last:mr-0 min-w">
                     {{ statTitle }}
                 </span>
-                <span class="text-sm block text-center amount">{{ statWallet }}</span>
+                <span class="text-sm block text-center amount">{{ statWallet }} {{ currency }}</span>
             </div>
 
         </a>
@@ -31,7 +31,7 @@ export default {
         },
         statWallet: {
             type: Number,
-            default: 2000,
+            default: 0,
             required: true
         },
         statColor: {
@@ -41,7 +41,11 @@ export default {
         statIdWallet: {
             type: Number,
             required: true
-        }
+        },
+        currency: {
+            type: String,
+            default: "€",
+        },
     },
 };
 </script>
