@@ -219,5 +219,7 @@ export default {
     no_voices_found: 'No se encontraron voces',
     workspace_whared_with: 'Espacio de trabajo compartido con',
     user_not_found: 'Usuario no encontrado',
+    save_as_model: 'Guardar como modelo',
+    write_temlate_name: 'Escribe el nombre del modelo',
 }
 </script>
