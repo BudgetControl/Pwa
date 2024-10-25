@@ -219,5 +219,6 @@ export default {
     no_voices_found: 'No se encontraron voces',
     workspace_whared_with: 'Espacio de trabajo compartido con',
     user_not_found: 'Usuario no encontrado',
+    ticket_value: 'Valor del voucher',
 }
 </script>

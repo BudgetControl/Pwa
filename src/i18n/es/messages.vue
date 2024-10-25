@@ -28,6 +28,7 @@ export default {
         closing_date: 'Por favor, elija una fecha de cierre',
         payment_account: 'Por favor, elija una cuenta de pago',
         installment: 'Por favor, elija un valor de cuota',
+        voucher_value: 'Por favor, ingrese un valor de cupón',
     },
     workspace: {
         updated: 'Espacio de trabajo actualizado',
