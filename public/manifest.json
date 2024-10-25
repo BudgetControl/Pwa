@@ -3,29 +3,33 @@
   "short_name": "BC",
   "description": "Budget Control: Track and Manage Your Finances with Ease",
   "start_url": "/",
-  "display": "standalone",
+  "theme_color": "#ffffff",
   "background_color": "#ffffff",
-  "theme_color": "#4DBA87",
+  "display": "standalone",
   "icons": [
     {
       "src": "/img/icons/android-chrome-180x180.png",
       "sizes": "180x180",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable" 
     },
     {
       "src": "/img/icons/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable" 
     },
     {
       "src": "/img/icons/android-chrome-512x512",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable" 
     },
     {
       "src": "/img/icons/apple-touch-icon.png",
       "sizes": "180x180",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable" 
     }
   ]
 }
