@@ -20,7 +20,7 @@
           <div class="min-w px-2">
             <router-link to="/app/entries?type=planned" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
-                <card-stats :statSubtitle="$t('labels.my_planned')" :statTitle="walletPlanned.statTitle + ' €'"
+                <card-stats :statSubtitle="$t('labels.end_of_month')" :statTitle="walletPlanned.statTitle + ' €'"
                   :statArrow="walletPlanned.statArrow" :statPercent="walletPlanned.statPercent"
                   statIconName="fas fa-money-bill" statIconColor="bg-teal-500" />
               </a>

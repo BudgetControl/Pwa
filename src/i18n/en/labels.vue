@@ -219,6 +219,7 @@ export default {
     no_voices_found: 'No voices found',
     workspace_whared_with: 'Workspace shared with',
     user_not_found: 'User not found',
+    end_of_month: 'End of month',
     ticket_value: 'Voucher value',
 };
 
