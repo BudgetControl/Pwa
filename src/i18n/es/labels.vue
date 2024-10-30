@@ -89,7 +89,7 @@ export default {
     profile: 'Perfil',
     assistance: 'Asistencia',
     my_entry: 'Mi entrada',
-    planned: 'Entrada planificada',
+    planned_entry: 'Entrada planificada',
     add: 'Agregar',
     model: 'Modelo',
     wallet: 'Billetera',
@@ -223,5 +223,8 @@ export default {
     write_temlate_name: 'Escribe el nombre del modelo',
     end_of_month: 'Fin de mes',
     ticket_value: 'Valor del voucher',
+    spend: 'gastado',
+    remaining: 'restante',
+    planned: 'planificado',
 }
 </script>

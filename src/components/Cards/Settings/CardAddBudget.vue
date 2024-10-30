@@ -13,14 +13,14 @@
                     <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
                         <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
                             v-on:click="toggleTabs(1)"
-                            v-bind:class="{ 'text-emerald-600 bg-white': openTab !== 1, 'text-white bg-emerald-600': openTab === 1 }">
+                            v-bind:class="{ 'text-white bg-emerald-600': openTab !== 1, 'text-emerald-600 bg-white': openTab === 1 }">
                             {{$t('labels.list_of_voices')}}
                         </a>
                     </li>
                     <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
                         <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
                             v-on:click="toggleTabs(2)"
-                            v-bind:class="{ 'text-emerald-600 bg-white': openTab !== 2, 'text-white bg-emerald-600': openTab === 2 }">
+                            v-bind:class="{ 'text-white bg-emerald-600': openTab !== 2, 'text-emerald-600 bg-white': openTab === 2 }">
                             {{$t('labels.settings')}}
                         </a>
                     </li>

@@ -9,22 +9,26 @@
                     </span>
                 </div>
                 <div class="text-right">
-                    <span class="text-xs font-semibold inline-block text-blueGray-400 ml-10">
-                        {{ localBudget.totalRemaining }}{{ currency }}
-                    </span>
-
                     <span class="text-xs font-semibold inline-block text-emerald-600">
                          {{ localBudget.totalRemainingPercentage }}
                     </span>
                 </div>
             </div>
-            <div class="overflow-hidden h-2 mb-4 text-xs flex rounded"
+            
+            <div class="overflow-hidden h-2 text-xs flex rounded"
                 v-bind:class="{ 'bg-emerald-200 ': localBudget.percentage <= 80, 'bg-red-200': localBudget.percentage >= 80 }">
                 <div :style="'width:' + localBudget.totalSpentPercentage"
                     class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
                     v-bind:class="{ 'bg-emerald-600 ': localBudget.percentage <= 80, 'bg-red-600': localBudget.percentage >= 80 }">
                 </div>
             </div>
+
+            
+            <div class="flex items-center justify-between text-sm">
+                   <span >{{ $t('labels.spent') }} {{  localBudget.totalSpent }} {{ currency }}</span>
+                   <span v-if="localBudget.totalPlanned">{{ $t('labels.planned') }} {{  localBudget.totalPlanned }} {{ currency }}</span>
+                   <span>{{ $t('labels.remaining') }} {{  localBudget.totalRemaining }} {{ currency }}</span>
+                </div>
 
             <div class="mb-4">
                 <span class="text-xs font-semibold inline-block text-blueGray-400">

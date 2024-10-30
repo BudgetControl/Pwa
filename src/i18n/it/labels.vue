@@ -88,7 +88,7 @@ export default {
     profile: 'Profilo',
     assistance: 'Assistenza',
     my_entry: 'La mia voce',
-    planned: 'Pianificati',
+    is_planned: 'Pianificati',
     add: 'Aggiungi',
     model: 'Modello',
     wallet: 'Portafoglio',
@@ -152,7 +152,6 @@ export default {
     set_new_password: 'Imposta nuova password',
     account_created: 'Account creato con successo, verifica la tua email per confermare ed attivare il tuo account',
     search_by_text: 'Cerca per testo',
-    is_planned: 'È pianificato',
     no: 'NO',
     yes: 'SI',
     date_interval: 'Intervallo di date',
@@ -223,5 +222,8 @@ export default {
     write_temlate_name: 'Scrivi il nome del modello',
     end_of_month: 'Fine mese',
     ticket_value: 'Valore del voucher',
+    spent: 'speso',
+    remaining: 'rimanente',
+    planned: 'pianificato',
 }
 </script>
