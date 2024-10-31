@@ -65,6 +65,7 @@ export default {
     mounted() {
         const data = this.localBudget;
         this.localBudget.totalRemaining = data.totalRemaining < 0 ? 0 : data.totalRemaining;
+        this.localBudget.percentage = data.totalSpentPercentage.replace('%', '');
     }
 }
 </script>
