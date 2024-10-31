@@ -9,7 +9,6 @@
           <!--header-->
           <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
             <h3 class="text-blueGray-400 text-sm font-bold uppercase">
-              {{ $t('labels.list_of_entries_of') }} ( {{this.name}} )
             </h3>
           </div>
           <!--body-->

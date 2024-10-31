@@ -61,13 +61,19 @@ async function getEntryList(uuid) {
     return response.data;
 }
 
+async function getBudgetStats(id) {
+    const response = await instance.get(`/api/budget/${id}/stats`);
+    return response.data;
+}
+
 export default {
     getEntryList,
     getBudgets,
     getBudget,
     createBudget,
     deleteBudget,
-    updateBudget
+    updateBudget,
+    getBudgetStats
 }
 
 </script>

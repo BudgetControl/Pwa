@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="w-full lg:w-12/12 px-1">
 
         <HeaderMenu>
             <MenuButton :path="'/app/budgets/new'" :label="$t('labels.add')" />
@@ -7,20 +7,20 @@
             <MenuButton :path="'/app/budgets'" :label="$t('labels.show')" />
         </HeaderMenu>
 
-        <div class="flex flex-wrap mt-10">
-            <div class="w-full">
+        <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+            <div class="container x-4 mx-auto py-3">
                 <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
                     <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
                         <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
                             v-on:click="toggleTabs(1)"
-                            v-bind:class="{ 'text-emerald-600 bg-white': openTab !== 1, 'text-white bg-emerald-600': openTab === 1 }">
+                            v-bind:class="{ 'text-white bg-emerald-600': openTab !== 1, 'text-emerald-600 bg-white': openTab === 1 }">
                             {{$t('labels.list_of_voices')}}
                         </a>
                     </li>
                     <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
                         <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
                             v-on:click="toggleTabs(2)"
-                            v-bind:class="{ 'text-emerald-600 bg-white': openTab !== 2, 'text-white bg-emerald-600': openTab === 2 }">
+                            v-bind:class="{ 'text-white bg-emerald-600': openTab !== 2, 'text-emerald-600 bg-white': openTab === 2 }">
                             {{$t('labels.settings')}}
                         </a>
                     </li>

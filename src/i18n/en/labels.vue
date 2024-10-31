@@ -88,7 +88,7 @@ export default {
     profile: 'Profile',
     assistance: 'Assistance',
     my_entry: 'My entry',
-    planned: 'Planned entry',
+    planned_entry: 'Planned entry',
     add: 'Add',
     model: 'Model',
     wallet: 'Wallet',
@@ -223,6 +223,9 @@ export default {
     write_temlate_name: 'Write the template name',
     end_of_month: 'End of month',
     ticket_value: 'Voucher value',
+    spent: 'spent',
+    remaining: 'remaining',
+    planned: 'planned',
 };
 
 </script>
