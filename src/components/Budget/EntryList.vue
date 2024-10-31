@@ -48,7 +48,7 @@ export default {
     methods: {
         async getBudget() {
             const uuid = this.uuid
-            BudgetService.getBudgetStats(uuid).then((res) => {
+            this.apiService.getBudgetStats(uuid).then((res) => {
                 this.budget = res
             })
         },
