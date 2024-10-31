@@ -38,6 +38,10 @@ class BudgetService extends ApiService {
         return response.data;
     }
     
+    async getBudgetStats(id) {
+        const response = await this.instance.get(`/api/budget/${id}/stats`);
+        return response.data;
+    }
 }
 
 export default BudgetService;
