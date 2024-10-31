@@ -21,14 +21,19 @@
                     class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
                     v-bind:class="{ 'bg-emerald-600 ': localBudget.percentage <= 80, 'bg-red-600': localBudget.percentage >= 80 }">
                 </div>
+
+                <!-- planned row -->
+                <div v-if="localBudget.planned" :style="'width:' + ( localBudget.planned.plannedSpentPercentage - localBudget.percentage)"
+                    class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center">
+                </div>
+
             </div>
 
-            
-            <div class="flex items-center justify-between text-sm">
+            <div class="flex items-center justify-between text-sm text-blueGray-400 text-xs">
                    <span >{{ $t('labels.spent') }} {{  localBudget.totalSpent }} {{ currency }}</span>
-                   <span v-if="localBudget.totalPlanned">{{ $t('labels.planned') }} {{  localBudget.totalPlanned }} {{ currency }}</span>
+                   <span v-if="localBudget.planned">{{ $t('labels.planned') }} {{  localBudget.planned.total }} {{ currency }}</span>
                    <span>{{ $t('labels.remaining') }} {{  localBudget.totalRemaining }} {{ currency }}</span>
-                </div>
+            </div>
 
             <div class="mb-4">
                 <span class="text-xs font-semibold inline-block text-blueGray-400">
