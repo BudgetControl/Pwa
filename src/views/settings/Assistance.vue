@@ -71,9 +71,9 @@ export default {
     },
     methods: {
         sendRequest() {
-            const userSettings = LocalStorageService.get("settings")
+            const userSettings = LocalStorageService.getUser()
             const data = {
-                "user_id": userSettings.user_profile.id,
+                "user_mail": userSettings.email,
                 "text": this.text
             }
 
