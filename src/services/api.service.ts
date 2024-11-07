@@ -1,5 +1,6 @@
 const DOMAIN = process.env.VUE_APP_API_PATH_V2;
 import { Workspace } from '../types/workspace.type';
+import { UseAuthStore } from '../storage/auth-token.store';
 
 import axios from 'axios';
 
@@ -8,6 +9,8 @@ class ApiService {
     protected tokens: { auth: { token: string, timestamp: string }, workspace: Workspace | {}, bcAuth: { token: string, timestamp: string } } = { auth: { token: '', timestamp: '' }, workspace: {}, bcAuth: { token: '', timestamp: '' } };
 
     constructor(value: { auth: { token: string, timestamp: string }, workspace: Workspace, bcAuth: { token: string, timestamp: string } } | boolean = false) {
+        const authStorage = UseAuthStore();
+        
         this.instance = axios.create({
             baseURL: DOMAIN
         });
@@ -40,6 +43,10 @@ class ApiService {
 
             this.instance.interceptors.response.use(
                 (response) => {
+                    //update auth token 
+                    if (response.headers['authorization']) {
+                        authStorage.set(response.headers['authorization']);
+                    }
                     return response;
                 },
                 (error) => {
