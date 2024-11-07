@@ -22,6 +22,8 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (response) => {
+    const newAuthToken = response.headers('authorization').replace('Bearer ', '');
+    LocalStorageService.setToken(newAuthToken);
     return response;
   },
   (error) => {
