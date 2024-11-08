@@ -1,4 +1,7 @@
+
 <script>
+import { Capacitor } from '@capacitor/core';
+
 function generateRandomColor() {
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
 }
@@ -15,5 +18,11 @@ function isIos() {
     return /iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
 
-export default { generateRandomColor, isMobile, isAndroid, isIos };
+function iAmDevice() {
+    if(Capacitor.isNativePlatform()) {
+        return true
+    }
+}
+
+export default { generateRandomColor, isMobile, isAndroid, isIos, iAmDevice };
 </script>

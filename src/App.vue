@@ -32,9 +32,9 @@ export default {
   mounted() {
     const isAndroid = libs.isAndroid();
     const isIos = libs.isIos();
-    if (isAndroid) {
+    if (isAndroid && libs.iAmDevice() === false) {
       this.$router.push({ path: '/app/auth/download/play-store' });
-    } else if (isIos) {
+    } else if (isIos && libs.iAmDevice() === false) {
      //TODO: will do later
     }
   },
@@ -69,10 +69,10 @@ export default {
         //redirect on play stor or app store
         const isAndroid = libs.isAndroid();
         const isIos = libs.isIos();
-        if (isAndroid) {
+        if (isAndroid && libs.iAmDevice() === false) {
           console.debug('redirect to play store');
           window.location.href = 'https://play.google.com/store/apps/details?id=com.example.app';
-        } else if (isIos) {
+        } else if (isIos && libs.iAmDevice() === false) {
           console.debug('redirect to app store');
          //TODO: will do later
         }
