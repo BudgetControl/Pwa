@@ -20,7 +20,7 @@
                                         Download our app now from the App Store to access your invoice and stay updated
                                         with your account
                                         <div class="flex justify-center">
-                                            <a href=""><img :src="googlePlayBadge" alt="Google Play Badge"
+                                            <a :href="androidUrlStore"><img :src="googlePlayBadge" alt="Google Play Badge"
                                                     width="150px" /></a>
                                         </div>
                                     </div>
@@ -36,11 +36,22 @@
 <script>
 
 import googlePlayBadge from '@/assets/img/google-play-badge.png'
+import libs from '@/Libs.vue'
 
 export default {
     data() {
         return {
+            androidUrlStore: process.env.VUE_APP_ANDORID_STORE_URL,
             googlePlayBadge: googlePlayBadge
+        }
+    },
+    mounted() {
+    const isMobile = libs.isMobile();
+    const isIos = libs.isIos();
+        if (!isMobile) {
+        this.$router.push({ path: '/app/auth/login' });
+        } else if (isIos) {
+        //TODO: will do later
         }
     },
 };

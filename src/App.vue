@@ -29,6 +29,15 @@ export default {
       }
     };
   },
+  mounted() {
+    const isAndroid = libs.isAndroid();
+    const isIos = libs.isIos();
+    if (isAndroid) {
+      this.$router.push({ path: '/app/auth/download/play-store' });
+    } else if (isIos) {
+     //TODO: will do later
+    }
+  },
   created() {
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
@@ -46,6 +55,7 @@ export default {
       const isMobile = libs.isMobile();
 
       if (this.deferredPrompt && isMobile === false) {
+        console.debug('installPWA');
         this.deferredPrompt.prompt();
         this.deferredPrompt.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
@@ -60,9 +70,11 @@ export default {
         const isAndroid = libs.isAndroid();
         const isIos = libs.isIos();
         if (isAndroid) {
+          console.debug('redirect to play store');
           window.location.href = 'https://play.google.com/store/apps/details?id=com.example.app';
         } else if (isIos) {
-          window.location.href = 'https://apps.apple.com/us/app/example-app/id1234567890';
+          console.debug('redirect to app store');
+         //TODO: will do later
         }
       }
     }
