@@ -15,5 +15,5 @@ function isIos() {
     return /iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
 
-export default { generateRandomColor };
+export default { generateRandomColor, isMobile, isAndroid, isIos };
 </script>
