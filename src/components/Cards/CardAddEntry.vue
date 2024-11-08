@@ -364,7 +364,7 @@ export default {
   },
   mounted() {
     this.action.openTab = 1
-    this.action.isMobile = this.checkIfMobile()
+    this.action.isMobile = libs.isMobile()
     this.action.showDetails = !this.action.isMobile
     this.time()
     this.getCategory()

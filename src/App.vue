@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import libs from './Libs.vue';
 
 export default {
   data() {
@@ -42,7 +43,9 @@ export default {
       this.$i18n.locale = this.selectedLanguage;
     },
     installPWA() {
-      if (this.deferredPrompt) {
+      const isMobile = libs.isMobile();
+
+      if (this.deferredPrompt && isMobile === false) {
         this.deferredPrompt.prompt();
         this.deferredPrompt.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
@@ -52,6 +55,15 @@ export default {
           }
           this.deferredPrompt = null;
         });
+      } else {
+        //redirect on play stor or app store
+        const isAndroid = libs.isAndroid();
+        const isIos = libs.isIos();
+        if (isAndroid) {
+          window.location.href = 'https://play.google.com/store/apps/details?id=com.example.app';
+        } else if (isIos) {
+          window.location.href = 'https://apps.apple.com/us/app/example-app/id1234567890';
+        }
       }
     }
   },

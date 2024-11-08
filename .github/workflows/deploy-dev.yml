@@ -3,7 +3,8 @@ name: Deploy application on DEV
 on:
   workflow_dispatch:
   push:
-    branches: [ "develop" ]
+    branches:
+      - 'develop*'
 
 permissions:
   contents: read
