@@ -12,13 +12,13 @@
                 {{ $t('labels.sign_in_with') }}
               </h6>
             </div>
-            <!-- <div class="btn-wrapper text-center">
-              <button
+            <div class="btn-wrapper text-center">
+              <!-- <button
                 class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                 type="button">
                 <img alt="..." class="w-5 mr-1" :src="facebook" />
                 Facebook
-              </button>
+              </button> -->
               <button @click="signInGoogle()"
                 class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md items-center font-bold text-xs ease-linear transition-all duration-150 w-full text-center"
                 type="button">
@@ -26,7 +26,7 @@
                 Google
               </button>
             </div>
-            <hr class="mt-6 border-b-1 border-blueGray-300" /> -->
+            <hr class="mt-6 border-b-1 border-blueGray-300" />
           </div>
           <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
             <!-- <div class="text-blueGray-400 text-center mb-3 font-bold">
@@ -113,6 +113,9 @@ export default {
       verify: false,
     };
   },
+  mounted() {
+    //TODO: check if is mobile
+  },
   methods: {
     async submit() {
       let email = this.email;
@@ -165,6 +168,7 @@ export default {
         })
       } else {
         // redirect to dashboard
+        this.show = false
         console.debug('User is already logged in')
         this.$router.push({ path: '/app/dashboard' })
       }
@@ -177,6 +181,7 @@ export default {
       this.error = false
 
       AuthService.providerUri('google').then((resp) => {
+        this.show = false
         Browser.open({ url: resp.uri });
       }).catch(() => {
         _this.show = false

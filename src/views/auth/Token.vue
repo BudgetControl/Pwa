@@ -49,7 +49,9 @@ export default {
   },
     async mounted() {
       const _this = this
-      const token = _this.$route.query.code
+      const token = this.$route.params.code
+
+      console.debug("Reciving code "+token)
 
       this.show = false
       this.error = false
