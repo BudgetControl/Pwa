@@ -3,7 +3,12 @@ version: '3'
 services:
     femodule:
       container_name: budgetcontrol-pwa
-      image: mlabfactory/php8-apache:v1.2.3
+      build:
+        context: .
+        dockerfile: Dockerfile.apache
+      image: mlabfactory/php8-apache:v1.2
+      volumes:
+          - ./:/usr/src/app
       restart: unless-stopped
       networks:
         - budgetcontrol_network    
