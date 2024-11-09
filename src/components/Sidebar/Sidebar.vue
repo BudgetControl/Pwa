@@ -89,7 +89,7 @@
             : 'text-blueGray-700 hover:text-blueGray-500',
         ]">
                 <i class="fas fa-clipboard-check mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
-                {{ $t('labels.planned') }}
+                {{ $t('labels.is_planned') }}
               </a>
             </router-link>
           </li>
