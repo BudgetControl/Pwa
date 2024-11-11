@@ -64,8 +64,8 @@
 
                         <div class="mb-3 pt-0"
                             v-if="modal.type == 'credit-card-revolving'">
-                            <span class="text-xs text-blueGray-400">{{ $t('labels.credit_card_installment') }}</span>
-                            <input type="text" placeholder="500.00 €" v-model="modal.installment"
+                            <span class="text-xs text-blueGray-400">{{ $t('labels.credit_card_installement') }}</span>
+                            <input type="text" placeholder="500.00 €" v-model="modal.installement_value"
                                 class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                         </div>
 
@@ -156,9 +156,11 @@ export default {
                 type: "bank",
                 currency: 2,
                 exclude_stats: false,
-                installment: 0,
+                installement: 0,
                 balance: null,
                 voucher_value: null,
+                installement_value: null,
+                installement: 0,
             }
         }
     },
@@ -227,7 +229,7 @@ export default {
                     this.modal.type = resp.type
                     this.modal.currency = resp.currency
                     this.modal.exclude_stats = resp.exclude_from_stats
-                    this.modal.installment = resp.installement_value
+                    this.modal.installement = resp.installement_value
                     this.modal.balance = resp.balance
                     this.modal.deleted = resp.deleted_at
                     this.modal.voucher_value = resp.voucher_value
@@ -248,6 +250,11 @@ export default {
             if (!this.validate()) {
                 return
             }
+
+            if(this.moda.type == 'credit-card' || this.modal.type == 'credit-card-revolving') {
+                this.modal.installement = 1
+            }
+
             const data = {
                 name: this.modal.name,
                 color: this.modal.color,
@@ -255,8 +262,8 @@ export default {
                 closing_date: this.modal.closingAccountDate,
                 payment_account: this.modal.accountPayment,
                 type: this.modal.type,
-                installement_value: this.modal.installment,
-                installment: this.installment,
+                installement_value: this.modal.installement_value,
+                installement: this.installement,
                 currency: this.modal.currency,
                 balance: this.modal.balance ? this.modal.balance : 0,
                 exclude_from_stats: this.modal.exclude_stats,
@@ -331,8 +338,8 @@ export default {
             }
 
             if (this.modal.type == 'credit-card' || this.modal.type == 'credit-card-revolving') {
-                if (this.modal.installment == 0) {
-                    alert(this.$t('messages.wallet.installment'), "error")
+                if (this.modal.installement == 0) {
+                    alert(this.$t('messages.wallet.installement'), "error")
                     return false    
                 }
             }
