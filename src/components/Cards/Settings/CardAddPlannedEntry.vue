@@ -180,6 +180,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import AlertModal from '../../GenericComponents/AlertModal.vue';
 import libs from '../../../Libs.vue';
+import LocalStorageService from '../../../services/LocalStorageService.vue';
 
 export default {
   props: {
@@ -229,7 +230,7 @@ export default {
       geolocalization: "",
       name: "",
       end_date_time: null,
-      planning: 'daily',
+      planning: 'monthly',
       debit: null,
       input: {
         tags: [],
@@ -263,6 +264,10 @@ export default {
     if (this.entryId != null) {
       this.getEntry()
     }
+
+    const settings = LocalStorageService.get("settings")
+    this.currency = settings.currency_id
+    this.payment_type = settings.payment_type_id
 
     this.input.planning = [
       {
@@ -456,9 +461,7 @@ export default {
             _this.category = data.category_id,
             _this.label = [],
             _this.note = null,
-            _this.currency = 1,
             _this.account = data.account_id,
-            _this.payment_type = 1,
             _this.model = [],
             _this.newlabel = null,
 
