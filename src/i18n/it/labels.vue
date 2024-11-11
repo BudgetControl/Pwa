@@ -225,5 +225,6 @@ export default {
     spent: 'speso',
     remaining: 'rimanente',
     planned: 'pianificato',
+    no_entries_found: 'Nessuna voce trovata',
 }
 </script>
