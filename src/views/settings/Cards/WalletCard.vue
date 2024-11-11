@@ -156,7 +156,6 @@ export default {
                 type: "bank",
                 currency: 2,
                 exclude_stats: false,
-                installement: 0,
                 balance: null,
                 voucher_value: null,
                 installement_value: null,
