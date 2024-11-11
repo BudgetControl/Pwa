@@ -138,6 +138,17 @@ export default {
         november: 'November',
         dec: 'Dec',
         december: 'December',
+    },
+    bank_accounts: {
+        bank: 'Bank',
+        cache: 'Cash',
+        "credit-card": 'Credit Card',
+        "credit-card-revolving": 'Credit Card Revolving',
+        investment: 'Investment',
+        loan: 'Loan',
+        other: 'Other',
+        "prepaid-card": 'Prepaid Card',
+        voucher: 'Voucher'
     }
 }
 </script>

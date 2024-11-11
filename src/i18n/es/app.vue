@@ -113,5 +113,16 @@ export default {
     investments: 'investments',
     food_beverages: 'food & beverages',
     computer_communication: 'computer communication',
+    bank_accounts: {
+        bank: 'Banco',
+        cache: 'Efectivo',
+        "credit-card": 'Tarjeta de Crédito',
+        "credit-card-revolving": 'Tarjeta de Crédito Revolving',
+        investment: 'Inversión',
+        loan: 'Préstamo',
+        other: 'Otro',
+        "prepaid-card": 'Tarjeta Prepaga',
+        voucher: 'Vale'
+    }
 }
 </script>

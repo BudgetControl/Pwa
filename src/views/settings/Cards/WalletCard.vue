@@ -34,7 +34,7 @@
                                 class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 v-model="modal.type">
                                 <option value="0">{{ $t('labels.choose_wallet_type') }}</option>
-                                <option v-for="(item, k) in form.type" :key="k" :value="item">{{ item }}
+                                <option v-for="(item, k) in form.type" :key="k" :value="item">{{ $t('app.bank_accounts.' + item) }}
                                 </option>
                             </select>
                         </div>

@@ -116,5 +116,16 @@ export default {
     investments: "investimenti",
     food_beverages: "cibo & bevande",
     computer_communication: "comunicazione pc",
+    bank_accounts: {
+        bank: 'Banca',
+        cache: 'Contanti',
+        "credit-card": 'Carta di Credito',
+        "credit-card-revolving": 'Carta di Credito Revolving',
+        investment: 'Investimento',
+        loan: 'Prestito',
+        other: 'Altro',
+        "prepaid-card": 'Carta Prepagata',
+        voucher: 'Voucher'
+    }
 }
 </script>
