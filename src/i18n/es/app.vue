@@ -113,6 +113,7 @@ export default {
     investments: 'investments',
     food_beverages: 'food & beverages',
     computer_communication: 'computer communication',
+    wallet_name: 'Nombre de la billetera',
     months: {
         jan: 'Ene',
         january: 'Enero',

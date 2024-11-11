@@ -116,6 +116,7 @@ export default {
     investments: "investimenti",
     food_beverages: "cibo & bevande",
     computer_communication: "comunicazione pc",
+    wallet_name: "Nome portafoglio",
     months: {
         jan: 'Gen',
         january: 'Gennaio',
