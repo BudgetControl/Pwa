@@ -156,7 +156,12 @@
                 <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
                     <div class="px-4 py-5 flex-auto">
                         <div class="tab-content tab-space">
-                            <EntriesTable ref="entryIncoming" />
+
+                            <div v-if="action.no_entry_found" class="text-center">
+                                <p class="text-blueGray-400 text-lg">{{ $t('labels.no_entries_found') }}</p>
+                            </div>
+
+                            <EntriesTable v-if="action.no_entry_found == false" ref="entryIncoming" />
 
                             <!-- pagination -->
                             <div class="py-2" v-if="pagination.enabled">
@@ -200,6 +205,7 @@ export default {
                 tags: [],
             },
             action: {
+                no_entry_found: false,
                 account: null,
                 category: null,
                 type: [],
@@ -252,10 +258,11 @@ export default {
 
             if (this.validate() === true) {
                 SearchService.filter(data, currentPage).then((res) => {
-                    _this.$refs.entryIncoming.entries = []
 
                     if (res.length > 0) {
                         _this.$refs.entryIncoming.buildEntriesTable(res)
+                    } else {
+                        _this.action.no_entry_found = true
                     }
 
                     if (currentPage == 0) {
@@ -266,10 +273,6 @@ export default {
                         this.$refs._paginator.hasMorePage = res.hasMorePages
                     }
 
-                }).catch((error) => {
-                    this.action.alert = true
-                    this.action.alert_message = this.$t('labels.generic_error')
-                    console.log(error);
                 })
             }
         },

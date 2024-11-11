@@ -226,6 +226,7 @@ export default {
     spent: 'spent',
     remaining: 'remaining',
     planned: 'planned',
+    no_entries_found: 'No entries found',
 };
 
 </script>
