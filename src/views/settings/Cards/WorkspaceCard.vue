@@ -147,8 +147,8 @@ export default {
         getWorkspaceDetail() {
             WorkspaceService.get(this.$route.params.id).then((res) => {
                 this.modal.name = res.workspace.name
-                this.modal.currency = res.settings.data.currency_id
-                this.modal.payment_type = res.settings.data.payment_type_id
+                this.modal.currency = res.settings.data.currencyId
+                this.modal.payment_type = res.settings.data.paymenttypeId
                 res.workspace.users.forEach((item) => {
                     const user = LocalStorageServiceVue.getUser()
                     if(item.uuid !== user.uuid) {
