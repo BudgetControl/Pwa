@@ -184,63 +184,72 @@
 
         <div v-if="action.showDetails" class="flex flex-wrap py-3">
 
-          <div class="mb-2 w-full flex flex-wrap">
 
-            <div class="lg:w-4/12 h44 bg-white rounded w-full mb-2" v-if="isModel === false">
+            <div class="flex w-full mb-2" v-if="!isModel">
               <VueDatePicker v-model="date"></VueDatePicker>
             </div>
 
-            <div class="w-full lg:w-4/12 mb-2">
+            <div class="w-full flex mb-2">
               <select v-model="payment_type" id="payment_type"
                 class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                 <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ $t('app.' + item.slug)
                   }}</option>
               </select>
             </div>
-            <div class="lg:w-4/12 w-full ">
-              <div v-if="isModel === false"
+
+            <div class="flex w-full mb-2 " v-if="!isModel  & !isPlanned">
+              <div
                 class="border-0 py-2 h44 text-center placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
-                <label for="confirmed" id="confirm" v-if="!isPlanned">
+                <label for="confirmed" id="confirm" >
                   {{ $t('labels.payment_confirm') }} <input v-model="confirmed" type="checkbox" id="confirmed" value="1"
                     checked>
                 </label>
               </div>
             </div>
+
+            <div class="flex w-full mb-2 " v-if="!isModel  & !isPlanned">
+              <div
+                class="border-0 py-2 h44 text-center placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
+                <label for="exclude_from_stats" id="exclude_from_stats" >
+                  {{ $t('labels.exclude_from_stats') }} <input v-model="exclude_from_stats" type="checkbox" id="exclude_from_stats" value="1"
+                    checked>
+                </label>
+              </div>
+            </div>
+
+            <div class="lg:w-12/12 w-full mb-2" v-if="isPlanned">
+              <select id="planning" v-model="planning"
+                class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
+                <option value="0">{{ $t('labels.choose_planned_type') }}</option>
+                <option required v-for="(item, k) in input.planning" :key="k" :value="item">{{ item }}</option>
+              </select>
           </div>
 
-          <div class="lg:w-4/12 " v-if="isPlanned">
-            <select id="planning" v-model="planning"
-              class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
-              <option></option>
-              <option required v-for="(item, k) in input.planning" :key="k" :value="item">{{ item }}</option>
-            </select>
-          </div>
-
-          <div class="lg:w-12/12 w-full">
+          <div class="lg:w-12/12 w-full bm-2">
             <textarea v-model="note" type="text" :placeholder="$t('labels.add_here_your_note')" id="note" rows="2"
               class="border-0 px-3 py-5 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
           </div>
 
-          <div class="lg:w-12/12 w-full">
-            <label for="save_as_model" id="save_as_model" v-if="!isPlanned">
-              <input v-model="action.save_as_model" type="checkbox" id="save_as_model" :value=true
-                    checked>
-                </label>  {{ $t('labels.save_as_model') }} 
-          </div>
+            <div class="lg:w-12/12 w-full" v-if="!isPlanned">
+              <label for="save_as_model" id="save_as_model" class="text-blueGray-600 bg-white text-xs">
+                <input v-model="action.save_as_model" type="checkbox" id="save_as_model" :value=true
+                      checked>
+                  </label>  {{ $t('labels.save_as_model') }} 
+            </div>
 
-              <div class="flex py-2 border border-solid border-blueGray-500 shadow rounded" v-if="isModel || action.save_as_model === true">
-          <div class="lg:w-8/12 px-2 w-full">
-            <input v-model="name" type="text" :placeholder="$t('labels.write_temlate_name')" id="name"
-              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+            <div class="flex py-2 border border-solid border-blueGray-500 shadow rounded" v-if="isModel || action.save_as_model === true">
+              <div class="lg:w-8/12 px-2 w-full">
+                <input v-model="name" type="text" :placeholder="$t('labels.write_temlate_name')" id="name"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+              </div>
+              <div class="lg:w-4/12 px-2 w-full">
+                <button v-on:click="setModel()"
+                  class="w-full text-xs py-3 bg-yellow-500 text-white active:bg-amber-600 font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+                  type="button">
+                  {{ $t('labels.save_template') }}
+                </button>
+              </div>
           </div>
-          <div class="lg:w-4/12 px-2 w-full">
-            <button v-on:click="setModel()"
-              class="w-full text-xs py-3 bg-yellow-500 text-white active:bg-amber-600 font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
-              type="button">
-              {{ $t('labels.save_template') }}
-            </button>
-          </div>
-        </div>
         </div>
 
       </div>
@@ -339,7 +348,8 @@ export default {
       name: "",
       debit_name: null,
       end_date_time: null,
-      planning: null,
+      planning: 0,
+      exclude_from_stats:false,
       debit: null,
       input: {
         tags: [],
@@ -671,7 +681,8 @@ export default {
           geolocalization: this.geolocalization,
           planning: this.planning,
           transfer_realtion: this.transfer_relation,
-          end_date_time: this.end_date_time
+          end_date_time: this.end_date_time,
+          exclude_from_stats: this.exclude_from_stats
         }
         let path = this.type
 
@@ -698,6 +709,7 @@ export default {
             _this.model = [],
             _this.newlabel = null,
             _this.action.dateUpdated = false
+            _this.exclude_from_stats = false
 
           localStorage.setItem("new_entry", true)
           this.time()

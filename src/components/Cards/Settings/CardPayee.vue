@@ -159,11 +159,11 @@ export default {
             totalamout += e.amount
           })
 
-          if (totalamout > 0) {
+          if (totalamout < 0) {
             debitColor = "text-emerald-500"
           }
 
-          if (totalamout < 0) {
+          if (totalamout > 0) {
             debitColor = "text-red-400"
           }
           
