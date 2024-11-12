@@ -51,7 +51,7 @@
         <div class="flex flex-wrap">
 
           <div class="lg:w-12/12 px-2 w-full "
-            v-if="this.isModel === false && input.model.length > 0 && (action.openTab === 2 || action.openTab === 1)">
+            v-if="this.isModel === false && input.model.length > 0 && (action.openTab === 2 || action.openTab === 1) && !this.isPlanned">
             <select v-model="model" v-on:change="retriveModel()" id="model" v-if="action.models"
               class="w-full border-0 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option value="0">{{ $t('labels.choose_a_model') }}</option>
@@ -135,7 +135,29 @@
             </select>
           </div>
 
+          <div class="lg:w-6/12 px-2 py-2 w-full" v-if="isPlanned">
+              <select id="planning" v-model="planning"
+              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                <option value="0">{{ $t('labels.choose_planned_type') }}</option>
+                <option required v-for="(item, k) in input.planning" :key="k" :value="item">{{ $t('labels.' + item) }}</option>
+              </select>
+          </div>
+
+          <div class="lg:w-12/12 px-2 py-2 w-full">
+            <div v-for="(item, i) in input.tags" :key="i">
+              <span v-on:click="removeTag(item)"
+                class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                v-if="label.includes(item.id)" :style="'color: #fff; background-color: ' + item.color">{{
+                  item.name
+                }}
+                <i class="fas fa-times close-icon"></i>
+              </span>
+            </div>
+          </div>
+
         </div>
+
+        
 
         <div v-if="!action.showDetails">
           <button v-on:click="action.showDetails = true"
@@ -168,22 +190,9 @@
             </div>
           </div>
 
-          <div class="flex flex-wrap py-3 ml-2 w-full">
-            <div v-for="(item, i) in input.tags" :key="i">
-              <span v-on:click="removeTag(item)"
-                class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
-                v-if="label.includes(item.id)" :style="'color: #fff; background-color: ' + item.color">{{
-                  item.name
-                }}
-                <i class="fas fa-times close-icon"></i>
-              </span>
-            </div>
-          </div>
-
         </div>
 
         <div v-if="action.showDetails" class="flex flex-wrap py-3">
-
 
             <div class="flex w-full mb-2" v-if="!isModel">
               <VueDatePicker v-model="date"></VueDatePicker>
@@ -197,52 +206,47 @@
               </select>
             </div>
 
-            <div class="flex w-full mb-2 " v-if="!isModel  & !isPlanned">
-              <div
-                class="border-0 py-2 h44 text-center placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
-                <label for="confirmed" id="confirm" >
-                  {{ $t('labels.payment_confirm') }} <input v-model="confirmed" type="checkbox" id="confirmed" value="1"
-                    checked>
-                </label>
-              </div>
+            <div class="flex w-full mb-2 " v-if="!isModel  && !isPlanned">
+              <label for="confirmed" id="confirmed" 
+              :class="{'bg-emerald-500 text-white': confirmed, 'bg-white': !confirmed}" 
+              class="w-full text-center active:bg-emerald-500 uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear"
+              @click="confirmed = !confirmed">
+                {{ $t('labels.payment_confirm') }} 
+                <input v-model="confirmed" type="checkbox" id="confirmed" value="1" class="hidden">
+              </label>
             </div>
 
-            <div class="flex w-full mb-2 " v-if="!isModel  & !isPlanned">
-              <div
-                class="border-0 py-2 h44 text-center placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
-                <label for="exclude_from_stats" id="exclude_from_stats" >
-                  {{ $t('labels.exclude_from_stats') }} <input v-model="exclude_from_stats" type="checkbox" id="exclude_from_stats" value="1"
-                    checked>
-                </label>
-              </div>
+            <div class="flex w-full mb-2 " v-if="!isModel  && !isPlanned">
+              <label for="exclude_from_stats" id="exclude_from_stats" 
+              :class="{'bg-emerald-500 text-white': exclude_from_stats, 'bg-white': !exclude_from_stats}" 
+              class="w-full text-center active:bg-emerald-500 uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear"
+              @click="exclude_from_stats = !exclude_from_stats">
+                {{ $t('labels.exclude_from_stats') }} 
+                <input v-model="exclude_from_stats" type="checkbox" id="exclude_from_stats" value="1" class="hidden">
+              </label>
             </div>
-
-            <div class="lg:w-12/12 w-full mb-2" v-if="isPlanned">
-              <select id="planning" v-model="planning"
-                class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
-                <option value="0">{{ $t('labels.choose_planned_type') }}</option>
-                <option required v-for="(item, k) in input.planning" :key="k" :value="item">{{ item }}</option>
-              </select>
-          </div>
 
           <div class="lg:w-12/12 w-full bm-2">
             <textarea v-model="note" type="text" :placeholder="$t('labels.add_here_your_note')" id="note" rows="2"
               class="border-0 px-3 py-5 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
           </div>
 
-            <div class="lg:w-12/12 w-full" v-if="!isPlanned">
-              <label for="save_as_model" id="save_as_model" class="text-blueGray-600 bg-white text-xs">
-                <input v-model="action.save_as_model" type="checkbox" id="save_as_model" :value=true
-                      checked>
-                  </label>  {{ $t('labels.save_as_model') }} 
+            <div class="flex w-full mb-2 " v-if="!isModel  && !isPlanned">
+              <label for="save_as_model" id="save_as_model" 
+              :class="{'bg-emerald-500 text-white': action.save_as_model, 'bg-white': !action.save_as_model}" 
+              class="w-full text-center active:bg-emerald-500 uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear"
+              @click="action.save_as_model = !action.save_as_model">
+                {{ $t('labels.save_as_model') }} 
+                <input v-model="action.save_as_model" type="checkbox" id="save_as_model" value="1" class="hidden">
+              </label>
             </div>
 
-            <div class="flex py-2 border border-solid border-blueGray-500 shadow rounded" v-if="isModel || action.save_as_model === true">
-              <div class="lg:w-8/12 px-2 w-full">
+            <div class="flex py-2 border border-solid w-full border-blueGray-500 shadow rounded" v-if="isModel || action.save_as_model === true">
+              <div class="px-2 w-full">
                 <input v-model="name" type="text" :placeholder="$t('labels.write_temlate_name')" id="name"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               </div>
-              <div class="lg:w-4/12 px-2 w-full">
+              <div class="px-2 w-full">
                 <button v-on:click="setModel()"
                   class="w-full text-xs py-3 bg-yellow-500 text-white active:bg-amber-600 font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
                   type="button">
@@ -373,6 +377,9 @@ export default {
     };
   },
   mounted() {
+
+    console.debug('Is planned ', this.isPlanned)
+
     this.action.openTab = 1
     this.action.isMobile = this.checkIfMobile()
     this.action.showDetails = !this.action.isMobile
@@ -682,7 +689,8 @@ export default {
           planning: this.planning,
           transfer_realtion: this.transfer_relation,
           end_date_time: this.end_date_time,
-          exclude_from_stats: this.exclude_from_stats
+          exclude_from_stats: this.exclude_from_stats,
+          type: this.type,
         }
         let path = this.type
 
@@ -701,8 +709,12 @@ export default {
           }
         }
 
+        if(this.isPlanned){
+          console.debug('planned')
+        }
+
         ApiService.setEntry(path, data, this.isPlanned, this.entryId).then(() => {
-          _this.date = null,
+            _this.date = null,
             _this.amount = null,
             _this.label = [],
             _this.note = null,
@@ -715,9 +727,6 @@ export default {
           this.time()
 
           alert(this.$t('labels.entry_saved'), "success")
-          this.$router.push({
-            path: '/app/entry'
-          })
 
         }).catch(() => {
           alert(this.$t('messages.generic_error'), "error")
