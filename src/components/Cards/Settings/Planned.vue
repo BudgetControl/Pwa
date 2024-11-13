@@ -88,11 +88,13 @@ export default {
                     const date_time = new Date(e.date_time)
                     const formattedDate = date_time.toISOString().split('T')[0];
 
+                    const currency = e.currency
+
                     let info = {
                         id: e.uuid,
                         date: formattedDate,
                         end_date: (e.end_date_time == null) ? null : e.end_date_time,
-                        amount: e.amount.toFixed(2) + " €",
+                        amount: e.amount + " " + currency.icon,
                         color_amount: e.amount <= 0 ? "text-red-500" : "text-emerald-500",
                         type_amount: e.amount <= 0 ? "expenses" : "incoming",
                         wallet: e.wallet.name,
@@ -110,15 +112,13 @@ export default {
                     }
                     
                     e.labels.forEach((l) => {
-                        if (l.name != "") {
-                            info.labels.push(
-                                {
-                                    id: l.id,
-                                    name: l.name,
-                                    color: l.color
-                                }
-                            )
-                        }
+                        info.labels.push(
+                            {
+                                id: l.id,
+                                name: l.name,
+                                color: l.color
+                            }
+                        )
                     });
 
                     this.entries.push(info)

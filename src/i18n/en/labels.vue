@@ -228,6 +228,7 @@ export default {
     planned: 'planned',
     no_entries_found: 'No entries found',
     credit_card_installement: 'Credit card installment',
+    choose_planned_type: 'Choose a planned type',
 };
 
 </script>

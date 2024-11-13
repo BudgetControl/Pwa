@@ -159,7 +159,7 @@ export default {
                 balance: null,
                 voucher_value: null,
                 installement_value: null,
-                installement: 0,
+                installement: 1,
             }
         }
     },
@@ -228,7 +228,7 @@ export default {
                     this.modal.type = resp.type
                     this.modal.currency = resp.currency
                     this.modal.exclude_stats = resp.exclude_from_stats
-                    this.modal.installement = resp.installement_value
+                    this.modal.installement_value = resp.installement_value
                     this.modal.balance = resp.balance
                     this.modal.deleted = resp.deleted_at
                     this.modal.voucher_value = resp.voucher_value
@@ -262,7 +262,7 @@ export default {
                 payment_account: this.modal.accountPayment,
                 type: this.modal.type,
                 installement_value: this.modal.installement_value,
-                installement: this.installement,
+                installement: this.modal.installement,
                 currency: this.modal.currency,
                 balance: this.modal.balance ? this.modal.balance : 0,
                 exclude_from_stats: this.modal.exclude_stats,
