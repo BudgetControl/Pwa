@@ -12,12 +12,12 @@
           :label="$t('labels.show')"
         />
       </HeaderMenu>
-      <CardAddEntry :entryId="this.$route.params.entry_id" :isPlanned="this.$route.query.planned" :typeOfEntry="this.$route.query.type" />
+      <CardAddEntry :entryId="this.$route.params.entry_id" :isPlanned="true" :typeOfEntry="this.$route.query.type" />
     </div>
   </div>
 </template>
 <script>
-import CardAddEntry from "@/components/Cards/Settings/CardAddPlannedEntry.vue";
+import CardAddEntry from "@/components/Cards/CardAddEntry.vue";
 import HeaderMenu from "../../components/Navbars/HeaderMenu.vue";
 import MenuButton from "../../components/GenericComponents/MenuButton.vue";
 

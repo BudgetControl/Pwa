@@ -18,11 +18,18 @@
                       {{ $t('labels.expenses') }}
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                      href="javascript:void(0)" v-on:click="toggleTabs(2)"
-                      v-bind:class="{ 'text-emerald-600 ': action.openTab !== 2, 'text-white bg-emerald-600': action.openTab === 2 }">
-                      {{ $t('labels.incoming') }}
+                  <li class="nav-item" v-if="isModel === false">
+                    <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                      href="javascript:void(0)" v-on:click="toggleTabs(3)"
+                      v-bind:class="{ 'text-emerald-600 ': action.openTab !== 3, 'text-white bg-emerald-600': action.openTab === 3 }">
+                      {{ $t('labels.transfer') }}
+                    </a>
+                  </li>
+                  <li class="nav-item" v-if="isModel === false">
+                    <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                      href="javascript:void(0)" v-on:click="toggleTabs(4)"
+                      v-bind:class="{ 'text-emerald-600 ': action.openTab !== 4, 'text-white bg-emerald-600': action.openTab === 4 }">
+                      {{ $t('labels.debit') }}
                     </a>
                   </li>
                 </ul>
@@ -32,7 +39,7 @@
         </div>
         <!-- ##### menu ########### -->
       </div>
-      <div v-bind:class="{ 'bg-red-200': action.openTab === 1, 'bg-lightBlue-200': action.openTab === 2 }"
+      <div v-bind:class="{ 'bg-red-200': action.openTab === 1, 'bg-lightBlue-200': action.openTab === 2, 'bg-emerald-200': action.openTab === 3, 'bg-orange-200': action.openTab === 3 }"
         class="container relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg border-0 flex-auto p-4">
         <div class="flex flex-wrap">
           <div class="lg:w-6/12 px-2 py-2 w-full">

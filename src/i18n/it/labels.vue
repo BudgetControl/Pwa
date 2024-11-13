@@ -226,5 +226,6 @@ export default {
     remaining: 'rimanente',
     planned: 'pianificato',
     no_entries_found: 'Nessuna voce trovata',
+    choose_planned_type: 'Scegli un tipo pianificato',
 }
 </script>
