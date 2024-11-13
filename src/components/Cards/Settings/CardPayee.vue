@@ -30,7 +30,8 @@
                 </div>
                 <div class="w-full flex-1 text-right">
                   <span class="text-sm block text-blueGray-700 rounded ">
-                    {{ entry.amount }} <i class="fas fa-circle mr-2" :class="entry.amount >= 0 ? 'text-emerald-500' : 'text-red-500'"></i>
+                    {{ entry.amount }} <i class="fas fa-circle mr-2"
+                      :class="entry.amount >= 0 ? 'text-emerald-500' : 'text-red-500'"></i>
                   </span>
 
                 </div>
@@ -71,34 +72,36 @@
     </div>
 
     <div v-if="entries.length === 0">
-        <div class="text-center">
-            <p class="text-blueGray-400 text-lg">{{ $t('labels.no_payees_found') }}</p>
-        </div>
+      <div class="text-center">
+        <p class="text-blueGray-400 text-lg">{{ $t('labels.no_payees_found') }}</p>
+      </div>
     </div>
 
-    <div class="container px-4 mx-auto py-3 border border-solid border-blueGray-100 shadow" :class="showModal ? 'opacity': ''"
-      v-for="(entry, i) in this.entries" :key="i">
-      <div v-on:click="toggleModal(i)" class="flex flex-wrap">
-        <div class="flex-l w-full px-4">
-          <span class="text-xs block text-emerald-500 rounded ">{{ entry.date }}</span>
+    <div class="container px-4 mx-auto py-3 border border-solid border-blueGray-100 shadow"
+      :class="showModal ? 'opacity' : ''" v-for="(entry, i) in this.entries" :key="i">
+      <div v-on:click="toggleModal(i)">
+        <div class="flex flex-wrap">
+          <div class="flex-l w-full px-4">
+            <span class="text-xs block text-emerald-500 rounded ">{{ entry.createdAt }}</span>
+          </div>
         </div>
-      </div>
-      <div class="flex flex-wrap">
-        <div class="w-full px-4 flex-1">
-          <span class="text-xs block rounded text-blueGray-900">
-            {{ entry.name }}</span>
-        </div>
-        <div v-on:click="toggleModal(i)" class="w-full px-4 flex-1 text-right">
-          <span class="text-sm block text-blueGray-700 rounded ">
-            {{ entry.amount }} <i :class="'fas fa-circle ' + entry.color_amount + ' mr-2'"></i>
-          </span>
+        <div class="flex flex-wrap">
+          <div class="w-full px-4 flex-1">
+            <span class="text-xs block rounded text-blueGray-900">
+              {{ entry.name }}</span>
+          </div>
+          <div class="w-full px-4 flex-1 text-right">
+            <span class="text-sm block text-blueGray-700 rounded ">
+              {{ entry.amount }} <i :class="'fas fa-circle ' + entry.color_amount + ' mr-2'"></i>
+            </span>
+
+          </div>
+
+          <div class="flex-l">
+            <PayeeActionDropdown :entryId="entry.uuid" :index=i @deleteItem="deleteItemFromArray" />
+          </div>
 
         </div>
-
-        <div class="flex-l">
-          <PayeeActionDropdown :entryId="entry.uuid" :index=i @deleteItem="deleteItemFromArray" />
-        </div>
-
       </div>
 
       <div class="flex flex-wrap">
@@ -138,7 +141,7 @@ export default {
     this.getPlannedEntries()
   },
   methods: {
-    toggleModal: function(i){
+    toggleModal: function (i) {
       this.index = i
       this.showModal = !this.showModal;
       this.name = this.entries[i].name
@@ -154,19 +157,19 @@ export default {
 
           debitColor = "text-blueGray-500"
 
-            const totalamout = e.debts.balance
+          const totalamout = e.debts.balance
 
-            if (totalamout > 0) {
+          if (totalamout > 0) {
             debitColor = "text-emerald-500"
-            }
+          }
 
-            if (totalamout < 0) {
-              debitColor = "text-red-400"
-            }
+          if (totalamout < 0) {
+            debitColor = "text-red-400"
+          }
 
-            let info = {
+          let info = {
             uuid: e.uuid,
-            date: '',
+            createdAt: e.createdAt,
             color_amount: debitColor,
             name: e.name,
             amount: totalamout,
@@ -190,7 +193,8 @@ export default {
 .opacity {
   opacity: 0.3;
 }
+
 .left {
-  margin-left:25%;
+  margin-left: 25%;
 }
 </style>
