@@ -147,37 +147,34 @@ export default {
       this.entries.splice(index, 1);
     },
     getPlannedEntries() {
-      ApiService.debt().then((resp) => {
+      ApiService.debtsList().then((resp) => {
         let debitColor = "text-red-500"
 
         resp.forEach(e => {
 
-          let totalamout = 0
           debitColor = "text-blueGray-500"
 
-          e.entry.forEach(e => {
-            totalamout += e.amount
-          })
+            const totalamout = e.debts.balance
 
-          if (totalamout > 0) {
+            if (totalamout > 0) {
             debitColor = "text-emerald-500"
-          }
+            }
 
-          if (totalamout < 0) {
-            debitColor = "text-red-400"
-          }
-          
+            if (totalamout < 0) {
+              debitColor = "text-red-400"
+            }
 
-          let info = {
+            let info = {
             uuid: e.uuid,
-            date: e.date_time,
+            date: '',
             color_amount: debitColor,
             name: e.name,
-            amount: totalamout.toFixed(2) + " €",
-            entry: e.entry,
+            amount: totalamout,
+            entry: e.debts.entries,
           }
 
           this.entries.push(info)
+
 
         });
 

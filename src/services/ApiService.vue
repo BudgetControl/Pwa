@@ -107,6 +107,11 @@ async function debt() {
   return response.data;
 }
 
+async function debtsList() {
+  const response = await instance.get(`/api/debits`);
+  return response.data;
+}
+
 async function deleteDebt(id) {
   const response = await instance.delete(`/api/debt/${id}`);
   return response.data;
@@ -271,6 +276,7 @@ export default {
   getPlannedEntry,
   setPlannedEntry,
   debt,
+  debtsList,
   deleteDebt,
   setAccount,
   setAccountSorting,

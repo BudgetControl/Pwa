@@ -227,6 +227,7 @@ export default {
     remaining: 'remaining',
     planned: 'planned',
     no_entries_found: 'No entries found',
+    credit_card_installement: 'Credit card installment',
 };
 
 </script>

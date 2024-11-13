@@ -226,5 +226,6 @@ export default {
     remaining: 'rimanente',
     planned: 'pianificato',
     no_entries_found: 'Nessuna voce trovata',
+    credit_card_installement: 'Rata della carta di credito',
 }
 </script>
