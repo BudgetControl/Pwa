@@ -98,7 +98,7 @@
           </div>
 
           <div class="flex-l">
-            <PayeeActionDropdown :entryId="entry.uuid" :index=i @deleteItem="deleteItemFromArray" />
+            <!-- <PayeeActionDropdown :entryId="entry.uuid" :index=i @deleteItem="deleteItemFromArray" /> -->
           </div>
 
         </div>
@@ -122,12 +122,12 @@
 </template>
 <script>
 
-import PayeeActionDropdown from "@/components/Dropdowns/PayeeActionDropdown.vue";
+//import PayeeActionDropdown from "@/components/Dropdowns/PayeeActionDropdown.vue";
 import ApiService from '../../../services/ApiService.vue';
 
 export default {
   components: {
-    PayeeActionDropdown
+    //PayeeActionDropdown
   },
   data() {
     return {
@@ -144,7 +144,6 @@ export default {
     toggleModal: function (i) {
       this.index = i
       this.showModal = !this.showModal;
-      this.name = this.entries[i].name
     },
     deleteItemFromArray(index) {
       this.entries.splice(index, 1);
