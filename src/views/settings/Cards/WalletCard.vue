@@ -228,7 +228,7 @@ export default {
                     this.modal.type = resp.type
                     this.modal.currency = resp.currency
                     this.modal.exclude_stats = resp.exclude_from_stats
-                    this.modal.installement = resp.installement_value
+                    this.modal.installement_value = resp.installement_value
                     this.modal.balance = resp.balance
                     this.modal.deleted = resp.deleted_at
                     this.modal.voucher_value = resp.voucher_value
