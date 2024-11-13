@@ -23,7 +23,7 @@
                       {{ $t('labels.incoming') }}
                     </a>
                   </li>
-                  <li class="nav-item" v-if="isModel === false">
+                  <li class="nav-item" v-if="isModel === false && isPlanned === false">
                     <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(3)"
                       v-bind:class="{ 'text-emerald-600 ': action.openTab !== 3, 'text-white bg-emerald-600': action.openTab === 3 }">
@@ -97,7 +97,7 @@
           </div>
 
           <div class="px-2 py-2 w-full lg:w-12/12" v-if="action.openTab == 4">
-            <input v-model="debit_name" type="text" placeholder="{{ $t('labels.debit_name') }}" id="debit"
+            <input v-model="debit_name" type="text" :placeholder="$t('labels.debit_name')" id="debit"
               v-if="debit == 'njn76298fm'"
               class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
@@ -377,9 +377,6 @@ export default {
     };
   },
   mounted() {
-
-    console.debug('Is planned ', this.isPlanned)
-
     this.action.openTab = 1
     this.action.isMobile = this.checkIfMobile()
     this.action.showDetails = !this.action.isMobile
@@ -406,14 +403,6 @@ export default {
     const settings = LocalStorageService.get("settings")
     this.currency = settings.currency_id
     this.payment_type = settings.payment_type_id
-
-    // get payee from qeury string
-    const urlParams = this.$route.query
-    const payee = urlParams.show
-
-    if (payee) {
-      this.toggleTabs(4)
-    }
 
   },
   methods: {
@@ -491,6 +480,10 @@ export default {
           _this.action.openTab = 3
         }
 
+        if (model.type == 'debit') {
+          _this.action.openTab = 4
+        }
+
         _this.type = model.type
         _this.category = model.sub_category.id
         _this.note = model.note
@@ -507,10 +500,9 @@ export default {
         _this.planned = model.planning
 
         if (model.type == 'debit') {
-          _this.action.openTab = 4
           _this.action.hidecategory = true
           _this.action.hidetransfer_to = true
-          _this.debit = model.payee.name
+          _this.debit = model.payee.id
           if (model.amount >= 0) {
             _this.action.debit_type = '+'
           }
@@ -607,7 +599,7 @@ export default {
         return false
       }
 
-      if (this.category == 0) {
+      if (this.category == 0 && this.type != "transfer" && this.type != "debit") {
         alert(this.$t('messages.validation.choose_category'), "error")
         return false
       }
@@ -789,15 +781,16 @@ export default {
           this.debit_name = null
           this.action.hidecategory = true
           this.action.hidetransfer_to = false
-          this.category = null
+          this.category = 0
           break;
         case 4:
         case 'debit':
           this.type = "debit"
           this.debit = 0
+          this.debit_name = null
           this.action.hidecategory = true
           this.action.hidetransfer_to = true
-          this.category = null
+          this.category = 0
           break;
         default:
 
