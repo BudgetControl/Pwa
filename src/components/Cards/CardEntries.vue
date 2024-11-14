@@ -75,9 +75,9 @@ export default {
         if (res.data.length > 0) {
           _this.$refs.entry.buildEntriesTable(res.data)
         }
-        
+
         if (this.$refs._paginator !== undefined) {
-          this.$refs._paginator.hasMorePage = currentPage < res.last_page 
+          this.$refs._paginator.hasMorePage = currentPage < res.last_page
         }
       })
 
@@ -95,7 +95,7 @@ export default {
 
       if (query.filter_date !== undefined) {
 
-        if(query.filer_date_start !== undefined) {
+        if (query.filer_date_start !== undefined) {
           filter += `&filters[date_time]=>=|${query.filter_date_start}`
         } else {
           filter += `&filters[date_time]=>=|${new Date().getFullYear()}-${new Date().getMonth() + 1}-01`
@@ -120,6 +120,10 @@ export default {
 
       if (query.filter_label !== undefined) {
         filter += `&filters[label]=${this.$route.query.filter_label}`
+      }
+
+      if (query.filter_payee !== undefined) {
+        filter += `&filters[payee]=${this.$route.query.filter_payee}`
       }
 
       if (filter != '') {

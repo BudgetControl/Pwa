@@ -69,8 +69,11 @@ export default {
   },
   methods: {
     goToRoute: function(i){
-      this.index = i
-      this.showModal = !this.showModal;
+      if(this.entries[i].type == 'model'){
+        this.$router.push({ name: 'entry', params: { filter_payee: this.entries[i].uuid } })
+      }
+
+      this.$router.push({ name: 'entry', params: { filter_wallet: this.entries[i].uuid } })
     },
     deleteItemFromArray(index) {
       this.entries.splice(index, 1);
@@ -103,7 +106,6 @@ export default {
           }
 
           this.entries.push(info)
-
 
         });
 
