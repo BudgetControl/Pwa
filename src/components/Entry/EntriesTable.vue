@@ -1,13 +1,20 @@
 <template>
     <div>
-        <div class="block w-full overflow-x-auto" id="entries-table" >
+        <div class="block w-full overflow-x-auto" id="entries-table">
 
             <div class="container px-4 mx-auto py-3 ">
                 <div class="flex items-center ps-3" v-if="isModel == false">
                     <input id="vue-checkbox-list" type="checkbox" v-model="action.show_planned" value="true"
                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                     <label for="vue-checkbox-list"
-                        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"> {{$t("labels.show_planned_entries")}}</label>
+                        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        {{ $t("labels.show_planned_entries") }}</label>
+                </div>
+            </div>
+
+            <div v-if="entries.length === 0">
+                <div class="text-center">
+                    <p class="text-blueGray-400 text-lg">{{ $t('labels.no_entries_found') }}</p>
                 </div>
             </div>
 
@@ -24,8 +31,9 @@
                     <div class="flex flex-wrap">
                         <div class="flex-l w-full px-4">
                             <span v-if="isModel == false" class="text-xs block text-emerald-500 rounded ">{{ entry.date
-                            }}</span>
-                            <span v-if="isModel == true" class="text-xs block uppercase font-bold rounded ">{{ entry.name }}</span>
+                                }}</span>
+                            <span v-if="isModel == true" class="text-xs block uppercase font-bold rounded ">{{
+                                entry.name }}</span>
                         </div>
                     </div>
                     <div class="flex">
@@ -35,7 +43,8 @@
                                     class="px-2 text-blueGray-700 rounded ">
                                     {{ entry.category.name }} </span></i>
                             <span class="text-xs rounded"
-                                :class="[entry.payee ? 'text-blueGray-900' : 'text-blueGray-400']">( {{ entry.wallet }} )
+                                :class="[entry.payee ? 'text-blueGray-900' : 'text-blueGray-400']">( {{ entry.wallet }}
+                                )
                                 {{
                                     entry.payee
                                 }}</span>
@@ -76,7 +85,7 @@
                         <div class="w-full px-4 flex-1 text-right">
                             <span class="text-xs mt-2 block text-blueGray-700 rounded ">
                                 <span v-if="entry.planned == true"
-                                    class="'text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1 bg-red-200">{{$t("labels.planned_entry")}}</span>
+                                    class="'text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1 bg-red-200">{{ $t("labels.planned_entry") }}</span>
                             </span>
                         </div>
                     </div>
@@ -176,7 +185,7 @@ export default {
                     const currency = r.currency
 
                     let formattedDate = null
-                    if(r.date_time != null) {
+                    if (r.date_time != null) {
                         const date_time = new Date(r.date_time)
                         formattedDate = date_time.toISOString().slice(0, 19).replace('T', ' ')
                     }
