@@ -69,11 +69,12 @@ export default {
   },
   methods: {
     goToRoute: function(i){
-      if(this.entries[i].type == 'model'){
-        this.$router.push({ name: 'entry', params: { filter_payee: this.entries[i].uuid } })
+      if(this.entries[i].type == 'debit'){
+        this.$router.push({ name: 'entries', query: { filter_payee: this.entries[i].uuid } })
+      } else {
+        this.$router.push({ name: 'entries', query: { filter_wallet: this.entries[i].uuid } })
       }
 
-      this.$router.push({ name: 'entry', params: { filter_wallet: this.entries[i].uuid } })
     },
     deleteItemFromArray(index) {
       this.entries.splice(index, 1);
@@ -103,6 +104,7 @@ export default {
             name: e.name,
             amount: totalamout,
             entry: e.debts.entries,
+            type: e.type
           }
 
           this.entries.push(info)
