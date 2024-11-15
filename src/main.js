@@ -85,14 +85,16 @@ import { Browser } from '@capacitor/browser';
 
 CapacitorApp.addListener('appUrlOpen', function (data) {
 
-  if (data.url.includes('/app-auth-token')) {
+  if (data.url.includes('/auth/callback')) {
     Browser.close();
 
     const url = new URL(data.url);
-    const token = url.searchParams.get('token');
-    console.log('Navigating to token route:', token);
-    router.push({ path: '/app/auth/token?token='+ token });
+    const code = url.searchParams.get('code');
 
+    console.debug('Navigating URL:', data.url);
+    console.debug('Navigating with code:', code);
+    console.debug('Navigating to:', '/app/auth/token/'+ code );
+    router.push({ path: '/app/auth/token/'+ code });
   }
 
 });
