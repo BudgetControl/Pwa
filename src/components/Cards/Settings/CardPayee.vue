@@ -87,7 +87,10 @@ export default {
 
           debitColor = "text-blueGray-500"
 
-          const totalamout = e.debts.balance
+          let totalamout = e.debts.balance
+          if(e.type == 'credit-card-revolving'){
+            totalamout = totalamout * -1
+          }
 
           if (totalamout < 0) {
             debitColor = "text-emerald-500"
@@ -97,18 +100,7 @@ export default {
             debitColor = "text-red-400"
           }
 
-          if(e.type == 'credit-card-revolving'){
 
-            if (totalamout > 0) {
-              debitColor = "text-emerald-500"
-            }
-
-            if (totalamout < 0) {
-              debitColor = "text-red-400"
-            }
-
-            totalamout = totalamout * -1
-          }
 
           let info = {
             uuid: e.uuid,
