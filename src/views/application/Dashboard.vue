@@ -35,7 +35,6 @@ import WidgetTable from "@/components/Charts/WidgetTable.vue";
 import LocalStorageService from "@/services/LocalStorageService.vue";
 import CardBudget from "@/components/Charts/WidgetBudget.vue";
 import WorkspaceService from "@/services/WorkspaceService.vue";
-import WorkspaceServiceVue from "@/services/WorkspaceService.vue";
 import AuthService from "@/services/AuthService.vue";
 import HeaderMenu from '@/components/Navbars/HeaderMenu.vue';
 import MenuButton from '@/components/GenericComponents/MenuButton.vue';
@@ -92,7 +91,6 @@ export default {
       }
 
       LocalStorageService.set('workspace', settings)
-      WorkspaceServiceVue.activeWorkspace(wsUuid)
 
     })
   },

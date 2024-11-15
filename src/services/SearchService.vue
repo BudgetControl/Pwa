@@ -1,7 +1,6 @@
 <script>
 import axios from 'axios';
 import LocalStorageService from './LocalStorageService.vue';
-
 const DOMAIN = process.env.VUE_APP_API_PATH_V2;
 
 const instance = axios.create({
@@ -24,7 +23,7 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (response) => {
-    const newAuthToken = response.headers('authorization').replace('Bearer ', '');
+    const newAuthToken = response.headers['authorization']?.replace('Bearer ', '');
     LocalStorageService.setToken(newAuthToken);
     return response;
   },
@@ -35,8 +34,8 @@ instance.interceptors.response.use(
 
     //if status code is 401 then logout
     if (error.response.status === 401) {
-      LocalStorageService.clearToken();
-      this.$router.push({ name: 'login' });
+      LocalStorageService.clear();
+      window.location.reload()
     }
 
     return Promise.reject(error);
