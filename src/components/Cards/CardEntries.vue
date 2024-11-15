@@ -69,35 +69,15 @@ export default {
     invoke() {
       let _this = this
 
-      const lastDayOfCurrentMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate()
-      let filter = `&filters[date_time]=<=|${new Date().getFullYear()}-${new Date().getMonth() + 1}-${lastDayOfCurrentMonth}T23:59:59`
-
-      if (this.$route.query.wallet !== undefined) {
-        filter += `&filters[account_id]=${this.$route.query.wallet}`
-      }
-
-      if (this.$route.query.category !== undefined) {
-        filter += `&filters[category_id]=${this.$route.query.category}`
-      }
-
-      if (this.$route.query.type !== undefined) {
-        filter += `&filters[type]=${this.$route.query.type}`
-      }
-
-      if (filter != '') {
-        this.action.reset = true
-      } else {
-        this.action.reset = false
-      }
-
       let currentPage = LocalStorageService.get('current_page') == null ? 1 : LocalStorageService.get('current_page')
-      ApiServiceVue.getEntry(currentPage, filter).then((res) => {
+      const filter = `?per_page=20&page=${currentPage}` + this.filterQueryString(this.$route.query)
+      ApiServiceVue.getEntry(filter).then((res) => {
         if (res.data.length > 0) {
           _this.$refs.entry.buildEntriesTable(res.data)
         }
-        
+
         if (this.$refs._paginator !== undefined) {
-          this.$refs._paginator.hasMorePage = currentPage < res.last_page 
+          this.$refs._paginator.hasMorePage = currentPage < res.last_page
         }
       })
 
@@ -108,7 +88,54 @@ export default {
       }).catch((error) => {
         console.error(error);
       })
-    }
+    },
+    filterQueryString(query) {
+      const lastDayOfCurrentMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate()
+      let filter = ''
+
+      if (query.filter_date !== undefined) {
+
+        if (query.filer_date_start !== undefined) {
+          filter += `&filters[date_time]=>=|${query.filter_date_start}`
+        } else {
+          filter += `&filters[date_time]=>=|${new Date().getFullYear()}-${new Date().getMonth() + 1}-01`
+        }
+        filter += `&filters[date_time]=<=|${query.filter_date}`
+
+      } else {
+        filter = `&filters[date_time]=<=|${new Date().getFullYear()}-${new Date().getMonth() + 1}-${lastDayOfCurrentMonth}T23:59:59`
+      }
+
+      if (query.filter_wallet !== undefined) {
+        filter += `&filters[account_id]=${this.$route.query.filter_wallet}`
+      }
+
+      if (query.filter_category !== undefined) {
+        filter += `&filters[category_id]=${this.$route.query.filter_category}`
+      }
+
+      if (query.filter_type !== undefined) {
+        filter += `&filters[type]=${this.$route.query.filter_type}`
+      }
+
+      if (query.filter_label !== undefined) {
+        filter += `&filters[label]=${this.$route.query.filter_label}`
+      }
+
+      if (query.filter_payee !== undefined) {
+        filter += `&filters[payee_id]=${this.$route.query.filter_payee}`
+      }
+
+      if (filter != '') {
+        this.action.reset = true
+      } else {
+        this.action.reset = false
+      }
+
+      console.debug('filter', filter)
+
+      return filter
+    },
   },
 };
 </script>

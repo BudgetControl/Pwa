@@ -144,6 +144,7 @@ const routes = [
 
       {
         path: "/app/entries",
+        name: 'entries',
         component: MyEntries,
       },
       {
