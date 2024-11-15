@@ -97,7 +97,7 @@ export default {
             debitColor = "text-red-400"
           }
 
-          if(this.entries[i].type == 'credit-card-revolving'){
+          if(e.type == 'credit-card-revolvin'){
 
             if (totalamout > 0) {
               debitColor = "text-emerald-500"
