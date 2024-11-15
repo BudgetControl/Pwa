@@ -22,6 +22,27 @@ instance.interceptors.request.use(
   }
 );
 
+instance.interceptors.response.use(
+  (response) => {
+    const newAuthToken = response.headers('authorization').replace('Bearer ', '');
+    LocalStorageService.setToken(newAuthToken);
+    return response;
+  },
+  (error) => {
+    console.error('API Error:', error.response ? error.response.data : error.message);
+
+    console.warn('An error occurred during the API request. Check the console for more details.');
+
+    //if status code is 401 then logout
+    if (error.response.status === 401) {
+      LocalStorageService.clearToken();
+      this.$router.push({ name: 'login' });
+    }
+
+    return Promise.reject(error);
+  }
+);
+
 async function expensesBarByCategory(data) {
   const config = {
     params: {

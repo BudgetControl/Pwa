@@ -30,6 +30,13 @@ instance.interceptors.response.use(
     console.error('API Error:', error.response ? error.response.data : error.message);
 
     console.warn('An error occurred during the API request. Check the console for more details.');
+
+    //if status code is 401 then logout
+    if (error.response.status === 401) {
+      LocalStorageService.clearToken();
+      this.$router.push({ name: 'login' });
+    }
+
     return Promise.reject(error);
   }
 );

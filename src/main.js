@@ -267,6 +267,7 @@ const routes = [
     children: [
       {
         path: "/app/auth/login",
+        name: "login",
         component: Login,
       },
       {
