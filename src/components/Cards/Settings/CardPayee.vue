@@ -97,6 +97,19 @@ export default {
             debitColor = "text-red-400"
           }
 
+          if(this.entries[i].type == 'credit-card-revolving'){
+
+            if (totalamout > 0) {
+              debitColor = "text-emerald-500"
+            }
+
+            if (totalamout < 0) {
+              debitColor = "text-red-400"
+            }
+
+            totalamout = totalamout * -1
+          }
+
           let info = {
             uuid: e.uuid,
             createdAt: e.createdAt,
