@@ -63,8 +63,8 @@ async function setEntry(type, data, isPlanned, uuid) {
   return response.data;
 }
 
-async function getEntry(page, filter) {
-  const response = await instance.get(`/api/entry?per_page=20&page=${page}${filter}`);
+async function getEntry(filter) {
+  const response = await instance.get(`/api/entry${filter}`);
   return response.data;
 }
 

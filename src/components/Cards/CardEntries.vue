@@ -68,10 +68,10 @@ export default {
   methods: {
     invoke() {
       let _this = this
-      const filter = this.filterQueryString(this.$route.query)
 
       let currentPage = LocalStorageService.get('current_page') == null ? 1 : LocalStorageService.get('current_page')
-      ApiServiceVue.getEntry(currentPage, filter).then((res) => {
+      const filter = `?per_page=20&page=${currentPage}` + this.filterQueryString(this.$route.query)
+      ApiServiceVue.getEntry(filter).then((res) => {
         if (res.data.length > 0) {
           _this.$refs.entry.buildEntriesTable(res.data)
         }
@@ -123,7 +123,7 @@ export default {
       }
 
       if (query.filter_payee !== undefined) {
-        filter += `&filters[payee]=${this.$route.query.filter_payee}`
+        filter += `&filters[payee_id]=${this.$route.query.filter_payee}`
       }
 
       if (filter != '') {
@@ -131,6 +131,9 @@ export default {
       } else {
         this.action.reset = false
       }
+
+      console.debug('filter', filter)
+
       return filter
     },
   },
