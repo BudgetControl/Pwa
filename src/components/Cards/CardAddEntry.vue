@@ -143,6 +143,16 @@
               </select>
           </div>
 
+           <div class="lg:w-6/12 px-2 py-2 w-full" v-if="isPlanned">
+              <span class="text-xs">{{ $t('labels.date_start') }}</span>
+              <VueDatePicker v-model="date"></VueDatePicker>
+            </div>
+
+            <div class="lg:w-6/12 px-2 py-2 w-full" v-if="isPlanned">
+              <span class="text-xs">{{ $t('labels.date_end') }}</span>
+              <VueDatePicker v-model="end_date_time"></VueDatePicker>
+            </div>
+
           <div class="lg:w-12/12 px-2 py-2 w-full">
             <div v-for="(item, i) in input.tags" :key="i">
               <span v-on:click="removeTag(item)"
@@ -194,7 +204,7 @@
 
         <div v-if="action.showDetails" class="flex flex-wrap py-3">
 
-            <div class="flex w-full mb-2" v-if="!isModel">
+            <div class="flex w-full mb-2" v-if="!isModel && !isPlanned">
               <VueDatePicker v-model="date"></VueDatePicker>
             </div>
 
