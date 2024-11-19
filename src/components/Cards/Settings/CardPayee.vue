@@ -41,7 +41,7 @@
 
           <ion-item-options>
             <ion-item-option @click=goToRoute(i) >SHOW</ion-item-option>
-            <ion-item-option  @click=archive(entry.uuid) color="danger">DELETE</ion-item-option>
+            <ion-item-option v-if="entry.type == 'debt'"  @click=archive(entry.uuid) color="danger">DELETE</ion-item-option>
           </ion-item-options>
         </ion-item-sliding>
 
