@@ -40,7 +40,7 @@
                         <div class="w-full px-4 flex-1">
                             <i v-on:click="$router.push(`/app/entries?filter_category=${entry.category.id}`)"
                                 :class="'block text-lightBlue-400 ' + entry.category.icon"> <span
-                                    class="px-2 text-blueGray-700 rounded ">
+                                    class="px-2  text-xs text-blueGray-700">
                                     {{ entry.category.name }} </span></i>
                             <span class="text-xs rounded"
                                 :class="[entry.payee ? 'text-blueGray-900' : 'text-blueGray-400']">( {{ entry.wallet }}

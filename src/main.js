@@ -1,8 +1,16 @@
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 import { createApp } from "vue";
 import { createWebHistory, createRouter } from "vue-router";
+import { IonicVue } from '@ionic/vue';
 
 // styles
+// Importa lo stile principale di Ionic
+import '@ionic/vue/css/core.css';         // Base styles
+// import '@ionic/vue/css/structure.css';    // Layout
+// import '@ionic/vue/css/typography.css';   // Font styles
+// import '@ionic/vue/css/ionic.bundle.css'; // Include only if necessary
+
+
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@/assets/styles/tailwind.css";
 import "@/assets/styles/custom.scss";
@@ -340,4 +348,5 @@ app.use(VueGtag, {
 // languages
 app.use(i18n)
 app.use(router)
+app.use(IonicVue)
 app.mount("#app")
