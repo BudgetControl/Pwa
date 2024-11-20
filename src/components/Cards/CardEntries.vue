@@ -77,7 +77,7 @@ export default {
     invoke() {
       let _this = this
 
-      let currentPage = LocalStorageService.get('current_page') == null ? 1 : LocalStorageService.get('current_page')
+      let currentPage = current_page ? 1 :current_page
       const filter = `?per_page=20&page=${currentPage}` + this.filterQueryString(this.$route.query)
       const headers = getHeaderTokens()
       const coreService = new CoreService(headers)
