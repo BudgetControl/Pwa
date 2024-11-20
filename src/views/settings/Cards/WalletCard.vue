@@ -250,7 +250,7 @@ export default {
                 return
             }
 
-            i(this.modal.type != 'credit-card-revolving') {
+            if(this.modal.type != 'credit-card-revolving') {
                 this.modal.installement = 0
             }
 
