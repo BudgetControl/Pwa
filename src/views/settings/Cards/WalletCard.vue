@@ -250,8 +250,8 @@ export default {
                 return
             }
 
-            if(this.modal.type == 'credit-card' || this.modal.type == 'credit-card-revolving') {
-                this.modal.installement = 1
+            i(this.modal.type != 'credit-card-revolving') {
+                this.modal.installement = 0
             }
 
             const data = {
