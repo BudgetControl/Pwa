@@ -229,8 +229,6 @@ export default {
     no_entries_found: 'No entries found',
     credit_card_installement: 'Credit card installment',
     choose_planned_type: 'Choose a planned type',
-    list_of_voices: 'List of voices',
-    no_voices_found: 'No voices found',
 };
 
 </script>
