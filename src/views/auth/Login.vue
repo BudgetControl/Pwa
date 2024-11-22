@@ -150,6 +150,7 @@ export default {
           })
 
         }).catch((err) => {
+          console.error(err)
           _this.show = false
 
           switch (err.response.data.code) {

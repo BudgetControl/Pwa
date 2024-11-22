@@ -18,79 +18,87 @@
                 </div>
             </div>
 
-            <div v-for="(entry, i) in entries" :key="i">
-                <div v-if="(entry.planned && action.show_planned) || (!entry.planned)"
-                    class="container px-4 mx-auto py-3 border border-solid border-blueGray-100 shadow" :class="[
-                        entry.payee
-                            ? 'bg-blueGray-200'
-                            : '',
-                        entry.transfer
-                            ? 'transfer-color'
-                            : ''
-                    ]">
-                    <div class="flex flex-wrap">
-                        <div class="flex-l w-full px-4">
-                            <span v-if="isModel == false" class="text-xs block text-emerald-500 rounded ">{{ entry.date
-                                }}</span>
-                            <span v-if="isModel == true" class="text-xs block uppercase font-bold rounded ">{{
-                                entry.name }}</span>
-                        </div>
-                    </div>
-                    <div class="flex">
-                        <div class="w-full px-4 flex-1">
-                            <i v-on:click="$router.push(`/app/entries?filter_category=${entry.category.id}`)"
-                                :class="'block text-lightBlue-400 ' + entry.category.icon"> </i> <span
-                                    class="px-2  text-xs text-blueGray-700 block">
-                                    {{ entry.category.name }} </span>
-                            <span class="text-xs rounded"
-                                :class="[entry.payee ? 'text-blueGray-900' : 'text-blueGray-400']">( {{ entry.wallet }}
-                                )
-                                {{
-                                    entry.payee
-                                }}</span>
-                        </div>
-                        <div class="w-full px-4 flex-1 text-right">
-                            <span v-on:click="$router.push(`/app/entries?filter_type=${entry.type_amount}`)"
-                                class="text-sm block text-blueGray-700 rounded amount">
-                                {{ entry.amount }} <i :class="'fas fa-circle ' + entry.color_amount + ' mr-2'"></i>
-                            </span>
-
-                        </div>
-                        <div class="flex-l">
-                            <EntryActionDropdown :entryId="entry.uuid" :type="isModel === true
-                                ? 'model'
-                                : 'entry'
-                                " :index=i @deleteItem="deleteItemFromArray" />
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap">
-                        <div class="flex-l w-full px-4">
-                            <span class="text-xs block text-blueGray-700 rounded ">{{ entry.note }}</span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="w-full px-4 flex-1">
-                            <span class="text-xs mt-2 text-blueGray-700 rounded ">
-                                <span v-for="(label, i) in entry.labels"
-                                    v-on:click="$router.push(`/app/entries?filter_label=${label.id}`)" :key="i"
-                                    class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
-                                    :style="'color: #fff; background-color: ' + label.color">{{
-                                        label.name
+            <ionic-list v-for="(entry, i) in entries" :key="i">
+                <ion-item-sliding>
+                    <ion-item>
+                        <div v-if="(entry.planned && action.show_planned) || (!entry.planned)"
+                            class="container px-4 mx-auto py-3 border border-solid border-blueGray-100 shadow" :class="[
+                                entry.type == 'debits'
+                                    ? 'bg-blueGray-200'
+                                    : '',
+                                entry.type == 'transfer'
+                                    ? 'transfer-color'
+                                    : ''
+                            ]">
+                            <div class="flex flex-wrap">
+                                <div class="flex-l w-full px-4">
+                                    <span v-if="isModel == false" class="text-xs block text-emerald-500 rounded ">{{
+                                        entry.date
                                     }}</span>
-                            </span>
-                        </div>
+                                    <span v-if="isModel == true" class="text-xs block uppercase font-bold rounded ">{{
+                                        entry.name }}</span>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="w-full px-4 flex-1">
+                                    <i v-on:click="$router.push(`/app/entries?filter_category=${entry.category.id}`)"
+                                        :class="'block text-lightBlue-400 ' + entry.category.icon"> </i> <span
+                                        class="px-2  text-xs text-blueGray-700 block">
+                                        {{ entry.category.name }} </span>
+                                    <span class="text-xs rounded"
+                                        :class="[entry.payee ? 'text-blueGray-900' : 'text-blueGray-400']">( {{
+                                            entry.wallet }}
+                                        )
+                                        {{
+                                            entry.payee
+                                        }}</span>
+                                </div>
+                                <div class="w-full px-4 flex-1 text-right">
+                                    <span v-on:click="$router.push(`/app/entries?filter_type=${entry.type_amount}`)"
+                                        class="text-sm block text-blueGray-700 rounded amount">
+                                        {{ entry.amount }} <i
+                                            :class="'fas fa-circle ' + entry.color_amount + ' mr-2'"></i>
+                                    </span>
+                                </div>
+                            </div>
 
-                        <div class="w-full px-4 flex-1 text-right">
-                            <span class="text-xs mt-2 block text-blueGray-700 rounded ">
-                                <span v-if="entry.planned == true"
-                                    class="'text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1 bg-red-200">{{ $t("labels.planned_entry") }}</span>
-                            </span>
+                            <div class="flex flex-wrap">
+                                <div class="flex-l w-full px-4">
+                                    <span class="text-xs block text-blueGray-700 rounded ">{{ entry.note }}</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="w-full px-4 flex-1">
+                                    <span class="text-xs mt-2 text-blueGray-700 rounded ">
+                                        <span v-for="(label, i) in entry.labels"
+                                            v-on:click="$router.push(`/app/entries?filter_label=${label.id}`)" :key="i"
+                                            class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                                            :style="'color: #fff; background-color: ' + label.color">{{
+                                                label.name
+                                            }}</span>
+                                    </span>
+                                </div>
+
+                                <div class="w-full px-4 flex-1 text-right">
+                                    <span class="text-xs mt-2 block text-blueGray-700 rounded ">
+                                        <span v-if="entry.planned == true"
+                                            class="'text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1 bg-red-200">{{
+                                                $t("labels.planned") }}</span>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </ion-item>
+
+                    <ion-item-options>
+                        <ion-item-option @click=editEntry(i)>{{ $t('labels.edit') }}</ion-item-option>
+                        <ion-item-option @click=deleteEntry(i) color="danger">{{ $t('labels.delete')
+                            }}</ion-item-option>
+                    </ion-item-options>
+
+                </ion-item-sliding>
+            </ionic-list>
 
         </div>
     </div>
@@ -101,8 +109,8 @@ import angular from "@/assets/img/angular.jpg";
 import sketch from "@/assets/img/sketch.jpg";
 import react from "@/assets/img/react.jpg";
 import vue from "@/assets/img/react.jpg";
-import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue";
 import ApiService from '../../services/ApiService.vue';
+import { IonItemOptions, IonItemOption } from '@ionic/vue';
 
 export default {
     props: {
@@ -118,7 +126,8 @@ export default {
         }
     },
     components: {
-        EntryActionDropdown
+      IonItemOptions,
+      IonItemOption,
     },
     data() {
         return {
@@ -145,89 +154,133 @@ export default {
         };
     },
     methods: {
-        deleteItemFromArray(index) {
-            this.entries.splice(index, 1);
-        },
-        getwallet() {
-            let _this = this
+        /**
+         * 
+         * @param index 
+         * deleteItemFromArray
+         */
+        deleteEntry(index) {
 
-            ApiService.wallets().then((res) => {
-                let data = res
-                data.forEach(function (r) {
-                    _this.input.wallet.push(r)
-                })
-            })
-        },
-        buildEntriesTable(res) {
-            this.entries = []
+            const confirm = window.confirm("Are you sure you want to delete this entry?")
 
-            let data = res
-
-            let _this = this
-            if (data !== undefined) {
-                data.forEach(function (r) {
-
-                    let labels = []
-                    r.labels.forEach((l) => {
-                        if (l.name != "") {
-                            labels.push(
-                                {
-                                    id: l.id,
-                                    name: l.name,
-                                    color: l.color
-                                }
-                            )
-                        }
-                    });
-
-
-
-                    const currency = r.currency
-
-                    let formattedDate = null
-                    if (r.date_time != null) {
-                        const date_time = new Date(r.date_time)
-                        formattedDate = date_time.toISOString().slice(0, 19).replace('T', ' ')
-                    }
-
-                    let info = {
-                        uuid: r.uuid,
-                        id: r.uuid,
-                        date: formattedDate,
-                        amount: parseFloat(r.amount).toFixed(2) + " " + currency.icon,
-                        color_amount: r.amount <= 0 ? "text-red-500" : "text-emerald-500",
-                        type_amount: r.amount <= 0 ? "expenses" : "incoming",
-                        wallet: r.wallet.name,
-                        note: r.note,
-                        planned: r.planned == 0 || r.planned == undefined ? false : true,
-                        category: {
-                            id: r.sub_category.id,
-                            icon: r.sub_category.category.icon,
-                            name: _this.$t('app.' + r.sub_category.slug)
-                        },
-                        labels: labels,
-                        payee: null,
-                        transfer: r.type == 'transfer' ? true : false,
-                        type: r.type,
-                        name: r.name
-                    }
-
-                    if (r.transfer_to != null) {
-                        info.wallet = r.wallet.name + " <-> " + r.transfer_to.name
-                    }
-
-                    if (r.payee != null) {
-                        info.payee = "[ debit: " + r.payee.name + "]"
-                    }
-
-                    _this.entries.push(info)
-                })
+            if (!confirm) {
+                return
             }
 
-        },
+            this.dropdownPopoverShow = false;
+            let isPlanned = this.queryParams == 'planned=true'
 
-    }
-};
+            const entryId = this.entries[index].id
+
+            if (this.isModel) {
+                    ApiService.deleteModel(entryId).then(() => {
+                        this.$emit('deleteItem', index)
+                    }).catch((error) => {
+                        console.error(error);
+                    })
+                } else {
+                    ApiService.deleteEntry(entryId, isPlanned).then(() => {
+                        this.$emit('deleteItem', index)
+                    }).catch((error) => {
+                        console.error(error);
+                    })
+                }
+
+                this.entries.splice(index, 1);
+                const itemSliding = document.querySelector('ion-item-sliding');
+                if (itemSliding) {
+                    itemSliding.close();
+                }
+
+            },
+            /**
+             * edit entry
+             */
+            editEntry(index) {
+                const type = this.isModel ? 'model' : 'entry'
+                const entryId = this.entries[index].id
+                this.$router.push({ path: `/app/${type}/${entryId}`})
+            },
+            getwallet() {
+                let _this = this
+
+                ApiService.wallets().then((res) => {
+                    let data = res
+                    data.forEach(function (r) {
+                        _this.input.wallet.push(r)
+                    })
+                })
+            },
+            buildEntriesTable(res) {
+                this.entries = []
+
+                let data = res
+
+                let _this = this
+                if (data !== undefined) {
+                    data.forEach(function (r) {
+
+                        let labels = []
+                        r.labels.forEach((l) => {
+                            if (l.name != "") {
+                                labels.push(
+                                    {
+                                        id: l.id,
+                                        name: l.name,
+                                        color: l.color
+                                    }
+                                )
+                            }
+                        });
+
+
+
+                        const currency = r.currency
+
+                        let formattedDate = null
+                        if (r.date_time != null) {
+                            const date_time = new Date(r.date_time)
+                            formattedDate = date_time.toISOString().slice(0, 19).replace('T', ' ')
+                        }
+
+                        let info = {
+                            uuid: r.uuid,
+                            id: r.uuid,
+                            date: formattedDate,
+                            amount: parseFloat(r.amount).toFixed(2) + " " + currency.icon,
+                            color_amount: r.amount <= 0 ? "text-red-500" : "text-emerald-500",
+                            type_amount: r.amount <= 0 ? "expenses" : "incoming",
+                            wallet: r.wallet.name,
+                            note: r.note,
+                            planned: r.planned == 0 || r.planned == undefined ? false : true,
+                            category: {
+                                id: r.sub_category.id,
+                                icon: r.sub_category.category.icon,
+                                name: _this.$t('app.' + r.sub_category.slug)
+                            },
+                            labels: labels,
+                            payee: null,
+                            transfer: r.type == 'transfer' ? true : false,
+                            type: r.type,
+                            name: r.name
+                        }
+
+                        if (r.transfer_to != null) {
+                            info.wallet = r.wallet.name + " <-> " + r.transfer_to.name
+                        }
+
+                        if (r.payee != null) {
+                            info.payee = "[ debit: " + r.payee.name + "]"
+                        }
+
+                        _this.entries.push(info)
+                    })
+                }
+
+            },
+
+        }
+    };
 </script>
 
 <style scoped>
