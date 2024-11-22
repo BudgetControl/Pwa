@@ -87,7 +87,7 @@ export default {
       const token = this.$route.params.token
       const _this = this
       const header = getHeaderTokens()
-      const authService = new AuthService(header)
+      const authService = new AuthService()
 
       this.show = false
       this.error = false

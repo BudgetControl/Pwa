@@ -161,7 +161,7 @@ export default {
         })
 
         const headers = getHeaderTokens()
-            const chartService = new ChartService(headers)
+            const chartService = new ChartService()
             chartService.incomingExpensesLine(data).then((resp) => {
 
           resp.series.forEach(element => {

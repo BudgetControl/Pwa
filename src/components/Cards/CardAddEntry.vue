@@ -303,7 +303,6 @@ import { useRefreshStore } from '../../storage/refresh';
 import AlertModal from '../GenericComponents/AlertModal.vue';
 import libs from '../../Libs.vue';
 import CoreService from '../../services/core.service';
-import { getHeaderTokens } from '../../utils/headers-token';
 
 export default {
   props: {
@@ -327,13 +326,12 @@ export default {
   setup() {
     const settingsStore = useAppSettings()
     const settings = settingsStore.get()
-    
+
     const refreshApp = useRefreshStore()
-    const headers = getHeaderTokens()
-    const apiService = new CoreService(headers)
+    const apiService = new CoreService()
 
     return {
-      settings, refreshApp, apiService, headers
+      settings, refreshApp, apiService
     }
   },
   data() {
@@ -401,6 +399,7 @@ export default {
     };
   },
   mounted() {
+    const settings = this.settings
     this.action.openTab = 1
     this.action.isMobile = this.checkIfMobile()
     this.action.showDetails = !this.action.isMobile
@@ -424,8 +423,9 @@ export default {
       this.getDebit()
     }
 
-    this.currency = this.settings.currency_id
-    this.payment_type = this.settings.payment_type_id
+    console.debug("settings", settings.currency_id)
+    this.currency = settings.currency_id
+    this.payment_type = settings.payment_type_id
 
   },
   methods: {
@@ -735,7 +735,7 @@ export default {
             _this.action.dateUpdated = false
             _this.exclude_from_stats = false
 
-          refreshApp.set(true)
+          this.refreshApp.set(true)
           this.time()
 
           alert(this.$t('labels.entry_saved'), "success")

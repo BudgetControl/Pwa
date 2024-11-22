@@ -78,7 +78,7 @@ export default {
         init: function () {
             const _this = this
             const headers = getHeaderTokens()
-            const chartService = new ChartService(headers)
+            const chartService = new ChartService()
             chartService.getBudgets().then((resp) => {
                 resp.forEach((data) => {
                     switch (data.planning) {

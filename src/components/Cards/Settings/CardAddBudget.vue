@@ -61,7 +61,7 @@ export default {
     },
     setup() {
         const headers = getHeaderTokens()
-        const coreService = new CoreService(headers)
+        const coreService = new CoreService()
         const appSettings = useAppSettings()
 
         return {
@@ -112,13 +112,13 @@ export default {
             this.openTab = tabNumber
         },
         deleteBudget() {
-            const chartService = new ChartService(headers)
+            const chartService = new ChartService()
             chartService.deleteBudget(this.id)
             this.$router.push({ path: '/app/budgets' })
         },
         getBudget() {
             const _this = this
-            const chartService = new ChartService(headers)
+            const chartService = new ChartService()
             chartService.getBudget(this.id).then((resp) => {
                 _this.data.name = resp.name
                 _this.data.note = resp.description
@@ -194,7 +194,7 @@ export default {
                     "emails": this.data.emails,
                 }
 
-                const chartService = new ChartService(headers)
+                const chartService = new ChartService()
                 chartService.createBudget(data).then(() => {
                     //return
                     alert("Budget created", 'success')
@@ -221,7 +221,7 @@ export default {
                     "notification": this.data.notification,
                     "emails": this.data.emails,
                 }
-                const chartService = new ChartService(headers)
+                const chartService = new ChartService()
                 chartService.updateBudget(data, this.id).then(() => {
                     //return
                     alert("Budget updated", 'success')

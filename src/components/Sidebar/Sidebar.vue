@@ -191,6 +191,7 @@ export default {
       this.collapseShow = classes;
     },
     workspaceList: function () {
+      const settings = this.appSettings.settings
       const _this = this
       const header = getHeaderTokens()
       const workspaceService = new WorkspaceService(header)
@@ -198,13 +199,13 @@ export default {
         response.forEach((e) => {
           _this.workspaces.push(e)
         })
-        _this.workspace = this.appSettings.getWorkspace()
+        _this.workspace = settings.current_ws.uuid
       })
     },
     changeWorkspace() {
       const _this = this
       const header = getHeaderTokens()
-      const authService = new AuthService(header)
+      const authService = new AuthService()
 
       header.workspace.uuid = _this.workspace
       authService.userInfo().then(() => {

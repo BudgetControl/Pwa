@@ -131,7 +131,7 @@ export default {
       const confirm_password = this.confirm_password
       const _this = this
       const header = getHeaderTokens()
-      const authService = new AuthService(header)
+      const authService = new AuthService()
 
       this.show = true
       this.error = false

@@ -1,10 +1,11 @@
 import ApiService from './api.service';
 import {useAppSettings } from '../storage/settings.store';
-import Auth from '../layouts/Auth.vue';
+import { useAuthStore } from '../storage/auth-token.store';
 
 class AuthService extends ApiService {
 
-    async login(email: string, password: string) {
+    async login(email: string, password: string)
+    {
         const response = await this.instance.post('/api/auth/authenticate', {
             email: email,
             password: password
@@ -38,7 +39,7 @@ class AuthService extends ApiService {
     async logout() {
         const response = await this.instance.get('/api/auth/logout', {
             headers: {
-                'Authorization': `Bearer ${this.tokens.auth.token}`
+                'Authorization': `Bearer ${this.tokens.authToken.token}`
             }
         });
         return response.data;
@@ -63,15 +64,15 @@ class AuthService extends ApiService {
         //retrive access token header
         const response = await this.instance.get('/api/auth/check', {
             headers: {
-                'Authorization': `Bearer ${this.tokens.auth.token}`,
-                'X-BC-Token': this.tokens.bcAuth.token
+                'Authorization': `Bearer ${this.tokens.authToken.token}`,
+                'X-BC-Token': this.tokens.bcAuthToken.token
             }
         });
 
         if (response.status === 200) {
             // Accedi all'header X-Custom-Header dalla risposta
             const access_token = response.data.token;
-            this.tokens.auth.token = access_token;
+            this.tokens.authToken.token = access_token;
         }
 
         return response;
@@ -88,9 +89,11 @@ class AuthService extends ApiService {
         provider: string,
         code: string
     }) {
+        const appSettings = useAppSettings();
         //retrive access token header
         const response = await this.instance.get(`/api/auth/authenticate/token/${provider}?code=${provider.code}`);
 
+        appSettings.settings.workspaces = response.data.workspaces;
         return response.data;
     }
 
@@ -121,12 +124,19 @@ class AuthService extends ApiService {
     }
 
     async userInfo() {
-        const user = useAppSettings();
+        const authStore = useAuthStore();
+        const appSettings = useAppSettings();
+
         //retrive access token header
         const response = await this.instance.get('/api/auth/user-info');
 
-        this.tokens.bcAuth.token = response.data.token;
-        user.settings.user = response.data.userInfo;
+        authStore.bcAuthToken = {token: response.data.token, timestamp: new Date().toISOString()};
+        appSettings.settings.user = response.data.userInfo
+        // let workspaceSettings = response.data.userInfo.workspace_settings
+
+        //FIXME: this is a temporary solution
+        appSettings.settings.currency_id = 2
+        appSettings.settings.payment_type_id = 2
 
         return response.data;
     }
@@ -137,8 +147,8 @@ class AuthService extends ApiService {
         //retrive access token header
         const response = await this.instance.get(`/api/auth/user-info/by-email/${email}`, {
             headers: {
-                'Authorization': `Bearer ${this.tokens.auth.token}`,
-                'X-BC-Token': this.tokens.bcAuth.token
+                'Authorization': `Bearer ${this.tokens.authToken.token}`,
+                'X-BC-Token': this.tokens.bcAuthToken.token
             }
         });
         return response.data;

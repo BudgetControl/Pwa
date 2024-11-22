@@ -121,7 +121,7 @@ export default {
         let values = []
 
         const headers = getHeaderTokens()
-        const chartService = new ChartService(headers)
+        const chartService = new ChartService()
         chartService.expensesBarByCategory(data).then((resp) => {
           resp.bar.forEach(element => {
 

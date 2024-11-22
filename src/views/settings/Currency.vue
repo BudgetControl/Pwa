@@ -51,7 +51,7 @@ export default {
     },
     setup() {
         const headers = getHeaderTokens()
-        const apiService = new CoreService(headers)
+        const apiService = new CoreService()
         const appSettings = useAppSettings()
         const settings = {
             currency_id : appSettings.get().currency_id
