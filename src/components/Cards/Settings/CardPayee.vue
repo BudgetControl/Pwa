@@ -40,8 +40,8 @@
           </ion-item>
 
           <ion-item-options>
-            <ion-item-option @click=goToRoute(i) >SHOW</ion-item-option>
-            <ion-item-option v-if="entry.type == 'debt'"  @click=archive(entry.uuid) color="danger">DELETE</ion-item-option>
+            <ion-item-option @click=goToRoute(i) >{{ $t('labels.open') }}</ion-item-option>
+            <ion-item-option v-if="entry.type == 'debt'"  @click=archive(entry.uuid) color="danger">{{ $t('labels.delete') }}</ion-item-option>
           </ion-item-options>
         </ion-item-sliding>
 
@@ -127,6 +127,10 @@
       archive(uuid) {
         ApiService.deleteDebt(uuid).then(() => {
           this.getPlannedEntries()
+          const itemSliding = document.querySelector('ion-item-sliding');
+          if (itemSliding) {
+              itemSliding.close();
+          }
         }).catch((error) => {
           console.error(error);
         })

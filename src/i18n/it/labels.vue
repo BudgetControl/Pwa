@@ -228,6 +228,7 @@ export default {
     no_entries_found: 'Nessuna voce trovata',
     credit_card_installement: 'Rata della carta di credito',
     choose_planned_type: 'Scegli un tipo pianificato',
-    planned_entry: "Pianificato",
+    planned_entry: "Pianificati",
+    open: 'Apri',
 }
 </script>

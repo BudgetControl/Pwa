@@ -229,5 +229,6 @@ export default {
     no_entries_found: 'No se encontraron entradas',
     credit_card_installement: 'Cuota de tarjeta de crédito',
     choose_planned_type: 'Elige un tipo planificado',
+    open: 'Abrir',
 }
 </script>
