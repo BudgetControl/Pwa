@@ -132,8 +132,8 @@ class AuthService extends ApiService {
 
         authStore.bcAuthToken = {token: response.data.token, timestamp: new Date().toISOString()};
         appSettings.settings.user = response.data.userInfo
-        let workspaceSettings = response.data.userInfo.workspace_settings
 
+        const workspaceSettings = response.data.userInfo.workspace_settings
         appSettings.settings.currency_id = workspaceSettings.settings.data.currency_id
         appSettings.settings.payment_type_id = workspaceSettings.settings.data.payment_type_id
 
