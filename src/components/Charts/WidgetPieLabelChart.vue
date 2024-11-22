@@ -104,7 +104,7 @@ export default {
         }]
 
         const headers = getHeaderTokens()
-            const chartService = new ChartService(headers)
+            const chartService = new ChartService()
             chartService.expensesLabelApplePie(date).then((resp) => {
 
           const datasetApplePie = {

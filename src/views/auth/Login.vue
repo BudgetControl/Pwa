@@ -96,14 +96,12 @@ import AuthService from "../../services/auth.service";
 import loading from 'vue-full-loading'
 import VerifyEmailButton from "../../components/Auth/VerifyEmailButton.vue";
 import { useAuthStore } from "../../storage/auth-token.store";
-import { getHeaderTokens } from "../../utils/headers-token";
 import { useAppSettings } from "../../storage/settings.store";
 
 export default {
   setup() {
     const authStore = useAuthStore()
     const appSettings = useAppSettings()
-    appSettings.settings = appSettings.get()
 
     return {
       authStore,
@@ -129,27 +127,16 @@ export default {
       let email = this.email;
       let password = this.password;
       const _this = this
-      const header = getHeaderTokens()
-      const authService = new AuthService(header)
+      const authService = new AuthService()
 
       this.show = true
       this.error = false
       await authService.login(email, password).then((response) => {
-
+        const settings = this.appSettings.settings
         //save token in local storage
-        header.auth.token = response.token;
-        const ws = this.appSettings.settings.current_ws ? this.appSettings.settings.current_ws.uuid : null
-
-        let currentWsUuid = response.workspaces[0].uuid //default workspace is first occurence
-        response.workspaces.forEach(workspace => {
-          if (workspace.uuid === ws) {
-            currentWsUuid = ws
-          }
-        });
-
-        if(ws === null || ws.uuid !== currentWsUuid) {
-          this.appSettings.settings.current_ws = response.workspaces.find(ws => ws === response.workspaces[0])
-        }
+        this.authStore.authToken = { token: response.token, timestamp: new Date().toISOString()};
+        settings.workspaces = response.workspaces
+        settings.current_ws = response.workspaces[0]
 
         authService.userInfo().then(() => {
           _this.$router.push({ path: '/app/dashboard' })
@@ -161,6 +148,8 @@ export default {
 
       }).catch((err) => {
         _this.show = false
+
+        console.error(err) //FIXME: remove this line
 
         switch (err.response.data.code) {
           case 'EML_NaN':

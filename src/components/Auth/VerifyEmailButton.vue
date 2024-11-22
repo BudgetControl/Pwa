@@ -26,7 +26,7 @@ export default {
             const email = this.email
             this.message = true
             const header = getHeaderTokens()
-            const authService = new AuthService(header)
+            const authService = new AuthService()
 
             authService.verify(email) // Adjust the URL as needed
                 .catch(error => {

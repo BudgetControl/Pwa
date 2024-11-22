@@ -13,7 +13,7 @@ export default {
         async deleteAllData() {
             const _this = this
             const header = getHeaderTokens()
-            const authService= new AuthService(header)
+            const authService= new AuthService()
             if(confirm("Are you sure you want to delete user ? All data and your user wil be deleted")) {
                 authService.deleteUser()
                 .then(() => {

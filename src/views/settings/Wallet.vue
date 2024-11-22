@@ -79,7 +79,7 @@ export default {
     },
     setup() {
         const headers = getHeaderTokens()
-        const apiService = new CoreService(headers)
+        const apiService = new CoreService()
 
         return {
             apiService

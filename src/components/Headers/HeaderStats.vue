@@ -74,8 +74,6 @@ export default {
   },
   setup() {
     const refreshApp = useRefreshStore()
-    refreshApp.state = refreshApp.get()
-
     const headers = getHeaderTokens()
 
     return {
@@ -119,14 +117,13 @@ export default {
       planned: 0
     }
   },
-  watch: {
-    "refreshApp.state": function () {
-        this.update()
-    },
-  },
   mounted() {
+    this.refreshApp.$subscribe((mutation, state) => {
+  if (state.state) {
+    this.update();
+  }
+});
     this.update()
-    let _this = this
   },
   methods: {
     update() {

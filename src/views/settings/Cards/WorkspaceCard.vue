@@ -84,22 +84,13 @@
 <script>
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
-import AuthService from "../../../services/auth.service";
 import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
-import { getHeaderTokens } from '@/utils/headers-token';
-import { useAppSettings } from '../../../storage/settings.store';
 import WorkspaceService from '../../../services/workspace.service';
+import CoreService from '../../../services/core.service';
 
 export default {
     components: {
         HeaderButton, AlertModal
-    },
-    setup() {
-        const tokens = getHeaderTokens()
-        const appSettings = useAppSettings()
-        return {
-            tokens, appSettings
-        }
     },
     data() {
         return {
@@ -130,13 +121,13 @@ export default {
     methods: {
         saveModal() {
             if(this.$route.params.id) {
-                const workspaceService = new WorkspaceService(this.tokens)
+                const workspaceService = new WorkspaceService()
                 workspaceService.update(this.$route.params.id, this.modal).then(() => {
                     alert(this.$t('messages.workspace.updated'))
                     this.$router.push('/app/settings/workspace')
                 })
             } else {
-                const workspaceService = new WorkspaceService(this.tokens)
+                const workspaceService = new WorkspaceService()
                 workspaceService.add(this.modal).then(() => {
                     alert(this.$t('messages.workspace.added'))
                     this.$router.push('/app/settings/workspace')
@@ -144,19 +135,19 @@ export default {
             }
         },
         getCurrencies() {
-            const authService = new AuthService(this.tokens)
-            authService.currencies().then((res) => {
+            const coreService = new CoreService()
+            coreService.currencies().then((res) => {
                 this.currencies = res
             })
         },
         getPaymentTypes() {
-            const authService = new AuthService(this.tokens)
-            authService.paymentstype().then((res) => {
+            const coreService = new CoreService()
+            coreService.paymentstype().then((res) => {
                 this.payment_types = res
             })
         },
         getWorkspaceDetail() {
-            const workspaceService = new WorkspaceService(this.tokens)
+            const workspaceService = new WorkspaceService()
                 workspaceService.get(this.$route.params.id).then((res) => {
                 this.modal.name = res.workspace.name
                 this.modal.currency = res.settings.data.currencyId
@@ -175,10 +166,10 @@ export default {
         share() {
             //check if is a valid email
             const email = this.shareEmail
-            const authService = new AuthService(this.tokens)
+            const coreService = new CoreService()
 
             if (this.shareEmail.length > 0 && this.shareEmail.includes('@') && this.shareEmail.includes('.') && this.shareEmail.length > 5) {
-                AuthServiceVue.userInfoByEmail(email).then((res) => {
+                coreService.userInfoByEmail(email).then((res) => {
                     this.modal.shareWith.push(res)
                 }).catch(() => {
                     alert(this.$t('labels.user_not_found'), 'error')

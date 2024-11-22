@@ -27,7 +27,6 @@ import axios from 'axios'
 import Paginator from "../GenericComponents/Paginator.vue";
 import { useAppSettings } from '../../storage/settings.store';
 import CoreService from "../../services/core.service";
-import { getHeaderTokens } from "../../utils/headers-token";
 
 export default {
   props: {
@@ -41,7 +40,7 @@ export default {
   },
   setup() {
     const appSettings = useAppSettings()
-    const current_page = appSettings.get().current_page
+    const current_page = appSettings.settings.current_page
 
     return {
       appSettings, current_page
@@ -77,10 +76,9 @@ export default {
     invoke() {
       let _this = this
 
-      let currentPage = current_page ? 1 :current_page
+      let currentPage = this.current_page === undefined ? 1 : this.current_page
       const filter = `?per_page=20&page=${currentPage}` + this.filterQueryString(this.$route.query)
-      const headers = getHeaderTokens()
-      const coreService = new CoreService(headers)
+      const coreService = new CoreService()
       coreService.getEntry(filter).then((res) => {
         if (res.data.length > 0) {
           _this.$refs.entry.buildEntriesTable(res.data)

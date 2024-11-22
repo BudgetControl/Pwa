@@ -34,8 +34,6 @@ export default {
   },
   setup() {
     const authStore = useAuthStore();
-    authStore.authToken = authStore.get();
-
     const router = useRouter();
 
     if (!authStore.authToken) {
