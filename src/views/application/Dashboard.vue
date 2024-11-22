@@ -11,6 +11,10 @@
       
       <AverageStats />
 
+      <div class="mt-4">
+          <FilterBar />
+      </div>
+
       <div class="flex flex-wrap mt-4">
           <CardLine_IncomingExpensesChart />
       </div>
@@ -40,6 +44,7 @@ import HeaderMenu from '@/components/Navbars/HeaderMenu.vue';
 import MenuButton from '@/components/GenericComponents/MenuButton.vue';
 import AverageStats from "../../components/Charts/AverageStats.vue";
 import WidgetBarChartVue from '../../components/Charts/WidgetBarChart.vue';
+import FilterBar from "../../components/Navbars/FilterBar.vue";
 
 export default {
   name: "dashboard-page",
@@ -50,7 +55,8 @@ export default {
     HeaderMenu,
     MenuButton,
     AverageStats,
-    WidgetBarChartVue
+    WidgetBarChartVue,
+    FilterBar
   },
   data() {
     return {
