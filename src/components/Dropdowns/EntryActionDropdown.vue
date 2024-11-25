@@ -11,18 +11,18 @@
 
       <router-link :to="`/app/${type}/${entryId}?${queryParams}`" v-slot="{ href, navigate, isActive }">
         <a :href="href" @click="navigate"
-          class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700" :class="[
+          class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700 uppercase text-xs" :class="[
             isActive
               ? 'text-emerald-500 hover:text-emerald-600'
               : 'text-blueGray-700 hover:text-blueGray-500',
           ]">
-          {{ $t('labels.edit') }}
+          <i class="text-xs fa-solid fa-arrow-right-from-bracket"></i> {{ $t('labels.edit') }}
         </a>
       </router-link>
 
       <a href="javascript:void(0)" v-on:click="deleteEntry()"
-        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">
-        {{ $t('labels.delete') }}
+        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700 uppercase text-xs">
+        <i @click=archive(entry.uuid) class="text-xs fa-solid fa-trash text-red-500"></i> {{ $t('labels.delete') }} 
       </a>
     </div>
   </div>
