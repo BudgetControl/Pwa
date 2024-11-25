@@ -27,103 +27,149 @@
               {{ entry.name }}</span>
           </div>
 
-          <div v-on:click="goToRoute(i)" class="w-full px-4 flex-1 text-right">
+          <div>
             <span class="text-sm block text-blueGray-700 rounded ">
               {{ entry.amount }} <i :class="'fas fa-circle ' + entry.color_amount + ' mr-2'"></i>
             </span>
           </div>
+
+          <div v-on:click="goToRoute(i)">
+            <i class="text-xs fa-solid fa-arrow-right-from-bracket"></i>
+          </div>
+
+          <div>
+            <i @click=archive(entry.uuid) class="text-xs fa-solid fa-trash text-red-500"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+
+    <div v-if="creditCards.length > 0">
+      <div class="container px-4 mx-auto py-3">
+        <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">{{ $t('labels.list_of_all_credit_cards') }}
+        </h3>
+      </div>
+    </div>
+
+    <div class="container px-4 mx-auto py-3 border-blueGray-100" v-for="(entry, i) in this.creditCards" :key="i">
+
+      <div class="container px-4 mx-auto">
+        <div class="flex flex-wrap">
+          <div class="flex-l w-full px-4">
+            <span class="text-xs block text-emerald-500 rounded ">{{ entry.createdAt }}</span>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap">
+          <div class="w-full px-4 flex-1">
+            <span class="text-xs block rounded text-blueGray-900">
+              {{ entry.name }}</span>
+          </div>
+
+          <div class="w-full px-4 flex-1 text-right">
+            <span class="text-sm block text-blueGray-700 rounded ">
+              {{ entry.amount }} <i :class="'fas fa-circle ' + entry.color_amount + ' mr-2'"></i>
+            </span>
+          </div>
+
+          <div v-on:click="goToRoute(i)">
+            <i class="text-xs fa-solid fa-arrow-right-from-bracket"></i>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
-
 </template>
 <script>
 
 import ApiService from '../../../services/ApiService.vue';
 
 export default {
-data() {
-  return {
-    entries: [],
-    index: null,
-    showModal: false,
-    name: null
-  }
-},
-mounted() {
-  this.getPlannedEntries()
-},
-methods: {
-  goToRoute: function (i) {
-    if (this.entries[i].type == 'debit') {
-      this.$router.push({ name: 'entries', query: { filter_payee: this.entries[i].uuid } })
-    } else {
-      this.$router.push({ name: 'entries', query: { filter_wallet: this.entries[i].uuid } })
+  data() {
+    return {
+      entries: [],
+      creditCards: [],
+      index: null,
+      showModal: false,
+      name: null
     }
-
   },
-  deleteItemFromArray(index) {
-    this.entries.splice(index, 1);
+  mounted() {
+    this.getPlannedEntries()
   },
-  getPlannedEntries() {
-    ApiService.debtsList().then((resp) => {
-      let debitColor = "text-red-500"
+  methods: {
+    goToRoute: function (i) {
+      if (this.entries[i].type == 'debit') {
+        this.$router.push({ name: 'entries', query: { filter_payee: this.entries[i].uuid } })
+      } else {
+        this.$router.push({ name: 'entries', query: { filter_wallet: this.entries[i].uuid } })
+      }
 
-      resp.forEach(e => {
+    },
+    getPlannedEntries() {
+      ApiService.debtsList().then((resp) => {
+        let debitColor = "text-red-500"
 
-        debitColor = "text-blueGray-500"
+        resp.forEach(e => {
 
-        let totalamout = e.debts.balance
-        if (e.type == 'credit-card-revolving') {
-          totalamout = totalamout * -1
-        }
+          debitColor = "text-blueGray-500"
 
-        if (totalamout < 0) {
-          debitColor = "text-emerald-500"
-        }
+          let totalamout = e.debts.balance
 
-        if (totalamout > 0) {
-          debitColor = "text-red-400"
-        }
+          if (totalamout < 0) {
+            debitColor = "text-emerald-500"
+          }
 
+          if (totalamout > 0) {
+            debitColor = "text-red-400"
+          }
 
 
-        let info = {
-          uuid: e.uuid,
-          createdAt: e.createdAt,
-          color_amount: debitColor,
-          name: e.name,
-          amount: totalamout,
-          entry: e.debts.entries,
-          type: e.type
-        }
 
-        this.entries.push(info)
+          let info = {
+            uuid: e.uuid,
+            createdAt: e.createdAt,
+            color_amount: debitColor,
+            name: e.name,
+            amount: totalamout,
+            entry: e.debts.entries,
+            type: e.type
+          }
 
-      });
+          // create two different of gourps
+          if (e.type == 'credit-card-revolving') {
+            this.creditCards.push(info)
+          } else {
+            this.entries.push(info)
+          }
 
-    }).catch((error) => {
-      console.error(error);
-    })
-  },
-  archive(uuid) {
-    ApiService.deleteDebt(uuid).then(() => {
-      this.getPlannedEntries()
-    }).catch((error) => {
-      console.error(error);
-    })
+
+        });
+
+      }).catch((error) => {
+        console.error(error);
+      })
+    },
+    archive(uuid) {
+      ApiService.deleteDebt(uuid).then(() => {
+        this.getPlannedEntries()
+      }).catch((error) => {
+        console.error(error);
+      })
+    }
   }
-}
 }
 </script>
 
 <style>
 .opacity {
-opacity: 0.3;
+  opacity: 0.3;
 }
 
 .left {
-margin-left: 25%;
+  margin-left: 25%;
 }
 </style>

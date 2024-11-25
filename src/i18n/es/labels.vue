@@ -51,7 +51,7 @@ export default {
     edit: 'Editar',
     restore: 'Restaurar',
     reasume_of_all_entries: 'Resumen de todas las entradas',
-    list_of_all_payees: 'Lista de todos los beneficiarios',
+    list_of_all_payees: 'Lista de todos los debedores',
     forget_debit: 'Olvidar débito',
     date_start: 'Fecha de inicio',
     debit_name: 'Nombre del débito',
@@ -229,5 +229,6 @@ export default {
     no_entries_found: 'No se encontraron entradas',
     credit_card_installement: 'Cuota de tarjeta de crédito',
     choose_planned_type: 'Elige un tipo planificado',
+    list_of_all_credit_cards: 'Lista de todas las tarjetas de crédito',
 }
 </script>
