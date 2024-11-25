@@ -51,7 +51,7 @@ export default {
     type: {
       required: false,
       type: String,
-      default: "emtry"
+      default: "entry"
     }
   },
   data() {
@@ -64,12 +64,19 @@ export default {
     toggleDropdown: function (event) {
       event.preventDefault();
       if (this.dropdownPopoverShow) {
-        this.dropdownPopoverShow = false;
+      this.dropdownPopoverShow = false;
       } else {
-        this.dropdownPopoverShow = true;
-        createPopper(this.$refs.btnDropdownRef, this.$refs.popoverDropdownRef, {
-          placement: "bottom-start",
-        });
+      this.dropdownPopoverShow = true;
+      createPopper(this.$refs.btnDropdownRef, this.$refs.popoverDropdownRef, {
+        placement: "right",
+      });
+      document.addEventListener('click', this.handleClickOutside);
+      }
+    },
+    handleClickOutside(event) {
+      if (this.$refs.popoverDropdownRef && !this.$refs.popoverDropdownRef.contains(event.target) && !this.$refs.btnDropdownRef.contains(event.target)) {
+      this.dropdownPopoverShow = false;
+      document.removeEventListener('click', this.handleClickOutside);
       }
     },
     deleteEntry() {
@@ -77,23 +84,22 @@ export default {
       let isPlanned = this.queryParams == 'planned=true'
 
       switch (this.type) {
-        case 'planned_entry':
-        case 'entry':
-          ApiService.deleteEntry(this.entryId, isPlanned).then(() => {
-            this.$emit('deleteItem', this.index)
-          }).catch((error) => {
-            console.error(error);
-          })
-          break;
-        case 'model':
-          ApiService.deleteModel(this.entryId).then(() => {
-            this.$emit('deleteItem', this.index)
-          }).catch((error) => {
-            console.error(error);
-          })
-          break;
+      case 'planned_entry':
+      case 'entry':
+        ApiService.deleteEntry(this.entryId, isPlanned).then(() => {
+        this.$emit('deleteItem', this.index)
+        }).catch((error) => {
+        console.error(error);
+        })
+        break;
+      case 'model':
+        ApiService.deleteModel(this.entryId).then(() => {
+        this.$emit('deleteItem', this.index)
+        }).catch((error) => {
+        console.error(error);
+        })
+        break;
       }
-
     }
   }
 };

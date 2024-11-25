@@ -27,18 +27,18 @@
               {{ entry.name }}</span>
           </div>
 
+
           <div>
             <span class="text-sm block text-blueGray-700 rounded ">
               {{ entry.amount }} <i :class="'fas fa-circle ' + entry.color_amount + ' mr-2'"></i>
             </span>
           </div>
 
-          <div v-on:click="goToRoute(i)">
-            <i class="text-xs fa-solid fa-arrow-right-from-bracket"></i>
-          </div>
-
           <div>
-            <i @click=archive(entry.uuid) class="text-xs fa-solid fa-trash text-red-500"></i>
+            <EntryActionDropdown :entryId="entry.uuid" :type="isModel === true
+              ? 'model'
+              : 'entry'
+              " :index=i @deleteItem="deleteItemFromArray" />
           </div>
         </div>
       </div>
@@ -68,14 +68,14 @@
               {{ entry.name }}</span>
           </div>
 
-          <div class="w-full px-4 flex-1 text-right">
+          <div class="px-4 flex text-right">
             <span class="text-sm block text-blueGray-700 rounded ">
               {{ entry.amount }} <i :class="'fas fa-circle ' + entry.color_amount + ' mr-2'"></i>
             </span>
           </div>
 
-          <div v-on:click="goToRoute(i)">
-            <i class="text-xs fa-solid fa-arrow-right-from-bracket"></i>
+          <div v-on:click="goToRouteCreditCard(i)" class="flex text-right">
+            <i class="text-xs fa-solid fa-arrow-right-from-bracket py-1"></i>
           </div>
 
         </div>
@@ -86,6 +86,7 @@
 <script>
 
 import ApiService from '../../../services/ApiService.vue';
+import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue";
 
 export default {
   data() {
@@ -97,17 +98,18 @@ export default {
       name: null
     }
   },
+  components: {
+    EntryActionDropdown
+  },
   mounted() {
     this.getPlannedEntries()
   },
   methods: {
     goToRoute: function (i) {
-      if (this.entries[i].type == 'debit') {
-        this.$router.push({ name: 'entries', query: { filter_payee: this.entries[i].uuid } })
-      } else {
-        this.$router.push({ name: 'entries', query: { filter_wallet: this.entries[i].uuid } })
-      }
-
+      this.$router.push({ name: 'entries', query: { filter_payee: this.entries[i].uuid } })
+    },
+    goToRouteCreditCard: function (i) {
+      this.$router.push({ name: 'entries', query: { filter_wallet: this.creditCards[i].uuid } })
     },
     getPlannedEntries() {
       ApiService.debtsList().then((resp) => {
@@ -126,8 +128,6 @@ export default {
           if (totalamout > 0) {
             debitColor = "text-red-400"
           }
-
-
 
           let info = {
             uuid: e.uuid,
