@@ -35,7 +35,7 @@
 import loading from 'vue-full-loading'
 import { useAppSettings } from '../../storage/settings.store';
 import AuthService from "../../services/auth.service";
-import { getHeaderTokens } from '../../utils/headers-token';
+
 import { useAuthStore } from '../../storage/auth-token.store';
 
 
@@ -44,7 +44,7 @@ export default {
     loading
   },
   setup() {
-    const headers = getHeaderTokens()
+    
     const appSettings = useAppSettings()
     const headerToken = useAuthStore()
 

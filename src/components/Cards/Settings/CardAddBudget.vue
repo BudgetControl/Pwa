@@ -51,7 +51,7 @@ import { useAppSettings } from '../../../storage/settings.store';
 import MenuButton from '../../GenericComponents/MenuButton.vue';
 import HeaderMenu from '../../Navbars/HeaderMenu.vue';
 import CoreService from '../../../services/core.service';
-import { getHeaderTokens } from '../../../utils/headers-token';
+
 import Setting from '../../Budget/Setting.vue';
 import EntryList from '../../Budget/EntryList.vue';
 
@@ -60,7 +60,7 @@ export default {
         MenuButton, HeaderMenu, Setting, EntryList
     },
     setup() {
-        const headers = getHeaderTokens()
+
         const coreService = new CoreService()
         const appSettings = useAppSettings()
 

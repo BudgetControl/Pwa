@@ -20,9 +20,8 @@
   </div>
 </template>
 <script>
-import Chart from "chart.js";
+import { Chart } from "chart.js";
 import ChartService from "@/services/chart.service";
-import { getHeaderTokens } from "../../utils/headers-token";
 
 export default {
   props: {
@@ -120,7 +119,6 @@ export default {
         let colors = []
         let values = []
 
-        const headers = getHeaderTokens()
         const chartService = new ChartService()
         chartService.expensesBarByCategory(data).then((resp) => {
           resp.bar.forEach(element => {

@@ -7,8 +7,7 @@
 </template>
   
 <script>
-import { AuthService } from '../../services/auth.service';
-import { getHeaderTokens } from '../../utils/headers-token';
+import AuthService from '../../services/auth.service';
 
 export default {
     data() {
@@ -25,7 +24,6 @@ export default {
         async verify() {
             const email = this.email
             this.message = true
-            const header = getHeaderTokens()
             const authService = new AuthService()
 
             authService.verify(email) // Adjust the URL as needed

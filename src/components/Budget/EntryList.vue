@@ -11,7 +11,7 @@
 
 <script>
 import BudgetService from '../../services/budget.service';
-import { getHeaderTokens } from '../../utils/headers-token';
+
 import EntriesTable from '../Entry/EntriesTable.vue';
 import Budget from '../../components/Budget/Budget.vue';
 
@@ -27,7 +27,7 @@ export default {
         }
     },
     setup() {
-        const headers = getHeaderTokens()
+
         const apiService = new BudgetService(headers)
 
         return {

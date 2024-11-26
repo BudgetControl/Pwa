@@ -112,7 +112,7 @@ import DeleteButton from "../../components/Auth/DeleteButton.vue";
 import { useAppSettings } from '../../storage/settings.store';
 import Avatar from "vue-boring-avatars";
 import AuthService from "../../services/auth.service";
-import { getHeaderTokens } from '../../utils/headers-token';
+
 import StatsService from '../../services/stats.service';
 import CoreService from "../../services/core.service";
 
@@ -168,7 +168,7 @@ export default {
       _this.user.name = resp.name
       _this.user.email = resp.email
 
-      const headers = getHeaderTokens()
+      
       const statsService = new StatsService(headers)
       statsService.health().then(resp => {
         _this.user.wallet.health = resp.total.toFixed(2)

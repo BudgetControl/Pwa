@@ -141,8 +141,6 @@ class AuthService extends ApiService {
     }
 
     async userInfoByEmail(email) {
-        const user = useAppSettings();
-
         //retrive access token header
         const response = await this.instance.get(`/api/auth/user-info/by-email/${email}`, {
             headers: {

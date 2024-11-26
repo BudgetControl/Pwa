@@ -47,7 +47,7 @@
 <script>
 import ChartService from '@/services/chart.service'
 import Budget from '@/components/Budget/Budget.vue'
-import { getHeaderTokens } from '@/utils/headers-token';
+
 
 
 export default {
@@ -79,7 +79,7 @@ export default {
     methods: {
         init: function () {
             const _this = this
-            const headers = getHeaderTokens()
+    
             const chartService = new ChartService()
             chartService.getBudgets().then((resp) => {
                 resp.forEach((data) => {

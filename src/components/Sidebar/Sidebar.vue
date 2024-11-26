@@ -166,7 +166,6 @@ import LogoutButton from "../Auth/LogoutButton.vue";
 import { useAppSettings } from '../../storage/settings.store';
 import EyeButton from "@/components/GenericComponents/EyeButton.vue";
 import AuthService from "../../services/auth.service";
-import { getHeaderTokens } from "../../utils/headers-token";
 import WorkspaceService from "../../services/workspace.service";
 
 export default {

@@ -592,10 +592,8 @@ export default {
     },
     setModel() {
       const label = labels(this)
-      const modelId = this.action.modelId
 
       this.validateBefore()
-
       let data = {
         name: this.name,
         amount: this.amount,

@@ -16,7 +16,6 @@
   import Sidebar from "@/components/Sidebar/Sidebar.vue";
   import HeaderStats from "@/components/Headers/HeaderStats.vue";
   import FooterAdmin from "@/components/Footers/FooterAdmin.vue";
-  import { getHeaderTokens } from "../utils/headers-token";
   
   export default {
     name: "admin-layout",

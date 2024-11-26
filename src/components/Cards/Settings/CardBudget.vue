@@ -59,7 +59,6 @@
 
 import { useAppSettings } from '../../../storage/settings.store';
 import ChartService from '@/services/chart.service'
-import { getHeaderTokens } from '@/utils/headers-token';
 import Budget from '@/components/Budget/Budget.vue'
 
 export default {
@@ -103,7 +102,6 @@ export default {
         },
         init: function () {
             const _this = this
-            const headers = getHeaderTokens()
             const chartService = new ChartService()
             chartService.getBudgets().then((resp) => {
                 resp.forEach((data) => {

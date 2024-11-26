@@ -29,14 +29,14 @@
 <script>
 import CardStats from '@/components/Cards/CardStats.vue';
 import StatsService from '../../services/stats.service';
-import { getHeaderTokens } from '../../utils/headers-token';
+
 
 export default {
     components: {
         CardStats
     },
     setup() {
-        const headers = getHeaderTokens()
+
         const statsService = new StatsService(headers)
 
         return {

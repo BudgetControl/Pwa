@@ -5,7 +5,7 @@
   
 <script>
 import { AuthService } from '../../services/auth.service';
-import { getHeaderTokens } from '../../utils/headers-token';
+
 
 export default {
     methods: {

@@ -69,7 +69,6 @@
 
 <script>
 import ChartService from '@/services/chart.service'
-import { getHeaderTokens } from '@/utils/headers-token';
 
 export default {
   props: {
@@ -133,9 +132,8 @@ export default {
         end: year + "/" + month + "/31"
       }]
 
-      const headers = getHeaderTokens()
-            const chartService = new ChartService()
-            chartService.expensesLabelCategory(data).then((resp) => {
+        const chartService = new ChartService()
+        chartService.expensesLabelCategory(data).then((resp) => {
 
         resp.rows.forEach(element => {
 

@@ -37,7 +37,7 @@ import HeaderButton from '@/components/Button/HeaderButton.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { useAppSettings } from '../../storage/settings.store';
 import ChartService from '@/services/chart.service';
-import { getHeaderTokens } from '../../utils/headers-token';
+
 
 export default {
     components: {
@@ -77,7 +77,7 @@ export default {
         },
         init: function () {
             const _this = this
-            const headers = getHeaderTokens()
+    
             const chartService = new ChartService()
             chartService.getBudgets().then((resp) => {
                 resp.forEach((data) => {

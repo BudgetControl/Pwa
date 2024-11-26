@@ -1,5 +1,4 @@
 const DOMAIN = process.env.VUE_APP_API_PATH_V2;
-import { Workspace } from '../types/workspace.type';
 import { useAuthStore } from '../storage/auth-token.store';
 import axios from 'axios';
 import { AuthToken } from '../types/auth-token.type';

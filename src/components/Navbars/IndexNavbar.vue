@@ -87,7 +87,6 @@
 
 <script>
 import IndexDropdown from "@/components/Dropdowns/IndexDropdown.vue";
-import { getHeaderTokens } from "../../utils/headers-token";
 
 export default {
   data() {

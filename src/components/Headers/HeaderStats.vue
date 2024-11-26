@@ -66,7 +66,6 @@ import CardStats from "@/components/Cards/CardStats.vue";
 import CardWallet from "@/components/Cards/CardWallet.vue";
 import { useRefreshStore } from "../../storage/refresh";
 import StatsService from '../../services/stats.service';
-import { getHeaderTokens } from "../../utils/headers-token";
 
 export default {
   components: {
@@ -74,7 +73,7 @@ export default {
   },
   setup() {
     const refreshApp = useRefreshStore()
-    const headers = getHeaderTokens()
+    
 
     return {
       refreshApp, headers
