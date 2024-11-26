@@ -187,8 +187,9 @@ export default {
         inputChanged(value) {
             this.activeNames = value;
         },
-        archiveWallet() {
-            if (window.confirm(this.$t('messages.wallet.are_you_sure'))) {
+        async archiveWallet() {
+            const userConfirmed = await window.confirm(this.$t('messages.wallet.are_you_sure'));
+            if (userConfirmed) {
                 ApiService.deleteWallet(this.$route.params.id)
                 alert(this.$t('messages.wallet.archived'), "success")
                 this.$router.push({ path: '/app/settings/wallet' })

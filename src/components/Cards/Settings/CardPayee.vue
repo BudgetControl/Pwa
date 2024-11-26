@@ -156,15 +156,15 @@ export default {
             this.entries.push(info)
           }
 
-
         });
 
       }).catch((error) => {
         console.error(error);
       })
     },
-    archive(uuid,index) {
-      if(window.confirm(this.$t('messages.archive_debit'))) {
+    async archive(uuid,index) {
+      const userConfirmed = await window.confirm(this.$t('messages.archive_debit'));
+      if (userConfirmed) {
         ApiService.deleteDebt(uuid)
         this.entries.splice(index, 1);
       }
