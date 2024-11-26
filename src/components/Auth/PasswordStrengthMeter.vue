@@ -34,7 +34,7 @@ export default {
         'w-2 bg-red-300',      // 1
         'w-3 bg-orange-500',      // 2
         'w-4 bg-emerald-500',       // 3
-        'w-5 bg-lightBlue-500'        // 4
+        'w-5 bg-sky-500'        // 4
       ]
     }
   },

@@ -12,7 +12,7 @@
           <div class="min-w px-2">
             <router-link to="/app/entries" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
-                <card-stats :statSubtitle="$t('labels.wallet')" :statTitle="wallet.statTitle + ' €'" statIconColor="bg-lightBlue-500" />
+                <card-stats :statSubtitle="$t('labels.wallet')" :statTitle="wallet.statTitle + ' €'" statIconColor="bg-sky-500" />
               </a>
             </router-link>
           </div>
@@ -40,7 +40,7 @@
                 <card-stats :statSubtitle="$t('labels.incoming')" :statTitle="incoming.statTitle + ' €'"
                   :statArrow="incoming.statArrow" :statPercent="incoming.statPercent"
                   :statPercentColor="incoming.statPercentColor" statDescripiron="Last month" statIconName="fas fa-coins"
-                  statIconColor="bg-lightBlue-500" />
+                  statIconColor="bg-sky-500" />
               </a>
             </router-link>
           </div>

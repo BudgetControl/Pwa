@@ -9,7 +9,7 @@
         <div class="px-2 w-full">
             <card-stats :statSubtitle="$t('labels.average_incoming')"
                 :statTitle="`${stats.averageIncoming.statTitle} €`" statDescripiron="Last month"
-                statIconName="fas fa-regular fa-money-bill" statIconColor="bg-lightBlue-500" />
+                statIconName="fas fa-regular fa-money-bill" statIconColor="bg-sky-500" />
         </div>
 
         <div class="px-2 w-full">

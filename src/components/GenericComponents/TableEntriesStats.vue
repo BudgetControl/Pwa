@@ -7,19 +7,19 @@
         <thead>
           <tr>
             <th
-              class="px-6 bg-blueGray-100 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              class="px-6 bg-slate-100 text-slate-500 align-middle border border-solid border-slate-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
               {{ $t('labels.name') }}
             </th>
             <th
-              class="px-6 bg-blueGray-100 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              class="px-6 bg-slate-100 text-slate-500 align-middle border border-solid border-slate-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
               {{ $t('labels.amount') }}
             </th>
             <th
-              class="px-6 bg-blueGray-100 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              class="px-6 bg-slate-100 text-slate-500 align-middle border border-solid border-slate-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
               {{ $t('labels.amount_before') }}
             </th>
             <th
-              class="px-6 bg-blueGray-100 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              class="px-6 bg-slate-100 text-slate-500 align-middle border border-solid border-slate-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
               {{ $t('labels.bounce_rate') }}
             </th>
           </tr>
@@ -27,18 +27,18 @@
         <tbody>
           <tr>
             <td
-              class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 uppercase font-semibold bg-blueGray-50">
+              class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 uppercase font-semibold bg-slate-50">
               {{ $t('labels.incoming') }}</td>
             <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-blueGray-50">
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-slate-50">
               {{ elements.stats.incoming.now }}
             </td>
             <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-blueGray-50">
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-slate-50">
               {{ elements.stats.incoming.before }}
             </td>
             <td
-              class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-blueGray-50">
+              class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-slate-50">
               <i class="fas mr-4" :class="[elements.stats.incoming.bounce_rate > 0 ? 'fa-arrow-up text-emerald-500' : 'fa-arrow-down text-red-500']
                 "></i>
               {{ elements.stats.incoming.bounce_rate }}%
@@ -63,18 +63,18 @@
           <tr><td colspan="4" > <hr/> </td></tr>
           <tr>
             <td
-              class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 uppercase font-semibold bg-blueGray-50">
+              class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 uppercase font-semibold bg-slate-50">
               {{ $t('labels.expenses') }}</td>
             <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-blueGray-50">
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-slate-50">
               {{ elements.stats.expenses.now }}
             </td>
             <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-blueGray-50">
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-slate-50">
               {{ elements.stats.expenses.before }}
             </td>
             <td
-              class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-blueGray-50">
+              class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-slate-50">
               <i class="fas mr-4" :class="[elements.stats.expenses.bounce_rate < 0 ? 'fa-arrow-down text-emerald-500' : 'fa-arrow-up text-red-500']
                 "></i>
               {{ elements.stats.expenses.bounce_rate }}%

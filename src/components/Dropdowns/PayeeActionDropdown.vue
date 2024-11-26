@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a class="text-blueGray-500 py-1 px-3" href="#pablo" ref="btnDropdownRef" v-on:click="toggleDropdown($event)">
+    <a class="text-slate-500 py-1 px-3" href="#pablo" ref="btnDropdownRef" v-on:click="toggleDropdown($event)">
       <i :class="'fas ' + icon"></i>
     </a>
     <div ref="popoverDropdownRef"
@@ -10,7 +10,7 @@
       }">
 
       <a href="javascript:void(0)" v-on:click="deleteEntry()"
-        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">
+        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700">
         {{ $t('labels.forget_debit')}}
       </a>
     </div>

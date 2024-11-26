@@ -3,18 +3,18 @@
         <div class="container x-4 mx-auto py-3">
 
             <div class="container px-4 mx-auto py-3">
-                <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">{{ $t('labels.list_of_all_budgets') }} </h3>
+                <h3 class="text-slate-400 text-sm mt-3 mb-6 font-bold uppercase">{{ $t('labels.list_of_all_budgets') }} </h3>
             </div>
 
             <div
                 v-if="budgets.week.length == 0 && budgets.month.length == 0 && budgets.year.length == 0 && budgets.custom.length == 0">
                 <div class="text-center">
-                    <p class="text-blueGray-400 text-lg">{{ $t('labels.no_budgets_found') }}</p>
+                    <p class="text-slate-400 text-lg">{{ $t('labels.no_budgets_found') }}</p>
                 </div>
             </div>
             <!--content-->
             <div class="border p-2 mt-2" v-if="budgets.week.length != 0">
-                <span class="text-xs font-semibold inline-block text-blueGray-400 ">
+                <span class="text-xs font-semibold inline-block text-slate-400 ">
                     {{ $t('labels.weekly') }}
                 </span>
 
@@ -25,7 +25,7 @@
 
             <div class="border p-2 mt-2" v-if="budgets.month.length != 0">
 
-                <span class="text-xs font-semibold inline-block text-blueGray-400 ">
+                <span class="text-xs font-semibold inline-block text-slate-400 ">
                     {{ $t('labels.monthly') }}
                 </span>
 
@@ -35,7 +35,7 @@
 
 
             <div class="border p-2 mt-2 mb-2" v-if="budgets.year.length != 0">
-                <span class="text-xs font-semibold inline-block text-blueGray-400 ">
+                <span class="text-xs font-semibold inline-block text-slate-400 ">
                     {{ $t('labels.yearly') }}
                 </span>
 
@@ -44,7 +44,7 @@
             </div>
 
             <div class="border p-2 mt-2 mb-2" v-if="budgets.custom.length != 0">
-                <span class="text-xs font-semibold inline-block text-blueGray-400 ">
+                <span class="text-xs font-semibold inline-block text-slate-400 ">
                     {{ $t('labels.recursive') }}
                 </span>
 

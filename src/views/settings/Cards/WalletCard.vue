@@ -1,5 +1,5 @@
 <template>
-    <section class="relative py-16 bg-blueGray-200">
+    <section class="relative py-16 bg-slate-200">
         <div class="container mx-auto px-4">
             <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
                 <div
@@ -12,15 +12,15 @@
 
                         <!-- Regular Input -->
                         <div class="mb-3 pt-0">
-                            <span class="text-xs text-blueGray-400">{{ $t('labels.wallet_name') }}</span>
+                            <span class="text-xs text-slate-400">{{ $t('labels.wallet_name') }}</span>
                             <input type="text" placeholder="Wallet name" v-model="modal.name"
-                                class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
+                                class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border border-slate-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                         </div>
 
                         <div class="mb-3 pt-0">
-                            <span class="text-xs text-blueGray-400">{{ $t('labels.currency') }}</span>
+                            <span class="text-xs text-slate-400">{{ $t('labels.currency') }}</span>
                             <select
-                                class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                class="w-full border-0 px-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 v-model="modal.currency">
                                 <option value="0">{{ $t('labels.choose_currency') }}</option>
                                 <option v-for="(item, k) in form.currencies" :key="k" :value="item.id">{{
@@ -29,9 +29,9 @@
                         </div>
 
                         <div class="mb-3 pt-0">
-                            <span class="text-xs text-blueGray-400">{{ $t('labels.wallet_type') }}</span>
+                            <span class="text-xs text-slate-400">{{ $t('labels.wallet_type') }}</span>
                             <select
-                                class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                class="w-full border-0 px-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 v-model="modal.type">
                                 <option value="0">{{ $t('labels.choose_wallet_type') }}</option>
                                 <option v-for="(item, k) in form.type" :key="k" :value="item">{{ $t('app.bank_accounts.' + item) }}
@@ -41,21 +41,21 @@
 
                         <div class="mb-3 pt-0"
                             v-if="modal.type == 'credit-card' || modal.type == 'credit-card-revolving'">
-                            <span class="text-xs text-blueGray-400">{{ $t('labels.closing_account_statement') }}</span>
+                            <span class="text-xs text-slate-400">{{ $t('labels.closing_account_statement') }}</span>
                             <VueDatePicker v-model="modal.closingAccountDate" ></VueDatePicker>
                         </div>
 
                         <div class="mb-3 pt-0"
                             v-if="modal.type == 'credit-card' || modal.type == 'credit-card-revolving'">
-                            <span class="text-xs text-blueGray-400">{{ $t('labels.payment_deadline') }}</span>
+                            <span class="text-xs text-slate-400">{{ $t('labels.payment_deadline') }}</span>
                             <VueDatePicker v-model="modal.invoiceDate" ></VueDatePicker>
                         </div>
 
                         <div class="mb-3 pt-0"
                             v-if="modal.type == 'credit-card' || modal.type == 'credit-card-revolving'">
-                            <span class="text-xs text-blueGray-400">{{ $t('labels.account_payment') }}</span>
+                            <span class="text-xs text-slate-400">{{ $t('labels.account_payment') }}</span>
                             <select v-model="modal.accountPayment" id="account" 
-                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                                 <option value="-1">{{ $t('labels.choose_wallet_account') }}</option>
                                 <option v-for="item in wallets" :key="item.id" :value="item.id">{{ item.name }}
                                 </option>
@@ -64,38 +64,38 @@
 
                         <div class="mb-3 pt-0"
                             v-if="modal.type == 'credit-card-revolving'">
-                            <span class="text-xs text-blueGray-400">{{ $t('labels.credit_card_installement') }}</span>
+                            <span class="text-xs text-slate-400">{{ $t('labels.credit_card_installement') }}</span>
                             <input type="text" placeholder="500.00 €" v-model="modal.installement_value"
-                                class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
+                                class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border border-slate-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                         </div>
 
                         <div class="mb-3 pt-0" v-if="modal.type == 'voucher'">
-                            <span class="text-xs text-blueGray-400">{{ $t('labels.ticket_value') }}</span>
+                            <span class="text-xs text-slate-400">{{ $t('labels.ticket_value') }}</span>
                             <input type="text" placeholder="10.00 €" v-model="modal.voucher_value"
-                                class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
+                                class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border border-slate-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                         </div>
 
                         <div class="mb-3 pt-0">
                             <label for="exclude_stats">
                                 <input v-model="modal.exclude_stats" type="checkbox" class="p-1 border rounded "
-                                    id="exclude_stats" :value="true" checked> <span class="text-xs text-blueGray-400">{{ $t('labels.exclude_from_stats') }}</span>
+                                    id="exclude_stats" :value="true" checked> <span class="text-xs text-slate-400">{{ $t('labels.exclude_from_stats') }}</span>
                             </label>
                         </div>
 
                         <div class="mb-3 pt-0">
-                            <span class="text-xs text-blueGray-400">{{ $t('labels.wallet_color') }}</span>
+                            <span class="text-xs text-slate-400">{{ $t('labels.wallet_color') }}</span>
                             <color-picker :visible-formats="['hex']" :color="modal.color" @color-change="updateColor" />
                         </div>
 
                         <div class="mb-3 pt-0">
-                            <span class="text-xs text-blueGray-400">{{ $t('labels.balance_wallet') }}</span><span class="text-xs text-blueGray-400" v-if="modal.type == 'voucher'"> : ({{ voucher_balance_value }})</span>
+                            <span class="text-xs text-slate-400">{{ $t('labels.balance_wallet') }}</span><span class="text-xs text-slate-400" v-if="modal.type == 'voucher'"> : ({{ voucher_balance_value }})</span>
                             <input type="text" placeholder="0" v-model="modal.balance"
-                                class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
+                                class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border border-slate-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                         </div>
 
                     </div>
                     <!--footer-->
-                    <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                    <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
 
                         <button v-if="$route.params.id && restore === false"
                             class="bg-red-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -104,7 +104,7 @@
                         </button>
 
                         <button v-if="$route.params.id && restore === true"
-                            class="bg-lightBlue-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            class="bg-sky-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button" v-on:click="restoreWallet()">
                             {{ $t('labels.restore') }}
                         </button>

@@ -4,7 +4,7 @@
     <div class="rounded-t mb-0 px-4 py-3 border-0">
       <div class="flex flex-wrap items-center">
         <div class="lg:w-2/12 px-2">
-          <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+          <h3 class="text-slate-400 text-sm mt-3 mb-6 font-bold uppercase">
             Wallet
           </h3>
         </div>

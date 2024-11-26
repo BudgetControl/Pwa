@@ -7,7 +7,7 @@
                     : '',
             ]">
             <div
-                class="px-4 flex-1 rounded border border-solid border-blueGray-100 block p-4 shadow-lg mr-4" 
+                class="px-4 flex-1 rounded border border-solid border-slate-100 block p-4 shadow-lg mr-4" 
                 :style="'background-color:'+statColor"
                 >
                 <span

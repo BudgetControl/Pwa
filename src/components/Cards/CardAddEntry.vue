@@ -10,28 +10,28 @@
               <div class="w-full" id="example-navbar-info">
                 <ul class="flex flex-row list-none ml-auto justify-center">
                   <li class="nav-item">
-                    <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                    <a class="border-slate-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(1)"
                       v-bind:class="{ 'text-emerald-600 ': action.openTab !== 1, 'text-white bg-emerald-600': action.openTab === 1 }">
                       {{ $t('labels.expenses') }}
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                    <a class="border-slate-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(2)"
                       v-bind:class="{ 'text-emerald-600 ': action.openTab !== 2, 'text-white bg-emerald-600': action.openTab === 2 }">
                       {{ $t('labels.incoming') }}
                     </a>
                   </li>
                   <li class="nav-item" v-if="isModel === false && isPlanned === false">
-                    <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                    <a class="border-slate-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(3)"
                       v-bind:class="{ 'text-emerald-600 ': action.openTab !== 3, 'text-white bg-emerald-600': action.openTab === 3 }">
                       {{ $t('labels.transfer') }}
                     </a>
                   </li>
                   <li class="nav-item" v-if="isModel === false">
-                    <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                    <a class="border-slate-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(4)"
                       v-bind:class="{ 'text-emerald-600 ': action.openTab !== 4, 'text-white bg-emerald-600': action.openTab === 4 }">
                       {{ $t('labels.debit') }}
@@ -45,7 +45,7 @@
         <!-- ##### menu ########### -->
       </div>
       <div
-        v-bind:class="{ 'bg-red-200': action.openTab === 1, 'bg-lightBlue-200': action.openTab === 2, 'bg-emerald-200': action.openTab === 3, 'bg-orange-200': action.openTab === 3 }"
+        v-bind:class="{ 'bg-red-200': action.openTab === 1, 'bg-sky-200': action.openTab === 2, 'bg-emerald-200': action.openTab === 3, 'bg-orange-200': action.openTab === 3 }"
         class="container relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg border-0 flex-auto p-4">
 
         <div class="flex flex-wrap">
@@ -53,7 +53,7 @@
           <div class="lg:w-12/12 px-2 w-full "
             v-if="this.isModel === false && input.model.length > 0 && (action.openTab === 2 || action.openTab === 1) && !this.isPlanned">
             <select v-model="model" v-on:change="retriveModel()" id="model" v-if="action.models"
-              class="w-full border-0 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+              class="w-full border-0 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option value="0">{{ $t('labels.choose_a_model') }}</option>
               <option v-for="(item, k) in input.model" :key="k" :value="item.uuid">{{ item.name }}</option>
             </select>
@@ -62,7 +62,7 @@
           <div class="lg:w-6/12 px-2 py-2 w-full">
 
             <select v-model="account" id="account" required
-              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+              class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option value="-1">{{ $t('labels.choose_wallet_account') }}</option>
               <option value="0" v-if="action.openTab === 3">{{ $t('labels.out_of_wallet') }}</option>
               <option v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
@@ -75,21 +75,21 @@
           }">
 
             <select v-if="action.hidecategory == false" v-model="category" id="category"
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
+              class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option value="0">{{ $t('labels.choose_a_category') }}</option>
               <option v-for="item in input.category" :key="item.id" :value="item.id">{{ item.name }}
               </option>
             </select>
 
             <select v-if="action.hidecategory == true && !action.hidetransfer_to" v-model="transferto" id="transferto"
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
+              class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option :value=false>{{ $t('labels.choose_a_wallet_to_transfer_to') }}</option>
               <option value="0">{{ $t('labels.out_of_wallet') }}</option>
               <option v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
 
             <select v-model="debit" v-if="action.hidetransfer_to"
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
+              class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option value="0">{{ $t('labels.choose_an_option') }}</option>
               <option value="njn76298fm">{{ $t('labels.create_new_debit') }}</option>
               <option v-for="item in input.debit" :key="item.id" :value="item.id">{{ item.name }}</option>
@@ -99,23 +99,23 @@
           <div class="px-2 py-2 w-full lg:w-12/12" v-if="action.openTab == 4">
             <input v-model="debit_name" type="text" :placeholder="$t('labels.debit_name')" id="debit"
               v-if="debit == 'njn76298fm'"
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+              class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
 
           <div class="px-2 py-2 lg:w-6/12" v-if="action.openTab == 4">
-            <label for="income" class="uppercase text-blueGray-600 text-xs font-bold mb-2">
+            <label for="income" class="uppercase text-slate-600 text-xs font-bold mb-2">
               {{ $t('labels.incoming') }}
               <input type="radio" id="income" value="+"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
+                class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
                 v-model="action.debit_type" />
             </label>
           </div>
 
           <div class="px-2 py-2 lg:w-6/12" v-if="action.openTab == 4">
-            <label for="expense" class="uppercase text-blueGray-600 text-xs font-bold mb-2">
+            <label for="expense" class="uppercase text-slate-600 text-xs font-bold mb-2">
               {{ $t('labels.expenses') }}
               <input type="radio" id="expense" value="-"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
+                class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
                 v-model="action.debit_type" />
             </label>
           </div>
@@ -124,12 +124,12 @@
         <div class="flex flex-wrap">
           <div class="lg:w-6/12 px-2 py-2 w-full">
             <input v-on:change="amountCast()" v-model="amount" type="tel" placeholder="0" id="amount"
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+              class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
 
           <div v-if="action.showDetails" class="lg:w-6/12 px-2 py-2 w-full">
             <select v-model="currency"
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+              class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option v-for="item in input.currency" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}
               </option>
             </select>
@@ -137,7 +137,7 @@
 
           <div class="lg:w-6/12 px-2 py-2 w-full" v-if="isPlanned">
               <select id="planning" v-model="planning"
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+              class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                 <option value="0">{{ $t('labels.choose_planned_type') }}</option>
                 <option required v-for="(item, k) in input.planning" :key="k" :value="item">{{ $t('labels.' + item) }}</option>
               </select>
@@ -177,12 +177,12 @@
           </button>
         </div>
 
-        <div v-if="action.showDetails" class="row border rounded border-blueGray-500 py-3 border-dashed">
+        <div v-if="action.showDetails" class="row border rounded border-slate-500 py-3 border-dashed">
           <div class="flex flex-wrap">
             <div class="lg:w-12/12 px-2 w-full text-center">
               <label class="text-xs w-full" for="tags">{{ $t('labels.choose_one_of_currently_tags') }}</label>
               <select v-model="label" multiple id="tags"
-                class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                 <option
                   class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
                   :style="'color: #fff; background-color: ' + item.color" v-for="item in input.tags" :key="item.id"
@@ -196,7 +196,7 @@
           <div class="flex flex-wrap ">
             <div class="lg:w-12/12 px-2 w-full">
               <input :placeholder="$t('labels.or_nsert_new_tag_name')" v-model="newlabel" type="text" id="tag"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
             </div>
           </div>
 
@@ -210,7 +210,7 @@
 
             <div class="w-full flex mb-2">
               <select v-model="payment_type" id="payment_type"
-                class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                 <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ $t('app.' + item.slug)
                   }}</option>
               </select>
@@ -238,7 +238,7 @@
 
           <div class="lg:w-12/12 w-full bm-2">
             <textarea v-model="note" type="text" :placeholder="$t('labels.add_here_your_note')" id="note" rows="2"
-              class="border-0 px-3 py-5 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+              class="border-0 px-3 py-5 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
           </div>
 
             <div class="flex w-full mb-2 " v-if="!isModel  && !isPlanned">
@@ -251,10 +251,10 @@
               </label>
             </div>
 
-            <div class="flex py-2 border border-solid w-full border-blueGray-500 shadow rounded" v-if="isModel || action.save_as_model === true">
+            <div class="flex py-2 border border-solid w-full border-slate-500 shadow rounded" v-if="isModel || action.save_as_model === true">
               <div class="px-2 w-full">
                 <input v-model="name" type="text" :placeholder="$t('labels.write_temlate_name')" id="name"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                  class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               </div>
               <div class="px-2 w-full">
                 <button v-on:click="setModel()"

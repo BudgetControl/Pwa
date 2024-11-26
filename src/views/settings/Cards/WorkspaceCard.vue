@@ -1,5 +1,5 @@
 <template>
-    <section class="relative py-16 bg-blueGray-200">
+    <section class="relative py-16 bg-slate-200">
         <div class="container mx-auto px-4">
             <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
                 <div
@@ -10,14 +10,14 @@
                         <!-- Regular Input -->
                         <div class="mb-3 pt-0">
                             <input type="text" placeholder="Workspace name" v-model="modal.name"
-                                class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
+                                class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border border-slate-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                         </div>
 
                         <div class="mb-3 pt-0">
                             <label for="exclude_stats">
                                 {{ $t('labels.default_currency') }}
                                 <select
-                                    class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                    class="w-full border-0 px-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                     v-model="modal.currency">
                                     <option v-for="(item, k) in currencies" :key="k" :value="item.id">{{ $t('app.' + item.slug) }}
                                     </option>
@@ -29,7 +29,7 @@
                             <label for="exclude_stats">
                                 {{ $t('labels.default_payment_type') }}
                                 <select
-                                    class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                    class="w-full border-0 px-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                     v-model="modal.payment_type">
                                     <option v-for="(item, k) in payment_types" :key="k" :value="item.id">{{ $t('app.' + item.slug) }}
                                     </option>
@@ -42,7 +42,7 @@
                             <div class="flex">
                                 <div class="lg:w-6/12 w-full">
                                     <input type="email" placeholder="exmail@example.com" v-model="shareEmail"
-                                        class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
+                                        class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border border-slate-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                                 </div>
                                 <div class="lg:w-6/12 px-2">
                                     <button
@@ -67,7 +67,7 @@
 
                     </div>
                     <!--footer-->
-                    <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                    <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                         <button
                             class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button" v-on:click="saveModal()">

@@ -4,7 +4,7 @@
             <div class="tab-content tab-space">
 
                 <div class="border p-2 mt-2" v-if="budgets.week.length != 0">
-                    <span class="text-xs font-semibold inline-block text-blueGray-400 ">
+                    <span class="text-xs font-semibold inline-block text-slate-400 ">
                         {{ $t('labels.weekly') }}
                     </span>
 
@@ -15,7 +15,7 @@
 
                 <div class="border p-2 mt-2" v-if="budgets.month.length != 0">
 
-                    <span class="text-xs font-semibold inline-block text-blueGray-400 ">
+                    <span class="text-xs font-semibold inline-block text-slate-400 ">
                         {{ $t('labels.monthly') }}
                     </span>
 
@@ -24,7 +24,7 @@
 
 
                 <div class="border p-2 mt-2 mb-2" v-if="budgets.year.length != 0">
-                    <span class="text-xs font-semibold inline-block text-blueGray-400 ">
+                    <span class="text-xs font-semibold inline-block text-slate-400 ">
                         {{ $t('labels.yearly') }}
                     </span>
 
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="border p-2 mt-2 mb-2" v-if="budgets.custom.length != 0">
-                    <span class="text-xs font-semibold inline-block text-blueGray-400 ">
+                    <span class="text-xs font-semibold inline-block text-slate-400 ">
                         {{ $t('labels.recursive') }}
                     </span>
 

@@ -2,7 +2,7 @@
     <div>
         <form>
             <div
-                class="container relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0 flex-auto p-4">
+                class="container relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-slate-100 border-0 flex-auto p-4">
 
                 <div class="flex flex-wrap py-3">
 
@@ -14,28 +14,28 @@
 
                             <div class="flex flex-wrap">
                                 <div class="lg:w-4/12 px-2 py-2 w-full">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    <label class="block uppercase text-slate-600 text-xs font-bold mb-2"
                                         htmlFor="grid-password">
                                         {{ $t('labels.budget_name') }}
                                     </label>
                                     <input type="text" v-model="data.name" placeholder="Budget name"
-                                        class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+                                        class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
                                 </div>
                                 <div class="lg:w-4/12 px-2 py-2 w-full">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    <label class="block uppercase text-slate-600 text-xs font-bold mb-2"
                                         htmlFor="grid-password">
                                         {{ $t('labels.budget') }}
                                     </label>
                                     <input v-model="data.amount" type="tel" placeholder="0,00 €" id="amount"
-                                        class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                        class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                                 </div>
                                 <div class="lg:w-4/12 px-2 py-2 w-full">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    <label class="block uppercase text-slate-600 text-xs font-bold mb-2"
                                         htmlFor="grid-password">
                                         {{ $t('labels.period') }}
                                     </label>
                                     <select v-model="data.period" id="planning"
-                                        class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                        class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                                         <option value="_"> {{ $t('labels.choose_period') }}</option>
                                         <option value="weekly"> {{ $t('labels.weekly') }}</option>
                                         <option value="monthly"> {{ $t('labels.monthly') }}</option>
@@ -50,7 +50,7 @@
                                 v-if="data.period == 'one_shot' || data.period == 'recursively'">
                                 <div class="lg:w-6/12 px-2 py-2 w-full">
 
-                                    <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    <label class="bl}ock uppercase text-slate-600 text-xs font-bold mb-2"
                                         htmlFor="grid-password">
                                         {{ $t('labels.start_Date') }}
                                     </label>
@@ -60,7 +60,7 @@
 
                                 <div class="lg:w-6/12 px-2 py-2 w-full">
 
-                                    <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    <label class="bl}ock uppercase text-slate-600 text-xs font-bold mb-2"
                                         htmlFor="grid-password">
                                         {{ $t('labels.end_date') }}
                                     </label>
@@ -73,12 +73,12 @@
 
                             <div class="flex flex-wrap">
                                 <div class="lg:w-6/12 px-2 py-2 w-full">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    <label class="block uppercase text-slate-600 text-xs font-bold mb-2"
                                         htmlFor="grid-password">
                                         {{ $t('labels.account') }}
                                     </label>
                                     <select multiple
-                                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                        class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                         v-model="data.account">
                                         <option v-for="account in input.account" :key="account.id" :value="account.id">
                                             {{
@@ -90,12 +90,12 @@
 
                                 <div class="lg:w-6/12 px-2 py-2 w-full">
 
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    <label class="block uppercase text-slate-600 text-xs font-bold mb-2"
                                         htmlFor="grid-password">
                                         {{ $t('labels.category') }}
                                     </label>
                                     <select multiple
-                                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                        class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                         v-model="data.category">
                                         <option v-for="category in input.category" :key="category.id"
                                             :value="category.id">
@@ -110,12 +110,12 @@
                             <div class="flex flex-wrap">
                                 <div class="lg:w-6/12 px-2 py-2 w-full">
 
-                                    <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    <label class="bl}ock uppercase text-slate-600 text-xs font-bold mb-2"
                                         htmlFor="grid-password">
                                         {{ $t('labels.label') }}
                                     </label>
                                     <select v-model="data.label" multiple
-                                        class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                        class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                                         <option
                                             class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
                                             v-for="item in input.tags" :key="item.id" :value="item.id">
@@ -127,13 +127,13 @@
 
                                 <div class="lg:w-6/12 px-2 py-2 w-full">
 
-                                    <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    <label class="bl}ock uppercase text-slate-600 text-xs font-bold mb-2"
                                         htmlFor="grid-password">
                                         {{ $t('labels.entry_type') }}
                                     </label>
 
                                     <select v-model="data.type" multiple
-                                        class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                        class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                                         <option
                                             class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
                                             value="incoming"> {{ $t('labels.incoming') }}
@@ -161,13 +161,13 @@
 
                             <div class="flex flex-wrap">
                                 <div class="lg:w-12/12 px-2 py-2 w-full">
-                                    <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    <label class="bl}ock uppercase text-slate-600 text-xs font-bold mb-2"
                                         htmlFor="grid-password">
                                         Note
                                     </label>
 
                                     <textarea v-model="data.note"
-                                        class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                        class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                         rows="4" />
                                 </div>
                             </div>
@@ -187,7 +187,7 @@
                                 <div class="lg:w-12/12 px-2 w-full">
 
                                     <select v-model="data.emails" multiple
-                                        class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                        class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                                         <option v-for="(email, id) in input.emails" :key="id" :value="email.email"
                                             class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1">
                                             {{ email.name }}

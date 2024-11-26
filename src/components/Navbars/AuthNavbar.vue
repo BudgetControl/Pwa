@@ -33,12 +33,12 @@
           </li>
           <li class="flex items-center">
             <a
-              class="lg:text-white lg:hover:text-blueGray-200 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+              class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
               href="https://www.facebook.com/profile.php?id=61564453328542"
               target="_blank"
             >
               <i
-                class="lg:text-blueGray-200 text-blueGray-400 fab fa-facebook text-lg leading-lg"
+                class="lg:text-slate-200 text-slate-400 fab fa-facebook text-lg leading-lg"
               />
               <span class="lg:hidden inline-block ml-2">Share</span>
             </a>
@@ -46,12 +46,12 @@
 
           <li class="flex items-center">
             <a
-              class="lg:text-white lg:hover:text-blueGray-200 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+              class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
               href="https://x.com/BudgetControl24"
               target="_blank"
             >
               <i
-                class="lg:text-blueGray-200 text-blueGray-400 fab fa-twitter text-lg leading-lg"
+                class="lg:text-slate-200 text-slate-400 fab fa-twitter text-lg leading-lg"
               />
               <span class="lg:hidden inline-block ml-2">Tweet</span>
             </a>

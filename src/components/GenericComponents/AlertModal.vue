@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     alertClass() {
-      return this.type === 'error' ? 'bg-red-500' : 'bg-lightBlue-500';
+      return this.type === 'error' ? 'bg-red-500' : 'bg-sky-500';
     }
   },
   methods: {

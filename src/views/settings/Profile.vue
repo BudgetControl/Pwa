@@ -1,5 +1,5 @@
 <template>
-  <section class="relative py-16 bg-blueGray-200">
+  <section class="relative py-16 bg-slate-200">
     <div class="container mx-auto px-4">
       <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg">
         <div class="px-6">
@@ -47,44 +47,44 @@
                 <span class="text-xl font-bold block uppercase tracking-wide " :class="user.wallet.total_color">
                   {{ user.wallet.total }} {{ this.currency }}
                 </span>
-                <span class="text-sm text-blueGray-400">Wallet</span>
+                <span class="text-sm text-slate-400">Wallet</span>
               </div>
               <div class="mr-4 p-3 text-center">
                 <span class="text-xl font-bold block uppercase tracking-wide text-emerald-600">
                   {{ user.wallet.incoming }} {{ this.currency }}
                 </span>
-                <span class="text-sm text-blueGray-400">{{ $t('labels.incoming') }}</span>
+                <span class="text-sm text-slate-400">{{ $t('labels.incoming') }}</span>
               </div>
               <div class="mr-4 p-3 text-center text-red-500">
                 <span class="text-xl font-bold block uppercase tracking-wide">
                   {{ user.wallet.expenses }} {{ this.currency }}
                 </span>
-                <span class="text-sm text-blueGray-400">{{ $t('labels.expenses') }}</span>
+                <span class="text-sm text-slate-400">{{ $t('labels.expenses') }}</span>
               </div>
               <div class="mr-4 p-3 text-center text-center">
                 <span class="text-xl font-bold block uppercase tracking-wide " :class="user.wallet.health_color">
                   {{ user.wallet.health }} {{ this.currency }}
                 </span>
-                <span class="text-sm text-blueGray-400">{{ $t('labels.my_health') }}</span>
+                <span class="text-sm text-slate-400">{{ $t('labels.my_health') }}</span>
               </div>
             </div>
           </div>
 
           <div class="text-center mt-12">
-            <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
+            <h3 class="text-4xl font-semibold leading-normal mb-2 text-slate-700 mb-2">
               {{ user.name }}
             </h3>
-            <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-              <i class="fas fa-envelope mr-2 text-lg text-blueGray-400"></i>
+            <div class="text-sm leading-normal mt-0 mb-2 text-slate-400 font-bold uppercase">
+              <i class="fas fa-envelope mr-2 text-lg text-slate-400"></i>
               {{ user.email }}
             </div>
           </div>
 
 
-          <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
+          <div class="mt-10 py-10 border-t border-slate-200 text-center">
             <div class="flex flex-wrap justify-center">
               <div class="w-full lg:w-9/12 px-4">
-                <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
+                <p class="mb-4 text-lg leading-relaxed text-slate-700">
                   {{ user.suggestions }}
                 </p>
                 <a href="javascript:void(0)" class="font-normal text-emerald-500" v-if="user.suggestions">

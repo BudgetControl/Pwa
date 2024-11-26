@@ -1,7 +1,7 @@
 <template>
   <form>
     <div
-      class="container relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0 flex-auto p-4">
+      class="container relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-slate-100 border-0 flex-auto p-4">
 
       <div class="flex flex-wrap py-3">
         <!-- ##### menu ########### -->
@@ -19,14 +19,14 @@
                     </a>
                   </li>
                   <li class="nav-item" v-if="isModel === false">
-                    <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                    <a class="border-slate-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(3)"
                       v-bind:class="{ 'text-emerald-600 ': action.openTab !== 3, 'text-white bg-emerald-600': action.openTab === 3 }">
                       {{ $t('labels.transfer') }}
                     </a>
                   </li>
                   <li class="nav-item" v-if="isModel === false">
-                    <a class="border-blueGray-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                    <a class="border-slate-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                       href="javascript:void(0)" v-on:click="toggleTabs(4)"
                       v-bind:class="{ 'text-emerald-600 ': action.openTab !== 4, 'text-white bg-emerald-600': action.openTab === 4 }">
                       {{ $t('labels.debit') }}
@@ -39,13 +39,13 @@
         </div>
         <!-- ##### menu ########### -->
       </div>
-      <div v-bind:class="{ 'bg-red-200': action.openTab === 1, 'bg-lightBlue-200': action.openTab === 2, 'bg-emerald-200': action.openTab === 3, 'bg-orange-200': action.openTab === 3 }"
+      <div v-bind:class="{ 'bg-red-200': action.openTab === 1, 'bg-sky-200': action.openTab === 2, 'bg-emerald-200': action.openTab === 3, 'bg-orange-200': action.openTab === 3 }"
         class="container relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg border-0 flex-auto p-4">
         <div class="flex flex-wrap">
           <div class="lg:w-6/12 px-2 py-2 w-full">
 
             <select v-model="account" id="account" required
-              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+              class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option value="0">{{ $t('labels.choose_wallet_account') }}</option>
               <option v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
@@ -53,7 +53,7 @@
 
           <div class="px-2 py-2 w-full lg:w-6/12">
             <select v-model="category" id="category"
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
+              class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option value="0">{{ $t('labels.choose_a_category') }}</option>
               <option v-for="item in input.category" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
@@ -63,23 +63,23 @@
         <div class="flex flex-wrap">
           <div class="lg:w-6/12 px-2 py-2 w-full">
             <input v-model="amount" type="tel" placeholder="0,00 €" id="amount"
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+              class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
           </div>
           <div class="lg:w-6/12 px-2 py-2 w-full">
             <select v-model="currency"
-              class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+              class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option v-for="item in input.currency" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}
               </option>
             </select>
           </div>
         </div>
 
-        <div class="row border rounded border-blueGray-500 py-3 border-dashed">
+        <div class="row border rounded border-slate-500 py-3 border-dashed">
           <div class="flex flex-wrap">
             <div class="lg:w-12/12 px-2 w-full text-center">
               <label class="text-xs w-full" for="tags">{{ $t('labels.choose_one_of_currently_tags') }}</label>
               <select v-model="label" multiple id="tags"
-                class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                 <option
                   class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
                   :style="'color: #fff; background-color: ' + item.color" v-for="item in input.tags" :key="item.id"
@@ -93,7 +93,7 @@
           <div class="flex flex-wrap ">
             <div class="lg:w-12/12 px-2 w-full">
               <input :placeholder="$t('labels.or_nsert_new_tag_name')" v-model="newlabel" type="text" id="tag"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
             </div>
           </div>
 
@@ -113,7 +113,7 @@
           <div class="lg:w-12/12 px-2 w-full">
             <textarea v-model="note" type="text" :placeholder="$t('labels.add_here_your_note')" required id="note"
               rows="2"
-              class="border-0 px-3 py-5 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
+              class="border-0 px-3 py-5 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
           </div>
 
           <div class="flex w-full flex-wrap py-3">
@@ -131,7 +131,7 @@
             <div class="lg:w-3/12 px-2 w-full">
               <span class="text-xs">{{ $t('labels.choose_frequency') }}</span>
               <select id="planning" v-model="planning"
-                class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                class="w-full border-0 px-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                 <option required v-for="(item, k) in input.planning" :key="k" :value="item.value">{{ item.label }}
                 </option>
               </select>
@@ -140,7 +140,7 @@
             <div class="lg:w-3/12 px-2 w-full">
               <span class="text-xs">{{ $t('labels.choose_method') }}</span>
               <select v-model="payment_type" id="payment_type"
-                class="w-full border-0 px-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                class="w-full border-0 px-2 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                 <option v-for="item in input.payment_type" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}
                 </option>
               </select>

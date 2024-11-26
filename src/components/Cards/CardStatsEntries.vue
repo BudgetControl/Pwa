@@ -3,13 +3,13 @@
 
     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
       <form>
-        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+        <h6 class="text-slate-400 text-sm mt-3 mb-6 font-bold uppercase">
           {{ $t('labels.stats') }}
         </h6>
         <div class="flex flex-wrap">
           <div class="w-full lg:w-12/12 px-4">
             <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              <label class="block uppercase text-slate-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 {{ $t('labels.date_interval') }}
               </label>
               <VueDatePicker v-model="action.date_time" :options="input.month" :required=true
@@ -19,11 +19,11 @@
 
           <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              <label class="block uppercase text-slate-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 {{ $t('labels.category') }}
               </label>
               <select multiple
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 v-model="action.category">
                 <option v-for="category in input.category" :key="category.id" :value="category.id">
                   {{ category.name }}
@@ -33,11 +33,11 @@
           </div>
           <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              <label class="block uppercase text-slate-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 {{ $t('labels.account') }}
               </label>
               <select multiple
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 v-model="action.account">
                 <option v-for="account in input.account" :key="account.id" :value="account.id">{{
                   account.name
@@ -48,11 +48,11 @@
 
           <div class="w-full lg:w-12/12 px-4">
             <div class="relative w-full mb-3">
-              <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              <label class="bl}ock uppercase text-slate-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 {{ $t('labels.label') }}
               </label>
               <select v-model="action.tags" multiple
-                class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                 <option
                   :class="'text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1 ' + item.color"
                   v-for="item in input.tags" :key="item.id" :value="item.id">
@@ -64,11 +64,11 @@
 
           <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              <label class="block uppercase text-slate-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 {{ $t('labels.payment_types') }}
               </label>
               <select multiple
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 v-model="action.payment_methods">
                 <option v-for="payment in input.payment_methods" :key="payment.id" :value="payment.id">
                   {{ payment.name }}
@@ -79,11 +79,11 @@
 
           <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              <label class="block uppercase text-slate-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 {{ $t('labels.currency') }}
               </label>
               <select multiple
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 v-model="action.currencies">
                 <option v-for="currency in input.currencies" :key="currency.id" :value="currency.id">
                   {{ currency.name }}
@@ -94,7 +94,7 @@
 
         </div>
 
-        <hr class="mt-6 border-b-1 border-blueGray-300" />
+        <hr class="mt-6 border-b-1 border-slate-300" />
 
         <div class="flex flex-wrap">
           <div class="w-full lg:w-12/12 px-4">
@@ -108,7 +108,7 @@
           </div>
         </div>
 
-        <hr class="mt-6 border-b-1 border-blueGray-300" />
+        <hr class="mt-6 border-b-1 border-slate-300" />
 
       </form>
     </div>

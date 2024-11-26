@@ -5,10 +5,10 @@
     <div class="flex-auto p-4">
       <div class="flex flex-wrap">
         <div class="relative w-full max-w-full flex-grow flex-1">
-          <h5 class="text-blueGray-400 uppercase font-bold text-xs">
+          <h5 class="text-slate-400 uppercase font-bold text-xs">
             {{ statSubtitle }}
           </h5>
-          <span class="font-semibold text-xl text-blueGray-700 amount">
+          <span class="font-semibold text-xl text-slate-700 amount">
             {{ statTitle }}
           </span>
         </div>
@@ -21,7 +21,7 @@
           </div>
         </div>
       </div>
-      <p class="text-sm text-blueGray-400 mt-4 amount" v-if="statPercent != ''">
+      <p class="text-sm text-slate-400 mt-4 amount" v-if="statPercent != ''">
         <span class="mr-2" :class="[statPercentColor]">
           <i
             :class="[

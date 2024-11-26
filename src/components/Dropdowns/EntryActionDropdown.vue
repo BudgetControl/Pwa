@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a class="text-blueGray-500 py-1 px-3" href="#pablo" ref="btnDropdownRef" v-on:click="toggleDropdown($event)">
+    <a class="text-slate-500 py-1 px-3" href="#pablo" ref="btnDropdownRef" v-on:click="toggleDropdown($event)">
       <i class="fas fa-ellipsis-v"></i>
     </a>
     <div ref="popoverDropdownRef"

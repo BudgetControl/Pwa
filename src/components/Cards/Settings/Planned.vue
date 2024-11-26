@@ -2,11 +2,11 @@
     <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
 
         <div class="container px-4 mx-auto py-3">
-            <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">{{
+            <h3 class="text-slate-400 text-sm mt-3 mb-6 font-bold uppercase">{{
                 $t('labels.list_of_all_planned_entries') }} </h3>
         </div>
 
-        <div class="container px-4 mx-auto py-3 border border-solid border-blueGray-100 shadow"
+        <div class="container px-4 mx-auto py-3 border border-solid border-slate-100 shadow"
             v-for="(entry, i) in this.entries" :key="i">
             <div class="flex flex-wrap">
                 <div class="w-full flex-1 text-xs">
@@ -14,7 +14,7 @@
                         }}</p>
                 </div>
                 <div class="w-full flex-1 text-right">
-                    <span class="text-sm block text-blueGray-700 rounded ">
+                    <span class="text-sm block text-slate-700 rounded ">
                         {{ entry.amount }} <i :class="'fas fa-circle ' + entry.color_amount + ' mr-2'"></i>
                     </span>
 
@@ -65,14 +65,14 @@
 import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue";
 import CoreService from "../../../services/core.service";
 import Paginator from '../../GenericComponents/Paginator.vue';
-import { getHeaderTokens } from "@/utils/headers-token";
+import Action from "../../Dropdowns/Action.vue";
+import ConfirmModal from "../../GenericComponents/ConfirmModal.vue";
 
 export default {
     components: {
         EntryActionDropdown, Paginator, Action, ConfirmModal
     },
     setup() {
-        const headers = getHeaderTokens()
         const apiService = new CoreService()
 
         return {
