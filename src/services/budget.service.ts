@@ -10,7 +10,7 @@ class BudgetService extends ApiService {
     async getBudget(id) {
     
         if (id !== undefined) {
-            id = `/${id}`
+            id = `${id}`
         } else {
             id = ''
         }

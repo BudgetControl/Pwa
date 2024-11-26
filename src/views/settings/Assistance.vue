@@ -79,9 +79,9 @@ export default {
     },
     methods: {
         sendRequest() {
-            const userSettings = this.appSettings.getUser().uuid
+            const userSettings = this.appSettings.settings.user
             const data = {
-                "user_id": userSettings.user_profile.id,
+                "user_id": userSettings.uuid,
                 "text": this.text
             }
 

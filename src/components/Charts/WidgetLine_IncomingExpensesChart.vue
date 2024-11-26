@@ -21,7 +21,7 @@
   </div>
 </template>
 <script>
-import {Chart} from "chart.js";
+import Chart from "chart.js";
 import ChartService from "@/services/chart.service";
 
 export default {

@@ -100,7 +100,7 @@ export default {
             const entryUuid = this.entries[index].id
             const userConfirmed = await window.confirm(this.$t('messages.delete_entry'));
             if (userConfirmed) {
-                ApiService.deleteEntry(entryUuid, true)
+                this.apiService.deleteEntry(entryUuid, true)
                 this.deleteItemFromArray(index)
             }
     },
@@ -108,9 +108,8 @@ export default {
         this.entries.splice(index, 1);
     },
     invoke() {
-
         let currentPage = window.localStorage.getItem('current_page') == null ? 0 : window.localStorage.getItem('current_page')
-        ApiServiceVue.getPlannedEntry(currentPage).then((resp) => {
+        this.apiService.getPlannedEntry(currentPage).then((resp) => {
             resp.forEach(e => {
                 const date_time = new Date(e.date_time)
                 const formattedDate = date_time.toISOString().split('T')[0];

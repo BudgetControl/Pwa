@@ -134,7 +134,7 @@ export default {
       this.getHealth()
     },
     getWallet() {
-      const statsService = new StatsService(this.headers)
+      const statsService = new StatsService()
       statsService.total().then((resp) => {
         let data = resp
         this.wallet.statTitle = data.total.toFixed(2)
@@ -145,7 +145,7 @@ export default {
     },
 
     getHealth() {
-      const statsService = new StatsService(this.headers)
+      const statsService = new StatsService()
       statsService.health().then((resp) => {
         let data = resp
         this.health.statTitle = data.total.toFixed(2)
@@ -162,7 +162,7 @@ export default {
     },
 
     getWalletPlanned() {
-      const statsService = new StatsService(this.headers)
+      const statsService = new StatsService()
       statsService.planned().then((resp) => {
 
         let data = resp
@@ -178,7 +178,7 @@ export default {
       const start_date = date_time.getFullYear() + '-' + (date_time.getMonth() + 1) + '-01'
       const end_date = date_time.getFullYear() + '-' + (date_time.getMonth() + 1) + '-' + date_time.getDate()
 
-      const statsService = new StatsService(this.headers)
+      const statsService = new StatsService()
       statsService.incoming(`?start_date=${start_date}&end_date=${end_date}`).then((resp) => {
         let data = resp
         this.incoming.statTitle = data.total.toFixed(2)
@@ -191,7 +191,7 @@ export default {
       })
     },
     getMonthexpenses() {
-      const statsService = new StatsService(this.headers)
+      const statsService = new StatsService()
       statsService.expenses().then((resp) => {
         let data = resp
         this.expenses.statTitle = data.total.toFixed(2)
@@ -205,7 +205,7 @@ export default {
     },
     getWallets() {
       this.wallets = []
-      const statsService = new StatsService(this.headers)
+      const statsService = new StatsService()
       statsService.wallets().then((resp) => {
         let data = resp
         data.forEach(e => {

@@ -21,10 +21,10 @@
             <div v-for="(entry, i) in entries" :key="i">
                 <div v-if="(entry.planned && action.show_planned) || (!entry.planned)"
                     class="container px-4 mx-auto py-3 border border-solid border-slate-100 shadow" :class="[
-                        entry.payee
+                        entry.type == 'debit'
                             ? 'bg-slate-200'
                             : '',
-                        entry.transfer
+                        entry.type == 'transfer'
                             ? 'transfer-color'
                             : ''
                     ]">
@@ -43,10 +43,10 @@
                                 class="px-2  text-xs text-slate-700">
                                 {{ entry.category.name }} </span>
                             <span class="text-xs rounded block"
-                                :class="[entry.payee ? 'text-slate-900' : 'text-slate-400']">( {{ entry.wallet }}
+                                :class="[entry.type == 'debit' ? 'text-slate-900' : 'text-slate-400']">( {{ entry.wallet }}
                                 )
                                 {{
-                                    entry.payee
+                                    entry.type == 'debit'
                                 }}</span>
                         </div>
                         <div class="w-full px-4 flex-1 text-right">

@@ -164,12 +164,13 @@ export default {
   async mounted() {
     const _this = this
     const userEmail = this.settings.user_email;
-    AuthService.userInfoByEmail(userEmail).then((resp) => {
+    const authService = new AuthService()
+    authService.userInfoByEmail(userEmail).then((resp) => {
       _this.user.name = resp.name
       _this.user.email = resp.email
 
       
-      const statsService = new StatsService(headers)
+      const statsService = new StatsService()
       statsService.health().then(resp => {
         _this.user.wallet.health = resp.total.toFixed(2)
         if (_this.user.wallet.health <= 0) {

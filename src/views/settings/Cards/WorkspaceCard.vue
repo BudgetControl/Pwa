@@ -87,6 +87,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
 import WorkspaceService from '../../../services/workspace.service';
 import CoreService from '../../../services/core.service';
+import { useAppSettings } from '../../../storage/settings.store';
 
 export default {
     components: {
@@ -104,6 +105,13 @@ export default {
                 currency: 2,
                 payment_type: 'credit_card',
             }
+        }
+    },
+    setup() {
+        const appSettings = useAppSettings()
+
+        return {
+            appSettings
         }
     },
     mounted: function () {

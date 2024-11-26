@@ -76,7 +76,7 @@ export default {
     methods: {
         setDefault(id) {
             this.apiService.setDefaultCurrency(id);
-            this.appSettings.set({ currency_id: id })
+            this.appSettings.settings.currency_id = id
         }
     },
 };

@@ -203,6 +203,7 @@ export default {
     changeWorkspace() {
       const _this = this
       const authService = new AuthService()
+      this.appSettings.settings.current_ws.uuid = this.workspace
 
       authService.userInfo().then(() => {
         _this.$router.go(0);

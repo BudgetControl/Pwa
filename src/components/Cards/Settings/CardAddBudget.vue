@@ -65,7 +65,7 @@ export default {
         const appSettings = useAppSettings()
 
         return {
-            headers, coreService, appSettings
+            coreService, appSettings
         }
     },
     data() {

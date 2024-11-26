@@ -172,7 +172,7 @@ export default {
     async archive(uuid,index) {
       const userConfirmed = await window.confirm(this.$t('messages.archive_debit'));
       if (userConfirmed) {
-        ApiService.deleteDebt(uuid)
+        this.apiService.deleteDebt(uuid)
         this.entries.splice(index, 1);
       }
     }
