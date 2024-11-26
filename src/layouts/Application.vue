@@ -25,13 +25,6 @@
       HeaderStats,
       FooterAdmin,
     },
-  mounted() {
-    const hasHeader = getHeaderTokens();
-    console.log('hasHeader', hasHeader);
-    if (!hasHeader.auth.token) {
-      this.$router.push({ path: "/auth/login" });
-    }
-  },
   methods: {
     parentFunction() {
       console.log('Funzione del componente genitore chiamata');

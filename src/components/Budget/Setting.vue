@@ -253,7 +253,7 @@ export default {
 
         const apiService = new CoreService()
         const appSettings = useAppSettings()
-        const budgetService = new BudgetService(headers)
+        const budgetService = new BudgetService()
 
         return {
             apiService, appSettings, budgetService

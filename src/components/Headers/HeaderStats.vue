@@ -76,7 +76,7 @@ export default {
     
 
     return {
-      refreshApp, headers
+      refreshApp
     }
   },
   data() {

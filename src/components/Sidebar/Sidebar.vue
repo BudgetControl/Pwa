@@ -192,8 +192,7 @@ export default {
     workspaceList: function () {
       const settings = this.appSettings.settings
       const _this = this
-      const header = getHeaderTokens()
-      const workspaceService = new WorkspaceService(header)
+      const workspaceService = new WorkspaceService()
       workspaceService.list().then((response) => {
         response.forEach((e) => {
           _this.workspaces.push(e)
@@ -203,10 +202,8 @@ export default {
     },
     changeWorkspace() {
       const _this = this
-      const header = getHeaderTokens()
       const authService = new AuthService()
 
-      header.workspace.uuid = _this.workspace
       authService.userInfo().then(() => {
         _this.$router.go(0);
       }).catch(() => {

@@ -87,6 +87,7 @@
 
 <script>
 import IndexDropdown from "@/components/Dropdowns/IndexDropdown.vue";
+import { useAuthStore } from "../../storage/auth-token.store";
 
 export default {
   data() {
@@ -96,8 +97,8 @@ export default {
     };
   },
   mounted() {
-    const tokens = getHeaderTokens();
-    this.token = tokens.auth.token;
+    const authStore = useAuthStore();
+    this.token = authStore.authToken.token;
   },
   methods: {
     setNavbarOpen: function () {

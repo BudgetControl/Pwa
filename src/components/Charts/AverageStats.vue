@@ -37,7 +37,7 @@ export default {
     },
     setup() {
 
-        const statsService = new StatsService(headers)
+        const statsService = new StatsService()
 
         return {
             statsService

@@ -54,7 +54,7 @@ export default {
     mounted: function () {
         const _this = this
 
-        const WorkspaceServiceVue = new WorkspaceService(headers)
+        const WorkspaceServiceVue = new WorkspaceService()
         WorkspaceServiceVue.listByUser().then((res) => {
             _this.workspaces = res
         })

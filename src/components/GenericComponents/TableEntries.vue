@@ -130,7 +130,7 @@ export default {
       this.elements.stats.expenses.now = 0
 
       
-      const statsService = new StatsService(headers)
+      const statsService = new StatsService()
       statsService.getStatsEntries(options).then((resp) => {
 
         resp.rows.forEach(element => {

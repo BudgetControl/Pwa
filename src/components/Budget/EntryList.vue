@@ -28,7 +28,7 @@ export default {
     },
     setup() {
 
-        const apiService = new BudgetService(headers)
+        const apiService = new BudgetService()
 
         return {
             apiService
