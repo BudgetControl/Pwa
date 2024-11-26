@@ -37,7 +37,7 @@ export default {
         document.addEventListener('click', this.handleClickOutside);
       }
     },
-    handleClickOutside(event) {
+    handleClickOutside() {
       this.dropdownPopoverShow = false;
       document.removeEventListener('click', this.handleClickOutside);
     }
