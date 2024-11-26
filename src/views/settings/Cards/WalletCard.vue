@@ -177,7 +177,7 @@ export default {
         };
         
         window.confirm = (message) => {
-            this.$refs.confirmModal.show(message);
+            return this.$refs.confirmModal.show(message);
         };
     },
     methods: {
