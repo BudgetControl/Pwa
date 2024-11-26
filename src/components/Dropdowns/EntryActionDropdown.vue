@@ -28,20 +28,18 @@ export default {
     toggleDropdown: function (event) {
       event.preventDefault();
       if (this.dropdownPopoverShow) {
-      this.dropdownPopoverShow = false;
+        this.dropdownPopoverShow = false;
       } else {
-      this.dropdownPopoverShow = true;
-      createPopper(this.$refs.btnDropdownRef, this.$refs.popoverDropdownRef, {
-        placement: "right",
-      });
-      document.addEventListener('click', this.handleClickOutside);
+        this.dropdownPopoverShow = true;
+        createPopper(this.$refs.btnDropdownRef, this.$refs.popoverDropdownRef, {
+          placement: "right",
+        });
+        document.addEventListener('click', this.handleClickOutside);
       }
     },
     handleClickOutside(event) {
-      if (this.$refs.popoverDropdownRef && !this.$refs.popoverDropdownRef.contains(event.target) && !this.$refs.btnDropdownRef.contains(event.target)) {
       this.dropdownPopoverShow = false;
       document.removeEventListener('click', this.handleClickOutside);
-      }
     }
   }
 };

@@ -58,8 +58,10 @@
                         </div>
                         <div class="flex-l">
                             <EntryActionDropdown>
-                                <Action :onAction="() => goToRoute(i)" :label="$t('labels.edit')" iconClass="fa-solid fa-pen-to-square" />
-                                <Action :onAction="() => deleteItem(i)" :label="$t('labels.delete')" iconClass="fa-solid fa-trash text-red-400" />
+                                <Action :onAction="() => goToRoute(i)" :label="$t('labels.edit')"
+                                    iconClass="fa-solid fa-pen-to-square" />
+                                <Action :onAction="() => deleteItem(i)" :label="$t('labels.delete')"
+                                    iconClass="fa-solid fa-trash text-red-400" />
                             </EntryActionDropdown>
                         </div>
                     </div>
@@ -151,14 +153,17 @@ export default {
             const isPlanned = this.isPlanned
             const isModel = this.isModel
 
-            const entryUuid = this.entries[index].id
-            if (isModel) {
-                ApiService.deleteModel(entryUuid)
-            } else {
-                ApiService.deleteEntry(entryUuid, isPlanned)
+            if (window.confirm($t('messages.delete_entry'))) {
+                const entryUuid = this.entries[index].id
+                if (isModel) {
+                    ApiService.deleteModel(entryUuid)
+                } else {
+                    ApiService.deleteEntry(entryUuid, isPlanned)
+                }
+
+                this.deleteItemFromArray(index)
             }
 
-            this.deleteItemFromArray(index)
         },
         deleteItemFromArray(index) {
             this.entries.splice(index, 1);
@@ -251,7 +256,7 @@ export default {
 
         },
     }
-    };
+};
 </script>
 
 <style scoped>

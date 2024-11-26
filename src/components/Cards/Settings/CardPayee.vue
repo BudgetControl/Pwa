@@ -157,8 +157,10 @@ export default {
       })
     },
     archive(uuid,index) {
-      ApiService.deleteDebt(uuid)
-      this.entries.splice(index, 1);
+      if(window.confirm($t('messages.archive_debit'))) {
+        ApiService.deleteDebt(uuid)
+        this.entries.splice(index, 1);
+      }
     }
   }
 }
