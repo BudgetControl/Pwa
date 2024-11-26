@@ -118,6 +118,7 @@
                 </div>
             </div>
             <AlertModal ref="alertModal" />
+            <ConfirmModal ref="confirmModal" />
         </div>
     </section>
 </template>
@@ -129,10 +130,11 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { ColorPicker } from 'vue-accessible-color-picker';
 import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
+import ConfirmModal from '@/components/GenericComponents/ConfirmModal.vue';
 
 export default {
     components: {
-        HeaderButton, VueDatePicker, ColorPicker, AlertModal
+        HeaderButton, VueDatePicker, ColorPicker, AlertModal, ConfirmModal
     },
     data() {
         return {
@@ -172,6 +174,10 @@ export default {
     created() {
         window.alert = (message, type = 'success') => {
             this.$refs.alertModal.show(message, type);
+        };
+        
+        window.confirm = (message) => {
+            this.$refs.confirmModal.show(message);
         };
     },
     methods: {

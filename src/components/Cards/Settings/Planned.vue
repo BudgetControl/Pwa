@@ -57,7 +57,7 @@
             <Paginator ref="_paginator"></Paginator>
         </div>
         <!-- end pagination -->
-
+        <ConfirmModal ref="confirmModal" />
     </div>
 </template>
 <script>
@@ -67,10 +67,11 @@ import ApiServiceVue from '../../../services/ApiService.vue';
 import Paginator from '../../GenericComponents/Paginator.vue';
 import ApiService from '../../../services/ApiService.vue';
 import Action from "../../Dropdowns/Action.vue";
+import ConfirmModal from '../../GenericComponents/ConfirmModal.vue';
 
 export default {
     components: {
-        EntryActionDropdown, Paginator, Action
+        EntryActionDropdown, Paginator, Action, ConfirmModal
     },
     data() {
         return {
@@ -79,6 +80,11 @@ export default {
                 enabled: false
             },
         }
+    },
+    created() {
+        window.confirm = (message) => {
+            this.$refs.confirmModal.show(message);
+        };
     },
     mounted() {
         this.invoke()

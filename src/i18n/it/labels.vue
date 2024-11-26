@@ -230,5 +230,6 @@ export default {
     choose_planned_type: 'Scegli un tipo pianificato',
     list_of_all_credit_cards: 'Elenco di tutte le carte di credito',
     details: 'Dettagli',
+    planned_entry: 'Pianificati',
 }
 </script>
