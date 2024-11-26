@@ -86,7 +86,7 @@ export default {
     methods: {
         deleteItem(index) {
             const entryUuid = this.entries[index].id
-            if(window.confirm($t('messages.delete_entry'))) {
+            if(window.confirm(this.$t('messages.delete_entry'))) {
                 ApiService.deleteEntry(entryUuid, true)
                 this.deleteItemFromArray(index)
             }

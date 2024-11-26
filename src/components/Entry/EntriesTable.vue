@@ -153,7 +153,7 @@ export default {
             const isPlanned = this.isPlanned
             const isModel = this.isModel
 
-            if (window.confirm($t('messages.delete_entry'))) {
+            if (window.confirm(this.$t('messages.delete_entry'))) {
                 const entryUuid = this.entries[index].id
                 if (isModel) {
                     ApiService.deleteModel(entryUuid)
