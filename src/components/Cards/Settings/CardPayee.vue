@@ -157,7 +157,7 @@ export default {
       })
     },
     archive(uuid,index) {
-      if(window.confirm($t('messages.archive_debit'))) {
+      if(window.confirm(this.$t('messages.archive_debit'))) {
         ApiService.deleteDebt(uuid)
         this.entries.splice(index, 1);
       }
