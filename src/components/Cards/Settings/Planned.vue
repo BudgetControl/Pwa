@@ -90,9 +90,10 @@ export default {
         this.invoke()
     },
     methods: {
-        deleteItem(index) {
+        async deleteItem(index) {
             const entryUuid = this.entries[index].id
-            if(window.confirm(this.$t('messages.delete_entry'))) {
+            const userConfirmed = await window.confirm(this.$t('messages.delete_entry'));
+            if (userConfirmed) {
                 ApiService.deleteEntry(entryUuid, true)
                 this.deleteItemFromArray(index)
             }

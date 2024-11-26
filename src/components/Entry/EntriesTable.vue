@@ -153,15 +153,18 @@ export default {
     
     created() {
         window.confirm = (message) => {
-            this.$refs.confirmModal.show(message);
+            const test = this.$refs.confirmModal.show(message);
+            console.debug("confirm:",test)
+            return test
         };
     },
     methods: {
-        deleteItem(index) {
+        async deleteItem(index) {
             const isPlanned = this.isPlanned
             const isModel = this.isModel
 
-            if (window.confirm(this.$t('messages.delete_entry'))) {
+            const userConfirmed = await window.confirm(this.$t('messages.delete_entry'));
+            if (userConfirmed) {
                 const entryUuid = this.entries[index].id
                 if (isModel) {
                     ApiService.deleteModel(entryUuid)
