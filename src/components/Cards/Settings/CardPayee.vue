@@ -83,6 +83,7 @@
         </div>
       </div>
     </div>
+    <ConfirmModal ref="confirmModal" />
   </div>
 </template>
 <script>
@@ -90,6 +91,7 @@
 import ApiService from '../../../services/ApiService.vue';
 import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue";
 import Action from "@/components/Dropdowns/Action.vue";
+import ConfirmModal from '../../GenericComponents/ConfirmModal.vue';
 
 export default {
   data() {
@@ -102,7 +104,12 @@ export default {
     }
   },
   components: {
-    EntryActionDropdown, Action
+    EntryActionDropdown, Action, ConfirmModal
+  },
+  created() {
+      window.confirm = (message) => {
+          this.$refs.confirmModal.show(message);
+      };
   },
   mounted() {
     this.getPlannedEntries()

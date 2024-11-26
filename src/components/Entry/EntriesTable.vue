@@ -96,6 +96,7 @@
             </div>
 
         </div>
+        <ConfirmModal ref="confirmModal" />
     </div>
 </template>
 <script>
@@ -107,6 +108,7 @@ import vue from "@/assets/img/react.jpg";
 import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue";
 import Action from "@/components/Dropdowns/Action.vue";
 import ApiService from '../../services/ApiService.vue';
+import ConfirmModal from '@/components/GenericComponents/ConfirmModal.vue';
 
 export default {
     props: {
@@ -122,7 +124,7 @@ export default {
         }
     },
     components: {
-        EntryActionDropdown, Action
+        EntryActionDropdown, Action, ConfirmModal
     },
     data() {
         return {
@@ -146,6 +148,12 @@ export default {
                 tags: [],
                 wallet: [],
             }
+        };
+    },
+    
+    created() {
+        window.confirm = (message) => {
+            this.$refs.confirmModal.show(message);
         };
     },
     methods: {
