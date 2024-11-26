@@ -153,9 +153,7 @@ export default {
     
     created() {
         window.confirm = (message) => {
-            const test = this.$refs.confirmModal.show(message);
-            console.debug("confirm:",test)
-            return test
+            return this.$refs.confirmModal.show(message);
         };
     },
     methods: {

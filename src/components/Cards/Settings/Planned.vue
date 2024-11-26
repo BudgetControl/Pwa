@@ -83,7 +83,7 @@ export default {
     },
     created() {
         window.confirm = (message) => {
-            this.$refs.confirmModal.show(message);
+            return this.$refs.confirmModal.show(message);
         };
     },
     mounted() {
