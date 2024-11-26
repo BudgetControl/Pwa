@@ -50,7 +50,7 @@ export default {
     show_more: 'Show more',
     restore: 'Restore',
     reasume_of_all_entries: 'Resume of all entries',
-    list_of_all_payees: 'List of all payees',
+    list_of_all_payees: 'List of all debits',
     forget_debit: 'Forget debit',
     date_start: 'Date start',
     debit_name: 'Debit name',
@@ -229,6 +229,8 @@ export default {
     no_entries_found: 'No entries found',
     credit_card_installement: 'Credit card installment',
     choose_planned_type: 'Choose a planned type',
+    list_of_all_credit_cards: 'List of all credit cards',
+    details: 'Details',
 };
 
 </script>

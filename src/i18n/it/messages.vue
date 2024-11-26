@@ -39,5 +39,7 @@ export default {
         no_results: 'Nessun risultato trovato',
         please_set_date: 'Scegli una data di inizio e fine',
     },
+    delete_entry: 'Sei sicuro di voler eliminare questa voce?',
+    archive_debit: 'Sei sicuro di voler archiviare questo debito?',
 }
 </script>

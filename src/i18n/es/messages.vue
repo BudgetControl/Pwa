@@ -39,5 +39,7 @@ export default {
         no_results: 'No se encontraron resultados',
         please_set_date: 'Elija una fecha de inicio y fin',
     },
+    delete_entry: '¿Estás seguro de que quieres eliminar esta entrada?',
+    archive_debit: '¿Estás seguro de que quieres archivar este débito?',
 }
 </script>
