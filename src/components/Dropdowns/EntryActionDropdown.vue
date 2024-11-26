@@ -9,8 +9,8 @@
         block: dropdownPopoverShow,
       }">
 
-        <slot></slot>
-      
+      <slot></slot>
+
     </div>
   </div>
 </template>
@@ -37,9 +37,11 @@ export default {
         document.addEventListener('click', this.handleClickOutside);
       }
     },
-    handleClickOutside() {
-      this.dropdownPopoverShow = false;
-      document.removeEventListener('click', this.handleClickOutside);
+    handleClickOutside(event) {
+      if (this.$refs.popoverDropdownRef && !this.$refs.btnDropdownRef.contains(event.target)) {
+        this.dropdownPopoverShow = false;
+        document.removeEventListener('click', this.handleClickOutside);
+      }
     }
   }
 };
