@@ -114,6 +114,7 @@ import Avatar from "vue-boring-avatars";
 import AuthService from "../../services/auth.service";
 import { getHeaderTokens } from '../../utils/headers-token';
 import StatsService from '../../services/stats.service';
+import CoreService from "../../services/core.service";
 
 export default {
   data() {
@@ -153,7 +154,8 @@ export default {
     const _this = this
     this.currency = this.settings.currency_id || 2
 
-    ApiServiceVue.currencies().then((resp) => {
+    const coreService = new CoreService()
+    coreService.currencies().then((resp) => {
       _this.currency = resp[_this.currency - 1 ].icon
     }).catch(() => {
       _this.currency = "€"

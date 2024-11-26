@@ -107,7 +107,6 @@
 import AuthService from "../../services/auth.service";
 import loading from 'vue-full-loading'
 import PasswordStrengthMeter from "../../components/Auth/PasswordStrengthMeter.vue";
-import { getHeaderTokens } from "../../utils/headers-token";
 
 export default {
   components: {
@@ -130,7 +129,6 @@ export default {
       let name = this.name;
       const confirm_password = this.confirm_password
       const _this = this
-      const header = getHeaderTokens()
       const authService = new AuthService()
 
       this.show = true

@@ -88,16 +88,12 @@
 </template>
 <script>
 
-import PayeeActionDropdown from "@/components/Dropdowns/PayeeActionDropdown.vue";
 import CoreService from "../../../services/core.service";
-import { getHeaderTokens } from "@/utils/headers-token";
+import Action from "../../Dropdowns/Action.vue";
+import EntryActionDropdown from "../../Dropdowns/EntryActionDropdown.vue";
 
 export default {
-  components: {
-    //PayeeActionDropdown
-  },
   setup() {
-        const headers = getHeaderTokens()
         const apiService = new CoreService()
 
         return {

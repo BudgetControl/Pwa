@@ -86,7 +86,8 @@ export default {
         },
         error => {
           console.error(error);
-          LocalStorageService.clear() //FIXME:
+          this.settingsStore.resetState()
+          this.authStore.resetState()
           _this.$router.push({ path: '/app/auth/login' })
         }
 

@@ -43,14 +43,12 @@ import HeaderButton from '@/components/Button/HeaderButton.vue';
 import CoreService from '../../services/core.service';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { useAppSettings } from '../../storage/settings.store';
-import { getHeaderTokens } from '../../utils/headers-token';
 
 export default {
     components: {
         HeaderButton
     },
     setup() {
-        const headers = getHeaderTokens()
         const apiService = new CoreService()
         const appSettings = useAppSettings()
         const settings = {
@@ -78,7 +76,6 @@ export default {
     methods: {
         setDefault(id) {
             this.apiService.setDefaultCurrency(id);
-            updateSettings.currency_id = id
             this.appSettings.set({ currency_id: id })
         }
     },

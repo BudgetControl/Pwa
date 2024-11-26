@@ -47,14 +47,12 @@
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import CoreService from '../../services/core.service';
 import '@vuepic/vue-datepicker/dist/main.css'
-import { getHeaderTokens } from '../../utils/headers-token';
 
 export default {
     components: {
         HeaderButton
     },
     setup() {
-        const headers = getHeaderTokens()
         const apiService = new CoreService()
 
         return {

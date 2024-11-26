@@ -33,7 +33,6 @@
 <script>
 import AuthService from "../../services/auth.service";
 import loading from 'vue-full-loading'
-import { getHeaderTokens } from "../../utils/headers-token";
 
 
 export default {
@@ -50,7 +49,6 @@ export default {
     async mounted() {
       const token = this.$route.params.token
       const _this = this
-      const header = getHeaderTokens()
       const authService = new AuthService()
 
       this.show = false

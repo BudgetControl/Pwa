@@ -923,16 +923,6 @@ select {
   }
 }
 
-@media (min-width: 1536px) {
-  .\!container {
-    max-width: 1280px !important;
-  }
-
-  .container {
-    max-width: 1280px;
-  }
-}
-
 .sr-only {
   position: absolute;
   width: 1px;
@@ -1016,10 +1006,6 @@ select {
   inset: 0px;
 }
 
-.-top-94-px {
-  top: -94px;
-}
-
 .bottom-0 {
   bottom: 0px;
 }
@@ -1068,6 +1054,10 @@ select {
   right: 0.75rem;
 }
 
+.right-8 {
+  right: 2rem;
+}
+
 .start-1 {
   inset-inline-start: 0.25rem;
 }
@@ -1102,6 +1092,10 @@ select {
 
 .z-10 {
   z-index: 10;
+}
+
+.z-2 {
+  z-index: 2;
 }
 
 .z-40 {
@@ -1590,6 +1584,11 @@ select {
   display: none;
 }
 
+.size-1 {
+  width: 0.25rem;
+  height: 0.25rem;
+}
+
 .h-0 {
   height: 0px;
 }
@@ -1630,10 +1629,6 @@ select {
   height: 0.75rem;
 }
 
-.h-350-px {
-  height: 350px;
-}
-
 .h-4 {
   height: 1rem;
 }
@@ -1664,10 +1659,6 @@ select {
 
 .h-7 {
   height: 1.75rem;
-}
-
-.h-70-px {
-  height: 70px;
 }
 
 .h-8 {
@@ -1854,6 +1845,10 @@ select {
   min-width: 5rem;
 }
 
+.min-w-28 {
+  min-width: 7rem;
+}
+
 .min-w-40 {
   min-width: 10rem;
 }
@@ -1866,14 +1861,6 @@ select {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
-}
-
-.max-w-120-px {
-  max-width: 120px;
-}
-
-.max-w-150-px {
-  max-width: 150px;
 }
 
 .max-w-40 {
@@ -2308,6 +2295,12 @@ select {
   -webkit-appearance: auto;
      -moz-appearance: auto;
           appearance: auto;
+}
+
+.columns-5 {
+  -webkit-columns: 5;
+     -moz-columns: 5;
+          columns: 5;
 }
 
 .break-before-auto {
@@ -3757,6 +3750,10 @@ select {
   padding: 2rem;
 }
 
+.p-\[hash\] {
+  padding: hash;
+}
+
 .px-0 {
   padding-left: 0px;
   padding-right: 0px;
@@ -4343,6 +4340,10 @@ select {
 .text-indigo-600 {
   --tw-text-opacity: 1;
   color: rgb(79 70 229 / var(--tw-text-opacity, 1));
+}
+
+.text-inherit {
+  color: inherit;
 }
 
 .text-lightBlue-400 {
@@ -5145,12 +5146,6 @@ select {
   }
 
   @media (min-width: 1280px) {
-    .sm\:container {
-      max-width: 1280px;
-    }
-  }
-
-  @media (min-width: 1536px) {
     .sm\:container {
       max-width: 1280px;
     }

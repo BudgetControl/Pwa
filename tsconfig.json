@@ -1,20 +1,19 @@
 {
-    "compilerOptions": {
-      "target": "esnext",
-      "module": "esnext",
-      "strict": true,
-      "jsx": "preserve",
-      "importHelpers": true,
-      "moduleResolution": "node",
-      "experimentalDecorators": true,
-      "skipLibCheck": true,
-      "noImplicitAny": false,
-      "allowJs": true
-    },
-    "paths": {
-      "@/*": ["src/*"]
-    },
-    "include": ["src/**/*.ts", "src/**/*.vue", "src/**/*.model.ts", "src/**/*.store.ts"],
-    "exclude": ["node_modules"]
-  }
-  
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "allowJs": true
+  },
+  "paths": {
+    "@/*": ["src/*"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.vue", "src/**/*.model.ts", "src/**/*.store.ts"],
+  "exclude": ["node_modules"]
+}

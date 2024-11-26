@@ -31,14 +31,12 @@ import HeaderButton from '@/components/Button/HeaderButton.vue';
 import CoreService from '../../services/core.service';
 import '@vuepic/vue-datepicker/dist/main.css'
 import EntriesTable from '../../components/Entry/EntriesTable.vue';
-import { getHeaderTokens } from '../../utils/headers-token';
 
 export default {
     components: {
         HeaderButton, EntriesTable
     },
     setup() {
-        const headers = getHeaderTokens()
         const apiService = new CoreService()
 
         return {

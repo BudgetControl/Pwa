@@ -46,14 +46,12 @@ import CoreService from '../../../services/core.service';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { ColorPicker } from 'vue-accessible-color-picker';
 import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
-import { getHeaderTokens } from '@/utils/headers-token';
 
 export default {
     components: {
         HeaderButton, ColorPicker, AlertModal
     },
     setup() {
-        const headers = getHeaderTokens()
         const apiService = new CoreService()
 
         return {

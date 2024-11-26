@@ -129,7 +129,6 @@ import CoreService from '../../../services/core.service';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { ColorPicker } from 'vue-accessible-color-picker';
-import { getHeaderTokens } from '@/utils/headers-token';
 import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
 import ConfirmModal from '@/components/GenericComponents/ConfirmModal.vue';
 
@@ -138,9 +137,7 @@ export default {
         HeaderButton, VueDatePicker, ColorPicker, AlertModal, ConfirmModal
     },
     setup() {
-        const headers = getHeaderTokens()
         const apiService = new CoreService()
-
         return {
             apiService
         }
@@ -199,7 +196,7 @@ export default {
         async archiveWallet() {
             const userConfirmed = await window.confirm(this.$t('messages.wallet.are_you_sure'));
             if (userConfirmed) {
-                ApiService.deleteWallet(this.$route.params.id)
+                this.apiService.deleteWallet(this.$route.params.id)
                 alert(this.$t('messages.wallet.archived'), "success")
                 this.$router.push({ path: '/app/settings/wallet' })
             }
@@ -247,8 +244,10 @@ export default {
                     this.modal.deleted = resp.deleted_at
                     this.modal.voucher_value = resp.voucher_value
 
+                    //FIXME: currencySymbol is missing ${currencySymbol}
+
                     if(resp.type == 'voucher') {
-                        this.voucher_balance_value = `${resp.balance.value_in_valut} ${currencySymbol}`
+                        this.voucher_balance_value = `${resp.balance.value_in_valut} currencySymbol`
                         this.modal.balance = resp.balance.value_in_voucher
                     }
 
