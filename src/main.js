@@ -1,8 +1,16 @@
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 import { createApp } from "vue";
 import { createWebHistory, createRouter } from "vue-router";
+import { IonicVue } from '@ionic/vue';
 
 // styles
+// Importa lo stile principale di Ionic
+import '@ionic/vue/css/core.css';         // Base styles
+// import '@ionic/vue/css/structure.css';    // Layout
+// import '@ionic/vue/css/typography.css';   // Font styles
+// import '@ionic/vue/css/ionic.bundle.css'; // Include only if necessary
+
+
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@/assets/styles/tailwind.css";
 import "@/assets/styles/custom.scss";
@@ -78,7 +86,24 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+// Capacitor plugins
 
+import { App as CapacitorApp } from '@capacitor/app';
+import { Browser } from '@capacitor/browser';
+
+CapacitorApp.addListener('appUrlOpen', function (data) {
+
+  if (data.url.includes('/app-auth-token')) {
+    Browser.close();
+
+    const url = new URL(data.url);
+    const token = url.searchParams.get('token');
+    console.log('Navigating to token route:', token);
+    router.push({ path: '/app/auth/token?token='+ token });
+
+  }
+
+});
 
 // routes
 
@@ -323,4 +348,5 @@ app.use(VueGtag, {
 // languages
 app.use(i18n)
 app.use(router)
+app.use(IonicVue)
 app.mount("#app")

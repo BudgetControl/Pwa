@@ -150,7 +150,7 @@
 
             <div class="lg:w-6/12 px-2 py-2 w-full" v-if="isPlanned">
               <span class="text-xs">{{ $t('labels.date_end') }}</span>
-              <VueDatePicker v-model="end_date_time"></VueDatePicker>
+              <VueDatePicker v-model="end_date_time"  no-today ></VueDatePicker>
             </div>
 
           <div class="lg:w-12/12 px-2 py-2 w-full">
@@ -414,6 +414,10 @@ export default {
     this.currency = settings.currency_id
     this.payment_type = settings.payment_type_id
 
+    if(this.$route.query.show === 'payee') {
+      this.toggleTabs(4)
+    }
+
   },
   methods: {
     time() {
@@ -421,7 +425,6 @@ export default {
       if (this.action.dateUpdated == false) {
         let dateTime = new Date()
         _this.date = dateTime.toISOString().split('T')[0] + " " + dateTime.toLocaleTimeString()
-        _this.end_date_time = dateTime.toISOString().split('T')[0] + " " + dateTime.toLocaleTimeString()
       }
     },
     getDebit() {

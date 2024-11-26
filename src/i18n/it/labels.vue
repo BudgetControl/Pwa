@@ -50,7 +50,7 @@ export default {
     show_more: 'Mostra di più',
     restore: 'Ripristina',
     reasume_of_all_entries: 'Riepilogo di tutte le voci',
-    list_of_all_payees: 'Elenco di tutti i beneficiari',
+    list_of_all_payees: 'Elenco di tutti i debiti',
     forget_debit: 'Dimentica addebito',
     date_start: 'Data inizio',
     debit_name: 'Nome addebito',
@@ -228,5 +228,7 @@ export default {
     no_entries_found: 'Nessuna voce trovata',
     credit_card_installement: 'Rata della carta di credito',
     choose_planned_type: 'Scegli un tipo pianificato',
+    list_of_all_credit_cards: 'Elenco di tutte le carte di credito',
+    details: 'Dettagli',
 }
 </script>

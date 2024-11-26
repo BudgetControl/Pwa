@@ -39,5 +39,7 @@ export default {
         no_results: 'No results found',
         please_set_date: 'Please choose a date start and end',
     },
+    delete_entry: 'Are you sure you want to delete this entry ?',
+    archive_debit: 'Are you sure you want to archive this debit ?',
 }
 </script>

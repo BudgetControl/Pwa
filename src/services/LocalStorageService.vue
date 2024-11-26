@@ -23,7 +23,7 @@ function setToken(value) {
 
 function setUser(value) {
     this.set('user', value)
-    this.set('settings', JSON.parse(value.workspace_settings.data))
+    this.set('settings', value.workspace_settings.data)
 }
 
 function setUserToken(value) {

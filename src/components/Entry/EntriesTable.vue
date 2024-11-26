@@ -39,10 +39,10 @@
                     <div class="flex">
                         <div class="w-full px-4 flex-1">
                             <i v-on:click="$router.push(`/app/entries?filter_category=${entry.category.id}`)"
-                                :class="'block text-lightBlue-400 ' + entry.category.icon"> <span
-                                    class="px-2 text-blueGray-700 rounded ">
-                                    {{ entry.category.name }} </span></i>
-                            <span class="text-xs rounded"
+                                :class="'text-lightBlue-400 ' + entry.category.icon"> </i> <span
+                                class="px-2  text-xs text-blueGray-700">
+                                {{ entry.category.name }} </span>
+                            <span class="text-xs rounded block"
                                 :class="[entry.payee ? 'text-blueGray-900' : 'text-blueGray-400']">( {{ entry.wallet }}
                                 )
                                 {{
@@ -57,10 +57,12 @@
 
                         </div>
                         <div class="flex-l">
-                            <EntryActionDropdown :entryId="entry.uuid" :type="isModel === true
-                                ? 'model'
-                                : 'entry'
-                                " :index=i @deleteItem="deleteItemFromArray" />
+                            <EntryActionDropdown>
+                                <Action :onAction="() => goToRoute(i)" :label="$t('labels.edit')"
+                                    iconClass="fa-solid fa-pen-to-square" />
+                                <Action :onAction="() => deleteItem(i)" :label="$t('labels.delete')"
+                                    iconClass="fa-solid fa-trash text-red-400" />
+                            </EntryActionDropdown>
                         </div>
                     </div>
 
@@ -68,9 +70,7 @@
                         <div class="flex-l w-full px-4">
                             <span class="text-xs block text-blueGray-700 rounded ">{{ entry.note }}</span>
                         </div>
-                    </div>
 
-                    <div>
                         <div class="w-full px-4 flex-1">
                             <span class="text-xs mt-2 text-blueGray-700 rounded ">
                                 <span v-for="(label, i) in entry.labels"
@@ -85,10 +85,13 @@
                         <div class="w-full px-4 flex-1 text-right">
                             <span class="text-xs mt-2 block text-blueGray-700 rounded ">
                                 <span v-if="entry.planned == true"
-                                    class="'text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1 bg-red-200">{{ $t("labels.planned_entry") }}</span>
+                                    class="'text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1 bg-red-200">{{
+                                        $t("labels.planned_entry") }}</span>
                             </span>
                         </div>
+
                     </div>
+
                 </div>
             </div>
 
@@ -102,6 +105,7 @@ import sketch from "@/assets/img/sketch.jpg";
 import react from "@/assets/img/react.jpg";
 import vue from "@/assets/img/react.jpg";
 import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue";
+import Action from "@/components/Dropdowns/Action.vue";
 import ApiService from '../../services/ApiService.vue';
 
 export default {
@@ -118,7 +122,7 @@ export default {
         }
     },
     components: {
-        EntryActionDropdown
+        EntryActionDropdown, Action
     },
     data() {
         return {
@@ -145,8 +149,34 @@ export default {
         };
     },
     methods: {
+        deleteItem(index) {
+            const isPlanned = this.isPlanned
+            const isModel = this.isModel
+
+            if (window.confirm($t('messages.delete_entry'))) {
+                const entryUuid = this.entries[index].id
+                if (isModel) {
+                    ApiService.deleteModel(entryUuid)
+                } else {
+                    ApiService.deleteEntry(entryUuid, isPlanned)
+                }
+
+                this.deleteItemFromArray(index)
+            }
+
+        },
         deleteItemFromArray(index) {
             this.entries.splice(index, 1);
+        },
+        goToRoute(index) {
+            const entryUuid = this.entries[index].id
+            const isModel = this.isModel
+            if (isModel) {
+                this.$router.push({ "path": `/app/model/${entryUuid}` })
+            } else {
+                this.$router.push({ "path": `/app/entry/${entryUuid}` })
+            }
+
         },
         getwallet() {
             let _this = this
@@ -225,7 +255,6 @@ export default {
             }
 
         },
-
     }
 };
 </script>
