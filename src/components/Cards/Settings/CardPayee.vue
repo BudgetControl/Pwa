@@ -35,10 +35,10 @@
           </div>
 
           <div>
-            <EntryActionDropdown :entryId="entry.uuid" :type="isModel === true
-              ? 'model'
-              : 'entry'
-              " :index=i @deleteItem="deleteItemFromArray" />
+            <EntryActionDropdown>
+                <Action :onAction="() => goToRoute(entry.uuid)" :label="$t('labels.details')" iconClass="fa-solid fa-eye"/>
+                <Action :onAction="() => archive(entry.uuid,i)" :label="$t('labels.archive')" iconClass="fa-solid fa-trash-can-arrow-up text-red-400"/>
+            </EntryActionDropdown>
           </div>
         </div>
       </div>
@@ -73,9 +73,11 @@
               {{ entry.amount }} <i :class="'fas fa-circle ' + entry.color_amount + ' mr-2'"></i>
             </span>
           </div>
-
-          <div v-on:click="goToRouteCreditCard(i)" class="flex text-right">
-            <i class="text-xs fa-solid fa-arrow-right-from-bracket py-1"></i>
+          
+          <div class="flex text-right">
+            <EntryActionDropdown>
+                <Action :onAction="() => goToRouteCreditCard(entry.uuid)" :label="$t('labels.details')" iconClass="fa-solid fa-eye"/>
+            </EntryActionDropdown>
           </div>
 
         </div>
@@ -87,6 +89,7 @@
 
 import ApiService from '../../../services/ApiService.vue';
 import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue";
+import Action from "@/components/Dropdowns/Action.vue";
 
 export default {
   data() {
@@ -99,17 +102,17 @@ export default {
     }
   },
   components: {
-    EntryActionDropdown
+    EntryActionDropdown, Action
   },
   mounted() {
     this.getPlannedEntries()
   },
   methods: {
-    goToRoute: function (i) {
-      this.$router.push({ name: 'entries', query: { filter_payee: this.entries[i].uuid } })
+    goToRoute: function (uuid) {
+      this.$router.push({ name: 'entries', query: { filter_payee: uuid } })
     },
-    goToRouteCreditCard: function (i) {
-      this.$router.push({ name: 'entries', query: { filter_wallet: this.creditCards[i].uuid } })
+    goToRouteCreditCard: function (uuid) {
+      this.$router.push({ name: 'entries', query: { filter_wallet: uuid } })
     },
     getPlannedEntries() {
       ApiService.debtsList().then((resp) => {
@@ -153,12 +156,9 @@ export default {
         console.error(error);
       })
     },
-    archive(uuid) {
-      ApiService.deleteDebt(uuid).then(() => {
-        this.getPlannedEntries()
-      }).catch((error) => {
-        console.error(error);
-      })
+    archive(uuid,index) {
+      ApiService.deleteDebt(uuid)
+      this.entries.splice(index, 1);
     }
   }
 }

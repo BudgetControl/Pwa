@@ -229,5 +229,6 @@ export default {
     credit_card_installement: 'Rata della carta di credito',
     choose_planned_type: 'Scegli un tipo pianificato',
     list_of_all_credit_cards: 'Elenco di tutte le carte di credito',
+    details: 'Dettagli',
 }
 </script>

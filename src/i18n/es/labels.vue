@@ -230,5 +230,6 @@ export default {
     credit_card_installement: 'Cuota de tarjeta de crédito',
     choose_planned_type: 'Elige un tipo planificado',
     list_of_all_credit_cards: 'Lista de todas las tarjetas de crédito',
+    details: 'Detalles',
 }
 </script>
