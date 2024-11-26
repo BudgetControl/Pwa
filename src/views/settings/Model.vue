@@ -1,5 +1,5 @@
 <template>
-    <section class="relative py-16 bg-blueGray-200">
+    <section class="relative py-16 bg-slate-200">
         <div class="container mx-auto px-4">
             <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
                 <div
@@ -28,13 +28,20 @@
 <script>
 
 import HeaderButton from '@/components/Button/HeaderButton.vue';
-import ApiService from '@/services/ApiService.vue';
+import CoreService from '../../services/core.service';
 import '@vuepic/vue-datepicker/dist/main.css'
 import EntriesTable from '../../components/Entry/EntriesTable.vue';
 
 export default {
     components: {
         HeaderButton, EntriesTable
+    },
+    setup() {
+        const apiService = new CoreService()
+
+        return {
+            apiService
+        }
     },
     data() {
         return {
@@ -51,7 +58,7 @@ export default {
     },
     mounted: function () {
         const refs = this.$refs
-        ApiService.model().then((res) => {
+        this.apiService.model().then((res) => {
             refs.entry.buildEntriesTable(res)
         })
     },

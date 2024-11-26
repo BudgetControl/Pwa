@@ -8,12 +8,12 @@
                     class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                     <!--body-->
                     <div class="relative p-6 flex-auto">
-                        <p class="my-4 text-blueGray-500 text-lg leading-relaxed">
+                        <p class="my-4 text-slate-500 text-lg leading-relaxed">
                             {{ message }}
                         </p>
                     </div>
                     <!--footer-->
-                    <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                    <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                         <button
                             class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button" v-on:click="confirm(false)">

@@ -10,7 +10,7 @@
       >
         <router-link to="/">
           <a
-            class="text-blueGray-700 text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+            class="text-slate-700 text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
             href="#pablo"
           >
            Budget Control
@@ -36,11 +36,11 @@
 
           <li class="flex items-center" v-if="!token">
             <router-link
-              class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
+              class="hover:text-slate-500 text-slate-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
               to="/app/auth/login"
             >
               <i
-                class="text-blueGray-400 far fa-solid fa-user text-lg leading-lg mr-2"
+                class="text-slate-400 far fa-solid fa-user text-lg leading-lg mr-2"
               />
               Login
             </router-link>
@@ -48,11 +48,11 @@
 
           <li class="flex items-center" v-if="!token">
             <router-link
-              class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
+              class="hover:text-slate-500 text-slate-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
               to="/app/auth/register"
             >
               <i
-                class="text-blueGray-400 far fas fa-sign-in-alt text-lg leading-lg mr-2"
+                class="text-slate-400 far fas fa-sign-in-alt text-lg leading-lg mr-2"
               />
               Sign up
             </router-link>
@@ -60,22 +60,22 @@
 
           <li class="flex items-center">
             <a
-              class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
+              class="hover:text-slate-500 text-slate-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
               href="https://www.facebook.com/profile.php?id=61564453328542"
               target="_blank"
             >
-              <i class="text-blueGray-400 fab fa-facebook text-lg leading-lg" />
+              <i class="text-slate-400 fab fa-facebook text-lg leading-lg" />
               <span class="lg:hidden inline-block ml-2">Share</span>
             </a>
           </li>
 
           <li class="flex items-center">
             <a
-              class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
+              class="hover:text-slate-500 text-slate-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
               href="https://x.com/BudgetControl24"
               target="_blank"
             >
-              <i class="text-blueGray-400 fab fa-twitter text-lg leading-lg" />
+              <i class="text-slate-400 fab fa-twitter text-lg leading-lg" />
               <span class="lg:hidden inline-block ml-2">Tweet</span>
             </a>
           </li>
@@ -87,7 +87,7 @@
 
 <script>
 import IndexDropdown from "@/components/Dropdowns/IndexDropdown.vue";
-import LocalStorageService from "../../services/LocalStorageService.vue";
+import { useAuthStore } from "../../storage/auth-token.store";
 
 export default {
   data() {
@@ -97,7 +97,8 @@ export default {
     };
   },
   mounted() {
-    this.token = LocalStorageService.getToken()
+    const authStore = useAuthStore();
+    this.token = authStore.authToken.token;
   },
   methods: {
     setNavbarOpen: function () {

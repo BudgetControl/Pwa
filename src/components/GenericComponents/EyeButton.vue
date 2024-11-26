@@ -1,36 +1,47 @@
 <template>
     <button v-on:click="toggleHide($event)">
-        <i v-if="hide === false" class="fas fa-eye"></i>
-        <i v-if="hide === true" class="fas fa-eye-slash"></i>
+        <i v-if="hideIcon === false" class="fas fa-eye"></i>
+        <i v-if="hideIcon === true" class="fas fa-eye-slash"></i>
     </button>
 </template>
 
 
 <script>
+import { useAppSettings } from '../../storage/settings.store';
+
 export default {
+  setup() {
+    const appSettings = useAppSettings();
+    appSettings.state = appSettings.getEye();
+    return {
+      appSettings
+    };
+  },
   data() {
     return {
-        hide: true,
+      hideIcon: false
     };
   },
   mounted() {
-    document.body.classList.add('hide-content');
+    this.hideIcon = this.appSettings.settings.eye_settings;
+    this.updateBodyClass();
   },
   methods: {
-    toggleHide: function (event) {
+    toggleHide(event) {
       event.preventDefault();
-      if (this.hide) {
-        this.hide = false;
-        this.$nextTick(() => {
-            document.body.classList.remove('hide-content');
-        });
-      } else {
-        this.hide = true;
-        this.$nextTick(() => {
-            document.body.classList.toggle('hide-content');
-        });
-      }
+      this.appSettings.settings.eye_settings = !this.hideIcon
+      this.updateBodyClass();
+      this.appSettings.setEye(this.appSettings.settings.eye_settings);
     },
-  },
+    updateBodyClass() {
+      if (this.appSettings.settings.eye_settings) {
+        document.body.classList.add('hide-content');
+        this.hideIcon = true;
+      } else {
+        document.body.classList.remove('hide-content');
+        this.hideIcon = false;
+      }
+    }
+  }
 };
 </script>

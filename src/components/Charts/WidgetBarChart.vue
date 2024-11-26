@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-700 text-white">
+  <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-slate-700 text-white">
     <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
       <div class="flex flex-wrap items-center">
         <div class="relative w-full max-w-full flex-grow flex-1">
@@ -21,7 +21,7 @@
 </template>
 <script>
 import Chart from "chart.js";
-import ChartService from "@/services/ChartService.vue";
+import ChartService from "@/services/chart.service";
 
 export default {
   props: {
@@ -119,8 +119,8 @@ export default {
         let colors = []
         let values = []
 
-
-        ChartService.expensesBarByCategory(data).then((resp) => {
+        const chartService = new ChartService()
+        chartService.expensesBarByCategory(data).then((resp) => {
           resp.bar.forEach(element => {
 
             labels.push(this.$t('app.' + element.label))

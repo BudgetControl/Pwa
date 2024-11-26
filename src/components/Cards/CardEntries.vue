@@ -4,7 +4,7 @@
     <div class="rounded-t mb-0 px-4 py-3 border-0">
       <div class="flex flex-wrap items-center">
         <div class="lg:w-2/12 px-2">
-          <h3 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+          <h3 class="text-slate-400 text-sm mt-3 mb-6 font-bold uppercase">
             Wallet
           </h3>
         </div>
@@ -24,9 +24,9 @@
 
 import EntriesTable from "@/components/Entry/EntriesTable.vue";
 import axios from 'axios'
-import ApiServiceVue from '../../services/ApiService.vue';
 import Paginator from "../GenericComponents/Paginator.vue";
-import LocalStorageService from "../../services/LocalStorageService.vue";
+import { useAppSettings } from '../../storage/settings.store';
+import CoreService from "../../services/core.service";
 
 export default {
   props: {
@@ -37,6 +37,14 @@ export default {
         return ["light", "dark"].indexOf(value) !== -1;
       },
     },
+  },
+  setup() {
+    const appSettings = useAppSettings()
+    const current_page = appSettings.settings.current_page
+
+    return {
+      appSettings, current_page
+    }
   },
   data() {
     return {
@@ -62,16 +70,16 @@ export default {
     }
   },
   mounted() {
-    LocalStorageService.set('current_page', 1)
     this.invoke()
   },
   methods: {
     invoke() {
       let _this = this
 
-      let currentPage = LocalStorageService.get('current_page') == null ? 1 : LocalStorageService.get('current_page')
+      let currentPage = this.current_page === undefined ? 1 : this.current_page
       const filter = `?per_page=20&page=${currentPage}` + this.filterQueryString(this.$route.query)
-      ApiServiceVue.getEntry(filter).then((res) => {
+      const coreService = new CoreService()
+      coreService.getEntry(filter).then((res) => {
         if (res.data.length > 0) {
           _this.$refs.entry.buildEntriesTable(res.data)
         }

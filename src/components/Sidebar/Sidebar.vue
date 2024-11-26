@@ -40,9 +40,9 @@
               <a :href="href" @click="navigate" class="text-xs uppercase py-3 font-bold block" :class="[
           isActive
             ? 'text-emerald-500 hover:text-emerald-600'
-            : 'text-blueGray-700 hover:text-blueGray-500',
+            : 'text-slate-700 hover:text-slate-500',
         ]">
-                <i class="fas fa-columns mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
+                <i class="fas fa-columns mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-slate-300']"></i>
                 {{ $t('labels.dashboard') }}
               </a>
             </router-link>
@@ -60,9 +60,9 @@
               <a :href="href" @click="navigate" class="text-xs uppercase py-3 font-bold block" :class="[
           isActive
             ? 'text-emerald-500 hover:text-emerald-600'
-            : 'text-blueGray-700 hover:text-blueGray-500',
+            : 'text-slate-700 hover:text-slate-500',
         ]">
-                <i class="fas fa-coins mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
+                <i class="fas fa-coins mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-slate-300']"></i>
                 {{ $t('labels.my_entries') }}
               </a>
             </router-link>
@@ -73,9 +73,9 @@
               <a :href="href" @click="navigate" class="text-xs uppercase py-3 font-bold block" :class="[
           isActive
             ? 'text-emerald-500 hover:text-emerald-600'
-            : 'text-blueGray-700 hover:text-blueGray-500',
+            : 'text-slate-700 hover:text-slate-500',
         ]">
-                <i class="fas fa-file-invoice mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
+                <i class="fas fa-file-invoice mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-slate-300']"></i>
                 {{ $t('labels.payee_list') }}
               </a>
             </router-link>
@@ -86,9 +86,9 @@
               <a :href="href" @click="navigate" class="text-xs uppercase py-3 font-bold block" :class="[
           isActive
             ? 'text-emerald-500 hover:text-emerald-600'
-            : 'text-blueGray-700 hover:text-blueGray-500',
+            : 'text-slate-700 hover:text-slate-500',
         ]">
-                <i class="fas fa-clipboard-check mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
+                <i class="fas fa-clipboard-check mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-slate-300']"></i>
                 {{ $t('labels.is_planned') }}
               </a>
             </router-link>
@@ -99,9 +99,9 @@
               <a :href="href" @click="navigate" class="text-xs uppercase py-3 font-bold block" :class="[
           isActive
             ? 'text-emerald-500 hover:text-emerald-600'
-            : 'text-blueGray-700 hover:text-blueGray-500',
+            : 'text-slate-700 hover:text-slate-500',
         ]">
-                <i class="fas fa-clinic-medical mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
+                <i class="fas fa-clinic-medical mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-slate-300']"></i>
                 {{ $t('labels.budgets') }}
               </a>
             </router-link>
@@ -112,9 +112,9 @@
               <a :href="href" @click="navigate" class="text-xs uppercase py-3 font-bold block" :class="[
           isActive
             ? 'text-emerald-500 hover:text-emerald-600'
-            : 'text-blueGray-700 hover:text-blueGray-500',
+            : 'text-slate-700 hover:text-slate-500',
         ]">
-                <i class="fas fa-search mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
+                <i class="fas fa-search mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-slate-300']"></i>
                 {{ $t('labels.stats') }}
               </a>
             </router-link>
@@ -132,9 +132,9 @@
               <a :href="href" @click="navigate" class="text-xs uppercase py-3 font-bold block" :class="[
           isActive
             ? 'text-emerald-500 hover:text-emerald-600'
-            : 'text-blueGray-700 hover:text-blueGray-500',
+            : 'text-slate-700 hover:text-slate-500',
         ]">
-                <i class="fas fa-tools mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"></i>
+                <i class="fas fa-tools mr-2 text-sm" :class="[isActive ? 'opacity-75' : 'text-slate-300']"></i>
                 {{ $t('labels.settings') }}
               </a>
             </router-link>
@@ -147,7 +147,7 @@
 
         <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
           <li class="items-center">
-            <i class="fas fa-sign-out-alt text-blueGray-300 mr-2 text-sm"></i>
+            <i class="fas fa-sign-out-alt text-slate-300 mr-2 text-sm"></i>
             <LogoutButton class="px-2 text-xs font-bold uppercase "></LogoutButton>
           </li>
         </ul>
@@ -163,10 +163,10 @@
 
 <script>
 import LogoutButton from "../Auth/LogoutButton.vue";
-import WorkspaceService from "../../services/WorkspaceService.vue";
-import LocalStorageServiceVue from '../../services/LocalStorageService.vue';
-import AuthService from '../../services/AuthService.vue';
+import { useAppSettings } from '../../storage/settings.store';
 import EyeButton from "@/components/GenericComponents/EyeButton.vue";
+import AuthService from "../../services/auth.service";
+import WorkspaceService from "../../services/workspace.service";
 
 export default {
   data() {
@@ -176,6 +176,12 @@ export default {
       workspaces: []
     };
   },
+  setup() {
+    const appSettings = useAppSettings()
+    return {
+      appSettings
+    }
+  },
   mounted() {
     this.workspaceList()
   },
@@ -184,18 +190,22 @@ export default {
       this.collapseShow = classes;
     },
     workspaceList: function () {
+      const settings = this.appSettings.settings
       const _this = this
-      WorkspaceService.list().then((response) => {
+      const workspaceService = new WorkspaceService()
+      workspaceService.list().then((response) => {
         response.forEach((e) => {
           _this.workspaces.push(e)
         })
-        _this.workspace = LocalStorageServiceVue.getWorkspaceId()
+        _this.workspace = settings.current_ws.uuid
       })
     },
     changeWorkspace() {
       const _this = this
-      LocalStorageServiceVue.setWorkspaceId(_this.workspace)
-      AuthService.userInfo().then(() => {
+      const authService = new AuthService()
+      this.appSettings.settings.current_ws.uuid = this.workspace
+
+      authService.userInfo().then(() => {
         _this.$router.go(0);
       }).catch(() => {
         _this.$router.push({path : '/app/auth/login'});

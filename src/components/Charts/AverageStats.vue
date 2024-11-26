@@ -9,7 +9,7 @@
         <div class="px-2 w-full">
             <card-stats :statSubtitle="$t('labels.average_incoming')"
                 :statTitle="`${stats.averageIncoming.statTitle} €`" statDescripiron="Last month"
-                statIconName="fas fa-regular fa-money-bill" statIconColor="bg-lightBlue-500" />
+                statIconName="fas fa-regular fa-money-bill" statIconColor="bg-sky-500" />
         </div>
 
         <div class="px-2 w-full">
@@ -27,12 +27,21 @@
 </template>
 
 <script>
-import StatsService from '../../services/StatsService.vue';
 import CardStats from '@/components/Cards/CardStats.vue';
+import StatsService from '../../services/stats.service';
+
 
 export default {
     components: {
         CardStats
+    },
+    setup() {
+
+        const statsService = new StatsService()
+
+        return {
+            statsService
+        }
     },
     data() {
         return {
@@ -60,7 +69,7 @@ export default {
     },
     methods: {
         getAverageIncoming: function () {
-            StatsService.getAverageIncoming().then((resp) => {
+            this.statsService.getAverageIncoming().then((resp) => {
                 let data = resp
                 this.stats.averageIncoming.statTitle = data.total.toFixed(2)
             }).catch((error) => {
@@ -68,7 +77,7 @@ export default {
             })
         },
         getAverageExpenses: function () {
-            StatsService.getAverageExpenses().then((resp) => {
+            this.statsService.getAverageExpenses().then((resp) => {
                 let data = resp
                 const total = data.total * -1
                 this.stats.averageExpenses.statTitle = total.toFixed(2)
@@ -77,7 +86,7 @@ export default {
             })
         },
         getAverageSavings: function () {
-            StatsService.getAverageSavings().then((resp) => {
+            this.statsService.getAverageSavings().then((resp) => {
                 let data = resp
                 const total = data.total * -1
                 this.stats.averageSavings.statTitle = total.toFixed(2)
@@ -86,7 +95,7 @@ export default {
             })
         },
         getPlannedExpenses: function () {
-            StatsService.getPlannedExpenses().then((resp) => {
+            this.statsService.getPlannedExpenses().then((resp) => {
                 let data = resp
                 const total = data.total * -1
                 this.stats.plannedExpenses.statTitle = total.toFixed(2)

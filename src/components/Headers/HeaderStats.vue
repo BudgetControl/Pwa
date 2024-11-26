@@ -12,7 +12,7 @@
           <div class="min-w px-2">
             <router-link to="/app/entries" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
-                <card-stats :statSubtitle="$t('labels.wallet')" :statTitle="wallet.statTitle + ' €'" statIconColor="bg-lightBlue-500" />
+                <card-stats :statSubtitle="$t('labels.wallet')" :statTitle="wallet.statTitle + ' €'" statIconColor="bg-sky-500" />
               </a>
             </router-link>
           </div>
@@ -40,7 +40,7 @@
                 <card-stats :statSubtitle="$t('labels.incoming')" :statTitle="incoming.statTitle + ' €'"
                   :statArrow="incoming.statArrow" :statPercent="incoming.statPercent"
                   :statPercentColor="incoming.statPercentColor" statDescripiron="Last month" statIconName="fas fa-coins"
-                  statIconColor="bg-lightBlue-500" />
+                  statIconColor="bg-sky-500" />
               </a>
             </router-link>
           </div>
@@ -64,11 +64,20 @@
 <script>
 import CardStats from "@/components/Cards/CardStats.vue";
 import CardWallet from "@/components/Cards/CardWallet.vue";
-import StatsService from "../../services/StatsService.vue";
+import { useRefreshStore } from "../../storage/refresh";
+import StatsService from '../../services/stats.service';
 
 export default {
   components: {
     CardStats, CardWallet
+  },
+  setup() {
+    const refreshApp = useRefreshStore()
+    
+
+    return {
+      refreshApp
+    }
   },
   data() {
     return {
@@ -107,27 +116,15 @@ export default {
       planned: 0
     }
   },
-  watch: {
-    "$store.state.actions.updatestats": function (updatestats) {
-      if (updatestats === true) {
-        this.update()
-      }
-    },
-  },
   mounted() {
+    this.refreshApp.$subscribe((mutation, state) => {
+  if (state.state) {
+    this.update();
+  }
+});
     this.update()
-    let _this = this
-    setInterval(function() {
-      _this.handleStorageChange()
-    },'1000')
   },
   methods: {
-    handleStorageChange() {
-        if (localStorage.getItem("new_entry") == 'true') {
-          this.update()
-          localStorage.setItem("new_entry", false)
-        }
-    },
     update() {
       this.getMonthIncoming()
       this.getMonthexpenses()
@@ -137,7 +134,8 @@ export default {
       this.getHealth()
     },
     getWallet() {
-      StatsService.total().then((resp) => {
+      const statsService = new StatsService()
+      statsService.total().then((resp) => {
         let data = resp
         this.wallet.statTitle = data.total.toFixed(2)
 
@@ -147,7 +145,8 @@ export default {
     },
 
     getHealth() {
-      StatsService.health().then((resp) => {
+      const statsService = new StatsService()
+      statsService.health().then((resp) => {
         let data = resp
         this.health.statTitle = data.total.toFixed(2)
 
@@ -163,7 +162,8 @@ export default {
     },
 
     getWalletPlanned() {
-      StatsService.planned().then((resp) => {
+      const statsService = new StatsService()
+      statsService.planned().then((resp) => {
 
         let data = resp
         this.walletPlanned.statTitle = data.total.toFixed(2)
@@ -178,7 +178,8 @@ export default {
       const start_date = date_time.getFullYear() + '-' + (date_time.getMonth() + 1) + '-01'
       const end_date = date_time.getFullYear() + '-' + (date_time.getMonth() + 1) + '-' + date_time.getDate()
 
-      StatsService.incoming(`?start_date=${start_date}&end_date=${end_date}`).then((resp) => {
+      const statsService = new StatsService()
+      statsService.incoming(`?start_date=${start_date}&end_date=${end_date}`).then((resp) => {
         let data = resp
         this.incoming.statTitle = data.total.toFixed(2)
         this.incoming.statPercent = data.percentage
@@ -190,7 +191,8 @@ export default {
       })
     },
     getMonthexpenses() {
-      StatsService.expenses().then((resp) => {
+      const statsService = new StatsService()
+      statsService.expenses().then((resp) => {
         let data = resp
         this.expenses.statTitle = data.total.toFixed(2)
         this.expenses.statPercent = data.percentage
@@ -203,7 +205,8 @@ export default {
     },
     getWallets() {
       this.wallets = []
-      StatsService.wallets().then((resp) => {
+      const statsService = new StatsService()
+      statsService.wallets().then((resp) => {
         let data = resp
         data.forEach(e => {
             const walletType = e.type

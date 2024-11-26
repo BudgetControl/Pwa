@@ -1,5 +1,5 @@
 <template>
-    <section class="relative py-16 bg-blueGray-200">
+    <section class="relative py-16 bg-slate-200">
         <div class="container mx-auto px-4">
             <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
                 <div
@@ -41,7 +41,7 @@
                                             {{ $t('app.' + subItem.slug) }}
 
                                             <span v-on:click="openModal(k, subItem.id)" v-if="subItem.custom == 1"
-                                                class="text-xs align-right font-semibold  py-1 px-2 rounded text-blueGray-600 bg-blueGray-200 uppercase">
+                                                class="text-xs align-right font-semibold  py-1 px-2 rounded text-slate-600 bg-slate-200 uppercase">
                                                 edit
                                             </span>
 
@@ -62,12 +62,19 @@
 <script>
 
 import HeaderButton from '@/components/Button/HeaderButton.vue';
-import ApiService from '@/services/ApiService.vue';
+import CoreService from '../../services/core.service';
 import '@vuepic/vue-datepicker/dist/main.css'
 
 export default {
     components: {
         HeaderButton
+    },
+    setup() {
+        const apiService = new CoreService()
+
+        return {
+            apiService
+        }
     },
     data() {
         return {
@@ -85,7 +92,7 @@ export default {
         }
     },
     mounted: function () {
-        ApiService.categories().then((res) => {
+        this.apiService.categories().then((res) => {
             let _this = this
             res.forEach(function (item) {
                 _this.categories.push({

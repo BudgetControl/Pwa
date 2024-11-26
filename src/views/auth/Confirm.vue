@@ -4,14 +4,14 @@
     </loading>
     <div class="flex content-center items-center justify-center h-full">
       <div class="w-full lg:w-6/12 px-4">
-        <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
+        <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-slate-200 border-0">
           <div class="rounded-t mb-0 px-6 py-6">
             <div class="text-center mb-3">
             </div>
-            <hr class="mt-6 border-b-1 border-blueGray-300" />
+            <hr class="mt-6 border-b-1 border-slate-300" />
           </div>
           <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-            <div class="text-blueGray-400 text-center mb-3 font-bold">
+            <div class="text-slate-400 text-center mb-3 font-bold">
               <form  action="javascript:void(0)">
 
                 <div role="alert" v-if="error">
@@ -31,7 +31,7 @@
   </div>
 </template>
 <script>
-import AuthService from "../../services/AuthService.vue";
+import AuthService from "../../services/auth.service";
 import loading from 'vue-full-loading'
 
 
@@ -49,11 +49,12 @@ export default {
     async mounted() {
       const token = this.$route.params.token
       const _this = this
+      const authService = new AuthService()
 
       this.show = false
       this.error = false
 
-      AuthService.confirm(token).then(() => {
+      authService.confirm(token).then(() => {
         _this.$router.push({ path: '/app/login' })
       }).catch((err) => {
         _this.show = false

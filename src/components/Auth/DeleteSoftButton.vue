@@ -4,17 +4,18 @@
 </template>
   
 <script>
-import AuthServiceVue from '../../services/AuthService.vue';
-import LocalStorageService from '../../services/LocalStorageService.vue';
+import { AuthService } from '../../services/auth.service';
+
 
 export default {
     methods: {
         async deleteAllData() {
             const _this = this
+            const authService= new AuthService()
+
             if(confirm("Are you sure you want to delete data ? Only data wil be deleted")) {
-                AuthServiceVue.deleteDataUser() // Adjust the URL as needed
+                authService.deleteDataUser() // Adjust the URL as needed
                 .then(() => {
-                    LocalStorageService.clear()
                     _this.$router.push({ path: '/' })
                 })
                 .catch(error => {

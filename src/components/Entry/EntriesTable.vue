@@ -14,17 +14,17 @@
 
             <div v-if="entries.length === 0">
                 <div class="text-center">
-                    <p class="text-blueGray-400 text-lg">{{ $t('labels.no_entries_found') }}</p>
+                    <p class="text-slate-400 text-lg">{{ $t('labels.no_entries_found') }}</p>
                 </div>
             </div>
 
             <div v-for="(entry, i) in entries" :key="i">
                 <div v-if="(entry.planned && action.show_planned) || (!entry.planned)"
-                    class="container px-4 mx-auto py-3 border border-solid border-blueGray-100 shadow" :class="[
-                        entry.payee
-                            ? 'bg-blueGray-200'
+                    class="container px-4 mx-auto py-3 border border-solid border-slate-100 shadow" :class="[
+                        entry.type == 'debit'
+                            ? 'bg-slate-200'
                             : '',
-                        entry.transfer
+                        entry.type == 'transfer'
                             ? 'transfer-color'
                             : ''
                     ]">
@@ -39,19 +39,19 @@
                     <div class="flex">
                         <div class="w-full px-4 flex-1">
                             <i v-on:click="$router.push(`/app/entries?filter_category=${entry.category.id}`)"
-                                :class="'text-lightBlue-400 ' + entry.category.icon"> </i> <span
-                                class="px-2  text-xs text-blueGray-700">
+                                :class="'text-sky-400 ' + entry.category.icon"> </i> <span
+                                class="px-2  text-xs text-slate-700">
                                 {{ entry.category.name }} </span>
                             <span class="text-xs rounded block"
-                                :class="[entry.payee ? 'text-blueGray-900' : 'text-blueGray-400']">( {{ entry.wallet }}
+                                :class="[entry.type == 'debit' ? 'text-slate-900' : 'text-slate-400']">( {{ entry.wallet }}
                                 )
                                 {{
-                                    entry.payee
+                                    entry.type == 'debit'
                                 }}</span>
                         </div>
                         <div class="w-full px-4 flex-1 text-right">
                             <span v-on:click="$router.push(`/app/entries?filter_type=${entry.type_amount}`)"
-                                class="text-sm block text-blueGray-700 rounded amount">
+                                class="text-sm block text-slate-700 rounded amount">
                                 {{ entry.amount }} <i :class="'fas fa-circle ' + entry.color_amount + ' mr-2'"></i>
                             </span>
 
@@ -68,11 +68,11 @@
 
                     <div class="flex flex-wrap">
                         <div class="flex-l w-full px-4">
-                            <span class="text-xs block text-blueGray-700 rounded ">{{ entry.note }}</span>
+                            <span class="text-xs block text-slate-700 rounded ">{{ entry.note }}</span>
                         </div>
 
                         <div class="w-full px-4 flex-1">
-                            <span class="text-xs mt-2 text-blueGray-700 rounded ">
+                            <span class="text-xs mt-2 text-slate-700 rounded ">
                                 <span v-for="(label, i) in entry.labels"
                                     v-on:click="$router.push(`/app/entries?filter_label=${label.id}`)" :key="i"
                                     class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
@@ -83,7 +83,7 @@
                         </div>
 
                         <div class="w-full px-4 flex-1 text-right">
-                            <span class="text-xs mt-2 block text-blueGray-700 rounded ">
+                            <span class="text-xs mt-2 block text-slate-700 rounded ">
                                 <span v-if="entry.planned == true"
                                     class="'text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1 bg-red-200">{{
                                         $t("labels.planned_entry") }}</span>
@@ -107,8 +107,8 @@ import react from "@/assets/img/react.jpg";
 import vue from "@/assets/img/react.jpg";
 import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue";
 import Action from "@/components/Dropdowns/Action.vue";
-import ApiService from '../../services/ApiService.vue';
 import ConfirmModal from '@/components/GenericComponents/ConfirmModal.vue';
+import CoreService from "../../services/core.service";
 
 export default {
     props: {
@@ -125,6 +125,14 @@ export default {
     },
     components: {
         EntryActionDropdown, Action, ConfirmModal
+    },
+    setup() {
+
+        const apiService = new CoreService()
+
+        return {
+            apiService
+        }
     },
     data() {
         return {
@@ -190,7 +198,7 @@ export default {
         getwallet() {
             let _this = this
 
-            ApiService.wallets().then((res) => {
+            this.apiService.wallets().then((res) => {
                 let data = res
                 data.forEach(function (r) {
                     _this.input.wallet.push(r)

@@ -5,31 +5,31 @@
     <div class="flex content-center items-center justify-center h-full ">
       <div class="w-full lg:w-4/12 px-4">
         <div
-          class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
+          class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-slate-200 border-0">
           <div class="rounded-t mb-0 px-6 py-6">
             <div class="text-center mb-3">
-              <h6 class="text-blueGray-500 text-sm font-bold">
+              <h6 class="text-slate-500 text-sm font-bold">
                 {{ $t('labels.sign_in_with') }}
               </h6>
             </div>
-            <!-- <div class="btn-wrapper text-center">
-              <button
-                class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
+            <div class="btn-wrapper text-center">
+              <!-- <button
+                class="bg-white active:bg-slate-50 text-slate-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                 type="button">
                 <img alt="..." class="w-5 mr-1" :src="facebook" />
                 Facebook
-              </button>
+              </button> -->
               <button @click="signInGoogle()"
-                class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md items-center font-bold text-xs ease-linear transition-all duration-150 w-full text-center"
+                class="bg-white active:bg-slate-50 text-slate-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md items-center font-bold text-xs ease-linear transition-all duration-150 w-full text-center"
                 type="button">
                 <img alt="SignIn with Google" class="w-5 mr-1 inline-flex" :src="google" />
                 Google
               </button>
             </div>
-            <hr class="mt-6 border-b-1 border-blueGray-300" /> -->
+            <hr class="mt-6 border-b-1 border-slate-300" />
           </div>
           <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-            <!-- <div class="text-blueGray-400 text-center mb-3 font-bold">
+            <!-- <div class="text-slate-400 text-center mb-3 font-bold">
               <small>{{ $t('labels.or_sign_in_with_credentials') }}</small>
             </div> -->
             <form @submit="submit()" action="javascript:void(0)">
@@ -46,13 +46,13 @@
 
               <div class="relative w-full mb-3">
                 <input type="email" v-model="email"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Email" />
               </div>
 
               <div class="relative w-full mb-3">
                 <input type="password" v-model="password"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Password" />
               </div>
 
@@ -84,21 +84,31 @@
     </div>
 
 
-    <div class="flex flex-wrap mt-6 relative radius bg-blueGray-200 justify-center mt-10 text-xs p-2"
+    <div class="flex flex-wrap mt-6 relative radius bg-slate-200 justify-center mt-10 text-xs p-2"
       v-html="$t('text.profile.policy')">
     </div>
   </div>
 </template>
 <script>
-//import facebook from "@/assets/img/github.svg";
+
 import google from "@/assets/img/google.svg";
-import AuthService from "../../services/AuthService.vue";
+import AuthService from "../../services/auth.service";
 import loading from 'vue-full-loading'
 import VerifyEmailButton from "../../components/Auth/VerifyEmailButton.vue";
-import LocalStorageService from "../../services/LocalStorageService.vue";
-import { Browser } from '@capacitor/browser';
+import { useAuthStore } from "../../storage/auth-token.store";
+import { useAppSettings } from "../../storage/settings.store";
+import { Browser } from "@capacitor/browser";
 
 export default {
+  setup() {
+    const authStore = useAuthStore()
+    const appSettings = useAppSettings()
+
+    return {
+      authStore,
+      appSettings
+    }
+  },
   components: {
     loading,
     VerifyEmailButton
@@ -118,57 +128,40 @@ export default {
       let email = this.email;
       let password = this.password;
       const _this = this
-      console.debug(this.$t("messages.wrong_password"))
+      const authService = new AuthService()
 
       this.show = true
       this.error = false
+      await authService.login(email, password).then((response) => {
+        const settings = this.appSettings.settings
+        //save token in local storage
+        this.authStore.authToken = { token: response.token, timestamp: new Date().toISOString()};
+        settings.workspaces = response.workspaces
+        settings.current_ws = response.workspaces[0]
 
-      //first of all we should check if User is already logged in
-      const token = LocalStorageService.getToken()
-      if (token === null) {
-
-        AuthService.login(email, password).then((response) => {
-          //save token in local storage
-          LocalStorageService.setToken(response.token);
-          const ws = LocalStorageService.getWorkspaceId()
-          let currentWsUuid = response.workspaces[0].uuid
-          response.workspaces.forEach(workspace => {
-            if (workspace.uuid === ws) {
-              currentWsUuid = ws
-            }
-          });
-
-          const currentWSInStore = LocalStorageService.getWorkspaceId()
-          if (currentWSInStore !== currentWsUuid) {
-            LocalStorageService.setWorkspaceId(currentWsUuid)
-          }
-
-          AuthService.userInfo().then(() => {
-            _this.$router.push({ path: '/app/dashboard' })
-          }).catch(() => {
-            _this.error = this.$t('messages.generic_error')
-          })
-
-        }).catch((err) => {
+        authService.userInfo().then(() => {
+          _this.$router.push({ path: '/app/dashboard' })
+        }).catch((error) => {
+          console.error(error)
+          _this.error = this.$t('messages.generic_error')
           _this.show = false
-
-          switch (err.response.data.code) {
-            case 'EML_NaN':
-              _this.error = this.$t('messages.login.not_verified_email')
-              _this.verify = true
-              break;
-            default:
-              _this.error = this.$t('messages.login.not_valid_password')
-              break;
-          }
-
         })
-      } else {
-        // redirect to dashboard
-        console.debug('User is already logged in')
-        this.$router.push({ path: '/app/dashboard' })
-      }
 
+      }).catch((err) => {
+        _this.show = false
+
+        console.error(err) //FIXME: remove this line
+
+        switch (err.response.data.code) {
+          case 'EML_NaN':
+            _this.error = this.$t('messages.login.not_verified_email')
+            _this.verify = true
+            break;
+          default:
+            _this.error = this.$t('messages.login.not_valid_password')
+            break;
+        }
+      })
     },
     async signInGoogle() {
       const _this = this
@@ -176,7 +169,8 @@ export default {
       this.show = true
       this.error = false
 
-      AuthService.providerUri('google').then((resp) => {
+      const authService = new AuthService()
+      authService.providerUri('google').then((resp) => {
         Browser.open({ url: resp.uri });
       }).catch(() => {
         _this.show = false

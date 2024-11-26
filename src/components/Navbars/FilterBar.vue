@@ -2,7 +2,7 @@
     <div class="flex flex-wrap">
         <div class="w-full xl:w-6/12 px-4 mb-2">
             <select @change="setFilter()"
-                class="text-center border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                class="text-center border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 v-model="input.year" id="year">
                 <option v-for="(year, k) in years" :key="k" :value="year">{{ year }}</option>
             </select>
@@ -10,7 +10,7 @@
 
         <div class="w-full xl:w-6/12 px-4">
             <select @change="setFilter()"
-                class="text-center border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                class="text-center border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 v-model="input.month" id="month">
                 <option v-for="(month, k) in months" :key="k" :value="k">{{ month }}</option>
             </select>

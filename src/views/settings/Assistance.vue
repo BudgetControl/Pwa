@@ -1,5 +1,5 @@
 <template>
-    <section class="relative py-16 bg-blueGray-200">
+    <section class="relative py-16 bg-slate-200">
         <div class="container mx-auto px-4">
             <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
                 <div
@@ -14,7 +14,7 @@
                                 <div class="lg:w-12/12 px-2 w-full">
                                     <textarea type="text" placeholder="Write here your question" v-model="text"
                                         rows="12"
-                                        class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full"></textarea>
+                                        class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border border-slate-300 outline-none focus:outline-none focus:shadow-outline w-full"></textarea>
                                 </div>
                             </div>
 
@@ -48,13 +48,21 @@
 
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
-import ApiService from '../../services/ApiService.vue';
-import LocalStorageService from '../../services/LocalStorageService.vue';
+import CoreService from '../../services/core.service';
+import { useAppSettings } from '../../storage/settings.store';
 import AlertModal from '../../components/GenericComponents/AlertModal.vue';
 
 export default {
     components: {
         HeaderButton,AlertModal
+    },
+    setup() {
+        const apiService = new CoreService()
+        const appSettings = useAppSettings()
+
+        return {
+            apiService, appSettings
+        }
     },
     data() {
         return {
@@ -71,13 +79,13 @@ export default {
     },
     methods: {
         sendRequest() {
-            const userSettings = LocalStorageService.get("settings")
+            const userSettings = this.appSettings.settings.user
             const data = {
-                "user_id": userSettings.user_profile.id,
+                "user_id": userSettings.uuid,
                 "text": this.text
             }
 
-            ApiService.assistance(data).then(() => {
+            this.apiService.assistance(data).then(() => {
                 alert(this.$t('text.assistance.thanks'), "success")
             }).catch(() => {
                 alert(this.$t('labels.generic_error'), "error")

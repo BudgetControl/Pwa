@@ -1,5 +1,5 @@
 <template>
-    <section class="relative py-16 bg-blueGray-200">
+    <section class="relative py-16 bg-slate-200">
         <div class="container mx-auto px-4">
             <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
                 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
@@ -9,11 +9,11 @@
                         <!-- Regular Input -->
                         <div class="mb-3 pt-0">
                             <input type="text" placeholder="" v-model="modal.name"
-                                class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
+                                class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border border-slate-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                         </div>
 
                         <div class="mb-3 pt-0">
-                            <span class="text-xs text-blueGray-400">  {{ $t('labels.label_color') }}</span>
+                            <span class="text-xs text-slate-400">  {{ $t('labels.label_color') }}</span>
                             <color-picker :visible-formats="['hex']" :color="modal.color" @color-change="updateColor" />
                         </div>
 
@@ -26,7 +26,7 @@
 
                     </div>
                     <!--footer-->
-                    <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                    <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                         <button
                             class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button" v-on:click="saveModal()">
@@ -42,7 +42,7 @@
 
 <script>
 import HeaderButton from '@/components/Button/HeaderButton.vue';
-import ApiService from '@/services/ApiService.vue';
+import CoreService from '../../../services/core.service';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { ColorPicker } from 'vue-accessible-color-picker';
 import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
@@ -50,6 +50,13 @@ import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
 export default {
     components: {
         HeaderButton, ColorPicker, AlertModal
+    },
+    setup() {
+        const apiService = new CoreService()
+
+        return {
+            apiService
+        }
     },
     data() {
         return {
@@ -82,7 +89,7 @@ export default {
 
         },
         openModal(id) {
-            ApiService.label(id).then((resp) => {
+            this.apiService.label(id).then((resp) => {
                 this.modal.id = resp.id
                 this.modal.name = resp.name
                 this.modal.archive = resp.archive
@@ -93,7 +100,7 @@ export default {
 
         saveModal() {
             const _this = this
-            ApiService.setLabel(this.modal.uuid, this.modal).then(() => {
+            this.apiService.setLabel(this.modal.uuid, this.modal).then(() => {
                 alert('Label updated')
                 _this.$router.push({path : '/app/settings/label'})
             })
