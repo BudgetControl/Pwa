@@ -51,7 +51,7 @@ export default {
             }
         },
         invokeEntry() {
-            this.appSettings.set({ current_page: this.pagination.current })
+            this.appSettings.settings.current_page = this.pagination.current
             this.$parent.invoke()
         }
     }

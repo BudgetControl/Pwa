@@ -40,10 +40,10 @@ export default {
   },
   setup() {
     const appSettings = useAppSettings()
-    const current_page = appSettings.settings.current_page
-
+    appSettings.settings.current_page = 1
+    
     return {
-      appSettings, current_page
+      appSettings
     }
   },
   data() {
@@ -75,8 +75,7 @@ export default {
   methods: {
     invoke() {
       let _this = this
-
-      let currentPage = this.current_page === undefined ? 1 : this.current_page
+      const currentPage = this.appSettings.settings.current_page
       const filter = `?per_page=20&page=${currentPage}` + this.filterQueryString(this.$route.query)
       const coreService = new CoreService()
       coreService.getEntry(filter).then((res) => {

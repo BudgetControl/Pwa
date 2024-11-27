@@ -3,13 +3,10 @@
         <div class="block w-full overflow-x-auto" id="entries-table">
 
             <div class="container px-4 mx-auto py-3 ">
-                <div class="flex items-center ps-3" v-if="isModel == false">
-                    <input id="vue-checkbox-list" type="checkbox" v-model="action.show_planned" value="true"
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                    <label for="vue-checkbox-list"
-                        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                        {{ $t("labels.show_planned_entries") }}</label>
-                </div>
+                <CheckboxButton v-if="isModel == false" 
+                    @update:active="action.show_planned = !action.show_planned" 
+                    :label="$t('labels.show_planned_entries')"
+                />
             </div>
 
             <div v-if="entries.length === 0">
@@ -46,7 +43,7 @@
                                 :class="[entry.type == 'debit' ? 'text-slate-900' : 'text-slate-400']">( {{ entry.wallet }}
                                 )
                                 {{
-                                    entry.type == 'debit'
+                                    entry.payee
                                 }}</span>
                         </div>
                         <div class="w-full px-4 flex-1 text-right">
@@ -109,6 +106,7 @@ import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue"
 import Action from "@/components/Dropdowns/Action.vue";
 import ConfirmModal from '@/components/GenericComponents/ConfirmModal.vue';
 import CoreService from "../../services/core.service";
+import CheckboxButton from "../Button/CheckboxButton.vue";
 
 export default {
     props: {
@@ -124,7 +122,7 @@ export default {
         }
     },
     components: {
-        EntryActionDropdown, Action, ConfirmModal
+        EntryActionDropdown, Action, ConfirmModal, CheckboxButton
     },
     setup() {
 
