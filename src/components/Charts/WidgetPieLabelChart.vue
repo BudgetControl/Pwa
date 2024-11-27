@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-700">
+  <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-slate-700">
     <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
       <div class="flex flex-wrap items-center">
         <div class="relative w-full max-w-full flex-grow flex-1">
@@ -22,7 +22,8 @@
 </template>
 <script>
 import Chart from "chart.js";
-import ChartService from "@/services/ChartService.vue";
+import ChartService from "@/services/chart.service";
+
 
 export default {
   props: {
@@ -102,7 +103,9 @@ export default {
           end: year + "/" + month + "/31"
         }]
 
-        ChartService.expensesLabelApplePie(date).then((resp) => {
+
+            const chartService = new ChartService()
+            chartService.expensesLabelApplePie(date).then((resp) => {
 
           const datasetApplePie = {
             labels: [],

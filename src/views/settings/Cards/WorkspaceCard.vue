@@ -1,5 +1,5 @@
 <template>
-    <section class="relative py-16 bg-blueGray-200">
+    <section class="relative py-16 bg-slate-200">
         <div class="container mx-auto px-4">
             <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
                 <div
@@ -10,14 +10,14 @@
                         <!-- Regular Input -->
                         <div class="mb-3 pt-0">
                             <input type="text" placeholder="Workspace name" v-model="modal.name"
-                                class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
+                                class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border border-slate-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                         </div>
 
                         <div class="mb-3 pt-0">
                             <label for="exclude_stats">
                                 {{ $t('labels.default_currency') }}
                                 <select
-                                    class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                    class="w-full border-0 px-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                     v-model="modal.currency">
                                     <option v-for="(item, k) in currencies" :key="k" :value="item.id">{{ $t('app.' + item.slug) }}
                                     </option>
@@ -29,7 +29,7 @@
                             <label for="exclude_stats">
                                 {{ $t('labels.default_payment_type') }}
                                 <select
-                                    class="w-full border-0 px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                    class="w-full border-0 px-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                     v-model="modal.payment_type">
                                     <option v-for="(item, k) in payment_types" :key="k" :value="item.id">{{ $t('app.' + item.slug) }}
                                     </option>
@@ -42,7 +42,7 @@
                             <div class="flex">
                                 <div class="lg:w-6/12 w-full">
                                     <input type="email" placeholder="exmail@example.com" v-model="shareEmail"
-                                        class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full" />
+                                        class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border border-slate-300 outline-none focus:outline-none focus:shadow-outline w-full" />
                                 </div>
                                 <div class="lg:w-6/12 px-2">
                                     <button
@@ -67,7 +67,7 @@
 
                     </div>
                     <!--footer-->
-                    <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                    <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                         <button
                             class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button" v-on:click="saveModal()">
@@ -84,11 +84,10 @@
 <script>
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
-import ApiServiceVue from '../../../services/ApiService.vue';
-import WorkspaceService from '../../../services/WorkspaceService.vue';
-import AuthServiceVue from '../../../services/AuthService.vue';
-import LocalStorageServiceVue from '../../../services/LocalStorageService.vue';
 import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
+import WorkspaceService from '../../../services/workspace.service';
+import CoreService from '../../../services/core.service';
+import { useAppSettings } from '../../../storage/settings.store';
 
 export default {
     components: {
@@ -108,6 +107,13 @@ export default {
             }
         }
     },
+    setup() {
+        const appSettings = useAppSettings()
+
+        return {
+            appSettings
+        }
+    },
     mounted: function () {
         this.getCurrencies()
         this.getPaymentTypes()
@@ -123,34 +129,39 @@ export default {
     methods: {
         saveModal() {
             if(this.$route.params.id) {
-                WorkspaceService.update(this.$route.params.id, this.modal).then(() => {
+                const workspaceService = new WorkspaceService()
+                workspaceService.update(this.$route.params.id, this.modal).then(() => {
                     alert(this.$t('messages.workspace.updated'))
                     this.$router.push('/app/settings/workspace')
                 })
             } else {
-                WorkspaceService.add(this.modal).then(() => {
+                const workspaceService = new WorkspaceService()
+                workspaceService.add(this.modal).then(() => {
                     alert(this.$t('messages.workspace.added'))
                     this.$router.push('/app/settings/workspace')
                 })
             }
         },
         getCurrencies() {
-            ApiServiceVue.currencies().then((res) => {
+            const coreService = new CoreService()
+            coreService.currencies().then((res) => {
                 this.currencies = res
             })
         },
         getPaymentTypes() {
-            ApiServiceVue.paymentstype().then((res) => {
+            const coreService = new CoreService()
+            coreService.paymentstype().then((res) => {
                 this.payment_types = res
             })
         },
         getWorkspaceDetail() {
-            WorkspaceService.get(this.$route.params.id).then((res) => {
+            const workspaceService = new WorkspaceService()
+                workspaceService.get(this.$route.params.id).then((res) => {
                 this.modal.name = res.workspace.name
                 this.modal.currency = res.settings.data.currencyId
                 this.modal.payment_type = res.settings.data.paymenttypeId
                 res.workspace.users.forEach((item) => {
-                    const user = LocalStorageServiceVue.getUser()
+                    const user = this.appSettings.settings.user
                     if(item.uuid !== user.uuid) {
                         this.modal.shareWith.push(item)
                     }
@@ -163,8 +174,10 @@ export default {
         share() {
             //check if is a valid email
             const email = this.shareEmail
+            const coreService = new CoreService()
+
             if (this.shareEmail.length > 0 && this.shareEmail.includes('@') && this.shareEmail.includes('.') && this.shareEmail.length > 5) {
-                AuthServiceVue.userInfoByEmail(email).then((res) => {
+                coreService.userInfoByEmail(email).then((res) => {
                     this.modal.shareWith.push(res)
                 }).catch(() => {
                     alert(this.$t('labels.user_not_found'), 'error')

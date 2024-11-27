@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a class="text-blueGray-500 py-1 px-3" href="#pablo" ref="btnDropdownRef" v-on:click="toggleDropdown($event)">
+    <a class="text-slate-500 py-1 px-3" href="#pablo" ref="btnDropdownRef" v-on:click="toggleDropdown($event)">
       <i class="fas fa-ellipsis-v"></i>
     </a>
     <div ref="popoverDropdownRef"
@@ -16,8 +16,38 @@
 </template>
 <script>
 import { createPopper } from "@popperjs/core";
+import CoreService from "../../services/core.service";
 
 export default {
+  props: {
+    entryId: {
+      type: String,
+      required: true
+    },
+    queryParams: {
+      type: String,
+      default: ""
+    },
+    icon: {
+      type: String,
+      default: "fa-ellipsis-v",
+    },
+    index: {
+      required: true
+    },
+    type: {
+      required: false,
+      type: String,
+      default: "emtry"
+    }
+  },
+  setup() {
+        const apiService = new CoreService()
+
+        return {
+            apiService
+        }
+    },
   data() {
     return {
       dropdownPopoverShow: false,

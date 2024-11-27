@@ -29,14 +29,14 @@
 
             </div>
 
-            <div class="flex items-center justify-between text-sm text-blueGray-400 text-xs">
+            <div class="flex items-center justify-between text-sm text-slate-400 text-xs">
                    <span >{{ $t('labels.spent') }} {{  localBudget.totalSpent }} {{ currency }}</span>
                    <span v-if="localBudget.planned">{{ $t('labels.planned') }} {{  localBudget.planned.total }} {{ currency }}</span>
                    <span>{{ $t('labels.remaining') }} {{  localBudget.totalRemaining }} {{ currency }}</span>
             </div>
 
             <div class="mb-4">
-                <span class="text-xs font-semibold inline-block text-blueGray-400">
+                <span class="text-xs font-semibold inline-block text-slate-400">
                     {{ localBudget.description }}
                 </span>
             </div>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <sidebar />
-    <div class="relative md:ml-64 bg-blueGray-100">
+    <div class="relative md:ml-64 bg-slate-100">
       <div class="px-1 md:px-10 mx-auto w-full">
         <main class="profile-page">
           <section class="relative block h-150-px">
@@ -9,7 +9,7 @@
               style="transform: translateZ(0);">
               <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
                 version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-                <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
+                <polygon class="text-slate-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
               </svg>
             </div>
           </section>

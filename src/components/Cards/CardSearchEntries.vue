@@ -1,50 +1,27 @@
 <template>
-    <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
+    <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-slate-100 border-0">
         <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
             <form>
-                <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                <h6 class="text-slate-400 text-sm mt-3 mb-6 font-bold uppercase">
                     {{ $t('labels.search') }}
                 </h6>
                 <div class="flex flex-wrap">
 
-                    <div class="w-full lg:w-6/12 px-4">
+                    <div class="w-full lg:w-12/12 px-4">
                         <div class="relative w-full mb-3">
-                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                            <label class="block uppercase text-slate-600 text-xs font-bold mb-2"
                                 htmlFor="grid-password">
                                 {{ $t('labels.search_by_text') }}
                             </label>
                             <input type="text"
-                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 v-model="action.text" />
-                        </div>
-                    </div>
-
-                    <div class="w-full lg:w-6/12 px-4">
-                        <div class="relative w-full mb-3">
-                            <span class="block uppercase text-blueGray-600 text-xs font-bold mb-2"> {{
-                                $t('labels.is_planned') }}</span>
-                            <div class="container">
-                                <label for="planned-no" class="uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                    htmlFor="grid-password">
-                                    {{ $t('labels.no') }}
-                                    <input type="radio" id="planned-no" value="0"
-                                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
-                                        v-model="action.planned" />
-                                </label>
-                                <label for="planned-yes" class="uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                    htmlFor="grid-password">
-                                    {{ $t('labels.yes') }}
-                                    <input type="radio" id="planned-yes" value="1"
-                                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
-                                        v-model="action.planned" />
-                                </label>
-                            </div>
                         </div>
                     </div>
 
                     <div class="w-full lg:w-12/12 px-4">
                         <div class="relative w-full mb-3">
-                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                            <label class="block uppercase text-slate-600 text-xs font-bold mb-2"
                                 htmlFor="grid-password">
                                 {{ $t('labels.date_interval') }}
                             </label>
@@ -55,12 +32,12 @@
 
                     <div class="w-full lg:w-6/12 px-4">
                         <div class="relative w-full mb-3">
-                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                            <label class="block uppercase text-slate-600 text-xs font-bold mb-2"
                                 htmlFor="grid-password">
                                 {{ $t('labels.type_of_transaction') }}
                             </label>
                             <select multiple
-                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 v-model="action.type">
                                 <option v-for="(type, k) in input.type" :key="k" :value="type.id">{{ type.name }}
                                 </option>
@@ -69,12 +46,12 @@
                     </div>
                     <div class="w-full lg:w-6/12 px-4">
                         <div class="relative w-full mb-3">
-                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                            <label class="block uppercase text-slate-600 text-xs font-bold mb-2"
                                 htmlFor="grid-password">
                                 {{ $t('labels.account') }}
                             </label>
                             <select multiple
-                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 v-model="action.account">
                                 <option v-for="account in input.account" :key="account.id" :value="account.id">{{
                                     account.name
@@ -85,12 +62,12 @@
 
                     <div class="w-full lg:w-6/12 px-4">
                         <div class="relative w-full mb-3">
-                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                            <label class="block uppercase text-slate-600 text-xs font-bold mb-2"
                                 htmlFor="grid-password">
                                 {{ $t('labels.category') }}
                             </label>
                             <select multiple
-                                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 v-model="action.category">
                                 <option v-for="category in input.category" :key="category.id" :value="category.id">
                                     {{ category.name }}
@@ -101,12 +78,12 @@
 
                     <div class="w-full lg:w-6/12 px-4">
                         <div class="relative w-full mb-3">
-                            <label class="bl}ock uppercase text-blueGray-600 text-xs font-bold mb-2"
+                            <label class="bl}ock uppercase text-slate-600 text-xs font-bold mb-2"
                                 htmlFor="grid-password">
                                 {{ $t('labels.label') }}
                             </label>
                             <select v-model="action.tags" multiple
-                                class="w-full border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                                 <option
                                     :class="'text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1 ' + item.color"
                                     v-for="item in input.tags" :key="item.id" :value="item.id">
@@ -118,7 +95,7 @@
 
                 </div>
 
-                <hr class="mt-6 border-b-1 border-blueGray-300" />
+                <hr class="mt-6 border-b-1 border-slate-300" />
 
                 <div class="flex flex-wrap">
                     <div class="w-full lg:w-12/12 px-4">
@@ -132,7 +109,7 @@
                     </div>
                 </div>
 
-                <hr class="mt-6 border-b-1 border-blueGray-300" />
+                <hr class="mt-6 border-b-1 border-slate-300" />
 
             </form>
         </div>
@@ -158,7 +135,7 @@
                         <div class="tab-content tab-space">
 
                             <div v-if="action.no_entry_found" class="text-center">
-                                <p class="text-blueGray-400 text-lg">{{ $t('labels.no_entries_found') }}</p>
+                                <p class="text-slate-400 text-lg">{{ $t('labels.no_entries_found') }}</p>
                             </div>
 
                             <EntriesTable v-if="action.no_entry_found == false" ref="entryIncoming" />
@@ -179,15 +156,23 @@
 
 <script>
 import EntriesTable from "@/components/Entry/EntriesTable.vue";
-import SearchService from "../../services/SearchService.vue";
-import ApiService from "../../services/ApiService.vue";
+import SearchService from "../../services/search.service";
 import Paginator from "../GenericComponents/Paginator.vue";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import AlertModal from '../GenericComponents/AlertModal.vue';
+import CoreService from "../../services/core.service";
 
 export default {
     components: {
         EntriesTable, Paginator, VueDatePicker, AlertModal
+    },
+    setup() {
+        const apiService = new CoreService()
+        const searchService = new SearchService()
+
+        return {
+            apiService, searchService
+        }
     },
     data() {
         return {
@@ -211,7 +196,7 @@ export default {
                 type: [],
                 tags: null,
                 text: null,
-                planned: null,
+                planned: true,
                 date_time: null
             }
         }
@@ -257,7 +242,8 @@ export default {
             let currentPage = window.localStorage.getItem('current_page') == null ? 0 : window.localStorage.getItem('current_page')
 
             if (this.validate() === true) {
-                SearchService.filter(data, currentPage).then((res) => {
+                this.searchService.filter(data, currentPage).then((res) => {
+                    _this.$refs.entryIncoming.entries = []
 
                     if (res.length > 0) {
                         _this.$refs.entryIncoming.buildEntriesTable(res)
@@ -285,7 +271,7 @@ export default {
         },
         getLabels() {
             let _this = this
-            ApiService.labels().then((res) => {
+            this.apiService.labels().then((res) => {
                 let data = res
                 data.forEach(function (r) {
                     _this.input.tags.push(r)
@@ -294,7 +280,7 @@ export default {
         },
         getCategory() {
             let _this = this
-            ApiService.subCategories().then((res) => {
+            this.apiService.subCategories().then((res) => {
                 let data = res
                 data.forEach(function (sub) {
                     _this.input.category.push({
@@ -310,7 +296,7 @@ export default {
         },
         getAccount() {
             let _this = this
-            ApiService.accounts('?order[name]=asc').then((res) => {
+            this.apiService.accounts('?order[name]=asc').then((res) => {
                 let data = res
                 data.forEach(function (r) {
                     _this.input.account.push(r)

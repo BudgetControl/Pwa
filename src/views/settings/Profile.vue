@@ -1,5 +1,5 @@
 <template>
-  <section class="relative py-16 bg-blueGray-200">
+  <section class="relative py-16 bg-slate-200">
     <div class="container mx-auto px-4">
       <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg">
         <div class="px-6">
@@ -47,44 +47,44 @@
                 <span class="text-xl font-bold block uppercase tracking-wide " :class="user.wallet.total_color">
                   {{ user.wallet.total }} {{ this.currency }}
                 </span>
-                <span class="text-sm text-blueGray-400">Wallet</span>
+                <span class="text-sm text-slate-400">Wallet</span>
               </div>
               <div class="mr-4 p-3 text-center">
                 <span class="text-xl font-bold block uppercase tracking-wide text-emerald-600">
                   {{ user.wallet.incoming }} {{ this.currency }}
                 </span>
-                <span class="text-sm text-blueGray-400">{{ $t('labels.incoming') }}</span>
+                <span class="text-sm text-slate-400">{{ $t('labels.incoming') }}</span>
               </div>
               <div class="mr-4 p-3 text-center text-red-500">
                 <span class="text-xl font-bold block uppercase tracking-wide">
                   {{ user.wallet.expenses }} {{ this.currency }}
                 </span>
-                <span class="text-sm text-blueGray-400">{{ $t('labels.expenses') }}</span>
+                <span class="text-sm text-slate-400">{{ $t('labels.expenses') }}</span>
               </div>
               <div class="mr-4 p-3 text-center text-center">
                 <span class="text-xl font-bold block uppercase tracking-wide " :class="user.wallet.health_color">
                   {{ user.wallet.health }} {{ this.currency }}
                 </span>
-                <span class="text-sm text-blueGray-400">{{ $t('labels.my_health') }}</span>
+                <span class="text-sm text-slate-400">{{ $t('labels.my_health') }}</span>
               </div>
             </div>
           </div>
 
           <div class="text-center mt-12">
-            <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
+            <h3 class="text-4xl font-semibold leading-normal mb-2 text-slate-700 mb-2">
               {{ user.name }}
             </h3>
-            <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-              <i class="fas fa-envelope mr-2 text-lg text-blueGray-400"></i>
+            <div class="text-sm leading-normal mt-0 mb-2 text-slate-400 font-bold uppercase">
+              <i class="fas fa-envelope mr-2 text-lg text-slate-400"></i>
               {{ user.email }}
             </div>
           </div>
 
 
-          <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
+          <div class="mt-10 py-10 border-t border-slate-200 text-center">
             <div class="flex flex-wrap justify-center">
               <div class="w-full lg:w-9/12 px-4">
-                <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
+                <p class="mb-4 text-lg leading-relaxed text-slate-700">
                   {{ user.suggestions }}
                 </p>
                 <a href="javascript:void(0)" class="font-normal text-emerald-500" v-if="user.suggestions">
@@ -108,12 +108,13 @@
 </template>
 <script>
 
-import AuthService from "@/services/AuthService.vue";
 import DeleteButton from "../../components/Auth/DeleteButton.vue";
-import LocalStorageService from "../../services/LocalStorageService.vue";
-import StatsService from "../../services/StatsService.vue";
-import ApiServiceVue from '../../services/ApiService.vue';
+import { useAppSettings } from '../../storage/settings.store';
 import Avatar from "vue-boring-avatars";
+import AuthService from "../../services/auth.service";
+
+import StatsService from '../../services/stats.service';
+import CoreService from "../../services/core.service";
 
 export default {
   data() {
@@ -138,12 +139,23 @@ export default {
   components: {
     DeleteButton, Avatar
   },
+  setup() {
+    const appSettings = useAppSettings()
+    const settings = {
+      currency_id: appSettings.get().currency_id,
+      user_email: appSettings.getUser().email
+    }
+
+    return {
+      appSettings, settings
+    }
+  },
   async beforeMount() {
     const _this = this
-    const storage = LocalStorageService.get('settings')
-    this.currency = storage.currency_id || 2
+    this.currency = this.settings.currency.id || 2
 
-    ApiServiceVue.currencies().then((resp) => {
+    const coreService = new CoreService()
+    coreService.currencies().then((resp) => {
       _this.currency = resp[_this.currency - 1 ].icon
     }).catch(() => {
       _this.currency = "€"
@@ -151,19 +163,22 @@ export default {
   },
   async mounted() {
     const _this = this
-    const userEmail = LocalStorageService.getUser().email;
-    AuthService.userInfoByEmail(userEmail).then((resp) => {
+    const userEmail = this.settings.user_email;
+    const authService = new AuthService()
+    authService.userInfoByEmail(userEmail).then((resp) => {
       _this.user.name = resp.name
       _this.user.email = resp.email
 
-      StatsService.health().then(resp => {
+      
+      const statsService = new StatsService()
+      statsService.health().then(resp => {
         _this.user.wallet.health = resp.total.toFixed(2)
         if (_this.user.wallet.health <= 0) {
           _this.user.wallet.health_color = 'text-red-500'
         }
       })
 
-      StatsService.total().then(resp => {
+      statsService.total().then(resp => {
         _this.user.wallet.total = resp.total.toFixed(2)
         if (_this.user.wallet.total <= 0) {
           _this.user.wallet.total_color = 'text-red-500'
@@ -174,11 +189,11 @@ export default {
       const start_date = date_time.getFullYear() + '-' + (date_time.getMonth() + 1) + '-01'
       const end_date = date_time.getFullYear() + '-' + (date_time.getMonth() + 1) + '-' + date_time.getDate()
 
-      StatsService.incoming(`?start_date=${start_date}&end_date=${end_date}`).then((resp) => {
+      statsService.incoming(`?start_date=${start_date}&end_date=${end_date}`).then((resp) => {
         _this.user.wallet.incoming = resp.total.toFixed(2)
       })
 
-      StatsService.expenses().then(resp => {
+      statsService.expenses().then(resp => {
         _this.user.wallet.expenses = resp.total.toFixed(2)
       })
 

@@ -1,5 +1,5 @@
 <template>
-    <div @click="action" class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700 uppercase text-xs">
+    <div @click="action" class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700 uppercase text-xs">
         <i :class="'text-xs ' + iconClass"></i> {{label}}
     </div>
 </template>

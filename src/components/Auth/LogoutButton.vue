@@ -4,21 +4,16 @@
 </template>
   
 <script>
-import AuthServiceVue from '../../services/AuthService.vue';
-import LocalStorageService from '../../services/LocalStorageService.vue';
+import AuthService from '../../services/auth.service';
+import { resetAllStores } from '../../utils/reset-stores';
 
 export default {
     methods: {
         async logout() {
-            const _this = this
-            AuthServiceVue.logout() // Adjust the URL as needed
-                .then(() => {
-                    LocalStorageService.clear()
-                    _this.$router.push({ path: '/app/auth/login' })
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+            const authService = new AuthService()
+            authService.logout()
+            resetAllStores()
+            this.$router.push({ path: '/app/auth/login' })
         },
     },
 };

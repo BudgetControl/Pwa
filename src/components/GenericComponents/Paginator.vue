@@ -18,7 +18,8 @@
 </template>
 
 <script>
-import LocalStorageService from '../../services/LocalStorageService.vue'
+import { useAppSettings } from '../../storage/settings.store';
+
 export default {
     data() {
         return {
@@ -28,21 +29,29 @@ export default {
             }
         }
     },
+    setup() {
+        const appSettings = useAppSettings()
+        const current_page = appSettings.get().current_page
+
+        return {
+            appSettings, current_page
+        }
+    },
     methods: {
         next() {
-            if(this.pagination.hasMorePage == true) {
+            if (this.pagination.hasMorePage == true) {
                 this.pagination.current++
                 this.invokeEntry()
             }
         },
         previus() {
-            if(this.pagination.current != 1) {
+            if (this.pagination.current != 1) {
                 this.pagination.current--
                 this.invokeEntry()
             }
         },
         invokeEntry() {
-            LocalStorageService.set('current_page', this.pagination.current)
+            this.appSettings.settings.current_page = this.pagination.current
             this.$parent.invoke()
         }
     }

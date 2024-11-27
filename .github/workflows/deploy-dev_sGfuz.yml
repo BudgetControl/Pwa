@@ -1,0 +1,46 @@
+name: Deploy application on DEV
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "dev-3.0" ]
+
+permissions:
+  contents: read
+
+
+jobs:
+  deploy_job:
+    runs-on: ubuntu-latest
+    environment: dev_sGfuz
+    name: deploy
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+
+        - name: Install Dependencies
+          run: npm install
+
+        - name: Build package
+          run: npm run build-dev
+        
+        - name: deploy file
+          uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+          with:
+              username: ${{ secrets.SFTP_USER }} 
+              server: ${{ secrets.SFTP_HOST }} 
+              password: ${{ secrets.SFTP_PASSWORD }}
+              port: ${{ secrets.SFTP_PORT }} 
+              local_path: './dist/*'
+              remote_path: '/var/www/budgetcontrol/Pwa_sGfuz/dist'
+              sftpArgs: '-o ConnectTimeout=5'
+
+        - name: copy dist folder into container
+          uses: appleboy/ssh-action@v1.0.3
+          with:
+            host: ${{ secrets.SFTP_HOST }}
+            username: ${{ secrets.SFTP_USER }}
+            password: ${{ secrets.SFTP_PASSWORD }}
+            port: ${{ secrets.SFTP_PORT }}
+            script: docker cp /var/www/budgetcontrol/Pwa_sGfuz/dist/. budgetcontrol-pwa_sGfuz:/var/www/workdir/dist/
+  

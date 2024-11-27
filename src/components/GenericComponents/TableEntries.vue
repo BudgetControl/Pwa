@@ -7,27 +7,27 @@
         <thead>
           <tr>
             <th
-              class="px-6 bg-blueGray-100 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              class="px-6 bg-slate-100 text-slate-500 align-middle border border-solid border-slate-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
               {{ $t('labels.name') }}
             </th>
             <th
-              class="px-6 bg-blueGray-100 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              class="px-6 bg-slate-100 text-slate-500 align-middle border border-solid border-slate-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
               {{ $t('labels.amount') }}
             </th>
-            <th class="px-6 bg-blueGray-100 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+            <th class="px-6 bg-slate-100 text-slate-500 align-middle border border-solid border-slate-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
             </th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td
-              class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 uppercase font-semibold bg-blueGray-50">
+              class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 uppercase font-semibold bg-slate-50">
               {{ $t('labels.incoming') }}</td>
             <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-blueGray-50">
-              {{ elements.stats.incoming.now }}
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-slate-50">
+              {{ elements.stats.incoming.now }}  {{ currency_symbol }}
             </td>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-blueGray-50">
+            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-slate-50">
             </td>
           </tr>
           <tr v-for="(d, i) in elements.incoming" :key="i">
@@ -35,7 +35,7 @@
               {{ d.label }}
             </td>
             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              {{ d.amount }}
+              {{ d.amount }}  {{ currency_symbol }}
             </td>
             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
               <!-- <button  v-if="d.amount > 0" @click="showEntries" class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-emerald-600 bg-emerald-200 uppercase last:mr-0 mr-1" type="button">
@@ -46,13 +46,13 @@
           <tr><td colspan="3" > <hr/> </td></tr>
           <tr>
             <td
-              class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 uppercase font-semibold bg-blueGray-50">
+              class="border-</td>t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 uppercase font-semibold bg-slate-50">
               {{ $t('labels.expenses') }}</td>
             <td
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-blueGray-50">
-              {{ elements.stats.expenses.now }}
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-slate-50">
+              {{ elements.stats.expenses.now }}  {{ currency_symbol }}
             </td>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-blueGray-50">
+            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-semibold bg-slate-50">
               
             </td>
           </tr>
@@ -61,7 +61,7 @@
               {{ d.label }}
             </td>
             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              {{ d.amount }}
+              {{ d.amount }}  {{ currency_symbol }}
             </td>
             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
               <!-- <button v-if="d.amount < 0" @click="showEntries" class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-emerald-600 bg-emerald-200 uppercase last:mr-0 mr-1" type="button">
@@ -78,7 +78,9 @@
 
 <script>
 import AlertModal from '../GenericComponents/AlertModal.vue';
-import StatsService from '../../services/StatsService.vue';
+import StatsService from '../../services/stats.service'
+import { useAppSettings } from '../../storage/settings.store';
+
 
 export default {
   components: {
@@ -110,12 +112,22 @@ export default {
         incoming: [],
         expenses: [],
       },
+      currency_symbol: '€'
+    }
+  },
+  setup() {
+    const appSettings = useAppSettings()
+    const current_page = appSettings.settings.current_page
+
+    return {
+      appSettings, current_page
     }
   },
   created() {
     window.alert = (message, type = 'success') => {
       this.$refs.alertModal.show(message, type);
     };
+    this.currency_symbol = this.appSettings.settings.currency.symbol
   },
   methods: {
     setGraph: function () {
@@ -128,7 +140,9 @@ export default {
       this.elements.stats.incoming.now = 0
       this.elements.stats.expenses.now = 0
 
-      StatsService.getStatsEntries(options).then((resp) => {
+      
+      const statsService = new StatsService()
+      statsService.getStatsEntries(options).then((resp) => {
 
         resp.rows.forEach(element => {
 

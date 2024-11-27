@@ -1,5 +1,5 @@
 <template>
-    <section class="relative py-16 bg-blueGray-200">
+    <section class="relative py-16 bg-slate-200">
         <div class="container mx-auto px-4">
             <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
                 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
@@ -35,9 +35,9 @@
 
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
-import LocalStorageServiceVue from '../../services/LocalStorageService.vue';
-import BudgetService from '../../../services/BudgetService.vue';
-import Budget from '../../components/Budget/Budget.vue';
+import { useAppSettings } from '../../storage/settings.store';
+import ChartService from '@/services/chart.service';
+
 
 export default {
     components: {
@@ -53,12 +53,19 @@ export default {
             currency: '€'
         }
     },
+    setup() {
+        const appSettings = useAppSettings()
+        return {
+            settings: {
+                currency_id: appSettings.get().currency_id
+            }
+        }
+    },
     mounted() {
         this.init()
 
         try {
-            const userconfig = LocalStorageServiceVue.get("user_setting")
-            this.currency = userconfig.settings.currency_id
+            this.currency = this.settings.currency.id
         } catch (e) {
             console.info(e)
         }
@@ -70,7 +77,9 @@ export default {
         },
         init: function () {
             const _this = this
-            BudgetService.getBudgets().then((resp) => {
+    
+            const chartService = new ChartService()
+            chartService.getBudgets().then((resp) => {
                 resp.forEach((data) => {
                     switch (data.planning) {
                         case 'weekly':

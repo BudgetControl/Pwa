@@ -46,17 +46,27 @@
 
 <script>
 import '@vuepic/vue-datepicker/dist/main.css'
-import ApiService from '../../../services/ApiService.vue';
-import LocalStorageServiceVue from '../../../services/LocalStorageService.vue';
+import ChartService from '@/services/chart.service';
+import { useAppSettings } from '../../../storage/settings.store';
 import MenuButton from '../../GenericComponents/MenuButton.vue';
 import HeaderMenu from '../../Navbars/HeaderMenu.vue';
+import CoreService from '../../../services/core.service';
+
 import Setting from '../../Budget/Setting.vue';
 import EntryList from '../../Budget/EntryList.vue';
-import BudgetService from '../../../services/BudgetService.vue';
 
 export default {
     components: {
         MenuButton, HeaderMenu, Setting, EntryList
+    },
+    setup() {
+
+        const coreService = new CoreService()
+        const appSettings = useAppSettings()
+
+        return {
+            coreService, appSettings
+        }
     },
     data() {
         return {
@@ -102,12 +112,14 @@ export default {
             this.openTab = tabNumber
         },
         deleteBudget() {
-            BudgetService.deleteBudget(this.id)
+            const chartService = new ChartService()
+            chartService.deleteBudget(this.id)
             this.$router.push({ path: '/app/budgets' })
         },
         getBudget() {
             const _this = this
-            BudgetService.getBudget(this.id).then((resp) => {
+            const chartService = new ChartService()
+            chartService.getBudget(this.id).then((resp) => {
                 _this.data.name = resp.name
                 _this.data.note = resp.description
                 _this.data.amount = resp.amount
@@ -124,7 +136,7 @@ export default {
         },
         getLabels() {
             let _this = this
-            ApiService.labels().then((res) => {
+            this.coreService.labels().then((res) => {
                 let data = res
                 data.forEach(function (r) {
                     _this.input.tags.push(r)
@@ -133,7 +145,7 @@ export default {
         },
         getCategory() {
             let _this = this
-            ApiService.subCategories().then((res) => {
+            this.coreService.subCategories().then((res) => {
                 let data = res
                 data.forEach(function (sub) {
                     _this.input.category.push({
@@ -149,7 +161,7 @@ export default {
         },
         getAccount() {
             let _this = this
-            ApiService.accounts('?order[name]=asc').then((res) => {
+            this.coreService.accounts('?order[name]=asc').then((res) => {
                 let data = res
                 data.forEach(function (r) {
                     _this.input.account.push(r)
@@ -157,7 +169,7 @@ export default {
             })
         },
         getEmails() {
-            const storage = LocalStorageServiceVue.getUser().shared_with
+            const storage = this.appSettings.getUser().shared_with
             storage.forEach((item) => {
                 this.input.emails.push(item)
             })
@@ -182,7 +194,8 @@ export default {
                     "emails": this.data.emails,
                 }
 
-                BudgetService.createBudget(data).then(() => {
+                const chartService = new ChartService()
+                chartService.createBudget(data).then(() => {
                     //return
                     alert("Budget created", 'success')
                 }).catch(() => {
@@ -208,7 +221,8 @@ export default {
                     "notification": this.data.notification,
                     "emails": this.data.emails,
                 }
-                BudgetService.updateBudget(data, this.id).then(() => {
+                const chartService = new ChartService()
+                chartService.updateBudget(data, this.id).then(() => {
                     //return
                     alert("Budget updated", 'success')
                 }).catch(() => {

@@ -7,7 +7,7 @@
 </template>
   
 <script>
-import AuthServiceVue from '../../services/AuthService.vue';
+import AuthService from '../../services/auth.service';
 
 export default {
     data() {
@@ -24,7 +24,9 @@ export default {
         async verify() {
             const email = this.email
             this.message = true
-            AuthServiceVue.verify(email) // Adjust the URL as needed
+            const authService = new AuthService()
+
+            authService.verify(email) // Adjust the URL as needed
                 .catch(error => {
                     console.error(error);
                 });

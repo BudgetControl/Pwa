@@ -3,7 +3,7 @@
     <div class="rounded-t mb-0 px-4 py-3 border-0">
       <div class="flex flex-wrap items-center">
         <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-          <h3 class="font-semibold text-base text-blueGray-700">
+          <h3 class="font-semibold text-base text-slate-700">
             {{ title }}
           </h3>
         </div>
@@ -22,19 +22,19 @@
         <thead>
           <tr>
             <th
-              class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              class="px-6 bg-slate-50 text-slate-500 align-middle border border-solid border-slate-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
               {{ path }} NAME
             </th>
             <th
-              class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              class="px-6 bg-slate-50 text-slate-500 align-middle border border-solid border-slate-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
               AMOUNT
             </th>
             <th
-              class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              class="px-6 bg-slate-50 text-slate-500 align-middle border border-solid border-slate-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
               AMOUNT BEFORE
             </th>
             <th
-              class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              class="px-6 bg-slate-50 text-slate-500 align-middle border border-solid border-slate-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
               BOUNCE RATE
             </th>
           </tr>
@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import ChartServiceVue from '@/services/ChartService.vue'
+import ChartService from '@/services/chart.service'
 
 export default {
   props: {
@@ -132,7 +132,8 @@ export default {
         end: year + "/" + month + "/31"
       }]
 
-      ChartServiceVue.expensesLabelCategory(data).then((resp) => {
+        const chartService = new ChartService()
+        chartService.expensesLabelCategory(data).then((resp) => {
 
         resp.rows.forEach(element => {
 

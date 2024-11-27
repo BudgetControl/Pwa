@@ -24,3 +24,7 @@ commit.sh
 src/assets/*
 
 android/*
+
+android/*
+*.Identifier
+public/*
