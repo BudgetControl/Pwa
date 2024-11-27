@@ -81,7 +81,6 @@ export default {
           const workspaceService = new WorkspaceService()
           workspaceService.get(ws).then((res) => {
               appSettings.workspaces.push(res.workspace)
-              appSettings.current_ws = res.workspace
           })
         },
         error => {
