@@ -170,7 +170,7 @@ export default {
 
       const authService = new AuthService()
       authService.providerUri('google').then((resp) => {
-        this.$router.push(resp.uri);
+        window.location.href = resp.uri;
       }).catch(() => {
         _this.show = false
         _this.error = this.$t('messages.generic_error')
