@@ -133,7 +133,13 @@ export default {
 
       this.show = true
       this.error = false
-      authService.register(name, password, confirm_password, email).then(() => {
+      authService.register(
+        {
+          email: email,
+          password: password,
+          name: name,
+          password_confirmation: confirm_password
+        }).then(() => {
         _this.message = _this.$t('labels.account_created')
         _this.show = false
       }).catch(() => {
