@@ -46,10 +46,10 @@ export default {
   setup() {
     
     const appSettings = useAppSettings()
-    const headerToken = useAuthStore()
+    const authStore = useAuthStore()
 
     return {
-      headers, appSettings, headerToken
+      headers, appSettings, authStore
     }
   },
   data() {
@@ -68,36 +68,23 @@ export default {
     this.error = false
 
     authService.token(token, 'google').then((response) => {
-      this.headerToken.set(response.token)
-      // Get the workspace id from the local storage
-      const ws = this.appSettings.getWorkspace().uuid
-      let currentWsUuid = response.workspaces[0].uuid
-      response.workspaces.forEach(workspace => {
-        if (workspace.uuid === ws) {
-          currentWsUuid = ws
-        }
-      });
-
-      const currentWSInStore = this.appSettings.getWorkspace().uuid
-      if (currentWSInStore !== currentWsUuid) {
-        this.appSettings.set({ workspace: { uuid: currentWsUuid } })
-      }
+      const settings = this.appSettings.settings
+      this.authStore.authToken = { token: response.token, timestamp: new Date().toISOString()};
+      
+      settings.workspaces = response.workspaces
+      settings.current_ws = response.workspaces[0]
 
       authService.userInfo().then(() => {
-        _this.$router.push({ path: '/app/dashboard' })
-      }).catch(() => {
-        _this.error = true
-        _this.message = false
-      })
+          _this.$router.push({ path: '/app/dashboard' })
+        }).catch((error) => {
+          console.error(error)
+          _this.error = this.$t('messages.generic_error')
+          _this.show = false
+        })
     }).catch((err) => {
-      _this.show = false
-      _this.error = true
-      _this.message = false
-
-      _this.error_message = err.response.data.error
-
-      console.debug(err)
-    })
-  }
+        _this.show = false
+        console.error(err)
+      })
+    }
 };
 </script>

@@ -148,16 +148,7 @@ export default {
 
       }).catch((err) => {
         _this.show = false
-
-        switch (err.response.data.code) {
-          case 'EML_NaN':
-            _this.error = this.$t('messages.login.not_verified_email')
-            _this.verify = true
-            break;
-          default:
-            _this.error = this.$t('messages.login.not_valid_password')
-            break;
-        }
+        console.error(err)
       })
     },
     async signInGoogle() {
