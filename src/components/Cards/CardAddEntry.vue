@@ -217,40 +217,20 @@
             </select>
           </div>
 
-          <div class="flex w-full mb-2 " v-if="!isModel && !isPlanned">
-            <label for="confirmed" id="confirmed"
-              :class="{ 'bg-emerald-500 text-white': confirmed, 'bg-white': !confirmed }"
-              class="w-full text-center active:bg-emerald-500 uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear"
-              @click="confirmed = !confirmed">
-              {{ $t('labels.payment_confirm') }}
-              <input v-model="confirmed" type="checkbox" id="confirmed" value="1" class="hidden">
-            </label>
-          </div>
+          <CheckboxButton v-if="!isModel && !isPlanned" @update:active="confirmed = !confirmed"
+            :label="$t('labels.payment_confirm')" />
 
-          <div class="flex w-full mb-2 " v-if="!isModel && !isPlanned">
-            <label for="exclude_from_stats" id="exclude_from_stats"
-              :class="{ 'bg-emerald-500 text-white': exclude_from_stats, 'bg-white': !exclude_from_stats }"
-              class="w-full text-center active:bg-emerald-500 uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear"
-              @click="exclude_from_stats = !exclude_from_stats">
-              {{ $t('labels.exclude_from_stats') }}
-              <input v-model="exclude_from_stats" type="checkbox" id="exclude_from_stats" value="1" class="hidden">
-            </label>
-          </div>
+          <CheckboxButton v-if="!isModel && !isPlanned" @update:active="exclude_from_stats = !exclude_from_stats"
+            :label="$t('labels.exclude_from_stats')" />
+
 
           <div class="lg:w-12/12 w-full bm-2">
             <textarea v-model="note" type="text" :placeholder="$t('labels.add_here_your_note')" id="note" rows="2"
               class="border-0 px-3 py-5 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
           </div>
 
-          <div class="flex w-full mb-2 " v-if="!isModel && !isPlanned">
-            <label for="save_as_model" id="save_as_model"
-              :class="{ 'bg-emerald-500 text-white': action.save_as_model, 'bg-white': !action.save_as_model }"
-              class="w-full text-center active:bg-emerald-500 uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear"
-              @click="action.save_as_model = !action.save_as_model">
-              {{ $t('labels.save_as_model') }}
-              <input v-model="action.save_as_model" type="checkbox" id="save_as_model" value="1" class="hidden">
-            </label>
-          </div>
+          <CheckboxButton v-if="!isModel && !isPlanned" @update:active="action.save_as_model = !action.save_as_model"
+            :label="$t('labels.save_as_model')" />
 
           <div class="flex py-2 border border-solid w-full border-slate-500 shadow rounded"
             v-if="isModel || action.save_as_model === true">
@@ -305,6 +285,7 @@ import { useRefreshStore } from '../../storage/refresh';
 import AlertModal from '../GenericComponents/AlertModal.vue';
 import libs from '../../Libs.vue';
 import CoreService from '../../services/core.service';
+import CheckboxButton from '../Button/CheckboxButton.vue';
 
 export default {
   props: {
@@ -393,7 +374,7 @@ export default {
     }
   },
   components: {
-    VueDatePicker, AlertModal
+    VueDatePicker, AlertModal, CheckboxButton
   },
   created() {
     window.alert = (message, type = 'success') => {
