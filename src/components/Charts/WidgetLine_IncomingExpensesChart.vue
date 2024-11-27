@@ -15,13 +15,24 @@
     <div class="p-4 flex-auto">
       <!-- Chart -->
       <div class="relative h-350-px">
-        <canvas :id="'line_graph_doubleline_'"></canvas>
+        <canvas :id="'line_graph_doubleline_'" style="min-height: 400px;"></canvas>
       </div>
     </div>
   </div>
 </template>
+
 <script>
-import Chart from "chart.js";
+import {
+  Chart,
+  LineController,
+  LineElement,
+  PointElement,
+  CategoryScale,
+  LinearScale,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 import ChartService from "@/services/chart.service";
 
 export default {
@@ -29,11 +40,11 @@ export default {
     filter: {
       type: Boolean,
       required: true,
-      default: false
+      default: false,
     },
     title: {
       type: String,
-      required: true
+      required: true,
     },
   },
   data() {
@@ -41,177 +52,136 @@ export default {
       subTitle: null,
       localStorage: {
         month: null,
-        year: null
+        year: null,
       },
       months: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
-    }
+    };
   },
   mounted() {
-    this.setGraph()
-    const _this = this
+    this.setGraph();
+    const _this = this;
     setInterval(function () {
-      _this.checkLocalStorageUpdate()
-    }, 1000)
+      _this.checkLocalStorageUpdate();
+    }, 1000);
   },
   methods: {
     setGraph() {
-      let date = new Date
-      let month = localStorage.getItem('chart-month')
-      let year = localStorage.getItem('chart-year')
+      let date = new Date();
+      let month = localStorage.getItem("chart-month");
+      let year = localStorage.getItem("chart-year");
 
       if (year === null) {
-        year = date.getFullYear()
+        year = date.getFullYear();
       }
 
       if (month === null) {
-        month = date.getMonth()
+        month = date.getMonth();
       }
 
-      month = this.months[month]
-      this.subTitle = year
+      month = this.months[month];
+      this.subTitle = year;
 
       this.$nextTick(function () {
+        if (window.myLine !== undefined) {
+          window.myLine.destroy();
+        }
 
-        var config = {
+        const config = {
           type: "line",
           data: {
             labels: [],
             datasets: [],
           },
           options: {
-            maintainAspectRatio: false,
             responsive: true,
-            title: {
-              display: false,
-              text: "Entries stats",
-              fontColor: "white",
-            },
-            legend: {
-              labels: {
-                fontColor: "white",
+            maintainAspectRatio: false,
+            plugins: {
+              title: {
+                display: false,
+                text: "Entries stats",
+                color: "white",
               },
-              align: "end",
-              position: "bottom",
-            },
-            tooltips: {
-              mode: "index",
-              intersect: false,
-            },
-            hover: {
-              mode: "nearest",
-              intersect: false,
+              legend: {
+                labels: {
+                  color: "white",
+                },
+                align: "end",
+                position: "bottom",
+              },
+              tooltip: {
+                mode: "index",
+                intersect: false,
+              },
             },
             scales: {
-              xAxes: [
-                {
-                  ticks: {
-                    fontColor: "rgba(255,255,255,.7)",
-                  },
-                  display: true,
-                  scaleLabel: {
-                    display: false,
-                    labelString: "Month",
-                    fontColor: "white",
-                  },
-                  gridLines: {
-                    display: false,
-                    borderDash: [2],
-                    borderDashOffset: [2],
-                    color: "rgba(33, 37, 41, 0.3)",
-                    zeroLineColor: "rgba(0, 0, 0, 0)",
-                    zeroLineBorderDash: [2],
-                    zeroLineBorderDashOffset: [2],
-                  },
+              x: {
+                ticks: {
+                  color: "rgba(255,255,255,.7)",
                 },
-              ],
-              yAxes: [
-                {
-                  ticks: {
-                    fontColor: "rgba(255,255,255,.7)",
-                  },
-                  display: true,
-                  scaleLabel: {
-                    display: false,
-                    labelString: "Value",
-                    fontColor: "white",
-                  },
-                  gridLines: {
-                    borderDash: [3],
-                    borderDashOffset: [3],
-                    drawBorder: false,
-                    color: "rgba(255, 255, 255, 0.15)",
-                    zeroLineColor: "rgba(33, 37, 41, 0)",
-                    zeroLineBorderDash: [2],
-                    zeroLineBorderDashOffset: [2],
-                  },
+                grid: {
+                  color: "rgba(33, 37, 41, 0.3)",
                 },
-              ]
+              },
+              y: {
+                ticks: {
+                  color: "rgba(255,255,255,.7)",
+                },
+                grid: {
+                  color: "rgba(255, 255, 255, 0.15)",
+                },
+              },
             },
           },
         };
 
-        let data = []
+        const data = this.months.map((month) => ({
+          start: `${year}/${month}/01`,
+          end: `${year}/${month}/${new Date(year, month, 0).getDate()}`,
+        }));
 
-        this.months.forEach(month => {
-            data.push({
-            start: year + "/" + month + "/01",
-            end: year + "/" + month + "/" + new Date(year, month, 0).getDate(),
-          })
-        })
+        const chartService = new ChartService();
+        chartService
+          .incomingExpensesLine(data)
+          .then((resp) => {
+            resp.series.forEach((element) => {
+              const color = element.label === "incoming" ? "#00FF00" : element.label === "debit" ? "#c6c6c6" : "#FF0000";
 
-          const chartService = new ChartService()
-          chartService.incomingExpensesLine(data).then((resp) => {
+              const dataset = {
+                label: this.$t("labels." + element.label),
+                backgroundColor: color,
+                borderColor: color,
+                data: [],
+                fill: false,
+                tension: 0.4
+              };
 
-          resp.series.forEach(element => {
+              element.dataPoints.forEach((point) => {
+                if (element.label === "incoming") {
+                  const pointLabel = point.label.toLowerCase();
+                  config.data.labels.push(this.$t("labels.months." + pointLabel));
+                }
+                dataset.data.push(Math.abs(point.xValue));
+              });
 
-            let color = '#FF0000';
-            if (element.label == 'incoming') {
-              color = '#00FF00';
-            } else if (element.label == 'debit') {
-              color = '#c6c6c6';
-            }
+              config.data.datasets.push(dataset);
+            });
 
-            let dataset = {
-              label: this.$t('labels.' + element.label),
-              backgroundColor: color,
-              borderColor: color,
-              data: [],
-              fill: false,
-              barThickness: 50,
-            }
-
-            element.dataPoints.forEach(point => {
-              if (element.label == 'incoming') {
-                const pointLabel = point.label.toLowerCase()
-                config.data.labels.push(this.$t('labels.months.' + pointLabel ))
-              }
-              let value = point.xValue < 0 ? point.xValue * -1 : point.xValue
-              dataset.data.push(value)
-            })
-
-            config.data.datasets.push(dataset)
-
-            var ctx = document.getElementById("line_graph_doubleline_").getContext("2d");
-            if(window.myLine !== undefined) {
-              window.myLine.destroy()
-            } 
-              
+            const ctx = document.getElementById("line_graph_doubleline_").getContext("2d");
+            Chart.register(LineController, LineElement, PointElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
             window.myLine = new Chart(ctx, config);
-
+          })
+          .catch((error) => {
+            console.info(error);
           });
-
-        }).catch((error) => {
-          console.info(error);
-        })
-      })
+      });
     },
     checkLocalStorageUpdate() {
-      const year = localStorage.getItem('chart-year')
+      const year = localStorage.getItem("chart-year");
       if (year != this.localStorage.year) {
-        this.localStorage.year = year
-        this.setGraph()
+        this.localStorage.year = year;
+        this.setGraph();
       }
-    }
-  }
+    },
+  },
 };
 </script>

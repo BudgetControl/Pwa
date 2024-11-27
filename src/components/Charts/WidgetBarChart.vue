@@ -14,13 +14,23 @@
     </div>
     <div class="p-4 flex-auto">
       <div class="relative h-350-px">
-        <canvas class="text-white" :id="'bar-chart_' + ID_GRAPH"></canvas>
+        <canvas class="text-white" :id="'bar-chart_' + ID_GRAPH" style="min-height: 400px;"></canvas>
       </div>
     </div>
   </div>
 </template>
+
 <script>
-import Chart from "chart.js";
+import {
+  Chart,
+  BarController,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+  Title
+} from "chart.js";
 import ChartService from "@/services/chart.service";
 
 export default {
@@ -43,8 +53,6 @@ export default {
       required: true
     }
   },
-  watch: {
-  },
   data() {
     return {
       subTitle: null,
@@ -53,37 +61,35 @@ export default {
         month: null,
         year: null
       },
-    }
+    };
   },
   mounted() {
-    this.setGraph()
-    const _this = this
+    this.setGraph();
+    const _this = this;
     setInterval(function () {
-      _this.checkLocalStorageUpdate()
-    }, 2000)
+      _this.checkLocalStorageUpdate();
+    }, 2000);
   },
   methods: {
     setGraph() {
-      let date = new Date
-      let month = localStorage.getItem('chart-month')
-      let year = localStorage.getItem('chart-year')
+      let date = new Date();
+      let month = localStorage.getItem("chart-month");
+      let year = localStorage.getItem("chart-year");
 
       if (year === null) {
-        year = date.getFullYear()
+        year = date.getFullYear();
       }
 
       if (month === null) {
-        month = date.getMonth()
+        month = date.getMonth();
       }
 
-      month = this.months[month]
-
-      this.subTitle = year + "/" + month
+      month = this.months[month];
+      this.subTitle = year + "/" + month;
 
       this.$nextTick(function () {
         if (window.myBar !== undefined) {
-          this.datasets = []
-          window.myBar.destroy()
+          window.myBar.destroy();
         }
 
         let config = {
@@ -93,76 +99,111 @@ export default {
             datasets: [],
           },
           options: {
-            title: {
-              display: false,
-              text: "Entries stats",
-              fontColor: "white",
+            plugins: {
+              title: {
+                display: false,
+                text: "Entries stats",
+                color: "white",
+              },
+              legend: {
+                display: false,
+              },
+              tooltip: {
+                enabled: true,
+              },
             },
-            legend: {
-              display: false
+            scales: {
+              x: {
+                grid: {
+                  color: "rgba(255, 255, 255, 0.2)",
+                },
+                ticks: {
+                  color: "white",
+                },
+              },
+              y: {
+                grid: {
+                  color: "rgba(255, 255, 255, 0.2)",
+                },
+                ticks: {
+                  color: "white",
+                },
+              },
             },
             maintainAspectRatio: false,
             responsive: true,
-            hover: {
+            interaction: {
               mode: "nearest",
               intersect: false,
             },
           },
         };
 
-        const data = [{
-          start: year + "/" + month + "/01",
-          end: year + "/" + month + "/31"
-        }]
+        const data = [
+          {
+            start: year + "/" + month + "/01",
+            end: year + "/" + month + "/31",
+          },
+        ];
 
-        let labels = []
-        let colors = []
-        let values = []
+        let labels = [];
+        let colors = [];
+        let values = [];
 
-        const chartService = new ChartService()
-        chartService.expensesBarByCategory(data).then((resp) => {
-          resp.bar.forEach(element => {
+        const chartService = new ChartService();
+        chartService
+          .expensesBarByCategory(data)
+          .then((resp) => {
+            resp.bar.forEach((element) => {
+              if(element.value < 0){
+                labels.push(this.$t("app." + element.label));
+                colors.push(element.color);
+                values.push(element.value * -1);
+              }
+            });
 
-            labels.push(this.$t('app.' + element.label))
-            colors.push(element.color)
-            values.push(element.value * -1)
+            let dataset = {
+              label: "expenses",
+              backgroundColor: colors,
+              data: values,
+              borderWidth: 1,
+            };
 
+            config.data.datasets.push(dataset);
+            config.data.labels = labels;
+
+            const ctx = document
+              .getElementById("bar-chart_" + this.ID_GRAPH)
+              .getContext("2d");
+
+            Chart.register(
+              BarController,
+              BarElement,
+              CategoryScale,
+              LinearScale,
+              Tooltip,
+              Legend,
+              Title
+            );
+            window.myBar = new Chart(ctx, config);
+          })
+          .catch((error) => {
+            console.info(error);
           });
-
-          let dataset = {
-            label: 'expenses',
-            backgroundColor: colors,
-            data: values,
-            fill: true,
-          }
-
-          config.data.datasets.push(dataset)
-          config.data.labels = labels
-
-          var ctx = document.getElementById("bar-chart_" + this.ID_GRAPH).getContext("2d");
-          if (window.myBar !== undefined) {
-            window.myBar.destroy()
-          }
-
-          window.myBar = new Chart(ctx, config);
-
-        }).catch((error) => {
-          console.info(error);
-        })
-      })
+      });
     },
     checkLocalStorageUpdate() {
-      const year = localStorage.getItem('chart-year')
-      const month = localStorage.getItem('chart-month')
+      const year = localStorage.getItem("chart-year");
+      const month = localStorage.getItem("chart-month");
       if (year != this.localStorage.year) {
-        this.localStorage.year = year
-        this.setGraph()
+        this.localStorage.year = year;
+        this.setGraph();
       }
       if (month != this.localStorage.month) {
-        this.localStorage.month = month
-        this.setGraph()
+        this.localStorage.month = month;
+        this.setGraph();
       }
-    }
-  }
+    },
+  },
 };
 </script>
