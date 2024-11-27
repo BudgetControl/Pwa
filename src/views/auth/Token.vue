@@ -49,7 +49,7 @@ export default {
     const authStore = useAuthStore()
 
     return {
-      headers, appSettings, authStore
+      appSettings, authStore
     }
   },
   data() {
