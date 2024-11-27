@@ -7,7 +7,7 @@
                 </h6>
                 <div class="flex flex-wrap">
 
-                    <div class="w-full lg:w-6/12 px-4">
+                    <div class="w-full lg:w-12/12 px-4">
                         <div class="relative w-full mb-3">
                             <label class="block uppercase text-slate-600 text-xs font-bold mb-2"
                                 htmlFor="grid-password">
@@ -16,29 +16,6 @@
                             <input type="text"
                                 class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                 v-model="action.text" />
-                        </div>
-                    </div>
-
-                    <div class="w-full lg:w-6/12 px-4">
-                        <div class="relative w-full mb-3">
-                            <span class="block uppercase text-slate-600 text-xs font-bold mb-2"> {{
-                                $t('labels.is_planned') }}</span>
-                            <div class="container">
-                                <label for="planned-no" class="uppercase text-slate-600 text-xs font-bold mb-2"
-                                    htmlFor="grid-password">
-                                    {{ $t('labels.no') }}
-                                    <input type="radio" id="planned-no" value="0"
-                                        class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
-                                        v-model="action.planned" />
-                                </label>
-                                <label for="planned-yes" class="uppercase text-slate-600 text-xs font-bold mb-2"
-                                    htmlFor="grid-password">
-                                    {{ $t('labels.yes') }}
-                                    <input type="radio" id="planned-yes" value="1"
-                                        class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150"
-                                        v-model="action.planned" />
-                                </label>
-                            </div>
                         </div>
                     </div>
 
@@ -219,7 +196,7 @@ export default {
                 type: [],
                 tags: null,
                 text: null,
-                planned: null,
+                planned: true,
                 date_time: null
             }
         }
