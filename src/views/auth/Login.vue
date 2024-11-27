@@ -97,7 +97,6 @@ import loading from 'vue-full-loading'
 import VerifyEmailButton from "../../components/Auth/VerifyEmailButton.vue";
 import { useAuthStore } from "../../storage/auth-token.store";
 import { useAppSettings } from "../../storage/settings.store";
-import { Browser } from "@capacitor/browser";
 
 export default {
   setup() {
@@ -171,7 +170,7 @@ export default {
 
       const authService = new AuthService()
       authService.providerUri('google').then((resp) => {
-        Browser.open({ url: resp.uri });
+        this.$router.push(resp.uri);
       }).catch(() => {
         _this.show = false
         _this.error = this.$t('messages.generic_error')
