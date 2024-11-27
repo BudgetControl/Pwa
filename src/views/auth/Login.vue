@@ -149,8 +149,6 @@ export default {
       }).catch((err) => {
         _this.show = false
 
-        console.error(err) //FIXME: remove this line
-
         switch (err.response.data.code) {
           case 'EML_NaN':
             _this.error = this.$t('messages.login.not_verified_email')

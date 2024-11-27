@@ -43,7 +43,7 @@
                                 :class="[entry.type == 'debit' ? 'text-slate-900' : 'text-slate-400']">( {{ entry.wallet }}
                                 )
                                 {{
-                                    entry.type == 'debit'
+                                    entry.payee
                                 }}</span>
                         </div>
                         <div class="w-full px-4 flex-1 text-right">
