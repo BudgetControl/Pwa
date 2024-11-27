@@ -419,11 +419,8 @@ export default {
   },
   methods: {
     time() {
-      const _this = this
-      if (this.action.dateUpdated == false) {
         let dateTime = new Date()
-        _this.date = dateTime.toISOString().split('T')[0] + " " + dateTime.toLocaleTimeString()
-      }
+        this.date = dateTime.toISOString().split('T')[0] + " " + dateTime.toLocaleTimeString()
     },
     getDebit() {
       let _this = this
@@ -811,14 +808,14 @@ export default {
       }
     },
     resetForm() {
-      this.date = null,
         this.amount = null,
         this.label = [],
         this.note = null,
         this.model = [],
         this.newlabel = null,
         this.action.dateUpdated = false
-      this.exclude_from_stats = false
+        this.exclude_from_stats = false
+        this.time()
     }
   }
 };
