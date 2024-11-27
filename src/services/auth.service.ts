@@ -86,12 +86,12 @@ class AuthService extends ApiService {
     }
 
     async token(provider: {
-        provider: string,
+        name: string,
         code: string
     }) {
         const appSettings = useAppSettings();
         //retrive access token header
-        const response = await this.instance.get(`/api/auth/authenticate/token/${provider}?code=${provider.code}`);
+        const response = await this.instance.get(`/api/auth/authenticate/token/${provider.name}?code=${provider.code}`);
 
         appSettings.settings.workspaces = response.data.workspaces;
         return response.data;

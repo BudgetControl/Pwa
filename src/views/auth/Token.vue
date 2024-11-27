@@ -69,7 +69,7 @@ export default {
 
     authService.token({
       code: token,
-      provier: 'google'
+      name: 'google'
     }).then((response) => {
       const settings = this.appSettings.settings
       this.authStore.authToken = { token: response.token, timestamp: new Date().toISOString()};
