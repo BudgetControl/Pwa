@@ -152,7 +152,7 @@ export default {
   },
   async beforeMount() {
     const _this = this
-    this.currency = this.settings.currency_id || 2
+    this.currency = this.settings.currency.id || 2
 
     const coreService = new CoreService()
     coreService.currencies().then((resp) => {

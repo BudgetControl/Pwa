@@ -65,7 +65,7 @@ export default {
         this.init()
 
         try {
-            this.currency = this.settings.currency_id
+            this.currency = this.settings.currency.id
         } catch (e) {
             console.info(e)
         }

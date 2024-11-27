@@ -70,7 +70,7 @@ export default {
 
         try {
             const userconfig = LocalStorageServiceVue.get("user_setting")
-            this.currency = userconfig.settings.currency_id
+            this.currency = userconfig.settings.currency.id
         } catch (e) {
             console.info(e)
         }

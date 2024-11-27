@@ -70,13 +70,13 @@ export default {
             res.forEach(e => {
                 this.currencies.push(e)
             });
-            this.currency_id = this.settings.currency_id
+            this.currency_id = this.settings.currency.id
         })
     },
     methods: {
         setDefault(id) {
             this.apiService.setDefaultCurrency(id);
-            this.appSettings.settings.currency_id = id
+            this.appSettings.settings.currency.id = id
         }
     },
 };

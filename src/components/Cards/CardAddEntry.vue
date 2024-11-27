@@ -408,8 +408,8 @@ export default {
       this.getDebit()
     }
 
-    console.debug("settings", settings.currency_id)
-    this.currency = settings.currency_id
+    console.debug("settings", settings.currency.id)
+    this.currency = settings.currency.id
     this.payment_type = settings.payment_type_id
 
     if (this.$route.query.show === 'payee') {

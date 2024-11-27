@@ -19,8 +19,8 @@ export const useAppSettings = defineStore(STORE_NAME, {
       setEye(value: boolean): void {
         this.settings.eye_settings = value
       },
-      getCurrency(): number {
-        return this.settings.user.workspace_settings.data.currency_id
+      getCurrencyId(): number {
+        return this.settings.currency.id
       },
       getPaymentType(): number {
         return this.settings.user.workspace_settings.data.payment_type_id

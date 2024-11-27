@@ -12,7 +12,7 @@
               <label class="block uppercase text-slate-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 {{ $t('labels.date_interval') }}
               </label>
-              <VueDatePicker v-model="action.date_time" :options="input.month" :required=true
+              <VueDatePicker v-model="action.date_time" :options="input.month" :range="{ maxRange: 364 }" :required=true
                 :placeholder="$t('labels.date_interval')" format="yyyy-MM-dd" />
             </div>
           </div>
@@ -129,7 +129,6 @@ export default {
   },
   setup() {
     const apiService = new CoreService()
-
     return {
       apiService
     }
@@ -182,8 +181,6 @@ export default {
         id: 'debit'
       }
     ]
-
-    this.invoke()
 
   },
   methods: {
