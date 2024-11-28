@@ -3,12 +3,12 @@
   <div class="relative bg-emerald-600 pb-32 pt-12">
     <div class="px-1 md:px-10 mx-auto w-full">
       <div id="statsWallet">
-        <div class="px-2 flex overflow-x-auto mb-2" style="min-height: 100px;">
+        <div class="px-2 flex overflow-x-auto mb-2 no-scrollbar">
           <CardWallet v-for="w in wallets" :key="w.id" :statTitle="w.name" :statWallet="w.balance"
             :statColor="w.color" :statIdWallet="w.id" :currency="w.currency"></CardWallet>
         </div>
         <!-- Card stats -->
-        <div class="flex overflow-x-auto">
+        <div class="flex overflow-x-auto no-scrollbar">
           <div class="min-w px-2">
             <router-link to="/app/entries" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
