@@ -148,6 +148,7 @@ export default {
 
       }).catch((err) => {
         _this.show = false
+        _this.error = this.$t('messages.login.not_valid_password')
         console.error(err)
       })
     },
@@ -159,7 +160,7 @@ export default {
 
       const authService = new AuthService()
       authService.providerUri('google').then((resp) => {
-        window.location.href = resp.uri;
+        window.open(resp.uri, '_self');
       }).catch(() => {
         _this.show = false
         _this.error = this.$t('messages.generic_error')

@@ -61,7 +61,8 @@ export default {
   },
   async mounted() {
     const _this = this
-    const token = _this.$route.query.code
+    const token = this.$route.params.code
+    console.debug("Auth Code: ", token)
     const authService = new AuthService(this.header)
 
     this.show = false
@@ -86,6 +87,7 @@ export default {
         })
     }).catch((err) => {
         _this.show = false
+        _this.error = this.$t('messages.generic_error')
         console.error(err)
       })
     }
