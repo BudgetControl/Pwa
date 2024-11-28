@@ -3,7 +3,7 @@
   <div class="relative bg-emerald-600 pb-32 pt-12">
     <div class="px-1 md:px-10 mx-auto w-full">
       <div id="statsWallet">
-        <div class="px-2 flex overflow-x-auto mb-2">
+        <div class="px-2 flex overflow-x-auto mb-2" style="min-height: 100px;">
           <CardWallet v-for="w in wallets" :key="w.id" :statTitle="w.name" :statWallet="w.balance"
             :statColor="w.color" :statIdWallet="w.id" :currency="w.currency"></CardWallet>
         </div>
@@ -73,8 +73,6 @@ export default {
   },
   setup() {
     const refreshApp = useRefreshStore()
-    
-
     return {
       refreshApp
     }
@@ -118,10 +116,11 @@ export default {
   },
   mounted() {
     this.refreshApp.$subscribe((mutation, state) => {
-  if (state.state) {
-    this.update();
-  }
-});
+    if (state.state === true) {
+      this.update();
+      this.refreshApp.set(false)
+    }
+  });
     this.update()
   },
   methods: {

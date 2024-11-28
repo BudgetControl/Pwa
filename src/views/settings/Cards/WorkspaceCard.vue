@@ -67,7 +67,14 @@
 
                     </div>
                     <!--footer-->
+
                     <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                        <button
+                            class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            type="button" v-on:click="deleteModal()">
+                            {{ $t('labels.delete') }}
+                        </button>
+
                         <button
                             class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button" v-on:click="saveModal()">
@@ -88,6 +95,7 @@ import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
 import WorkspaceService from '../../../services/workspace.service';
 import CoreService from '../../../services/core.service';
 import { useAppSettings } from '../../../storage/settings.store';
+import AuthService from '../../../services/auth.service';
 
 export default {
     components: {
@@ -177,16 +185,26 @@ export default {
         share() {
             //check if is a valid email
             const email = this.shareEmail
-            const coreService = new CoreService()
+            const authService = new AuthService()
 
             if (this.shareEmail.length > 0 && this.shareEmail.includes('@') && this.shareEmail.includes('.') && this.shareEmail.length > 5) {
-                coreService.userInfoByEmail(email).then((res) => {
+                const authService = new AuthService()
+                authService.userInfoByEmail(email).then((res) => {
                     this.modal.shareWith.push(res)
                 }).catch(() => {
                     alert(this.$t('labels.user_not_found'), 'error')
                 })
             }
             this.shareEmail = ''
+        },
+        deleteModal() {
+            const workspaceService = new WorkspaceService()
+            workspaceService.delete(this.$route.params.id).then(() => {
+                alert(this.$t('messages.workspace.deleted'))
+                this.$router.push('/app/settings/workspace')
+            }).catch(() => {
+                alert(this.$t('messages.generic_error'), 'error')
+            })
         }
     }
 };

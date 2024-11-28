@@ -41,5 +41,6 @@ export default {
     },
     delete_entry: '¿Estás seguro de que quieres eliminar esta entrada?',
     archive_debit: '¿Estás seguro de que quieres archivar este débito?',
+    we_are_loading_your_data: 'Estamos cargando tus datos ...',
 }
 </script>
