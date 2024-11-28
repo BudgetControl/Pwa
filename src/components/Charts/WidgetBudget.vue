@@ -74,7 +74,7 @@ export default {
     mounted() {
         this.init()
         const userconfig = this.appSettings.settings
-        this.currency = userconfig.currency.id
+
     },
     methods: {
         init: function () {
