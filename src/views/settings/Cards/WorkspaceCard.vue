@@ -130,7 +130,10 @@ export default {
         saveModal() {
             if(this.$route.params.id) {
                 const workspaceService = new WorkspaceService()
-                workspaceService.update(this.$route.params.id, this.modal).then(() => {
+                workspaceService.update({
+                    id: this.$route.params.id,
+                    data: this.modal
+                }).then(() => {
                     alert(this.$t('messages.workspace.updated'))
                     this.$router.push('/app/settings/workspace')
                 })
@@ -158,7 +161,7 @@ export default {
             const workspaceService = new WorkspaceService()
                 workspaceService.get(this.$route.params.id).then((res) => {
                 this.modal.name = res.workspace.name
-                this.modal.currency = res.settings.data.currencyId
+                this.modal.currency = res.settings.data.currency.id
                 this.modal.payment_type = res.settings.data.paymenttypeId
                 res.workspace.users.forEach((item) => {
                     const user = this.appSettings.settings.user
