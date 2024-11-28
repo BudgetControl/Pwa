@@ -47,7 +47,7 @@
 <script>
 import ChartService from '@/services/chart.service'
 import Budget from '@/components/Budget/Budget.vue'
-
+import { useAppSettings } from '../../storage/settings.store';
 
 
 export default {
@@ -65,16 +65,16 @@ export default {
     components: {
         Budget
     },
+    setup() {
+        const appSettings = useAppSettings()
+        return {
+            appSettings
+        }
+    },
     mounted() {
         this.init()
-
-        try {
-            const userconfig = LocalStorageServiceVue.get("user_setting")
-            this.currency = userconfig.settings.currency.id
-        } catch (e) {
-            console.info(e)
-        }
-
+        const userconfig = this.appSettings.settings
+        this.currency = userconfig.currency.id
     },
     methods: {
         init: function () {
