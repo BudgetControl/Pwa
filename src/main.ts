@@ -311,7 +311,7 @@ const routes = [
         component: AuthConfirm,
       },
       {
-        path: "/app/auth/token/:code",
+        path: "/app/auth/token",
         component: AuthToken,
       },
     ],
@@ -361,13 +361,11 @@ CapacitorApp.addListener('appUrlOpen', function (data) {
     Browser.close();
 
     const url = new URL(data.url);
-    const code = url.searchParams.get('code');
+    const authCode = url.searchParams.get('code');
 
     console.debug('Navigating URL:', data.url);
-    console.debug('Navigating with code:', code);
-    console.debug('Navigating to:', '/app/auth/token/'+ code );
-    router.push({ path: '/app/auth/token/'+ code });
-    console.debug('Navigating to:', '/app/auth/token/'+ code );
+    console.debug('Navigating with code:', authCode);
+    router.push({ path: '/app/auth/token', query: { code: authCode } });
   }
 
 });
