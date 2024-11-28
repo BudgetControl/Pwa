@@ -61,7 +61,7 @@ export default {
   },
   async mounted() {
     const _this = this
-    const token = this.$route.params.code
+    const token = _this.$route.query.code
     console.debug("Auth Code: ", token)
     const authService = new AuthService(this.header)
 
