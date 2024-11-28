@@ -107,6 +107,7 @@ import Action from "@/components/Dropdowns/Action.vue";
 import ConfirmModal from '@/components/GenericComponents/ConfirmModal.vue';
 import CoreService from "../../services/core.service";
 import CheckboxButton from "../Button/CheckboxButton.vue";
+import { useRefreshStore } from "../../storage/refresh";
 
 export default {
     props: {
@@ -125,11 +126,11 @@ export default {
         EntryActionDropdown, Action, ConfirmModal, CheckboxButton
     },
     setup() {
-
+        const refreshApp = useRefreshStore()
         const apiService = new CoreService()
 
         return {
-            apiService
+            apiService, refreshApp
         }
     },
     data() {
@@ -175,7 +176,7 @@ export default {
                 } else {
                     ApiService.deleteEntry(entryUuid, isPlanned)
                 }
-
+                this.refreshApp.set(true)
                 this.deleteItemFromArray(index)
             }
 

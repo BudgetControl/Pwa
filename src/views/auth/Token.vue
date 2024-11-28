@@ -14,6 +14,8 @@
           <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
             <div class="text-slate-400 text-center mb-3 font-bold">
               <form action="javascript:void(0)">
+                
+                {{ $t('messages.we_are_loading_your_data') }}
 
                 <div role="alert" v-if="error">
                   <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
