@@ -185,7 +185,7 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import AlertModal from '../../GenericComponents/AlertModal.vue';
-import libs from '../../../Libs.vue';
+import {libs} from '../../../libs';
 import CoreService from '../../../services/core.service';
 
 

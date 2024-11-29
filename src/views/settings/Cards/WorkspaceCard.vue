@@ -185,7 +185,6 @@ export default {
         share() {
             //check if is a valid email
             const email = this.shareEmail
-            const authService = new AuthService()
 
             if (this.shareEmail.length > 0 && this.shareEmail.includes('@') && this.shareEmail.includes('.') && this.shareEmail.length > 5) {
                 const authService = new AuthService()
