@@ -1,65 +1,69 @@
 <template>
-  <div class="e" id="app">
-    <div  v-if="deferredPrompt" id="alert-message"  class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-sky-500">
-      <span class="inline-block align-middle mr-8">
-      <button @click="installPWA">{{ $t('text.install_app') }} {{ $t('labels.click_here') }}</button>
-      </span>
-      <button
-        v-on:click="closeAlert()"
-        class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none">
-        <span>×</span>
-      </button>
+  <div id="app">
+    <!-- Il tuo template -->
+    <div v-if="showInstallMessage" id="alert-message">
+      <p>Installa la nostra app dal Play Store!</p>
+      <button @click="installPWA">Installa</button>
+      <button @click="closeAlert">Chiudi</button>
     </div>
     <router-view />
   </div>
 </template>
 
 <script>
+import { libs } from './libs';
 
 export default {
   data() {
     return {
       deferredPrompt: null,
-      selectedLanguage: this.$i18n.locale,
+      showInstallMessage: false,
+      selectedLanguage: 'en',
       languages: {
         en: 'English',
-        es: 'Spanish',
-        it: 'Italian',
-      }
+        it: 'Italiano',
+        sp: 'Español',
+      },
     };
   },
-  created() {
+  async created() {
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       this.deferredPrompt = e;
     });
+
+    const browserLanguage = navigator.language.split('-')[0];
+    if (this.languages[browserLanguage]) {
+      this.selectedLanguage = browserLanguage;
+      this.changeLanguage();
+    }
+
+    const isAndroid = await libs.isAndroidPlatform();
+    const isAppInstalled = await libs.isAppInstalled();
+
+    if (isAndroid && !isAppInstalled) {
+      this.showInstallMessage = true;
+    }
+
   },
   methods: {
-    closeAlert: function(){
-      this.deferredPrompt = false;
+    closeAlert() {
+      this.showInstallMessage = false;
     },
     changeLanguage() {
       this.$i18n.locale = this.selectedLanguage;
     },
     installPWA() {
-      if (this.deferredPrompt) {
-        this.deferredPrompt.prompt();
-        this.deferredPrompt.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            console.log('User accepted the A2HS prompt');
-          } else {
-            console.log('User dismissed the A2HS prompt');
-          }
-          this.deferredPrompt = null;
-        });
-      }
-    }
+      // Reindirizza al Play Store
+      const urlToPlayStore = process.env.VUE_APP_GOOGLE_PLAY_STORE_URL;
+      window.location.href = urlToPlayStore;
+    },
   },
-}
+};
 </script>
 
 <style scoped>
 #alert-message {
-  z-index: 9999;
+  /* Stili per il messaggio di installazione */
 }
 </style>

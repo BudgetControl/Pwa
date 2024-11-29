@@ -283,7 +283,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import { useAppSettings } from '../../storage/settings.store';
 import { useRefreshStore } from '../../storage/refresh';
 import AlertModal from '../GenericComponents/AlertModal.vue';
-import libs from '../../Libs.vue';
+import {libs} from '../../libs';
 import CoreService from '../../services/core.service';
 import CheckboxButton from '../Button/CheckboxButton.vue';
 
