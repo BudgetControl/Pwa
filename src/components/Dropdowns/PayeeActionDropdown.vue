@@ -62,7 +62,7 @@ export default {
     },
     deleteEntry() {
       this.dropdownPopoverShow = false;
-      ApiService.deleteDebt(this.entryId).then(() => {
+      this.apiService.deleteDebt(this.entryId).then(() => {
         this.$emit('deleteItem', this.index)
       }).catch((error) => {
         console.error(error);

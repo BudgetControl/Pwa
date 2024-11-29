@@ -172,9 +172,9 @@ export default {
             if (userConfirmed) {
                 const entryUuid = this.entries[index].id
                 if (isModel) {
-                    ApiService.deleteModel(entryUuid)
+                    this.apiService.deleteModel(entryUuid)
                 } else {
-                    ApiService.deleteEntry(entryUuid, isPlanned)
+                    this.apiService.deleteEntry(entryUuid, isPlanned)
                 }
                 this.refreshApp.set(true)
                 this.deleteItemFromArray(index)

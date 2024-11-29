@@ -97,7 +97,6 @@ export default {
       })
     },
     filterQueryString(query) {
-      const lastDayOfCurrentMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate()
       let filter = ''
 
       if (query.filter_date !== undefined) {
@@ -109,8 +108,6 @@ export default {
         }
         filter += `&filters[date_time]=<=|${query.filter_date}`
 
-      } else {
-        filter = `&filters[date_time]=<=|${new Date().getFullYear()}-${new Date().getMonth() + 1}-${lastDayOfCurrentMonth}T23:59:59`
       }
 
       if (query.filter_wallet !== undefined) {
