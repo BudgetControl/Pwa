@@ -1,4 +1,3 @@
-import { Device } from '@capacitor/device';
 import { Capacitor } from '@capacitor/core';
 
 class Libs {
@@ -7,15 +6,15 @@ class Libs {
   }
 
    async isAndroidPlatform() {
-    const info = await Device.getInfo();
-    console.debug('isAndroidPlatform', info.platform);
-    return info.platform === 'android';
+    const info = await Capacitor.getPlatform();
+    console.debug('isAndroidPlatform', info);
+    return info === 'android';
   }
 
    async isIosPlatform() {
-    const info = await Device.getInfo();
-    console.debug('isIosPlatform', info.platform);
-    return info.platform === 'ios';
+    const info = await Capacitor.getPlatform();
+    console.debug('isIosPlatform', info);
+    return info === 'ios';
   }
 
    async isAppInstalled(): Promise<boolean> {
