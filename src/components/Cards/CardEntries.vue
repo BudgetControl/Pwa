@@ -50,6 +50,7 @@ export default {
     return {
       filter: "",
       wallet: 0,
+      entries: [],
       selected: {
         wallet: 0
       },
@@ -73,20 +74,35 @@ export default {
     this.invoke()
   },
   methods: {
-    invoke() {
-      let _this = this
+    async invoke() {
       const currentPage = this.appSettings.settings.current_page
-      const filter = `?per_page=20&page=${currentPage}` + this.filterQueryString(this.$route.query)
-      const coreService = new CoreService()
-      coreService.getEntry(filter).then((res) => {
-        if (res.data.length > 0) {
-          _this.$refs.entry.buildEntriesTable(res.data)
+      const filter = `?per_page=30&page=${currentPage}` + this.filterQueryString(this.$route.query) + "&filters[planned]=0";
+      const filterPlannedEntry = `?per_page=30&page=${currentPage}&filters[planned]=1`;
+      const coreService = new CoreService();
+
+      try {
+        const [plannedRes, regularRes] = await Promise.all([
+          coreService.getEntry(filterPlannedEntry),
+          coreService.getEntry(filter),
+        ]);
+
+        let plannedEntries = plannedRes.data;
+        let regularEntries = regularRes.data;
+
+        // Unisci le entries
+        let entries = regularEntries.concat(plannedEntries);
+
+        if (entries.length > 0) {
+          entries.sort((a, b) => new Date(b.date_time) - new Date(a.date_time));
+          this.$refs.entry.buildEntriesTable(entries);
         }
 
         if (this.$refs._paginator !== undefined) {
-          this.$refs._paginator.hasMorePage = currentPage < res.last_page
+          this.$refs._paginator.hasMorePage = this.currentPage < regularRes.last_page;
         }
-      })
+      } catch (error) {
+        console.error('Errore durante il recupero delle entries:', error);
+      }
 
     },
     get(path, callBack) {
@@ -128,6 +144,10 @@ export default {
 
       if (query.filter_payee !== undefined) {
         filter += `&filters[payee_id]=${this.$route.query.filter_payee}`
+      }
+
+      if (query.filter_planned !== undefined) {
+        filter += `&filters[planned]=${this.$route.query.filter_planned}`
       }
 
       if (filter != '') {

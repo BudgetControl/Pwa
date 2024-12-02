@@ -15,9 +15,6 @@
             <hr class="mt-6 border-b-1 border-slate-300" />
           </div>
           <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-            <div class="text-slate-400 text-center mb-3 font-bold">
-              <small>{{ $t('labels.or_sign_in_with_credentials') }} </small>
-            </div>
             <form @submit="submit" action="javascript:void(0)">
 
               <div role="alert" v-if="error">
@@ -94,6 +91,13 @@
                     type="submit">
                     {{ $t('labels.create_account') }}
                   </button>
+
+                  <span class="text-slate-400 text-center mt-3 font-bold lowercase">
+                    <router-link to="/app/auth/login">
+                      {{ $t('labels.back_to_login') }}
+                    </router-link>
+                  </span>
+
                 </div>
               </div>
             </form>

@@ -231,5 +231,6 @@ export default {
     choose_planned_type: 'Elige un tipo planificado',
     list_of_all_credit_cards: 'Lista de todas las tarjetas de crédito',
     details: 'Detalles',
+    back_to_login: 'Volver a iniciar sesión',
 }
 </script>

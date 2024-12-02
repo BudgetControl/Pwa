@@ -11,6 +11,11 @@ export default {
         insert_amount: 'Please insert amount value',
         choose_wallet_transfer: 'Please choose a different wallet to transfer',
         insert_payee: 'Please insert a payee name',
+        end_date_greater_than_start_date: 'The end date must be greater than the start date',
+        choose_start_date: 'Please choose a start date',
+        end_date_greater_than_today: 'The end date must be greater than today',
+        start_date_greater_than_today: 'The start date must be greater than today',
+        insert_model_name: 'Please insert a model name',
     },
     login: {
         not_verified_email: `You haven't verified your email yet. If you haven't received it, click here to resend.`,

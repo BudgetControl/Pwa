@@ -617,6 +617,7 @@ export default {
         return false
       }
 
+      // transfer
       if (this.action.openTab == 3) {
 
         if (this.account == -1) {
@@ -642,6 +643,7 @@ export default {
 
       }
 
+      // debit
       if (this.action.openTab == 4) {
         if (this.debit == 'njn76298fm' && this.debit_name == null) {
           alert(this.$t('messages.validation.insert_payee'), "error")
@@ -658,6 +660,41 @@ export default {
           return false
         }
 
+      }
+
+      if(this.isPlanned) {
+        if(this.end_date_time != null) {
+          if(this.end_date_time < this.date) {
+            // check if end date is greater than start date
+            alert(this.$t('messages.validation.end_date_greater_than_start_date'), "error")
+          }
+        }
+
+        if(this.date == null) {
+          alert(this.$t('messages.validation.choose_start_date'), "error")
+          return false
+        }
+
+        const now = new Date()
+        if(this.end_date_time != null) {
+          if(this.end_date_time < now.toISOString().split('T')[0]) {
+            alert(this.$t('messages.validation.end_date_greater_than_today'), "error")
+            return false
+          }
+        }
+
+        if(this.date < now.toISOString().split('T')[0]) {
+          alert(this.$t('messages.validation.start_date_greater_than_today'), "error")
+          return false
+        }
+
+      }
+
+      if(this.isModel || this.action.save_as_model) {
+        if(this.name == null) {
+          alert(this.$t('messages.validation.insert_model_name'), "error")
+          return false
+        }
       }
 
       return true
