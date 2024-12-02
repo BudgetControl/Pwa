@@ -48,6 +48,12 @@ class ApiService {
                 console.error('API Error:', error.response ? error.response.data : error.message);
 
                 console.warn('An error occurred during the API request. Check the console for more details.');
+
+                //if statis on 401, logout
+                if (error.response.status === 401) {
+                    authStorage.resetState();
+                    window.location.href = '/app/auth/login';
+                }
                 return Promise.reject(error);
             }
         );

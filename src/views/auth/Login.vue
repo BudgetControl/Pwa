@@ -122,6 +122,12 @@ export default {
       verify: false,
     };
   },
+  mounted() {
+    // check if user is already logged in
+    if (this.authStore.authToken.token != undefined && this.authStore.bcAuthToken.token != undefined) {
+      this.$router.push({ path: '/app/dashboard' })
+    }
+  },
   methods: {
     async submit() {
       let email = this.email;
