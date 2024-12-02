@@ -23,6 +23,7 @@
                 <div class="flex-l">
                     <EntryActionDropdown>
                         <Action :onAction="() => deleteItem(i)" :label="$t('labels.delete')" iconClass="fa-solid fa-trash text-red-400" />
+                        <Action :onAction="() => editItem(i)" :label="$t('labels.edit')" iconClass="fa-solid fa-pen-to-square" />
                     </EntryActionDropdown>
                 </div>
 
@@ -106,6 +107,10 @@ export default {
     },
     deleteItemFromArray(index) {
         this.entries.splice(index, 1);
+    },
+    editItem(index) {
+        const entryUuid = this.entries[index].id
+        this.$router.push(`/app/planned_entry/${entryUuid}`)
     },
     invoke() {
         let currentPage = window.localStorage.getItem('current_page') == null ? 0 : window.localStorage.getItem('current_page')

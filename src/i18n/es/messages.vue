@@ -11,6 +11,11 @@ export default {
         insert_amount: 'Por favor, ingrese un valor para el monto',
         choose_Wallet_transfer: 'Por favor, elija una billetera diferente para la transferencia',
         insert_payee: 'Por favor, ingrese un nombre de beneficiario',
+        end_date_greater_than_start_date: 'La fecha de finalización debe ser mayor que la fecha de inicio',
+        choose_start_date: 'Por favor, elija una fecha de inicio',
+        end_date_greater_than_today: 'La fecha de finalización debe ser mayor que la de hoy',
+        start_date_greater_than_today: 'La fecha de inicio debe ser mayor que la de hoy',
+        insert_model_name: 'Por favor, ingrese un nombre de modelo',
     },
     login: {
         not_verified_email: `Aún no has verificado tu correo electrónico. Si no lo has recibido, haz clic aquí para reenviarlo.`,
