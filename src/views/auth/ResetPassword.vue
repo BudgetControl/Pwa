@@ -51,6 +51,13 @@
                     type="submit">
                     {{ $t('labels.set_new_password') }}
                   </button>
+
+                  <span class="text-slate-400 text-center mt-3 font-bold lowercase">
+                    <router-link to="/app/auth/login">
+                      {{ $t('labels.back_to_login') }}
+                    </router-link>
+                  </span>
+                  
                 </div>
               </form>
             </div>
