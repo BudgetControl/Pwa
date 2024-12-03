@@ -232,5 +232,7 @@ export default {
     list_of_all_credit_cards: 'Lista de todas las tarjetas de crédito',
     details: 'Detalles',
     back_to_login: 'Volver a iniciar sesión',
+    donate: 'Donar',
+    faq: 'FAQ',
 }
 </script>

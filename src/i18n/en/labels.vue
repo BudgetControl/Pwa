@@ -232,6 +232,8 @@ export default {
     list_of_all_credit_cards: 'List of all credit cards',
     details: 'Details',
     back_to_login: 'Back to login',
+    donate: 'Donate',
+    faq: 'FAQ',
 };
 
 </script>

@@ -232,5 +232,7 @@ export default {
     details: 'Dettagli',
     planned_entry: 'Pianificati',
     back_to_login: 'Torna al login',
+    donate: 'Donazione',
+    faq: 'FAQ',
 }
 </script>

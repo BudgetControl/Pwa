@@ -59,12 +59,12 @@
             <p class="text-xs text-slate-400">{{ $t('text.settings.learn') }}</p>
           </router-link>
 
-          <router-link to="/app/settings/assistance"
+          <!-- <router-link to="/app/settings/assistance"
             class="active:bg-emerald-600 font-bold text-sm px-6 py-3 m-5 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
             <i class="fas fa-solid fa-cookie-bite fa-lg text-emerald-500 mr-2 "><span
                 class="p-2 text-black text-lg">{{ $t('labels.assistance') }}</span></i>
             <p class="text-xs text-slate-400">{{ $t('text.settings.write_us') }}</p>
-          </router-link>
+          </router-link> -->
 
         </div>
       </div>
