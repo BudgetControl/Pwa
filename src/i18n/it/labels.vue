@@ -232,5 +232,9 @@ export default {
     details: 'Dettagli',
     planned_entry: 'Pianificati',
     back_to_login: 'Torna al login',
+    workspace_name: 'Nome del tuo workspace',
+    first_wallet_name: 'Nome del tuo primo portafoglio',
+    wallet_amount: "Saldo del portafoglio",
+    setup_account: 'Configura account',
 }
 </script>

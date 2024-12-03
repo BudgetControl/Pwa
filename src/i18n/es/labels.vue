@@ -232,5 +232,9 @@ export default {
     list_of_all_credit_cards: 'Lista de todas las tarjetas de crédito',
     details: 'Detalles',
     back_to_login: 'Volver a iniciar sesión',
+    workspace_name: 'Nombre del espacio de trabajo',
+    first_wallet_name: 'Nombre de la primera billetera',
+    wallet_amount: 'Monto de la billetera',
+    setup_account: 'Configurar cuenta',
 }
 </script>
