@@ -95,17 +95,20 @@ class CoreService extends ApiService {
 
     async categories() {
         const response = await this.instance.get('/api/categories-subcategories');
+        this.setInCache(response)
         return response.data
 
     }
 
     async category(id) {
         const response = await this.instance.get(`/api/categories/${id}`);
+        this.setInCache(response)
         return response.data;
     }
 
     async paymentstype() {
         const response = await this.instance.get('/api/payment-types');
+        this.setInCache(response)
         return response.data;
     }
 
@@ -151,6 +154,7 @@ class CoreService extends ApiService {
 
     async currencies() {
         const response = await this.instance.get('/api/currencies');
+        this.setInCache(response)
         return response.data;
     }
 

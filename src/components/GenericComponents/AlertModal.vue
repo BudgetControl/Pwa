@@ -25,7 +25,16 @@ export default {
   },
   computed: {
     alertClass() {
-      return this.type === 'error' ? 'bg-red-500' : 'bg-sky-500';
+      switch (this.type) {
+        case 'success':
+          return 'bg-emerald-500';
+        case 'error':
+          return 'bg-red-500';
+        case 'warning':
+          return 'bg-slace-500';
+        default:
+          return 'bg-sky-500';
+      }
     }
   },
   methods: {

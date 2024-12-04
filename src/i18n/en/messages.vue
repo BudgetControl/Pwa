@@ -47,5 +47,7 @@ export default {
     delete_entry: 'Are you sure you want to delete this entry ?',
     archive_debit: 'Are you sure you want to archive this debit ?',
     we_are_loading_your_data: 'We are loading your data ...',
+    install: 'Install our app from the Play Store!',
+    offline: 'You are offline. Please check your internet connection.'
 }
 </script>
