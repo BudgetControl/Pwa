@@ -236,5 +236,7 @@ export default {
     first_wallet_name: 'Nome del tuo primo portafoglio',
     wallet_amount: "Saldo del portafoglio",
     setup_account: 'Configura account',
+    donate: 'Donazione',
+    faq: 'FAQ',
 }
 </script>

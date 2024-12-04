@@ -236,6 +236,8 @@ export default {
     first_wallet_name: 'First wallet name',
     wallet_amount: 'Wallet amount',
     setup_account: 'Setup account',
+    donate: 'Donate',
+    faq: 'FAQ',
 };
 
 </script>

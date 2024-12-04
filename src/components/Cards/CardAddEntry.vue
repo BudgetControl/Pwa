@@ -506,6 +506,7 @@ export default {
         _this.planning = model.planning
         _this.transfer_realtion = model.transfer_relation
         _this.planned = model.planning
+        _this.end_date_time = model.end_date_time
 
         if (model.type == 'debit') {
           _this.action.hidecategory = true

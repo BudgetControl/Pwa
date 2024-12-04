@@ -22,8 +22,8 @@
 
                 <div class="flex-l">
                     <EntryActionDropdown>
-                        <Action :onAction="() => deleteItem(i)" :label="$t('labels.delete')" iconClass="fa-solid fa-trash text-red-400" />
                         <Action :onAction="() => editItem(i)" :label="$t('labels.edit')" iconClass="fa-solid fa-pen-to-square" />
+                        <Action :onAction="() => deleteItem(i)" :label="$t('labels.delete')" iconClass="fa-solid fa-trash text-red-400" />
                     </EntryActionDropdown>
                 </div>
 

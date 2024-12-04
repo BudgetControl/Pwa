@@ -236,5 +236,7 @@ export default {
     first_wallet_name: 'Nombre de la primera billetera',
     wallet_amount: 'Monto de la billetera',
     setup_account: 'Configurar cuenta',
+    donate: 'Donar',
+    faq: 'FAQ',
 }
 </script>
