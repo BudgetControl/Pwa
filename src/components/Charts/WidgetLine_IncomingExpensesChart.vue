@@ -1,12 +1,12 @@
 <template>
-  <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-slate-700">
+  <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded">
     <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
       <div class="flex flex-wrap items-center">
         <div class="relative w-full max-w-full flex-grow flex-1">
-          <h2 class="text-white text-xl font-semibold">
+          <h2 class="text-xl font-semibold">
             {{ title }}
           </h2>
-          <h3 class="text-white text-xl font-semibold">
+          <h3 class="text-xl font-semibold">
             {{ subTitle }}
           </h3>
         </div>
@@ -34,6 +34,7 @@ import {
   Legend,
 } from "chart.js";
 import ChartService from "@/services/chart.service";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
 export default {
   props: {
@@ -96,39 +97,24 @@ export default {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
+              dataLabels: {
+                display: false
+              },
               title: {
                 display: false,
                 text: "Entries stats",
-                color: "white",
+                color: "black",
               },
               legend: {
                 labels: {
-                  color: "white",
+                  color: "black",
                 },
-                align: "end",
+                align: "center",
                 position: "bottom",
               },
               tooltip: {
                 mode: "index",
                 intersect: false,
-              },
-            },
-            scales: {
-              x: {
-                ticks: {
-                  color: "rgba(255,255,255,.7)",
-                },
-                grid: {
-                  color: "rgba(33, 37, 41, 0.3)",
-                },
-              },
-              y: {
-                ticks: {
-                  color: "rgba(255,255,255,.7)",
-                },
-                grid: {
-                  color: "rgba(255, 255, 255, 0.15)",
-                },
               },
             },
           },
@@ -167,7 +153,7 @@ export default {
             });
 
             const ctx = document.getElementById("line_graph_doubleline_").getContext("2d");
-            Chart.register(LineController, LineElement, PointElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
+            Chart.register(LineController, LineElement, PointElement, CategoryScale, LinearScale, Title, Tooltip, Legend, ChartDataLabels);
             window.myLine = new Chart(ctx, config);
           })
           .catch((error) => {

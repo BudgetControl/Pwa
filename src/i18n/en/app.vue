@@ -149,6 +149,8 @@ export default {
         other: 'Other',
         "prepaid-card": 'Prepaid Card',
         voucher: 'Voucher'
-    }
+    },
+    stats_by_category: 'Stats by category',
+    stats_by_tags: 'Stats by tags',
 }
 </script>

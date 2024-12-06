@@ -48,6 +48,10 @@ export default {
     archive_debit: '¿Estás seguro de que quieres archivar este débito?',
     we_are_loading_your_data: 'Estamos cargando tus datos ...',
     install: '¡Instala nuestra app desde el Play Store!',
-    offline: 'Estás sin conexión. Por favor, verifica tu conexión a internet.'
+    offline: 'Estás sin conexión. Por favor, verifica tu conexión a internet.',
+    chart: {
+        no_data: 'No hay datos para mostrar',
+        no_data_selected: 'No se ha seleccionado ningún dato',
+    }
 }
 </script>

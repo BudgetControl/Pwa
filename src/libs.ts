@@ -22,6 +22,12 @@ class Libs {
     console.debug('isAppInstalled', info);
     return info;
   }
+
+  async isMobile(): Promise<boolean> {
+    const platform = await Capacitor.getPlatform();
+    console.debug('isMobile', platform);
+    return platform === 'ios' || platform === 'android';
+  }
 }
 
 export const libs = new Libs();

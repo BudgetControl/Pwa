@@ -48,6 +48,10 @@ export default {
     archive_debit: 'Sei sicuro di voler archiviare questo debito?',
     we_are_loading_your_data: 'Stiamo caricando i tuoi dati...',
     install: 'Installa la nostra app dal Play Store!',
-    offline: 'Sei offline. Per favore controlla la tua connessione internet.'
+    offline: 'Sei offline. Per favore controlla la tua connessione internet.',
+    chart: {
+        no_data: 'Nessun dato da visualizzare',
+        no_data_selected: 'Nessun dato selezionato',
+    }
 }
 </script>

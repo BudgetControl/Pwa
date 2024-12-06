@@ -149,6 +149,8 @@ export default {
         other: 'Otro',
         "prepaid-card": 'Tarjeta Prepaga',
         voucher: 'Vale'
-    }
+    },
+    stats_by_category: 'Estadísticas por categoría',
+    stats_by_tags: 'Estadísticas por etiquetas',
 }
 </script>
