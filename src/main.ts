@@ -62,6 +62,7 @@ import RecoveryPassword from "./views/auth/RecoveryPassword.vue";
 import ResetPassword from "./views/auth/ResetPassword.vue";
 import AuthConfirm from "./views/auth/Confirm.vue";
 import AuthToken from "./views/auth/Token.vue";
+import AuthFinalize from "./views/auth/Finalize.vue";
 
 // views without layouts
 
@@ -313,6 +314,11 @@ const routes = [
       {
         path: "/app/auth/token",
         component: AuthToken,
+      },
+      {
+        path: "/app/auth/finalize",
+        name: "finalizeAuth",
+        component: AuthFinalize,
       },
     ],
   },

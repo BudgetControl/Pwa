@@ -1,11 +1,10 @@
 import ApiService from './api.service';
-import {useAppSettings } from '../storage/settings.store';
+import { useAppSettings } from '../storage/settings.store';
 import { useAuthStore } from '../storage/auth-token.store';
 
 class AuthService extends ApiService {
 
-    async login(email: string, password: string)
-    {
+    async login(email: string, password: string) {
         const response = await this.instance.post('/api/auth/authenticate', {
             email: email,
             password: password
@@ -130,12 +129,14 @@ class AuthService extends ApiService {
         //retrive access token header
         const response = await this.instance.get('/api/auth/user-info');
 
-        authStore.bcAuthToken = {token: response.data.token, timestamp: new Date().toISOString()};
+        authStore.bcAuthToken = { token: response.data.token, timestamp: new Date().toISOString() };
         appSettings.settings.user = response.data.userInfo
 
         const workspaceSettings = response.data.userInfo.workspace_settings
-        appSettings.settings.currency = workspaceSettings.data.currency
-        appSettings.settings.payment_type_id = workspaceSettings.data.payment_type_id
+        if (workspaceSettings.data) {
+            appSettings.settings.currency = workspaceSettings.data.currency
+            appSettings.settings.payment_type_id = workspaceSettings.data.payment_type_id
+        }
 
         return response.data;
     }

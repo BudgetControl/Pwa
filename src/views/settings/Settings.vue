@@ -18,19 +18,19 @@
             <p class="text-xs text-slate-400">{{ $t('text.settings.manage_wallets') }}</p>
           </router-link>
 
-          <router-link to="/app/settings/category"
+          <!-- <router-link to="/app/settings/category"
             class="active:bg-emerald-600 font-bold text-sm px-6 py-3 m-5 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
             <i class="fas fa-solid fa-chart-pie fa-lg text-emerald-500 mr-2 "><span
                 class="p-2 text-black text-lg">{{ $t('labels.category') }}</span></i>
             <p class="text-xs text-slate-400">{{ $t('text.settings.manage_entry') }}</p>
-          </router-link>
-
+          </router-link> -->
+<!-- 
           <router-link to="/app/settings/label"
             class="active:bg-emerald-600 font-bold text-sm px-6 py-3 m-5 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
             <i class="fas fa-solid fa-tags fa-lg text-emerald-500 mr-2 "><span
                 class="p-2 text-black text-lg">{{ $t('labels.labels') }}</span></i>
             <p class="text-xs text-slate-400">{{ $t('text.settings.customize_entry') }}</p>
-          </router-link>
+          </router-link> -->
 
           <router-link to="/app/settings/model"
             class="active:bg-emerald-600 font-bold text-sm px-6 py-3 m-5 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
@@ -39,12 +39,12 @@
             <p class="text-xs text-slate-400">{{ $t('text.settings.configure_model') }}</p>
           </router-link>
 
-          <router-link to="/app/settings/currency"
+          <!-- <router-link to="/app/settings/currency"
             class="active:bg-emerald-600 font-bold text-sm px-6 py-3 m-5 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
             <i class="fas fa-solid fa-dollar-sign fa-lg text-emerald-500 mr-2 "><span
                 class="p-2 text-black text-lg">{{ $t('labels.currency') }}</span></i>
             <p class="text-xs text-slate-400">{{ $t('text.settings.set_currency') }}</p>
-          </router-link>
+          </router-link> -->
 
           <router-link to="/app/settings/profile"
             class="active:bg-emerald-600 font-bold text-sm px-6 py-3 m-5 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
@@ -59,12 +59,12 @@
             <p class="text-xs text-slate-400">{{ $t('text.settings.learn') }}</p>
           </router-link>
 
-          <router-link to="/app/settings/assistance"
+          <!-- <router-link to="/app/settings/assistance"
             class="active:bg-emerald-600 font-bold text-sm px-6 py-3 m-5 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
             <i class="fas fa-solid fa-cookie-bite fa-lg text-emerald-500 mr-2 "><span
                 class="p-2 text-black text-lg">{{ $t('labels.assistance') }}</span></i>
             <p class="text-xs text-slate-400">{{ $t('text.settings.write_us') }}</p>
-          </router-link>
+          </router-link> -->
 
         </div>
       </div>

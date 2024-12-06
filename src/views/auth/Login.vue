@@ -145,7 +145,7 @@ export default {
         settings.current_ws = response.workspaces[0]
 
         authService.userInfo().then(() => {
-          _this.$router.push({ path: '/app/dashboard' })
+          _this.$router.push({ name: 'finalizeAuth' })
         }).catch((error) => {
           console.error(error)
           _this.error = this.$t('messages.generic_error')

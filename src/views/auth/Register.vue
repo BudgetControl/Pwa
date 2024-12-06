@@ -4,8 +4,7 @@
     </loading>
     <div class="flex content-center items-center justify-center h-full">
       <div class="w-full lg:w-6/12 px-4">
-        <div
-          class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-slate-200 border-0">
+        <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-slate-200 border-0">
           <div class="rounded-t mb-0 px-6 py-6">
             <div class="text-center mb-3">
               <h6 class="text-slate-500 text-sm font-bold">
@@ -27,8 +26,7 @@
               </div>
 
               <div role="alert" id="message" v-if="message">
-                <div
-                  class="border border-t-0 border-sky-400 rounded-b bg-sky-100 px-4 py-3 text-sky-700">
+                <div class="border border-t-0 border-sky-400 rounded-b bg-sky-100 px-4 py-3 text-sky-700">
                   ! {{ message }}.
                 </div>
               </div>
@@ -137,19 +135,28 @@ export default {
 
       this.show = true
       this.error = false
-      authService.register(
-        {
-          email: email,
-          password: password,
-          name: name,
-          password_confirmation: confirm_password
-        }).then(() => {
-        _this.message = _this.$t('labels.account_created')
-        _this.show = false
-      }).catch(() => {
+      try {
+
+        authService.register(
+          {
+            email: email,
+            password: password,
+            name: name,
+            password_confirmation: confirm_password
+          }).then(() => {
+
+            _this.show = false
+            authService.userInfo().then(() => {
+              _this.$router.push({ name: 'finalizeAuth' })
+            })
+
+          })
+          
+      } catch (error) {
+        console.error(error)
         _this.show = false
         _this.error = _this.$t('labels.generic_error')
-      })
+      }
     }
   }
 };
