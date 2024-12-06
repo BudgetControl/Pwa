@@ -4,8 +4,8 @@
 
         <div class="flex flex-wrap mt-4">
             <div class="flex-1">
-                <WidgetBarChartVue ref="WidgetCategoryStatsBar" :title="$t('app.stats_by_category')" />
-                <WidgetCategoryStats ref="WidgetCategoryStatsBar" />
+                <WidgetPieChart ref="WidgetPieChart" :title="$t('app.stats_by_category')" />
+                <WidgetCategoryStats ref="WidgetCategoryStats" />
             </div>
         </div>
 
@@ -17,7 +17,7 @@
 <script>
 import CardBudget from "../../../components/Charts/WidgetBudget.vue";
 import AverageStats from '../../../components/Charts/AverageStats.vue';
-import WidgetBarChartVue from '../../../components/Charts/WidgetBarChart.vue';
+import WidgetPieChart from "../../../components/Charts/WidgetdoughnutChart.vue";
 import WidgetCategoryStats from "../../../components/Charts/WidgetCategoryStats.vue";
 import ChartBarController from "../../../controller/ChartBar.controller";
 
@@ -26,7 +26,7 @@ export default {
     components: {
         CardBudget,
         AverageStats,
-        WidgetBarChartVue,
+        WidgetPieChart,
         WidgetCategoryStats
     },
     data() {
@@ -59,8 +59,8 @@ export default {
                         this.hasBarData = true
                     }
 
-                    this.$refs.WidgetCategoryStatsBar.setGraph(chartBarDataset);
-                    this.$refs.WidgetBarChartVue.setGraph(chartBarDataset);
+                    this.$refs.WidgetPieChart.setGraph(chartBarDataset);
+                    this.$refs.WidgetCategoryStats.setGraph(chartBarDataset);
                 }
             });
         }
@@ -68,29 +68,3 @@ export default {
 
 };
 </script>
-
-<style>
-@media (max-width: 767px) {
-
-    #bar-chart,
-    #table-chart {
-        display: none;
-    }
-}
-
-@media (min-width: 768px) {
-
-    #bar-chart,
-    #table-chart {
-        display: block;
-    }
-
-    #widget .flex-wrap {
-        flex-wrap: nowrap;
-    }
-
-    #widget .w-full {
-        width: 25%;
-    }
-}
-</style>

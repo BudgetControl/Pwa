@@ -107,12 +107,8 @@ export default {
                 borderRadius: 25,
                 borderWidth: 2,
                 color: 'black',
-                display: function (context) {
-                  var dataset = context.dataset;
-                  var count = dataset.data.length;
-                  var value = dataset.data[context.dataIndex];
-                  return value > count * 1.5;
-                },
+                display: false,
+
                 font: {
                   weight: 'bold'
                 },

@@ -120,29 +120,3 @@ export default {
 
 };
 </script>
-
-<style>
-@media (max-width: 767px) {
-
-  #bar-chart,
-  #table-chart {
-    display: none;
-  }
-}
-
-@media (min-width: 768px) {
-
-  #bar-chart,
-  #table-chart {
-    display: block;
-  }
-
-  #widget .flex-wrap {
-    flex-wrap: nowrap;
-  }
-
-  #widget .w-full {
-    width: 25%;
-  }
-}
-</style>

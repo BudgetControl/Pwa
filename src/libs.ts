@@ -25,8 +25,10 @@ class Libs {
 
   async isMobile(): Promise<boolean> {
     const platform = await Capacitor.getPlatform();
-    console.debug('isMobile', platform);
-    return platform === 'ios' || platform === 'android';
+    const aspectRatio = window.innerWidth / window.innerHeight;
+    const isMobile = platform === 'android' || platform === 'ios' || aspectRatio < 1.6;
+    console.debug('isMobile', isMobile);
+    return isMobile;
   }
 }
 
