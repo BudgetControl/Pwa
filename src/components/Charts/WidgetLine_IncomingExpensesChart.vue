@@ -108,13 +108,13 @@ export default {
               legend: {
                 labels: {
                   color: "black",
+                  display: false,
                 },
                 align: "center",
                 position: "bottom",
               },
               tooltip: {
-                mode: "index",
-                intersect: false,
+                enabled: true,
               },
             },
           },
@@ -138,7 +138,10 @@ export default {
                 borderColor: color,
                 data: [],
                 fill: false,
-                tension: 0.4
+                tension: 0.4,
+                datalabels: {
+                  display: false, // Nascondi datalabels per questo dataset
+                },
               };
 
               element.dataPoints.forEach((point) => {
