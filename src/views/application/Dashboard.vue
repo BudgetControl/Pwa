@@ -13,7 +13,7 @@
         <DashboardMobile />
       </div>
 
-      <div v-else>
+      <div v-if="!isMobile">
         <DashboardDesktop />
       </div>
 
@@ -29,7 +29,6 @@ import { useAppSettings } from '../../storage/settings.store';
 import { useAuthStore } from "../../storage/auth-token.store";
 import DashboardDesktop from "./dashboard/DashboardDesktop.vue";
 import DashboardMobile from "./dashboard/DashboardMobile.vue";
-import { libs } from "../../libs";
 
 export default {
   name: "dashboard-page",
@@ -50,7 +49,7 @@ export default {
   data() {
     return {
       openTab: 1,
-      isFinite: libs.isMobile(),
+      isMobile: process.env.VUE_APP_MOBILE === 'true',
     }
   },
   mounted: async function () {

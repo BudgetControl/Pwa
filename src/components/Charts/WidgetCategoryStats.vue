@@ -5,7 +5,7 @@
                 <div class="flex-1">
                     <div class=" p-2 text-center inline-flex items-center justify-center w-8 h-8 shadow-lg rounded-full mr-2"
                         :style="'background-color: ' + value.color">
-                        <i :class="value.icon"> </i>
+                        <i :class="value.icon + ' text-white'"> </i>
                     </div>
                     <span class="text-blueGray-700 p-2 inline-flex items-center justify-center">{{ value.name }} </span>
                 </div>
