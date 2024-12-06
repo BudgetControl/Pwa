@@ -9,49 +9,35 @@
     </HeaderMenu>
     <div class="mt-10">
 
-      <AverageStats />
-
-      <div class="flex flex-wrap mt-4">
-        <CardLine_IncomingExpensesChart />
+      <div v-if="isMobile">
+        <DashboardMobile />
       </div>
 
-      <div id="bar-chart" class="flex flex-wrap mt-4">
-        <WidgetBarChartVue />
+      <div v-else>
+        <DashboardDesktop />
       </div>
 
-      <div class="flex flex-wrap mt-4">
-        <WidgetTable />
-      </div>
-
-      <div class="flex flex-wrap mt-4">
-        <CardBudget />
-      </div>
     </div>
   </div>
 </template>
 <script>
-import CardLine_IncomingExpensesChart from "@/components/Charts/WidgetLine_IncomingExpensesChart.vue";
-import CardBudget from "../../components/Charts/WidgetBudget.vue";
-import WidgetTable from "../../components/Charts/WidgetTable.vue";
 import WorkspaceService from "../../services/workspace.service";
 import AuthService from "../../services/auth.service";
 import HeaderMenu from '../../components/Navbars/HeaderMenu.vue';
 import MenuButton from '../../components/GenericComponents/MenuButton.vue';
-import AverageStats from '../../components/Charts/AverageStats.vue';
-import WidgetBarChartVue from '../../components/Charts/WidgetBarChart.vue';
 import { useAppSettings } from '../../storage/settings.store';
 import { useAuthStore } from "../../storage/auth-token.store";
+import DashboardDesktop from "./dashboard/DashboardDesktop.vue";
+import DashboardMobile from "./dashboard/DashboardMobile.vue";
+import { libs } from "../../libs";
 
 export default {
   name: "dashboard-page",
   components: {
-    CardLine_IncomingExpensesChart,
-    WidgetTable,
-    CardBudget,
     HeaderMenu,
     MenuButton,
-    AverageStats,
-    WidgetBarChartVue
+    DashboardDesktop,
+    DashboardMobile
   },
   setup() {
     const settingsStore = useAppSettings()
@@ -64,6 +50,7 @@ export default {
   data() {
     return {
       openTab: 1,
+      isFinite: libs.isMobile(),
     }
   },
   mounted: async function () {
@@ -80,7 +67,7 @@ export default {
           const ws = response.userInfo.workspaces[0].uuid
           const workspaceService = new WorkspaceService()
           workspaceService.get(ws).then((res) => {
-              appSettings.workspaces.push(res.workspace)
+            appSettings.workspaces.push(res.workspace)
           })
         },
         error => {
@@ -99,24 +86,30 @@ export default {
       console.debug("NOT LOGGED")
       _this.$router.push({ path: '/app/auth/login' })
     }
+
   },
   methods: {
     toggleTabs: function (tabNumber) {
       this.openTab = tabNumber
     },
-  }
+  },
+
 };
 </script>
 
 <style>
 @media (max-width: 767px) {
-  #bar-chart {
+
+  #bar-chart,
+  #table-chart {
     display: none;
   }
 }
 
 @media (min-width: 768px) {
-  #bar-chart {
+
+  #bar-chart,
+  #table-chart {
     display: block;
   }
 

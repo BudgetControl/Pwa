@@ -47,5 +47,9 @@ export default {
     delete_entry: 'Sei sicuro di voler eliminare questa voce?',
     archive_debit: 'Sei sicuro di voler archiviare questo debito?',
     we_are_loading_your_data: 'Stiamo caricando i tuoi dati...',
+    chart: {
+        no_data: 'Nessun dato da visualizzare',
+        no_data_selected: 'Nessun dato selezionato',
+    }
 }
 </script>

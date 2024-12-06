@@ -12,6 +12,16 @@ class ChartService extends ApiService {
         return response.data;
     }
 
+    async expensesBarByLabel(data) {
+        const config = {
+            params: {
+                date_time: data
+            }
+        }
+        const response = await this.instance.get('/api/stats/chart/bar/expenses/label', config);
+        return response.data;
+    }
+
     async incomingExpensesLine(data) {
         const config = {
             params: {
