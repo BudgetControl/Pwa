@@ -150,6 +150,16 @@ export default {
         };
     },
     async mounted() {
+
+        const workspaceCurrency = this.appSettings.settings.currency
+            const workspacePaymentType = this.appSettings.settings.payment_type_id
+
+            if (workspaceCurrency && workspacePaymentType) {
+                console.debug('Workspace already setup')
+                this.$router.push({ path: '/app/dashboard' })
+                return
+            }
+
         //get current wallet ID
         const currentWallet = await this.coreService.accounts()
         this.currentWalletId = currentWallet[0].uuid

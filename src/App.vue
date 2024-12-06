@@ -2,7 +2,7 @@
   <div id="app">
     <!-- Il tuo template -->
     <div v-if="!networkStore.isOnline" class="offline-message flex flex-col items-center justify-center">
-      <p><img :src="logo"class="logo mb-4" width="80px" /></p>
+      <p><img :src="logo" alt="Budget Control" class="logo mb-4" width="80px" /></p>
       <p class="text-center">{{$t('messages.offline')}}</p>
     </div>
     <div v-if="showInstallMessage" id="alert-message">

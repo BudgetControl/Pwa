@@ -133,8 +133,10 @@ class AuthService extends ApiService {
         appSettings.settings.user = response.data.userInfo
 
         const workspaceSettings = response.data.userInfo.workspace_settings
-        appSettings.settings.currency = workspaceSettings.data.currency
-        appSettings.settings.payment_type_id = workspaceSettings.data.payment_type_id
+        if (workspaceSettings.data) {
+            appSettings.settings.currency = workspaceSettings.data.currency
+            appSettings.settings.payment_type_id = workspaceSettings.data.payment_type_id
+        }
 
         return response.data;
     }
