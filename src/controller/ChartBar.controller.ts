@@ -28,6 +28,7 @@ class ChartBarController extends ChartController {
                 },
             ])
             .then((resp) => {
+                this.dataset = [];
 
                 if (resp && resp.bar) {
 
