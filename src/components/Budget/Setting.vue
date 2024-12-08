@@ -36,17 +36,17 @@
                                     </label>
                                     <select v-model="data.period" id="planning"
                                         class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                                        <option value="_"> {{ $t('labels.choose_period') }}</option>
+                                        <option value=""> {{ $t('labels.choose_period') }}</option>
                                         <option value="weekly"> {{ $t('labels.weekly') }}</option>
                                         <option value="monthly"> {{ $t('labels.monthly') }}</option>
                                         <option value="yearly">{{ $t('labels.yearly') }}</option>
                                         <option value="one_shot"> {{ $t('labels.one_shot') }}</option>
-                                        <option value="recursively"> {{ $t('labels.recursive') }}</option>
+                                        <!-- <option value="recursively"> {{ $t('labels.recursive') }}</option> -->
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="flex flex-wrap"
+                            <!-- <div class="flex flex-wrap"
                                 v-if="data.period == 'one_shot' || data.period == 'recursively'">
                                 <div class="lg:w-6/12 px-2 py-2 w-full">
 
@@ -69,7 +69,7 @@
 
                                 </div>
 
-                            </div>
+                            </div> -->
 
                             <div class="flex flex-wrap">
                                 <div class="lg:w-6/12 px-2 py-2 w-full">
@@ -430,25 +430,25 @@ export default {
                 return false
             }
 
-            if (this.data.period == "one_shot" || this.data.period == "recursively") {
+            // if (this.data.period == "one_shot" || this.data.period == "recursively") {
 
-                if (this.data.period_start == null) {
-                    alert("Please insert a start date for a budget", 'error')
-                    return false
-                }
+            //     if (this.data.period_start == null) {
+            //         alert("Please insert a start date for a budget", 'error')
+            //         return false
+            //     }
 
-                if (this.data.period_end == null) {
-                    alert("Please insert a end date for a budget", 'error')
-                    return false
-                }
+            //     if (this.data.period_end == null) {
+            //         alert("Please insert a end date for a budget", 'error')
+            //         return false
+            //     }
 
-                // check if start date is less than end date
-                if (this.data.period_start > this.data.period_end) {
-                    alert("Start date must be less than end date", 'error')
-                    return false
-                }
+            //     // check if start date is less than end date
+            //     if (this.data.period_start > this.data.period_end) {
+            //         alert("Start date must be less than end date", 'error')
+            //         return false
+            //     }
 
-            }
+            // }
 
             return true
         }
