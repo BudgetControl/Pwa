@@ -232,7 +232,6 @@
 <script>
 import '@vuepic/vue-datepicker/dist/main.css'
 import CoreService from '../../services/core.service';
-import VueDatePicker from '@vuepic/vue-datepicker';
 import { useAppSettings } from '../../storage/settings.store';
 import AlertModal from '../GenericComponents/AlertModal.vue';
 
@@ -240,7 +239,7 @@ import BudgetService from '../../services/budget.service';
 
 export default {
     components: {
-        VueDatePicker, AlertModal
+        AlertModal
     },
     props: {
         uuid: {
