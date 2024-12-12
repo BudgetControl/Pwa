@@ -238,5 +238,6 @@ export default {
     setup_account: 'Configura account',
     donate: 'Donazione',
     faq: 'FAQ',
+    start_Date: 'Data di inizio',
 }
 </script>

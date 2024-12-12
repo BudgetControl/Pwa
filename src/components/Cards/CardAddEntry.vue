@@ -777,6 +777,11 @@ export default {
         data.forEach(function (r) {
           _this.input.account.push(r)
         })
+
+        //if we have only one wallet set selected
+        if(_this.input.account.length >= 1) {
+          _this.account = _this.input.account[0].id
+        }
       })
     },
     closeAlert: function () {

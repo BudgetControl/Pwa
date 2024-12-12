@@ -27,7 +27,7 @@ export default {
     alertClass() {
       switch (this.type) {
         case 'success':
-          return 'bg-emerald-500';
+          return 'bg-sky-500';
         case 'error':
           return 'bg-red-500';
         case 'warning':
