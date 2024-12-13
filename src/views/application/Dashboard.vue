@@ -27,8 +27,8 @@ import HeaderMenu from '../../components/Navbars/HeaderMenu.vue';
 import MenuButton from '../../components/GenericComponents/MenuButton.vue';
 import { useAppSettings } from '../../storage/settings.store';
 import { useAuthStore } from "../../storage/auth-token.store";
-import DashboardDesktop from "./dashboard/DashboardDesktop.vue";
-import DashboardMobile from "./dashboard/DashboardMobile.vue";
+import DashboardDesktop from "./dashboards/DashboardDesktop.vue";
+import DashboardMobile from "./dashboards/DashboardMobile.vue";
 
 export default {
   name: "dashboard-page",

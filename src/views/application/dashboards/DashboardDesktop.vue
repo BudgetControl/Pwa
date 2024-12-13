@@ -8,11 +8,11 @@
       </div>
 
       <div class="flex flex-wrap mt-4">
-        <div class="flex-1">
+        <div class="w-1/2">
           <WidgetBarChartVue ref="WidgetBarChartVue" :title="$t('app.stats_by_category')" />
           <WidgetCategoryStats ref="WidgetCategoryStatsBar" />
         </div>
-        <div class="flex-1">
+        <div class="w-1/2">
           <WidgetPieChart class="flex-1" ref="WidgetPieChart" :title="$t('app.stats_by_tags')" />
           <WidgetCategoryStats ref="WidgetCategoryStatsPie" />
         </div>
