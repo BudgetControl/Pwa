@@ -385,7 +385,14 @@ export default {
     const settings = this.settings
     this.action.openTab = 1
     this.action.isMobile = this.checkIfMobile()
-    this.action.showDetails = !this.action.isMobile
+        
+    const queryString = this.$route.query
+        if(queryString.showDetails === 'true') {
+            this.action.showDetails = true
+        } else {
+          this.action.showDetails = !this.action.isMobile
+        }
+
     this.time()
     this.getCategory()
     this.getCurrency()

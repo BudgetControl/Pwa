@@ -37,7 +37,7 @@ class WorkspaceService extends ApiService {
     }
 
     async delete(id: string) {
-        const response = await this.instance.delete(`/api/workspace/${id}`);
+        const response = await this.instance.delete(`/api/workspace/delete/${id}`);
         return response.data;
     }
 }

@@ -2,8 +2,7 @@
     <div class="w-full lg:w-12/12 px-1">
 
         <HeaderMenu>
-            <MenuButton :path="'/app/budgets/new'" :label="$t('labels.add')" />
-
+            <MenuButton :path="'/app/budgets/new?tab=2'" :label="$t('labels.add')" v-on:click="toggleTabs(2); $router.go(0)"/>
             <MenuButton :path="'/app/budgets'" :label="$t('labels.show')" />
         </HeaderMenu>
 
@@ -98,6 +97,11 @@ export default {
         window.alert = (message, type = 'success') => {
             this.$refs.alertModal.show(message, type);
         };
+        
+        const queryString = this.$route.query
+        if(queryString.tab) {
+            this.openTab = parseInt(queryString.tab, 10)
+        }
     },
     mounted() {
         this.getCategory()
