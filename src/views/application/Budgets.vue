@@ -3,7 +3,7 @@
     <div class="w-full lg:w-12/12 px-1">
       <HeaderMenu>
         <MenuButton
-          :path="'/app/budgets/new'"
+          :path="'/app/budgets/new?tab=2'"
           :label="$t('labels.add')"
         />
 
