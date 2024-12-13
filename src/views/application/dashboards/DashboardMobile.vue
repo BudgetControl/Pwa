@@ -3,6 +3,10 @@
         <AverageStats />
 
         <div class="flex flex-wrap mt-4">
+            <CardLine_IncomingExpensesChart />
+        </div>
+
+        <div class="flex flex-wrap mt-4">
             <div class="flex-1">
                 <WidgetPieChart ref="WidgetPieChart" :title="$t('app.stats_by_category')" />
                 <WidgetCategoryStats ref="WidgetCategoryStats" />
