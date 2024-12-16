@@ -749,8 +749,12 @@ export default {
         if (this.type == "debit") {
           if (this.action.debit_type == '-') {
             data.amount = this.amount * -1
-            data.payee_id = (this.debit == 'njn76298fm') ? this.debit_name : this.debit
+          } else {
+            data.amount = this.amount
           }
+
+          data.payee_id = (this.debit == 'njn76298fm') ? this.debit_name : this.debit
+
         }
 
         this.apiService.setEntry(path, data, this.isPlanned, this.entryId).then(() => {
