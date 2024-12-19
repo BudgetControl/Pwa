@@ -231,6 +231,11 @@ class CoreService extends ApiService {
         return response.data;
     }
 
+    async archiveWallet(uuid) {
+        const response = await this.instance.patch(`/api/wallet/archive/${uuid}`);
+        return response.data;
+    }
+    
 }
 
 export default CoreService;

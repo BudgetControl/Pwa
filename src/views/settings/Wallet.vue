@@ -43,7 +43,7 @@
                         <template #item="{ element }">
                             <div class="container px-4 mx-auto ">
                                 <div class="flex border border-dotted m-1" v-on:click="openModal(element.uuid)"
-                                v-if="element.deleted_at == null || action.archived == true"
+                                v-if="element.archived == true || action.archived == true"
                                 >
                                     <div class="flex p-2" v-if="action.order">
                                         <i class="fas fa-bars fa-lg"></i>
@@ -108,7 +108,7 @@ export default {
         },
         getWallets() {
 
-            this.apiService.accounts("?filter[trashed]=1&order[name]=asc").then((res) => {
+            this.apiService.accounts("?filter[archived]=true&order[name]=asc").then((res) => {
                 res.forEach(e => {
                     this.wallets.push(e)
                 });
