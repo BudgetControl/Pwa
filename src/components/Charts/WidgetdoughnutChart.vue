@@ -69,7 +69,6 @@ export default {
   },
   methods: {
     setGraph(data) {
-      this.hasData = true;
       const date = new Date();
       const month = localStorage.getItem("chart-month") || date.getMonth();
       const year = localStorage.getItem("chart-year") || date.getFullYear();
@@ -123,6 +122,10 @@ export default {
         const labels = [];
         const colors = [];
         const values = [];
+
+        if(data.length > 0) {
+          this.hasData = true;
+        }
 
         data.forEach(element => {
 
