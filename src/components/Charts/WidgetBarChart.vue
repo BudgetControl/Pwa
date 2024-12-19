@@ -13,19 +13,9 @@
       <div class="relative h-400-px">
         <div v-if="hasData">
           <canvas class="" ref="barChart" :id="'bar-chart_' + ID_GRAPH" style="min-height: 300px;"></canvas>
+          <div v-if="!hasData" class="no-data-placeholder">{{ $t("messages.chart.no_data") }}</div>
         </div>
 
-        <div v-if="!hasData">
-
-          <div class="flex items-center justify-center h-full">
-            <div class="text-center">
-              <p class="text-gray-500 text-lg font-semibold">
-                {{ $t("messages.chart.no_data") }}
-              </p>
-            </div>
-          </div>
-
-        </div>
       </div>
     </div>
   </div>
@@ -77,7 +67,6 @@ export default {
   },
   methods: {
     setGraph(data) {
-      this.hasData = true;
       this.$nextTick(function () {
         if (window.myBar !== undefined) {
           window.myBar.destroy();
@@ -138,6 +127,10 @@ export default {
         const colors = [];
         const values = [];
 
+        if(data.length > 0) {
+          this.hasData = true;
+        }
+
         data.forEach(element => {
 
           const amount = element.value * -1;
@@ -186,4 +179,13 @@ export default {
 .h-400-px {
   min-height: 400px;
 }
+ .no-data-placeholder {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   min-height: 300px;
+   /* Altezza del grafico */
+   color: #aaa;
+   font-size: 18px;
+ }
 </style>

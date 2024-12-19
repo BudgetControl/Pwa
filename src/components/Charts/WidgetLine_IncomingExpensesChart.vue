@@ -4,9 +4,9 @@
       <div class="flex flex-wrap items-center">
         <div class="relative w-full max-w-full flex-grow flex-1">
           <h3 class="text-xl font-semibold">
-           <select v-model="year" v-on:change="setGraph" class="form-select block w-full">
-            <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
-          </select>
+            <select v-model="year" v-on:change="setGraph" class="form-select block w-full">
+              <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
+            </select>
           </h3>
         </div>
       </div>
@@ -15,6 +15,7 @@
       <!-- Chart -->
       <div class="relative h-350-px">
         <canvas :id="'line_graph_doubleline_'" style="min-height: 400px;"></canvas>
+        <div v-if="!hasData" class="no-data-placeholder">{{ $t("messages.chart.no_data") }}</div>
       </div>
     </div>
   </div>
@@ -49,6 +50,7 @@ export default {
   },
   data() {
     return {
+      hasData: false,
       subTitle: null,
       year: new Date().getFullYear(),
       years: Array.from({ length: 10 }, (v, k) => new Date().getFullYear() - k),
@@ -112,7 +114,7 @@ export default {
           .then((resp) => {
             resp.series.forEach((element) => {
               const color = element.label === "incoming" ? "#00FF00" : element.label === "debit" ? "#c6c6c6" : "#FF0000";
-
+              this.hasData = true;
               const dataset = {
                 label: this.$t("labels." + element.label),
                 backgroundColor: color,
@@ -148,3 +150,15 @@ export default {
   },
 };
 </script>
+
+<style>
+ .no-data-placeholder {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   min-height: 400px;
+   /* Altezza del grafico */
+   color: #aaa;
+   font-size: 18px;
+ }
+</style>
