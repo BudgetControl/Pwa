@@ -11,12 +11,8 @@
     </div>
     <div class="p-4 flex-auto">
       <div class="relative h-400-px mb-20">
-
-        <div v-if="hasData">
-          <canvas class=" chart" ref="doughChart" :id="'dough-chart_' + ID_GRAPH"></canvas>
-          <div v-if="!hasData" class="no-data-placeholder">{{ $t("messages.chart.no_data") }}</div>
-        </div>
-
+        <canvas class=" chart" ref="doughChart" :id="'dough-chart_' + ID_GRAPH"></canvas>
+        <div v-if="!hasData" class="no-data-placeholder">{{ $t("messages.chart.no_data") }}</div>
       </div>
     </div>
 

@@ -11,11 +11,8 @@
     </div>
     <div class="p-4 flex-auto">
       <div class="relative h-400-px">
-        <div v-if="hasData">
           <canvas class="" ref="barChart" :id="'bar-chart_' + ID_GRAPH" style="min-height: 300px;"></canvas>
           <div v-if="!hasData" class="no-data-placeholder">{{ $t("messages.chart.no_data") }}</div>
-        </div>
-
       </div>
     </div>
   </div>
