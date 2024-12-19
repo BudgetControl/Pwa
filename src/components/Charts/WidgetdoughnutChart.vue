@@ -14,17 +14,7 @@
 
         <div v-if="hasData">
           <canvas class=" chart" ref="doughChart" :id="'dough-chart_' + ID_GRAPH"></canvas>
-        </div>
-        <div v-if="!hasData">
-
-          <div class="flex items-center justify-center h-full">
-            <div class="text-center">
-              <p class="text-gray-500 text-lg font-semibold">
-                {{ $t("messages.chart.no_data") }}
-              </p>
-            </div>
-          </div>
-
+          <div v-if="!hasData" class="no-data-placeholder">{{ $t("messages.chart.no_data") }}</div>
         </div>
 
       </div>
@@ -79,7 +69,6 @@ export default {
   },
   methods: {
     setGraph(data) {
-      this.hasData = true;
       const date = new Date();
       const month = localStorage.getItem("chart-month") || date.getMonth();
       const year = localStorage.getItem("chart-year") || date.getFullYear();
@@ -134,6 +123,10 @@ export default {
         const colors = [];
         const values = [];
 
+        if(data.length > 0) {
+          this.hasData = true;
+        }
+
         data.forEach(element => {
 
           const amount = element.value * -1;
@@ -156,6 +149,10 @@ export default {
           }
         });
 
+        if (this.chartInstance) {
+          this.chartInstance.destroy();
+        }
+        
         const ctx = this.$refs.doughChart.getContext("2d");
         Chart.register(
           DoughnutController,
@@ -184,4 +181,14 @@ export default {
 .h-400-px {
   min-height: 400px;
 }
+
+.no-data-placeholder {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 300px;
+   /* Altezza del grafico */
+   color: #aaa;
+   font-size: 18px;
+ }
 </style>
