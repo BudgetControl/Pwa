@@ -156,6 +156,10 @@ export default {
           }
         });
 
+        if (this.chartInstance) {
+          this.chartInstance.destroy();
+        }
+        
         const ctx = this.$refs.doughChart.getContext("2d");
         Chart.register(
           DoughnutController,

@@ -1,55 +1,46 @@
 <template>
-    <div class="flex flex-wrap">
-        <div class="w-full xl:w-6/12 px-4 mb-2">
-            <select @change="setFilter()"
-                class="text-center border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                v-model="input.year" id="year">
-                <option v-for="(year, k) in years" :key="k" :value="year">{{ year }}</option>
-            </select>
-        </div>
-
-        <div class="w-full xl:w-6/12 px-4">
-            <select @change="setFilter()"
-                class="text-center border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                v-model="input.month" id="month">
-                <option v-for="(month, k) in months" :key="k" :value="k">{{ month }}</option>
-            </select>
-        </div>
-    </div>
+    <VueDatePicker @update:model-value="handleDateChange" class="align-center" v-model="date_time" :range="{ maxRange: 364 }"
+        :required=true :placeholder="$t('labels.date_interval')" format="yyyy-MM-dd" />
 </template>
 
 <script>
+import { useGraphStore } from '../../storage/graph';
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 export default {
+    name: "filter-bar",
+    components: {
+        VueDatePicker
+    },
     data() {
         return {
-            input: {
-                year: null,
-                month: null
-            },
-            years: [],
-            months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "All"]
+            date_time: []
+        }
+    },
+    setup() {
+        const graphStore = useGraphStore()
+
+        return {
+            graphStore
         }
     },
     mounted() {
-        let date = new Date()
-        for (let i = 0; i <= 4; i++) {
-            this.years.push(date.getFullYear() - i);
+        if (this.graphStore.start_date && this.graphStore.end_date) {
+            this.date_time = [this.graphStore.start_date, this.graphStore.end_date]
+        } else {
+            const today = new Date();
+            const startDate = new Date(today.getFullYear(), today.getMonth(), 1).toISOString().substr(0, 10);
+            const endDate = new Date(today.getFullYear(), today.getMonth() + 1, 0).toISOString().substr(0, 10)
+
+            this.date_time = [startDate, endDate]
         }
-        this.input.year = date.getFullYear()
-        this.input.month = date.getMonth()
     },
     methods: {
-        setYear: function (y) {
-            localStorage.setItem('chart-year', y)
+        handleDateChange(dates) {
+            this.graphStore.start_date = dates[0].toISOString().substr(0, 10)
+            this.graphStore.end_date = dates[1].toISOString().substr(0, 10)
         },
-        setMonth: function (m) {
-            localStorage.setItem('chart-month', m)
-        },
-        setFilter() {
-            this.setYear(this.input.year)
-            this.setMonth(this.input.month)
-        }
     }
 };
 </script>

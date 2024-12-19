@@ -16,7 +16,7 @@
         </div>
 
         <div v-if="!hasData">
-          
+
           <div class="flex items-center justify-center h-full">
             <div class="text-center">
               <p class="text-gray-500 text-lg font-semibold">
@@ -78,21 +78,6 @@ export default {
   methods: {
     setGraph(data) {
       this.hasData = true;
-      let date = new Date();
-      let month = localStorage.getItem("chart-month");
-      let year = localStorage.getItem("chart-year");
-
-      if (year === null) {
-        year = date.getFullYear();
-      }
-
-      if (month === null) {
-        month = date.getMonth();
-      }
-
-      month = this.months[month];
-      this.subTitle = year + "/" + month;
-
       this.$nextTick(function () {
         if (window.myBar !== undefined) {
           window.myBar.destroy();
@@ -174,6 +159,10 @@ export default {
           }
         });
 
+        if (this.chartInstance) {
+          this.chartInstance.destroy();
+        }
+
         const ctx = this.$refs.barChart.getContext("2d");
         Chart.register(
           BarController,
@@ -194,7 +183,6 @@ export default {
 };
 </script>
 <style>
-
 .h-400-px {
   min-height: 400px;
 }

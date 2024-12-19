@@ -3,11 +3,10 @@
     <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
       <div class="flex flex-wrap items-center">
         <div class="relative w-full max-w-full flex-grow flex-1">
-          <h2 class="text-xl font-semibold">
-            {{ title }}
-          </h2>
           <h3 class="text-xl font-semibold">
-            {{ subTitle }}
+           <select v-model="year" v-on:change="setGraph" class="form-select block w-full">
+            <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
+          </select>
           </h3>
         </div>
       </div>
@@ -51,36 +50,16 @@ export default {
   data() {
     return {
       subTitle: null,
-      localStorage: {
-        month: null,
-        year: null,
-      },
-      months: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+      year: new Date().getFullYear(),
+      years: Array.from({ length: 10 }, (v, k) => new Date().getFullYear() - k),
     };
   },
   mounted() {
     this.setGraph();
-    const _this = this;
-    setInterval(function () {
-      _this.checkLocalStorageUpdate();
-    }, 1000);
   },
   methods: {
     setGraph() {
-      let date = new Date();
-      let month = localStorage.getItem("chart-month");
-      let year = localStorage.getItem("chart-year");
-
-      if (year === null) {
-        year = date.getFullYear();
-      }
-
-      if (month === null) {
-        month = date.getMonth();
-      }
-
-      month = this.months[month];
-      this.subTitle = year;
+      const year = this.year
 
       this.$nextTick(function () {
         if (window.myLine !== undefined) {
@@ -120,10 +99,12 @@ export default {
           },
         };
 
-        const data = this.months.map((month) => ({
-          start: `${year}/${month}/01`,
-          end: `${year}/${month}/${new Date(year, month, 0).getDate()}`,
-        }));
+        const data = Array.from({ length: 12 }, (v, k) => {
+          const month = k + 1;
+          const start = `${this.year}-${String(month).padStart(2, '0')}-01`;
+          const end = new Date(this.year, month, 0).toISOString().split('T')[0];
+          return { start, end };
+        });
 
         const chartService = new ChartService();
         chartService
@@ -163,13 +144,6 @@ export default {
             console.info(error);
           });
       });
-    },
-    checkLocalStorageUpdate() {
-      const year = localStorage.getItem("chart-year");
-      if (year != this.localStorage.year) {
-        this.localStorage.year = year;
-        this.setGraph();
-      }
     },
   },
 };
