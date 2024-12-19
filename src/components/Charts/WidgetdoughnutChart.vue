@@ -183,7 +183,7 @@ export default {
    display: flex;
    align-items: center;
    justify-content: center;
-   min-height: 300px;
+   height: 300px;
    /* Altezza del grafico */
    color: #aaa;
    font-size: 18px;

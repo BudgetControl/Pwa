@@ -14,7 +14,7 @@
     <div class="p-4 flex-auto">
       <!-- Chart -->
       <div class="relative h-350-px">
-        <canvas :id="'line_graph_doubleline_'" style="min-height: 400px;"></canvas>
+        <canvas :id="'line_graph_doubleline_'" style="max-height: 400px;"></canvas>
         <div v-if="!hasData" class="no-data-placeholder">{{ $t("messages.chart.no_data") }}</div>
       </div>
     </div>
@@ -156,7 +156,7 @@ export default {
    display: flex;
    align-items: center;
    justify-content: center;
-   min-height: 400px;
+   height: 400px;
    /* Altezza del grafico */
    color: #aaa;
    font-size: 18px;
