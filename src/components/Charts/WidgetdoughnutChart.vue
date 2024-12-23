@@ -64,7 +64,7 @@ export default {
       chartDataset: [],
       currency: '€',
       hasData: false,
-      show:true,
+      show: true,
     };
   },
   methods: {
@@ -123,10 +123,6 @@ export default {
         const colors = [];
         const values = [];
 
-        if(data.length > 0) {
-          this.hasData = true;
-        }
-
         data.forEach(element => {
 
           const amount = element.value * -1;
@@ -152,20 +148,23 @@ export default {
         if (this.chartInstance) {
           this.chartInstance.destroy();
         }
-        
-        const ctx = this.$refs.doughChart.getContext("2d");
-        Chart.register(
-          DoughnutController,
-          ArcElement,
-          CategoryScale,
-          LinearScale,
-          Tooltip,
-          Legend,
-          Title,
-          ChartDataLabels
-        );
 
-        this.chartInstance = new Chart(ctx, config);
+        if (data.length > 0) {
+          this.hasData = true;
+          const ctx = this.$refs.doughChart.getContext("2d");
+          Chart.register(
+            DoughnutController,
+            ArcElement,
+            CategoryScale,
+            LinearScale,
+            Tooltip,
+            Legend,
+            Title,
+            ChartDataLabels
+          );
+
+          this.chartInstance = new Chart(ctx, config);
+        }
 
       })
 
@@ -178,19 +177,20 @@ export default {
 .chart {
   background-color: transparent;
 }
+
 .h-300-px {
   height: 300px;
   max-height: 300px;
 }
 
 .no-data-placeholder {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   height: 300px;
-   max-height: 300px;
-   /* Altezza del grafico */
-   color: #aaa;
-   font-size: 18px;
- }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  max-height: 300px;
+  /* Altezza del grafico */
+  color: #aaa;
+  font-size: 18px;
+}
 </style>
