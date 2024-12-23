@@ -10,7 +10,8 @@
       </div>
     </div>
     <div class="p-4 flex-auto">
-      <div class="relative h-400-px mb-20">
+      <div class="relative h-300-px mb-20">
+        <loading :show="show"></loading>
         <canvas class=" chart" ref="doughChart" :id="'dough-chart_' + ID_GRAPH"></canvas>
         <div v-if="!hasData" class="no-data-placeholder">{{ $t("messages.chart.no_data") }}</div>
       </div>
@@ -31,6 +32,7 @@ import {
   Title,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import loading from 'vue-full-loading'
 
 export default {
   props: {
@@ -53,6 +55,7 @@ export default {
     },
   },
   components: {
+    loading
   },
   data() {
     return {
@@ -61,6 +64,7 @@ export default {
       chartDataset: [],
       currency: '€',
       hasData: false,
+      show:true,
     };
   },
   methods: {
@@ -174,8 +178,9 @@ export default {
 .chart {
   background-color: transparent;
 }
-.h-400-px {
-  min-height: 400px;
+.h-300-px {
+  height: 300px;
+  max-height: 300px;
 }
 
 .no-data-placeholder {
@@ -183,6 +188,7 @@ export default {
    align-items: center;
    justify-content: center;
    height: 300px;
+   max-height: 300px;
    /* Altezza del grafico */
    color: #aaa;
    font-size: 18px;

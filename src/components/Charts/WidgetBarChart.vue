@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="p-4 flex-auto">
-      <div class="relative h-400-px">
+      <div class="relative h-300-px">
           <canvas class="" ref="barChart" :id="'bar-chart_' + ID_GRAPH" style="min-height: 300px;"></canvas>
           <div v-if="!hasData" class="no-data-placeholder">{{ $t("messages.chart.no_data") }}</div>
       </div>
@@ -173,14 +173,16 @@ export default {
 };
 </script>
 <style>
-.h-400-px {
-  min-height: 400px;
+.h-300-px {
+  height: 300px;
+  max-height: 300px;
 }
  .no-data-placeholder {
    display: flex;
    align-items: center;
    justify-content: center;
    height: 300px;
+   max-height: 300px;
    /* Altezza del grafico */
    color: #aaa;
    font-size: 18px;
