@@ -3,11 +3,10 @@
     <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
       <div class="flex flex-wrap items-center">
         <div class="relative w-full max-w-full flex-grow flex-1">
-          <h2 class="text-xl font-semibold">
-            {{ title }}
-          </h2>
           <h3 class="text-xl font-semibold">
-            {{ subTitle }}
+            <select v-model="year" v-on:change="setGraph" class="form-select block w-full">
+              <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
+            </select>
           </h3>
         </div>
       </div>
@@ -15,7 +14,8 @@
     <div class="p-4 flex-auto">
       <!-- Chart -->
       <div class="relative h-350-px">
-        <canvas :id="'line_graph_doubleline_'" style="min-height: 400px;"></canvas>
+        <canvas :id="'line_graph_doubleline_'" style="height: 300px; max-height: 300px;"></canvas>
+        <div v-if="!hasData" class="no-data-placeholder">{{ $t("messages.chart.no_data") }}</div>
       </div>
     </div>
   </div>
@@ -50,37 +50,18 @@ export default {
   },
   data() {
     return {
+      hasData: false,
       subTitle: null,
-      localStorage: {
-        month: null,
-        year: null,
-      },
-      months: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+      year: new Date().getFullYear(),
+      years: Array.from({ length: 10 }, (v, k) => new Date().getFullYear() - k),
     };
   },
   mounted() {
     this.setGraph();
-    const _this = this;
-    setInterval(function () {
-      _this.checkLocalStorageUpdate();
-    }, 1000);
   },
   methods: {
     setGraph() {
-      let date = new Date();
-      let month = localStorage.getItem("chart-month");
-      let year = localStorage.getItem("chart-year");
-
-      if (year === null) {
-        year = date.getFullYear();
-      }
-
-      if (month === null) {
-        month = date.getMonth();
-      }
-
-      month = this.months[month];
-      this.subTitle = year;
+      const year = this.year
 
       this.$nextTick(function () {
         if (window.myLine !== undefined) {
@@ -120,10 +101,12 @@ export default {
           },
         };
 
-        const data = this.months.map((month) => ({
-          start: `${year}/${month}/01`,
-          end: `${year}/${month}/${new Date(year, month, 0).getDate()}`,
-        }));
+        const data = Array.from({ length: 12 }, (v, k) => {
+          const month = k + 1;
+          const start = `${this.year}-${String(month).padStart(2, '0')}-01`;
+          const end = new Date(this.year, month, 0).toISOString().split('T')[0];
+          return { start, end };
+        });
 
         const chartService = new ChartService();
         chartService
@@ -131,7 +114,7 @@ export default {
           .then((resp) => {
             resp.series.forEach((element) => {
               const color = element.label === "incoming" ? "#00FF00" : element.label === "debit" ? "#c6c6c6" : "#FF0000";
-
+              this.hasData = true;
               const dataset = {
                 label: this.$t("labels." + element.label),
                 backgroundColor: color,
@@ -164,13 +147,19 @@ export default {
           });
       });
     },
-    checkLocalStorageUpdate() {
-      const year = localStorage.getItem("chart-year");
-      if (year != this.localStorage.year) {
-        this.localStorage.year = year;
-        this.setGraph();
-      }
-    },
   },
 };
 </script>
+
+<style>
+ .no-data-placeholder {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 300px;
+   max-height: 300px;
+   /* Altezza del grafico */
+   color: #aaa;
+   font-size: 18px;
+ }
+</style>

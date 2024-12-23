@@ -24,6 +24,7 @@ import AverageStats from '../../../components/Charts/AverageStats.vue';
 import WidgetPieChart from "../../../components/Charts/WidgetdoughnutChart.vue";
 import WidgetCategoryStats from "../../../components/Charts/WidgetCategoryStats.vue";
 import ChartBarController from "../../../controller/ChartBar.controller";
+import { useGraphStore } from "../../../storage/graph";
 
 export default {
     name: "dashboard-page",
@@ -33,24 +34,28 @@ export default {
         WidgetPieChart,
         WidgetCategoryStats
     },
-    data() {
+    setup() {
+        const graphStore = useGraphStore()
+
         return {
-            months: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+            graphStore
         }
     },
     mounted: async function () {
+        this.graphStore.$subscribe(() => {
+            this.initCategoryChartDataset()
+        });
         this.initCategoryChartDataset()
     },
     methods: {
         async initCategoryChartDataset() {
 
-            const date = new Date();
-            const month = date.getMonth();
-            const year = date.getFullYear();
+            const startDate = this.graphStore.start_date;
+            const endDate = this.graphStore.end_date;
 
             const chartData = await ChartBarController.buildDataset({
-                start: `${year}/${this.months[month]}/01`,
-                end: `${year}/${this.months[month]}/31`,
+                start: startDate,
+                end: endDate,
             });
 
             const barDataset = await chartData.getDataset();

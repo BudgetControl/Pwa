@@ -196,7 +196,7 @@ export default {
         async archiveWallet() {
             const userConfirmed = await window.confirm(this.$t('messages.wallet.are_you_sure'));
             if (userConfirmed) {
-                this.apiService.deleteWallet(this.$route.params.id)
+                this.apiService.archiveWallet(this.$route.params.id)
                 alert(this.$t('messages.wallet.archived'), "success")
                 this.$router.push({ path: '/app/settings/wallet' })
             }

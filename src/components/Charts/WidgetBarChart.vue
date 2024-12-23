@@ -10,22 +10,9 @@
       </div>
     </div>
     <div class="p-4 flex-auto">
-      <div class="relative h-400-px">
-        <div v-if="hasData">
-          <canvas class="" ref="barChart" :id="'bar-chart_' + ID_GRAPH" style="min-height: 300px;"></canvas>
-        </div>
-
-        <div v-if="!hasData">
-          
-          <div class="flex items-center justify-center h-full">
-            <div class="text-center">
-              <p class="text-gray-500 text-lg font-semibold">
-                {{ $t("messages.chart.no_data") }}
-              </p>
-            </div>
-          </div>
-
-        </div>
+      <div class="relative h-300-px">
+        <canvas class="" ref="barChart" :id="'bar-chart_' + ID_GRAPH" style="min-height: 300px;"></canvas>
+        <div v-if="!hasData" class="no-data-placeholder">{{ $t("messages.chart.no_data") }}</div>
       </div>
     </div>
   </div>
@@ -77,22 +64,6 @@ export default {
   },
   methods: {
     setGraph(data) {
-      this.hasData = true;
-      let date = new Date();
-      let month = localStorage.getItem("chart-month");
-      let year = localStorage.getItem("chart-year");
-
-      if (year === null) {
-        year = date.getFullYear();
-      }
-
-      if (month === null) {
-        month = date.getMonth();
-      }
-
-      month = this.months[month];
-      this.subTitle = year + "/" + month;
-
       this.$nextTick(function () {
         if (window.myBar !== undefined) {
           window.myBar.destroy();
@@ -174,19 +145,28 @@ export default {
           }
         });
 
-        const ctx = this.$refs.barChart.getContext("2d");
-        Chart.register(
-          BarController,
-          BarElement,
-          CategoryScale,
-          LinearScale,
-          Tooltip,
-          Legend,
-          Title,
-          ChartDataLabels
-        );
+        if (this.chartInstance) {
+          this.chartInstance.destroy();
+        }
 
-        this.chartInstance = new Chart(ctx, config);
+        if (data.length > 0) {
+          this.hasData = true;
+
+          const ctx = this.$refs.barChart.getContext("2d");
+          Chart.register(
+            BarController,
+            BarElement,
+            CategoryScale,
+            LinearScale,
+            Tooltip,
+            Legend,
+            Title,
+            ChartDataLabels
+          );
+
+          this.chartInstance = new Chart(ctx, config);
+
+        }
 
       });
     },
@@ -194,8 +174,19 @@ export default {
 };
 </script>
 <style>
+.h-300-px {
+  height: 300px;
+  max-height: 300px;
+}
 
-.h-400-px {
-  min-height: 400px;
+.no-data-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  max-height: 300px;
+  /* Altezza del grafico */
+  color: #aaa;
+  font-size: 18px;
 }
 </style>

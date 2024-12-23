@@ -29,6 +29,7 @@ import { useAppSettings } from '../../storage/settings.store';
 import { useAuthStore } from "../../storage/auth-token.store";
 import DashboardDesktop from "./dashboards/DashboardDesktop.vue";
 import DashboardMobile from "./dashboards/DashboardMobile.vue";
+import { libs } from "../../libs";
 
 export default {
   name: "dashboard-page",
@@ -49,7 +50,20 @@ export default {
   data() {
     return {
       openTab: 1,
-      isMobile: process.env.VUE_APP_MOBILE === 'true',
+      isMobile: false,
+    }
+  },
+  async created() {
+    //check if is a mobile apps
+    const mobileFormEnv = process.env.VUE_APP_MOBILE === 'true'
+    const isMobile = await libs.isMobile()
+
+    if(isMobile === true) {
+      this.isMobile = true
+    }
+
+    if(mobileFormEnv === true) {
+      this.isMobile = true
     }
   },
   mounted: async function () {

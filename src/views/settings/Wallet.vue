@@ -21,8 +21,8 @@
                                 class="flex items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                 <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600 flex lg:w3/12 px-4">
                                     <div class="flex items-center ps-3">
-                                        <input id="vue-checkbox-list" type="checkbox" v-model="action.order" value="true"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        <!-- <input id="vue-checkbox-list" type="checkbox" v-model="action.order" value="true"
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"> -->
                                         <label for="vue-checkbox-list"
                                             class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"> {{ $t('labels.change_order') }}</label>
                                     </div>
@@ -43,7 +43,7 @@
                         <template #item="{ element }">
                             <div class="container px-4 mx-auto ">
                                 <div class="flex border border-dotted m-1" v-on:click="openModal(element.uuid)"
-                                v-if="element.deleted_at == null || action.archived == true"
+                                v-if="element.archived == true || action.archived == true"
                                 >
                                     <div class="flex p-2" v-if="action.order">
                                         <i class="fas fa-bars fa-lg"></i>
@@ -108,7 +108,7 @@ export default {
         },
         getWallets() {
 
-            this.apiService.accounts("?filter[trashed]=1&order[name]=asc").then((res) => {
+            this.apiService.accounts("?filter[archived]=true&order[name]=asc").then((res) => {
                 res.forEach(e => {
                     this.wallets.push(e)
                 });

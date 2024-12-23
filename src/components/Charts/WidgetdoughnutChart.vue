@@ -10,23 +10,10 @@
       </div>
     </div>
     <div class="p-4 flex-auto">
-      <div class="relative h-400-px mb-20">
-
-        <div v-if="hasData">
-          <canvas class=" chart" ref="doughChart" :id="'dough-chart_' + ID_GRAPH"></canvas>
-        </div>
-        <div v-if="!hasData">
-
-          <div class="flex items-center justify-center h-full">
-            <div class="text-center">
-              <p class="text-gray-500 text-lg font-semibold">
-                {{ $t("messages.chart.no_data") }}
-              </p>
-            </div>
-          </div>
-
-        </div>
-
+      <div class="relative h-300-px mb-20">
+        <loading :show="show"></loading>
+        <canvas class=" chart" ref="doughChart" :id="'dough-chart_' + ID_GRAPH"></canvas>
+        <div v-if="!hasData" class="no-data-placeholder">{{ $t("messages.chart.no_data") }}</div>
       </div>
     </div>
 
@@ -45,6 +32,7 @@ import {
   Title,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import loading from 'vue-full-loading'
 
 export default {
   props: {
@@ -67,6 +55,7 @@ export default {
     },
   },
   components: {
+    loading
   },
   data() {
     return {
@@ -75,11 +64,11 @@ export default {
       chartDataset: [],
       currency: '€',
       hasData: false,
+      show: true,
     };
   },
   methods: {
     setGraph(data) {
-      this.hasData = true;
       const date = new Date();
       const month = localStorage.getItem("chart-month") || date.getMonth();
       const year = localStorage.getItem("chart-year") || date.getFullYear();
@@ -156,19 +145,26 @@ export default {
           }
         });
 
-        const ctx = this.$refs.doughChart.getContext("2d");
-        Chart.register(
-          DoughnutController,
-          ArcElement,
-          CategoryScale,
-          LinearScale,
-          Tooltip,
-          Legend,
-          Title,
-          ChartDataLabels
-        );
+        if (this.chartInstance) {
+          this.chartInstance.destroy();
+        }
 
-        this.chartInstance = new Chart(ctx, config);
+        if (data.length > 0) {
+          this.hasData = true;
+          const ctx = this.$refs.doughChart.getContext("2d");
+          Chart.register(
+            DoughnutController,
+            ArcElement,
+            CategoryScale,
+            LinearScale,
+            Tooltip,
+            Legend,
+            Title,
+            ChartDataLabels
+          );
+
+          this.chartInstance = new Chart(ctx, config);
+        }
 
       })
 
@@ -181,7 +177,20 @@ export default {
 .chart {
   background-color: transparent;
 }
-.h-400-px {
-  min-height: 400px;
+
+.h-300-px {
+  height: 300px;
+  max-height: 300px;
+}
+
+.no-data-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  max-height: 300px;
+  /* Altezza del grafico */
+  color: #aaa;
+  font-size: 18px;
 }
 </style>

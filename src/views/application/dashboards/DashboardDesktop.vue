@@ -1,31 +1,35 @@
 <template>
   <div>
 
-      <AverageStats />
+    <AverageStats />
 
-      <div class="flex flex-wrap mt-4">
-        <CardLine_IncomingExpensesChart />
+    <div class="flex flex-wrap mt-4">
+      <FilterBar />
+    </div>
+
+    <div class="flex flex-wrap mt-4">
+      <CardLine_IncomingExpensesChart />
+    </div>
+
+    <div class="flex flex-wrap mt-4">
+      <div class="w-1/2">
+        <WidgetBarChartVue ref="WidgetBarChartVue" :title="$t('app.stats_by_category')" />
+        <WidgetCategoryStats ref="WidgetCategoryStatsBar" />
       </div>
-
-      <div class="flex flex-wrap mt-4">
-        <div class="w-1/2">
-          <WidgetBarChartVue ref="WidgetBarChartVue" :title="$t('app.stats_by_category')" />
-          <WidgetCategoryStats ref="WidgetCategoryStatsBar" />
-        </div>
-        <div class="w-1/2">
-          <WidgetPieChart class="flex-1" ref="WidgetPieChart" :title="$t('app.stats_by_tags')" />
-          <WidgetCategoryStats ref="WidgetCategoryStatsPie" />
-        </div>
-      </div>
-
-      <div id="table-chart" class="flex flex-wrap mt-4">
-        <WidgetTable />
-      </div>
-
-      <div class="flex flex-wrap mt-4">
-        <CardBudget />
+      <div class="w-1/2">
+        <WidgetPieChart class="flex-1" ref="WidgetPieChart" :title="$t('app.stats_by_tags')" />
+        <WidgetCategoryStats ref="WidgetCategoryStatsPie" />
       </div>
     </div>
+
+    <div id="table-chart" class="flex flex-wrap mt-4">
+      <WidgetTable />
+    </div>
+
+    <div class="flex flex-wrap mt-4">
+      <CardBudget />
+    </div>
+  </div>
 </template>
 <script>
 import CardLine_IncomingExpensesChart from "@/components/Charts/WidgetLine_IncomingExpensesChart.vue";
@@ -37,6 +41,8 @@ import WidgetBarChartVue from '../../../components/Charts/WidgetBarChart.vue';
 import WidgetCategoryStats from "../../../components/Charts/WidgetCategoryStats.vue";
 import ChartBarController from "../../../controller/ChartBar.controller";
 import ChartLabelController from "../../../controller/ChartLabel.controller";
+import FilterBar from "../../../components/Navbars/FilterBar.vue";
+import { useGraphStore } from "../../../storage/graph";
 
 export default {
   name: "dashboard-page",
@@ -47,16 +53,23 @@ export default {
     AverageStats,
     WidgetBarChartVue,
     WidgetPieChart,
-    WidgetCategoryStats
+    WidgetCategoryStats,
+    FilterBar
   },
-  data() {
+  setup() {
+    const graphStore = useGraphStore()
+
     return {
-      months: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
+      graphStore
     }
   },
   mounted: async function () {
+    this.graphStore.$subscribe(() => {
       this.initCategoryChartDataset()
       this.initLabelChartDataset()
+    });
+    this.initCategoryChartDataset()
+    this.initLabelChartDataset()
   },
   methods: {
     toggleTabs: function (tabNumber) {
@@ -64,13 +77,12 @@ export default {
     },
     async initLabelChartDataset() {
 
-      const date = new Date();
-      const month = date.getMonth();
-      const year = date.getFullYear();
+      const startDate = this.graphStore.start_date;
+      const endDate = this.graphStore.end_date;
 
       const chartData = await ChartLabelController.buildDataset({
-        start: `${year}/${this.months[month]}/01`,
-        end: `${year}/${this.months[month]}/31`,
+        start: startDate,
+        end: endDate,
       });
 
       const barDataset = await chartData.getDataset();
@@ -80,7 +92,7 @@ export default {
 
           const chartBarDataset = await JSON.parse(JSON.stringify(barDataset));
 
-          if(chartBarDataset.length > 0) {
+          if (chartBarDataset.length > 0) {
             this.hasPieData = true
           }
 
@@ -92,13 +104,12 @@ export default {
     },
     async initCategoryChartDataset() {
 
-      const date = new Date();
-      const month = date.getMonth();
-      const year = date.getFullYear();
+      const startDate = this.graphStore.start_date;
+      const endDate = this.graphStore.end_date;
 
       const chartData = await ChartBarController.buildDataset({
-        start: `${year}/${this.months[month]}/01`,
-        end: `${year}/${this.months[month]}/31`,
+        start: startDate,
+        end: endDate,
       });
 
       const barDataset = await chartData.getDataset();
@@ -107,7 +118,7 @@ export default {
         if (this.$refs.WidgetPieChart) {
           const chartBarDataset = await JSON.parse(JSON.stringify(barDataset));
 
-          if(chartBarDataset.length > 0) {
+          if (chartBarDataset.length > 0) {
             this.hasBarData = true
           }
 
