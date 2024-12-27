@@ -238,6 +238,7 @@ export default {
     setup_account: 'Setup account',
     donate: 'Donate',
     faq: 'FAQ',
+    savings: 'Savings',
 };
 
 </script>

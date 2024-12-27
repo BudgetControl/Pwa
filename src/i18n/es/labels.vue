@@ -238,5 +238,6 @@ export default {
     setup_account: 'Configurar cuenta',
     donate: 'Donar',
     faq: 'FAQ',
+    savings: 'Ahorros',
 }
 </script>
