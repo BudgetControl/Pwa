@@ -239,5 +239,6 @@ export default {
     donate: 'Donazione',
     faq: 'FAQ',
     start_Date: 'Data di inizio',
+    savings: 'Risparmi',
 }
 </script>

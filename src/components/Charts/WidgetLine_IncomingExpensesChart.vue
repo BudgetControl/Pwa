@@ -113,7 +113,25 @@ export default {
           .incomingExpensesLine(data)
           .then((resp) => {
             resp.series.forEach((element) => {
-              const color = element.label === "incoming" ? "#00FF00" : element.label === "debit" ? "#c6c6c6" : "#FF0000";
+              let color = null;
+              switch (element.label) {
+                case "incoming":
+                  color = "#00FF00";
+                  break;
+                case "debit":
+                  color = "#c6c6c6";
+                  break;
+                case "expenses":
+                  color = "#FF0000";
+                  break;
+                case "savings":
+                  color = "#0000FF";
+                  break;
+                default:
+                  color = "#000000";
+                  break;
+              }
+              
               this.hasData = true;
               const dataset = {
                 label: this.$t("labels." + element.label),
