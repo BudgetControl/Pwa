@@ -207,7 +207,7 @@ export default {
             this.$router.push({ path: '/app/settings/wallet' })
         },
         getWallets() {
-            this.apiService.accounts("?filer[type]=bank").then((res) => {
+            this.apiService.accounts("?filters[type]=bank").then((res) => {
                 res.forEach(e => {
                     this.wallets.push(e)
                 });
