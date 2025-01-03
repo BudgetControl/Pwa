@@ -220,7 +220,7 @@ export default {
     user_not_found: 'Utente non trovato',
     save_as_model: 'Salva come modello',
     write_temlate_name: 'Scrivi il nome del modello',
-    end_of_month: 'Fine mese',
+    end_of_month: 'Previsione Fine mese',
     ticket_value: 'Valore del voucher',
     spent: 'speso',
     remaining: 'rimanente',
@@ -240,5 +240,6 @@ export default {
     faq: 'FAQ',
     start_Date: 'Data di inizio',
     savings: 'Risparmi',
+    paid_debits: 'Debiti pagati',
 }
 </script>

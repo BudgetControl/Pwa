@@ -41,11 +41,15 @@ export default {
         setGraph(data) {
 
             this.currency = this.appSettings.settings.currency.symbol
+            this.dataset = []
 
             data.forEach(element => {
 
+                const translatedLabel = this.$t("app." + element.label);
+                const label = translatedLabel.startsWith("app.") ? element.label : translatedLabel;
+
                 this.dataset.push({
-                    name: this.$t("app." + element.label),
+                    name: label,
                     icon: element.icon,
                     amount: element.value.toFixed(2),
                     color: element.color,

@@ -3,6 +3,10 @@
         <AverageStats />
 
         <div class="flex flex-wrap mt-4">
+            <FilterBar />
+        </div>
+
+        <div class="flex flex-wrap mt-4">
             <CardLine_IncomingExpensesChart />
         </div>
 
@@ -13,26 +17,23 @@
             </div>
         </div>
 
-        <div class="flex flex-wrap mt-4">
-            <CardBudget />
-        </div>
     </div>
 </template>
 <script>
-import CardBudget from "../../../components/Charts/WidgetBudget.vue";
 import AverageStats from '../../../components/Charts/AverageStats.vue';
 import WidgetPieChart from "../../../components/Charts/WidgetdoughnutChart.vue";
 import WidgetCategoryStats from "../../../components/Charts/WidgetCategoryStats.vue";
 import ChartBarController from "../../../controller/ChartBar.controller";
 import { useGraphStore } from "../../../storage/graph";
+import FilterBar from "../../../components/Navbars/FilterBar.vue";
 
 export default {
     name: "dashboard-page",
     components: {
-        CardBudget,
         AverageStats,
         WidgetPieChart,
-        WidgetCategoryStats
+        WidgetCategoryStats,
+        FilterBar
     },
     setup() {
         const graphStore = useGraphStore()

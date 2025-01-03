@@ -108,7 +108,7 @@ export default {
         },
         getWallets() {
 
-            this.apiService.accounts("?filter[archived]=true&order[name]=asc").then((res) => {
+            this.apiService.accounts("?filters[archived]=true&order[name]=asc").then((res) => {
                 res.forEach(e => {
                     this.wallets.push(e)
                 });

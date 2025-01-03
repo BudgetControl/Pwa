@@ -12,7 +12,7 @@
               <label class="block uppercase text-slate-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 {{ $t('labels.date_interval') }}
               </label>
-              <VueDatePicker v-model="action.date_time" :options="input.month" :range="{ maxRange: 364 }" :required=true
+              <VueDatePicker v-model="action.date_time" :options="input.month" :range="{ maxRange: 365, minRange: 1 }" :required=true
                 :placeholder="$t('labels.date_interval')" format="yyyy-MM-dd" />
             </div>
           </div>
@@ -242,7 +242,7 @@ export default {
     },
     getAccount() {
       let _this = this
-      this.apiService.accounts('?order[name]=asc').then((res) => {
+      this.apiService.accounts('?order[name]=asc&filters[archived]=false').then((res) => {
         let data = res
         data.forEach(function (r) {
           _this.input.account.push(r)

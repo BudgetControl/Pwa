@@ -128,7 +128,8 @@ export default {
           const amount = element.value * -1;
           this.hasData = true;
 
-          labels.push(this.$t("app." + element.label));
+          const translatedLabel = this.$t("app." + element.label);
+          labels.push(translatedLabel.startsWith("app.") ? element.label : translatedLabel);
           colors.push(element.color);
           values.push(amount);
 

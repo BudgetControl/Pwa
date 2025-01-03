@@ -5,7 +5,7 @@
       <div id="statsWallet">
         <div class="px-2 flex overflow-x-auto mb-2" style="min-height: 100px;">
           <CardWallet v-for="w in wallets" :key="w.id" :statTitle="w.name" :statWallet="w.balance"
-            :statColor="w.color" :statIdWallet="w.id" :currency="w.currency"></CardWallet>
+            :statColor="w.color" :statIdWallet="w.uuid" :currency="w.currency"></CardWallet>
         </div>
         <!-- Card stats -->
         <div class="flex overflow-x-auto">
@@ -18,7 +18,7 @@
           </div>
 
           <div class="min-w px-2">
-            <router-link to="/app/entries?type=planned" v-slot="{ href, navigate }">
+            <router-link to="/app/entries?filter_type=planned&filter_planned=0" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
                 <card-stats :statSubtitle="$t('labels.end_of_month')" :statTitle="walletPlanned.statTitle + ' €'"
                   :statArrow="walletPlanned.statArrow" :statPercent="walletPlanned.statPercent"
@@ -35,7 +35,18 @@
           </div>
 
           <div class="min-w px-2">
-            <router-link to="/app/entries?type=incoming" v-slot="{ href, navigate }">
+            <router-link to="/app/entries?filter_type=debits&filter_planned=0" v-slot="{ href, navigate }">
+              <a :href="href" @click="navigate">
+                <card-stats :statSubtitle="$t('labels.paid_debits')" :statTitle="debits.statTitle + ' €'"
+                  :statArrow="debits.statArrow" :statPercent="debits.statPercent"
+                  :statPercentColor="debits.statPercentColor" statDescripiron="Last month" statIconName="fas fa-credit-card"
+                  statIconColor="bg-blueGray-200" />
+              </a>
+            </router-link>
+          </div>
+
+          <div class="min-w px-2">
+            <router-link to="/app/entries?filter_type=incoming&filter_planned=0" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
                 <card-stats :statSubtitle="$t('labels.incoming')" :statTitle="incoming.statTitle + ' €'"
                   :statArrow="incoming.statArrow" :statPercent="incoming.statPercent"
@@ -46,7 +57,7 @@
           </div>
 
           <div class="min-w px-2">
-            <router-link to="/app/entries?type=expenses" v-slot="{ href, navigate }">
+            <router-link to="/app/entries?filter_type=expenses&filter_planned=0" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
                 <card-stats :statSubtitle="$t('labels.expenses')" :statTitle="expenses.statTitle + ' €'"
                   :statArrow="expenses.statArrow" :statPercent="expenses.statPercent"
@@ -111,6 +122,12 @@ export default {
         statPercent: 0,
         statPercentColor: "text-emerald-500"
       },
+      debits: {
+        statTitle: 0,
+        statArrow: "up",
+        statPercent: 0,
+        statPercentColor: "text-blueGray-300"
+      },
       planned: 0
     }
   },
@@ -131,6 +148,7 @@ export default {
       this.getWallets()
       this.getWalletPlanned()
       this.getHealth()
+      this.getWalletDebbits()
     },
     getWallet() {
       const statsService = new StatsService()
@@ -202,6 +220,18 @@ export default {
         console.error(error);
       })
     },
+    getWalletDebbits() {
+      const statsService = new StatsService()
+      statsService.debits().then((resp) => {
+
+        let data = resp
+        this.debits.statTitle = data.total.toFixed(2)
+
+      }).catch((error) => {
+        console.error(error);
+      })
+
+    },
     getWallets() {
       this.wallets = []
       const statsService = new StatsService()
@@ -218,6 +248,7 @@ export default {
 
             const wallet = {
               id: e.id,
+              uuid: e.uuid,
               name: e.name,
               balance: balance,
               color: e.color,

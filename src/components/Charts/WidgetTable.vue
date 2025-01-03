@@ -69,6 +69,7 @@
 
 <script>
 import ChartService from '@/services/chart.service'
+import { useGraphStore } from '../../storage/graph';
 
 export default {
   props: {
@@ -94,42 +95,32 @@ export default {
   data() {
     return {
       elements: [],
-      months: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
-      localStorage: {
-        month: null,
-        year: null
-      },
     }
   },
   mounted() {
+    this.graphStore.$subscribe(() => {
+      this.setGraph()
+    });
     this.setGraph()
-    const _this = this
-    setInterval(function () {
-      _this.checkLocalStorageUpdate()
-    }, 1000)
+  },
+  setup() {
+    const graphStore = useGraphStore()
+
+    return {
+      graphStore
+    }
   },
   methods: {
     setGraph: function () {
 
       this.elements = []
 
-      let month = localStorage.getItem('chart-month')
-      let year = localStorage.getItem('chart-year')
-      let date = new Date
-
-      if (month === null) {
-        month = date.getMonth()
-      }
-
-      if (year === null) {
-        year = date.getFullYear()
-      }
-
-      month = this.months[month]
+      const startDate = this.graphStore.start_date;
+      const endDate = this.graphStore.end_date;
 
       let data = [{
-        start: year + "/" + month + "/01",
-        end: year + "/" + month + "/31"
+        start: startDate,
+        end: endDate,
       }]
 
         const chartService = new ChartService()
@@ -152,19 +143,6 @@ export default {
         console.info(error);
       })
     },
-    checkLocalStorageUpdate() {
-      const year = localStorage.getItem('chart-year')
-      const month = localStorage.getItem('chart-month')
-      if (year != this.localStorage.year) {
-        this.localStorage.year = year
-        this.setGraph()
-      }
-      if (month != this.localStorage.month) {
-        this.localStorage.month = month
-        this.setGraph()
-      }
-
-    }
   }
 }
 </script>
