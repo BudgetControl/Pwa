@@ -90,7 +90,12 @@ export default {
         let regularEntries = regularRes.data;
 
         // Unisci le entries
-        let entries = regularEntries.concat(plannedEntries);
+        let entries
+        if(this.$route.query.filter_planned == 0 ) {
+          entries = regularEntries;
+        } else {
+          entries = regularEntries.concat(plannedEntries);
+        }
 
         if (entries.length > 0) {
           entries.sort((a, b) => new Date(b.date_time) - new Date(a.date_time));

@@ -25,15 +25,10 @@
     <div id="table-chart" class="flex flex-wrap mt-4">
       <WidgetTable />
     </div>
-
-    <div class="flex flex-wrap mt-4">
-      <CardBudget />
-    </div>
   </div>
 </template>
 <script>
 import CardLine_IncomingExpensesChart from "@/components/Charts/WidgetLine_IncomingExpensesChart.vue";
-import CardBudget from "../../../components/Charts/WidgetBudget.vue";
 import WidgetTable from "../../../components/Charts/WidgetTable.vue";
 import WidgetPieChart from "../../../components/Charts/WidgetdoughnutChart.vue";
 import AverageStats from '../../../components/Charts/AverageStats.vue';
@@ -49,7 +44,6 @@ export default {
   components: {
     CardLine_IncomingExpensesChart,
     WidgetTable,
-    CardBudget,
     AverageStats,
     WidgetBarChartVue,
     WidgetPieChart,

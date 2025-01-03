@@ -1,5 +1,5 @@
 <template>
-    <VueDatePicker @update:model-value="handleDateChange" class="align-center" v-model="date_time" :range="{ maxRange: 364 }"
+    <VueDatePicker @update:model-value="handleDateChange" class="align-center" v-model="date_time" :range="{ maxRange: 365, minRange: 1 }"
         :required=true :placeholder="$t('labels.date_interval')" format="yyyy-MM-dd" />
 </template>
 

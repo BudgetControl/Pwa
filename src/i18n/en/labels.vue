@@ -239,6 +239,7 @@ export default {
     donate: 'Donate',
     faq: 'FAQ',
     savings: 'Savings',
+    paid_debits: 'Paid debits',
 };
 
 </script>

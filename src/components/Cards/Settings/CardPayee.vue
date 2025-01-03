@@ -123,10 +123,10 @@ export default {
   },
   methods: {
     goToRoute: function (uuid) {
-      this.$router.push({ name: 'entries', query: { filter_payee: uuid } })
+      this.$router.push({ name: 'entries', query: { filter_payee: uuid, filter_planned: 0 } })
     },
     goToRouteCreditCard: function (uuid) {
-      this.$router.push({ name: 'entries', query: { filter_wallet: uuid } })
+      this.$router.push({ name: 'entries', query: { filter_wallet: uuid, filter_planned: 0 } })
     },
     getPlannedEntries() {
       this.apiService.debtsList().then((resp) => {

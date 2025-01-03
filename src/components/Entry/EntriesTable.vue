@@ -35,7 +35,7 @@
                     </div>
                     <div class="flex">
                         <div class="w-full px-4 flex-1">
-                            <i v-on:click="$router.push(`/app/entries?filter_category=${entry.category.id}`)"
+                            <i v-on:click="$router.push(`/app/entries?filter_planned=0&filter_category=${entry.category.id}`)"
                                 :class="'text-sky-400 ' + entry.category.icon"> </i> <span
                                 class="px-2  text-xs text-slate-700">
                                 {{ entry.category.name }} </span>
@@ -47,7 +47,7 @@
                                 }}</span>
                         </div>
                         <div class="w-full px-4 flex-1 text-right">
-                            <span v-on:click="$router.push(`/app/entries?filter_type=${entry.type_amount}`)"
+                            <span v-on:click="$router.push(`/app/entries?filter_planned=0&filter_type=${entry.type_amount}`)"
                                 class="text-sm block text-slate-700 rounded amount">
                                 {{ entry.amount }} <i :class="'fas fa-circle ' + entry.color_amount + ' mr-2'"></i>
                             </span>
@@ -71,7 +71,7 @@
                         <div class="w-full px-4 flex-1">
                             <span class="text-xs mt-2 text-slate-700 rounded ">
                                 <span v-for="(label, i) in entry.labels"
-                                    v-on:click="$router.push(`/app/entries?filter_label=${label.id}`)" :key="i"
+                                    v-on:click="$router.push(`/app/entries?filter_planned=0&filter_label=${label.id}`)" :key="i"
                                     class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
                                     :style="'color: #fff; background-color: ' + label.color">{{
                                         label.name
