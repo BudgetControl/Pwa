@@ -240,6 +240,6 @@ export default {
     faq: 'FAQ',
     start_Date: 'Data di inizio',
     savings: 'Risparmi',
-    paid_debits: 'Debiti pagati',
+    paid_debits: 'Debiti',
 }
 </script>

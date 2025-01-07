@@ -29,6 +29,8 @@ class CoreService extends ApiService {
         } else {
             response = await this.instance.post(url, data);
         }
+        // refresh app
+        this.refreshApp.set(true)
 
         return response.data;
     }
@@ -45,6 +47,9 @@ class CoreService extends ApiService {
         }
 
         const response = await this.instance.delete(url);
+
+        // refresh app
+        this.refreshApp.set(true)
         return response.data;
     }
 
