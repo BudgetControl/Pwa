@@ -239,6 +239,6 @@ export default {
     donate: 'Donar',
     faq: 'FAQ',
     savings: 'Ahorros',
-    paid_debits: 'Débitos pagados',
+    paid_debits: 'Débitos',
 }
 </script>

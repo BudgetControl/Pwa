@@ -4,10 +4,12 @@ import axios from 'axios';
 import { AuthToken } from '../types/auth-token.type';
 import { useAppSettings } from '../storage/settings.store';
 import { useCacheApi } from '../storage/cache-api';
+import { useRefreshStore } from '../storage/refresh';
 
 class ApiService {
     protected instance: any;
     protected tokens: { authToken: AuthToken, bcAuthToken: AuthToken }
+    protected refreshApp = useRefreshStore();
 
     constructor() {
         const authStorage = useAuthStore();

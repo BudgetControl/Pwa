@@ -281,7 +281,6 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { useAppSettings } from '../../storage/settings.store';
-import { useRefreshStore } from '../../storage/refresh';
 import AlertModal from '../GenericComponents/AlertModal.vue';
 import {libs} from '../../libs';
 import CoreService from '../../services/core.service';
@@ -309,12 +308,10 @@ export default {
   setup() {
     const settingsStore = useAppSettings()
     const settings = settingsStore.get()
-
-    const refreshApp = useRefreshStore()
     const apiService = new CoreService()
 
     return {
-      settings, refreshApp, apiService
+      settings, apiService
     }
   },
   data() {
@@ -762,9 +759,7 @@ export default {
             _this.resetForm()
           }
 
-          this.refreshApp.set(true)
           this.time()
-
           alert(this.$t('labels.entry_saved'), "success")
 
         }).catch(() => {
