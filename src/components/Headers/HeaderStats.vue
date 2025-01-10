@@ -4,15 +4,16 @@
     <div class="px-1 md:px-10 mx-auto w-full">
       <div id="statsWallet">
         <div class="px-2 flex overflow-x-auto mb-2" style="min-height: 100px;">
-          <CardWallet v-for="w in wallets" :key="w.id" :statTitle="w.name" :statWallet="w.balance"
-            :statColor="w.color" :statIdWallet="w.uuid" :currency="w.currency"></CardWallet>
+          <CardWallet v-for="w in wallets" :key="w.id" :statTitle="w.name" :statWallet="w.balance" :statColor="w.color"
+            :statIdWallet="w.uuid" :currency="w.currency"></CardWallet>
         </div>
         <!-- Card stats -->
         <div class="flex overflow-x-auto">
           <div class="min-w px-2">
             <router-link to="/app/entries" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
-                <card-stats :statSubtitle="$t('labels.wallet')" :statTitle="wallet.statTitle + ' €'" statIconColor="bg-sky-500" />
+                <card-stats :statSubtitle="$t('labels.wallet')" :statTitle="wallet.statTitle + ' €'"
+                  statIconColor="bg-sky-500" />
               </a>
             </router-link>
           </div>
@@ -29,18 +30,30 @@
 
           <div class="min-w px-2">
             <a>
-              <card-stats :statSubtitle="$t('labels.my_health')" :statTitle="health.statTitle + ' €'" :statArrow="health.statArrow"
-                :statPercent="health.statPercent" statIconName="fas fa-heart" :statIconColor=health.iconColor />
+              <card-stats :statSubtitle="$t('labels.my_health')" :statTitle="health.statTitle + ' €'"
+                :statArrow="health.statArrow" :statPercent="health.statPercent" statIconName="fas fa-heart"
+                :statIconColor=health.iconColor />
             </a>
           </div>
 
-          <div class="min-w px-2">
-            <router-link to="/app/entries?filter_type=debits&filter_planned=0" v-slot="{ href, navigate }">
+          <div class="min-w px-2" v-if="debits.negative.statTitle < 0">
+            <router-link to="/app/payee" v-slot="{ href, navigate }">
               <a :href="href" @click="navigate">
-                <card-stats :statSubtitle="$t('labels.paid_debits')" :statTitle="debits.statTitle + ' €'"
-                  :statArrow="debits.statArrow" :statPercent="debits.statPercent"
-                  :statPercentColor="debits.statPercentColor" statDescripiron="Last month" statIconName="fas fa-credit-card"
-                  statIconColor="bg-blueGray-200" />
+                <card-stats :statSubtitle="$t('labels.given_on_loan')" :statTitle="debits.negative.statTitle + ' €'"
+                  :statArrow="debits.negative.statArrow" :statPercent="debits.negative.statPercent"
+                  :statPercentColor="debits.negative.statPercentColor" statDescripiron="Last month"
+                  statIconName="fas fa-credit-card" statIconColor="bg-amber-300" />
+              </a>
+            </router-link>
+          </div>
+
+          <div class="min-w px-2" v-if="debits.positive.statTitle > 0">
+            <router-link to="/app/payee" v-slot="{ href, navigate }">
+              <a :href="href" @click="navigate">
+                <card-stats :statSubtitle="$t('labels.loans')" :statTitle="debits.positive.statTitle + ' €'"
+                  :statArrow="debits.positive.statArrow" :statPercent="debits.positive.statPercent"
+                  :statPercentColor="debits.positive.statPercentColor" statDescripiron="Last month"
+                  statIconName="fas fa-credit-card" statIconColor="bg-amber-300" />
               </a>
             </router-link>
           </div>
@@ -123,21 +136,29 @@ export default {
         statPercentColor: "text-emerald-500"
       },
       debits: {
-        statTitle: 0,
-        statArrow: "up",
-        statPercent: 0,
-        statPercentColor: "text-blueGray-300"
+        negative: {
+          statTitle: 0,
+          statArrow: "up",
+          statPercent: 0,
+          statPercentColor: "text-blueGray-300"
+        },
+        positive: {
+          statTitle: 0,
+          statArrow: "up",
+          statPercent: 0,
+          statPercentColor: "text-blueGray-300"
+        },
       },
       planned: 0
     }
   },
   mounted() {
     this.refreshApp.$subscribe((mutation, state) => {
-    if (state.state === true) {
-      this.update();
-      this.refreshApp.set(false)
-    }
-  });
+      if (state.state === true) {
+        this.update();
+        this.refreshApp.set(false)
+      }
+    });
     this.update()
   },
   methods: {
@@ -148,7 +169,8 @@ export default {
       this.getWallets()
       this.getWalletPlanned()
       this.getHealth()
-      this.getWalletDebbits()
+      this.getWalletDebitsNegative()
+      this.getWalletDebitsPositive()
     },
     getWallet() {
       const statsService = new StatsService()
@@ -220,42 +242,56 @@ export default {
         console.error(error);
       })
     },
-    getWalletDebbits() {
+    getWalletDebitsNegative() {
       const statsService = new StatsService()
-      statsService.debits().then((resp) => {
+      statsService.totalDebitsNegative().then((resp) => {
 
         let data = resp
-        this.debits.statTitle = data.total.toFixed(2)
+        this.debits.negative.statTitle = data.total.toFixed(2)
 
       }).catch((error) => {
         console.error(error);
       })
 
     },
+
+    getWalletDebitsPositive() {
+      const statsService = new StatsService()
+      statsService.totalDebitsPositive().then((resp) => {
+
+        let data = resp
+        this.debits.positive.statTitle = data.total.toFixed(2)
+
+      }).catch((error) => {
+        console.error(error);
+      })
+
+    },
+
     getWallets() {
       this.wallets = []
       const statsService = new StatsService()
       statsService.wallets().then((resp) => {
         let data = resp
         data.forEach(e => {
-            const walletType = e.type
-            let balance = e.balance
-            let currency = e.currency.icon
-            if(walletType === 'voucher') {
-              balance = e.balance.value_in_voucher
-              currency = `(${e.balance.value_in_valut} ${e.currency.icon})`
-            }
+          const walletType = e.type
+          let balance = e.balance
+          let currency = e.currency.icon
+          if (walletType === 'voucher') {
+            balance = e.balance.value_in_voucher
+            currency = `(${e.balance.value_in_valut} ${e.currency.icon})`
+          }
 
-            const wallet = {
-              id: e.id,
-              uuid: e.uuid,
-              name: e.name,
-              balance: balance,
-              color: e.color,
-              currency: currency
-            }
+          const wallet = {
+            id: e.id,
+            uuid: e.uuid,
+            name: e.name,
+            balance: balance,
+            color: e.color,
+            currency: currency
+          }
 
-            this.wallets.push(wallet)
+          this.wallets.push(wallet)
         });
       }).catch((error) => {
         console.error(error);

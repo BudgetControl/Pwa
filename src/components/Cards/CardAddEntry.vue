@@ -217,10 +217,10 @@
             </select>
           </div>
 
-          <CheckboxButton v-if="!isModel && !isPlanned" @update:active="confirmed = !confirmed"
+          <CheckboxButton v-if="!isModel && !isPlanned" @update:active="confirmed = !confirmed" :status="confirmed"
             :label="$t('labels.payment_confirm')" />
 
-          <CheckboxButton v-if="!isModel && !isPlanned" @update:active="exclude_from_stats = !exclude_from_stats"
+          <CheckboxButton v-if="!isModel && !isPlanned" @update:active="exclude_from_stats = !exclude_from_stats" :status="exclude_from_stats"
             :label="$t('labels.exclude_from_stats')" />
 
 
@@ -229,7 +229,7 @@
               class="border-0 px-3 py-5 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" />
           </div>
 
-          <CheckboxButton v-if="!isModel && !isPlanned" @update:active="action.save_as_model = !action.save_as_model"
+          <CheckboxButton v-if="!isModel && !isPlanned" @update:active="action.save_as_model = !action.save_as_model" :status="action.save_as_model"
             :label="$t('labels.save_as_model')" />
 
           <div class="flex py-2 border border-solid w-full border-slate-500 shadow rounded"
