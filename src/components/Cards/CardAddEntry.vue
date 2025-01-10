@@ -217,8 +217,8 @@
             </select>
           </div>
 
-          <CheckboxButton v-if="!isModel && !isPlanned" @update:active="confirmed = !confirmed" :status="confirmed"
-            :label="$t('labels.payment_confirm')" />
+          <!-- <CheckboxButton v-if="!isModel && !isPlanned" @update:active="confirmed = !confirmed" :status="confirmed"
+            :label="$t('labels.payment_confirm')" /> -->
 
           <CheckboxButton v-if="!isModel && !isPlanned" @update:active="exclude_from_stats = !exclude_from_stats" :status="exclude_from_stats"
             :label="$t('labels.exclude_from_stats')" />
