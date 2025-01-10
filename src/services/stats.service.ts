@@ -28,7 +28,17 @@ class StatsService extends ApiService {
     }
 
     async debits() {
-        const response = await this.instance.get('/api/stats/total/debits');
+        const response = await this.instance.get('/api/stats/debits');
+        return response.data;
+    }
+
+    async totalDebitsNegative() {
+        const response = await this.instance.get('/api/stats/debits/total-negative');
+        return response.data;
+    }
+
+    async totalDebitsPositive() {
+        const response = await this.instance.get('/api/stats/debits/total-positive');
         return response.data;
     }
 

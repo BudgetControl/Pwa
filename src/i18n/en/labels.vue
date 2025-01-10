@@ -240,6 +240,8 @@ export default {
     faq: 'FAQ',
     savings: 'Savings',
     paid_debits: 'Debits',
+    given_on_loan: 'Given on loan',
+    loans: 'Loans',
 };
 
 </script>

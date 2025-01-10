@@ -241,5 +241,7 @@ export default {
     start_Date: 'Data di inizio',
     savings: 'Risparmi',
     paid_debits: 'Debiti',
+    given_on_loan: 'Dato in prestito',
+    loans: 'Prestiti',
 }
 </script>

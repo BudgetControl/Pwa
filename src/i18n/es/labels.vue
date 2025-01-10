@@ -240,5 +240,7 @@ export default {
     faq: 'FAQ',
     savings: 'Ahorros',
     paid_debits: 'Débitos',
+    given_on_loan: 'Dado en préstamo',
+    loans: 'Préstamos',
 }
 </script>
