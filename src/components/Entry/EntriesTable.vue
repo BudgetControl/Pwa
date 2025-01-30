@@ -4,7 +4,7 @@
 
             <div class="container px-4 mx-auto py-3 ">
                 <CheckboxButton v-if="isModel == false" 
-                    @update:active="action.show_planned = !action.show_planned" 
+                    @update:active="action.show_planned = !action.show_planned" :status="action.show_planned"
                     :label="$t('labels.show_planned_entries')"
                 />
             </div>

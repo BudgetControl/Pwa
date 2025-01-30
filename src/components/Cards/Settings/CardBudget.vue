@@ -88,18 +88,9 @@ export default {
     },
     mounted() {
         this.init()
-
-        try {
-            this.currency = this.settings.currency.id
-        } catch (e) {
-            console.info(e)
-        }
-
+        this.currency = this.settings.currency.id
     },
     methods: {
-        edit: function (id) {
-            console.log(id)
-        },
         init: function () {
             const _this = this
             const chartService = new ChartService()
