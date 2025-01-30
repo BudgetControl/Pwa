@@ -155,7 +155,7 @@
         <hr class="my-4 md:min-w-full" />
         <!-- Heading -->
 
-        <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
+        <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4" v-if="isMobile === false">
           <li class="items-center">
             <a href="https://opencollective.com/budgetcontrol" target="_blank" class="text-sm uppercase py-1 block text-slate-900" >
                 <i class="fa-brands fa-internet-explorer mr-2 text-sm text-slate-300"></i>
@@ -187,13 +187,15 @@ import { useAppSettings } from '../../storage/settings.store';
 import EyeButton from "@/components/GenericComponents/EyeButton.vue";
 import AuthService from "../../services/auth.service";
 import WorkspaceService from "../../services/workspace.service";
+import { libs } from "../../libs";
 
 export default {
   data() {
     return {
       workspace: null,
       collapseShow: "hidden",
-      workspaces: []
+      workspaces: [],
+      isMobile: false,
     };
   },
   setup() {
@@ -202,7 +204,8 @@ export default {
       appSettings
     }
   },
-  mounted() {
+  async mounted() {
+    this.isMobile = await libs.isMobile()
     this.workspaceList()
   },
   methods: {

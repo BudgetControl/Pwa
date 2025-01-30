@@ -52,7 +52,6 @@ export default {
     return {
       hasData: false,
       subTitle: null,
-      year: new Date().getFullYear(),
       years: Array.from({ length: 10 }, (v, k) => new Date().getFullYear() - k),
     };
   },
