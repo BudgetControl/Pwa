@@ -230,7 +230,7 @@
           <!-- <CheckboxButton v-if="!isModel && !isPlanned" @update:active="action.save_as_model = !action.save_as_model" :status="action.save_as_model"
             :label="$t('labels.save_as_model')" /> -->
 
-          <!-- <div class="flex py-2 border border-solid w-full border-slate-500 shadow rounded"
+          <div class="flex py-2 border border-solid w-full border-slate-500 shadow rounded"
             v-if="isModel || action.save_as_model === true">
             <div class="px-2 w-full">
               <input v-model="name" type="text" :placeholder="$t('labels.write_temlate_name')" id="name"
@@ -243,7 +243,7 @@
                 {{ $t('labels.save_template') }}
               </button>
             </div>
-          </div> -->
+          </div>
         </div>
 
       </div>
