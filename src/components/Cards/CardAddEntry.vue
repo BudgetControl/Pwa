@@ -154,18 +154,6 @@
             <VueDatePicker v-model="end_date_time" no-today></VueDatePicker>
           </div>
 
-          <div class="lg:w-12/12 px-2 py-2 w-full">
-            <div v-for="(item, i) in input.tags" :key="i">
-              <span v-on:click="removeTag(item)"
-                class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
-                v-if="label.includes(item.id)" :style="'color: #fff; background-color: ' + item.color">{{
-                  item.name
-                }}
-                <i class="fas fa-times close-icon"></i>
-              </span>
-            </div>
-          </div>
-
         </div>
 
         <div v-if="!action.showDetails">
@@ -190,6 +178,19 @@
                 </option>
               </select>
             </div>
+
+            <div class="lg:w-12/12 px-2 py-2 w-full flex">
+            <div v-for="(item, i) in input.tags" :key="i">
+              <span v-on:click="removeTag(item)"
+                class="ml-2 text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600 last:mr-0 mr-1"
+                v-if="label.includes(item.id)" :style="'color: #fff; background-color: ' + item.color">{{
+                  item.name
+                }}
+                <i class="fas fa-times close-icon"></i>
+              </span>
+            </div>
+          </div>
+
           </div>
 
           <div class="flex flex-wrap ">
