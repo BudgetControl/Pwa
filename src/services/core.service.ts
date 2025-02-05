@@ -225,7 +225,7 @@ class CoreService extends ApiService {
     }
 
     async deleteModel(id) {
-        const url = `/api/model/${id}`
+        const url = `/api/entry/model/${id}`
         const response = await this.instance.delete(url);
         return response.data;
     }
