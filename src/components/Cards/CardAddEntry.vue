@@ -64,7 +64,7 @@
             <select v-model="account" id="account" required
               class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
               <option value="-1">{{ $t('labels.choose_wallet_account') }}</option>
-              <option value="0" v-if="action.openTab === 3">{{ $t('labels.out_of_wallet') }}</option>
+              <option value="" v-if="action.openTab === 3">{{ $t('labels.out_of_wallet') }}</option>
               <option v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
           </div>
@@ -84,13 +84,13 @@
             <select v-if="action.hidecategory == true && !action.hidetransfer_to" v-model="transferto" id="transferto"
               class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option :value=false>{{ $t('labels.choose_a_wallet_to_transfer_to') }}</option>
-              <option value="0">{{ $t('labels.out_of_wallet') }}</option>
+              <option value="">{{ $t('labels.out_of_wallet') }}</option>
               <option v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
 
             <select v-model="debit" v-if="action.hidetransfer_to"
               class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
-              <option value="0">{{ $t('labels.choose_an_option') }}</option>
+              <option value="">{{ $t('labels.choose_an_option') }}</option>
               <option value="njn76298fm">{{ $t('labels.create_new_debit') }}</option>
               <option v-for="item in input.debit" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
@@ -633,13 +633,7 @@ export default {
           return false
         }
 
-        if (this.account == this.transferto) {
-          alert(this.$t('messages.validation.choose_wallet_transfer'), "error")
-          return false
-        }
-
-
-        if (this.transferto == false) {
+        if (this.transferto == -1) {
           alert(this.$t('messages.validation.choose_wallet_transfer'), "error")
           return false
         }
