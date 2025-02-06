@@ -90,7 +90,7 @@
 
             <select v-model="debit" v-if="action.hidetransfer_to"
               class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
-              <option value="">{{ $t('labels.choose_an_option') }}</option>
+              <option value="0">{{ $t('labels.choose_an_option') }}</option>
               <option value="njn76298fm">{{ $t('labels.create_new_debit') }}</option>
               <option v-for="item in input.debit" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
