@@ -53,6 +53,7 @@ export default {
       hasData: false,
       subTitle: null,
       years: Array.from({ length: 10 }, (v, k) => new Date().getFullYear() - k),
+      year: new Date().getFullYear(),
     };
   },
   mounted() {
