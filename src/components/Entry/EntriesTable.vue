@@ -243,7 +243,6 @@ export default {
                         amount: parseFloat(r.amount).toFixed(2) + " " + currency.icon,
                         color_amount: r.amount <= 0 ? "text-red-500" : "text-emerald-500",
                         type_amount: r.amount <= 0 ? "expenses" : "incoming",
-                        wallet: r.wallet.name,
                         note: r.note,
                         planned: r.planned == 0 || r.planned == undefined ? false : true,
                         category: {
@@ -256,6 +255,12 @@ export default {
                         transfer: r.type == 'transfer' ? true : false,
                         type: r.type,
                         name: r.name
+                    }
+
+                    if(r.wallet != null) {
+                        info.wallet = r.wallet.name
+                    } else {
+                        info.wallet = _this.$t('labels.out_of_wallet')
                     }
 
                     if (r.transfer_to != null) {
