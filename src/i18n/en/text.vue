@@ -29,5 +29,15 @@ export default {
         write_us: 'Write us for assistance.',
     },
     install_app: 'Hey! Install our app to get the best experience.',
+    tooltips: {
+        finalize: {
+            workspace: "The name of your workspace, so you can identify it if you create many others",
+            currency: "The default currency you use, for example Euro",
+            wallet: "The name of your first wallet, for example it can also be the name of your bank",
+            balance: "The starting balance of your wallet",
+            payment_type: "The payment method you use most often, we will set it as default",
+            wallet_type: "What type is your common wallet? A bank or simply cash? Here you can choose it to improve your statistics"
+        }
+    }
 }
 </script>

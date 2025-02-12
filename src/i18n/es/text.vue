@@ -1,4 +1,6 @@
 <script>
+import Finalize from '../../views/auth/Finalize.vue';
+
 export default {
     about_us: {
         version: `Budget Control de Mlabfactory versión `,
@@ -25,5 +27,15 @@ export default {
         write_us: 'Escríbenos para asistencia.',
     },
     install_app: 'Hey! ¿Quieres instalar la aplicación?',
+    tooltips: {
+       finalize: {
+        workspace: "El nombre de tu área de trabajo, para que puedas identificarla si creas muchas otras",
+        currency: "La moneda predeterminada que utilizas, por ejemplo, Euro",
+        wallet: "El nombre de tu primera billetera, por ejemplo, puede ser también el nombre de tu institución bancaria",
+        balance: "El balance inicial de tu billetera",
+        payment_type: "El método de pago que utilizas con más frecuencia, lo estableceremos como predeterminado",
+        wallet_type: "¿Qué tipo es tu billetera común? ¿Un banco o simplemente efectivo? Aquí puedes elegirlo para mejorar tus estadísticas"
+       }
+    }
 }
 </script>
