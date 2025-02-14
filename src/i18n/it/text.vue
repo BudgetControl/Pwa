@@ -25,5 +25,15 @@ export default {
         write_us: 'Scrivici per assistenza.',
     },
     install_app: 'Hey! Vuoi installare l\'applicazione?',
+    tooltips: {
+        finalize: {
+            workspace: "Il nome della tua area di lavoro, così da poterla identificare facilmente se ne crei molte altre.",
+            currency: "La valuta predefinita che utilizzi, ad esempio Euro.",
+            wallet: "Il nome del tuo primo portafoglio, ad esempio può essere anche il nome del tuo istituto bancario.",
+            balance: "Il bilancio iniziale del tuo portafoglio.",
+            payment_type: "Il metodo di pagamento che utilizzi più spesso, lo renderemo predefinito.",
+            wallet_type: "Che tipologia è il tuo portafoglio? Una banca o semplicemente dei contanti? Qui puoi sceglierlo per migliorare le tue statistiche."
+        }
+    }
 }
 </script>

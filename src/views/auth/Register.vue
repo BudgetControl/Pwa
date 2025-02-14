@@ -109,11 +109,21 @@
 import AuthService from "../../services/auth.service";
 import loading from 'vue-full-loading'
 import PasswordStrengthMeter from "../../components/Auth/PasswordStrengthMeter.vue";
+import { useAuthStore } from "../../storage/auth-token.store";
+import { useAppSettings } from "../../storage/settings.store";
 
 export default {
   components: {
     loading,
     PasswordStrengthMeter
+  },
+  setup() {
+    const authStore = useAuthStore()
+    const appSettings = useAppSettings()
+
+    return {
+      authStore, appSettings
+    }
   },
   data() {
     return {
@@ -146,12 +156,24 @@ export default {
           }).then(() => {
 
             _this.show = false
-            authService.userInfo().then(() => {
-              _this.$router.push({ name: 'finalizeAuth' })
+            const settings = this.appSettings.settings
+            authService.login(email, password).then((response) => {
+              this.authStore.authToken = { token: response.token, timestamp: new Date().toISOString() };
+              // this.settings.workspaces = response.workspaces
+              // this.settings.current_ws = response.workspaces[0]
+
+              authService.userInfo().then(() => {
+                _this.$router.push({ name: 'finalizeAuth' })
+              }).catch((error) => {
+                console.error(error)
+                _this.error = this.$t('messages.generic_error')
+                _this.show = false
+              })
+
             })
 
           })
-          
+
       } catch (error) {
         console.error(error)
         _this.show = false

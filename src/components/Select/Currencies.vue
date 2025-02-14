@@ -11,9 +11,14 @@ import CoreService from '../../services/core.service';
 export default {
     data() {
         return {
-            selectedCurrency: null,
+            selectedCurrency: this.selected,
             currencies: [],
         };
+    },
+    props: {
+        selected: {
+            default: null,
+        }
     },
     methods: {
         getCurrency() {

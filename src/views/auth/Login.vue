@@ -125,6 +125,7 @@ export default {
   mounted() {
     // check if user is already logged in
     if (this.authStore.authToken.token != undefined && this.authStore.bcAuthToken.token != undefined) {
+      console.debug("Return to dashboard")
       this.$router.push({ path: '/app/dashboard' })
     }
   },

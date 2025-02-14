@@ -72,7 +72,10 @@ export default {
     const tokens = this.authStore.get()
     const appSettings = this.settingsStore.get()
 
-    if (tokens.authToken.token && appSettings.current_ws) {
+    console.debug("authToken", tokens.authToken.token)
+    console.debug("current_ws", appSettings.current_ws)
+
+    if (tokens.authToken.token && tokens.bcAuthToken.token) {
       await authService.userInfo().then(
         response => {
           appSettings.user = response.userInfo

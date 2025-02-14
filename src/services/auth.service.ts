@@ -123,20 +123,9 @@ class AuthService extends ApiService {
     }
 
     async userInfo() {
-        const authStore = useAuthStore();
-        const appSettings = useAppSettings();
-
         //retrive access token header
         const response = await this.instance.get('/api/auth/user-info');
-
-        authStore.bcAuthToken = { token: response.data.token, timestamp: new Date().toISOString() };
-        appSettings.settings.user = response.data.userInfo
-
-        const workspaceSettings = response.data.userInfo.workspace_settings
-        if (workspaceSettings.data) {
-            appSettings.settings.currency = workspaceSettings.data.currency
-            appSettings.settings.payment_type_id = workspaceSettings.data.payment_type_id
-        }
+        this.setUpUserInfo(response);
 
         return response.data;
     }
@@ -150,6 +139,45 @@ class AuthService extends ApiService {
             }
         });
         return response.data;
+    }
+
+    async finalizeRegistration(useruuid: string, data: { workspace: {name: string, currency: string, payment_type: string}, wallet: {name:string, balance:number, type: string, currency:number, exclude_from_stats: number, color: string} }) {
+
+        //retrive access token header
+        const response = await this.instance.post(`/api/auth/${useruuid}finalize/sign-up`, data, {
+            headers: {
+                'Authorization': `Bearer ${this.tokens.authToken.token}`,
+            }
+        });
+
+        this.setUpUserInfo(response);
+
+        return response.data;
+    }
+
+    /**
+     * Sets up user information in the authentication store and application settings.
+     *
+     * @param response - The response object containing user information and authentication token.
+     * @property response.data.token - The authentication token.
+     * @property response.data.userInfo - The user information.
+     * @property response.data.userInfo.workspace_settings - The workspace settings of the user.
+     * @property response.data.userInfo.workspace_settings.data.currency - The currency setting of the workspace.
+     * @property response.data.userInfo.workspace_settings.data.payment_type_id - The payment type ID setting of the workspace.
+     */
+    private setUpUserInfo(response) {
+        const authStore = useAuthStore();
+        const appSettings = useAppSettings();
+
+        authStore.bcAuthToken = { token: response.data.token, timestamp: new Date().toISOString() };
+        appSettings.settings.user = response.data.userInfo
+
+        const workspaceSettings = response.data.userInfo.workspace_settings
+        if (workspaceSettings.data) {
+            appSettings.settings.currency = workspaceSettings.data.currency
+            appSettings.settings.payment_type_id = workspaceSettings.data.payment_type_id
+        }
+
     }
 }
 

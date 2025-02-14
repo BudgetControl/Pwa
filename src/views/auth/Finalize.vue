@@ -36,46 +36,36 @@
 
                             <div v-if="!message">
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-slate-600 text-xs font-bold mb-2"
-                                        htmlFor="grid-password">
-                                        {{ $t('labels.workspace_name') }}
-                                    </label>
+                                    <LabelTooltip :title="$t('labels.workspace_name')"
+                                        :content="$t('text.tooltips.finalize.workspace')"></LabelTooltip>
                                     <input v-model="workspace_name" type="text"
                                         class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                         placeholder="" />
                                 </div>
 
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-slate-600 text-xs font-bold mb-2"
-                                        htmlFor="grid-password">
-                                        {{ $t('labels.default_currency') }}
-                                    </label>
-                                    <Currencies v-model="currency"></Currencies>
+                                    <LabelTooltip :title="$t('labels.default_currency')"
+                                        :content="$t('text.tooltips.finalize.currency')"></LabelTooltip>
+                                    <Currencies :selected="currency" v-model="currency"></Currencies>
                                 </div>
 
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-slate-600 text-xs font-bold mb-2"
-                                        htmlFor="grid-password">
-                                        {{ $t('labels.default_payment_type') }}
-                                    </label>
-                                    <PaymentTypes v-model="paymentType"></PaymentTypes>
+                                    <LabelTooltip :title="$t('labels.default_payment_type')"
+                                        :content="$t('text.tooltips.finalize.payment_type')"></LabelTooltip>
+                                    <PaymentTypes :selected="paymentType" v-model="paymentType"></PaymentTypes>
                                 </div>
 
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-slate-600 text-xs font-bold mb-2"
-                                        htmlFor="grid-password">
-                                        {{ $t('labels.first_wallet_name') }}
-                                    </label>
+                                    <LabelTooltip :title="$t('labels.first_wallet_name')"
+                                        :content="$t('labels.first_wallet_name')"></LabelTooltip>
                                     <input v-model="first_wallet_name" type="text"
                                         class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                         placeholder="" />
                                 </div>
 
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-slate-600 text-xs font-bold mb-2"
-                                        htmlFor="grid-password">
-                                        {{ $t('labels.wallet_type') }}
-                                    </label>
+                                    <LabelTooltip :title="$t('labels.wallet_type')"
+                                        :content="$t('text.tooltips.finalize.wallet_type')"></LabelTooltip>
                                     <select
                                         class="w-full border-0 px-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                         v-model="wallet_type">
@@ -87,10 +77,8 @@
                                 </div>
 
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-slate-600 text-xs font-bold mb-2"
-                                        htmlFor="grid-password">
-                                        {{ $t('labels.wallet_amount') }}
-                                    </label>
+                                    <LabelTooltip :title="$t('labels.wallet_amount')"
+                                        :content="$t('text.tooltips.finalize.balance')"></LabelTooltip>
                                     <Amount v-model="amount"></Amount>
                                 </div>
 
@@ -118,13 +106,15 @@ import Amount from "../../components/Input/Amount.vue";
 import WorkspaceService from "../../services/workspace.service";
 import CoreService from "../../services/core.service";
 import { useAppSettings } from "../../storage/settings.store";
+import LabelTooltip from "../../components/Modals/LabelTooltip.vue";
+import { libs } from "../../libs";
 
 export default {
     components: {
-        loading, PaymentTypes, Currencies, Amount
+        loading, PaymentTypes, Currencies, Amount, LabelTooltip
     },
     setup() {
-    const authService = new AuthService()
+        const authService = new AuthService()
         const workspaceService = new WorkspaceService()
         const coreService = new CoreService()
         const appSettings = useAppSettings()
@@ -140,33 +130,31 @@ export default {
             form: {
                 type: ['bank', 'cache', 'other'],
             },
-            workspace_name: '',
+            workspace_name: 'Workspace',
             first_wallet_name: '',
-            wallet_type: 0,
-            amount: '0.00',
+            wallet_type: 'bank',
             currency: 2,
             paymentType: 1,
-            currentWalletId: null
+            currentWalletId: null,
+            wallet_amount: 0
         };
     },
     async mounted() {
 
         const workspaceCurrency = this.appSettings.settings.currency
-            const workspacePaymentType = this.appSettings.settings.payment_type_id
+        const workspacePaymentType = this.appSettings.settings.payment_type_id
 
-            if (workspaceCurrency && workspacePaymentType) {
-                console.debug('Workspace already setup')
-                this.$router.push({ path: '/app/dashboard' })
-                return
-            }
+        if (workspaceCurrency && workspacePaymentType) {
+            console.debug('Workspace already setup')
+            this.$router.push({ path: '/app/dashboard' })
+            return
+        }
 
-        //get current wallet ID
-        const currentWallet = await this.coreService.accounts()
-        this.currentWalletId = currentWallet[0].uuid
     },
     methods: {
         async finalize() {
             const _this = this
+            const useruuid = this.appSettings.settings.user.uuid
 
             const workspaceData = {
                 name: this.workspace_name,
@@ -176,31 +164,22 @@ export default {
 
             const walletData = {
                 name: this.first_wallet_name,
-                amount: this.amount,
-                type: this.wallet_type
+                balance: this.wallet_amount,
+                type: this.wallet_type,
+                color: libs.generateRandomColor(),
+                currency: this.currency,
+                exclude_from_stats: 0
             }
 
-            const wallet = await this.coreService.setAccount(walletData, this.currentWalletId);
-            const workspace = await this.workspaceService.update({
-                id: this.appSettings.settings.current_ws.uuid,
-                data: workspaceData
-            });
-
-            try {
-                if (workspace && wallet) {
-                    //refresh user info data
-                    this.authService.userInfo().then(() => {
-                        _this.$router.push({ path: '/app/dashboard' })
-                    })
-                } else {
-                    throw new Error('Error on save data')
+            await this.authService.finalizeRegistration(
+                useruuid,
+                {
+                    workspace: workspaceData,
+                    wallet: walletData
                 }
-
-            } catch (error) {
-                console.error(error)
-                _this.error = true
-                _this.error_message = $t('labels.generic_error')
-            }
+            ).then(() => {
+                this.$router.push({ path: '/app/dashboard' })
+            })
 
         }
     }
