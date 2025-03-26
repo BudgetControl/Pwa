@@ -40,7 +40,7 @@
                                         <option value="weekly"> {{ $t('labels.weekly') }}</option>
                                         <option value="monthly"> {{ $t('labels.monthly') }}</option>
                                         <option value="yearly">{{ $t('labels.yearly') }}</option>
-                                        <option value="one_shot"> {{ $t('labels.one_shot') }}</option>
+                                        <option value="one-shot"> {{ $t('labels.one_shot') }}</option>
                                         <!-- <option value="recursively"> {{ $t('labels.recursive') }}</option> -->
                                     </select>
                                 </div>
