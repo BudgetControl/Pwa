@@ -52,6 +52,15 @@ export default {
     chart: {
         no_data: 'No hay datos para mostrar',
         no_data_selected: 'No se ha seleccionado ningún dato',
+    },
+    label: {
+        label_saved: 'Etiqueta guardada exitosamente',
+        label_deleted: 'Etiqueta eliminada exitosamente',
+        label_archived: 'Etiqueta archivada exitosamente',
+        label_restored: 'Etiqueta restaurada exitosamente',
+        label_name: 'Por favor, ingrese un nombre para la etiqueta',
+        label_color: 'Por favor, elija un color para la etiqueta',
+        delete_label: '¿Estás seguro de que quieres eliminar esta etiqueta?',
     }
 }
 </script>

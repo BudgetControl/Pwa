@@ -2,7 +2,8 @@
     <section class="relative py-16 bg-slate-200">
         <div class="container mx-auto px-4">
             <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
-                <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
+                <div
+                    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
                     <HeaderButton back="/app/settings/label" title="Label settings" />
 
                     <div class="relative p-6 flex-auto">
@@ -13,15 +14,8 @@
                         </div>
 
                         <div class="mb-3 pt-0">
-                            <span class="text-xs text-slate-400">  {{ $t('labels.label_color') }}</span>
+                            <span class="text-xs text-slate-400"> {{ $t('labels.label_color') }}</span>
                             <color-picker :visible-formats="['hex']" :color="modal.color" @color-change="updateColor" />
-                        </div>
-
-                        <div class="mb-3 pt-0">
-                            <label for="exclude_stats">
-                                <input v-model="modal.archive" type="checkbox" class="p-1 border rounded"
-                                    id="exclude_stats" :value="true" checked>  {{ $t('labels.archive') }}
-                            </label>
                         </div>
 
                     </div>
@@ -75,10 +69,11 @@ export default {
         this.openModal(this.$route.params.id, this.$route.params.subId)
     },
     created() {
-    window.alert = (message, type = 'success') => {
-      this.$refs.alertModal.show(message, type);
-    };
-  },
+        window.alert = (message, type = 'success') => {
+            this.$refs.alertModal.show(message, type);
+        };
+    },
+
     methods: {
         showSub(id) {
             if (this.opentab == id) {
@@ -102,7 +97,7 @@ export default {
             const _this = this
             this.apiService.setLabel(this.modal.uuid, this.modal).then(() => {
                 alert('Label updated')
-                _this.$router.push({path : '/app/settings/label'})
+                _this.$router.push({ path: '/app/settings/label' })
             })
         },
         updateColor(eventData) {
@@ -129,4 +124,3 @@ export default {
     color: green
 }
 </style>
-  
