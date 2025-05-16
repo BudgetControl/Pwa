@@ -24,13 +24,13 @@
                 class="p-2 text-black text-lg">{{ $t('labels.category') }}</span></i>
             <p class="text-xs text-slate-400">{{ $t('text.settings.manage_entry') }}</p>
           </router-link> -->
-<!-- 
+
           <router-link to="/app/settings/label"
             class="active:bg-emerald-600 font-bold text-sm px-6 py-3 m-5 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
             <i class="fas fa-solid fa-tags fa-lg text-emerald-500 mr-2 "><span
                 class="p-2 text-black text-lg">{{ $t('labels.labels') }}</span></i>
             <p class="text-xs text-slate-400">{{ $t('text.settings.customize_entry') }}</p>
-          </router-link> -->
+          </router-link>
 
           <router-link to="/app/settings/model"
             class="active:bg-emerald-600 font-bold text-sm px-6 py-3 m-5 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">

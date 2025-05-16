@@ -52,6 +52,15 @@ export default {
     chart: {
         no_data: 'Nessun dato da visualizzare',
         no_data_selected: 'Nessun dato selezionato',
+    },
+    label: {
+        label_saved: 'Etichetta salvata con successo',
+        label_deleted: 'Etichetta eliminata con successo',
+        label_archived: 'Etichetta archiviata con successo',
+        label_restored: 'Etichetta ripristinata con successo',
+        label_name: 'Per favore inserisci un nome per l\'etichetta',
+        label_color: 'Per favore scegli un colore per l\'etichetta',
+        delete_label: 'Sei sicuro di voler eliminare questa etichetta?',
     }
 }
 </script>

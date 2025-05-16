@@ -152,6 +152,11 @@ class CoreService extends ApiService {
         return response.data;
     }
 
+    async deleteLabel(id) {
+        const response = await this.instance.delete(`/api/label/${id}`);
+        return response.data;
+    }
+
     async setLabel(id, data) {
         const response = await this.instance.put(`/api/label/${id}`, data);
         return response.data;

@@ -53,5 +53,14 @@ export default {
         no_data: 'No data to display',
         no_data_selected: 'No data selected',
     },
+    label: {
+        label_saved: 'Label saved successfully',
+        label_deleted: 'Label deleted successfully',
+        label_archived: 'Label archived successfully',
+        label_restored: 'Label restored successfully',
+        label_name: 'Please insert a label name',
+        label_color: 'Please choose a label color',
+        delete_label: 'Are you sure you want to delete this label?',
+    }
 }
 </script>
