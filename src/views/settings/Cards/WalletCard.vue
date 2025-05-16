@@ -131,6 +131,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import { ColorPicker } from 'vue-accessible-color-picker';
 import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
 import ConfirmModal from '@/components/GenericComponents/ConfirmModal.vue';
+import { useAppSettings } from '../../../storage/settings.store';
 
 export default {
     components: {
@@ -138,8 +139,9 @@ export default {
     },
     setup() {
         const apiService = new CoreService()
+        const appSettings = useAppSettings()
         return {
-            apiService
+            apiService, appSettings
         }
     },
     data() {
@@ -244,10 +246,13 @@ export default {
                     this.modal.deleted = resp.deleted_at
                     this.modal.voucher_value = resp.voucher_value
 
-                    //FIXME: currencySymbol is missing ${currencySymbol}
+                    const settings = this.appSettings.settings.settings
+                    const symbol = settings.currency.symbol
 
                     if(resp.type == 'voucher') {
-                        this.voucher_balance_value = `${resp.balance.value_in_valut} currencySymbol`
+                        let value = resp.balance.value_in_valut
+                        value = value.format(2)
+                        this.voucher_balance_value = `${value} ${symbol}`
                         this.modal.balance = resp.balance.value_in_voucher
                     }
 
