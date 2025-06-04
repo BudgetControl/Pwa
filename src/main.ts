@@ -36,6 +36,8 @@ import EntriesResume from "./views/application/EntriesResume.vue";
 import Budgets from "./views/application/Budgets.vue";
 import AddBudgets from "./components/Cards/Settings/CardAddBudget.vue";
 import Stats from "./views/application/Stats.vue";
+import Goals from "./views/application/Goals.vue";
+import CardAddGoal from "./components/Goal/CardAddGoal.vue";
 
 // settings layout
 
@@ -87,6 +89,7 @@ if ('serviceWorker' in navigator) {
 
 import { App as CapacitorApp } from '@capacitor/app';
 import { Browser } from '@capacitor/browser';
+import CardGoal from "./components/Cards/CardGoal.vue";
 
 CapacitorApp.addListener('appUrlOpen', function (data) {
 
@@ -164,6 +167,24 @@ const routes = [
       {
         path: "/app/budgets/edit/:id",
         component: AddBudgets,
+      },
+
+
+
+      {
+        path: "/app/goals",
+        component: Goals,
+      },
+
+      {
+        path: "/app/goals/new",
+        component: CardAddGoal,
+      },
+
+
+      {
+        path: "/app/goals/edit/:id",
+        component: CardAddGoal,
       },
 
       {

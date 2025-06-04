@@ -1,0 +1,74 @@
+[
+    {
+        "label": "house",
+        "icon": "fa-solid fa-house"
+    },
+    {
+        "label": "car",
+        "icon": "fa-solid fa-car"
+    },
+    {
+        "label": "travel",
+        "icon": "fa-solid fa-plane"
+    },
+    {
+        "label": "education",
+        "icon": "fa-solid fa-graduation-cap"
+    },
+    {
+        "label": "health",
+        "icon": "fa-solid fa-heart"
+    },
+    {
+        "label": "savings",
+        "icon": "fa-solid fa-piggy-bank"
+    },
+    {
+        "label": "retirement",
+        "icon": "fa-solid fa-umbrella"
+    },
+    {
+        "label": "business",
+        "icon": "fa-solid fa-briefcase"
+    },
+    {
+        "label": "charity",
+        "icon": "fa-solid fa-hand-holding-heart"
+    },
+    {
+        "label": "family",
+        "icon": "fa-solid fa-users"
+    },
+    {
+        "label": "hobby",
+        "icon": "fa-solid fa-palette"
+    },
+    {
+        "label": "investment",
+        "icon": "fa-solid fa-chart-line"
+    },
+    {
+        "label": "emergency",
+        "icon": "fa-solid fa-shield-alt"
+    },
+    {
+        "label": "vacation",
+        "icon": "fa-solid fa-suitcase"
+    },
+    {
+        "label": "home-improvement",
+        "icon": "fa-solid fa-tools"
+    },
+    {
+        "label": "technology",
+        "icon": "fa-solid fa-laptop"
+    },
+    {
+        "label": "pets",
+        "icon": "fa-solid fa-paw"
+    },
+    {
+        "label": "other",
+        "icon": "fa-solid fa-ellipsis-h"
+    }
+]

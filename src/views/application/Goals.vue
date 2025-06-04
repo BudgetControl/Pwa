@@ -12,18 +12,18 @@
           :label="$t('labels.show')"
         />
       </HeaderMenu>
-      <CardBudget />
+      <CardGoal />
     </div>
   </div>
 </template>
 <script>
-import CardBudget from "@/components/Cards/Settings/CardBudget.vue";
+import CardGoal from "@/components/Cards/CardGoal.vue";
 import MenuButton from "../../components/GenericComponents/MenuButton.vue";
 import HeaderMenu from "../../components/Navbars/HeaderMenu.vue";
 
 export default {
   components: {
-    CardBudget, MenuButton, HeaderMenu
+    CardGoal, MenuButton, HeaderMenu
   },
 };
 </script>

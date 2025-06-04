@@ -242,6 +242,25 @@ export default {
     paid_debits: 'Debits',
     given_on_loan: 'Given on loan',
     loans: 'Loans',
+    goals: 'Goals',
+    list_of_all_goals: 'List of all goals',
+    no_goals_found: 'No goals found',
+    add_new_goal: 'Add new goal',
+    target_amount: 'Target amount',
+    goals_name: 'Goal name',
+    goal_target: 'Goal target',
+    goal_note: 'Goal note',
+    icons: {
+        car: 'Car',
+        house: 'House',
+        vacation: 'Vacation',
+        education: 'Education',
+        health: 'Health',
+        retirement: 'Retirement',
+        wedding: 'Wedding',
+        other: 'Other',
+    },
+    goal_type: 'Goal type',
 };
 
 </script>
