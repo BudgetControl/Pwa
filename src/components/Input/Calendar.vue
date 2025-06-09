@@ -6,8 +6,7 @@
         <VueDatePicker 
             :model-value="modelValue"
             @update:model-value="handleUpdate"
-            :placeholder="placeholder"
-            range>
+            :placeholder="placeholder">
         </VueDatePicker>
     </div>
 </template>
@@ -22,8 +21,8 @@ export default {
     },
     props: {
         modelValue: {
-            type: Array,
-            default: () => []
+            type: String,
+            default: () => new Date()
         },
         placeholder: {
             type: String,
@@ -33,18 +32,19 @@ export default {
             type: String,
             default: 'Select Date'
         }
+
     },
     emits: ['update:modelValue'],
     mounted() {
         if (!this.modelValue || this.modelValue.length === 0) {
             const currentDate = new Date();
-            this.$emit('update:modelValue', [currentDate]);
+            this.$emit('update:modelValue', currentDate);
         }
     },
     methods: {
         handleUpdate(value) {
             this.$emit('update:modelValue', value);
-        }
+        },
     }
 };
 </script>

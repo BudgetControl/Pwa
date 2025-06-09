@@ -7,7 +7,7 @@
             :value="modelValue" 
             @change="handleChange"
             class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full">
-            <option value="" disabled selected>{{ placeholder }}</option>
+            <option value="" disabled selected>{{ $t('labels.choose_an_option') }}</option>
             <option v-for="(icon, key) in icons" :key="key" :value="icon.icon">
                 {{ $t('labels.icons.' + icon.label) }}
             </option>
@@ -21,7 +21,7 @@ import GoalsIcons from '@/assets/goal-icons.json'
 export default {
     props: {
         modelValue: {
-            type: String,  // Modificato da Array a String
+            type: String,
             default: ''
         },
         placeholder: {

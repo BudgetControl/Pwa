@@ -3,9 +3,10 @@
         <label v-if="label" class="block uppercase text-slate-600 text-xs font-bold mb-2" htmlFor="grid-password">
             {{ label }}
         </label>
-        <input v-model="amount" type="number"
+        <input :value="modelValue" type="number"
+            @input="$emit('update:modelValue', $event.target.value)"
             class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-            :placeholder="placeholder" @input="formatAmount" />
+            :placeholder="placeholder" @change="formatAmount" />
     </div>
 
 </template>
@@ -15,8 +16,8 @@
 export default {
     props: {
         modelValue: {
-            type: String,
-            default: ''
+            type: Number,
+            default: 0
         },
         placeholder: {
             type: String,
@@ -32,6 +33,7 @@ export default {
             amount: '',
         };
     },
+    emits: ['update:modelValue'],
     methods: {
         formatAmount() {
             let amount = this.amount.toString();

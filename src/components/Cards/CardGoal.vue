@@ -14,7 +14,7 @@
             </div>
             <!--content-->
             <div class="border p-2 mt-2" v-if="goals.length != 0">
-                <Goal :goal="goal" :currency="currency" v-for="goal in goals"
+                <Goal :localGoal="goal" :currency="currency" v-for="goal in goals"
                     :key="goal.uuid" />
             </div>
 
@@ -24,21 +24,12 @@
 <script>
 import { useAppSettings } from '../../storage/settings.store'
 import Goal from '@/components/Goal/Card.vue'
+import GoalService from '../../services/goal.service'
 
 export default {
     data() {
         return {
-            goals: [
-                {
-                    uuid: '1',
-                    name: 'Holiday trip',
-                    amount: 1400,
-                    spent: 900,
-                    color: '#4ade80',
-                    description: 'A trip to the beach with family.',
-                    archive: 0
-                },
-            ],
+            goals: [],
             currency: '€'
         }
     },
@@ -47,20 +38,27 @@ export default {
     },
     setup() {
         const appSettings = useAppSettings()
+        const goalService = new GoalService()
         const settings = {
             currency_id: appSettings.get().currency_id
         }
 
         return {
-            settings
+            settings, goalService
         }
     },
     mounted() {
-        this.currency = this.settings.currency.id
+        this.init()
     },
     methods: {
         init: function () {
-
+            this.goalService.getAll().then((response) => {
+                response.forEach((goal) => {
+                    this.goals.push(goal)
+                })
+            }).catch((error) => {
+                console.error('Error fetching goals:', error)
+            })
         }
     }
 }

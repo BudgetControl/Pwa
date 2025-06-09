@@ -61,6 +61,18 @@ export default {
         label_name: 'Per favore inserisci un nome per l\'etichetta',
         label_color: 'Per favore scegli un colore per l\'etichetta',
         delete_label: 'Sei sicuro di voler eliminare questa etichetta?',
-    }
+    },
+    goal: {
+        created: 'Obiettivo creato con successo',
+        error_creating: 'Errore nella creazione dell\'obiettivo',
+        updated: 'Obiettivo aggiornato con successo',
+        deleted: 'Obiettivo eliminato con successo',
+    },
+    date_required: 'Scegli una data',
+    date_in_past: 'La data non può essere nel passato',
+    amount_required: 'Inserisci un importo valido',
+    icon_required: 'Scegli un\'icona',
+    name_required: 'Inserisci un nome',
+    
 }
 </script>
