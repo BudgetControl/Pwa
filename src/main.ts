@@ -38,6 +38,7 @@ import AddBudgets from "./components/Cards/Settings/CardAddBudget.vue";
 import Stats from "./views/application/Stats.vue";
 import Goals from "./views/application/Goals.vue";
 import CardAddGoal from "./components/Goal/CardAddGoal.vue";
+import DetailsGoal from "./components/Goal/DetailsGoal.vue";
 
 // settings layout
 
@@ -181,6 +182,11 @@ const routes = [
         component: CardAddGoal,
       },
 
+      {
+        path: "/app/goals/details/:id",
+        name: 'goalDetails',
+        component: DetailsGoal,
+      },
 
       {
         path: "/app/goals/edit/:id",

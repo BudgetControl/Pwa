@@ -261,5 +261,14 @@ export default {
         other: 'Otro',
     },
     goal_type: 'Tipo de meta',
+    activity: 'Actividad',
+    deposit: 'Depósito',
+    saved: 'Ahorrado',
+    my_goal: 'Mi meta',
+    my_goals: 'Mis metas',
+    current_saved: 'Ahorrado actualmente',
+    monthly_deposit: 'Depósito mensual',
+    due_date: 'Fecha de vencimiento',
+    goal_name: 'Nombre de la meta',
 }
 </script>

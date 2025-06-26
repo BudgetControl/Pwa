@@ -85,7 +85,7 @@ export default {
     data() {
         return {
             data: {
-                icon: '',
+                category_icon: '',
                 name: '',
                 amount: 0,
                 due_date: null,
@@ -118,7 +118,7 @@ export default {
             this.goalService.get(this.id).then(goal => {
                 if (goal) {
                     this.data = {
-                        icon: goal.icon,
+                        icon: goal.category_icon,
                         name: goal.name,
                         amount: goal.amount,
                         due_date: goal.due_date,
@@ -143,7 +143,7 @@ export default {
                 this.$router.push('/app/goals');
             }).catch(error => {
                 console.error('Error creating goal:', error);
-                alert(this.$t('messages.goal.error_creating', 'error'));
+                alert(this.$t('messages.goal.error_creating'),'error');
             });
         },
         updateGoal() {
@@ -156,35 +156,35 @@ export default {
                 this.$router.push('/app/goals');
             }).catch(error => {
                 console.error('Error deleting goal:', error);
-                alert(this.$t('messages.goal.error_deleting', 'error'));
+                alert(this.$t('messages.goal.error_deleting'),'error');
             });
         },
         validation() {
             if (!this.data.due_date) {
-                alert(this.$t('messages.date_required', 'error'));
+                alert(this.$t('messages.date_required'),'error');
             }
             // if data is in past is not correct
             const today = new Date();
             if (new Date(this.data.due_date) < today) {
-                alert(this.$t('messages.date_in_past', 'error'));
+                alert(this.$t('messages.date_in_past'),'error');
                 return false;
             }
 
             //if amount is not a number or less than 0
             if (isNaN(this.data.amount) || this.data.amount <= 0) {
-                alert(this.$t('messages.amount_required', 'error'));
+                alert(this.$t('messages.amount_required'),'error');
                 return false;
             }
 
             //if icon is not selected
-            if (!this.data.icon) {
-                alert(this.$t('messages.icon_required', 'error'));
+            if (!this.data.category_icon) {
+                alert(this.$t('messages.icon_required'),'error');
                 return false;
             }
 
             //if name is empty
             if (!this.data.name.trim()) {
-                alert(this.$t('messages.name_required', 'error'));
+                alert(this.$t('messages.name_required'),'error');
                 return false;
             }
 

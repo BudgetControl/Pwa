@@ -261,6 +261,15 @@ export default {
         other: 'Other',
     },
     goal_type: 'Goal type',
+    activity: 'Activity',
+    deposit: 'Deposit',
+    saved: 'Saved',
+    my_goal: 'My Goal',
+    my_goals: 'My Goals',
+    current_saved: 'Current saved',
+    monthly_deposit: 'Monthly deposit',
+    due_date: 'Due date',
+    goal_name: 'Goal name',
 };
 
 </script>

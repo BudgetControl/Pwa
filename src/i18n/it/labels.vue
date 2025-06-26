@@ -262,5 +262,15 @@ export default {
         other: 'Altro',
     },
     goal_type: 'Tipo di obiettivo',
+    activity: 'Attività',
+    deposit: 'Deposito',
+    saved: 'Risparmiato',
+    my_goal: 'Il mio obiettivo',
+    my_goals: 'I miei obiettivi',
+    current_saved: 'Attualmente risparmiato',
+    monthly_deposit: 'Deposito mensile',
+    due_date: 'Data di scadenza',
+
+
 }
 </script>
