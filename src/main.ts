@@ -174,11 +174,13 @@ const routes = [
 
       {
         path: "/app/goals",
+        name: 'goals',
         component: Goals,
       },
 
       {
         path: "/app/goals/new",
+        name: 'addGoal',
         component: CardAddGoal,
       },
 
@@ -190,6 +192,7 @@ const routes = [
 
       {
         path: "/app/goals/edit/:id",
+        name: 'editGoal',
         component: CardAddGoal,
       },
 

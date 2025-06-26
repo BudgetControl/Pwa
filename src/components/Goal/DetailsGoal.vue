@@ -6,12 +6,12 @@
             <div class="flex flex-col items-center">
                 <i class="fas fa-piggy-bank text-4xl mb-4"></i>
                 <h2 class="text-2xl font-bold mb-2">{{ $t('labels.my_goal') }}</h2>
-                <div class="text-4xl font-bold mb-4">{{currency}} {{ goal.amount }}</div>
+                <div class="text-4xl font-bold mb-4">{{currency}} {{ goal.target_amount }}</div>
                 <div class="text-sm mb-4">{{goal.due_date}}</div>
                 
                 <!-- Progress bar -->
                 <div class="w-full bg-emerald-400 rounded-full h-2 mb-4">
-                    <div class="bg-white h-2 rounded-full" style="width: 64%"></div>
+                    <div class="bg-white h-2 rounded-full" :style="goal.percentage"></div>
                 </div>
                 
                 <div class="flex justify-between w-full text-sm">
@@ -33,7 +33,7 @@
                 <div class="text-right font-semibold">{{ goal.name }}</div>
                 
                 <div class="text-gray-600">{{ $t('labels.target_amount') }}</div>
-                <div class="text-right font-semibold">{{ currency }} {{ goal.amount }}</div>
+                <div class="text-right font-semibold">{{ currency }} {{ goal.target_amount }}</div>
                 
                 <div class="text-gray-600">{{ $t('labels.current_saved') }}</div>
                 <div class="text-right font-semibold">{{currency}} {{ goal.balance }}</div>
@@ -99,12 +99,13 @@ export default {
             goal: {
                 icon: '',
                 name: '',
-                amount: 0,
+                target_amount: 0,
                 due_date: '',
                 description: '',
                 balance: 0,
                 uuid: '',
-                monthly_deposit: 0
+                monthly_deposit: 0,
+                percentage: 'width: 0%;'
             }
         };
     },
@@ -132,12 +133,13 @@ export default {
                     this.goal = {
                         icon: goal.category_icon,
                         name: goal.name,
-                        amount: goal.amount,
+                        target_amount: goal.target_amount,
                         due_date: goal.due_date,
                         description: goal.description,
                         balance: goal.balance,
                         uuid: goal.uuid,
-                        monthly_deposit: goal.monthly_deposit
+                        monthly_deposit: goal.monthly_deposit,
+                        percentage: `width: ${goal.percentage}%`
                     };
 
                     this.$refs.entry.buildEntriesTable(entries);
