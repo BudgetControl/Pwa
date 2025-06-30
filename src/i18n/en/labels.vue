@@ -270,6 +270,7 @@ export default {
     monthly_deposit: 'Monthly deposit',
     due_date: 'Due date',
     goal_name: 'Goal name',
+    description: 'Description',
 };
 
 </script>

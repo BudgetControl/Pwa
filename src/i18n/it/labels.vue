@@ -270,6 +270,7 @@ export default {
     current_saved: 'Attualmente risparmiato',
     monthly_deposit: 'Deposito mensile',
     due_date: 'Data di scadenza',
+    description: 'Descrizione',
 
 
 }

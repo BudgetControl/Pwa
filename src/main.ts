@@ -170,8 +170,6 @@ const routes = [
         component: AddBudgets,
       },
 
-
-
       {
         path: "/app/goals",
         name: 'goals',

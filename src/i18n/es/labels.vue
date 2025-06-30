@@ -270,5 +270,6 @@ export default {
     monthly_deposit: 'Depósito mensual',
     due_date: 'Fecha de vencimiento',
     goal_name: 'Nombre de la meta',
+    description: 'Descripción',
 }
 </script>
