@@ -26,7 +26,7 @@
                 </div>
 
                 <!-- Add Money Button -->
-                <router-link to="/app/entry"
+                <router-link :to="'/app/entry/goal/' + goal.uuid"
                     class="bg-white text-emerald-600 px-6 py-2 rounded-full mt-4 font-semibold">
                     {{ $t('labels.add') }}
                 </router-link>

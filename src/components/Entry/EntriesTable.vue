@@ -23,6 +23,9 @@
                             : '',
                         entry.type == 'transfer'
                             ? 'transfer-color'
+                            : '',
+                        entry.type == 'goal'
+                            ? 'bg-teal-200'
                             : ''
                     ]">
                     <div class="flex flex-wrap">

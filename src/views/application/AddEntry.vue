@@ -25,7 +25,7 @@
         />
       </HeaderMenu>
 
-      <CardAddEntry :entryId="this.$route.params.entry_id" :typeOfEntry="this.$route.query.type" />
+      <CardAddEntry :entryId="this.$route.params.entry_id" :typeOfEntry="this.$route.query.type" :goalId="this.$route.params.goal_id" />
     </div>
   </div>
 </template>

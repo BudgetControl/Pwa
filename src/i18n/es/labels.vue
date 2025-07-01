@@ -259,6 +259,7 @@ export default {
         retirement: 'Jubilación',
         wedding: 'Boda',
         other: 'Otro',
+        travel: 'Viaje',
     },
     goal_type: 'Tipo de meta',
     activity: 'Actividad',
@@ -271,5 +272,6 @@ export default {
     due_date: 'Fecha de vencimiento',
     goal_name: 'Nombre de la meta',
     description: 'Descripción',
+    choose_a_goal: 'meta'
 }
 </script>

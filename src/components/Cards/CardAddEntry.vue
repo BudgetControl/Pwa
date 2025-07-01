@@ -5,6 +5,7 @@
         <!-- ##### menu ########### -->
         <div class="w-full">
           <nav
+          v-if="action.openTab !== 5"
             class="relative flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-emerald-500 rounded">
             <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
               <div class="w-full" id="example-navbar-info">
@@ -45,7 +46,7 @@
         <!-- ##### menu ########### -->
       </div>
       <div
-        v-bind:class="{ 'bg-red-200': action.openTab === 1, 'bg-sky-200': action.openTab === 2, 'bg-emerald-200': action.openTab === 3, 'bg-orange-200': action.openTab === 3 }"
+        v-bind:class="{ 'bg-red-200': action.openTab === 1, 'bg-sky-200': action.openTab === 2, 'bg-emerald-200': action.openTab === 3, 'bg-emerald-200': action.openTab === 4, 'bg-teal-200': action.openTab === 5 }"
         class="container relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg border-0 flex-auto p-4">
 
         <div class="flex flex-wrap">
@@ -81,11 +82,17 @@
               </option>
             </select>
 
-            <select v-if="action.hidecategory == true && !action.hidetransfer_to" v-model="transferto" id="transferto"
+            <select v-if="action.hidecategory == true && action.openTab === 3" v-model="transferto" id="transferto"
               class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
               <option :value=false>{{ $t('labels.choose_a_wallet_to_transfer_to') }}</option>
               <option value="">{{ $t('labels.out_of_wallet') }}</option>
               <option v-for="item in input.account" :key="item.id" :value="item.id">{{ item.name }}</option>
+            </select>
+
+            <select v-if="action.hidecategory == true && action.openTab === 5" v-model="goal_id" id="goal_id"
+              class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
+              <option :value=false>{{ $t('labels.choose_a_goal') }}</option>
+              <option v-for="item in input.goals" :key="item.id" :value="item.id">{{ item.name }}</option>
             </select>
 
             <select v-model="debit" v-if="action.hidetransfer_to"
@@ -284,6 +291,7 @@ import AlertModal from '../GenericComponents/AlertModal.vue';
 import {libs} from '../../libs';
 import CoreService from '../../services/core.service';
 import CheckboxButton from '../Button/CheckboxButton.vue';
+import GoalService from '../../services/goal.service';
 
 export default {
   props: {
@@ -302,15 +310,20 @@ export default {
     typeOfEntry: {
       type: String,
       default: 'expense'
+    },
+    goalId: {
+      type: String,
+      default: null,
     }
   },
   setup() {
     const settingsStore = useAppSettings()
     const settings = settingsStore.get()
     const apiService = new CoreService()
+    const goalService = new GoalService()
 
     return {
-      settings, apiService
+      settings, apiService, goalService
     }
   },
   data() {
@@ -356,6 +369,7 @@ export default {
       planning: 0,
       exclude_from_stats: false,
       debit: null,
+      goal_id: false,
       input: {
         tags: [],
         category: [],
@@ -366,6 +380,7 @@ export default {
         model: [],
         planning: ["daily", "monthly", "yearly"],
         debit: [],
+        goals: [],
       }
     }
   },
@@ -416,6 +431,14 @@ export default {
 
     if (this.$route.query.show === 'payee') {
       this.toggleTabs(4)
+    }
+
+    if(this.goalId) {
+      this.action.openTab = 5
+      this.action.hidecategory = true
+      this.type = "goal"
+      this.goal_id = this.goalId
+      this.getGoals()
     }
 
   },
@@ -609,7 +632,7 @@ export default {
         return false
       }
 
-      if (this.category == 0 && this.type != "transfer" && this.type != "debit") {
+      if (this.category == 0 && this.type != "transfer" && this.type != "debit" && this.type != "goal") {
         alert(this.$t('messages.validation.choose_category'), "error")
         return false
       }
@@ -723,6 +746,7 @@ export default {
           end_date_time: this.end_date_time,
           exclude_from_stats: this.exclude_from_stats,
           type: this.type,
+          goal_id: this.goal_id,
         }
         let path = this.type
 
@@ -734,6 +758,12 @@ export default {
         if (this.type == "incoming") {
           path = 'income'
         }
+
+        if(this.type == "goal") {
+          path = 'goal'
+          data.amount = this.amount * -1
+        }
+
 
         if (this.type == "debit") {
           if (this.action.debit_type == '-') {
@@ -857,6 +887,19 @@ export default {
         this.action.dateUpdated = false
         this.exclude_from_stats = false
         this.time()
+    },
+    getGoals() {
+      let _this = this
+      this.goalService.getAll().then((res) => {
+        let data = res
+        data.forEach(function (r) {
+          _this.input.goals.push(r)
+        })
+
+        if(_this.goalId) {
+          _this.goal_id = _this.goalId
+        }
+      })
     }
   }
 };

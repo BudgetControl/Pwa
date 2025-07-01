@@ -90,7 +90,6 @@ if ('serviceWorker' in navigator) {
 
 import { App as CapacitorApp } from '@capacitor/app';
 import { Browser } from '@capacitor/browser';
-import CardGoal from "./components/Cards/CardGoal.vue";
 
 CapacitorApp.addListener('appUrlOpen', function (data) {
 
@@ -192,6 +191,12 @@ const routes = [
         path: "/app/goals/edit/:id",
         name: 'editGoal',
         component: CardAddGoal,
+      },
+
+      {
+        path: "/app/entry/goal/:goal_id",
+        name: 'addEntryGoal',
+        component: AddEntry,
       },
 
       {

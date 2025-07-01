@@ -260,6 +260,7 @@ export default {
         retirement: 'Pensione',
         wedding: 'Matrimonio',
         other: 'Altro',
+        travel: 'Viaggio',
     },
     goal_type: 'Tipo di obiettivo',
     activity: 'Attività',
@@ -271,6 +272,7 @@ export default {
     monthly_deposit: 'Deposito mensile',
     due_date: 'Data di scadenza',
     description: 'Descrizione',
+    choose_a_goal: 'Seleziona un obbiettivo'
 
 
 }

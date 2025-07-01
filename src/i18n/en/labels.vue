@@ -259,6 +259,7 @@ export default {
         retirement: 'Retirement',
         wedding: 'Wedding',
         other: 'Other',
+        travel: 'Travel',
     },
     goal_type: 'Goal type',
     activity: 'Activity',
@@ -271,6 +272,7 @@ export default {
     due_date: 'Due date',
     goal_name: 'Goal name',
     description: 'Description',
+    choose_a_goal: 'Choose a goal'
 };
 
 </script>
