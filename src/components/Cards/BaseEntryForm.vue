@@ -3,6 +3,31 @@
         <div :class="containerClass"
             class="container relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg border-0 flex-auto p-4">
 
+
+            <!-- Selector per modelli - solo se non è un model, non è planned, e ci sono modelli disponibili -->
+            <div v-if="!isModel && !isPlanned && models.length > 0 && (entryType === 'expenses' || entryType === 'incoming')" class="flex flex-wrap -mx-2">
+                <div class="w-full px-2 py-2">
+                    <select v-model="selectedModel" @change="loadModelData"
+                        class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
+                        <option value="0">{{ $t('labels.choose_a_model') }}</option>
+                        <option v-for="item in models" :key="item.uuid" :value="item.uuid">{{ item.name }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Suggerimento per creare modelli se non ce ne sono -->
+            <div v-if="!isModel && !isPlanned && models.length === 0 && (entryType === 'expenses' || entryType === 'incoming')" class="flex flex-wrap -mx-2">
+                <div class="w-full px-2 py-2">
+                        <router-link 
+                            to="/app/settings/model/add?showDetails=true" 
+                            class="bg-emerald-600 w-full text-center inline-block bg-blue-500 text-white px-4 py-2 rounded text-sm hover:bg-blue-600 transition-colors">
+                            <i class="fas fa-plus mr-2"></i>
+                            {{ $t('labels.create_first_model') }}
+                        </router-link>
+                </div>
+            </div>
+
+
             <!-- Prima riga: campi specifici del tipo -->
             <div class="flex flex-wrap -mx-2">
                 <!-- Slot per campi specifici del tipo -->
@@ -86,7 +111,7 @@
                 </div>
 
                 <div class="px-2 w-full" v-if="isModel">
-                    <input v-model="model_name" type="text" :placeholder="$t('labels.write_template_name')" id="model_name"
+                    <input v-model="name" type="text" :placeholder="$t('labels.write_template_name')" id="name"
                         class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                 </div>
             </div>
@@ -164,13 +189,18 @@ export default {
         entryId: {
             type: String,
             default: null
+        },
+        models: {
+            type: Array,
+            default: () => []
         }
     },
     data() {
         return {
             showDetails: false,
             planningOptions: ["daily", "monthly", "yearly"],
-            newLabels: [], // Array per memorizzare le nuove etichette create
+            newLabels: [],
+            selectedModel: "0",
             formData: {
                 amount: null,
                 currency_id: 1,
@@ -258,7 +288,7 @@ export default {
             
             const errors = []
             
-            if (!this.model_name || this.model_name.trim() === '') {
+            if (!this.name || this.name.trim() === '') {
                 errors.push(this.$t('messages.validation.insert_model_name'))
             }
             
@@ -386,10 +416,10 @@ export default {
                 confirmed: this.formData.confirmed,
                 waranty: this.formData.waranty,
                 geolocalization: this.formData.geolocalization || "",
-                planning: parseInt(this.formData.planning) || 0,
+                planning: this.formData.planning,
                 end_date_time: formattedEndDateTime,
                 exclude_from_stats: this.formData.exclude_from_stats,
-                model_name: this.isModel ? this.model_name : null
+                name: this.isModel ? this.name : null
             }
 
             console.log('Final submit data:', submitData) // Debug
@@ -403,7 +433,15 @@ export default {
                 const CoreService = (await import('../../services/core.service')).default
                 const apiService = new CoreService()
                 
-                const entryData = await apiService.getEntryDetail(this.entryId, this.isPlanned)
+                // Usa il metodo appropriato in base al tipo di entry
+                if (this.isModel) {
+                    const entryData = await apiService.getModel(this.entryId)
+                    this.populateForm(entryData)
+                } else {
+                    const entryData = await apiService.getEntryDetail(this.entryId, this.isPlanned)
+                    this.populateForm(entryData)
+                }
+
                 this.populateForm(entryData)
             } catch (error) {
                 console.error('Error loading entry data:', error)
@@ -435,11 +473,39 @@ export default {
             
             // Se è un modello, popola anche il nome del modello
             if (this.isModel) {
-                this.model_name = entryData.model_name || ''
+                this.name = entryData.name || ''
             }
             
             // Emetti i dati al componente padre per popolare i campi specifici
             this.$emit('entry-loaded', entryData)
+        },
+
+        async loadModelData() {
+            if (this.selectedModel && this.selectedModel !== "0") {
+                try {
+                    const CoreService = (await import('../../services/core.service')).default
+                    const apiService = new CoreService()
+                    
+                    const modelData = await apiService.getModel(this.selectedModel)
+                    this.applyModelData(modelData)
+                } catch (error) {
+                    console.error('Error loading model data:', error)
+                    this.showAlert('Errore nel caricamento del modello', 'error')
+                }
+            }
+        },
+        
+        applyModelData(modelData) {
+            // Applica i dati del modello al form
+            this.formData.amount = Math.abs(modelData.amount || 0)
+            this.formData.currency_id = modelData.currency_id || 1
+            this.formData.payment_type = modelData.payment_type?.id || 1
+            this.formData.note = modelData.note || null
+            this.formData.labels = modelData.labels ? modelData.labels.map(label => label.id) : []
+            this.formData.exclude_from_stats = modelData.exclude_from_stats || false
+            
+            // Emetti i dati al componente padre per popolare i campi specifici
+            this.$emit('model-loaded', modelData)
         }
     }
 }

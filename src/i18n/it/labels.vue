@@ -285,5 +285,7 @@ export default {
     wallets_must_be_different: 'I portafogli devono essere diversi',
     create_goal_first: 'Crea prima un obiettivo',
     label_input_hint: 'Puoi aggiungere più etichette separandole con spazi',
+    no_models_available: 'Nessun modello disponibile',
+    create_first_model: 'Crea il tuo primo modello',
 }
 </script>

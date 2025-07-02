@@ -59,6 +59,7 @@
       :currencies="input.currency"
       :payment-types="input.payment_type"
       :available-labels="input.labels"
+      :models="input.models"
       :entry-id="entryId"
       @save="handleSave" />
 
@@ -70,6 +71,7 @@
       :currencies="input.currency"
       :payment-types="input.payment_type"
       :available-labels="input.labels"
+      :models="input.models"
       :entry-id="entryId"
       @save="handleSave" />
 
@@ -172,7 +174,8 @@ export default {
         payment_type: [],
         debit: [],
         goals: [],
-        labels: []
+        labels: [],
+        models: []
       }
     }
   },
@@ -210,7 +213,8 @@ export default {
         this.getAccount(),
         this.getPaymentType(),
         this.getDebit(),
-        this.getLabels()
+        this.getLabels(),
+        this.getModels()
       ])
     },
     getCategory() {
@@ -249,6 +253,11 @@ export default {
     getLabels() {
       return this.apiService.labels().then((res) => {
         this.input.labels = res
+      })
+    },
+    getModels() {
+      return this.apiService.model().then((res) => {
+        this.input.models = res
       })
     },
     async loadEntryTypeFromId() {

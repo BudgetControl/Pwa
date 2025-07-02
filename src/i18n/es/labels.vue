@@ -286,5 +286,7 @@ export default {
     create_goal_first: 'Crear un objetivo primero',
     planning_settings: 'Configuración de Planificación',
     label_input_hint: 'Puedes agregar múltiples etiquetas separándolas con spacios',
+    no_models_available: 'No hay modelos disponibles',
+    create_first_model: 'Crea tu primer modelo',
 }
 </script>

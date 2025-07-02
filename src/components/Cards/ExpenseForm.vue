@@ -6,10 +6,12 @@
     :currencies="currencies"
     :payment-types="paymentTypes"
     :available-labels="availableLabels"
+    :models="models"
     :entry-id="entryId"
     ref="baseForm"
     @validate-and-submit="handleSubmit"
-    @entry-loaded="handleEntryLoaded">
+    @entry-loaded="handleEntryLoaded"
+    @model-loaded="handleModelLoaded">
     
     <template #specific-fields>
       <div class="w-full lg:w-6/12 px-2 py-2">
@@ -72,6 +74,10 @@ export default {
       type: Array,
       default: () => []
     },
+    models: {
+      type: Array,
+      default: () => []
+    },
     entryId: {
       type: String,
       default: null
@@ -112,13 +118,22 @@ export default {
       return true
     },
     handleEntryLoaded(entryData) {
-      console.log('ExpenseForm - Entry data received:', entryData) // Debug
+      console.log('ExpenseForm - Entry data received:', entryData)
       
-      // Popola i campi specifici del form spese
       this.account = entryData.account_id ? entryData.account_id.toString() : "-1"
       this.category = entryData.category_id || 0
       
-      console.log('ExpenseForm - Set account:', this.account, 'category:', this.category) // Debug
+      console.log('ExpenseForm - Set account:', this.account, 'category:', this.category)
+    },
+    
+    handleModelLoaded(modelData) {
+      console.log('ExpenseForm - Model data received:', modelData)
+      
+      // Popola i campi specifici del form spese dal modello
+      this.account = modelData.account_id ? modelData.account_id.toString() : "-1"
+      this.category = modelData.category_id || 0
+      
+      console.log('ExpenseForm - Set from model - account:', this.account, 'category:', this.category)
     },
     
     handleSubmit(baseData) {
