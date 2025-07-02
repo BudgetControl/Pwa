@@ -283,6 +283,8 @@ export default {
     choose_payee: 'Choose payee',
     insert_payee_name: 'Insert payee name',
     wallets_must_be_different: 'Wallets must be different',
-    create_goal_first: 'Create a goal first'
+    create_goal_first: 'Create a goal first',
+    planning_settings: 'Planning Settings',
+    label_input_hint: 'You can add multiple labels by separating them with spaces',
 }
 </script>

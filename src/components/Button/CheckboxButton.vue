@@ -1,13 +1,11 @@
 <template>
-    <div class="flex w-full mb-2">
         <label :for="'checkbox_id_'+id" :id="'checkbox_id_'+id"
             :class="{ 'bg-emerald-500 text-white': active, 'bg-blueGray-200': !active }"
-            class="w-full text-center active:bg-emerald-500 uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear"
+            class="w-full text-center block active:bg-emerald-500 uppercase text-xs px-2 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mb-1 ease-linear cursor-pointer"
             @click="handleClick">
             {{ label }}
             <input :id="'checkbox_id_'+id" type="checkbox" v-model="active" value="true" class="hidden" />
         </label>
-    </div>
 </template>
 <script>
 

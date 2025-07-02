@@ -80,7 +80,7 @@ export default {
     save_changes: 'Guardar cambios',
     archive_label: 'Archivar etiqueta',
     add_model_entry: 'Agregar nueva entrada de modelo',
-    model_settings: 'Configuraciones del modelo',
+    model_settings: 'Configuración de Modelo',
     currency_settings: 'Configuraciones de moneda',
     wallets: 'Billeteras',
     models: 'Modelos',
@@ -283,6 +283,8 @@ export default {
     choose_payee: 'Elegir beneficiario',
     insert_payee_name: 'Insertar nombre del beneficiario',
     wallets_must_be_different: 'Las billeteras deben ser diferentes',
-    create_goal_first: 'Crear un objetivo primero'
+    create_goal_first: 'Crear un objetivo primero',
+    planning_settings: 'Configuración de Planificación',
+    label_input_hint: 'Puedes agregar múltiples etiquetas separándolas con spacios',
 }
 </script>

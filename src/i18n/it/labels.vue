@@ -283,6 +283,7 @@ export default {
     choose_payee: 'Scegli beneficiario',
     insert_payee_name: 'Inserisci nome beneficiario',
     wallets_must_be_different: 'I portafogli devono essere diversi',
-    create_goal_first: 'Crea prima un obiettivo'
+    create_goal_first: 'Crea prima un obiettivo',
+    label_input_hint: 'Puoi aggiungere più etichette separandole con spazi',
 }
 </script>

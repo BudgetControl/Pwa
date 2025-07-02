@@ -5,9 +5,12 @@
         :is-model="isModel" 
         :is-planned="isPlanned" 
         :currencies="currencies"
-        :payment-types="paymentTypes" 
+        :payment-types="paymentTypes"
+        :available-labels="availableLabels"
+        :entry-id="entryId"
         ref="baseForm"
-        @validate-and-submit="handleSubmit">
+        @validate-and-submit="handleSubmit"
+        @entry-loaded="handleEntryLoaded">
 
         <template #specific-fields>
             <div class="w-full lg:w-6/12 px-2 py-2">
@@ -44,7 +47,7 @@
             </div>
         </template>
     </BaseEntryForm>
-
+    
     <!-- Mostra solo il pulsante se non ci sono goals -->
     <div v-else class="bg-emerald-200 container relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg border-0 flex-auto p-4">
         <div class="text-center py-8">
@@ -101,6 +104,14 @@ export default {
         goalId: {
             type: String,
             default: null
+        },
+        availableLabels: {
+            type: Array,
+            default: () => []
+        },
+        entryId: {
+            type: String,
+            default: null
         }
     },
     data() {
@@ -120,6 +131,19 @@ export default {
         }
     },
     methods: {
+        handleEntryLoaded(entryData) {
+            console.log('SavingForm - Entry data received:', entryData) // Debug
+            
+            // Popola i campi specifici del form saving
+            this.account = entryData.account_id ? entryData.account_id.toString() : "-1"
+            this.goal_id = entryData.goal_id || false
+            
+            // Determina il tipo di saving dall'amount
+            this.saving_type = entryData.amount < 0 ? '-' : '+'
+            
+            console.log('SavingForm - Set account:', this.account, 'goal_id:', this.goal_id, 'type:', this.saving_type) // Debug
+        },
+        
         validateForm() {
             // Non validare se non ci sono goals disponibili
             if (!this.goals || this.goals.length === 0) {
@@ -149,6 +173,7 @@ export default {
             
             return true
         },
+        
         handleSubmit(baseData) {
             if (!this.validateForm()) {
                 return
@@ -156,11 +181,13 @@ export default {
             
             const savingData = {
                 ...baseData,
-                type: 'saving',
-                account_id: this.account,
-                goal_id: this.goal_id,
-                amount: this.saving_type === '-' ? baseData.amount * -1 : baseData.amount
+                type: "saving",
+                account_id: parseInt(this.account),
+                category_id: 0, // Saving non ha categoria
+                goal_id: parseInt(this.goal_id),
+                amount: this.saving_type === '-' ? Math.abs(baseData.amount) * -1 : Math.abs(baseData.amount)
             }
+            
             this.$emit('save', savingData)
         }
     }

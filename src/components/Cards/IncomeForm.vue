@@ -5,8 +5,11 @@
     :is-planned="isPlanned"
     :currencies="currencies"
     :payment-types="paymentTypes"
+    :available-labels="availableLabels"
+    :entry-id="entryId"
     ref="baseForm"
-    @validate-and-submit="handleSubmit">
+    @validate-and-submit="handleSubmit"
+    @entry-loaded="handleEntryLoaded">
     
     <template #specific-fields>
       <div class="w-full lg:w-6/12 px-2 py-2">
@@ -46,7 +49,15 @@ export default {
     accounts: Array,
     categories: Array,
     currencies: Array,
-    paymentTypes: Array
+    paymentTypes: Array,
+    availableLabels: {
+      type: Array,
+      default: () => []
+    },
+    entryId: {
+      type: String,
+      default: null
+    }
   },
   data() {
     return {
@@ -82,6 +93,16 @@ export default {
       
       return true
     },
+    handleEntryLoaded(entryData) {
+      console.log('IncomeForm - Entry data received:', entryData) // Debug
+      
+      // Popola i campi specifici del form entrate
+      this.account = entryData.account_id ? entryData.account_id.toString() : "-1"
+      this.category = entryData.category_id || 0
+      
+      console.log('IncomeForm - Set account:', this.account, 'category:', this.category) // Debug
+    },
+    
     handleSubmit(baseData) {
       if (!this.validateForm()) {
         return
@@ -89,10 +110,12 @@ export default {
       
       const incomeData = {
         ...baseData,
-        type: 'income',
-        account_id: this.account,
-        category_id: this.category
+        type: "incoming",
+        account_id: parseInt(this.account),
+        category_id: parseInt(this.category),
+        amount: Math.abs(baseData.amount) // Assicurati che sia positivo
       }
+      
       this.$emit('save', incomeData)
     }
   }

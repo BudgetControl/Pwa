@@ -5,8 +5,11 @@
     :is-planned="isPlanned"
     :currencies="currencies"
     :payment-types="paymentTypes"
+    :available-labels="availableLabels"
+    :entry-id="entryId"
     ref="baseForm"
-    @validate-and-submit="handleSubmit">
+    @validate-and-submit="handleSubmit"
+    @entry-loaded="handleEntryLoaded">
     
     <template #specific-fields>
       <div class="w-full lg:w-6/12 px-2 py-2">
@@ -47,7 +50,15 @@ export default {
     isPlanned: Boolean,
     accounts: Array,
     currencies: Array,
-    paymentTypes: Array
+    paymentTypes: Array,
+    availableLabels: {
+      type: Array,
+      default: () => []
+    },
+    entryId: {
+      type: String,
+      default: null
+    }
   },
   data() {
     return {
@@ -60,6 +71,21 @@ export default {
     }
   },
   methods: {
+    handleEntryLoaded(entryData) {
+      console.log('TransferForm - Entry data received:', entryData) // Debug
+      
+      // Popola i campi specifici del form trasferimenti
+      this.account = entryData.account_id ? entryData.account_id.toString() : "-1"
+      this.transferTo = entryData.transfer_id !== undefined ? entryData.transfer_id : false
+      
+      // Se transfer_id è 0, significa "out of wallet"
+      if (entryData.transfer_id === 0) {
+        this.transferTo = ""
+      }
+      
+      console.log('TransferForm - Set account:', this.account, 'transferTo:', this.transferTo) // Debug
+    },
+    
     validateForm() {
       this.validationErrors = {
         account: this.account === "-1",
@@ -87,6 +113,7 @@ export default {
       
       return true
     },
+    
     handleSubmit(baseData) {
       if (!this.validateForm()) {
         return
@@ -94,10 +121,13 @@ export default {
       
       const transferData = {
         ...baseData,
-        type: 'transfer',
-        account_id: this.account,
-        transfer_id: this.transferTo
+        type: "transfer",
+        account_id: parseInt(this.account),
+        transfer_id: this.transferTo === "" ? "" : (this.transferTo === false ? false : parseInt(this.transferTo)),
+        category_id: 0, // Transfer non ha categoria
+        amount: Math.abs(baseData.amount) // Transfer sempre positivo
       }
+      
       this.$emit('save', transferData)
     }
   }

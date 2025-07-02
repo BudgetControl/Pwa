@@ -5,8 +5,11 @@
     :is-planned="isPlanned"
     :currencies="currencies"
     :payment-types="paymentTypes"
+    :available-labels="availableLabels"
+    :entry-id="entryId"
     ref="baseForm"
-    @validate-and-submit="handleSubmit">
+    @validate-and-submit="handleSubmit"
+    @entry-loaded="handleEntryLoaded">
     
     <template #specific-fields>
       <div class="w-full lg:w-6/12 px-2 py-2">
@@ -39,12 +42,12 @@
       <!-- Radio buttons for debit type - occupano tutta la larghezza -->
       <div class="w-full px-2 py-2">
         <div class="grid grid-cols-2 gap-4 bg-white">
-          <label for="income" class="flex items-center justify-center p-3  rounded cursor-pointer hover:bg-gray-50 transition-colors"
+          <label for="income" class="flex items-center justify-center p-3 border rounded cursor-pointer hover:bg-gray-50 transition-colors"
                  :class="{ 'border-green-500 bg-green-50': debit_type === '+', 'border-gray-300': debit_type !== '+' }">
             <input type="radio" id="income" value="+" v-model="debit_type" class="mr-2" />
             <span class="text-slate-600 text-sm font-medium">{{ $t('labels.incoming') }}</span>
           </label>
-          <label for="expense" class="flex items-center justify-center p-3  rounded cursor-pointer hover:bg-gray-50 transition-colors"
+          <label for="expense" class="flex items-center justify-center p-3 border rounded cursor-pointer hover:bg-gray-50 transition-colors"
                  :class="{ 'border-red-500 bg-red-50': debit_type === '-', 'border-gray-300': debit_type !== '-' }">
             <input type="radio" id="expense" value="-" v-model="debit_type" class="mr-2" />
             <span class="text-slate-600 text-sm font-medium">{{ $t('labels.expenses') }}</span>
@@ -91,6 +94,14 @@ export default {
     paymentTypes: {
       type: Array,
       default: () => []
+    },
+    availableLabels: {
+      type: Array,
+      default: () => []
+    },
+    entryId: {
+      type: String,
+      default: null
     }
   },
   data() {
@@ -107,6 +118,30 @@ export default {
     }
   },
   methods: {
+    handleEntryLoaded(entryData) {
+      console.log('DebitForm - Entry data received:', entryData) // Debug
+      
+      // Popola i campi specifici del form debiti
+      this.account = entryData.account_id ? entryData.account_id.toString() : "-1"
+      
+      // Gestisci il debitore - può essere un ID esistente o un nome nuovo
+      if (entryData.payee_id) {
+        const existingDebit = this.debits.find(d => d.id === entryData.payee_id)
+        if (existingDebit) {
+          this.debit = entryData.payee_id
+        } else {
+          // È un nome nuovo
+          this.debit = 'njn76298fm'
+          this.debit_name = entryData.payee_id
+        }
+      }
+      
+      // Determina il tipo di debito dall'amount
+      this.debit_type = entryData.amount < 0 ? '-' : '+'
+      
+      console.log('DebitForm - Set account:', this.account, 'debit:', this.debit, 'type:', this.debit_type) // Debug
+    },
+    
     validateForm() {
       this.validationErrors = {
         account: this.account === "-1",
@@ -135,6 +170,7 @@ export default {
       
       return true
     },
+    
     handleSubmit(baseData) {
       if (!this.validateForm()) {
         return
@@ -142,11 +178,13 @@ export default {
       
       const debitData = {
         ...baseData,
-        type: 'debit',
-        account_id: this.account,
+        type: "debit",
+        account_id: parseInt(this.account),
+        category_id: 0, // Debit non ha categoria
         payee_id: (this.debit == 'njn76298fm') ? this.debit_name : this.debit,
-        amount: this.debit_type == '-' ? baseData.amount * -1 : baseData.amount
+        amount: this.debit_type == '-' ? Math.abs(baseData.amount) * -1 : Math.abs(baseData.amount)
       }
+      
       this.$emit('save', debitData)
     }
   }

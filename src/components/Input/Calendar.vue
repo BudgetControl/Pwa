@@ -30,7 +30,7 @@ export default {
         },
         label: {
             type: String,
-            default: 'Select Date'
+            default: ''
         }
 
     },
