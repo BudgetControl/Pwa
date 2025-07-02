@@ -272,8 +272,17 @@ export default {
     monthly_deposit: 'Deposito mensile',
     due_date: 'Data di scadenza',
     description: 'Descrizione',
-    choose_a_goal: 'Seleziona un obbiettivo'
-
-
+    choose_a_goal: 'Seleziona un obbiettivo',
+    withdrawal: 'Prelievo',
+    choose_payment_type: 'Scegli tipo di pagamento',
+    no_goals_available: 'Nessun obiettivo disponibile',
+    create_goal_to_start_saving: 'Crea un obiettivo per iniziare a risparmiare',
+    create_first_goal: 'Crea il tuo primo obiettivo',
+    operation_type: 'Tipo di operazione',
+    attention: 'Attenzione',
+    choose_payee: 'Scegli beneficiario',
+    insert_payee_name: 'Inserisci nome beneficiario',
+    wallets_must_be_different: 'I portafogli devono essere diversi',
+    create_goal_first: 'Crea prima un obiettivo'
 }
 </script>

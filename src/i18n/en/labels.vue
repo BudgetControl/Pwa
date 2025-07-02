@@ -272,7 +272,17 @@ export default {
     due_date: 'Due date',
     goal_name: 'Goal name',
     description: 'Description',
-    choose_a_goal: 'Choose a goal'
-};
-
+    choose_a_goal: 'Choose a goal',
+    withdrawal: 'Withdrawal',
+    choose_payment_type: 'Choose payment type',
+    no_goals_available: 'No goals available',
+    create_goal_to_start_saving: 'Create a goal to start saving',
+    create_first_goal: 'Create your first goal',
+    operation_type: 'Operation type',
+    attention: 'Attention',
+    choose_payee: 'Choose payee',
+    insert_payee_name: 'Insert payee name',
+    wallets_must_be_different: 'Wallets must be different',
+    create_goal_first: 'Create a goal first'
+}
 </script>

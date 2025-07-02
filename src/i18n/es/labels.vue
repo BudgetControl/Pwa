@@ -272,6 +272,17 @@ export default {
     due_date: 'Fecha de vencimiento',
     goal_name: 'Nombre de la meta',
     description: 'Descripción',
-    choose_a_goal: 'meta'
+    choose_a_goal: 'meta',
+    withdrawal: 'Retiro',
+    choose_payment_type: 'Elegir tipo de pago',
+    no_goals_available: 'No hay objetivos disponibles',
+    create_goal_to_start_saving: 'Crea un objetivo para empezar a ahorrar',
+    create_first_goal: 'Crea tu primer objetivo',
+    operation_type: 'Tipo de operación',
+    attention: 'Atención',
+    choose_payee: 'Elegir beneficiario',
+    insert_payee_name: 'Insertar nombre del beneficiario',
+    wallets_must_be_different: 'Las billeteras deben ser diferentes',
+    create_goal_first: 'Crear un objetivo primero'
 }
 </script>

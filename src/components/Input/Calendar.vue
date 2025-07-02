@@ -1,6 +1,6 @@
 <template>
-    <div class="lg:w-4/12 px-2 py-2 w-full">
-        <label class="block uppercase text-slate-600 text-xs font-bold mb-2" htmlFor="grid-password">
+    <div class="w-full">
+        <label v-if="label" class="block uppercase text-slate-600 text-xs font-bold mb-2">
             {{ label }}
         </label>
         <VueDatePicker 
