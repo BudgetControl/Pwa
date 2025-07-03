@@ -24,7 +24,7 @@
                       { 'border-red-300 bg-red-50': validationErrors.goal }
                     ]">
                     <option :value="false">{{ $t('labels.choose_a_goal') }}</option>
-                    <option v-for="item in goals" :key="item.id" :value="item.id">{{ item.name }}</option>
+                    <option v-for="item in goals" :key="item.id" :value="item.uuid">{{ item.name }}</option>
                 </select>
             </div>
 
@@ -32,13 +32,13 @@
             <div class="w-full px-2 py-2">
                 <div class="grid grid-cols-2 gap-4 bg-white">
                     <label for="deposit"
-                        class="flex items-center justify-center p-3 border rounded cursor-pointer hover:bg-gray-50 transition-colors"
+                        class="flex items-center justify-center p-3 rounded cursor-pointer hover:bg-gray-50 transition-colors"
                         :class="{ 'border-green-500 bg-green-50': saving_type === '+', 'border-gray-300': saving_type !== '+' }">
                         <input type="radio" id="deposit" value="+" v-model="saving_type" class="mr-2" />
                         <span class="text-slate-600 text-sm font-medium">{{ $t('labels.deposit') }}</span>
                     </label>
                     <label for="withdrawal"
-                        class="flex items-center justify-center p-3 border rounded cursor-pointer hover:bg-gray-50 transition-colors"
+                        class="flex items-center justify-center p-3 rounded cursor-pointer hover:bg-gray-50 transition-colors"
                         :class="{ 'border-red-500 bg-red-50': saving_type === '-', 'border-gray-300': saving_type !== '-' }">
                         <input type="radio" id="withdrawal" value="-" v-model="saving_type" class="mr-2" />
                         <span class="text-slate-600 text-sm font-medium">{{ $t('labels.withdrawal') }}</span>
@@ -129,6 +129,11 @@ export default {
         if (this.goalId) {
             this.goal_id = this.goalId
         }
+
+        const queryParamsGoalType = this.$route.query.goal_type || null;
+        if (queryParamsGoalType) {
+            this.saving_type = queryParamsGoalType === 'withdrawal' ? '-' : '+'
+        }
     },
     methods: {
         handleEntryLoaded(entryData) {
@@ -183,8 +188,8 @@ export default {
                 ...baseData,
                 type: "saving",
                 account_id: parseInt(this.account),
-                category_id: 0, // Saving non ha categoria
-                goal_id: parseInt(this.goal_id),
+                category_id: 62, // Saving non ha categoria
+                goal_id: this.goal_id,
                 amount: this.saving_type === '-' ? Math.abs(baseData.amount) * -1 : Math.abs(baseData.amount)
             }
             

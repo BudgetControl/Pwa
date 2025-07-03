@@ -26,15 +26,22 @@
                 </div>
 
                 <!-- Add Money Button -->
-                <router-link :to="'/app/entry/goal/' + goal.uuid"
-                    class="bg-white text-emerald-600 px-6 py-2 rounded-full mt-4 font-semibold">
-                    {{ $t('labels.add') }}
-                </router-link>
+                <div class="flex gap-3 mt-4 justify-center">
+                    <router-link :to="'/app/entry/goal/' + goal.uuid"
+                        class="bg-white text-emerald-600 px-4 py-2 rounded-full font-semibold text-center">
+                        {{ $t('labels.add') }}
+                    </router-link>
+
+                    <router-link :to="'/app/entry/goal/' + goal.uuid + '?goal_type=withdrawal'"
+                        class="bg-white text-emerald-600 px-4 py-2 rounded-full font-semibold text-center">
+                        {{ $t('labels.withdrawal') }}
+                    </router-link>
+                </div>
             </div>
         </div>
 
         <!-- Dettagli -->
-        <div class="px-4">
+        <div class="px-4 bg-white rounded-lg shadow-lg m-4 p-6">
             <div class="grid grid-cols-2 gap-4 mb-4">
                 <div class="text-gray-600">{{ $t('labels.goal_name') }}</div>
                 <div class="text-right font-semibold">{{ goal.name }}</div>
