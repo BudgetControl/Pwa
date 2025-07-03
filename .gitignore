@@ -28,3 +28,4 @@ android/*
 android/*
 *.Identifier
 public/*
+cypress/screenshots/*
