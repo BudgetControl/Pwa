@@ -25,19 +25,19 @@
         />
       </HeaderMenu>
 
-      <CardAddEntry :entryId="this.$route.params.entry_id" :typeOfEntry="this.$route.query.type" :goalId="this.$route.params.goal_id" />
+      <AddSaving :entryId="this.$route.params.entry_id" :typeOfEntry="this.$route.query.type" />
     </div>
   </div>
 </template>
 
 <script>
-import CardAddEntry from "@/components/Cards/CardAddEntry.vue";
 import MenuButton from "../../components/GenericComponents/MenuButton.vue";
 import HeaderMenu from "../../components/Navbars/HeaderMenu.vue";
+import AddSaving from "../../components/Cards/Entry/AddSaving.vue";
 
 export default {
   components: {
-    CardAddEntry, HeaderMenu, MenuButton
+    AddSaving, HeaderMenu, MenuButton
   },
 };
 </script>

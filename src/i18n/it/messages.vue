@@ -4,6 +4,7 @@ export default {
     email_not_verified: `L'indirizzo email non è ancora verificato. Se non hai ricevuto l'email, clicca qui per inviarla nuovamente.`,
     model_saved: `Modello salvato con successo.`,
     entry_Saved: `Voce salvata con successo.`,
+    entry_updated: `Voce aggiornata con successo.`,
     generic_error: `Si è verificato un errore. Per favore riprova più tardi.`,
     validation: {
         choose_Wallet: 'Per favore scegli un account del portafoglio',
@@ -61,6 +62,18 @@ export default {
         label_name: 'Per favore inserisci un nome per l\'etichetta',
         label_color: 'Per favore scegli un colore per l\'etichetta',
         delete_label: 'Sei sicuro di voler eliminare questa etichetta?',
-    }
+    },
+    goal: {
+        created: 'Obiettivo creato con successo',
+        error_creating: 'Errore nella creazione dell\'obiettivo',
+        updated: 'Obiettivo aggiornato con successo',
+        deleted: 'Obiettivo eliminato con successo',
+    },
+    date_required: 'Scegli una data',
+    date_in_past: 'La data non può essere nel passato',
+    amount_required: 'Inserisci un importo valido',
+    icon_required: 'Scegli un\'icona',
+    name_required: 'Inserisci un nome',
+    
 }
 </script>

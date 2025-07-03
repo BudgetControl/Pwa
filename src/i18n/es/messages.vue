@@ -4,6 +4,7 @@ export default {
     email_not_verified: `Aún no has verificado tu correo electrónico. Si no lo has recibido, haz clic aquí para reenviarlo.`,
     model_saved: `Modelo guardado exitosamente.`,
     entry_Saved: `Entrada guardada exitosamente.`,
+    entry_updated: `Entrada actualizada exitosamente.`,
     generic_error: `Se produjo un error. Por favor, inténtelo de nuevo más tarde.`,
     validation: {
         choose_Wallet: 'Por favor, elija una cuenta de billetera',
@@ -61,6 +62,17 @@ export default {
         label_name: 'Por favor, ingrese un nombre para la etiqueta',
         label_color: 'Por favor, elija un color para la etiqueta',
         delete_label: '¿Estás seguro de que quieres eliminar esta etiqueta?',
-    }
+    },
+    goal: {
+        created: 'Meta creada exitosamente',
+        error_creating: 'Error al crear la meta',
+        updated: 'Meta actualizada exitosamente',
+        deleted: 'Meta eliminada exitosamente',
+    },
+    date_required: 'Por favor, elija una fecha',
+    date_in_past: 'La fecha no puede estar en el pasado',
+    amount_required: 'Por favor, ingrese un monto válido',
+    icon_required: 'Por favor, elija un icono',
+    name_required: 'Por favor, ingrese un nombre',
 }
 </script>

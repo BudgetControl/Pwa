@@ -12,7 +12,10 @@
     "allowJs": true
   },
   "paths": {
-    "@/*": ["src/*"]
+    "@/*": ["src/*"],
+    "@components/*": ["src/components/*"],
+    "@services/*": ["src/services/*"],
+    "@inputs/*": ["src/input/*"],
   },
   "include": ["src/**/*.ts", "src/**/*.vue", "src/**/*.model.ts", "src/**/*.store.ts"],
   "exclude": ["node_modules"]

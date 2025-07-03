@@ -5,7 +5,12 @@
             {{  $t('labels.no_voices_found') }}
         </div>
         <Budget v-if="budget" :budget="budget" :currency="currency" :key="budget.id" />
-        <EntriesTable ref="entry" />
+        <EntriesTable ref="entry">
+            <!-- Non inserisce alcun controllo - rimane vuoto -->
+            <template #controls>
+                <!-- Volutamente vuoto - nessun controllo per budget -->
+            </template>
+        </EntriesTable>
     </div>
 </template>
 

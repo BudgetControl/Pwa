@@ -2,11 +2,11 @@
     <div>
         <div class="block w-full overflow-x-auto" id="entries-table">
 
-            <div class="container px-4 mx-auto py-3 ">
-                <CheckboxButton v-if="isModel == false" 
-                    @update:active="action.show_planned = !action.show_planned" :status="action.show_planned"
-                    :label="$t('labels.show_planned_entries')"
-                />
+            <!-- Slot per controlli personalizzati -->
+            <div class="container px-4 mx-auto py-3">
+                <slot name="controls" :togglePlanned="handleTogglePlanned" :showPlanned="actualShowPlanned">
+                    <!-- Nessun fallback - se non viene fornito controllo esterno, non mostra nulla -->
+                </slot>
             </div>
 
             <div v-if="entries.length === 0">
@@ -16,13 +16,16 @@
             </div>
 
             <div v-for="(entry, i) in entries" :key="i">
-                <div v-if="(entry.planned && action.show_planned) || (!entry.planned)"
+                <div v-if="(entry.planned && actualShowPlanned) || (!entry.planned)"
                     class="container px-4 mx-auto py-3 border border-solid border-slate-100 shadow" :class="[
                         entry.type == 'debit'
                             ? 'bg-slate-200'
                             : '',
                         entry.type == 'transfer'
                             ? 'transfer-color'
+                            : '',
+                        entry.type == 'goal'
+                            ? 'bg-teal-200'
                             : ''
                     ]">
                     <div class="flex flex-wrap">
@@ -106,7 +109,6 @@ import EntryActionDropdown from "@/components/Dropdowns/EntryActionDropdown.vue"
 import Action from "@/components/Dropdowns/Action.vue";
 import ConfirmModal from '@/components/GenericComponents/ConfirmModal.vue';
 import CoreService from "../../services/core.service";
-import CheckboxButton from "../Button/CheckboxButton.vue";
 import { useRefreshStore } from "../../storage/refresh";
 
 export default {
@@ -120,10 +122,15 @@ export default {
             required: false,
             default: false,
             type: Boolean
+        },
+        // Nuova prop per controllare externamente
+        externalShowPlanned: {
+            type: Boolean,
+            default: null
         }
     },
     components: {
-        EntryActionDropdown, Action, ConfirmModal, CheckboxButton
+        EntryActionDropdown, Action, ConfirmModal
     },
     setup() {
         const refreshApp = useRefreshStore()
@@ -162,6 +169,12 @@ export default {
         window.confirm = (message) => {
             return this.$refs.confirmModal.show(message);
         };
+    },
+    computed: {
+        actualShowPlanned() {
+            // Se externalShowPlanned è definito, usa quello, altrimenti usa lo stato interno
+            return this.externalShowPlanned !== null ? this.externalShowPlanned : this.action.show_planned
+        }
     },
     methods: {
         async deleteItem(index) {
@@ -275,6 +288,18 @@ export default {
                 })
             }
 
+        },
+        togglePlanned() {
+            this.action.show_planned = !this.action.show_planned
+        },
+        handleTogglePlanned() {
+            if (this.externalShowPlanned !== null) {
+                // Se è controllato externamente, emetti un evento
+                this.$emit('toggle-planned')
+            } else {
+                // Altrimenti gestisci internamente
+                this.action.show_planned = !this.action.show_planned
+            }
         },
     }
 };

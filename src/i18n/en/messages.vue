@@ -4,6 +4,7 @@ export default {
     email_not_verified: `You haven't verified your email yet. If you haven't received it, click here to resend.`,
     model_saved: `Model saved successfully.`,
     entry_Saved: `Entry saved successfully.`,
+    entry_updated: `Entry updated successfully.`,
     generic_error: `An error occurred. Please try again later.`,
     validation: {
         choose_wallet: 'Please choose a wallet account',
@@ -61,6 +62,17 @@ export default {
         label_name: 'Please insert a label name',
         label_color: 'Please choose a label color',
         delete_label: 'Are you sure you want to delete this label?',
-    }
+    },
+    goal: {
+        created: 'Goal created successfully',
+        error_creating: 'Error creating goal',
+        updated: 'Goal updated successfully',
+        deleted: 'Goal deleted successfully',
+    },
+    date_required: 'Please choose a date',
+    date_in_past: 'The date cannot be in the past',
+    amount_required: 'Please insert a valid amount',
+    icon_required: 'Please choose an icon',
+    name_required: 'Please insert a name',
 }
 </script>

@@ -36,6 +36,9 @@ import EntriesResume from "./views/application/EntriesResume.vue";
 import Budgets from "./views/application/Budgets.vue";
 import AddBudgets from "./components/Cards/Settings/CardAddBudget.vue";
 import Stats from "./views/application/Stats.vue";
+import Goals from "./views/application/Goals.vue";
+import CardAddGoal from "./components/Goal/CardAddGoal.vue";
+import DetailsGoal from "./components/Goal/DetailsGoal.vue";
 
 // settings layout
 
@@ -164,6 +167,36 @@ const routes = [
       {
         path: "/app/budgets/edit/:id",
         component: AddBudgets,
+      },
+
+      {
+        path: "/app/goals",
+        name: 'goals',
+        component: Goals,
+      },
+
+      {
+        path: "/app/goals/new",
+        name: 'addGoal',
+        component: CardAddGoal,
+      },
+
+      {
+        path: "/app/goals/details/:id",
+        name: 'goalDetails',
+        component: DetailsGoal,
+      },
+
+      {
+        path: "/app/goals/edit/:id",
+        name: 'editGoal',
+        component: CardAddGoal,
+      },
+
+      {
+        path: "/app/entry/goal/:goal_id",
+        name: 'addEntryGoal',
+        component: AddEntry,
       },
 
       {
