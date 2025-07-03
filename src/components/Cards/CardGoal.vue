@@ -15,6 +15,7 @@
             <!--content-->
             <div class="border p-2 mt-2" v-if="goals.length != 0">
                 <Goal :localGoal="goal" :currency="currency" v-for="goal in goals"
+                    @goalArchived="goalArchived($index)"
                     :key="goal.uuid" />
             </div>
 
@@ -59,6 +60,9 @@ export default {
             }).catch((error) => {
                 console.error('Error fetching goals:', error)
             })
+        },
+        goalArchived: function (index) {
+            this.goals.splice(index, 1)
         }
     }
 }
