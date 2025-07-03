@@ -15,13 +15,32 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
-
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
-
 import { mount } from 'cypress/vue'
+import { createPinia } from 'pinia'
+import { createRouter, createWebHistory } from 'vue-router'
 
-Cypress.Commands.add('mount', mount)
+// Crea un router di base per i test
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    { path: '/', component: { template: '<div>Home</div>' } }
+  ]
+})
+
+Cypress.Commands.add('mount', (component, options = {}) => {
+  options.global = options.global || {}
+  options.global.plugins = options.global.plugins || []
+  
+  // Aggiungi Pinia
+  options.global.plugins.push(createPinia())
+  
+  // Aggiungi Router se necessario
+  if (options.router !== false) {
+    options.global.plugins.push(router)
+  }
+  
+  return mount(component, options)
+})
 
 // Example use:
 // cy.mount(MyComponent)

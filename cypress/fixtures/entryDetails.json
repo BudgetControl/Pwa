@@ -1,0 +1,8 @@
+{
+  "id": "123",
+  "amount": 50.00,
+  "description": "Test entry",
+  "category": "Food",
+  "date": "2024-01-15",
+  "type": "expense"
+}
