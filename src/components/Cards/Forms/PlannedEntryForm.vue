@@ -2,9 +2,8 @@
   <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg items-center">
     <div class="flex flex-wrap py-3">
       <!-- Navigation Menu -->
-      <div class="w-full" v-if="action.openTab !== 'saving'">
-        <nav
-          class="relative flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-emerald-500 rounded">
+      <div class="w-full">
+        <nav class="relative flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-emerald-500 rounded">
           <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
             <div class="w-full">
               <ul class="flex flex-row list-none ml-auto justify-center">
@@ -22,18 +21,18 @@
                     {{ $t('labels.incoming') }}
                   </a>
                 </li>
-                <li class="nav-item" v-if="!isModel && !isPlanned">
-                  <a class="border-slate-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                    href="javascript:void(0)" @click="toggleTabs('transfer')"
-                    :class="{ 'text-emerald-600': action.openTab !== 'transfer', 'text-white bg-emerald-600': action.openTab === 'transfer' }">
-                    {{ $t('labels.transfer') }}
-                  </a>
-                </li>
-                <li class="nav-item" v-if="!isModel">
+                <li class="nav-item">
                   <a class="border-slate-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                     href="javascript:void(0)" @click="toggleTabs('debit')"
                     :class="{ 'text-emerald-600': action.openTab !== 'debit', 'text-white bg-emerald-600': action.openTab === 'debit' }">
                     {{ $t('labels.debit') }}
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="border-slate-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                    href="javascript:void(0)" @click="toggleTabs('saving')"
+                    :class="{ 'text-emerald-600': action.openTab !== 'saving', 'text-white bg-emerald-600': action.openTab === 'saving' }">
+                    {{ $t('labels.savings') }}
                   </a>
                 </li>
               </ul>
@@ -45,106 +44,103 @@
 
     <!-- Dynamic Form Components -->
     <ExpenseForm v-if="action.openTab === 'expenses'"
-      :is-model="isModel"
-      :is-planned="isPlanned"
+      :is-planned="true"
       :accounts="input.account"
       :categories="input.category"
       :currencies="input.currency"
       :payment-types="input.payment_type"
-      :available-labels="input.labels"
-      :models="input.models"
-      :entry-id="entryId"
       @save="handleSave" />
 
     <IncomeForm v-if="action.openTab === 'incoming'"
-      :is-model="isModel"
-      :is-planned="isPlanned"
+      :is-planned="true"
       :accounts="input.account"
       :categories="input.category"
       :currencies="input.currency"
       :payment-types="input.payment_type"
-      :available-labels="input.labels"
-      :models="input.models"
-      :entry-id="entryId"
-      @save="handleSave" />
-
-    <TransferForm v-if="action.openTab === 'transfer'"
-      :is-model="isModel"
-      :is-planned="isPlanned"
-      :accounts="input.account"
-      :currencies="input.currency"
-      :payment-types="input.payment_type"
-      :available-labels="input.labels"
-      :entry-id="entryId"
       @save="handleSave" />
 
     <DebitForm v-if="action.openTab === 'debit'"
-      :is-model="isModel"
-      :is-planned="isPlanned"
+      :is-planned="true"
       :accounts="input.account"
       :debits="input.debit"
       :currencies="input.currency"
       :payment-types="input.payment_type"
-      :available-labels="input.labels"
-      :entry-id="entryId"
       @save="handleSave" />
 
     <SavingForm v-if="action.openTab === 'saving'"
-      :is-model="isModel"
-      :is-planned="isPlanned"
+      :is-planned="true"
       :accounts="input.account"
       :goals="input.goals"
       :currencies="input.currency"
       :payment-types="input.payment_type"
-      :available-labels="input.labels"
-      :goal-id="goalId"
-      :entry-id="entryId"
       @save="handleSave" />
+
+    <!-- Planned Entry Specific Fields -->
+    <div class="bg-slate-100 container relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg border-0 flex-auto p-4">
+      <h3 class="text-slate-600 text-sm font-bold uppercase mb-4">{{ $t('labels.planning_settings') }}</h3>
+      
+      <div class="flex flex-wrap -mx-2">
+        <div class="w-full lg:w-3/12 px-2 py-2">
+          <label class="block uppercase text-slate-600 text-xs font-bold mb-2">{{ $t('labels.date_start') }}</label>
+          <Calendar v-model="plannedData.start_date" />
+        </div>
+
+        <div class="w-full lg:w-3/12 px-2 py-2">
+          <label class="block uppercase text-slate-600 text-xs font-bold mb-2">{{ $t('labels.date_end') }}</label>
+          <Calendar v-model="plannedData.end_date" />
+        </div>
+
+        <div class="w-full lg:w-3/12 px-2 py-2">
+          <label class="block uppercase text-slate-600 text-xs font-bold mb-2">{{ $t('labels.choose_frequency') }}</label>
+          <select v-model="plannedData.planning"
+            class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
+            <option v-for="item in planningOptions" :key="item.value" :value="item.value">{{ item.label }}</option>
+          </select>
+        </div>
+
+        <div class="w-full lg:w-3/12 px-2 py-2">
+          <label class="block uppercase text-slate-600 text-xs font-bold mb-2">{{ $t('labels.choose_method') }}</label>
+          <PaymentTypeSelector 
+            v-model="plannedData.payment_type"
+            :payment-types="input.payment_type" />
+        </div>
+      </div>
+    </div>
 
     <AlertModal ref="alertModal" />
   </div>
 </template>
 
 <script>
-import { useAppSettings } from '../../storage/settings.store';
-import CoreService from '../../services/core.service';
-import AlertModal from '../GenericComponents/AlertModal.vue';
-import ExpenseForm from './Forms/ExpenseForm.vue';
-import IncomeForm from './Forms/IncomeForm.vue';
-import TransferForm from './Forms/TransferForm.vue';
-import DebitForm from './Forms/DebitForm.vue';
-import SavingForm from './Forms/SavingForm.vue';
-import GoalService from '../../services/goal.service';
+import { useAppSettings } from '../../../storage/settings.store';
+import CoreService from '../../../services/core.service';
+import GoalService from '../../../services/goal.service';
+import AlertModal from '../../GenericComponents/AlertModal.vue';
+import ExpenseForm from './ExpenseForm.vue';
+import IncomeForm from './IncomeForm.vue';
+import DebitForm from './DebitForm.vue';
+import SavingForm from './SavingForm.vue';
+import Calendar from '../../Input/Calendar.vue';
+import PaymentTypeSelector from '../../Input/PaymentTypeSelector.vue';
 
 export default {
   components: {
     ExpenseForm,
     IncomeForm,
-    TransferForm,
     DebitForm,
     SavingForm,
-    AlertModal
+    AlertModal,
+    Calendar,
+    PaymentTypeSelector
   },
   props: {
     entryId: {
       type: String,
       default: null
     },
-    isPlanned: {
-      type: Boolean,
-      default: false
-    },
-    isModel: {
-      type: Boolean,
-      default: false
-    },
     typeOfEntry: {
       type: String,
       default: 'expenses'
-    },
-    goalId: {
-      type: String,
-      default: null
     }
   },
   setup() {
@@ -166,10 +162,20 @@ export default {
         currency: [],
         payment_type: [],
         debit: [],
-        goals: [],
-        labels: [],
-        models: []
-      }
+        goals: []
+      },
+      plannedData: {
+        start_date: null,
+        end_date: null,
+        planning: 'monthly',
+        payment_type: 1
+      },
+      planningOptions: [
+        { label: this.$t('labels.daily'), value: 'daily' },
+        { label: this.$t('labels.weekly'), value: 'weekly' },
+        { label: this.$t('labels.monthly'), value: 'monthly' },
+        { label: this.$t('labels.yearly'), value: 'yearly' }
+      ]
     }
   },
   created() {
@@ -179,21 +185,8 @@ export default {
   },
   mounted() {
     this.loadData()
-    
-    // Se è in modalità edit, determina il tipo di entry e imposta il tab corretto
-    if (this.entryId) {
-      this.loadEntryTypeFromId()
-    } else {
-      this.action.openTab = this.typeOfEntry
-    }
-    
-    if(this.goalId) {
-        this.action.openTab = 'saving'
-        this.getGoals()
-    } else {
-        // Carica sempre i goals per controllare se esistono
-        this.getGoals()
-    }
+    this.action.openTab = this.typeOfEntry
+    this.initializePlannedData()
   },
   methods: {
     toggleTabs(tabType) {
@@ -206,8 +199,7 @@ export default {
         this.getAccount(),
         this.getPaymentType(),
         this.getDebit(),
-        this.getLabels(),
-        this.getModels()
+        this.getGoals()
       ])
     },
     getCategory() {
@@ -243,50 +235,42 @@ export default {
         this.input.goals = res
       })
     },
-    getLabels() {
-      return this.apiService.labels().then((res) => {
-        this.input.labels = res
-      })
+    initializePlannedData() {
+      const now = new Date()
+      this.plannedData.start_date = now.toISOString().split('T')[0] + " " + now.toLocaleTimeString()
+      this.plannedData.payment_type = this.settings.payment_type_id
     },
-    getModels() {
-      return this.apiService.model().then((res) => {
-        this.input.models = res
-      })
-    },
-    async loadEntryTypeFromId() {
-      try {
-        const entryData = await this.apiService.getEntryDetail(this.entryId, this.isPlanned)
-        
-        // Determina il tipo di entry e imposta il tab corretto
-        if (entryData.type) {
-          this.action.openTab = entryData.type
-        }
-        
-        console.log('Entry type determined:', entryData.type) // Debug
-      } catch (error) {
-        console.error('Error loading entry type:', error)
-        // Fallback al tipo di default
-        this.action.openTab = this.typeOfEntry
+    validatePlannedData() {
+      if (!this.plannedData.start_date) {
+        window.alert(this.$t('messages.validation.choose_start_date'), 'error')
+        return false
       }
+
+      if (this.plannedData.end_date && this.plannedData.end_date < this.plannedData.start_date) {
+        window.alert(this.$t('messages.validation.end_date_greater_than_start_date'), 'error')
+        return false
+      }
+
+      return true
     },
     handleSave(data) {
-      const uuid = this.entryId || null
-      
-      this.apiService.setEntry(data.type, data, this.isPlanned, uuid)
+      if (!this.validatePlannedData()) {
+        return
+      }
+
+      const plannedEntryData = {
+        ...data,
+        ...this.plannedData,
+        date_time: this.plannedData.start_date,
+        end_date_time: this.plannedData.end_date,
+        planning: this.plannedData.planning
+      }
+
+      this.apiService.setEntry(data.type, plannedEntryData, true, this.entryId)
         .then(() => {
-          const message = uuid ? 
-            this.$t('messages.entry_updated') : 
-            this.$t('labels.entry_saved')
-          window.alert(message, "success")
-          
-          // Redirect o altra logica post-save
-          if (uuid) {
-            // In modalità edit, potresti voler tornare alla lista o alla dashboard
-            this.$router.push('/app/entries')
-          }
+          window.alert(this.$t('labels.entry_saved'), "success")
         })
-        .catch((error) => {
-          console.error('Error saving entry:', error)
+        .catch(() => {
           window.alert(this.$t('messages.generic_error'), "error")
         })
     }

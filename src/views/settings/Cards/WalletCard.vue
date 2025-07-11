@@ -131,6 +131,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import { ColorPicker } from 'vue-accessible-color-picker';
 import AlertModal from '../../../components/GenericComponents/AlertModal.vue';
 import ConfirmModal from '@/components/GenericComponents/ConfirmModal.vue';
+import { useAppSettings } from '../../../storage/settings.store';
 
 export default {
     components: {
@@ -138,8 +139,9 @@ export default {
     },
     setup() {
         const apiService = new CoreService()
+        const appSettings = useAppSettings()
         return {
-            apiService
+            apiService, appSettings
         }
     },
     data() {
@@ -155,6 +157,7 @@ export default {
                 currencies: []
             },
             modal: {
+                uuid: null,
                 id: null,
                 name: null,
                 color: "#c5c526",
@@ -174,7 +177,6 @@ export default {
     mounted: function () {
         this.getCurrency()
         this.openModal(this.$route.params.id)
-        this.getWallets()
         this.modal.color = '#' + Math.floor(Math.random() * 16777215).toString(16);
     },
     created() {
@@ -206,13 +208,6 @@ export default {
             alert(this.$t('messages.wallet.restored'), "success")
             this.$router.push({ path: '/app/settings/wallet' })
         },
-        getWallets() {
-            this.apiService.accounts("?filters[type]=bank").then((res) => {
-                res.forEach(e => {
-                    this.wallets.push(e)
-                });
-            })
-        },
         getComponentData() {
             return {
                 on: {
@@ -243,11 +238,15 @@ export default {
                     this.modal.balance = resp.balance
                     this.modal.deleted = resp.deleted_at
                     this.modal.voucher_value = resp.voucher_value
+                    this.modal.uuid = resp.uuid
 
-                    //FIXME: currencySymbol is missing ${currencySymbol}
+                    const settings = this.appSettings.settings
+                    const symbol = settings.currency.symbol
 
                     if(resp.type == 'voucher') {
-                        this.voucher_balance_value = `${resp.balance.value_in_valut} currencySymbol`
+                        let value = resp.balance.value_in_valut
+                        value = parseFloat(value).toFixed(2)
+                        this.voucher_balance_value = `${value} ${symbol}`
                         this.modal.balance = resp.balance.value_in_voucher
                     }
 
@@ -282,13 +281,15 @@ export default {
                 sorting: this.modal.sorting,
                 voucher_value: this.modal.voucher_value
             }
+
             let walletUuid = null
-            if(this.$route.params.id) {
-                walletUuid = this.$route.params.id
+            if(this.modal.uuid != null) {
+                walletUuid = this.modal.uuid
             }
 
-            this.apiService.setAccount(data, walletUuid).then(() => {
+            this.apiService.setAccount(data, walletUuid).then((resp) => {
                 alert(this.$t('messages.wallet.saved'), "success")
+                this.modal = resp
             }).catch(() => {
                 alert(this.$t('messages.generic_error'), "error")
             })
@@ -302,13 +303,6 @@ export default {
                 res.forEach(e => {
                     this.form.currencies.push(e)
                 });
-            })
-        },
-        saveSorting() {
-            let i = 0;
-            this.sortingList.forEach((e) => {
-                i++;
-                this.apiService.setAccountSorting(e.uuid, i)
             })
         },
         checkMove: function (e) {

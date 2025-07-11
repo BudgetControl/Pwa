@@ -2,6 +2,15 @@ import ApiService from './api.service';
 
 class CoreService extends ApiService {
 
+    entry_map = {
+        'expenses': 'expense',
+        'incoming': 'income',
+        'transfer': 'transfer',
+        'planned': 'planned',
+        'debit': 'debit',
+        'saving': 'saving',
+    }
+
     async setPlannedEntry(data, uuid) {
         let url = `/api/entry/planned`
 
@@ -17,7 +26,13 @@ class CoreService extends ApiService {
     }
 
     async setEntry(type, data, isPlanned, uuid) {
-        let url = `/api/entry/${type}`
+
+        const entryType = this.entry_map[type];
+        if (!entryType) {
+            throw new Error(`Invalid entry type: ${type}`);
+        }
+
+        let url = `/api/entry/${entryType}`
         if (isPlanned == true || isPlanned == 'true') {
             url = `/api/entry/planned`
         }

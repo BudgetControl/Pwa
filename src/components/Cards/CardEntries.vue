@@ -11,7 +11,21 @@
       </div>
     </div>
 
-    <EntriesTable ref="entry" />
+    <EntriesTable 
+      ref="entry" 
+      :external-show-planned="action.show_planned"
+      @toggle-planned="handleTogglePlanned">
+      
+      <!-- Inietta il CheckboxButton tramite slot -->
+      <template #controls="{ showPlanned }">
+        <CheckboxButton 
+          @update:active="handleTogglePlanned"
+          :status="showPlanned"
+          :label="$t('labels.show_planned_entries')"
+        />
+      </template>
+    </EntriesTable>
+    
     <!-- pagination -->
     <div class="py-2">
       <Paginator ref="_paginator"></Paginator>
@@ -27,6 +41,7 @@ import axios from 'axios'
 import Paginator from "../GenericComponents/Paginator.vue";
 import { useAppSettings } from '../../storage/settings.store';
 import CoreService from "../../services/core.service";
+import CheckboxButton from "../Button/CheckboxButton.vue";
 
 export default {
   props: {
@@ -58,12 +73,15 @@ export default {
         enabled: false
       },
       action: {
-        reset: true
+        reset: true,
+        show_planned: true
       },
     }
   },
   components: {
-    EntriesTable, Paginator
+    EntriesTable, 
+    Paginator, 
+    CheckboxButton  // Manteniamo questo perché viene usato nello slot
   },
   watch: {
     $route() {
@@ -164,6 +182,11 @@ export default {
       console.debug('filter', filter)
 
       return filter
+    },
+    handleTogglePlanned() {
+      this.action.show_planned = !this.action.show_planned
+      // Ricarica i dati se necessario
+      this.invoke()
     },
   },
 };
