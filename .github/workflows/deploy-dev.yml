@@ -8,7 +8,6 @@ on:
 permissions:
   contents: read
 
-
 jobs:
   deploy_job:
     runs-on: ubuntu-latest
@@ -22,12 +21,12 @@ jobs:
           id: get_tag
           run: echo ::set-output name=GIT_TAG::$(git describe --tags --abbrev=0)
   
-
         - name: Create .env file
           run: |
             echo APP_ENV=dev >> .env
             echo VUE_APP_VERSION=${{ steps.get_tag.outputs.GIT_TAG }} >> .env
             echo VUE_APP_GOOGLE_PLAY_STORE_URL=https://google.com >> .env
+            echo VUE_APP_API_PATH_V2=${{ secrets.VUE_APP_API_PATH_V2 }} >> .env
 
         - name: Install Dependencies
           run: npm install
@@ -35,23 +34,24 @@ jobs:
         - name: Build package
           run: npm run build-dev
         
-        - name: deploy file
-          uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        - name: Configure AWS credentials
+          uses: aws-actions/configure-aws-credentials@v1
           with:
-              username: ${{ secrets.SFTP_USER }} 
-              server: ${{ secrets.SFTP_HOST }} 
-              password: ${{ secrets.SFTP_PASSWORD }}
-              port: ${{ secrets.SFTP_PORT }} 
-              local_path: './dist/*'
-              remote_path: '/var/www/budgetcontrol/Pwa/dist'
-              sftpArgs: '-o ConnectTimeout=5'
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: ${{ secrets.AWS_REGION }}
+            
+        - name: Deploy to S3
+          run: aws s3 sync dist/ s3://${{ secrets.BUCKET_NAME }} --delete
 
-        - name: copy dist folder into container
-          uses: appleboy/ssh-action@v1.0.3
-          with:
-            host: ${{ secrets.SFTP_HOST }}
-            username: ${{ secrets.SFTP_USER }}
-            password: ${{ secrets.SFTP_PASSWORD }}
-            port: ${{ secrets.SFTP_PORT }}
-            script: docker cp /var/www/budgetcontrol/Pwa/dist/. budgetcontrol-pwa:/var/www/workdir/dist/
-  
+        - name: Invalidate CloudFront cache
+          if: success()  # This ensures this step only runs if previous steps succeeded
+          run: |
+            echo "Invalidating CloudFront distribution..."
+            aws cloudfront create-invalidation --distribution-id ${{ secrets.DISTRIBUTION_ID }} --paths "/*"
+            echo "Invalidation complete."
+        
+        - name: Deployment Summary
+          if: success()
+          run: |
+            echo "Deployment to DEV environment completed successfully."
