@@ -29,7 +29,7 @@
                 <div class="flex gap-3 mt-4 justify-center">
                     <router-link :to="'/app/entry/goal/' + goal.uuid"
                         class="bg-white text-emerald-600 px-4 py-2 rounded-full font-semibold text-center">
-                        {{ $t('labels.add') }}
+                        {{ $t('labels.deposit') }}
                     </router-link>
 
                     <router-link :to="'/app/entry/goal/' + goal.uuid + '?goal_type=withdrawal'"
@@ -186,7 +186,7 @@ export default {
             });
         },
         deleteGoal() {
-            const userConfirmed = window.confirm(this.$t('messages.confirm_delete_goal'));
+            const userConfirmed = window.confirm(this.$t('messages.goal.confirm_delete_goal'));
             if ( userConfirmed) {
                 this.goalService.delete(this.goalId).then(() => {
                     alert(this.$t('messages.goal.deleted', 'success'));

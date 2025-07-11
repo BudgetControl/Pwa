@@ -2,7 +2,7 @@
   <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg items-center">
     <div class="flex flex-wrap py-3">
       <!-- Navigation Menu -->
-      <div class="w-full">
+      <div class="w-full" v-if="action.openTab !== 'saving'">
         <nav
           class="relative flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-emerald-500 rounded">
           <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
@@ -34,13 +34,6 @@
                     href="javascript:void(0)" @click="toggleTabs('debit')"
                     :class="{ 'text-emerald-600': action.openTab !== 'debit', 'text-white bg-emerald-600': action.openTab === 'debit' }">
                     {{ $t('labels.debit') }}
-                  </a>
-                </li>
-                <li class="nav-item" v-if="!isModel">
-                  <a class="border-slate-100 px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
-                    href="javascript:void(0)" @click="toggleTabs('saving')"
-                    :class="{ 'text-emerald-600': action.openTab !== 'saving', 'text-white bg-emerald-600': action.openTab === 'saving' }">
-                    {{ $t('labels.savings') }}
                   </a>
                 </li>
               </ul>
@@ -116,11 +109,11 @@
 import { useAppSettings } from '../../storage/settings.store';
 import CoreService from '../../services/core.service';
 import AlertModal from '../GenericComponents/AlertModal.vue';
-import ExpenseForm from './ExpenseForm.vue';
-import IncomeForm from './IncomeForm.vue';
-import TransferForm from './TransferForm.vue';
-import DebitForm from './DebitForm.vue';
-import SavingForm from './SavingForm.vue';
+import ExpenseForm from './Forms/ExpenseForm.vue';
+import IncomeForm from './Forms/IncomeForm.vue';
+import TransferForm from './Forms/TransferForm.vue';
+import DebitForm from './Forms/DebitForm.vue';
+import SavingForm from './Forms/SavingForm.vue';
 import GoalService from '../../services/goal.service';
 
 export default {

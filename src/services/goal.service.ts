@@ -13,12 +13,12 @@ class GoalService extends ApiService {
       }
 
     async create(data) {
-        const response = await this.instance.post('/api/goals', data);
+        const response = await this.instance.post('/api/goals/create', data);
         return response.data;
     }
 
     async update(id, data) {
-        const response = await this.instance.put(`/api/goals/${id}`, data);
+        const response = await this.instance.put(`/api/goals/update/${id}`, data);
         return response.data;
     }
 

@@ -24,8 +24,8 @@
                         entry.type == 'transfer'
                             ? 'transfer-color'
                             : '',
-                        entry.type == 'goal'
-                            ? 'bg-teal-200'
+                        entry.type == 'saving'
+                            ? 'bg-teal-100'
                             : ''
                     ]">
                     <div class="flex flex-wrap">
@@ -48,6 +48,12 @@
                                 {{
                                     entry.payee
                                 }}</span>
+
+                                <span class="text-xs rounded block"
+                                :class="[entry.type == 'saving' ? 'text-slate-900' : 'text-slate-400']">
+                                {{ $t('labels.your_goal') }}: <span v-if="entry.goal_name">{{ entry.goal_name }}</span>
+                                <span v-else>-</span>
+                                </span>
                         </div>
                         <div class="w-full px-4 flex-1 text-right">
                             <span v-on:click="$router.push(`/app/entries?filter_planned=0&filter_type=${entry.type_amount}`)"
@@ -267,7 +273,8 @@ export default {
                         payee: null,
                         transfer: r.type == 'transfer' ? true : false,
                         type: r.type,
-                        name: r.name
+                        name: r.name,
+                        goal_name: r.goal ? r.goal.name : null,
                     }
 
                     if(r.wallet != null) {

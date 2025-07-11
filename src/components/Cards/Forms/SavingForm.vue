@@ -67,8 +67,8 @@
 </template>
 
 <script>
-import BaseEntryForm from './BaseEntryForm.vue';
-import WalletSelector from '../Input/WalletSelector.vue';
+import BaseEntryForm from '../BaseEntryForm.vue';
+import WalletSelector from '../../Input/WalletSelector.vue';
 
 export default {
     name: 'SavingForm',

@@ -288,5 +288,7 @@ export default {
     label_input_hint: 'Puedes agregar múltiples etiquetas separándolas con spacios',
     no_models_available: 'No hay modelos disponibles',
     create_first_model: 'Crea tu primer modelo',
+    your_goal: 'Tu meta',
+    confirm_delete_goal: 'Confirmar eliminación de objetivo'
 }
 </script>

@@ -59,9 +59,9 @@
 </template>
 
 <script>
-import BaseEntryForm from './BaseEntryForm.vue';
-import WalletSelector from '../Input/WalletSelector.vue';
-import TextInput from '../Input/Text.vue';
+import BaseEntryForm from '../BaseEntryForm.vue';
+import WalletSelector from '../../Input/WalletSelector.vue';
+import TextInput from '../../Input/Text.vue';
 
 export default {
   name: 'DebitForm',

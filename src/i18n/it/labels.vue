@@ -287,5 +287,7 @@ export default {
     label_input_hint: 'Puoi aggiungere più etichette separandole con spazi',
     no_models_available: 'Nessun modello disponibile',
     create_first_model: 'Crea il tuo primo modello',
+    your_goal: 'Il tuo obiettivo',
+    confirm_delete_goal: 'Conferma eliminazione obiettivo',
 }
 </script>

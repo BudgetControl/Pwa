@@ -21,18 +21,25 @@
                                             <div
                                                 class="container relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg border-0 flex-auto p-4">
                                                 <div class="flex flex-wrap">
-                                                    <GoalType v-model="data.category_icon"
-                                                        :label="$t('labels.goal_type')" />
-
-                                                    <InputText v-model="data.name" :label="$t('labels.goal_name')" />
-
-                                                    <Amount v-model="data.amount" :label="$t('labels.target_amount')" />
-
+                                                    <!-- Prima riga: 2 colonne -->
+                                                    <div class="w-full lg:w-6/12 px-2">
+                                                        <GoalType v-model="data.category_icon"
+                                                            :label="$t('labels.goal_type')" />
+                                                    </div>
+                                                    <div class="w-full lg:w-6/12 px-2">
+                                                        <InputText v-model="data.name" :label="$t('labels.goal_name')" />
+                                                    </div>
                                                 </div>
 
-                                                <div class="flex flex-wrap">
-                                                    <Calendar v-model="data.due_date"
-                                                        :label="$t('labels.goal_target')" />
+                                                <div class="flex flex-wrap py-3">
+                                                    <!-- Seconda riga: 2 colonne -->
+                                                    <div class="w-full lg:w-6/12 px-2">
+                                                        <Amount v-model="data.amount" :label="$t('labels.target_amount')" />
+                                                    </div>
+                                                    <div class="w-full lg:w-6/12 px-2">
+                                                        <Calendar v-model="data.due_date"
+                                                            :label="$t('labels.goal_target')" />
+                                                    </div>
                                                 </div>
 
                                                 <div class="flex flex-wrap">

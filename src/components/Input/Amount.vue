@@ -3,7 +3,8 @@
         <label v-if="label" class="block uppercase text-slate-600 text-xs font-bold mb-2">
             {{ label }}
         </label>
-        <input :value="displayValue" type="text"
+        <input :value="displayValue"
+            type="number"
             @input="handleInput"
             @blur="handleBlur"
             @focus="handleFocus"

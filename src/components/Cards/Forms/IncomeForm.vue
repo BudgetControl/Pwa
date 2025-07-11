@@ -34,9 +34,9 @@
 </template>
 
 <script>
-import BaseEntryForm from './BaseEntryForm.vue';
-import WalletSelector from '../Input/WalletSelector.vue';
-import CategorySelector from '../Input/CategorySelector.vue';
+import BaseEntryForm from '../BaseEntryForm.vue';
+import WalletSelector from '../../Input/WalletSelector.vue';
+import CategorySelector from '../../Input/CategorySelector.vue';
 
 export default {
   name: 'IncomeForm',

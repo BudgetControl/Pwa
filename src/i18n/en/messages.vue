@@ -68,6 +68,7 @@ export default {
         error_creating: 'Error creating goal',
         updated: 'Goal updated successfully',
         deleted: 'Goal deleted successfully',
+        confirm_delete_goal: 'Are you sure you want to delete this goal?',
     },
     date_required: 'Please choose a date',
     date_in_past: 'The date cannot be in the past',

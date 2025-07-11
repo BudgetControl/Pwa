@@ -288,5 +288,7 @@ export default {
     label_input_hint: 'You can add multiple labels by separating them with spaces',
     no_models_available: 'No models available',
     create_first_model: 'Create your first model',
+    your_goal: 'Your goal',
+    confirm_delete_goal: 'Confirm delete goal',
 }
 </script>

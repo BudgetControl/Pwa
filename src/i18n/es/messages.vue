@@ -68,6 +68,7 @@ export default {
         error_creating: 'Error al crear la meta',
         updated: 'Meta actualizada exitosamente',
         deleted: 'Meta eliminada exitosamente',
+        confirm_delete_goal: '¿Estás seguro de que quieres eliminar esta meta?',
     },
     date_required: 'Por favor, elija una fecha',
     date_in_past: 'La fecha no puede estar en el pasado',

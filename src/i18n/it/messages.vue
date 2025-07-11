@@ -68,6 +68,7 @@ export default {
         error_creating: 'Errore nella creazione dell\'obiettivo',
         updated: 'Obiettivo aggiornato con successo',
         deleted: 'Obiettivo eliminato con successo',
+        confirm_delete_goal: 'Sei sicuro di voler eliminare questo obiettivo?'
     },
     date_required: 'Scegli una data',
     date_in_past: 'La data non può essere nel passato',
