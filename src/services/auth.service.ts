@@ -144,7 +144,7 @@ class AuthService extends ApiService {
     async finalizeRegistration(useruuid: string, data: { workspace: {name: string, currency: string, payment_type: string}, wallet: {name:string, balance:number, type: string, currency:number, exclude_from_stats: number, color: string} }) {
 
         //retrive access token header
-        const response = await this.instance.post(`/api/auth/${useruuid}finalize/sign-up`, data, {
+        const response = await this.instance.post(`/api/auth/${useruuid}/finalize/sign-up`, data, {
             headers: {
                 'Authorization': `Bearer ${this.tokens.authToken.token}`,
             }
