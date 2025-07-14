@@ -147,7 +147,14 @@ export default {
                 })
             } else {
                 const workspaceService = new WorkspaceService()
-                workspaceService.add(this.modal).then(() => {
+                workspaceService.add({
+                    "workspace": {
+                        "name": this.modal.name,
+                        "currency": this.modal.currency,
+                        "payment_type": this.modal.payment_type,
+                    },
+                    "share_with": this.modal.shareWith
+                }).then(() => {
                     alert(this.$t('messages.workspace.added'))
                     this.$router.push('/app/settings/workspace')
                 })
