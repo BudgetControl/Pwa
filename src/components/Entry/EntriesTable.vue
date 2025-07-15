@@ -49,10 +49,8 @@
                                     entry.payee
                                 }}</span>
 
-                                <span class="text-xs rounded block"
-                                :class="[entry.type == 'saving' ? 'text-slate-900' : 'text-slate-400']">
-                                {{ $t('labels.your_goal') }}: <span v-if="entry.goal_name">{{ entry.goal_name }}</span>
-                                <span v-else>-</span>
+                                <span v-if="entry.type == 'saving'" class="text-xs rounded block text-slate-900">
+                                {{ $t('labels.your_goal') }}: <span v-if="entry.goal_name">{{ entry.goal_name }}</span><span v-else>-</span>
                                 </span>
                         </div>
                         <div class="w-full px-4 flex-1 text-right">
