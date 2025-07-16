@@ -441,8 +441,7 @@ export default {
                     const entryData = await apiService.getEntryDetail(this.entryId, this.isPlanned)
                     this.populateForm(entryData)
                 }
-
-                this.populateForm(entryData)
+                
             } catch (error) {
                 console.error('Error loading entry data:', error)
                 this.showAlert('Errore nel caricamento dei dati', 'error')

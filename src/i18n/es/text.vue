@@ -3,9 +3,9 @@ import Finalize from '../../views/auth/Finalize.vue';
 
 export default {
     about_us: {
-        version: `Budget Control de Mlabfactory versión `,
-        personal_finance: `<b>Gestor de finanzas personales</b><p>Budget Control de Mlabfactory es una herramienta de gestión de finanzas personales que te ayuda a seguir tus gastos, para que puedas mantener el control y alcanzar tus metas.</p>`,
-        information: `<b>Información de Budget Control</b><p>Mlabfactory es un desarrollador profesional con sede en Italia, Milán, que opera y desarrolla aplicaciones desde 2008. Descubre más sobre el equipo</p><a href="http://mlabfactory.it">Mlabfactory.it</a>`,
+        version: `Budget Control de MlabFactory s.r.l versión `,
+        personal_finance: `<b>Gestor de finanzas personales</b><p>Budget Control de MlabFactory s.r.l es una herramienta de gestión de finanzas personales que te ayuda a seguir tus gastos, para que puedas mantener el control y alcanzar tus metas.</p>`,
+        information: `<b>Información de Budget Control</b><p>MlabFactory s.r.l es un desarrollador profesional con sede en Italia, Milán, que opera y desarrolla aplicaciones desde 2008. Descubre más sobre el equipo</p><a href="http://mlabfactory.it">Mlabfactory.it</a>`,
         visit_our_website: 'Visita nuestro sitio web',
     },
     assistance: {

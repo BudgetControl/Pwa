@@ -48,16 +48,16 @@
 
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
-import CoreService from '../../services/core.service';
 import { useAppSettings } from '../../storage/settings.store';
 import AlertModal from '../../components/GenericComponents/AlertModal.vue';
+import NotificationService from '../../services/notification.service';
 
 export default {
     components: {
         HeaderButton,AlertModal
     },
     setup() {
-        const apiService = new CoreService()
+        const apiService = new NotificationService()
         const appSettings = useAppSettings()
 
         return {
@@ -81,11 +81,16 @@ export default {
         sendRequest() {
             const userSettings = this.appSettings.settings.user
             const data = {
-                "user_id": userSettings.uuid,
-                "text": this.text
+                to: userSettings.email,
+                subject: "Assistance Request from BudgetControl app",
+                message: this.text,
+                user_name: userSettings.name,
+                email: userSettings.email,
+                privacy: true
             }
 
-            this.apiService.assistance(data).then(() => {
+            this.apiService.contactForm(data).then(() => {
+                this.text = null
                 alert(this.$t('text.assistance.thanks'), "success")
             }).catch(() => {
                 alert(this.$t('labels.generic_error'), "error")

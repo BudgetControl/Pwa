@@ -1,9 +1,9 @@
 <script>
 export default {
     about_us: {
-        version: `Budget Control of Mlabfacotry version `,
-        personal_finance: `<b>Personal finance manager</b><p>Budget Control by Mlabfactory is a personal finance management tool that helps you track your spending, so you can stay in control and achieve your goals.</p>`,
-        information: `<b>Budget Control information</b><p>Mlabfactory is a professional developer based in Italy, Milan has been operating and developing applications since 2008. Find out more about the team</p><a href="http://mlabfactory.it">Mlabfacotry.it</a>`,
+        version: `Budget Control of MlabFactory s.r.l version `,
+        personal_finance: `<b>Personal finance manager</b><p>Budget Control by MlabFactory s.r.l is a personal finance management tool that helps you track your spending, so you can stay in control and achieve your goals.</p>`,
+        information: `<b>Budget Control information</b><p>MlabFactory s.r.l is a professional developer based in Italy, Milan has been operating and developing applications since 2008. Find out more about the team</p><a href="http://mlabfactory.it">MlabFactory s.r.l</a>`,
         visit_our_website: 'Visit our website',
     },
     assistance: {
