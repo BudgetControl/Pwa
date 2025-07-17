@@ -7,7 +7,7 @@
       >
         <div class="w-full md:w-4/12 px-4">
           <div
-            class="text-sm font-semibold text-white py-1 text-center md:text-left"
+            class="text-sm font-semibold py-1 text-center md:text-left"
           >
             Copyright © {{ date }}
             <a
@@ -25,7 +25,7 @@
                 href="https://www.mlabfactory.it?ref=bc-app-admin"
                 class="text-slate-600 hover:text-slate-800 text-sm font-semibold block py-1 px-3"
               >
-                MlabFactory
+                MlabFactory s.r.l
               </a>
             </li>
             <li>

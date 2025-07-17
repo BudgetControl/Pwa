@@ -56,7 +56,7 @@
         </div>
         <div class="mb-2 text-slate-600 mt-10">
           <i class="fas fa-briefcase mr-2 text-lg text-slate-400"></i>
-          Solution Manager - MlabFactory Officer
+          Solution Manager - MlabFactory s.r.l Officer
         </div>
         <div class="mb-2 text-slate-600">
           <i class="fas fa-university mr-2 text-lg text-slate-400"></i>
