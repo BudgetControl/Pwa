@@ -290,5 +290,6 @@ export default {
     create_first_model: 'Create your first model',
     your_goal: 'Your goal',
     confirm_delete_goal: 'Confirm delete goal',
+    remaining_expenses: 'Remaining expenses',
 }
 </script>

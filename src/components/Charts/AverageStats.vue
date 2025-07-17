@@ -18,7 +18,7 @@
         </div>
 
         <div class="px-2 w-full">
-            <card-stats :statSubtitle="$t('labels.your_planned_expenses')"
+            <card-stats :statSubtitle="$t('labels.remaining_expenses')"
                 :statTitle="`${stats.plannedExpenses.statTitle} €`" statDescripiron="Last month"
                 statIconName="fas fa-solid fa-plane" statIconColor="bg-amber-500" />
         </div>
