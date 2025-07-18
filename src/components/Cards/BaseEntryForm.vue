@@ -200,6 +200,7 @@ export default {
             planningOptions: ["daily", "monthly", "yearly"],
             newLabels: [],
             selectedModel: "0",
+            validationErrors: {},
             formData: {
                 amount: null,
                 currency_id: 1,
