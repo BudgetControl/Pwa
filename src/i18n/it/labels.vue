@@ -317,7 +317,7 @@ export default {
     label_name: 'Nome etichetta',
     active_labels: 'Etichette attive',
     all_labels: 'Tutte le etichette',
-    archived_labels: 'Portafogli archiviati',
+    archived_labels: 'Etichette archiviate',
     no_labels_found: 'Nessuna etichetta trovata',
 }
 </script>
