@@ -1,40 +1,39 @@
 <template>
-    <section class="relative py-16 bg-slate-200">
-        <div class="container mx-auto px-4">
-            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
-                <div
-                    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
-                    <HeaderButton back="/app/settings" title="Model settings" />
-
-                    <div class="container px-4 mx-auto"
-                        v-on:click="this.$router.push({ path: `/app/settings/model/add`, query: { showDetails: true } })">
-
-                        <button
-                            class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                            type="button">
-                            {{ $t('labels.add_new_model') }}
-                        </button>
-
-                    </div>
-
-                    <!-- labels -->
-                    <EntriesTable ref="entry" :isModel="true" />
-
-                </div>
+    <div class="p-6 bg-gray-100 min-h-screen">
+        <!-- Intestazione desktop -->
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-800">{{ $t('labels.model_settings') }}</h1>
+                <p class="text-gray-600 mt-1">{{ $t('labels.manage_your_models') }}</p>
             </div>
         </div>
-    </section>
+
+        <div class="mt-4 lg:mt-0 flex flex-col sm:flex-row gap-3">
+                <button
+                    class="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors flex items-center gap-2"
+                    v-on:click="$router.push({ path: `/app/settings/model/add`, query: { showDetails: true } })">
+                    <i class="fas fa-plus mr-2"></i> {{ $t('labels.add_new_model') }}
+                </button>
+            </div>
+
+        <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+            <div class="p-6">
+                <!-- Tabella dei modelli -->
+                <EntriesTable ref="entry" :isModel="true" />
+            </div>
+        </div>
+    </div>
 </template>
+
 <script>
 
-import HeaderButton from '@/components/Button/HeaderButton.vue';
 import CoreService from '../../services/core.service';
 import '@vuepic/vue-datepicker/dist/main.css'
 import EntriesTable from '../../components/Entry/EntriesTable.vue';
 
 export default {
     components: {
-        HeaderButton, EntriesTable
+        EntriesTable
     },
     setup() {
         const apiService = new CoreService()

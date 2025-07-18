@@ -45,7 +45,6 @@ import DetailsGoal from "./components/Goal/DetailsGoal.vue";
 import Profile from "./views/settings/Profile.vue";
 import Settings from "./views/settings/Settings.vue";
 import Wallet from "./views/settings/Wallet.vue";
-import WalletCard from "./views/settings/Cards/WalletCard.vue";
 import Category from "./views/settings/Category.vue";
 import CategoryCard from "./views/settings/Cards/CategoryCard.vue";
 import Label from "./views/settings/Label.vue";
@@ -236,18 +235,6 @@ const routes = [
       {
         path: "/app/settings/wallet",
         component: Wallet,
-      },
-      {
-        path: "/app/settings/wallet/add",
-        component: WalletCard,
-      },
-      {
-        path: "/app/settings/wallet/edit/:id",
-        component: WalletCard,
-      },
-      {
-        path: "/app/settings/wallet/edit/",
-        component: WalletCard,
       },
       {
         path: "/app/settings/category",
