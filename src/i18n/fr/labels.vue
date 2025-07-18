@@ -319,5 +319,7 @@ export default {
     all_labels: 'Toutes les étiquettes',
     archived_labels: 'Étiquettes archivées',
     no_labels_found: 'Aucune étiquette trouvée',
+    balance: 'Solde',
+    active: 'Actif',
 }
 </script>
