@@ -143,7 +143,7 @@ export default {
     const appSettings = useAppSettings()
     const settings = {
       currency_id: appSettings.get().currency_id,
-      user_email: appSettings.getUser().email
+      user: appSettings.getUser()
     }
 
     return {
@@ -151,37 +151,34 @@ export default {
     }
   },
   async beforeMount() {
-    const _this = this
-    this.currency = this.settings.currency.id || 2
 
     const coreService = new CoreService()
     coreService.currencies().then((resp) => {
-      _this.currency = resp[_this.currency - 1 ].icon
+      this.currency_id = resp[this.currency_id - 1].icon
     }).catch(() => {
-      _this.currency = "€"
+      this.currency = "€"
     })
   },
   async mounted() {
-    const _this = this
-    const userEmail = this.settings.user_email;
-    const authService = new AuthService()
-    authService.userInfoByEmail(userEmail).then((resp) => {
-      _this.user.name = resp.name
-      _this.user.email = resp.email
+
+    const userInfo = this.user
+
+      this.user.name = userInfo.name
+      this.user.email = userInfo.email
 
       
       const statsService = new StatsService()
       statsService.health().then(resp => {
-        _this.user.wallet.health = resp.total.toFixed(2)
-        if (_this.user.wallet.health <= 0) {
-          _this.user.wallet.health_color = 'text-red-500'
+        this.user.wallet.health = resp.total.toFixed(2)
+        if (this.user.wallet.health <= 0) {
+          this.user.wallet.health_color = 'text-red-500'
         }
       })
 
       statsService.total().then(resp => {
-        _this.user.wallet.total = resp.total.toFixed(2)
-        if (_this.user.wallet.total <= 0) {
-          _this.user.wallet.total_color = 'text-red-500'
+        this.user.wallet.total = resp.total.toFixed(2)
+        if (this.user.wallet.total <= 0) {
+          this.user.wallet.total_color = 'text-red-500'
         }
       })
 
@@ -190,16 +187,13 @@ export default {
       const end_date = date_time.getFullYear() + '-' + (date_time.getMonth() + 1) + '-' + date_time.getDate()
 
       statsService.incoming(`?start_date=${start_date}&end_date=${end_date}`).then((resp) => {
-        _this.user.wallet.incoming = resp.total.toFixed(2)
+        this.user.wallet.incoming = resp.total.toFixed(2)
       })
 
       statsService.expenses().then(resp => {
-        _this.user.wallet.expenses = resp.total.toFixed(2)
+        this.user.wallet.expenses = resp.total.toFixed(2)
       })
 
-    }).catch(() => {
-      this.$router.push({ path: '/' })
-    })
   },
 };
 </script>

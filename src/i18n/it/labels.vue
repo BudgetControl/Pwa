@@ -309,5 +309,15 @@ export default {
     enter_initial_balance: 'Inserisci saldo iniziale',
     edit_wallet: 'Modifica Portafoglio',
     initial_balance: 'Saldo iniziale',
+    label_settings: 'Impostazioni etichette',
+    manage_your_labels: 'Gestisci le tue etichette, aggiungine di nuove o archivia quelle non utilizzate',
+    add_new_label: 'Aggiungi nuova etichetta',
+    edit_label: 'Modifica etichetta',
+    add_label: 'Aggiungi etichetta',
+    label_name: 'Nome etichetta',
+    active_labels: 'Etichette attive',
+    all_labels: 'Tutte le etichette',
+    archived_labels: 'Portafogli archiviati',
+    no_labels_found: 'Nessuna etichetta trovata',
 }
 </script>

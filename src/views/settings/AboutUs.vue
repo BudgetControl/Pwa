@@ -1,61 +1,32 @@
 <template>
-    <section class="relative py-16 bg-slate-200">
-        <div class="container mx-auto px-4">
-            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
-                <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
-                    <HeaderButton back="/app/settings" title="About Us" />
-
-                    <!-- labels -->
-                    <div class="container px-4 mx-auto ">
-                        <div class=" border border-dotted m-1">
-
-                            <div class="container px-4 mx-auto">
-
-                                <div class="flex flex-wrap border rounded m-5 bg-gray-100">
-                                    <div class="w-full justify-center px-4 flex">
-                                        <img :src="logo" width="100" />
-                                    </div>
-                                    <div class="w-full justify-center flex">
-                                        <span
-                                            class="text-sm block my-4 text-slate-700 border-slate-100" v-html="$t('text.about_us.version')"></span>
-                                            <span class="text-sm block my-4  text-slate-700 border-slate-100 ml-2"> ( v{{  version }} )</span>
-                                    </div>
-                                </div>
-
-                                <div class="flex flex-wrap">
-                                    <div class="w-full px-2 flex-1 text-xs" v-html="$t('text.about_us.personal_finance')">
-                                        
-                                         </div>
-                                </div>
-
-                                <div class="flex flex-wrap mt-5">
-                                    <div class="w-full px-2 flex-1 text-xs" v-html="$t('text.about_us.information')">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-wrap py-3">
-                                <div class="flex justify-center px-2 w-full">
-                                    <a href="https://www.budgetcontrol.cloud"
-                                        class="text-center w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                        v-html="$t('text.about_us.visit_our_website')"
-                                        >
-
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+    <div class="p-6 bg-gray-100 min-h-screen">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden max-w-2xl mx-auto">
+            <div class="p-8">
+                <div class="flex flex-col items-center mb-8">
+                    <img :src="logo" width="100" class="mb-4" />
+                    (v{{ version }})
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm text-slate-700" v-html="$t('text.about_us.version')"></span>
                     </div>
+                </div>
+                <div class="mb-6">
+                    <div class="text-base text-gray-700 mb-4" v-html="$t('text.about_us.personal_finance')"></div>
+                    <div class="text-base text-gray-700" v-html="$t('text.about_us.information')"></div>
+                </div>
+                <div class="flex justify-center mt-8">
+                    <a href="https://www.budgetcontrol.cloud"
+                        class="bg-emerald-500 text-white font-bold px-6 py-3 rounded-lg shadow hover:bg-emerald-600 transition-colors text-center"
+                        v-html="$t('text.about_us.visit_our_website')">
+                    </a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </template>
 <script>
-
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
-import logo from '@/assets/img/vue.jpg'
+import logo from '@/assets/img/icon-192.png'
 
 export default {
     components: {

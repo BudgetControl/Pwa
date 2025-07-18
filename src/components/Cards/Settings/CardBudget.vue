@@ -88,7 +88,7 @@ export default {
     },
     mounted() {
         this.init()
-        this.currency = this.settings.currency.id
+        this.currency = this.settings.currency_id ?? '€'
     },
     methods: {
         init: function () {

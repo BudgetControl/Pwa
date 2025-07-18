@@ -65,7 +65,7 @@ export default {
         this.init()
 
         try {
-            this.currency = this.settings.currency.id
+            this.currency = this.settings.currency.id ?? '€'; // Default to Euro if not set
         } catch (e) {
             console.info(e)
         }
