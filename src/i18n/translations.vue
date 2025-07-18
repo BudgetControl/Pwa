@@ -11,7 +11,7 @@ export default
     en: en,
     it: it,
     es: es,
-    de: de
+    de: de,
     fr: fr
   }
 </script>
