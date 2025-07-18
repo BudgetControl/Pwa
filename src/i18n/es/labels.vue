@@ -291,5 +291,14 @@ export default {
     your_goal: 'Tu meta',
     confirm_delete_goal: 'Confirmar eliminación de objetivo',
     remaining_expenses: 'Gastos restantes',
+    wallet_management: 'Gestión de billetera',
+    wallet_management_description: 'Gestiona tus billeteras, agrega nuevas y configura tu billetera predeterminada.',
+    add_first_wallet: 'Agrega tu primera billetera',
+    no_wallets_available: 'No hay billeteras disponibles',
+    create_first_wallet: 'Crea tu primera billetera',
+    archived: 'Archivado',
+    last_update: 'Última actualización',
+    click_to_create_wallet: 'Haz clic para crear una billetera',
+    add_wallet: 'Agregar billetera',
 }
 </script>

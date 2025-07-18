@@ -291,5 +291,14 @@ export default {
     your_goal: 'Your goal',
     confirm_delete_goal: 'Confirm delete goal',
     remaining_expenses: 'Remaining expenses',
+    wallet_management: 'Wallet management',
+    wallet_management_description: 'Manage your wallets, add new ones, and set up your default wallet.',
+    add_first_wallet: 'Add your first wallet',
+    no_wallets_available: 'No wallets available',
+    create_first_wallet: 'Create your first wallet',
+    archived: 'Archived',
+    last_update: 'Last update',
+    click_to_create_wallet: 'Click to create a wallet',
+    add_wallet: 'Add wallet',
 }
 </script>
