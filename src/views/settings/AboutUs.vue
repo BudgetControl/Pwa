@@ -24,13 +24,11 @@
     </div>
 </template>
 <script>
-import HeaderButton from '@/components/Button/HeaderButton.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
 import logo from '@/assets/img/icon-192.png'
 
 export default {
     components: {
-        HeaderButton
     },
     data() {
         return {
