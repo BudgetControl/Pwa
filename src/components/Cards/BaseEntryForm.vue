@@ -146,6 +146,7 @@ import LabelSelector from '../Input/LabelSelector.vue';
 import AlertModal from '../GenericComponents/AlertModal.vue';
 import CheckboxButton from '../Button/CheckboxButton.vue';
 import CurrencySelector from '../Input/CurrencySelector.vue';
+import { useAppSettings } from '../../storage/settings.store';
 
 export default {
     name: 'BaseEntryForm',
@@ -219,6 +220,10 @@ export default {
             }
         }
     },
+    setup() {
+        const appSettings = useAppSettings();
+        return { appSettings };
+    },
     computed: {
         containerClass() {
             const classes = {
@@ -242,6 +247,9 @@ export default {
         if (this.entryId) {
             this.loadEntryData()
         }
+
+        const currency = this.appSettings.getCurrencyId()
+        this.formData.currency_id = currency
     },
     methods: {
         time() {
