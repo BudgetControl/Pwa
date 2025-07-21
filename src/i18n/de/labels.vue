@@ -319,5 +319,7 @@ export default {
     all_labels: 'Alle Labels',
     archived_labels: 'Archivierte Labels',
     no_labels_found: 'Keine Labels gefunden',
+    balance: 'Saldo',
+    active: 'Aktiv',
 }
 </script>

@@ -319,5 +319,6 @@ export default {
     all_labels: 'Tutte le etichette',
     archived_labels: 'Etichette archiviate',
     no_labels_found: 'Nessuna etichetta trovata',
+    balance: 'Saldo',
 }
 </script>
