@@ -325,6 +325,7 @@ export default {
                 closingAccountDate: null,
                 accountPayment: '-1',
                 installement_value: null,
+                installement: installement_value !== null ? true : false,
                 voucher_value: null,
                 lastUpdate: new Date()
             }
