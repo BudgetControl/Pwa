@@ -267,7 +267,7 @@
             <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-auto p-6">
                 <h3 class="text-xl font-bold text-gray-800 mb-4">{{ $t('labels.confirm_deletion') }}</h3>
                 <p class="text-gray-600 mb-6">
-                    {{ $t('messages.wallet_delete_confirmation', { name: walletToDelete?.name || '' }) }}
+                    {{ $t('messages.wallet.are_you_sure', { name: walletToDelete?.name || '' }) }}
                 </p>
 
                 <div class="flex space-x-3">
@@ -325,7 +325,7 @@ export default {
                 closingAccountDate: null,
                 accountPayment: '-1',
                 installement_value: null,
-                installement: installement_value !== null ? true : false,
+                installement: this.installement_value !== null ? true : false,
                 voucher_value: null,
                 lastUpdate: new Date()
             }
@@ -435,13 +435,13 @@ export default {
 
         deleteWallet() {
             if (this.walletToDelete) {
-                this.apiService.deleteAccount(this.walletToDelete.id).then(() => {
+                this.apiService.deleteWallet(this.walletToDelete.uuid).then(() => {
                     this.wallets = this.wallets.filter(w => w.id !== this.walletToDelete.id);
                     this.showDeleteConfirmation = false;
                     this.walletToDelete = null;
-                    alert(this.$t('messages.wallet_deleted'), 'success');
+                    alert(this.$t('messages.wallet.archived'), 'success');
                 }).catch(() => {
-                    alert(this.$t('messages.wallet_delete_error'), 'error');
+                    alert(this.$t('messages.generic_error'), 'error');
                 });
             }
         },
