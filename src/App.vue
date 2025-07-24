@@ -75,19 +75,28 @@ export default {
       isPushSupported.value = isSupported;
 
       if (isSupported) {
-        const permission = await PushNotifications.requestPermissions();
-        if (permission.receive === 'granted') {
-          const { token } = await PushNotifications.register();
-          sendTokenToServer(token.value);
+        try {
+          const permission = await PushNotifications.requestPermissions();
+          console.log('Push permission result:', permission);
+          if (permission.receive === 'granted') {
+            const { token } = await PushNotifications.register();
+            sendTokenToServer(token.value);
+          } else {
+            alert('Permesso per le notifiche non concesso. Abilitalo dalle impostazioni.');
+          }
+          PushNotifications.addListener('notification', handleNotification);
+          PushNotifications.addListener('registration', (registration) => {
+            // Puoi gestire la registrazione qui se serve
+          });
+          // Funzione di cleanup
+          removeListeners = () => {
+            PushNotifications.removeAllListeners();
+          };
+        } catch (err) {
+          console.error('Errore durante la richiesta delle notifiche push:', err);
         }
-        PushNotifications.addListener('notification', handleNotification);
-        PushNotifications.addListener('registration', (registration) => {
-          // Puoi gestire la registrazione qui se serve
-        });
-        // Funzione di cleanup
-        removeListeners = () => {
-          PushNotifications.removeAllListeners();
-        };
+      } else {
+        console.log('PushNotifications non supportato su questo dispositivo.');
       }
     });
 
