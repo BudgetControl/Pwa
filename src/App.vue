@@ -12,14 +12,19 @@
     </div>
     <router-view />
   </div>
+  <UserNotificationPopUp />
 </template>
 
 <script>
 import { libs } from './libs';
 import { useNetworkStore } from './storage/network';
 import logo from '@/assets/img/icon-192.png';
+import UserNotificationPopUp from './components/Comunications/UserNotificationPopUp.vue';
 
 export default {
+  components: {
+    UserNotificationPopUp,
+  },
   data() {
     return {
       logo,
@@ -74,9 +79,6 @@ export default {
 </script>
 
 <style scoped>
-#alert-message {
-  /* Stili per il messaggio di installazione */
-}
 .offline-message {
   background-color: #000;
   color: #fff;

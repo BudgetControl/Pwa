@@ -8,6 +8,11 @@ class NotificationService extends ApiService {
         return response.data;
     }
 
+    async getLastMessage() {
+        const response = await this.instance.get('/api/notify/message/last');
+        return response.data;
+    }
+
 }
 
 export default NotificationService;
