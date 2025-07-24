@@ -13,6 +13,11 @@ class NotificationService extends ApiService {
         return response.data;
     }
 
+    async savePushToken(token: string) {
+        const response = await this.instance.post('/api/notify/push/token', { token });
+        return response.data;
+    }
+
 }
 
 export default NotificationService;

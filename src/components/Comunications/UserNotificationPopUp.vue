@@ -24,8 +24,7 @@ export default {
       (val) => {
         if (val) {
           visible.value = true;
-          // Puoi recuperare il messaggio dallo store, qui esempio statico
-          message.value = notificationStore.getNewMessage?.() || 'Hai una nuova notifica!';
+          message.value = notificationStore.last_message || 'Hai una nuova notifica!';
         }
       }
     );
