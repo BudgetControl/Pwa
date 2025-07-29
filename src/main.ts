@@ -362,12 +362,6 @@ const i18n = createI18n({
 })
 
 const app = createApp(App);
-
-// app.config.productionTip = false;
-// app.use(VueGtag, {
-//   config: { id: process.env.VUE_APP_GOOGLE_ANALYTICS },
-// });
-
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 

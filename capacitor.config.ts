@@ -5,8 +5,8 @@ const config: CapacitorConfig = {
   appName: 'BudgetControl',
   webDir: 'dist',
   plugins: {
-     PushNotifications: {
-      presentationOptions: ["badge", "sound", "alert"]
+    FirebaseMessaging: {
+      presentationOptions: ['badge', 'sound', 'alert']
     }
   }
 };

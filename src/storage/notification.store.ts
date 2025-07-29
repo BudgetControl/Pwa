@@ -1,48 +1,36 @@
 import { defineStore } from 'pinia';
 import { ref, computed, onMounted } from 'vue';
-import NotificationService from '../services/notification.service';
 
 export const useNotificationStore = defineStore('notification', () => {
-    const new_message = ref(false);
-    const last_message = ref<string | null>(null);
+    const token = ref('');
+    const isEnabled = ref(false);
+    const error = ref(null);
+    const message = ref(null);
 
-    onMounted(() => {
-        const notificationService = new NotificationService();
-        setInterval(async () => {
-            try {
-                const lastMessage = await notificationService.getLastMessage();
-                if (lastMessage && lastMessage.id) {
-                    new_message.value = true;
-                    last_message.value = lastMessage.content; // Assuming the message content is what you want to save
-                } else {
-                    new_message.value = false;
-                }
-            } catch (error) {
-                console.error('Error fetching last message:', error);
-            }
-        }, 5000); // Check every 5 seconds
-    });
-
-    function setNewMessage(message: string) {
-        new_message.value = true;
-        last_message.value = message;
+    // Imposta il token di notifica
+    function setToken(newToken: string) {
+        token.value = newToken;
+        isEnabled.value = true;
+        error.value = null;
     }
 
-    function getLastMessage(): string | null {
-        return last_message.value;
+    function setNewMessage(newMessage) {
+        message.value = newMessage;
     }
 
-    function clearNewMessage() {
-        new_message.value = false;
-        last_message.value = null;
-    }
+    // Ottieni lo stato delle notifiche
+    const notificationState = computed(() => ({
+        token: token.value,
+        isEnabled: isEnabled.value,
+        error: error.value,
+    }));
 
     return {
-        new_message,
-        last_message,
+        token,
+        isEnabled,
+        error,
+        setToken,
+        notificationState,
         setNewMessage,
-        getLastMessage,
-        clearNewMessage,
-        isNewMessage: computed(() => new_message.value)
     };
 });

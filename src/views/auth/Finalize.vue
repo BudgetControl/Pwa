@@ -108,6 +108,7 @@ import CoreService from "../../services/core.service";
 import { useAppSettings } from "../../storage/settings.store";
 import LabelTooltip from "../../components/Modals/LabelTooltip.vue";
 import { libs } from "../../libs";
+import FirebaseMessagingService from "../../services/firebase/firebase-messaging.service";
 
 export default {
     components: {
@@ -118,8 +119,11 @@ export default {
         const workspaceService = new WorkspaceService()
         const coreService = new CoreService()
         const appSettings = useAppSettings()
+        // Inizializza i servizi qui se necessario
+        const firebaseMessagingService = new FirebaseMessagingService();
+
         return {
-            appSettings, authService, workspaceService, coreService
+            appSettings, authService, workspaceService, coreService, firebaseMessagingService
         }
     },
     data() {
@@ -140,6 +144,8 @@ export default {
         };
     },
     async mounted() {
+        // Usa direttamente l'istanza importata
+        await this.firebaseMessagingService.initializeNotifications();
 
         const workspaceCurrency = this.appSettings.settings.currency
         const workspacePaymentType = this.appSettings.settings.payment_type_id

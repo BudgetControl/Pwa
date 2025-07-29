@@ -3,33 +3,23 @@
     <!-- Il tuo template -->
     <div v-if="!networkStore.isOnline" class="offline-message flex flex-col items-center justify-center">
       <p><img :src="logo" alt="Budget Control" class="logo mb-4" width="80px" /></p>
-      <p class="text-center">{{ $t('messages.offline') }}</p>
+      <p class="text-center">{{$t('messages.offline')}}</p>
     </div>
     <div v-if="showInstallMessage" id="alert-message">
       <p>{{ $t('messages.install') }}</p>
-      <button @click="installPWA">{{ $t('labels.install') }}</button>
-      <button @click="closeAlert">{{ $t('labels.close') }}</button>
+      <button @click="installPWA">{{$t('labels.install')}}</button>
+      <button @click="closeAlert">{{$t('labels.close')}}</button>
     </div>
     <router-view />
   </div>
-  <UserNotificationPopUp />
 </template>
 
 <script>
-
 import { libs } from './libs';
 import { useNetworkStore } from './storage/network';
-import { useNotificationStore } from './storage/notification.store';
 import logo from '@/assets/img/icon-192.png';
-import UserNotificationPopUp from './components/Comunications/UserNotificationPopUp.vue';
-import { onMounted, onUnmounted, ref } from 'vue';
-import { PushNotifications } from '@capacitor/push-notifications';
-import NotificationService from './services/notification.service';
 
 export default {
-  components: {
-    UserNotificationPopUp,
-  },
   data() {
     return {
       logo,
@@ -45,65 +35,6 @@ export default {
   },
   setup() {
     const networkStore = useNetworkStore();
-    const notificationStore = useNotificationStore();
-    const notificationService = new NotificationService();
-    const isPushSupported = ref(false);
-
-    // Funzione per inviare il token al backend
-    const sendTokenToServer = (token) => {
-      notificationService.savePushToken(token);
-      console.log('Token inviato al backend:', token);
-    };
-
-    // Listener per ricezione notifica push
-    const handleNotification = (notification) => {
-      // Salva la notifica nello store
-      const message = notification.data?.message || '';
-      notificationStore.setNewMessage(message);
-    };
-
-    let removeListeners = null;
-
-    onMounted(async () => {
-      let isSupported = false;
-      try {
-        const result = await PushNotifications.isSupported();
-        isSupported = result.isSupported;
-      } catch (e) {
-        isSupported = false;
-      }
-      isPushSupported.value = isSupported;
-
-      if (isSupported) {
-        try {
-          const permission = await PushNotifications.requestPermissions();
-          console.log('Push permission result:', permission);
-          if (permission.receive === 'granted') {
-            const { token } = await PushNotifications.register();
-            sendTokenToServer(token.value);
-          } else {
-            alert('Permesso per le notifiche non concesso. Abilitalo dalle impostazioni.');
-          }
-          PushNotifications.addListener('notification', handleNotification);
-          PushNotifications.addListener('registration', (registration) => {
-            // Puoi gestire la registrazione qui se serve
-          });
-          // Funzione di cleanup
-          removeListeners = () => {
-            PushNotifications.removeAllListeners();
-          };
-        } catch (err) {
-          console.error('Errore durante la richiesta delle notifiche push:', err);
-        }
-      } else {
-        console.log('PushNotifications non supportato su questo dispositivo.');
-      }
-    });
-
-    onUnmounted(() => {
-      if (removeListeners) removeListeners();
-    });
-
     return { networkStore };
   },
   async created() {
@@ -126,7 +57,6 @@ export default {
     }
 
   },
-  // ...rimosso, ora gestito in setup con Composition API...
   methods: {
     closeAlert() {
       this.showInstallMessage = false;
@@ -144,6 +74,9 @@ export default {
 </script>
 
 <style scoped>
+#alert-message {
+  /* Stili per il messaggio di installazione */
+}
 .offline-message {
   background-color: #000;
   color: #fff;
