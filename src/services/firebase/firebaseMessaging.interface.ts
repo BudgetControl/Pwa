@@ -1,10 +1,23 @@
 // Interfaccia comune per entrambe le implementazioni
-interface IFirebaseMessagingService {
+export interface IFirebaseMessagingService {
   initialize(): Promise<void>;
-  getToken(): string | null;
+  getToken(): Promise<string | null>;
   cleanup(): Promise<void>;
   subscribeToTopic(topic: string): Promise<void>;
   unsubscribeFromTopic(topic: string): Promise<void>;
+  getState(): IAppState;
 }
 
-export default IFirebaseMessagingService;
+export interface IAppState {
+  deferredPrompt: any;
+  showInstallMessage: boolean;
+  selectedLanguage: string;
+  languages: {
+    [key: string]: string;
+  };
+  notificationState: {
+    isEnabled: boolean;
+    token: string;
+    error: string | null;
+  };
+}

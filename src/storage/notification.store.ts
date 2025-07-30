@@ -1,36 +1,21 @@
 import { defineStore } from 'pinia';
-import { ref, computed, onMounted } from 'vue';
+const STORE_NAME = 'notification';
 
-export const useNotificationStore = defineStore('notification', () => {
-    const token = ref('');
-    const isEnabled = ref(false);
-    const error = ref(null);
-    const message = ref(null);
-
-    // Imposta il token di notifica
-    function setToken(newToken: string) {
-        token.value = newToken;
-        isEnabled.value = true;
-        error.value = null;
+export const useNotificationStore = defineStore(STORE_NAME, {
+  state: () => ({
+    state: false as boolean,
+    token: null as string | null,
+  }),
+  actions: {
+    set(value: boolean) {
+      this.state = value
+    },
+    get(): boolean {
+      return this.state
+    },
+    setToken(token: string) {
+      this.token = token;
     }
-
-    function setNewMessage(newMessage) {
-        message.value = newMessage;
-    }
-
-    // Ottieni lo stato delle notifiche
-    const notificationState = computed(() => ({
-        token: token.value,
-        isEnabled: isEnabled.value,
-        error: error.value,
-    }));
-
-    return {
-        token,
-        isEnabled,
-        error,
-        setToken,
-        notificationState,
-        setNewMessage,
-    };
-});
+  },
+  persist: false,
+})

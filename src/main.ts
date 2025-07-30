@@ -67,26 +67,9 @@ import AuthToken from "./views/auth/Token.vue";
 import AuthFinalize from "./views/auth/Finalize.vue";
 
 // views without layouts
-
 import Landing from "./views/Landing.vue";
-// import Index from "./views/Index.vue";
-
-
-// import VueGtag from "vue-gtag";
-
-// 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js').then(registration => {
-      console.log('SW registered: ', registration);
-    }).catch(registrationError => {
-      console.log('SW registration failed: ', registrationError);
-    });
-  });
-}
 
 // Capacitor plugins
-
 import { App as CapacitorApp } from '@capacitor/app';
 import { Browser } from '@capacitor/browser';
 
