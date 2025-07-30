@@ -237,7 +237,6 @@ class BrowserFirebaseMessagingService implements IFirebaseMessagingService {
     state.notificationState.error = null;
     
     this.notificationStore.setToken(token);
-    this.service.savePushToken(token);
     this.sendTokenToServer(token);
   }
 

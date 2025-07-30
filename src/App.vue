@@ -11,6 +11,7 @@
       <button @click="closeAlert">{{$t('labels.close')}}</button>
     </div>
     <router-view />
+    <UserNotificationPopUp />
   </div>
 </template>
 
@@ -18,8 +19,13 @@
 import { libs } from './libs';
 import { useNetworkStore } from './storage/network';
 import logo from '@/assets/img/icon-192.png';
+import UserNotificationPopUp from './components/Comunications/UserNotificationPopUp.vue';
+import FirebaseMessagingService from './services/firebase/firebase-messaging.service';
 
 export default {
+  components: {
+    UserNotificationPopUp,
+  },
   data() {
     return {
       logo,
@@ -56,6 +62,11 @@ export default {
       this.showInstallMessage = true;
     }
 
+  },
+  async mounted() {
+    // Inizializza Firebase Messaging Service
+    const firebaseMessagingService = new FirebaseMessagingService();
+    await firebaseMessagingService.initializeNotifications();
   },
   methods: {
     closeAlert() {

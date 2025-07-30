@@ -144,8 +144,6 @@ export default {
         };
     },
     async mounted() {
-        // Usa direttamente l'istanza importata
-        await this.firebaseMessagingService.initializeNotifications();
 
         const workspaceCurrency = this.appSettings.settings.currency
         const workspacePaymentType = this.appSettings.settings.payment_type_id
