@@ -21,7 +21,6 @@
 <script>
 import { libs } from './libs';
 import { useNetworkStore } from './storage/network';
-import { useNotificationStore } from './storage/notification.store';
 import logo from '@/assets/img/icon-192.png';
 import UserNotificationPopUp from './components/Comunications/UserNotificationPopUp.vue';
 import FirebaseMessagingService from './services/firebase/firebase-messaging.service';
@@ -47,15 +46,9 @@ export default {
   },
   setup() {
     const networkStore = useNetworkStore();
-    const notificationStore = useNotificationStore();
     const firebaseMessagingService = new FirebaseMessagingService();
 
-    return { networkStore, notificationStore, firebaseMessagingService };
-  },
-  mounted() {
-    this.notificationStore.$subscribe((mutation, state) => {
-        console.log('Notification received:', state.state);
-    });
+    return { networkStore, firebaseMessagingService };
   },
   async created() {
     window.addEventListener('beforeinstallprompt', (e) => {

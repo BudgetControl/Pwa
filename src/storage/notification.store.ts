@@ -1,17 +1,30 @@
 import { defineStore } from 'pinia';
+import { title } from 'process';
 const STORE_NAME = 'notification';
 
 export const useNotificationStore = defineStore(STORE_NAME, {
   state: () => ({
-    state: false as boolean,
+    message: '',
+    title: '',
+    isNewMessage: false as boolean,
     token: null as string | null,
   }),
   actions: {
-    set(value: boolean) {
-      this.state = value
+    set({ title, message }: { title: string; message: string }) {
+      this.title = title
+      this.message = message
+      this.isNewMessage = true
     },
-    get(): boolean {
-      return this.state
+    get(): ({title: string, message: string}) {
+      return {title: this.title, message: this.message}
+    },
+    getIsNewMessage(): boolean {
+      return this.isNewMessage
+    },
+    clearNewMessage() {
+      this.isNewMessage = false;
+      this.message = '';
+      this.title = '';
     },
     setToken(token: string) {
       this.token = token;

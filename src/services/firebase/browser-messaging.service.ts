@@ -114,7 +114,8 @@ class BrowserFirebaseMessagingService implements IFirebaseMessagingService {
             notification.data?.message ||
             'Nuova notifica';
 
-        this.notificationStore.set(message);
+        this.notificationStore.isNewMessage = true;
+        this.notificationStore.set({ title: notification.notification?.title || 'Nuova notifica', message });
         this.showLocalNotification(notification);
     }
 
