@@ -144,6 +144,7 @@ export default {
         this.authStore.authToken = { token: response.token, timestamp: new Date().toISOString()};
         settings.workspaces = response.workspaces
         settings.current_ws = response.workspaces[0]
+        this.show = false
 
         authService.userInfo().then(() => {
           _this.$router.push({ name: 'finalizeAuth' })
