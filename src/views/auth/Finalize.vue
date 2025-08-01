@@ -118,6 +118,7 @@ export default {
         const workspaceService = new WorkspaceService()
         const coreService = new CoreService()
         const appSettings = useAppSettings()
+
         return {
             appSettings, authService, workspaceService, coreService
         }
@@ -140,7 +141,6 @@ export default {
         };
     },
     async mounted() {
-
         const workspaceCurrency = this.appSettings.settings.currency
         const workspacePaymentType = this.appSettings.settings.payment_type_id
 
