@@ -84,12 +84,23 @@ class BrowserFirebaseMessagingService implements IFirebaseMessagingService {
     }
 
     async getToken(): Promise<string | null> {
-    if(!this.currentToken) {
-        const result = await FirebaseMessaging.getToken();
-        this.currentToken = result.token;
+        if (!this.currentToken) {
+            if (!this.messaging) {
+                throw new Error('Firebase Messaging non inizializzato');
+            }
+            try {
+                const token = await getToken(this.messaging, {
+                    vapidKey: process.env.VUE_APP_VAPID_KEY,
+                    serviceWorkerRegistration: this.serviceWorkerRegistration
+                });
+                this.currentToken = token;
+            } catch (error) {
+                console.error('Errore durante il recupero del token FCM:', error);
+                return null;
+            }
+        }
+        return this.currentToken;
     }
-    return this.currentToken;
-  }
 
     async cleanup(): Promise<void> {
         // Non ci sono listener specifici da rimuovere per il web
