@@ -118,7 +118,6 @@ export default {
         const workspaceService = new WorkspaceService()
         const coreService = new CoreService()
         const appSettings = useAppSettings()
-        // Inizializza i servizi qui se necessario
 
         return {
             appSettings, authService, workspaceService, coreService
