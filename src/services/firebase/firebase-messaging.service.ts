@@ -39,10 +39,11 @@ class FirebaseMessagingService {
     return this.service.initialize();
   }
 
-  getToken(): Promise<string | null> {
-    this.service.getToken().then((token) => {
+  async getToken(): Promise<string | null> {
+    try {
+      const token = await this.service.getToken();
       if (token) {
-        this.sendTokenToServer(token);
+        await this.sendTokenToServer(token);
         state.notificationState.token = token;
         state.notificationState.isEnabled = true;
       } else {
