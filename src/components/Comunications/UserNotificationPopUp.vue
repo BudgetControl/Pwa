@@ -34,7 +34,7 @@ export default {
   },
   mounted() {
     this.notificationStore.$subscribe((mutation, state) => {
-        console.log('Notification received:', state.state);
+        console.log('Notification received:', state);
         if(state.isNewMessage) {
           this.visible = true;
           this.message = state.message
