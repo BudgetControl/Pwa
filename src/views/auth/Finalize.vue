@@ -141,7 +141,6 @@ export default {
         };
     },
     async mounted() {
-        // Usa direttamente l'istanza importata
         const workspaceCurrency = this.appSettings.settings.currency
         const workspacePaymentType = this.appSettings.settings.payment_type_id
 
