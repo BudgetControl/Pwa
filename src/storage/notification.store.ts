@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import { title } from 'process';
 const STORE_NAME = 'notification';
 
 export const useNotificationStore = defineStore(STORE_NAME, {
