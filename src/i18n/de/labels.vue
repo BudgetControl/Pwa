@@ -321,5 +321,6 @@ export default {
     no_labels_found: 'Keine Labels gefunden',
     balance: 'Saldo',
     active: 'Aktiv',
+    manage_your_workspaces: 'Verwalten Sie Ihre Arbeitsbereiche',
 }
 </script>

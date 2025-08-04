@@ -321,5 +321,6 @@ export default {
     no_labels_found: 'No labels found',
     balance: 'Balance',
     active: 'Active',
+    manage_your_workspaces: 'Manage your workspaces',
 }
 </script>
