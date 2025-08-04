@@ -330,5 +330,6 @@ export default {
     no_labels_found: 'No se encontraron etiquetas',
     balance: 'Saldo',
     active: 'Activo',
+    manage_your_workspaces: 'Gestiona tus espacios de trabajo.',
 }
 </script>

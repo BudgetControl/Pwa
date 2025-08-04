@@ -75,5 +75,6 @@ export default {
     amount_required: 'Veuillez saisir un montant valide',
     icon_required: 'Veuillez choisir une icône',
     name_required: 'Veuillez saisir un nom',
+    manage_your_workspaces: 'Gérez vos espaces de travail',
 }
 </script>
