@@ -19,8 +19,7 @@
 
                 <!-- Lista workspace -->
                 <div class="space-y-3">
-                    <div v-for="(item, k) in workspaces" :key="k" 
-                        v-on:click="openWorkspaceModal(item)"
+                    <div v-for="(item, k) in workspaces" :key="k" v-on:click="openWorkspaceModal(item)"
                         class="flex items-center p-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer">
                         <div class="flex items-center">
                             <i class="fas fa-briefcase text-emerald-500 mr-3"></i>
@@ -30,7 +29,7 @@
                             <i class="fas fa-chevron-right text-gray-400"></i>
                         </div>
                     </div>
-                    
+
                     <div v-if="workspaces.length === 0" class="text-center py-8 text-gray-500">
                         <i class="fas fa-folder-open text-4xl mb-3"></i>
                         <p>{{ $t('labels.no_workspaces_found') }}</p>
@@ -56,27 +55,33 @@
                 <div class="overflow-y-auto flex-1 p-6">
                     <div class="space-y-6">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">{{ $t('labels.workspace_name') }} *</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">{{ $t('labels.workspace_name')
+                                }} *</label>
                             <input type="text" v-model="currentWorkspace.name"
                                 class="w-full border-0 px-4 py-3 placeholder-slate-300 text-slate-600 bg-gray-50 rounded-lg text-sm shadow focus:outline-none focus:ring focus:ring-emerald-200"
                                 :placeholder="$t('labels.workspace_name')" />
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">{{ $t('labels.default_currency') }}</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">{{ $t('labels.default_currency')
+                                }}</label>
                             <select v-model="currentWorkspace.currency"
                                 class="w-full border-0 px-4 py-3 placeholder-slate-300 text-slate-600 bg-gray-50 rounded-lg text-sm shadow focus:outline-none focus:ring focus:ring-emerald-200">
-                                <option v-for="item in currencies" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}</option>
+                                <option v-for="item in currencies" :key="item.id" :value="item.id">{{ $t('app.' +
+                                    item.slug) }}</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">{{ $t('labels.default_payment_type') }}</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">{{
+                                $t('labels.default_payment_type') }}</label>
                             <select v-model="currentWorkspace.payment_type"
                                 class="w-full border-0 px-4 py-3 placeholder-slate-300 text-slate-600 bg-gray-50 rounded-lg text-sm shadow focus:outline-none focus:ring focus:ring-emerald-200">
-                                <option v-for="item in payment_types" :key="item.id" :value="item.id">{{ $t('app.' + item.slug) }}</option>
+                                <option v-for="item in payment_types" :key="item.id" :value="item.id">{{ $t('app.' +
+                                    item.slug) }}</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">{{ $t('labels.share_workspace_with') }}</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">{{
+                                $t('labels.share_workspace_with') }}</label>
                             <div class="flex gap-2">
                                 <input type="email" v-model="shareEmail"
                                     class="flex-1 px-4 py-3 placeholder-slate-300 text-slate-600 bg-gray-50 rounded-lg text-sm border border-gray-300 focus:outline-none focus:ring focus:ring-emerald-200"
@@ -89,8 +94,10 @@
                             <div v-if="currentWorkspace.shareWith.length > 0" class="mt-2">
                                 <span class="text-xs text-gray-500">{{ $t('labels.workspace_shared_with') }}:</span>
                                 <ul class="mt-1">
-                                    <li v-for="(user, i) in currentWorkspace.shareWith" :key="i" class="flex items-center gap-2">
-                                        <span class="text-xs font-semibold py-1 px-2 rounded text-emerald-600 bg-emerald-100 cursor-pointer"
+                                    <li v-for="(user, i) in currentWorkspace.shareWith" :key="i"
+                                        class="flex items-center gap-2">
+                                        <span
+                                            class="text-xs font-semibold py-1 px-2 rounded text-emerald-600 bg-emerald-100 cursor-pointer"
                                             @click="removeShare(i)">{{ $t('labels.remove') }}</span>
                                         {{ user.name }}
                                     </li>
@@ -184,14 +191,16 @@ export default {
         },
         openWorkspaceModal(item = null) {
             if (item) {
-                this.editingWorkspace = true;
-                this.currentWorkspace = {
-                    name: item.name,
-                    currency: item.currency || null,
-                    payment_type: item.payment_type || null,
-                    shareWith: item.shareWith || [],
-                    uuid: item.uuid || null
-                };
+                //get workspace details
+                const workspaceService = new WorkspaceService();
+                workspaceService.get(item.uuid).then((res) => {
+                    this.currentWorkspace = res;
+                    this.editingWorkspace = true;
+                    this.showWorkspaceModal = true;
+                    this.currentWorkspace.shareWith = res.users || [];
+                }).catch(() => {
+                    alert(this.$t('messages.generic_error'), 'error');
+                });
             } else {
                 this.editingWorkspace = false;
                 this.currentWorkspace = {
