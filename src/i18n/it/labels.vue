@@ -321,5 +321,6 @@ export default {
     no_labels_found: 'Nessuna etichetta trovata',
     balance: 'Saldo',
     manage_your_workspaces: 'Gestisci i tuoi spazi di lavoro',
+    edit_workspace: 'Modifica spazio di lavoro',
 }
 </script>

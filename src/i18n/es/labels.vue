@@ -322,5 +322,6 @@ export default {
     balance: 'Saldo',
     active: 'Activo',
     manage_your_workspaces: 'Gestiona tus espacios de trabajo.',
+    edit_workspace: 'Editar espacio de trabajo',
 }
 </script>
