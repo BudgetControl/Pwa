@@ -323,5 +323,7 @@ export default {
     active: 'Active',
     manage_your_workspaces: 'Manage your workspaces',
     edit_workspace: 'Edit workspace',
+    user_shared: 'User shared',
+    enter_email: 'Enter email',
 }
 </script>
