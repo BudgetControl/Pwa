@@ -329,5 +329,9 @@ export default {
     archived_labels: 'Etichette archiviate',
     no_labels_found: 'Nessuna etichetta trovata',
     balance: 'Saldo',
+    manage_your_workspaces: 'Gestisci i tuoi spazi di lavoro',
+    edit_workspace: 'Modifica spazio di lavoro',
+    user_shared: 'Utente condiviso',
+    enter_email: 'Inserisci email'
 }
 </script>

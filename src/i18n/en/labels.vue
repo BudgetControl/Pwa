@@ -330,5 +330,9 @@ export default {
     no_labels_found: 'No labels found',
     balance: 'Balance',
     active: 'Active',
+    manage_your_workspaces: 'Manage your workspaces',
+    edit_workspace: 'Edit workspace',
+    user_shared: 'User shared',
+    enter_email: 'Enter email',
 }
 </script>

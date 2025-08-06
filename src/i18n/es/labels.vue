@@ -330,5 +330,9 @@ export default {
     no_labels_found: 'No se encontraron etiquetas',
     balance: 'Saldo',
     active: 'Activo',
+    manage_your_workspaces: 'Gestiona tus espacios de trabajo.',
+    edit_workspace: 'Editar espacio de trabajo',
+    user_shared: 'Usuario compartido',
+    enter_email: 'Introduce el correo electrónico',
 }
 </script>

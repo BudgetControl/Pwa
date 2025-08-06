@@ -28,6 +28,22 @@ class WorkspaceService extends ApiService {
         return response.data;
     }
 
+    /**
+     * Share a workspace with a user
+     * @param workspaceId The ID of the workspace to share
+     * @param user The email or UUID of the user to share the workspace with
+     * @returns The response from the API
+     */
+    async share(workspaceId: string, user: string) {
+        const response = await this.instance.post(`/api/workspace/${workspaceId}/share`, { "user_to_share": user });
+        return response.data;
+    }
+
+    async unshare(workspaceId: string, userId: string) {
+        const response = await this.instance.delete(`/api/workspace/${workspaceId}/unshare/${userId}`);
+        return response.data;
+    }
+
     async update(workspace: {
         id: string,
         data: {}
