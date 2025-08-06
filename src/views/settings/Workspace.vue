@@ -194,10 +194,16 @@ export default {
                 //get workspace details
                 const workspaceService = new WorkspaceService();
                 workspaceService.get(item.uuid).then((res) => {
-                    this.currentWorkspace = res;
+                    //remove current user form shareWith
+                    const userUuid = this.appSettings.settings.user.uuid;
+                    res.workspace.users = res.workspace.users.filter(user => user.uuid !== userUuid);
+
+                    this.currentWorkspace = res.workspace;
                     this.editingWorkspace = true;
                     this.showWorkspaceModal = true;
-                    this.currentWorkspace.shareWith = res.users || [];
+                    this.currentWorkspace.shareWith = res.workspace.users
+                    this.currentWorkspace.currency = res.settings.data.currency.id
+                    this.currentWorkspace.payment_type = res.settings.data.paymenttypeId;
                 }).catch(() => {
                     alert(this.$t('messages.generic_error'), 'error');
                 });
@@ -259,8 +265,8 @@ export default {
         shareUser() {
             const email = this.shareEmail;
             if (email.length > 0 && email.includes('@') && email.includes('.') && email.length > 5) {
-                const authService = new AuthService();
-                authService.userInfoByEmail(email).then((res) => {
+                const service = new WorkspaceService();
+                service.share(this.currentWorkspace.uuid, email).then((res) => {
                     this.currentWorkspace.shareWith.push(res);
                 }).catch(() => {
                     alert(this.$t('labels.user_not_found'), 'error');
@@ -269,6 +275,12 @@ export default {
             this.shareEmail = '';
         },
         removeShare(i) {
+            const service = new WorkspaceService();
+            service.unshare(this.currentWorkspace.uuid, this.currentWorkspace.shareWith[i].uuid).then(() => {
+                alert(this.$t('messages.workspace.user_unshared'), 'success');
+            }).catch(() => {
+                alert(this.$t('messages.generic_error'), 'error');
+            });
             this.currentWorkspace.shareWith.splice(i, 1);
         },
         openModal(id) {

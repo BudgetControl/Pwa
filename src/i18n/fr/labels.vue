@@ -330,5 +330,7 @@ export default {
     no_labels_found: 'Aucune étiquette trouvée',
     balance: 'Solde',
     active: 'Actif',
+    edit_workspace: 'Modifier l\'espace de travail',
+    manage_your_workspaces: 'Gérez vos espaces de travail',
 }
 </script>
