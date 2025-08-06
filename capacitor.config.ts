@@ -4,7 +4,11 @@ const config: CapacitorConfig = {
   appId: 'app.budgetcontrol.cloud',
   appName: 'BudgetControl',
   webDir: 'dist',
-  bundledWebRuntime: false,
+  plugins: {
+    FirebaseMessaging: {
+      presentationOptions: ['badge', 'sound', 'alert']
+    }
+  }
 };
 
 export default config;

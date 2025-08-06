@@ -5,7 +5,6 @@ import { AuthToken } from '../types/auth-token.type';
 import { useAppSettings } from '../storage/settings.store';
 import { useCacheApi } from '../storage/cache-api';
 import { useRefreshStore } from '../storage/refresh';
-import { resetAllStores } from '../utils/reset-stores';
 
 class ApiService {
     protected instance: any;
@@ -60,14 +59,12 @@ class ApiService {
                     }
                 }
                 
-                console.error('API Error:', error.response ? error.response.data : error.message);
-                console.warn('An error occurred during the API request. Check the console for more details.');
+                console.error('API Error:', error.config.url, error.response ? error.response.data : error.message);
 
                 //if statis on 401, logout
                 if (error.response.status === 401) {
                     authStorage.resetState();
                     window.location.href = '/app/auth/login';
-                    resetAllStores()
                 }
                 return Promise.reject(error);
             }

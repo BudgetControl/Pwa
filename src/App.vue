@@ -10,7 +10,11 @@
       <button @click="installPWA">{{$t('labels.install')}}</button>
       <button @click="closeAlert">{{$t('labels.close')}}</button>
     </div>
+    <div v-if="showNotification" class="notification-popup">
+      {{ notificationMessage }}
+    </div>
     <router-view />
+    <UserNotificationPopUp />
   </div>
 </template>
 
@@ -18,8 +22,13 @@
 import { libs } from './libs';
 import { useNetworkStore } from './storage/network';
 import logo from '@/assets/img/icon-192.png';
+import UserNotificationPopUp from './components/Comunications/UserNotificationPopUp.vue';
+import FirebaseMessagingService from './services/firebase/firebase-messaging.service';
 
 export default {
+  components: {
+    UserNotificationPopUp,
+  },
   data() {
     return {
       logo,
@@ -31,11 +40,15 @@ export default {
         it: 'Italiano',
         sp: 'Español',
       },
+      showNotification: false,
+      notificationMessage: '',
     };
   },
   setup() {
     const networkStore = useNetworkStore();
-    return { networkStore };
+    const firebaseMessagingService = new FirebaseMessagingService();
+
+    return { networkStore, firebaseMessagingService };
   },
   async created() {
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -74,6 +87,18 @@ export default {
 </script>
 
 <style scoped>
+.notification-popup {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #323232;
+  color: #fff;
+  padding: 16px 24px;
+  border-radius: 8px;
+  z-index: 2000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  font-size: 1.1em;
+}
 #alert-message {
   /* Stili per il messaggio di installazione */
 }

@@ -1,0 +1,224 @@
+---------------------------- PROCESS STARTED (17398) for package app.budgetcontrol.cloud ----------------------------
+2025-07-29 18:02:08.351 17398-17398 nativeloader            app.budgetcontrol.cloud              D  Configuring clns-9 for other apk /data/app/~~adZV2-zZgXc6IcsZrN27Qw==/app.budgetcontrol.cloud-_XaNBtv6S0YvGhcKer7kYA==/base.apk. target_sdk_version=34, uses_libraries=, library_path=/data/app/~~adZV2-zZgXc6IcsZrN27Qw==/app.budgetcontrol.cloud-_XaNBtv6S0YvGhcKer7kYA==/lib/arm64, permitted_path=/data:/mnt/expand:/data/user/0/app.budgetcontrol.cloud
+2025-07-29 18:02:08.353 17398-17398 etcontrol.cloud         app.budgetcontrol.cloud              I  AssetManager2(0xb400007cf4816e78) locale list changing from [] to [it-IT]
+2025-07-29 18:02:08.354 17398-17398 etcontrol.cloud         app.budgetcontrol.cloud              I  AssetManager2(0xb400007cf4818a98) locale list changing from [] to [it-IT]
+2025-07-29 18:02:08.356 17398-17398 GraphicsEnvironment     app.budgetcontrol.cloud              V  Currently set values for:
+2025-07-29 18:02:08.356 17398-17398 GraphicsEnvironment     app.budgetcontrol.cloud              V    angle_gl_driver_selection_pkgs=[com.android.angle, com.linecorp.b612.android, com.campmobile.snow, com.google.android.apps.tachyon]
+2025-07-29 18:02:08.356 17398-17398 GraphicsEnvironment     app.budgetcontrol.cloud              V    angle_gl_driver_selection_values=[angle, native, native, native]
+2025-07-29 18:02:08.356 17398-17398 GraphicsEnvironment     app.budgetcontrol.cloud              V  app.budgetcontrol.cloud is not listed in per-application setting
+2025-07-29 18:02:08.356 17398-17398 GraphicsEnvironment     app.budgetcontrol.cloud              V  ANGLE allowlist from config: 
+2025-07-29 18:02:08.356 17398-17398 GraphicsEnvironment     app.budgetcontrol.cloud              V  app.budgetcontrol.cloud is not listed in ANGLE allowlist or settings, returning default
+2025-07-29 18:02:08.356 17398-17398 GraphicsEnvironment     app.budgetcontrol.cloud              V  Neither updatable production driver nor prerelease driver is supported.
+2025-07-29 18:02:08.372 17398-17398 FirebaseApp             app.budgetcontrol.cloud              I  Device unlocked: initializing all Firebase APIs for app [DEFAULT]
+2025-07-29 18:02:08.382 17398-17398 FirebaseInitProvider    app.budgetcontrol.cloud              I  FirebaseApp initialization successful
+2025-07-29 18:02:08.394 17398-17429 etcontrol.cloud         app.budgetcontrol.cloud              W  ClassLoaderContext classpath size mismatch. expected=1, found=0 (DLC[];PCL[base.apk*129399461]{PCL[/system/framework/org.apache.http.legacy.jar*4247870504]#PCL[/system/framework/com.android.media.remotedisplay.jar*487574312]#PCL[/system/framework/com.android.location.provider.jar*1570284764]#PCL[/system_ext/framework/androidx.window.extensions.jar*1030441313]#PCL[/system_ext/framework/androidx.window.sidecar.jar*3860983653]} | DLC[];PCL[])
+2025-07-29 18:02:08.395 17398-17437 DisplayManager          app.budgetcontrol.cloud              I  Choreographer implicitly registered for the refresh rate.
+2025-07-29 18:02:08.395 17398-17398 etcontrol.cloud         app.budgetcontrol.cloud              I  AssetManager2(0xb400007cf4811d38) locale list changing from [] to [it-IT]
+2025-07-29 18:02:08.396 17398-17437 DMABUFHEAPS             app.budgetcontrol.cloud              I  Using DMA-BUF heap named: vframe-secure
+2025-07-29 18:02:08.397 17398-17429 DynamiteModule          app.budgetcontrol.cloud              I  Considering local module com.google.android.gms.measurement.dynamite:155 and remote module com.google.android.gms.measurement.dynamite:153
+2025-07-29 18:02:08.397 17398-17429 DynamiteModule          app.budgetcontrol.cloud              I  Selected local version of com.google.android.gms.measurement.dynamite
+2025-07-29 18:02:08.408 17398-17398 AppCompatDelegate       app.budgetcontrol.cloud              D  Checking for metadata for AppLocalesMetadataHolderService : Service not found
+2025-07-29 18:02:08.408 17398-17398 etcontrol.cloud         app.budgetcontrol.cloud              I  AssetManager2(0xb400007cf4813f98) locale list changing from [] to [it-IT]
+2025-07-29 18:02:08.410 17398-17398 ashmem                  app.budgetcontrol.cloud              E  Pinning is deprecated since Android Q. Please use trim or other methods.
+2025-07-29 18:02:08.426 17398-17398 DesktopModeFlags        app.budgetcontrol.cloud              D  Toggle override initialized to: OVERRIDE_UNSET
+2025-07-29 18:02:08.434 17398-17398 etcontrol.cloud         app.budgetcontrol.cloud              I  hiddenapi: Accessing hidden method Landroid/view/View;->computeFitSystemWindows(Landroid/graphics/Rect;Landroid/graphics/Rect;)Z (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/appcompat/widget/ViewUtils; (domain=app) using reflection: allowed
+2025-07-29 18:02:08.434 17398-17398 etcontrol.cloud         app.budgetcontrol.cloud              I  hiddenapi: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/appcompat/widget/ViewUtils; (domain=app) using reflection: allowed
+2025-07-29 18:02:08.440 17398-17398 etcontrol.cloud         app.budgetcontrol.cloud              I  AssetManager2(0xb400007cf480ee58) locale list changing from [] to [it-IT]
+2025-07-29 18:02:08.440 17398-17398 WebViewFactory          app.budgetcontrol.cloud              I  Loading com.google.android.webview version 138.0.7204.158 (code 720415833)
+2025-07-29 18:02:08.441 17398-17398 etcontrol.cloud         app.budgetcontrol.cloud              I  AssetManager2(0xb400007cf480e4f8) locale list changing from [] to [it-IT]
+2025-07-29 18:02:08.441 17398-17398 etcontrol.cloud         app.budgetcontrol.cloud              I  AssetManager2(0xb400007cf480db98) locale list changing from [] to [it-IT]
+2025-07-29 18:02:08.442 17398-17398 etcontrol.cloud         app.budgetcontrol.cloud              I  AssetManager2(0xb400007cf48148f8) locale list changing from [] to [it-IT]
+2025-07-29 18:02:08.442 17398-17398 etcontrol.cloud         app.budgetcontrol.cloud              I  AssetManager2(0xb400007cf4812058) locale list changing from [] to [it-IT]
+2025-07-29 18:02:08.443 17398-17398 etcontrol.cloud         app.budgetcontrol.cloud              I  AssetManager2(0xb400007cf48190d8) locale list changing from [] to [it-IT]
+2025-07-29 18:02:08.443 17398-17398 ResourcesManager        app.budgetcontrol.cloud              V  The following library key has been added: ResourcesKey{ mHash=d92c46e8 mResDir=null mSplitDirs=[] mOverlayDirs=[] mLibDirs=[/data/app/~~5GUr9YQYAnKcNoSykzIIig==/com.google.android.webview-ZH8egD8PnJbCUigo8Qzw4A==/base.apk,/data/app/~~I_dvvkbcoXoF3csNyGxxTQ==/com.google.android.trichromelibrary_720415833-5NvrxoVWzCrBOzV3Lp0Ihw==/base.apk,/system_ext/framework/androidx.window.extensions.jar] mDisplayId=0 mOverrideConfig=v36 mCompatInfo={420dpi always-compat} mLoaders=[]}
+2025-07-29 18:02:08.444 17398-17398 etcontrol.cloud         app.budgetcontrol.cloud              W  Failed to find entry 'classes.dex': Entry not found
+2025-07-29 18:02:08.444 17398-17398 nativeloader            app.budgetcontrol.cloud              D  Configuring clns-10 for other apk /data/app/~~I_dvvkbcoXoF3csNyGxxTQ==/com.google.android.trichromelibrary_720415833-5NvrxoVWzCrBOzV3Lp0Ihw==/base.apk. target_sdk_version=35, uses_libraries=ALL, library_path=/data/app/~~5GUr9YQYAnKcNoSykzIIig==/com.google.android.webview-ZH8egD8PnJbCUigo8Qzw4A==/lib/arm64:/data/app/~~5GUr9YQYAnKcNoSykzIIig==/com.google.android.webview-ZH8egD8PnJbCUigo8Qzw4A==/base.apk!/lib/arm64-v8a:/data/app/~~I_dvvkbcoXoF3csNyGxxTQ==/com.google.android.trichromelibrary_720415833-5NvrxoVWzCrBOzV3Lp0Ihw==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand
+2025-07-29 18:02:08.445 17398-17398 ApplicationLoaders      app.budgetcontrol.cloud              D  Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+2025-07-29 18:02:08.445 17398-17398 etcontrol.cloud         app.budgetcontrol.cloud              W  Loading /data/app/~~5GUr9YQYAnKcNoSykzIIig==/com.google.android.webview-ZH8egD8PnJbCUigo8Qzw4A==/oat/arm64/base.odex non-executable as it requires an image which we failed to load
+2025-07-29 18:02:08.446 17398-17398 nativeloader            app.budgetcontrol.cloud              D  Configuring clns-11 for other apk /data/app/~~5GUr9YQYAnKcNoSykzIIig==/com.google.android.webview-ZH8egD8PnJbCUigo8Qzw4A==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~5GUr9YQYAnKcNoSykzIIig==/com.google.android.webview-ZH8egD8PnJbCUigo8Qzw4A==/lib/arm64:/data/app/~~5GUr9YQYAnKcNoSykzIIig==/com.google.android.webview-ZH8egD8PnJbCUigo8Qzw4A==/base.apk!/lib/arm64-v8a:/data/app/~~I_dvvkbcoXoF3csNyGxxTQ==/com.google.android.trichromelibrary_720415833-5NvrxoVWzCrBOzV3Lp0Ihw==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand
+2025-07-29 18:02:08.451 17398-17452 etcontrol.cloud         app.budgetcontrol.cloud              I  AssetManager2(0xb400007cf4813958) locale list changing from [] to [it-IT]
+2025-07-29 18:02:08.453 17398-17452 FA                      app.budgetcontrol.cloud              I  App measurement initialized, version: 133005
+2025-07-29 18:02:08.453 17398-17452 FA                      app.budgetcontrol.cloud              I  To enable debug logging run: adb shell setprop log.tag.FA VERBOSE
+2025-07-29 18:02:08.453 17398-17452 FA                      app.budgetcontrol.cloud              I  To enable faster debug mode event logging run:
+                                                                                                      adb shell setprop debug.firebase.analytics.app app.budgetcontrol.cloud
+2025-07-29 18:02:08.458 17398-17398 cr_WVCFactoryProvider   app.budgetcontrol.cloud              I  version=138.0.7204.158 (720415833) minSdkVersion=29 isBundle=false multiprocess=true packageId=2
+2025-07-29 18:02:08.466 17398-17398 nativeloader            app.budgetcontrol.cloud              D  Load /data/app/~~I_dvvkbcoXoF3csNyGxxTQ==/com.google.android.trichromelibrary_720415833-5NvrxoVWzCrBOzV3Lp0Ihw==/base.apk!/lib/arm64-v8a/libmonochrome_64.so using class loader ns clns-11 (caller=/data/app/~~5GUr9YQYAnKcNoSykzIIig==/com.google.android.webview-ZH8egD8PnJbCUigo8Qzw4A==/base.apk): ok
+2025-07-29 18:02:08.467 17398-17398 nativeloader            app.budgetcontrol.cloud              D  Load /system/lib64/libwebviewchromium_plat_support.so using class loader ns clns-11 (caller=/data/app/~~5GUr9YQYAnKcNoSykzIIig==/com.google.android.webview-ZH8egD8PnJbCUigo8Qzw4A==/base.apk): ok
+2025-07-29 18:02:08.473 17398-17398 cr_LibraryLoader        app.budgetcontrol.cloud              I  Successfully loaded native library
+2025-07-29 18:02:08.474 17398-17398 cr_CachingUmaRecorder   app.budgetcontrol.cloud              I  Flushed 8 samples from 8 histograms, 0 samples were dropped.
+2025-07-29 18:02:08.476 17398-17398 cr_CombinedPProvider    app.budgetcontrol.cloud              I  #registerProvider() provider:WV.d9@4a0530f isPolicyCacheEnabled:false policyProvidersSize:0
+2025-07-29 18:02:08.477 17398-17398 cr_PolicyProvider       app.budgetcontrol.cloud              I  #setManagerAndSource() 0
+2025-07-29 18:02:08.479 17398-17398 etcontrol.cloud         app.budgetcontrol.cloud              I  AssetManager2(0xb400007cf4819718) locale list changing from [] to [it-IT]
+2025-07-29 18:02:08.480 17398-17398 etcontrol.cloud         app.budgetcontrol.cloud              I  AssetManager2(0xb400007cf4814f38) locale list changing from [] to [it-IT]
+2025-07-29 18:02:08.494 17398-17398 cr_CombinedPProvider    app.budgetcontrol.cloud              I  #linkNativeInternal() 1
+2025-07-29 18:02:08.494 17398-17398 cr_AppResProvider       app.budgetcontrol.cloud              I  #getApplicationRestrictionsFromUserManager() Bundle[EMPTY_PARCEL]
+2025-07-29 18:02:08.494 17398-17398 cr_PolicyProvider       app.budgetcontrol.cloud              I  #notifySettingsAvailable() 0
+2025-07-29 18:02:08.494 17398-17398 cr_CombinedPProvider    app.budgetcontrol.cloud              I  #onSettingsAvailable() 0
+2025-07-29 18:02:08.494 17398-17398 cr_CombinedPProvider    app.budgetcontrol.cloud              I  #flushPolicies()
+2025-07-29 18:02:08.519 17398-17398 chromium                app.budgetcontrol.cloud              W  [WARNING:android_webview/browser/network_service/net_helpers.cc:143] HTTP Cache size is: 20971520
+2025-07-29 18:02:08.572 17398-17398 Capacitor               app.budgetcontrol.cloud              D  Starting BridgeActivity
+2025-07-29 18:02:08.583 17398-17398 Capacitor               app.budgetcontrol.cloud              D  Registering plugin instance: CapacitorCookies
+2025-07-29 18:02:08.585 17398-17398 Capacitor               app.budgetcontrol.cloud              D  Registering plugin instance: WebView
+2025-07-29 18:02:08.586 17398-17398 Capacitor               app.budgetcontrol.cloud              D  Registering plugin instance: CapacitorHttp
+2025-07-29 18:02:08.587 17398-17398 Capacitor               app.budgetcontrol.cloud              D  Registering plugin instance: FirebaseMessaging
+2025-07-29 18:02:08.589 17398-17398 Capacitor               app.budgetcontrol.cloud              D  Registering plugin instance: App
+2025-07-29 18:02:08.590 17398-17398 Capacitor               app.budgetcontrol.cloud              D  Registering plugin instance: Browser
+2025-07-29 18:02:08.591 17398-17398 Capacitor               app.budgetcontrol.cloud              D  Registering plugin instance: Device
+2025-07-29 18:02:08.592 17398-17398 Capacitor               app.budgetcontrol.cloud              D  Registering plugin instance: Haptics
+2025-07-29 18:02:08.593 17398-17398 Capacitor               app.budgetcontrol.cloud              D  Registering plugin instance: Keyboard
+2025-07-29 18:02:08.594 17398-17398 Capacitor               app.budgetcontrol.cloud              D  Registering plugin instance: StatusBar
+2025-07-29 18:02:08.624 17398-17398 Capacitor               app.budgetcontrol.cloud              W  Unable to read file at path public/plugins
+2025-07-29 18:02:08.627 17398-17398 Capacitor               app.budgetcontrol.cloud              D  Loading app at https://localhost
+2025-07-29 18:02:08.634 17398-17481 cr_media                app.budgetcontrol.cloud              W  BLUETOOTH_CONNECT permission is missing.
+2025-07-29 18:02:08.635 17398-17481 cr_media                app.budgetcontrol.cloud              W  getBluetoothAdapter() requires BLUETOOTH permission
+2025-07-29 18:02:08.635 17398-17481 cr_media                app.budgetcontrol.cloud              W  registerBluetoothIntentsIfNeeded: Requires BLUETOOTH permission
+2025-07-29 18:02:08.651 17398-17473 Capacitor               app.budgetcontrol.cloud              D  Handling local request: https://localhost/
+2025-07-29 18:02:08.656 17398-17398 Capacitor               app.budgetcontrol.cloud              D  App started
+2025-07-29 18:02:08.656 17398-17398 WindowOnBackDispatcher  app.budgetcontrol.cloud              W  OnBackInvokedCallback is not enabled for the application.
+                                                                                                    Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+2025-07-29 18:02:08.656 17398-17398 ContentCaptureHelper    app.budgetcontrol.cloud              I  Setting logging level to OFF
+2025-07-29 18:02:08.658 17398-17398 Capacitor/AppPlugin     app.budgetcontrol.cloud              D  Firing change: true
+2025-07-29 18:02:08.658 17398-17398 Capacitor/AppPlugin     app.budgetcontrol.cloud              V  Notifying listeners for event appStateChange
+2025-07-29 18:02:08.658 17398-17398 Capacitor/AppPlugin     app.budgetcontrol.cloud              D  No listeners found for event appStateChange
+2025-07-29 18:02:08.660 17398-17452 FA                      app.budgetcontrol.cloud              I  Tag Manager is not found and thus will not be used
+2025-07-29 18:02:08.673 17398-17398 Capacitor/BrowserPlugin app.budgetcontrol.cloud              V  Notifying listeners for event browserFinished
+2025-07-29 18:02:08.673 17398-17398 Capacitor/BrowserPlugin app.budgetcontrol.cloud              D  No listeners found for event browserFinished
+2025-07-29 18:02:08.673 17398-17398 Capacitor               app.budgetcontrol.cloud              D  App resumed
+2025-07-29 18:02:08.952 17398-17546 CameraManagerGlobal     app.budgetcontrol.cloud              I  Connecting to camera service
+2025-07-29 18:02:08.967 17398-17398 Choreographer           app.budgetcontrol.cloud              I  Skipped 34 frames!  The application may be doing too much work on its main thread.
+2025-07-29 18:02:08.997 17398-17406 etcontrol.cloud         app.budgetcontrol.cloud              I  Compiler allocated 5111KB to compile void android.view.ViewRootImpl.performTraversals()
+2025-07-29 18:02:09.024 17398-17477 Capacitor               app.budgetcontrol.cloud              D  Handling local request: https://localhost/js/chunk-vendors.ede46452.js
+2025-07-29 18:02:09.025 17398-17489 Capacitor               app.budgetcontrol.cloud              D  Handling local request: https://localhost/css/chunk-vendors.26fda74c.css
+2025-07-29 18:02:09.025 17398-17480 Capacitor               app.budgetcontrol.cloud              D  Handling local request: https://localhost/js/app.44314bd7.js
+2025-07-29 18:02:09.030 17398-17474 Capacitor               app.budgetcontrol.cloud              D  Handling local request: https://localhost/css/app.277cc8cb.css
+2025-07-29 18:02:09.065 17398-17398 ContentCaptureHelper    app.budgetcontrol.cloud              I  Setting logging level to OFF
+2025-07-29 18:02:09.074 17398-17471 CompatChangeReporter    app.budgetcontrol.cloud              D  Compat change id reported: 263076149; UID 10242; state: ENABLED
+2025-07-29 18:02:09.122 17398-17398 InsetsController        app.budgetcontrol.cloud              D  hide(ime(), fromIme=false)
+2025-07-29 18:02:09.122 17398-17398 ImeTracker              app.budgetcontrol.cloud              I  app.budgetcontrol.cloud:74b5b5d3: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+2025-07-29 18:02:09.234 17398-17398 etcontrol.cloud         app.budgetcontrol.cloud              I  hiddenapi: Accessing hidden field Landroid/content/pm/ApplicationInfo;->primaryCpuAbi:Ljava/lang/String; (runtime_flags=0, domain=platform, api=unsupported) from Lorg/chromium/android_webview/SystemStateUtil; (domain=app) using reflection: allowed
+2025-07-29 18:02:10.081 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              D  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: isAndroidPlatform android
+2025-07-29 18:02:10.082 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              D  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: isAppInstalled true
+2025-07-29 18:02:10.088 17398-17398 Capacitor/Plugin        app.budgetcontrol.cloud              V  To native (Capacitor plugin): callbackId: 66459913, pluginId: App, methodName: addListener
+2025-07-29 18:02:10.088 17398-17398 Capacitor               app.budgetcontrol.cloud              V  callback: 66459913, pluginId: App, methodName: addListener, methodData: {"eventName":"appUrlOpen"}
+2025-07-29 18:02:10.088 17398-17398 Capacitor/Plugin        app.budgetcontrol.cloud              V  To native (Capacitor plugin): callbackId: 66459914, pluginId: App, methodName: addListener
+2025-07-29 18:02:10.088 17398-17398 Capacitor               app.budgetcontrol.cloud              V  callback: 66459914, pluginId: App, methodName: addListener, methodData: {"eventName":"appUrlOpen"}
+2025-07-29 18:02:10.101 17398-17473 Capacitor               app.budgetcontrol.cloud              D  Handling local request: https://localhost/img/google.31cff837.svg
+2025-07-29 18:02:10.103 17398-17474 Capacitor               app.budgetcontrol.cloud              D  Handling local request: https://localhost/fonts/fa-solid-900.0066af05.woff2
+2025-07-29 18:02:10.166 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              I  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: SW registration failed:  TypeError: Failed to register a ServiceWorker for scope ('https://localhost/') with script ('https://localhost/service-worker.js'): An unknown error occurred when fetching the script.
+2025-07-29 18:02:10.168 17398-17471 Capacitor               app.budgetcontrol.cloud              D  Handling local request: https://localhost/favicon.ico
+2025-07-29 18:02:11.460 17398-17398 AutofillManager         app.budgetcontrol.cloud              I  showAutofillDialog() return false due to improve fill dialog
+2025-07-29 18:02:11.471 17398-17398 ImeTracker              app.budgetcontrol.cloud              I  app.budgetcontrol.cloud:92fdf234: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+2025-07-29 18:02:11.472 17398-17398 InsetsController        app.budgetcontrol.cloud              D  show(ime(), fromIme=false)
+2025-07-29 18:02:11.472 17398-17398 InsetsController        app.budgetcontrol.cloud              D  Setting requestedVisibleTypes to -1 (was -9)
+2025-07-29 18:02:11.478 17398-17398 AssistStructure         app.budgetcontrol.cloud              I  Flattened final assist data: 2812 bytes, containing 1 windows, 6 views
+2025-07-29 18:02:11.657 17398-17398 Capacitor/...oardPlugin app.budgetcontrol.cloud              V  Notifying listeners for event keyboardWillShow
+2025-07-29 18:02:11.657 17398-17398 Capacitor/...oardPlugin app.budgetcontrol.cloud              D  No listeners found for event keyboardWillShow
+2025-07-29 18:02:11.658 17398-17398 InteractionJankMonitor  app.budgetcontrol.cloud              W  Initializing without READ_DEVICE_CONFIG permission. enabled=false, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=app.budgetcontrol.cloud
+2025-07-29 18:02:11.974 17398-17398 ImeTracker              app.budgetcontrol.cloud              I  app.budgetcontrol.cloud:92fdf234: onShown
+2025-07-29 18:02:11.974 17398-17398 Capacitor/...oardPlugin app.budgetcontrol.cloud              V  Notifying listeners for event keyboardDidShow
+2025-07-29 18:02:11.975 17398-17398 Capacitor/...oardPlugin app.budgetcontrol.cloud              D  No listeners found for event keyboardDidShow
+2025-07-29 18:02:14.192 17398-17612 ProfileInstaller        app.budgetcontrol.cloud              D  Installing profile for app.budgetcontrol.cloud
+2025-07-29 18:02:14.871 17398-17398 ImeTracker              app.budgetcontrol.cloud              I  app.budgetcontrol.cloud:210fbe04: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+2025-07-29 18:02:14.871 17398-17398 InsetsController        app.budgetcontrol.cloud              D  show(ime(), fromIme=false)
+2025-07-29 18:02:14.871 17398-17398 ImeTracker              app.budgetcontrol.cloud              I  app.budgetcontrol.cloud:210fbe04: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+2025-07-29 18:02:14.874 17398-17398 AssistStructure         app.budgetcontrol.cloud              I  Flattened final assist data: 2836 bytes, containing 1 windows, 6 views
+2025-07-29 18:02:15.992 17398-17398 HWUI                    app.budgetcontrol.cloud              W  Image decoding logging dropped!
+2025-07-29 18:02:16.506 17398-17398 WindowOnBackDispatcher  app.budgetcontrol.cloud              W  sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda13@d15c00f
+2025-07-29 18:02:16.510 17398-17398 DecorView[]             app.budgetcontrol.cloud              E  Destroying unexpected ActionMode instance of TYPE_FLOATING; com.android.internal.view.FloatingActionMode@aeccaff was not the current floating action mode! Expected null
+2025-07-29 18:02:16.771 17398-17398 WindowOnBackDispatcher  app.budgetcontrol.cloud              W  sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda13@e1bbb72
+2025-07-29 18:02:16.773 17398-17437 HWUI                    app.budgetcontrol.cloud              D  endAllActiveAnimators on 0xb400007ce48678b0 (RippleDrawable) with handle 0xb400007e14882c20
+2025-07-29 18:02:17.138 17398-17398 ImeTracker              app.budgetcontrol.cloud              I  app.budgetcontrol.cloud:cbdd9350: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT fromUser false
+2025-07-29 18:02:17.138 17398-17398 InsetsController        app.budgetcontrol.cloud              D  hide(ime(), fromIme=false)
+2025-07-29 18:02:17.139 17398-17398 WindowOnBackDispatcher  app.budgetcontrol.cloud              W  sendCancelIfRunning: isInProgress=false callback=android.view.ImeBackAnimationController@bc12fab
+2025-07-29 18:02:17.139 17398-17398 InsetsController        app.budgetcontrol.cloud              D  Setting requestedVisibleTypes to -9 (was -1)
+2025-07-29 18:02:17.143 17398-17398 Capacitor/...oardPlugin app.budgetcontrol.cloud              V  Notifying listeners for event keyboardWillHide
+2025-07-29 18:02:17.143 17398-17398 Capacitor/...oardPlugin app.budgetcontrol.cloud              D  No listeners found for event keyboardWillHide
+2025-07-29 18:02:17.457 17398-17398 Capacitor/...oardPlugin app.budgetcontrol.cloud              V  Notifying listeners for event keyboardDidHide
+2025-07-29 18:02:17.457 17398-17398 Capacitor/...oardPlugin app.budgetcontrol.cloud              D  No listeners found for event keyboardDidHide
+2025-07-29 18:02:17.501 17398-17398 ImeTracker              app.budgetcontrol.cloud              I  system_server:a92d1100: onCancelled at PHASE_CLIENT_ON_CONTROLS_CHANGED
+2025-07-29 18:02:20.084 17398-17407 etcontrol.cloud         app.budgetcontrol.cloud              I  Background concurrent mark compact GC freed 12MB AllocSpace bytes, 61(1592KB) LOS objects, 81% free, 5491KB/29MB, paused 1.079ms,1.659ms total 164.444ms
+2025-07-29 18:02:20.677 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              I  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: 🔥 Creazione servizio Android
+2025-07-29 18:02:20.731 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              I  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: 🚀 Inizializzazione notifiche...
+2025-07-29 18:02:20.731 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              I  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: 🔥 Inizializzazione Firebase Messaging Android
+2025-07-29 18:02:20.739 17398-17398 Capacitor/Plugin        app.budgetcontrol.cloud              V  To native (Capacitor plugin): callbackId: 66459915, pluginId: FirebaseMessaging, methodName: removeAllListeners
+2025-07-29 18:02:20.739 17398-17398 Capacitor               app.budgetcontrol.cloud              V  callback: 66459915, pluginId: FirebaseMessaging, methodName: removeAllListeners, methodData: {}
+2025-07-29 18:02:20.746 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              I  File:  - Line 353 - Msg: undefined
+2025-07-29 18:02:20.747 17398-17398 Capacitor/Plugin        app.budgetcontrol.cloud              V  To native (Capacitor plugin): callbackId: 66459916, pluginId: FirebaseMessaging, methodName: addListener
+2025-07-29 18:02:20.747 17398-17398 Capacitor               app.budgetcontrol.cloud              V  callback: 66459916, pluginId: FirebaseMessaging, methodName: addListener, methodData: {"eventName":"tokenReceived"}
+2025-07-29 18:02:20.748 17398-17398 Capacitor/Plugin        app.budgetcontrol.cloud              V  To native (Capacitor plugin): callbackId: 66459917, pluginId: FirebaseMessaging, methodName: addListener
+2025-07-29 18:02:20.748 17398-17398 Capacitor               app.budgetcontrol.cloud              V  callback: 66459917, pluginId: FirebaseMessaging, methodName: addListener, methodData: {"eventName":"notificationReceived"}
+2025-07-29 18:02:20.748 17398-17398 Capacitor/Plugin        app.budgetcontrol.cloud              V  To native (Capacitor plugin): callbackId: 66459918, pluginId: FirebaseMessaging, methodName: addListener
+2025-07-29 18:02:20.748 17398-17398 Capacitor               app.budgetcontrol.cloud              V  callback: 66459918, pluginId: FirebaseMessaging, methodName: addListener, methodData: {"eventName":"notificationActionPerformed"}
+2025-07-29 18:02:20.748 17398-17398 Capacitor/Plugin        app.budgetcontrol.cloud              V  To native (Capacitor plugin): callbackId: 66459919, pluginId: FirebaseMessaging, methodName: requestPermissions
+2025-07-29 18:02:20.749 17398-17398 Capacitor               app.budgetcontrol.cloud              V  callback: 66459919, pluginId: FirebaseMessaging, methodName: requestPermissions, methodData: {}
+2025-07-29 18:02:20.751 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              I  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: 🔥 Permessi Android: [object Object]
+2025-07-29 18:02:20.751 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              I  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: ✅ Permessi concessi, in attesa del token via listener...
+2025-07-29 18:02:20.752 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              D  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: Workspace already setup
+2025-07-29 18:02:20.787 17398-17398 AssistStructure         app.budgetcontrol.cloud              I  Flattened final assist data: 6508 bytes, containing 1 windows, 10 views
+2025-07-29 18:02:20.797 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              D  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: authToken eyJraWQiOiJKNkVyRmJcL3liMGhHeU5IZ3o2aXhaYWU2QXI3VDlhWExqZXNpWjB4RWlKMD0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmYTg0ZWQ5Ny1mODQxLTQyYjgtYTNjMi0zYTBjYjBhMDdlYjYiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuZXUtd2VzdC0xLmFtYXpvbmF3cy5jb21cL2V1LXdlc3QtMV9nUXBkM0FobWEiLCJjbGllbnRfaWQiOiJhdGp0ZDd1NWRiN3RwNW85aWUwcXJiM2MxIiwib3JpZ2luX2p0aSI6ImFhMTEwNTlmLThkNjMtNDJjOC04NDVjLTUyMDdkY2IzYmYxYSIsImV2ZW50X2lkIjoiNjZkYTQ1MzktYzcwZC00MTRmLTg1ZjYtMDdmYzNjMzY0MDdhIiwidG9rZW5fdXNlIjoiYWNjZXNzIiwic2NvcGUiOiJhd3MuY29nbml0by5zaWduaW4udXNlci5hZG1pbiIsImF1dGhfdGltZSI6MTc1MzgwNDkzNSwiZXhwIjoxNzUzODA4NTM1LCJpYXQiOjE3NTM4MDQ5MzUsImp0aSI6IjNkZWU1ZTVkLTc4ODUtNDMyMy04ZjY2LTgwYmY3YWM3YzllNCIsInVzZXJuYW1lIjoiZmE4NGVkOTctZjg0MS00MmI4LWEzYzItM2EwY2IwYTA3ZWI2In0.VawEUxDd8Q7oyDKhsXR9187XgStH1co6l0HAhfRdhOjnAm-AXFECEasHStPFNKHXdrW3ET6KWezYbvRG_kMABdtzosYlWXJYGoXg_QyaqtOViAQsv5Y74O87GOJ2dfXYulZhSaIjhnlOR6_TCRccvNn76Bou1cWCWKldiYM65pJlX7Q2rsG_bxIrzs_FBLUeM9XMmq11sBs-znrzKNeQBAv9bwLSwm9fGDSBsD4H_efKoeERS8vjrm89geZRulmdPnRDb-tzVv7uBdqsaI2g7vRvCsx2x93xaAKu0Jhk59er0DBLLvsaaPMQMfvz7qssewfS7GYXCBz6x-kcXRYW-Q
+2025-07-29 18:02:20.797 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              D  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: current_ws [object Proxy]
+2025-07-29 18:02:20.810 17398-17474 Capacitor               app.budgetcontrol.cloud              D  Handling local request: https://localhost/fonts/fa-regular-400.71c3e4f1.woff2
+2025-07-29 18:02:20.812 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              D  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: isMobile true
+2025-07-29 18:02:20.812 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              D  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: isMobile true
+2025-07-29 18:02:20.869 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: API Error: [object Object]
+2025-07-29 18:02:20.869 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              W  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: An error occurred during the API request. Check the console for more details.
+2025-07-29 18:02:20.869 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: Errore durante il recupero delle valute: [object Object]
+2025-07-29 18:02:20.875 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: API Error: [object Object]
+2025-07-29 18:02:20.875 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              W  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: An error occurred during the API request. Check the console for more details.
+2025-07-29 18:02:20.875 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/app/dashboard - Line 0 - Msg: Uncaught (in promise) AxiosError: Request failed with status code 500
+2025-07-29 18:02:23.089 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: API Error: [object Object]
+2025-07-29 18:02:23.090 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              W  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: An error occurred during the API request. Check the console for more details.
+2025-07-29 18:02:23.918 17398-17398 Capacitor/AppPlugin     app.budgetcontrol.cloud              V  Notifying listeners for event pause
+2025-07-29 18:02:23.918 17398-17398 Capacitor/AppPlugin     app.budgetcontrol.cloud              D  No listeners found for event pause
+2025-07-29 18:02:23.921 17398-17398 Capacitor               app.budgetcontrol.cloud              D  App paused
+2025-07-29 18:02:23.949 17398-17398 VRI[MainActivity]       app.budgetcontrol.cloud              D  visibilityChanged oldVisibility=true newVisibility=false
+2025-07-29 18:02:23.960 17398-17398 AutofillManager         app.budgetcontrol.cloud              I  onInvisibleForAutofill(): expiringResponse
+2025-07-29 18:02:23.962 17398-17398 Capacitor/AppPlugin     app.budgetcontrol.cloud              D  Firing change: false
+2025-07-29 18:02:23.962 17398-17398 Capacitor/AppPlugin     app.budgetcontrol.cloud              V  Notifying listeners for event appStateChange
+2025-07-29 18:02:23.962 17398-17398 Capacitor/AppPlugin     app.budgetcontrol.cloud              D  No listeners found for event appStateChange
+2025-07-29 18:02:23.962 17398-17398 Capacitor               app.budgetcontrol.cloud              D  App stopped
+2025-07-29 18:02:23.969 17398-17398 Capacitor               app.budgetcontrol.cloud              D  Saving instance state!
+2025-07-29 18:02:25.204 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: API Error: [object Object]
+2025-07-29 18:02:25.206 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              W  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: An error occurred during the API request. Check the console for more details.
+2025-07-29 18:02:26.025 17398-17452 FA                      app.budgetcontrol.cloud              I  Application backgrounded at: timestamp_millis: 1753804944023
+2025-07-29 18:02:41.206 17398-17398 Capacitor               app.budgetcontrol.cloud              D  App restarted
+2025-07-29 18:02:41.208 17398-17398 Capacitor               app.budgetcontrol.cloud              D  App started
+2025-07-29 18:02:41.209 17398-17398 WindowOnBackDispatcher  app.budgetcontrol.cloud              W  OnBackInvokedCallback is not enabled for the application.
+                                                                                                    Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+2025-07-29 18:02:41.212 17398-17398 Capacitor/AppPlugin     app.budgetcontrol.cloud              D  Firing change: true
+2025-07-29 18:02:41.212 17398-17398 Capacitor/AppPlugin     app.budgetcontrol.cloud              V  Notifying listeners for event appStateChange
+2025-07-29 18:02:41.212 17398-17398 Capacitor/AppPlugin     app.budgetcontrol.cloud              D  No listeners found for event appStateChange
+2025-07-29 18:02:41.212 17398-17398 Capacitor/AppPlugin     app.budgetcontrol.cloud              V  Notifying listeners for event resume
+2025-07-29 18:02:41.212 17398-17398 Capacitor/AppPlugin     app.budgetcontrol.cloud              D  No listeners found for event resume
+2025-07-29 18:02:41.230 17398-17398 Capacitor               app.budgetcontrol.cloud              D  App resumed
+2025-07-29 18:02:41.690 17398-17398 InsetsController        app.budgetcontrol.cloud              D  hide(ime(), fromIme=false)
+2025-07-29 18:02:41.690 17398-17398 ImeTracker              app.budgetcontrol.cloud              I  app.budgetcontrol.cloud:42a03153: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+2025-07-29 18:02:45.585 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: API Error: [object Object]
+2025-07-29 18:02:45.587 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              W  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: An error occurred during the API request. Check the console for more details.
+2025-07-29 18:02:47.681 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: API Error: [object Object]
+2025-07-29 18:02:47.682 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              W  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: An error occurred during the API request. Check the console for more details.
+2025-07-29 18:02:52.845 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: API Error: [object Object]
+2025-07-29 18:02:52.846 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              W  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: An error occurred during the API request. Check the console for more details.
+2025-07-29 18:02:52.847 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: Uncaught (in promise) AxiosError: Request failed with status code 500
+2025-07-29 18:02:52.854 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: API Error: [object Object]
+2025-07-29 18:02:52.855 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              W  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: An error occurred during the API request. Check the console for more details.
+2025-07-29 18:02:52.855 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: Uncaught (in promise) AxiosError: Request failed with status code 500
+2025-07-29 18:02:54.350 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: API Error: [object Object]
+2025-07-29 18:02:54.352 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              W  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: An error occurred during the API request. Check the console for more details.
+2025-07-29 18:02:54.354 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/app/dashboard - Line 0 - Msg: Uncaught (in promise) AxiosError: Request failed with status code 500
+2025-07-29 18:02:54.506 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: API Error: [object Object]
+2025-07-29 18:02:54.508 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              W  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: An error occurred during the API request. Check the console for more details.
+2025-07-29 18:02:54.532 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: API Error: [object Object]
+2025-07-29 18:02:54.533 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              W  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: An error occurred during the API request. Check the console for more details.
+2025-07-29 18:02:55.531 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: API Error: [object Object]
+2025-07-29 18:02:55.533 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              W  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: An error occurred during the API request. Check the console for more details.
+2025-07-29 18:02:56.482 17398-17741 etcontrol.cloud         app.budgetcontrol.cloud              I  hiddenapi: Accessing hidden method Ldalvik/system/VMStack;->getStackClass2()Ljava/lang/Class; (runtime_flags=0, domain=core-platform, api=unsupported) from LWV/G2; (domain=app) using reflection: allowed
+2025-07-29 18:02:56.487 17398-17741 FilePhenotypeFlags      app.budgetcontrol.cloud              E  Config package com.google.android.gms.clearcut_client#app.budgetcontrol.cloud cannot use FILE backing without declarative registration. See go/phenotype-android-integration#phenotype for more information. This will lead to stale flags.
+2025-07-29 18:02:56.499 17398-17741 FilePhenotypeFlags      app.budgetcontrol.cloud              E  Config package com.google.android.gms.clearcut_client#app.budgetcontrol.cloud cannot use FILE backing without declarative registration. See go/phenotype-android-integration#phenotype for more information. This will lead to stale flags.
+2025-07-29 18:02:58.748 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: API Error: [object Object]
+2025-07-29 18:02:58.749 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              W  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: An error occurred during the API request. Check the console for more details.
+2025-07-29 18:02:58.751 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: Uncaught (in promise) AxiosError: Request failed with status code 500
+2025-07-29 18:03:00.836 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: API Error: [object Object]
+2025-07-29 18:03:00.837 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              W  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: An error occurred during the API request. Check the console for more details.
+2025-07-29 18:03:01.705 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              E  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: API Error: [object Object]
+2025-07-29 18:03:01.706 17398-17398 Capacitor/Console       app.budgetcontrol.cloud              W  File: https://localhost/js/app.44314bd7.js - Line 20 - Msg: An error occurred during the API request. Check the console for more details.
