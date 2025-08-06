@@ -331,5 +331,7 @@ export default {
     balance: 'Saldo',
     manage_your_workspaces: 'Gestisci i tuoi spazi di lavoro',
     edit_workspace: 'Modifica spazio di lavoro',
+    user_shared: 'Utente condiviso',
+    enter_email: 'Inserisci email'
 }
 </script>

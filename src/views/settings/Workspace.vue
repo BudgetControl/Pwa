@@ -268,6 +268,7 @@ export default {
                 const service = new WorkspaceService();
                 service.share(this.currentWorkspace.uuid, email).then((res) => {
                     this.currentWorkspace.shareWith.push(res);
+                    alert(this.$t('labels.user_shared'), 'success');
                 }).catch(() => {
                     alert(this.$t('labels.user_not_found'), 'error');
                 });

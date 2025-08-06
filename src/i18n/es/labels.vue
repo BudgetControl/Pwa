@@ -332,5 +332,7 @@ export default {
     active: 'Activo',
     manage_your_workspaces: 'Gestiona tus espacios de trabajo.',
     edit_workspace: 'Editar espacio de trabajo',
+    user_shared: 'Usuario compartido',
+    enter_email: 'Introduce el correo electrónico',
 }
 </script>

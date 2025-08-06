@@ -332,5 +332,7 @@ export default {
     active: 'Aktiv',
     manage_your_workspaces: 'Verwalten Sie Ihre Arbeitsbereiche',
     edit_workspace: 'Arbeitsbereich bearbeiten',
+    user_shared: 'Benutzer geteilt',
+    enter_email: 'E-Mail eingeben',
 }
 </script>
