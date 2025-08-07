@@ -14,7 +14,7 @@
 
                     <button
                         class="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors flex items-center gap-2"
-                        v-on:click="openLabelModal()">
+                        v-on:click="openLabelModal(null)">
                         <i class="fas fa-plus mr-2"></i> {{ $t('labels.add_new_label') }}
                     </button>
                     
@@ -53,7 +53,7 @@
         
         <!-- Modal per aggiungere/modificare etichetta -->
         <div v-if="showLabelModal"
-            class="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50 p-4 overflow-y-auto">
+            class="fixed inset-0 bg-black flex items-start justify-center z-50 p-4 overflow-y-auto">
             <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-auto my-8 flex flex-col">
                 <!-- Header della modale -->
                 <div class="bg-white p-6 border-b border-gray-200 flex justify-between items-center">
@@ -209,11 +209,9 @@ export default {
             } else {
                 this.editingLabel = false;
                 this.currentLabel = {
-                    id: null,
                     name: '',
                     color: '#' + Math.floor(Math.random() * 16777215).toString(16),
                     archive: false,
-                    uuid: null
                 };
             }
             this.showLabelModal = true;

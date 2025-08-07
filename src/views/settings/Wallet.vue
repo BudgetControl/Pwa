@@ -85,7 +85,7 @@
 
         <!-- Modal per aggiungere/modificare wallet -->
         <div v-if="showAddWalletModal"
-            class="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50 p-4 overflow-y-auto">
+            class="fixed inset-0 bg-black flex items-start justify-center z-50 p-4 overflow-y-auto">
             <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-auto my-8 flex flex-col">
                 <!-- Header della modale -->
                 <div class="bg-white p-6 border-b border-gray-200 flex justify-between items-center">
@@ -263,7 +263,7 @@
 
         <!-- Modal di conferma eliminazione -->
         <div v-if="showDeleteConfirmation"
-            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            class="fixed inset-0 bg-black flex items-center justify-center z-50 p-4">
             <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-auto p-6">
                 <h3 class="text-xl font-bold text-gray-800 mb-4">{{ $t('labels.confirm_deletion') }}</h3>
                 <p class="text-gray-600 mb-6">
