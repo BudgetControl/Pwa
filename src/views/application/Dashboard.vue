@@ -72,7 +72,7 @@ export default {
     const tokens = this.authStore.get()
     const appSettings = this.settingsStore.get()
 
-    console.debug("authToken", tokens.authToken.token)
+    console.debug("auth_token", tokens.authToken.token)
     console.debug("current_ws", appSettings.current_ws)
 
     if (tokens.authToken.token && tokens.bcAuthToken.token) {

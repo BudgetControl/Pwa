@@ -8,6 +8,16 @@ class NotificationService extends ApiService {
         return response.data;
     }
 
+    async getLastMessage() {
+        const response = await this.instance.get('/api/notify/message/last');
+        return response.data;
+    }
+
+    async savePushToken(firebase_token: string) {
+        const response = await this.instance.post('/api/notify/save/token', { firebase_token });
+        return response.data;
+    }
+
 }
 
 export default NotificationService;
