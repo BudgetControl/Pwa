@@ -332,6 +332,7 @@ export default {
     manage_your_workspaces: 'Gestisci i tuoi spazi di lavoro',
     edit_workspace: 'Modifica spazio di lavoro',
     user_shared: 'Utente condiviso',
-    enter_email: 'Inserisci email'
+    enter_email: 'Inserisci email',
+    no_workspaces_found: 'Nessun spazio di lavoro trovato',
 }
 </script>
