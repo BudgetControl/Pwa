@@ -235,8 +235,7 @@ export default {
                     data: {
                         name: this.currentWorkspace.name,
                         currency: this.currentWorkspace.currency,
-                        payment_type: this.currentWorkspace.payment_type,
-                        shareWith: this.currentWorkspace.shareWith
+                        payment_type: this.currentWorkspace.payment_type
                     }
                 }).then(() => {
                     alert(this.$t('messages.workspace.updated'), 'success');
@@ -267,7 +266,7 @@ export default {
             if (email.length > 0 && email.includes('@') && email.includes('.') && email.length > 5) {
                 const service = new WorkspaceService();
                 service.share(this.currentWorkspace.uuid, email).then((res) => {
-                    this.currentWorkspace.shareWith.push(res);
+                    this.currentWorkspace.shareWith.push(res.user);
                     alert(this.$t('labels.user_shared'), 'success');
                 }).catch(() => {
                     alert(this.$t('labels.user_not_found'), 'error');
