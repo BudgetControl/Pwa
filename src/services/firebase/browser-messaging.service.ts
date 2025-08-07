@@ -18,6 +18,7 @@ class BrowserFirebaseMessagingService implements IFirebaseMessagingService {
     private currentToken: string | null = null;
     private notificationStore = useNotificationStore();
     private state: IAppState;
+    private serviceWorkerRegistration: ServiceWorkerRegistration | null = null;
 
     constructor(state: IAppState) {
         this.state = state;
@@ -89,10 +90,14 @@ class BrowserFirebaseMessagingService implements IFirebaseMessagingService {
                 throw new Error('Firebase Messaging non inizializzato');
             }
             try {
-                const token = await getToken(this.messaging, {
-                    vapidKey: process.env.VUE_APP_VAPID_KEY,
-                    serviceWorkerRegistration: this.serviceWorkerRegistration
-                });
+                let token = this.currentToken;
+                if (this.serviceWorkerRegistration) {
+                    token = await getToken(this.messaging, {
+                        vapidKey: process.env.VUE_APP_VAPID_KEY,
+                        serviceWorkerRegistration: this.serviceWorkerRegistration
+                    });
+                }
+
                 this.currentToken = token;
             } catch (error) {
                 console.error('Errore durante il recupero del token FCM:', error);

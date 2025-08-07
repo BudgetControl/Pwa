@@ -51,11 +51,11 @@ class FirebaseMessagingService {
         state.notificationState.isEnabled = false;
         state.notificationState.error = 'Token not available';
       }
-    }).catch((error) => {
+    } catch (error) {
       console.error("Error getting Firebase token:", error);
       state.notificationState.error = error instanceof Error ? error.message : String(error);
       state.notificationState.isEnabled = false;
-    });
+    }
     return Promise.resolve(state.notificationState.token);
   }
 
