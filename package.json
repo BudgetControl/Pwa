@@ -16,7 +16,8 @@
     "build:tailwind": "tailwind build -i src/assets/styles/index.css -o src/assets/styles/tailwind.css",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm run build:tailwind && npm run serve",
     "start": "npm run serve",
-    "run:android": "npm run build && npx cap sync && npx cap run android"
+    "run:android": "npm run build && npx cap sync && npx cap run android",
+    "sync:android": "npm run build && npx cap sync android"
   },
   "dependencies": {
     "@capacitor/android": "^6.1.2",
