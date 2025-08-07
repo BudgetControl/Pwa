@@ -177,6 +177,11 @@ class CoreService extends ApiService {
         return response.data;
     }
 
+    async createLabel(data) {
+        const response = await this.instance.post('/api/label', data);
+        return response.data;
+    }
+
     async currencies() {
         const response = await this.instance.get('/api/currencies');
         this.setInCache(response)
