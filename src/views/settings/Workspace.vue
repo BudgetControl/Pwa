@@ -40,7 +40,7 @@
 
         <!-- Modale per aggiungere/modificare workspace -->
         <div v-if="showWorkspaceModal"
-            class="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50 p-4 overflow-y-auto">
+            class="fixed inset-0 bg-black flex items-start justify-center z-50 p-4 overflow-y-auto">
             <div class="bg-white rounded-lg shadow-xl w-full max-w-xl mx-auto my-8 flex flex-col">
                 <!-- Header sticky -->
                 <div class="sticky top-0 bg-white p-6 border-b border-gray-200 z-10 flex justify-between items-center">

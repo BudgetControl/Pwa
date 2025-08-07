@@ -334,5 +334,6 @@ export default {
     edit_workspace: 'Editar espacio de trabajo',
     user_shared: 'Usuario compartido',
     enter_email: 'Introduce el correo electrónico',
+    no_workspaces_found: 'No se encontraron espacios de trabajo',
 }
 </script>

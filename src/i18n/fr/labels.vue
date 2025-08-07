@@ -334,5 +334,6 @@ export default {
     manage_your_workspaces: 'Gérez vos espaces de travail',
     user_shared: 'Utilisateur partagé',
     enter_email: 'Entrez l\'email',
+    no_workspaces_found: 'Aucun espace de travail trouvé',
 }
 </script>
