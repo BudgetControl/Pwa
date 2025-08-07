@@ -231,14 +231,20 @@ export default {
                 alert(this.$t('messages.label_name_required'), 'error');
                 return;
             }
-            
-            this.apiService.setLabel(this.currentLabel.uuid, this.currentLabel).then(() => {
-                this.loadLabels();
-                this.closeLabelModal();
-                alert(this.editingLabel ? this.$t('messages.label_updated') : this.$t('messages.label_created'), 'success');
-            }).catch(() => {
-                alert(this.$t('labels.generic_error'), 'error');
-            });
+
+            if (this.editingLabel) {
+                this.apiService.setLabel(this.currentLabel.uuid, this.currentLabel).then(() => {
+                    this.loadLabels();
+                    this.closeLabelModal();
+                    alert(this.editingLabel ? this.$t('messages.label_updated') : this.$t('messages.label_created'), 'success');
+                });
+            } else {
+                this.apiService.createLabel(this.currentLabel).then(() => {
+                    this.loadLabels();
+                    this.closeLabelModal();
+                    alert(this.editingLabel ? this.$t('messages.label_updated') : this.$t('messages.label_created'), 'success');
+                });
+            }
         },
 
         deleteItemFromArray(index) {
