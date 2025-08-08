@@ -389,7 +389,7 @@ export default {
                     type: wallet.type || 'bank',
                     exclude_stats: wallet.exclude_stats || false,
                     invoiceDate: wallet.invoice_date || null,
-                    closingAccountDate: wallet.closing_account_date || null,
+                    closingAccountDate: wallet.closing_date || null,
                     accountPayment: wallet.payment_account || '-1',
                     installement_value: wallet.installement_value || null,
                     voucher_value: wallet.voucher_value || null,
