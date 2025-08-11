@@ -335,6 +335,6 @@ export default {
     user_shared: 'User shared',
     enter_email: 'Enter email',
     no_workspaces_found: 'No workspaces found',
-    restore: 'Restore',
+    reset: 'Restore',
 }
 </script>

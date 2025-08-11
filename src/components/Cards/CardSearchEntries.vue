@@ -100,19 +100,20 @@
                 <div class="flex flex-wrap">
                     <div class="w-full lg:w-6/12 px-4">
                         <div class="relative w-full mb-3">
-                            <button v-on:click="invoke()"
-                                class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            <button v-on:click="resetForm()"
+                                class="w-full bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                 type="button">
-                                {{ $t('labels.search') }}
+                                {{ $t('labels.reset') }}
                             </button>
                         </div>
                     </div>
                     <div class="w-full lg:w-6/12 px-4">
                         <div class="relative w-full mb-3">
-                            <button v-on:click="resetForm()"
-                                class="w-full bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            <button v-on:click="invoke()" :disabled="isLoading"
+                                class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                 type="button">
-                                {{ $t('labels.reset') }}
+                                <loading v-if="isLoading" />
+                                <span v-else>{{ $t('labels.search') }}</span>
                             </button>
                         </div>
                     </div>
@@ -170,10 +171,11 @@ import Paginator from "../GenericComponents/Paginator.vue";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import AlertModal from '../GenericComponents/AlertModal.vue';
 import CoreService from "../../services/core.service";
+import loading from 'vue-full-loading'
 
 export default {
     components: {
-        EntriesTable, Paginator, VueDatePicker, AlertModal
+        EntriesTable, Paginator, VueDatePicker, AlertModal, loading
     },
     setup() {
         const apiService = new CoreService()
@@ -185,6 +187,7 @@ export default {
     },
     data() {
         return {
+            isLoading: false,
             total: {
                 entry: 0,
                 bgcolor: "bg-emerald-400"
@@ -251,6 +254,7 @@ export default {
             let currentPage = window.localStorage.getItem('current_page') == null ? 0 : window.localStorage.getItem('current_page')
 
             if (this.validate() === true) {
+                this.isLoading = true
                 this.searchService.filter(data, currentPage).then((res) => {
                     _this.$refs.entryIncoming.entries = []
 
@@ -264,9 +268,7 @@ export default {
                         this.pagination.enabled = res.paginate
                     }
 
-                    if (this.$refs._paginator !== undefined) {
-                        this.$refs._paginator.hasMorePage = res.hasMorePages
-                    }
+
 
                 })
             }
