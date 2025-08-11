@@ -98,12 +98,21 @@
                 <hr class="mt-6 border-b-1 border-slate-300" />
 
                 <div class="flex flex-wrap">
-                    <div class="w-full lg:w-12/12 px-4">
+                    <div class="w-full lg:w-6/12 px-4">
                         <div class="relative w-full mb-3">
                             <button v-on:click="invoke()"
                                 class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                 type="button">
                                 {{ $t('labels.search') }}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-6/12 px-4">
+                        <div class="relative w-full mb-3">
+                            <button v-on:click="resetForm()"
+                                class="w-full bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                type="button">
+                                {{ $t('labels.reset') }}
                             </button>
                         </div>
                     </div>
@@ -302,6 +311,23 @@ export default {
                     _this.input.account.push(r)
                 })
             })
+        },
+        resetForm() {
+            this.action = {
+                no_entry_found: false,
+                account: null,
+                category: null,
+                type: [],
+                tags: null,
+                text: null,
+                planned: true,
+                date_time: null
+            }
+            this.$refs.entryIncoming.entries = []
+            this.pagination.enabled = false
+            if (this.$refs._paginator !== undefined) {
+                this.$refs._paginator.hasMorePage = false
+            }
         },
     }
 }
