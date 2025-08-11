@@ -1,5 +1,6 @@
 <template>
   <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+    <loading :show="isLoading" />
 
     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
       <form>
@@ -48,7 +49,7 @@
 
           <div class="w-full lg:w-12/12 px-4">
             <div class="relative w-full mb-3">
-              <label class="bl}ock uppercase text-slate-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              <label class="block uppercase text-slate-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 {{ $t('labels.label') }}
               </label>
               <select v-model="action.tags" multiple
@@ -97,12 +98,21 @@
         <hr class="mt-6 border-b-1 border-slate-300" />
 
         <div class="flex flex-wrap">
-          <div class="w-full lg:w-12/12 px-4">
+          <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
-              <button v-on:click="invoke()"
+              <button v-on:click="resetForm()"
+                class="w-full bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button">
+                {{ $t('labels.reset') }}
+              </button>
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <button v-on:click="invoke()" :disabled="isLoading"
                 class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button">
-                {{ $t('labels.search') }}
+                <span>{{ $t('labels.search') }}</span>
               </button>
             </div>
           </div>
@@ -118,14 +128,16 @@
     </div>
   </div>
 </template>
+
 <script>
 import TableEntries from '../GenericComponents/TableEntries.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import CoreService from '../../services/core.service';
+import loading from 'vue-full-loading'
 
 export default {
   components: {
-    TableEntries, VueDatePicker
+    TableEntries, VueDatePicker, loading
   },
   setup() {
     const apiService = new CoreService()
@@ -135,6 +147,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       input: {
         account: [],
         category: [],
@@ -185,6 +198,7 @@ export default {
   },
   methods: {
     invoke() {
+      this.isLoading = true
 
       const year = new Date().getFullYear()
       const month = new Date().getMonth() + 1
@@ -212,8 +226,30 @@ export default {
         tags: this.action.tags,
       }
 
-      this.$refs.statsTable.setOptions(options)
-      this.$refs.statsTable.setGraph()
+      try {
+        this.$refs.statsTable.setOptions(options)
+        this.$refs.statsTable.setGraph()
+      } catch (error) {
+        console.error('Stats error:', error)
+      } finally {
+        this.isLoading = false
+      }
+    },
+    resetForm() {
+      this.action = {
+        account: null,
+        category: null,
+        type: [],
+        tags: null,
+        text: null,
+        planned: null,
+        date_time: null,
+        currencies: null,
+        payment_methods: null,
+      }
+      if (this.$refs.statsTable) {
+        this.$refs.statsTable.clearData()
+      }
     },
     getLabels() {
       let _this = this
