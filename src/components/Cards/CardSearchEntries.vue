@@ -1,5 +1,6 @@
 <template>
     <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-slate-100 border-0">
+        <loading v-if="isLoading" />
         <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
             <form>
                 <h6 class="text-slate-400 text-sm mt-3 mb-6 font-bold uppercase">
@@ -112,8 +113,7 @@
                             <button v-on:click="invoke()" :disabled="isLoading"
                                 class="w-full bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded-full shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                 type="button">
-                                <loading v-if="isLoading" />
-                                <span v-else>{{ $t('labels.search') }}</span>
+                                <span >{{ $t('labels.search') }}</span>
                             </button>
                         </div>
                     </div>
@@ -172,6 +172,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import AlertModal from '../GenericComponents/AlertModal.vue';
 import CoreService from "../../services/core.service";
 import loading from 'vue-full-loading'
+import { useAppSettings } from '../../storage/settings.store';
 
 export default {
     components: {
@@ -180,9 +181,11 @@ export default {
     setup() {
         const apiService = new CoreService()
         const searchService = new SearchService()
+        const appSettings = useAppSettings()
+        appSettings.settings.current_page = 1
 
         return {
-            apiService, searchService
+            apiService, searchService, appSettings
         }
     },
     data() {
@@ -251,33 +254,38 @@ export default {
         invoke() {
             let _this = this
             let data = this.action
-            let currentPage = window.localStorage.getItem('current_page') == null ? 0 : window.localStorage.getItem('current_page')
+            const currentPage = this.appSettings.settings.current_page
 
             if (this.validate() === true) {
                 this.isLoading = true
                 this.searchService.filter(data, currentPage).then((res) => {
                     _this.$refs.entryIncoming.entries = []
 
-                    if (res.length > 0) {
-                        _this.$refs.entryIncoming.buildEntriesTable(res)
+                    if (res.data.length > 0) {
+                        _this.$refs.entryIncoming.buildEntriesTable(res.data)
+                        _this.action.no_entry_found = false
                     } else {
                         _this.action.no_entry_found = true
                     }
 
-                    if (currentPage == 0) {
-                        this.pagination.enabled = res.paginate
+                    this.pagination.enabled = true
+                    if (this.$refs._paginator !== undefined) {
+                        this.$refs._paginator.hasMorePage = currentPage < res.pagination.total_pages
                     }
 
-
-
+                }).catch((error) => {
+                    console.error('Search error:', error)
+                    alert('Errore durante la ricerca', 'error')
+                }).finally(() => {
+                    this.isLoading = false
                 })
             }
         },
         validate() {
-            if (this.action.date_time == null) {
-                alert(this.$t('messages.search.please_set_date'), 'error')
-                return false
-            }
+            // if (this.action.date_time == null) {
+            //     alert(this.$t('messages.search.please_set_date'), 'error')
+            //     return false
+            // }
             return true
         },
         getLabels() {

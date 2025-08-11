@@ -7,8 +7,8 @@ class SearchService extends ApiService {
         return response.data;
       }
       
-      async filter(data) {
-        const response = await this.instance.post(`/api/find`,data);
+      async filter(data, currentPage) {
+        const response = await this.instance.post(`/api/find?page=${currentPage}`,data);
         return response.data;
       }
 
