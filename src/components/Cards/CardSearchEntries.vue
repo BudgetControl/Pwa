@@ -259,8 +259,6 @@ export default {
             if (this.validate() === true) {
                 this.isLoading = true
                 this.searchService.filter(data, currentPage).then((res) => {
-                    _this.$refs.entryIncoming.entries = []
-
                     if (res.data.length > 0) {
                         _this.$refs.entryIncoming.buildEntriesTable(res.data)
                         _this.action.no_entry_found = false
