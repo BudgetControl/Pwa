@@ -190,6 +190,7 @@ export default {
     },
     data() {
         return {
+            data: {},
             isLoading: false,
             total: {
                 entry: 0,
@@ -254,6 +255,12 @@ export default {
         invoke() {
             let _this = this
             let data = this.action
+
+            if (JSON.stringify(this.data) !== JSON.stringify(data)) {
+                this.appSettings.settings.current_page = 1
+            }
+            this.data = { ...data }
+
             const currentPage = this.appSettings.settings.current_page
 
             if (this.validate() === true) {
