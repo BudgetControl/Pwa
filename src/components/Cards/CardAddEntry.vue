@@ -272,22 +272,42 @@ export default {
     handleSave(data) {
       const uuid = this.entryId || null
       
-      this.apiService.setEntry(data.type, data, this.isPlanned, uuid)
-        .then(() => {
-          const message = uuid ? 
-            this.$t('messages.entry_updated') : 
-            this.$t('labels.entry_saved')
-          window.alert(message, "success")
+      // Gestione specifica per il trasferimento verso un altro workspace
+      if (data.type === 'transfer' && data.targetWorkspace) {
+        // Salva l'entry con l'header X-WS personalizzato
+        this.apiService.instance.post(`/api/entry/transfer`, data, {
+          headers: {
+            'X-WS': data.targetWorkspace.uuid
+          }
+        }).then(() => {
+          window.alert(this.$t('labels.entry_saved'), "success")
           
-          // Redirect o altra logica post-save
-          if (uuid) {
-            // In modalità edit, potresti voler tornare alla lista o alla dashboard
-            this.$router.push('/app/entries')
-          } else {
-            //reset amount - note - date time fields
-            data.amount = null
-            data.note = ''
-            data.date = new Date().toISOString().slice(0, 10)
+          // Reset dei campi dopo il salvataggio
+          data.amount = null
+          data.note = ''
+          data.date = new Date().toISOString().slice(0, 10)
+        }).catch((error) => {
+          console.error('Error saving transfer to other workspace:', error)
+          window.alert(this.$t('messages.generic_error'), "error")
+        })
+      } else {
+        // Comportamento standard per le altre entry
+        this.apiService.setEntry(data.type, data, this.isPlanned, uuid)
+          .then(() => {
+            const message = uuid ? 
+              this.$t('messages.entry_updated') : 
+              this.$t('labels.entry_saved')
+            window.alert(message, "success")
+            
+            // Redirect o altra logica post-save
+            if (uuid) {
+              // In modalità edit, potresti voler tornare alla lista o alla dashboard
+              this.$router.push('/app/entries')
+            } else {
+              //reset amount - note - date time fields
+              data.amount = null
+              data.note = ''
+              data.date = new Date().toISOString().slice(0, 10)
             data.confirmed = true
             data.labels = []
           }

@@ -197,6 +197,16 @@ class CoreService extends ApiService {
         const response = await this.instance.get(`/api/wallet/list${queryParams}`);
         return response.data;
     }
+    
+    async getWalletsForWorkspace(workspaceUuid) {
+        // Qui usiamo una soluzione personalizzata per impostare l'header X-WS per questa specifica richiesta
+        const response = await this.instance.get(`/api/wallet/list`, {
+            headers: {
+                'X-WS': workspaceUuid
+            }
+        });
+        return response.data;
+    }
 
     async deleteWallet(uuid) {
         const response = await this.instance.delete(`/api/wallet/${uuid}`);
