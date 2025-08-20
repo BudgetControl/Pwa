@@ -1,9 +1,11 @@
 <template>
   <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-slate-700">
-    <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
+    <Loading :show="isLoading" />
+    <div class="rounded-t mb-0 px-4 py-3 bg-transparent cursor-pointer" @click="toggleVisibility">
       <div class="flex flex-wrap items-center">
         <div class="relative w-full max-w-full flex-grow flex-1">
           <h2 class="text-white text-xl font-semibold">
+            <i class="fas fa-chevron-right mr-2" :class="{ 'transform rotate-90': isVisible }"></i>
             {{ $t('labels.expenses') }}
           </h2>
           <h3 class="text-white text-xl font-semibold">
@@ -12,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="p-4 flex-auto">
+    <div v-show="isVisible" class="p-4 flex-auto">
       <div class="relative h-350-px">
         <canvas :id="'bar_graph_' + ID_GRAPH"></canvas>
       </div>
@@ -23,8 +25,10 @@
 <script>
 import Chart from "chart.js";
 import ChartService from "@/services/chart.service";
+import Loading from '../GenericComponents/Loading.vue'
 
 export default {
+  components: { Loading },
   props: {
     path: {
       type: String,
@@ -45,6 +49,8 @@ export default {
   },
   data() {
     return {
+      isVisible: true,
+      isLoading: false,
       subTitle: null,
       months: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"],
       localStorageState: {
@@ -61,6 +67,9 @@ export default {
     }, 1000);
   },
   methods: {
+    toggleVisibility() {
+      this.isVisible = !this.isVisible;
+    },
     initializeGraph() {
       const now = new Date();
       let year = localStorage.getItem("chart-year") || now.getFullYear();
@@ -71,6 +80,8 @@ export default {
       this.createGraph(year, month);
     },
     createGraph(year, month) {
+      this.isLoading = true
+
       const config = {
         type: "pie",
         data: {
@@ -113,6 +124,9 @@ export default {
         })
         .catch((error) => {
           console.error("Error loading chart data:", error);
+        })
+        .finally(() => {
+          this.isLoading = false
         });
     },
     prepareDataset(fields) {
@@ -149,3 +163,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.transform {
+  transition: transform 0.2s ease;
+}
+</style>

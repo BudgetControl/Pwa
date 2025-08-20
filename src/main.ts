@@ -339,6 +339,7 @@ const router = createRouter({
 
 // language settings
 const i18n = createI18n({
+  legacy: false,
   locale: 'it',
   fallbackLocale: 'en',
   messages: translations,
