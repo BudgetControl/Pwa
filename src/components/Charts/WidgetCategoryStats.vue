@@ -66,7 +66,6 @@ export default {
             this.dataset = []
 
             data.forEach(element => {
-
                 const translatedLabel = this.$t("app." + element.label);
                 const label = translatedLabel.startsWith("app.") ? element.label : translatedLabel;
 
@@ -76,8 +75,10 @@ export default {
                     amount: element.value.toFixed(2),
                     color: element.color,
                 });
-
             });
+
+            // Ordina il dataset per nome tradotto
+            this.dataset.sort((a, b) => a.name.localeCompare(b.name));
 
             this.isLoading = false
         },

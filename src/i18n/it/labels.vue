@@ -112,7 +112,7 @@ export default {
     unarchive: 'Disarchivia',
     search: 'Cerca',
     show_details: 'Mostra dettagli',
-    bounce_rate: 'Tasso di rimbalzo',
+    bounce_rate: 'Differenza',
     session_duration: 'Durata sessione',
     amount_before: 'Importo precedente',
     send_a_request: 'Invia una richiesta',

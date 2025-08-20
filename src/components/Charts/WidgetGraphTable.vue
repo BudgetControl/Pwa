@@ -21,9 +21,9 @@
         </thead>
         <tbody>
           <template v-for="(cat, index) in categories" :key="cat">
-            <tr @click="toggleExpand(index)" class="cursor-pointer hover:bg-slate-50">
+            <tr class="hover:bg-slate-50">
               <td class="px-2 py-2 font-semibold">
-                <i class="fas fa-chevron-right mr-2" :class="{ 'transform rotate-90': expandedRows[index] }"></i>
+                <i :class="{ 'transform rotate-90': expandedRows[index] }"></i>
                 {{ $t('app.' + cat) }}
               </td>
               <td v-for="month in months" :key="month" class="px-2 py-2 text-right">
@@ -83,13 +83,6 @@ export default {
       };
     }
 
-    function hasNonZeroExpense(category) {
-      return Object.values(expenses.value).some(monthData => {
-        const value = monthData[category] || 0;
-        return Math.abs(value) > 0;
-      });
-    }
-
     async function fetchData() {
       loading.value = true;
       const chartService = new ChartService();
@@ -109,8 +102,7 @@ export default {
           });
         }
       }
-      // Filtra le categorie con importi non nulli
-      categories.value = Array.from(allCategories).filter(hasNonZeroExpense);
+      categories.value = Array.from(allCategories);
       expenses.value = allExpenses;
       loading.value = false;
     }

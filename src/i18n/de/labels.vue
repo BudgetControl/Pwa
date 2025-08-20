@@ -338,6 +338,7 @@ export default {
     reset: 'Zurücksetzen',
     category_details: 'Kategoriedetails',
     expenses_by_category_monthly: 'Ausgaben nach Kategorie (monatlich)',
-    expenses_by_category_comparison: 'Ausgaben nach Kategorie (Vergleich)'
+    expenses_by_category_comparison: 'Ausgaben nach Kategorie (Vergleich)',
+    
 }
 </script>

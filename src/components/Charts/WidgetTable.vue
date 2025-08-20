@@ -18,27 +18,27 @@
           <tr>
             <th
               class="px-6 bg-slate-50 text-slate-500 align-middle border border-solid border-slate-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-              {{ path }} NAME
+              {{ path }} {{ $t('labels.name') }}
             </th>
             <th
               class="px-6 bg-slate-50 text-slate-500 align-middle border border-solid border-slate-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-              AMOUNT
+              {{ $t('labels.amount') }}
             </th>
             <th
               class="px-6 bg-slate-50 text-slate-500 align-middle border border-solid border-slate-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-              AMOUNT BEFORE
+              {{ $t('labels.amount_before') }}
             </th>
             <th
               class="px-6 bg-slate-50 text-slate-500 align-middle border border-solid border-slate-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-              BOUNCE RATE
+              {{ $t('labels.bounce_rate') }}
             </th>
           </tr>
         </thead>
         <tbody>
           <template v-for="(d, i) in elements" :key="i">
-            <tr @click="toggleExpand(i)" class="cursor-pointer hover:bg-slate-50">
+            <tr class="hover:bg-slate-50">
               <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                <i class="fas fa-chevron-right mr-2" :class="{ 'transform rotate-90': expandedRows[i] }"></i>
+                <i :class="{ 'transform rotate-90': expandedRows[i] }"></i>
                 {{ d.label }}
               </th>
               <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -131,29 +131,28 @@ export default {
       const endDate = this.graphStore.end_date;
 
       let data = [{
-        start: startDate,
-        end: endDate,
+          start: startDate,
+          end: endDate,
       }]
 
       const chartService = new ChartService()
       chartService.expensesLabelCategory(data).then((resp) => {
-        // Filtra solo gli elementi con amount diverso da 0
-        resp.rows.forEach(element => {
-          if (Math.abs(element.amount) > 0) {
-            this.elements.push({
-              label: this.$t('app.' + element.label),
-              amount: element.amount.toFixed(2),
-              amount_before: element.prevAmount.toFixed(2),
-              bounce_rate: element.bounceRate.toFixed(2)
-            })
-          }
-        });
+          // Filtra solo gli elementi con amount diverso da 0 e traduce le label
+          const translatedElements = resp.rows
+              .filter(element => Math.abs(element.amount) > 0)
+              .map(element => ({
+                  label: this.$t('app.' + element.label),
+                  amount: element.amount.toFixed(2),
+                  amount_before: element.prevAmount.toFixed(2),
+                  bounce_rate: element.bounceRate.toFixed(2)
+              }));
 
-        this.elements.sort((a, b) => a.label.localeCompare(b.label));
+          // Ordina gli elementi per label tradotta
+          this.elements = translatedElements.sort((a, b) => a.label.localeCompare(b.label));
       }).catch((error) => {
-        console.info(error);
+          console.info(error);
       }).finally(() => {
-        this.isLoading = false
+          this.isLoading = false
       })
     },
   }
