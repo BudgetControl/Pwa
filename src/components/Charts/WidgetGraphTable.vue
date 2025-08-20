@@ -10,11 +10,11 @@
       </div>
     </div>
     <div class="p-4 flex-auto overflow-x-auto">
-      <table class="min-w-full text-xs text-left">
+      <table class="w-full text-xs text-left">
         <thead>
           <tr>
-            <th class="px-2 py-2 bg-slate-100">Categoria</th>
-            <th v-for="month in months" :key="month" class="px-2 py-2 bg-slate-100 text-center">{{ month }}</th>
+            <th class="px-2 py-2 bg-slate-100">{{ $t('labels.category') }}</th>
+            <th v-for="month in months" :key="month" class="px-2 py-2 bg-slate-100 text-center">{{ $t('labels.months.' + month.toLowerCase()) }}</th>
           </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@
         </tbody>
         <tfoot>
           <tr class="font-bold bg-slate-200">
-            <td class="px-2 py-2">Totale mese</td>
+            <td class="px-2 py-2">{{ $t('labels.amount') }} {{ $t('labels.monthly') }}</td>
             <td v-for="month in months" :key="month" class="px-2 py-2 text-right">
               {{ getMonthTotal(month) }} €
             </td>
@@ -71,12 +71,13 @@ export default {
         const res = await chartService.expensesBarByCategory([
           { start: date.start, end: date.end }
         ]);
-        // Supponiamo che res sia un array di oggetti: [{ category: 'Food', amount: 123 }, ...]
+        // res.bar è un array di oggetti, ogni oggetto ha .value e .data.category.name
         allExpenses[months[i]] = {};
-        if (Array.isArray(res)) {
-          res.forEach(item => {
-            allExpenses[months[i]][item.category] = item.amount;
-            allCategories.add(item.category);
+        if (res && Array.isArray(res.bar)) {
+          res.bar.forEach(item => {
+            const catName = item.data?.category?.name || item.data?.name || 'Unknown';
+            allExpenses[months[i]][catName] = item.value;
+            allCategories.add(catName);
           });
         }
       }
