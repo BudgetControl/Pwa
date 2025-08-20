@@ -1,22 +1,17 @@
 <template>
   <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-    <div class="rounded-t mb-0 px-4 py-3 border-0">
+    <div class="rounded-t mb-0 px-4 py-3 border-0 cursor-pointer" @click="toggleTableVisibility">
       <div class="flex flex-wrap items-center">
         <div class="relative w-full px-4 max-w-full flex-grow flex-1">
           <h3 class="font-semibold text-base text-slate-700">
-            {{ title }}
+            <i class="fas fa-chevron-right mr-2" :class="{ 'transform rotate-90': isTableVisible }"></i>
+            {{ $t('labels.expenses_by_category_comparison') }}
           </h3>
         </div>
-        <!-- <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-          <a :href="'/see_all/' + path"
-            class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-            type="button">
-            See all
-          </a>
-        </div> -->
       </div>
     </div>
-    <div class="block w-full overflow-x-auto">
+    <div v-show="isTableVisible" class="block w-full overflow-x-auto relative">
+      <Loading :show="isLoading" />
       <!-- Projects table -->
       <table class="items-center w-full bg-transparent border-collapse">
         <thead>
@@ -40,27 +35,31 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-if="elements.length == 0">
-            <td colspan="4" class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-center">
-              {{ $t('labels.no_data_found') }}
-            </td>
-          </tr>
-          <tr v-for="(d, i) in elements" :key="i">
-            <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-              {{ d.label }}
-            </th>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              {{ d.amount }}
-            </td>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              {{ d.amount_before }}
-            </td>
-            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              <i class="fas mr-4" :class="[d.bounce_rate < 0 ? 'fa-arrow-down text-emerald-500' : 'fa-arrow-up text-red-500']
-                "></i>
-              {{ d.bounce_rate }}%
-            </td>
-          </tr>
+          <template v-for="(d, i) in elements" :key="i">
+            <tr @click="toggleExpand(i)" class="cursor-pointer hover:bg-slate-50">
+              <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                <i class="fas fa-chevron-right mr-2" :class="{ 'transform rotate-90': expandedRows[i] }"></i>
+                {{ d.label }}
+              </th>
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                {{ d.amount }}
+              </td>
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                {{ d.amount_before }}
+              </td>
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                <i class="fas mr-4" :class="[d.bounce_rate < 0 ? 'fa-arrow-down text-emerald-500' : 'fa-arrow-up text-red-500']
+                  "></i>
+                {{ d.bounce_rate }}%
+              </td>
+            </tr>
+            <tr v-if="expandedRows[i]" class="bg-slate-50">
+              <td colspan="4" class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                <!-- Contenuto espanso qui, se necessario -->
+                <!-- Puoi aggiungere ulteriori dettagli o grafici relativi all'elemento qui -->
+              </td>
+            </tr>
+          </template>
         </tbody>
       </table>
     </div>
@@ -70,8 +69,11 @@
 <script>
 import ChartService from '@/services/chart.service'
 import { useGraphStore } from '../../storage/graph';
+import { ref } from 'vue';
+import Loading from '../GenericComponents/Loading.vue'
 
 export default {
+  components: { Loading },
   props: {
     path: {
       type: String,
@@ -94,7 +96,9 @@ export default {
   },
   data() {
     return {
+      expandedRows: {},
       elements: [],
+      isLoading: false
     }
   },
   mounted() {
@@ -105,14 +109,22 @@ export default {
   },
   setup() {
     const graphStore = useGraphStore()
+    const isTableVisible = ref(true);
 
     return {
-      graphStore
+      graphStore,
+      isTableVisible
     }
   },
   methods: {
+    toggleExpand(index) {
+      this.$set(this.expandedRows, index, !this.expandedRows[index]);
+    },
+    toggleTableVisibility() {
+      this.isTableVisible = !this.isTableVisible;
+    },
     setGraph: function () {
-
+      this.isLoading = true
       this.elements = []
 
       const startDate = this.graphStore.start_date;
@@ -123,26 +135,33 @@ export default {
         end: endDate,
       }]
 
-        const chartService = new ChartService()
-        chartService.expensesLabelCategory(data).then((resp) => {
-
+      const chartService = new ChartService()
+      chartService.expensesLabelCategory(data).then((resp) => {
+        // Filtra solo gli elementi con amount diverso da 0
         resp.rows.forEach(element => {
-
-          this.elements.push({
-            label: this.$t('app.' + element.label),
-            amount: element.amount.toFixed(2),
-            amount_before: element.prevAmount.toFixed(2),
-            bounce_rate: element.bounceRate.toFixed(2)
-          })
-
+          if (Math.abs(element.amount) > 0) {
+            this.elements.push({
+              label: this.$t('app.' + element.label),
+              amount: element.amount.toFixed(2),
+              amount_before: element.prevAmount.toFixed(2),
+              bounce_rate: element.bounceRate.toFixed(2)
+            })
+          }
         });
 
         this.elements.sort((a, b) => a.label.localeCompare(b.label));
-
       }).catch((error) => {
         console.info(error);
+      }).finally(() => {
+        this.isLoading = false
       })
     },
   }
 }
 </script>
+
+<style scoped>
+.transform {
+  transition: transform 0.2s ease;
+}
+</style>

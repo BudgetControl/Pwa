@@ -14,17 +14,15 @@
     <div class="flex flex-wrap mt-4">
       <div class="w-1/2">
         <WidgetBarChartVue ref="WidgetBarChartVue" :title="$t('app.stats_by_category')" />
-        <WidgetCategoryStats ref="WidgetCategoryStatsBar" />
       </div>
       <div class="w-1/2">
         <WidgetPieChart class="flex-1" ref="WidgetPieChart" :title="$t('app.stats_by_tags')" />
-        <WidgetCategoryStats ref="WidgetCategoryStatsPie" />
       </div>
     </div>
 
     <div id="table-chart" class="flex flex-wrap mt-4">
+      <WidgetGraphTable />
       <WidgetTable />
-  <WidgetGraphTable />
     </div>
   </div>
 </template>
@@ -35,7 +33,6 @@ import WidgetGraphTable from "../../../components/Charts/WidgetGraphTable.vue";
 import WidgetPieChart from "../../../components/Charts/WidgetdoughnutChart.vue";
 import AverageStats from '../../../components/Charts/AverageStats.vue';
 import WidgetBarChartVue from '../../../components/Charts/WidgetBarChart.vue';
-import WidgetCategoryStats from "../../../components/Charts/WidgetCategoryStats.vue";
 import ChartBarController from "../../../controller/ChartBar.controller";
 import ChartLabelController from "../../../controller/ChartLabel.controller";
 import FilterBar from "../../../components/Navbars/FilterBar.vue";
@@ -50,7 +47,6 @@ export default {
     AverageStats,
     WidgetBarChartVue,
     WidgetPieChart,
-    WidgetCategoryStats,
     FilterBar
   },
   setup() {
@@ -94,7 +90,6 @@ export default {
           }
 
           this.$refs.WidgetPieChart.setGraph(chartBarDataset);
-          this.$refs.WidgetCategoryStatsPie.setGraph(chartBarDataset);
         }
       });
 
@@ -119,7 +114,6 @@ export default {
             this.hasBarData = true
           }
 
-          this.$refs.WidgetCategoryStatsBar.setGraph(chartBarDataset);
           this.$refs.WidgetBarChartVue.setGraph(chartBarDataset);
         }
       });

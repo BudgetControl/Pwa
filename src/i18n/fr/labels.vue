@@ -336,5 +336,8 @@ export default {
     enter_email: 'Entrez l\'email',
     no_workspaces_found: 'Aucun espace de travail trouvé',
     reset: 'Réinitialiser',
+    category_details: 'Détails de la catégorie',
+    expenses_by_category_monthly: 'Dépenses par catégorie (mensuel)',
+    expenses_by_category_comparison: 'Dépenses par catégorie (comparaison)'
 }
 </script>
