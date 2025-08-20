@@ -10,8 +10,10 @@
       </div>
     </div>
     <div class="p-4 flex-auto overflow-x-auto">
-      <loading :active="loading" :is-full-page="false" />
-      <table v-if="!loading" class="w-full text-xs text-left">
+      <div v-if="loading" class="flex items-center justify-center py-8 text-lg font-semibold">
+        <span>Loading<span class="dot-anim">...</span></span>
+      </div>
+      <table v-else class="w-full text-xs text-left">
         <thead>
           <tr>
             <th class="px-2 py-2 bg-slate-100">{{ $t('labels.category') }}</th>
@@ -42,7 +44,6 @@
 <script>
 import ChartService from '../../services/chart.service';
 import { ref, onMounted } from 'vue';
-import loading from 'vue-full-loading';
 
 export default {
   name: 'WidgetGraphTable',
