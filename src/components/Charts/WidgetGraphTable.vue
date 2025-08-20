@@ -24,7 +24,7 @@
             <tr class="hover:bg-slate-50">
               <td class="px-2 py-2 font-semibold">
                 <i :class="{ 'transform rotate-90': expandedRows[index] }"></i>
-                {{ $t('app.' + cat) }}
+                {{ cat }}
               </td>
               <td v-for="month in months" :key="month" class="px-2 py-2 text-right">
                 {{ round(getExpense(cat, month)) }} €
@@ -55,6 +55,7 @@
 import ChartService from '../../services/chart.service';
 import { ref, onMounted } from 'vue';
 import Loading from '../GenericComponents/Loading.vue'
+import { useI18n } from 'vue-i18n';
 
 export default {
   name: 'WidgetGraphTable',
@@ -73,6 +74,7 @@ export default {
   const currentYear = new Date().getFullYear();
   const loading = ref(true);
   const expandedRows = ref({});
+  const { t } = useI18n();
 
     function getMonthDateRange(monthIdx) {
       const start = new Date(currentYear, monthIdx, 1);
@@ -84,6 +86,7 @@ export default {
     }
 
     async function fetchData() {
+      
       loading.value = true;
       const chartService = new ChartService();
       const allExpenses = {};
@@ -97,14 +100,21 @@ export default {
         if (res && Array.isArray(res.bar)) {
           res.bar.forEach(item => {
             const catName = item.data?.slug;
+            const catNameTranslated = t('app.' + catName);
             allExpenses[months[i]][catName] = item.value;
-            allCategories.add(catName);
+            allCategories.add(catNameTranslated);
           });
         }
       }
       categories.value = Array.from(allCategories);
       expenses.value = allExpenses;
       loading.value = false;
+
+      categories.value = sorting(categories.value);
+    }
+
+    function sorting(categories) {
+      return categories.sort((a, b) => a.localeCompare(b));
     }
 
     function getExpense(category, month) {
