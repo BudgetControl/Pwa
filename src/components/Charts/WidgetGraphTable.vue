@@ -10,18 +10,19 @@
       </div>
     </div>
     <div class="p-4 flex-auto overflow-x-auto">
-      <table class="w-full text-xs text-left">
+      <loading :active="loading" :is-full-page="false" />
+      <table v-if="!loading" class="w-full text-xs text-left">
         <thead>
           <tr>
             <th class="px-2 py-2 bg-slate-100">{{ $t('labels.category') }}</th>
-            <th v-for="month in months" :key="month" class="px-2 py-2 bg-slate-100 text-center">{{ $t('labels.months.' + month.toLowerCase()) }}</th>
+            <th v-for="(month, idx) in months" :key="month" class="px-2 py-2 bg-slate-100 text-center">{{ $t('app.months.' + monthKeys[idx]) }}</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="cat in categories" :key="cat">
             <td class="px-2 py-2 font-semibold">{{ cat }}</td>
             <td v-for="month in months" :key="month" class="px-2 py-2 text-right">
-              {{ getExpense(cat, month) }} €
+              {{ round(getExpense(cat, month)) }} €
             </td>
           </tr>
         </tbody>
@@ -29,7 +30,7 @@
           <tr class="font-bold bg-slate-200">
             <td class="px-2 py-2">{{ $t('labels.amount') }} {{ $t('labels.monthly') }}</td>
             <td v-for="month in months" :key="month" class="px-2 py-2 text-right">
-              {{ getMonthTotal(month) }} €
+              {{ round(getMonthTotal(month)) }} €
             </td>
           </tr>
         </tfoot>
@@ -41,17 +42,22 @@
 <script>
 import ChartService from '../../services/chart.service';
 import { ref, onMounted } from 'vue';
+import loading from 'vue-full-loading';
 
 export default {
   name: 'WidgetGraphTable',
   setup() {
+    // Chiavi dei mesi per traduzione
+    const monthKeys = ['january','february','march','april','may','june','july','august','september','october','november','december'];
+    // Nomi dei mesi (per mapping)
     const months = [
       'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno',
       'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'
     ];
-    const categories = ref([]);
-    const expenses = ref({});
-    const currentYear = new Date().getFullYear();
+  const categories = ref([]);
+  const expenses = ref({});
+  const currentYear = new Date().getFullYear();
+  const loading = ref(true);
 
     function getMonthDateRange(monthIdx) {
       const start = new Date(currentYear, monthIdx, 1);
@@ -63,6 +69,7 @@ export default {
     }
 
     async function fetchData() {
+      loading.value = true;
       const chartService = new ChartService();
       const allExpenses = {};
       let allCategories = new Set();
@@ -71,7 +78,6 @@ export default {
         const res = await chartService.expensesBarByCategory([
           { start: date.start, end: date.end }
         ]);
-        // res.bar è un array di oggetti, ogni oggetto ha .value e .data.category.name
         allExpenses[months[i]] = {};
         if (res && Array.isArray(res.bar)) {
           res.bar.forEach(item => {
@@ -83,6 +89,7 @@ export default {
       }
       categories.value = Array.from(allCategories);
       expenses.value = allExpenses;
+      loading.value = false;
     }
 
     function getExpense(category, month) {
@@ -94,13 +101,21 @@ export default {
       return Object.values(cats).reduce((a, b) => a + b, 0);
     }
 
+    function round(val) {
+      // Arrotonda a 2 decimali, gestisce anche numeri negativi
+      return Math.round((val + Number.EPSILON) * 100) / 100;
+    }
+
     onMounted(fetchData);
 
     return {
       months,
+      monthKeys,
       categories,
       getExpense,
-      getMonthTotal
+      getMonthTotal,
+      round,
+      loading
     };
   }
 };
