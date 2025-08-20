@@ -101,7 +101,7 @@ export default {
           res.bar.forEach(item => {
             const catName = item.data?.slug;
             const catNameTranslated = t('app.' + catName);
-            allExpenses[months[i]][catName] = item.value;
+            allExpenses[months[i]][catNameTranslated] = item.value;
             allCategories.add(catNameTranslated);
           });
         }
