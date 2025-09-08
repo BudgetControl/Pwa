@@ -27,7 +27,6 @@
             { 'border-red-300 bg-red-50': validationErrors.transferTo }
           ]">
           <option :value="false">{{ $t('labels.choose_a_wallet_to_transfer_to') }}</option>
-          <option value="">{{ $t('labels.out_of_wallet') }}</option>
           <option v-for="item in accountsWithOutOfWallet" :key="item.id" :value="item.id">{{ item.name }}</option>
         </select>
       </div>
@@ -137,19 +136,6 @@ export default {
       }
       
       this.$emit('save', transferData)
-      this.resetForm()
-    },
-    resetForm() {
-        this.amount = null,
-        this.label = [],
-        this.note = null,
-        this.model = 0,
-        this.newlabel = null,
-        this.action.dateUpdated = false
-        this.exclude_from_stats = false
-        this.account = "-1"
-        this.transferTo = false
-        this.time()
     },
   }
 }

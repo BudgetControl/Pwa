@@ -434,6 +434,8 @@ export default {
 
             // Passa la validazione al componente padre
             this.$emit('validate-and-submit', submitData)
+            this.resetForm()
+
         },
 
         async loadEntryData() {
@@ -485,6 +487,27 @@ export default {
             
             // Emetti i dati al componente padre per popolare i campi specifici
             this.$emit('entry-loaded', entryData)
+        },
+
+        resetForm() {
+            this.formData = {
+                amount: null,
+                date_time: null,
+                note: null,
+                planning: 0,
+                end_date_time: null,
+                labels: [],
+                transfer_id: false,
+                confirmed: true,
+                waranty: false,
+                geolocalization: "",
+                exclude_from_stats: false
+            }
+            this.newLabels = []
+            this.selectedModel = "0"
+            this.name = ""
+            this.time()
+            this.setInitialShowDetails()
         },
 
         async loadModelData() {

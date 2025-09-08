@@ -194,17 +194,6 @@ export default {
             }
             
             this.$emit('save', savingData)
-            this.resetForm()
-        },
-        resetForm() {
-            this.amount = null,
-            this.label = [],
-            this.note = null,
-            this.model = 0,
-            this.newlabel = null,
-            this.action.dateUpdated = false
-            this.exclude_from_stats = false
-            this.time()
         },
     }
 }
