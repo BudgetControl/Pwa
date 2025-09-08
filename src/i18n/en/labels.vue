@@ -338,6 +338,8 @@ export default {
     reset: 'Restore',
     category_details: 'Category details',
     expenses_by_category_monthly: 'Expenses by category (monthly)',
-    expenses_by_category_comparison: 'Expenses by category (comparison)'
+    expenses_by_category_comparison: 'Expenses by category (comparison)',
+    manage_your_models: 'Manage your templates, add new ones or archive unused ones',
+    write_template_name: 'Enter template name',
 }
 </script>
