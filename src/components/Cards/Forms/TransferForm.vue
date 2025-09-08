@@ -15,7 +15,7 @@
       <div class="w-full lg:w-6/12 px-2 py-2">
         <WalletSelector 
           v-model="account" 
-          :accounts="accounts" 
+          :accounts="accountsWithOutOfWallet" 
           :required="true"
           :has-error="validationErrors.account" />
       </div>
@@ -28,7 +28,7 @@
           ]">
           <option :value="false">{{ $t('labels.choose_a_wallet_to_transfer_to') }}</option>
           <option value="">{{ $t('labels.out_of_wallet') }}</option>
-          <option v-for="item in accounts" :key="item.id" :value="item.id">{{ item.name }}</option>
+          <option v-for="item in accountsWithOutOfWallet" :key="item.id" :value="item.id">{{ item.name }}</option>
         </select>
       </div>
     </template>
@@ -68,6 +68,14 @@ export default {
         account: false,
         transferTo: false
       }
+    }
+  },
+  computed: {
+    accountsWithOutOfWallet() {
+      return [
+        { id: 0, name: this.$t('labels.out_of_wallet') },
+        ...(this.accounts || [])
+      ];
     }
   },
   methods: {
