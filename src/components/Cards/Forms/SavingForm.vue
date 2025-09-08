@@ -194,7 +194,7 @@ export default {
             }
             
             this.$emit('save', savingData)
-        }
+        },
     }
 }
 </script>

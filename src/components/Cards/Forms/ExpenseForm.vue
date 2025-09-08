@@ -150,7 +150,7 @@ export default {
       }
       
       this.$emit('save', expenseData)
-    }
+    },
   }
 }
 </script>

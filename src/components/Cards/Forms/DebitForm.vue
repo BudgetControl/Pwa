@@ -186,7 +186,7 @@ export default {
       }
       
       this.$emit('save', debitData)
-    }
+    },
   }
 }
 </script>

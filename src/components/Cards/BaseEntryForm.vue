@@ -106,11 +106,6 @@
                 <div class="w-full px-2 py-2">
                     <TextNote v-model="formData.note" :placeholder="$t('labels.add_here_your_note')" />
                 </div>
-
-                <div class="px-2 w-full" v-if="isModel">
-                    <input v-model="name" type="text" :placeholder="$t('labels.write_template_name')" id="name"
-                        class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                </div>
             </div>
         </div>
 
@@ -291,23 +286,6 @@ export default {
             return true
         },
 
-        validateModelFields() {
-            if (!this.isModel) return true
-            
-            const errors = []
-            
-            if (!this.name || this.name.trim() === '') {
-                errors.push(this.$t('messages.validation.insert_model_name'))
-            }
-            
-            if (errors.length > 0) {
-                this.showAlert(errors.join(', '), 'error')
-                return false
-            }
-            
-            return true
-        },
-
         handleNewLabel(newLabel) {
             console.log('New label received in BaseEntryForm:', newLabel) // Debug
             console.log('Current newLabels array:', this.newLabels) // Debug
@@ -398,10 +376,6 @@ export default {
             }
 
             if (!this.validatePlannedFields()) {
-                return
-            }
-
-            if (!this.validateModelFields()) {
                 return
             }
 

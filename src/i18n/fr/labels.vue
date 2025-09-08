@@ -338,6 +338,8 @@ export default {
     reset: 'Réinitialiser',
     category_details: 'Détails de la catégorie',
     expenses_by_category_monthly: 'Dépenses par catégorie (mensuel)',
-    expenses_by_category_comparison: 'Dépenses par catégorie (comparaison)'
+    expenses_by_category_comparison: 'Dépenses par catégorie (comparaison)',
+    manage_your_models: 'Gérez vos modèles, ajoutez-en de nouveaux ou archivez ceux inutilisés',
+    write_template_name: 'Écrivez le nom du modèle',
 }
 </script>

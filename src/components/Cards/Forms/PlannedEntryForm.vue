@@ -273,7 +273,7 @@ export default {
         .catch(() => {
           window.alert(this.$t('messages.generic_error'), "error")
         })
-    }
+    },
   }
 }
 </script>

@@ -207,10 +207,10 @@ export default {
             },
             action: {
                 no_entry_found: false,
-                account: null,
-                category: null,
+                account: [],
+                category: [],
                 type: [],
-                tags: null,
+                tags: [],
                 text: null,
                 planned: true,
                 date_time: null
@@ -330,10 +330,10 @@ export default {
         resetForm() {
             this.action = {
                 no_entry_found: false,
-                account: null,
-                category: null,
+                account: [],
+                category: [],
                 type: [],
-                tags: null,
+                tags: [],
                 text: null,
                 planned: true,
                 date_time: null

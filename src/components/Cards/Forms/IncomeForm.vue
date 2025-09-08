@@ -132,7 +132,7 @@ export default {
       }
       
       this.$emit('save', incomeData)
-    }
+    },
   }
 }
 </script>

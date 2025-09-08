@@ -9,7 +9,7 @@
                     <div class="container px-4 mx-auto">
                         <!--content-->
 
-                        <CardAddEntry :isModel="true" :entryId="this.$route.params.entry_id" />
+                        <CardModelForm :isModel="true" :entryId="this.$route.params.entry_id" />
 
                     </div>
                 </div>
@@ -21,11 +21,11 @@
 
 import HeaderButton from '@/components/Button/HeaderButton.vue';
 import '@vuepic/vue-datepicker/dist/main.css'
-import CardAddEntry from '../../../components/Cards/CardAddEntry.vue';
+import CardModelForm from '../../../components/Cards/CardModelForm.vue';
 
 export default {
     components: {
-        HeaderButton, CardAddEntry
+        HeaderButton, CardModelForm
     },
     methods: {
         getComponentData() {
