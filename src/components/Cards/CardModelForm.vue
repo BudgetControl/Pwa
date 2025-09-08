@@ -97,14 +97,14 @@
 </template>
 
 <script>
-import { useAppSettings } from '../../../storage/settings.store';
-import CoreService from '../../../services/core.service';
-import GoalService from '../../../services/goal.service';
-import AlertModal from '../../GenericComponents/AlertModal.vue';
-import ExpenseForm from './ExpenseForm.vue';
-import IncomeForm from './IncomeForm.vue';
-import DebitForm from './DebitForm.vue';
-import SavingForm from './SavingForm.vue';
+import { useAppSettings } from '../../storage/settings.store';
+import CoreService from '../../services/core.service';
+import GoalService from '../../services/goal.service';
+import AlertModal from '../GenericComponents/AlertModal.vue';
+import ExpenseForm from './Forms/ExpenseForm.vue';
+import IncomeForm from './Forms/IncomeForm.vue';
+import DebitForm from './Forms/DebitForm.vue';
+import SavingForm from './Forms/SavingForm.vue';
 
 export default {
   components: {
