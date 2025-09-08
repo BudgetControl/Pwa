@@ -279,17 +279,8 @@ export default {
             this.$t('labels.entry_saved')
           window.alert(message, "success")
           
-          // Redirect o altra logica post-save
           if (uuid) {
-            // In modalità edit, potresti voler tornare alla lista o alla dashboard
             this.$router.push('/app/entries')
-          } else {
-            //reset amount - note - date time fields
-            data.amount = null
-            data.note = ''
-            data.date = new Date().toISOString().slice(0, 10)
-            data.confirmed = true
-            data.labels = []
           }
         })
         .catch((error) => {

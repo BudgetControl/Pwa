@@ -186,7 +186,21 @@ export default {
       }
       
       this.$emit('save', debitData)
-    }
+      this.resetForm()
+    },
+    resetForm() {
+        this.amount = null,
+        this.label = [],
+        this.note = null,
+        this.model = 0,
+        this.newlabel = null,
+        this.action.dateUpdated = false
+        this.exclude_from_stats = false
+        this.account = "-1"
+        this.debit = 0
+        this.debit_name = null
+        this.time()
+    },
   }
 }
 </script>

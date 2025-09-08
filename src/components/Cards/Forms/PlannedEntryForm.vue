@@ -269,11 +269,22 @@ export default {
       this.apiService.setEntry(data.type, plannedEntryData, true, this.entryId)
         .then(() => {
           window.alert(this.$t('labels.entry_saved'), "success")
+          this.resetForm()
         })
         .catch(() => {
           window.alert(this.$t('messages.generic_error'), "error")
         })
-    }
+    },
+    resetForm() {
+        this.amount = null,
+        this.label = [],
+        this.note = null,
+        this.model = 0,
+        this.newlabel = null,
+        this.action.dateUpdated = false
+        this.exclude_from_stats = false
+        this.time()
+    },
   }
 }
 </script>
