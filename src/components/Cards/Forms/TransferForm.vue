@@ -125,11 +125,12 @@ export default {
       if (!this.validateForm()) {
         return
       }
-      
+
+      const accountId = this.account == 0 ? null : parseInt(this.account)
       const transferData = {
         ...baseData,
         type: "transfer",
-        account_id: parseInt(this.account),
+        account_id: accountId,
         transfer_id: this.transferTo === "" ? "" : (this.transferTo === false ? false : parseInt(this.transferTo)),
         category_id: 0, // Transfer non ha categoria
         amount: Math.abs(baseData.amount) // Transfer sempre positivo
