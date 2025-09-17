@@ -4,42 +4,59 @@
       {{ label }}
     </label>
     
-    <!-- Select per scegliere etichette esistenti -->
-    <select 
-      :value="modelValue" 
-      @input="handleLabelSelect"
-      multiple
-      :class="[
-        'w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150 mb-3',
-        { 'border-red-300 bg-red-50': hasError }
-      ]">
-      <option 
-        v-for="item in availableLabels" 
-        :key="item.id" 
-        :value="item.id"
-        :style="'color: #fff; background-color: ' + item.color"
-        class="text-xs font-semibold justify-center py-1 px-2 uppercase rounded text-white-600">
-        {{ item.name }}
-      </option>
-    </select>
+    <!-- Lista di checkbox per desktop -->
+    <div class="desktop-grid label-selector-grid w-full border-0 bg-white rounded text-sm shadow mb-3" v-if="!isMobile">
+      <div class="flex flex-col">
+        <div v-for="item in sortedLabels" 
+            :key="item.id" 
+            @click="toggleLabel(item)"
+            class="label-item cursor-pointer p-1"
+            :class="{ 'selected': isSelected(item) }">
+          <span 
+            class="text-xs font-semibold py-2 px-4 uppercase w-full text-center block"
+            :style="'color: #fff; background-color: ' + item.color">
+            {{ item.name }}
+          </span>
+        </div>
+      </div>
+    </div>
 
-    <!-- Suggerimento per l'utente -->
-    <p class="text-xs text-slate-500 mb-3">
-      {{ $t('labels.label_input_hint') }}
-    </p>
+    <!-- Select multipla per mobile -->
+    <div class="mobile-select w-full mb-3" v-if="isMobile">
+      <select 
+        v-model="selectedLabels"
+        multiple
+        class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
+        <option 
+          v-for="item in availableLabels" 
+          :key="item.id" 
+          :value="item"
+          :style="'color: #fff; background-color: ' + item.color"
+          class="text-xs font-semibold py-1 px-2 uppercase">
+          {{ item.name }}
+        </option>
+      </select>
+    </div>
 
     <!-- Input per creare nuove etichette -->
-    <input 
-      v-model="newLabelInput" 
-      type="text" 
-      :placeholder="$t('labels.or_nsert_new_tag_name')"
-      @keypress.enter="addNewLabel"
-      @input="handleInputChange"
-      class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150 mb-3" />
-
+    <div class="flex w-full mb-3">
+      <input 
+        v-model="newLabelInput" 
+        type="text" 
+        :placeholder="$t('labels.or_nsert_new_tag_name')"
+        @keypress.enter.prevent="addNewLabel"
+        @input="handleInputChange"
+        class="flex-1 border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded-l text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150" />
+      <button 
+        @click="addNewLabel"
+        class="px-4 bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm rounded-r shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+        :disabled="!newLabelInput.trim()">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
 
     <!-- Visualizzazione etichette selezionate -->
-    <div class="w-full flex flex-wrap" v-if="selectedLabels.length > 0">
+    <div class="w-full flex flex-wrap mt-3" v-if="selectedLabels.length > 0">
       <div v-for="(item, i) in selectedLabels" :key="i" class="mb-2">
         <span 
           @click="removeLabel(item)"
@@ -54,6 +71,8 @@
 </template>
 
 <script>
+import { libs } from '../../libs'
+
 export default {
   name: 'LabelSelector',
   props: {
@@ -81,10 +100,19 @@ export default {
   data() {
     return {
       newLabelInput: '',
-      selectedLabels: []
+      selectedLabels: [],
+      isMobile: false
     }
   },
   emits: ['update:modelValue', 'new-label'],
+  computed: {
+    sortedLabels() {
+      return [...this.availableLabels].sort((a, b) => a.name.localeCompare(b.name))
+    }
+  },
+  async created() {
+    this.isMobile = await libs.isMobile()
+  },
   watch: {
     modelValue: {
       immediate: true,
@@ -100,15 +128,22 @@ export default {
     }
   },
   methods: {
-    handleLabelSelect(event) {
-      const selectedIds = Array.from(event.target.selectedOptions).map(option => option.value)
-      console.log('Selected from dropdown:', selectedIds) // Debug
-      this.updateModelValue(selectedIds)
+    isSelected(item) {
+      return this.selectedLabels.some(label => label.id === item.id)
+    },
+
+    toggleLabel(item) {
+      const index = this.selectedLabels.findIndex(label => label.id === item.id)
+      if (index === -1) {
+        this.selectedLabels.push(item)
+      } else {
+        this.selectedLabels.splice(index, 1)
+      }
+      this.emitSelectedLabels()
     },
     
     handleInputChange(event) {
       const value = event.target.value
-      
       // Auto-aggiungi etichette quando l'utente digita uno spazio o virgola
       if (value.includes(' ') || value.includes(',')) {
         this.addNewLabel()
@@ -117,8 +152,6 @@ export default {
     
     addNewLabel() {
       if (this.newLabelInput.trim()) {
-        console.log('Adding new label:', this.newLabelInput) // Debug
-        
         // Split by space, comma, or combination
         const separators = /[\s,]+/
         const newLabels = this.newLabelInput.split(separators)
@@ -131,43 +164,42 @@ export default {
             label.name.toLowerCase() === labelName.toLowerCase()
           )
           
-          if (!existingLabel) {
-            // Crea una nuova etichetta temporanea
+          if (existingLabel) {
+            // Se l'etichetta esiste, selezionala automaticamente
+            if (!this.selectedLabels.find(sl => sl.id === existingLabel.id)) {
+              this.selectedLabels.push(existingLabel)
+            }
+          } else {
+            // Crea una nuova etichetta
             const newLabel = {
               id: `temp_${Date.now()}_${Math.random()}`,
               name: labelName,
               color: this.generateRandomColor(),
               isNew: true
             }
-            
-            console.log('Created new label:', newLabel) // Debug
-            
-            // Aggiungi la nuova etichetta alle selectedLabels
             this.selectedLabels.push(newLabel)
-            
-            // Emetti immediatamente la nuova label al componente padre
             this.$emit('new-label', newLabel)
-          } else {
-            console.log('Adding existing label:', existingLabel) // Debug
-            // Aggiungi l'etichetta esistente se non è già selezionata
-            if (!this.selectedLabels.find(selected => selected.id === existingLabel.id)) {
-              this.selectedLabels.push(existingLabel)
-            }
           }
         })
         
         // Pulisci l'input
         this.newLabelInput = ''
-        
-        // Aggiorna il model value con tutti gli ID selezionati
+        // Aggiorna il model value
         this.emitSelectedLabels()
       }
     },
     
     removeLabel(labelToRemove) {
-      console.log('Removing label:', labelToRemove) // Debug
+      // Rimuovi l'etichetta dalla lista selezionata
       this.selectedLabels = this.selectedLabels.filter(label => label.id !== labelToRemove.id)
-      this.emitSelectedLabels()
+      
+      // Se era una nuova etichetta temporanea, rimuovila completamente
+      if (labelToRemove.isNew) {
+        this.$emit('update:modelValue', this.selectedLabels.map(label => label.id))
+      } else {
+        // Altrimenti aggiorna solo la lista delle selezioni
+        this.emitSelectedLabels()
+      }
     },
     
     updateSelectedLabels(selectedIds) {
@@ -202,9 +234,7 @@ export default {
     },
     
     emitSelectedLabels() {
-      const selectedIds = this.selectedLabels.map(label => label.id)
-      console.log('Emitting selected labels:', selectedIds) // Debug
-      this.$emit('update:modelValue', selectedIds)
+      this.$emit('update:modelValue', this.selectedLabels.map(label => label.id))
     },
     
     generateRandomColor() {
