@@ -161,3 +161,62 @@
 .bg-opacity-90 {
     opacity: 0.9;
 }
+
+// Label Selector styles
+.label-selector-grid {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #e2e8f0;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+    
+    &:hover {
+      background: #94a3b8;
+    }
+  }
+
+  .label-item {
+    transition: all 0.2s ease;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+    
+    &.selected {
+      opacity: 0.7;
+    }
+    
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    span {
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .mobile-select {
+      display: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .desktop-grid {
+      display: none;
+    }
+  }
+}
