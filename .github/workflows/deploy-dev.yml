@@ -42,7 +42,9 @@ jobs:
             aws-region: ${{ secrets.AWS_REGION }}
             
         - name: Deploy to S3
-          run: aws s3 sync dist/ s3://${{ secrets.BUCKET_NAME }} --delete
+          run: |
+            cp bin/apache/htaccess.conf dist/.htaccess
+            aws s3 sync dist/. s3://${{ secrets.BUCKET_NAME }}
 
         - name: Invalidate CloudFront cache
           if: success()
