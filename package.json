@@ -17,7 +17,12 @@
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm run build:tailwind && npm run serve",
     "start": "npm run serve",
     "build:android": "npm run build && npx cap sync && npx cap run android",
-    "sync:android": "npm run build && npx cap sync"
+    "sync:android": "npm run build && npx cap sync",
+    "test:e2e": "cypress run",
+    "test:e2e:open": "cypress open",
+    "test:e2e:headless": "cypress run --headless",
+    "test:e2e:chrome": "cypress run --browser chrome",
+    "test:e2e:firefox": "cypress run --browser firefox"
   },
   "dependencies": {
     "@capacitor-firebase/messaging": "^7.3.0",
