@@ -20,7 +20,7 @@ export interface UserInfo {
             deleted_at: string | null;
             user_id: number;
             workspace_id: number;
-        }[];
+        }[],
         current_ws: string;
         workspace_settings: {
             id: number;
@@ -30,10 +30,11 @@ export interface UserInfo {
             created_at: string;
             updated_at: string;
             deleted_at: string | null;
-        };
+        },
         shared_with: {
             email: string;
             name: string;
-        }[];
+        }[],
+        username: string
     };
 }
