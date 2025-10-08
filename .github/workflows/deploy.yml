@@ -35,7 +35,7 @@ jobs:
           echo VUE_APP_GOOGLE_PLAY_STORE_URL=https://google.com >> .env
 
       - name: Install Dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm install --legacy-peer-deps
 
       - name: Build Application
         run: npm run build
