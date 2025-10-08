@@ -1,8 +1,6 @@
 name: Cypress E2E Tests
 
 on:
-  push:
-    branches: [ master, develop ]
   pull_request:
     branches: [ master ]
 
@@ -17,7 +15,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies
