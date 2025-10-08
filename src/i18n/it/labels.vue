@@ -68,6 +68,7 @@ export default {
     labels: 'Etichette',
     entry_type: 'Tipo di voce',
     enable_email_notification: 'Abilita notifica email',
+    include_planned_entries: 'Includi voci pianificate',
     save_budget: 'Salva budget',
     add_new_wallet: 'Aggiungi nuovo portafoglio',
     show_archived: 'Mostra archiviati',

@@ -68,6 +68,7 @@ export default {
     labels: 'Labels',
     entry_type: 'Eintragstyp',
     enable_email_notification: 'E-Mail-Benachrichtigung aktivieren',
+    include_planned_entries: 'Geplante Einträge einbeziehen',
     save_budget: 'Budget speichern',
     add_new_wallet: 'Neue Wallet hinzufügen',
     show_archived: 'Archivierte anzeigen',

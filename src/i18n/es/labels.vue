@@ -68,6 +68,7 @@ export default {
     labels: 'Etiquetas',
     entry_type: 'Tipo de entrada',
     enable_email_notification: 'Habilitar notificación por correo',
+    include_planned_entries: 'Incluir entradas planificadas',
     save_budget: 'Guardar presupuesto',
     add_new_wallet: 'Agregar nueva billetera',
     show_archived: 'Mostrar archivados',

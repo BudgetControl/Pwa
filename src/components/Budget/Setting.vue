@@ -183,6 +183,17 @@
                                 </div>
                             </div>
 
+                            <div class="flex flex-wrap py-3">
+                                <div class="lg:w-12/12 px-2 w-full">
+                                    <input id="include-planned-checkbox" type="checkbox" v-model="data.include_planned"
+                                        :checked="data.include_planned" value="true"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                    <label for="include-planned-checkbox"
+                                        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                        {{ $t('labels.include_planned_entries') }}</label>
+                                </div>
+                            </div>
+
                             <div class="flex flex-wrap py-3" v-if="data.notification">
                                 <div class="lg:w-12/12 px-2 w-full">
 
@@ -279,7 +290,8 @@ export default {
                 name: null,
                 note: null,
                 notification: false,
-                emails: []
+                emails: [],
+                include_planned: false
             }
         }
     },
@@ -316,6 +328,7 @@ export default {
                 _this.data.emails = resp.emails.length == 0 ? null : resp.emails
                 _this.data.period_start = resp.configuration.period_start
                 _this.data.period_end = resp.configuration.period_end
+                _this.data.include_planned = resp.configuration.include_planned || false
             })
         },
         getLabels() {
@@ -373,6 +386,7 @@ export default {
                         "accounts": this.data.account,
                         "period_start": this.data.period_start,
                         "period_end": this.data.period_end,
+                        "include_planned": this.data.include_planned,
                     },
                     "notification": this.data.notification,
                     "emails": this.data.emails,
@@ -400,6 +414,7 @@ export default {
                         "accounts": this.data.account,
                         "period_start": this.data.period_start,
                         "period_end": this.data.period_end,
+                        "include_planned": this.data.include_planned,
                     },
                     "notification": this.data.notification,
                     "emails": this.data.emails,
