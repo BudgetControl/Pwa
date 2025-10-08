@@ -18,11 +18,11 @@
     "start": "npm run serve",
     "build:android": "npm run build && npx cap sync && npx cap run android",
     "sync:android": "npm run build && npx cap sync",
-    "test:e2e": "cypress run",
-    "test:e2e:open": "cypress open",
-    "test:e2e:headless": "cypress run --headless",
-    "test:e2e:chrome": "cypress run --browser chrome",
-    "test:e2e:firefox": "cypress run --browser firefox"
+    "test:e2e": "npx cypress run",
+    "test:e2e:open": "npx cypress open",
+    "test:e2e:headless": "npx cypress run --headless",
+    "test:e2e:chrome": "npx cypress run --browser chrome",
+    "test:e2e:firefox": "npx cypress run --browser firefox"
   },
   "dependencies": {
     "@capacitor-firebase/messaging": "^7.3.0",
@@ -86,7 +86,7 @@
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.5.1",
     "autoprefixer": "^10.4.20",
-    "cypress": "^13.3.3",
+    "cypress": "^13.17.0",
     "eslint": "^8.57.1",
     "eslint-plugin-cypress": "^3.3.0",
     "eslint-plugin-vue": "^9.29.0",
