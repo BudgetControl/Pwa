@@ -190,9 +190,13 @@ describe('Accessibility Tests', () => {
     });
 
     it('should have adequately sized touch targets (44x44px minimum)', () => {
-      cy.get('button[type="submit"]').then(($btn) => {
-        const height = $btn.height();
-        const width = $btn.width();
+      cy.get('button[type="submit"]').first().then(($btn) => {
+        const height = $btn.outerHeight();
+        const width = $btn.outerWidth();
+        
+        // Log for debugging
+        cy.log(`Button dimensions: ${width}x${height}`);
+        
         expect(height).to.be.at.least(44);
         expect(width).to.be.at.least(44);
       });
@@ -213,7 +217,7 @@ describe('Accessibility Tests', () => {
     });
 
     it('should have proper text direction', () => {
-      cy.get('html').should('have.attr', 'dir').or('not.have.attr', 'dir');
+      cy.get('html').should('have.attr', 'dir');
     });
 
     it('should support multiple languages', () => {
