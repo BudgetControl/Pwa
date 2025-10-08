@@ -96,7 +96,8 @@ describe('Navigation and Routing', () => {
   describe('Browser Back/Forward Navigation', () => {
     it('should navigate back and forward correctly', () => {
       cy.visit('/app/auth/login');
-      cy.contains('Create new account').click();
+      // Use href selector instead of text to avoid translation issues
+      cy.get('a[href*="register"]').first().click();
       cy.url().should('include', '/app/auth/register');
       
       cy.go('back');

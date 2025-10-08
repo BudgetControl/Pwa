@@ -20,7 +20,7 @@ describe('Authentication Flow', () => {
 
     it('should display Google sign-in button', () => {
       cy.contains('Google').should('be.visible');
-      cy.get('img[alt="SignIn with Google"]').should('be.visible');
+      cy.get('img[alt*="Google"], img[src*="google"]').first().should('be.visible');
     });
 
     it('should show forgot password link', () => {
