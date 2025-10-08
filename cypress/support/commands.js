@@ -119,3 +119,13 @@ Cypress.Commands.add('testResponsive', (callback) => {
     callback(name, width, height);
   });
 });
+
+// Custom command to simulate tab key navigation
+Cypress.Commands.add('tab', { prevSubject: 'optional' }, (subject) => {
+  if (subject) {
+    cy.wrap(subject).trigger('keydown', { key: 'Tab', code: 'Tab', keyCode: 9 });
+  } else {
+    cy.focused().trigger('keydown', { key: 'Tab', code: 'Tab', keyCode: 9 });
+  }
+  return cy.focused();
+});
