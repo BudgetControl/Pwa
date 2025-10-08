@@ -345,7 +345,7 @@ export default {
         },
         getAccount() {
             let _this = this
-            this.apiService.accounts('?order[name]=asc').then((res) => {
+            this.apiService.accounts('?order[name]=asc&filters[archived]=false').then((res) => {
                 let data = res
                 data.forEach(function (r) {
                     _this.input.account.push(r)
