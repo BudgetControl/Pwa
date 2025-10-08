@@ -97,6 +97,8 @@ import loading from 'vue-full-loading'
 import VerifyEmailButton from "../../components/Auth/VerifyEmailButton.vue";
 import { useAuthStore } from "../../storage/auth-token.store";
 import { useAppSettings } from "../../storage/settings.store";
+import { Browser } from '@capacitor/browser';
+import { App } from '@capacitor/app';
 
 export default {
   setup() {
@@ -120,6 +122,7 @@ export default {
       show: false,
       error: null,
       verify: false,
+      appUrlListener: null,
     };
   },
   mounted() {
@@ -127,6 +130,30 @@ export default {
     if (this.authStore.authToken.token != undefined && this.authStore.bcAuthToken.token != undefined) {
       console.debug("Return to dashboard")
       this.$router.push({ path: '/app/dashboard' })
+    }
+
+    // Listen for app URL open events (deep links)
+    this.appUrlListener = App.addListener('appUrlOpen', (data) => {
+      const url = data.url;
+      console.debug('App opened with URL:', url);
+      
+      // Check if it's the OAuth callback
+      if (url.includes('com.bcapp://auth')) {
+        const urlParams = new URL(url);
+        const code = urlParams.searchParams.get('code');
+        
+        if (code) {
+          // Close the browser and navigate to token page
+          Browser.close();
+          this.$router.push({ name: 'token', query: { code } });
+        }
+      }
+    });
+  },
+  beforeUnmount() {
+    // Remove the listener when component is destroyed
+    if (this.appUrlListener) {
+      this.appUrlListener.remove();
     }
   },
   methods: {
@@ -167,8 +194,10 @@ export default {
       this.error = false
 
       const authService = new AuthService()
-      authService.providerUri('google').then((resp) => {
-        window.open(resp.uri, '_self');
+      authService.providerUri('google').then(async (resp) => {
+        // Use Capacitor Browser for in-app authentication
+        await Browser.open({ url: resp.uri, windowName: '_self' });
+        _this.show = false;
       }).catch(() => {
         _this.show = false
         _this.error = this.$t('messages.generic_error')
