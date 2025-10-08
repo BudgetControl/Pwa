@@ -111,6 +111,7 @@ export default {
     archive: 'Archive',
     unarchive: 'Unarchive',
     search: 'Search',
+    search_labels: 'Search labels...',
     show_details: 'Show details',
     bounce_rate: 'Bounce rate',
     session_duration: 'Session duration',

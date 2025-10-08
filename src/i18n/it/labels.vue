@@ -111,6 +111,7 @@ export default {
     archive: 'Archivia',
     unarchive: 'Disarchivia',
     search: 'Cerca',
+    search_labels: 'Cerca etichette...',
     show_details: 'Mostra dettagli',
     bounce_rate: 'Differenza',
     session_duration: 'Durata sessione',
