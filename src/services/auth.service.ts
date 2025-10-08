@@ -1,10 +1,13 @@
 import ApiService from './api.service';
 import { useAppSettings } from '../storage/settings.store';
 import { useAuthStore } from '../storage/auth-token.store';
+import { Auth } from '../types/api/auth';
+import { UserInfo } from '../types/api/user-info.type';
+import { SignUpResponse } from '../types/api/sign-up';
 
 class AuthService extends ApiService {
 
-    async login(email: string, password: string) {
+    async login(email: string, password: string): Promise<Auth> {
         const response = await this.instance.post('/api/auth/authenticate', {
             email: email,
             password: password
@@ -25,7 +28,7 @@ class AuthService extends ApiService {
         email: string,
         password: string,
         confirm_password: string
-    }) {
+    }): Promise<SignUpResponse> {
         const response = await this.instance.post('/api/auth/sign-up', {
             name: user.name,
             password: user.password,
@@ -122,7 +125,7 @@ class AuthService extends ApiService {
         return response.data;
     }
 
-    async userInfo() {
+    async userInfo(): Promise<UserInfo> {
         //retrive access token header
         const response = await this.instance.get('/api/auth/user-info');
         this.setUpUserInfo(response);
