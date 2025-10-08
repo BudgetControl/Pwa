@@ -16,8 +16,10 @@ module.exports = defineConfig({
   },
   component: {
     devServer: {
-      framework: "vue",
+      framework: "vue-cli",
       bundler: "webpack",
     },
+    specPattern: 'src/**/*.cy.{js,jsx,ts,tsx}',
+    supportFile: 'cypress/support/component.js',
   },
 });
