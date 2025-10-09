@@ -111,6 +111,7 @@ export default {
     archive: 'Archivieren',
     unarchive: 'Wiederherstellen',
     search: 'Suchen',
+    search_labels: 'Etiketten suchen...',
     show_details: 'Details anzeigen',
     bounce_rate: 'Absprungrate',
     session_duration: 'Sitzungsdauer',
