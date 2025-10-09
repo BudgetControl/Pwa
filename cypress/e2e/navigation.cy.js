@@ -42,6 +42,7 @@ describe('Navigation and Routing', () => {
     });
     
     it('should have sidebar with navigation items', () => {
+      cy.mockAuthAPIs();
       cy.visit('/app/dashboard');
       
       // Check for sidebar navigation items - case insensitive to handle translations
@@ -68,6 +69,7 @@ describe('Navigation and Routing', () => {
     });
 
     it('should show mobile menu toggle on small screens', () => {
+      cy.mockAuthAPIs();
       cy.visit('/app/dashboard');
       
       // Look for hamburger menu icon

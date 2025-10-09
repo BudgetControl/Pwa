@@ -36,6 +36,7 @@ describe('Authentication Flow', () => {
     });
 
     it('should validate empty form submission', () => {
+      cy.mockAuthAPIs();
       cy.get('button[type="submit"]').click();
       // Form should not submit with empty fields
       cy.url().should('include', '/app/auth/login');
@@ -108,6 +109,7 @@ describe('Authentication Flow', () => {
     });
 
     it('should successfully register with valid data', () => {
+      cy.mockAuthAPIs();
       cy.mockSignUp(201);
       cy.get('input[type="text"]').type('New User');
       cy.get('input[type="email"]').type('newuser@example.com');
@@ -167,6 +169,7 @@ describe('Authentication Flow', () => {
     });
 
     it('should successfully logout', () => {
+      cy.mockAuthAPIs();
       cy.visit('/app/dashboard');
       // Trigger logout action - this will vary based on your app
       // Assuming there's a logout button or menu item

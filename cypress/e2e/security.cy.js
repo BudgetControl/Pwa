@@ -8,6 +8,7 @@ describe('Security Tests', () => {
 
   describe('Authentication Security', () => {
     it('should redirect unauthenticated users to login', () => {
+      cy.mockAuthAPIs();
       cy.visit('/app/dashboard');
       cy.url().should('include', '/app/auth/login');
     });
@@ -39,6 +40,7 @@ describe('Security Tests', () => {
 
     it('should handle token expiration', () => {
       cy.mockCheckAuth(401, false);
+      cy.mockAuthAPIs();
       cy.window().then((win) => {
         // Set expired token
         const expiredDate = new Date();
@@ -159,7 +161,6 @@ describe('Security Tests', () => {
   describe('Data Storage Security', () => {
     it('should store sensitive tokens securely', () => {
       cy.mockAuth();
-      
       cy.window().then((win) => {
         const authToken = win.localStorage.getItem('auth-token');
         expect(authToken).to.exist;
@@ -189,6 +190,7 @@ describe('Security Tests', () => {
     it('should invalidate session after logout', () => {
       cy.mockAuth();
       cy.mockLogout(200);
+      cy.mockAuthAPIs();
       cy.visit('/app/dashboard');
       
       cy.clearAuth();
@@ -198,6 +200,7 @@ describe('Security Tests', () => {
 
     it('should handle multiple tabs correctly', () => {
       cy.mockAuth();
+      cy.mockAuthAPIs();
       cy.visit('/app/dashboard');
       
       // Storage should be consistent
