@@ -185,7 +185,7 @@
 
                             <div class="flex flex-wrap py-3" v-if="data.notification">
                                 <div class="lg:w-12/12 px-2 w-full">
-
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">{{ $t('labels.notification_emails') }}</label>
                                     <select v-model="data.emails" multiple
                                         class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                                         <option v-for="(email, id) in input.emails" :key="id" :value="email.email"
@@ -193,7 +193,13 @@
                                             {{ email.name }}
                                         </option>
                                     </select>
-
+                                    <label class="block text-sm font-medium text-gray-700 mt-4 mb-2">{{ $t('labels.notification_thresholds') }}</label>
+                                    <input type="text" v-model="thresholdInput" @keyup.enter="addThreshold" placeholder="Es: 60 per 60%" class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 mb-2" />
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <span v-for="(t, idx) in data.thresholds" :key="idx" class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">
+                                            {{ t }}% <button @click="removeThreshold(idx)" class="ml-1 text-red-500">&times;</button>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -267,6 +273,7 @@ export default {
                 emails: []
             },
             id: null,
+            thresholdInput: '',
             data: {
                 account: [],
                 category: [],
@@ -279,7 +286,8 @@ export default {
                 name: null,
                 note: null,
                 notification: false,
-                emails: []
+                emails: [],
+                thresholds: []
             }
         }
     },
@@ -297,6 +305,16 @@ export default {
         this.getEmails()
     },
     methods: {
+        addThreshold() {
+            const val = parseInt(this.thresholdInput)
+            if (!isNaN(val) && val > 0 && val < 100 && !this.data.thresholds.includes(val)) {
+                this.data.thresholds.push(val)
+                this.thresholdInput = ''
+            }
+        },
+        removeThreshold(idx) {
+            this.data.thresholds.splice(idx, 1)
+        },
         deleteBudget() {
             this.budgetService.deleteBudget(this.id)
             this.$router.push({ path: '/app/budgets' })
@@ -376,10 +394,9 @@ export default {
                     },
                     "notification": this.data.notification,
                     "emails": this.data.emails,
+                    "thresholds": this.data.thresholds,
                 }
-
                 this.budgetService.createBudget(data).then(() => {
-                    //return
                     alert("Budget created", 'success')
                 }).catch(() => {
                     alert("Error creating budget", 'error')
@@ -403,9 +420,9 @@ export default {
                     },
                     "notification": this.data.notification,
                     "emails": this.data.emails,
+                    "thresholds": this.data.thresholds,
                 }
                 this.budgetService.updateBudget(data, this.id).then(() => {
-                    //return
                     alert("Budget updated", 'success')
                 }).catch(() => {
                     alert("Error updating budget", 'error')
