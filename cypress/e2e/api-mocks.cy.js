@@ -337,6 +337,7 @@ describe('API Mocks Tests', () => {
     });
 
     it('should mock finalize registration endpoint', () => {
+      cy.mockAuthAPIs();
       cy.request('POST', '/api/auth/user-uuid-123/finalize/sign-up', {
         workspace: {
           name: 'My Workspace',
