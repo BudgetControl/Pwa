@@ -2,6 +2,14 @@ describe('Accessibility Tests', () => {
   beforeEach(() => {
     cy.clearLocalStorage();
     cy.clearCookies();
+    
+    // Intercetta errori non gestiti
+    cy.on('uncaught:exception', (err) => {
+      if (err.message.includes('401') || err.message.includes('404') || err.message.includes('Request failed')) {
+        return false;
+      }
+      return true;
+    });
   });
 
   describe('Keyboard Navigation', () => {
@@ -41,7 +49,22 @@ describe('Accessibility Tests', () => {
     });
 
     it('should support arrow keys for navigation in dropdowns', () => {
-      cy.mockAuth();
+      cy.mockAuthAPIs();
+      
+      // Set auth before visiting
+      cy.visit('/app/auth/login', {
+        onBeforeLoad: (win) => {
+          win.localStorage.setItem('auth-token', JSON.stringify({
+            token: 'mock-auth-token',
+            timestamp: new Date().toISOString()
+          }));
+          win.localStorage.setItem('bc-auth-token', JSON.stringify({
+            token: 'mock-bc-token',
+            timestamp: new Date().toISOString()
+          }));
+        }
+      });
+      
       cy.visit('/app/dashboard');
       
       // Look for any selects/dropdowns

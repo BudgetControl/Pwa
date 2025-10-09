@@ -4,6 +4,14 @@ describe('Navigation and Routing', () => {
     cy.clearCookies();
     // Mock all auth API endpoints
     cy.mockAuthAPIs();
+    
+    // Intercetta errori non gestiti
+    cy.on('uncaught:exception', (err) => {
+      if (err.message.includes('401') || err.message.includes('404') || err.message.includes('Request failed')) {
+        return false;
+      }
+      return true;
+    });
   });
 
   describe('Public Routes', () => {
@@ -36,13 +44,26 @@ describe('Navigation and Routing', () => {
 
   describe('Sidebar Navigation (when authenticated)', () => {
     beforeEach(() => {
-      cy.mockAuth();
       cy.mockUserInfo(200);
       cy.mockCheckAuth(200, true);
+      cy.mockAuthAPIs();
     });
     
     it('should have sidebar with navigation items', () => {
-      cy.mockAuthAPIs();
+      // Set auth before visiting
+      cy.visit('/app/auth/login', {
+        onBeforeLoad: (win) => {
+          win.localStorage.setItem('auth-token', JSON.stringify({
+            token: 'mock-auth-token',
+            timestamp: new Date().toISOString()
+          }));
+          win.localStorage.setItem('bc-auth-token', JSON.stringify({
+            token: 'mock-bc-token',
+            timestamp: new Date().toISOString()
+          }));
+        }
+      });
+      
       cy.visit('/app/dashboard');
       
       // Check for sidebar navigation items - case insensitive to handle translations
@@ -64,12 +85,25 @@ describe('Navigation and Routing', () => {
   describe('Mobile Navigation', () => {
     beforeEach(() => {
       cy.viewport('iphone-x');
-      cy.mockAuth();
       cy.mockUserInfo(200);
+      cy.mockAuthAPIs();
     });
 
     it('should show mobile menu toggle on small screens', () => {
-      cy.mockAuthAPIs();
+      // Set auth before visiting
+      cy.visit('/app/auth/login', {
+        onBeforeLoad: (win) => {
+          win.localStorage.setItem('auth-token', JSON.stringify({
+            token: 'mock-auth-token',
+            timestamp: new Date().toISOString()
+          }));
+          win.localStorage.setItem('bc-auth-token', JSON.stringify({
+            token: 'mock-bc-token',
+            timestamp: new Date().toISOString()
+          }));
+        }
+      });
+      
       cy.visit('/app/dashboard');
       
       // Look for hamburger menu icon

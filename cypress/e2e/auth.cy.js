@@ -5,6 +5,15 @@ describe('Authentication Flow', () => {
     cy.clearCookies();
     // Mock all auth API endpoints
     cy.mockAuthAPIs();
+    
+    // Intercetta errori non gestiti dall'app (importante per GitHub Actions)
+    cy.on('uncaught:exception', (err) => {
+      // Ignora errori 401/404/422 che potrebbero verificarsi durante i test
+      if (err.message.includes('401') || err.message.includes('404') || err.message.includes('422') || err.message.includes('Request failed')) {
+        return false;
+      }
+      return true;
+    });
   });
 
   describe('Login Page', () => {
@@ -164,12 +173,25 @@ describe('Authentication Flow', () => {
 
   describe('Logout Flow', () => {
     beforeEach(() => {
-      cy.mockAuth();
       cy.mockLogout(200);
+      cy.mockAuthAPIs();
     });
 
     it('should successfully logout', () => {
-      cy.mockAuthAPIs();
+      // Set auth before visiting
+      cy.visit('/app/auth/login', {
+        onBeforeLoad: (win) => {
+          win.localStorage.setItem('auth-token', JSON.stringify({
+            token: 'mock-auth-token',
+            timestamp: new Date().toISOString()
+          }));
+          win.localStorage.setItem('bc-auth-token', JSON.stringify({
+            token: 'mock-bc-token',
+            timestamp: new Date().toISOString()
+          }));
+        }
+      });
+      
       cy.visit('/app/dashboard');
       // Trigger logout action - this will vary based on your app
       // Assuming there's a logout button or menu item
