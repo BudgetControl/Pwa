@@ -2,6 +2,8 @@ describe('Security Tests', () => {
   beforeEach(() => {
     cy.clearLocalStorage();
     cy.clearCookies();
+    // Mock all auth API endpoints
+    cy.mockAuthAPIs();
   });
 
   describe('Authentication Security', () => {
@@ -11,6 +13,7 @@ describe('Security Tests', () => {
     });
 
     it('should not expose sensitive data in URL', () => {
+      cy.mockLoginFailure(401);
       cy.visit('/app/auth/login');
       cy.get('input[type="email"]').type('test@example.com');
       cy.get('input[type="password"]').type('password123');
@@ -22,6 +25,7 @@ describe('Security Tests', () => {
 
     it('should clear auth tokens on logout', () => {
       cy.mockAuth();
+      cy.mockLogout(200);
       cy.visit('/app/dashboard');
       
       // Simulate logout
@@ -34,6 +38,7 @@ describe('Security Tests', () => {
     });
 
     it('should handle token expiration', () => {
+      cy.mockCheckAuth(401, false);
       cy.window().then((win) => {
         // Set expired token
         const expiredDate = new Date();
@@ -67,8 +72,10 @@ describe('Security Tests', () => {
     });
 
     it('should not store passwords in localStorage', () => {
+      cy.mockLoginFailure(401);
       cy.get('input[type="email"]').type('test@example.com');
       cy.get('input[type="password"]').type('password123');
+      cy.get('button[type="submit"]').click();
       
       cy.window().then((win) => {
         const storage = JSON.stringify(win.localStorage);
@@ -79,6 +86,7 @@ describe('Security Tests', () => {
 
   describe('XSS Protection', () => {
     beforeEach(() => {
+      cy.mockLoginFailure(401, 'Invalid credentials');
       cy.visit('/app/auth/login');
     });
 
@@ -180,6 +188,7 @@ describe('Security Tests', () => {
   describe('Session Management', () => {
     it('should invalidate session after logout', () => {
       cy.mockAuth();
+      cy.mockLogout(200);
       cy.visit('/app/dashboard');
       
       cy.clearAuth();
@@ -236,6 +245,7 @@ describe('Security Tests', () => {
 
   describe('Input Validation', () => {
     beforeEach(() => {
+      cy.mockLoginFailure(401, 'Invalid credentials');
       cy.visit('/app/auth/login');
     });
 

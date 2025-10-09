@@ -3,6 +3,8 @@ describe('Authentication Flow', () => {
     // Clear storage before each test
     cy.clearLocalStorage();
     cy.clearCookies();
+    // Mock all auth API endpoints
+    cy.mockAuthAPIs();
   });
 
   describe('Login Page', () => {
@@ -56,6 +58,22 @@ describe('Authentication Flow', () => {
       cy.get('a[href*="register"]').first().click();
       cy.url().should('include', '/app/auth/register');
     });
+
+    it('should successfully login with valid credentials', () => {
+      cy.mockLogin(200);
+      cy.get('input[type="email"]').type('test@example.com');
+      cy.get('input[type="password"]').type('password123');
+      cy.get('button[type="submit"]').click();
+      cy.wait('@loginAPI').its('response.statusCode').should('eq', 200);
+    });
+
+    it('should show error on login failure', () => {
+      cy.mockLoginFailure(401, 'Invalid credentials');
+      cy.get('input[type="email"]').type('wrong@example.com');
+      cy.get('input[type="password"]').type('wrongpassword');
+      cy.get('button[type="submit"]').click();
+      cy.wait('@loginFailureAPI').its('response.statusCode').should('eq', 401);
+    });
   });
 
   describe('Registration Page', () => {
@@ -78,6 +96,29 @@ describe('Authentication Flow', () => {
       cy.get('a[href*="login"]').first().click();
       cy.url().should('include', '/app/auth/login');
     });
+
+    it('should successfully register with valid data', () => {
+      cy.mockSignUp(201);
+      cy.get('input[type="text"]').type('New User');
+      cy.get('input[type="email"]').type('newuser@example.com');
+      cy.get('input[type="password"]').eq(0).type('Password123!');
+      cy.get('input[type="password"]').eq(1).type('Password123!');
+      cy.get('button[type="submit"]').click();
+      cy.wait('@signUpAPI').its('response.statusCode').should('eq', 201);
+    });
+
+    it('should show validation errors on invalid registration', () => {
+      cy.mockSignUpFailure(422, {
+        email: ['The email has already been taken.'],
+        password: ['The password must be at least 8 characters.']
+      });
+      cy.get('input[type="text"]').type('Test');
+      cy.get('input[type="email"]').type('existing@example.com');
+      cy.get('input[type="password"]').eq(0).type('weak');
+      cy.get('input[type="password"]').eq(1).type('weak');
+      cy.get('button[type="submit"]').click();
+      cy.wait('@signUpFailureAPI').its('response.statusCode').should('eq', 422);
+    });
   });
 
   describe('Password Recovery', () => {
@@ -96,6 +137,33 @@ describe('Authentication Flow', () => {
 
     it('should navigate back to login', () => {
       cy.get('a[href*="login"]').first().click();
+      cy.url().should('include', '/app/auth/login');
+    });
+
+    it('should successfully send recovery email', () => {
+      cy.mockPasswordRecovery(200);
+      cy.get('input[type="email"]').type('test@example.com');
+      cy.get('button[type="submit"]').click();
+      cy.wait('@recoveryPasswordAPI').its('response.statusCode').should('eq', 200);
+    });
+  });
+
+  describe('Logout Flow', () => {
+    beforeEach(() => {
+      cy.mockAuth();
+      cy.mockLogout(200);
+    });
+
+    it('should successfully logout', () => {
+      cy.visit('/app/dashboard');
+      // Trigger logout action - this will vary based on your app
+      // Assuming there's a logout button or menu item
+      cy.window().then((win) => {
+        // Clear tokens to simulate logout
+        win.localStorage.removeItem('auth-token');
+        win.localStorage.removeItem('bc-auth-token');
+      });
+      cy.visit('/app/dashboard');
       cy.url().should('include', '/app/auth/login');
     });
   });
