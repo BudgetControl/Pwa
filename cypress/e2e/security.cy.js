@@ -199,40 +199,6 @@ describe('Security Tests', () => {
     });
   });
 
-  describe('CORS and API Security', () => {
-    it('should have proper CORS headers', () => {
-      // Intercept API calls to check headers
-      let apiCallMade = false;
-      cy.intercept('**/api/**', (req) => {
-        apiCallMade = true;
-      }).as('apiCall');
-      
-      cy.visit('/app/auth/login');
-      
-      // Wait for any API calls - test passes regardless as we're checking the setup
-      cy.wait(1000).then(() => {
-        // Test passes - we verified the intercept is set up
-        expect(true).to.be.true;
-      });
-    });
-
-    it('should include auth headers in API requests', () => {
-      cy.mockAuth();
-      
-      let requestMade = false;
-      cy.intercept('**/api/**', (req) => {
-        requestMade = true;
-        // Check for Authorization header if request is made
-        if (req.headers.authorization) {
-          expect(req.headers.authorization).to.exist;
-        }
-      }).as('authenticatedRequest');
-      
-      cy.visit('/app/dashboard');
-      cy.wait(1000); // Give time for potential API calls
-    });
-  });
-
   describe('Content Security Policy', () => {
     it('should have CSP meta tag or header', () => {
       cy.visit('/app/auth/login');
