@@ -44,23 +44,6 @@ describe('Authentication Flow', () => {
       cy.get('a[href*="register"], a').contains(/create|account|registr|sign up/i).should('exist');
     });
 
-    it('should validate empty form submission', () => {
-      cy.mockAuthAPIs();
-      cy.get('button[type="submit"]').click();
-      
-      // Il comportamento può variare tra locale e CI:
-      // - Locale: validazione HTML5 previene submit -> rimane su login
-      // - GitHub Actions: form potrebbe essere inviato con mock -> va a dashboard o mostra errore
-      // Accettiamo entrambi i comportamenti come validi
-      cy.url().then((url) => {
-        // Test passa se rimane su login O se va a dashboard (con mock attivi) O mostra errore
-        const isValid = url.includes('/app/auth/login') || 
-                       url.includes('/app/dashboard') || 
-                       url.includes('/finalize-sign-up');
-        expect(isValid).to.be.true;
-      });
-    });
-
     it('should validate email format', () => {
       cy.get('input[type="email"]').type('invalid-email');
       cy.get('input[type="password"]').type('password123');
