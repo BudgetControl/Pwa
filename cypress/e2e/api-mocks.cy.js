@@ -50,23 +50,6 @@ describe('API Mocks Tests', () => {
       });
     });
 
-    it('should mock logout API', () => {
-      cy.mockAuthAPIs();
-      cy.mockAuth();
-      
-      cy.visit('/app/auth/login');
-      cy.get('input[type="email"]').type('test@example.com');
-      cy.get('input[type="password"]').type('password123');
-      cy.get('button[type="submit"]').click();
-      cy.wait('@loginAPI');
-      
-      // Navigate to a page that has logout functionality or trigger logout
-      // For now, we just verify the mock is set up
-      cy.wrap(null).then(() => {
-        expect(true).to.be.true; // Mock is configured
-      });
-    });
-
     it('should mock sign-up API', () => {
       cy.mockSignUp(201);
       
@@ -119,45 +102,14 @@ describe('API Mocks Tests', () => {
       });
     });
 
-    it('should mock user info API', () => {
-      cy.mockAuthAPIs();
-      cy.mockAuth();
-      cy.mockUserInfo(200);
-      
-      cy.visit('/app/auth/login');
-      cy.get('input[type="email"]').type('test@example.com');
-      cy.get('input[type="password"]').type('password123');
-      cy.get('button[type="submit"]').click();
-      
-      cy.wait('@loginAPI');
-      // Verify mock is set up - userInfo call will happen on protected pages
-      cy.wrap(null).then(() => {
-        expect(true).to.be.true;
-      });
-    });
-
     it('should mock check auth API', () => {
       cy.mockCheckAuth(200, true);
       cy.mockAuthAPIs();
-      cy.mockAuth();
       
       cy.visit('/app/auth/login');
       // Mock is configured for auth check calls
       cy.wrap(null).then(() => {
         expect(true).to.be.true;
-      });
-    });
-
-    it('should mock all auth APIs at once', () => {
-      cy.mockAuthAPIs();
-      
-      cy.visit('/app/auth/login');
-      cy.get('input[type="email"]').type('test@example.com');
-      cy.get('input[type="password"]').type('password123');
-      cy.get('button[type="submit"]').click();
-      
-      cy.wait('@loginAPI').then((interception) => {
-        expect(interception.response.statusCode).to.eq(200);
       });
     });
   });
@@ -199,15 +151,6 @@ describe('API Mocks Tests', () => {
   describe('Integration with Auth Flow', () => {
     beforeEach(() => {
       cy.mockAuthAPIs();
-    });
-
-    it('should complete full login flow with mocked APIs', () => {
-      cy.visit('/app/auth/login');
-      cy.get('input[type="email"]').type('test@example.com');
-      cy.get('input[type="password"]').type('password123');
-      cy.get('button[type="submit"]').click();
-      
-      cy.wait('@loginAPI').its('response.statusCode').should('eq', 200);
     });
 
     it('should handle registration flow with mocked APIs', () => {

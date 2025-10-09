@@ -16,9 +16,25 @@ Cypress.Commands.add('mockAuthAPIs', () => {
         id: 1,
         email: 'test@example.com',
         name: 'Test User'
-      }
+      },
+      workspaces: [
+        { id: 1, name: 'Default Workspace' }
+      ]
     }
   }).as('loginAPI');
+
+  cy.intercept('POST', '**/api/auth/authenticate', {
+    statusCode: 200,
+    body: {
+      token: 'mock-auth-token-123',
+      user: {
+        id: 1,
+        email: 'test@example.com',
+        name: 'Test User'
+      },
+      workspaces: []
+    }
+  }).as('firstTimeLoginAPI');
 
   // Mock logout endpoint
   cy.intercept('GET', '**/api/auth/logout', {

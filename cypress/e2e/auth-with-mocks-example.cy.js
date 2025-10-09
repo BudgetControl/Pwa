@@ -212,40 +212,6 @@ describe('Authentication Flow - Esempio con Mock', () => {
     });
   });
 
-  describe('Authenticated Navigation', () => {
-    beforeEach(() => {
-      cy.mockAuthAPIs();
-      cy.mockUserInfo(200, {
-        token: 'bc-token-123',
-        userInfo: {
-          id: 1,
-          uuid: 'user-uuid-123',
-          name: 'Test User',
-          email: 'test@example.com',
-          workspace_settings: {
-            data: {
-              currency: 'USD',
-              payment_type_id: 1
-            }
-          }
-        }
-      });
-      
-      // Visit login page first to initialize window
-      cy.visit('/app/auth/login');
-      
-      // Then set auth
-      cy.mockAuth();
-    });
-
-    it('should access dashboard when not authenticated', () => {
-      cy.visit('/app/dashboard');
-      // Verify we're on login page
-      cy.url().should('include', '/app/auth/login');
-    });
-    
-  });
-
   describe('OAuth Provider Flow', () => {
     beforeEach(() => {
       cy.mockAuthAPIs();

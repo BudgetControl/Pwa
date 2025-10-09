@@ -60,11 +60,11 @@ describe('Authentication Flow', () => {
     });
 
     it('should successfully login with valid credentials', () => {
-      cy.mockLogin(200);
+      cy.mockLogin(200, { workspaces: [] });
       cy.get('input[type="email"]').type('test@example.com');
       cy.get('input[type="password"]').type('password123');
       cy.get('button[type="submit"]').click();
-      cy.wait('@loginAPI').its('response.statusCode').should('eq', 200);
+      cy.url().should('include', '/app/dashboard');
     });
 
     it('should show error on login failure', () => {
@@ -179,4 +179,5 @@ describe('Authentication Flow', () => {
       cy.url().should('include', '/app/auth/login');
     });
   });
+
 });
