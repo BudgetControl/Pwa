@@ -247,3 +247,9 @@ Instagram: <a href="https://www.instagram.com/creativetimofficial/" target="_bla
 - License Agreement: <a href="https://www.mlabfactory.it/license?ref=vn-readme" target="_blank">https://www.mlabfactory.it/license?ref=vn-readme</a>
 - Support: <a href="https://www.mlabfactory.it/contact-us?ref=vn-readme" target="_blank">https://www.mlabfactory.it/contact-us?ref=vn-readme</a>
 - Issues: <a href="https://github.com/BudgetControl/Application/issues" target="_blank">Github Issues Page</a>
+
+## Deploy on AWS S3 bucket
+aws s3 sync dist/. s3://budgetcontrol-pwa-dev
+
+## Clean
+aws cloudfront create-invalidation --distribution-id E1ZLM9B2HSVWP9 --paths "/*"

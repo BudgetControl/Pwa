@@ -1,5 +1,5 @@
 <template>
-    <button v-on:click="toggleHide($event)">
+    <button v-on:click="toggleHide($event)" class="relative z-50">
         <i v-if="hideIcon === false" class="fas fa-eye"></i>
         <i v-if="hideIcon === true" class="fas fa-eye-slash"></i>
     </button>

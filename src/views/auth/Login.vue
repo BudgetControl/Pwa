@@ -20,7 +20,7 @@
                 Facebook
               </button> -->
               <button @click="signInGoogle()"
-                class="bg-white active:bg-slate-50 text-slate-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md items-center font-bold text-xs ease-linear transition-all duration-150 w-full text-center"
+                class="bg-white active:bg-slate-50 text-slate-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md items-center font-bold text-xs ease-linear transition-all duration-150 w-full text-center min-h-[44px]"
                 type="button">
                 <img alt="SignIn with Google" class="w-5 mr-1 inline-flex" :src="google" />
                 Google
@@ -58,7 +58,7 @@
 
               <div class="text-center mt-6">
                 <button
-                  class="bg-emerald-600 text-white active:bg-emerald-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                  class="bg-emerald-600 text-white active:bg-emerald-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150 min-h-[44px]"
                   type="submit">
                   {{ $t('labels.sign_in') }}
                 </button>
@@ -97,6 +97,9 @@ import loading from 'vue-full-loading'
 import VerifyEmailButton from "../../components/Auth/VerifyEmailButton.vue";
 import { useAuthStore } from "../../storage/auth-token.store";
 import { useAppSettings } from "../../storage/settings.store";
+import { Browser } from '@capacitor/browser';
+import { App } from '@capacitor/app';
+import { Capacitor } from '@capacitor/core';
 
 export default {
   setup() {
@@ -120,6 +123,7 @@ export default {
       show: false,
       error: null,
       verify: false,
+      appUrlListener: null,
     };
   },
   mounted() {
@@ -127,6 +131,32 @@ export default {
     if (this.authStore.authToken.token != undefined && this.authStore.bcAuthToken.token != undefined) {
       console.debug("Return to dashboard")
       this.$router.push({ path: '/app/dashboard' })
+    }
+
+    // Listen for app URL open events (deep links) - only on native platforms
+    if (Capacitor.isNativePlatform()) {
+      this.appUrlListener = App.addListener('appUrlOpen', (data) => {
+        const url = data.url;
+        console.debug('App opened with URL:', url);
+        
+        // Check if it's the OAuth callback
+        if (url.includes('com.bcapp://auth')) {
+          const urlParams = new URL(url);
+          const code = urlParams.searchParams.get('code');
+          
+          if (code) {
+            // Close the browser and navigate to token page
+            Browser.close();
+            this.$router.push({ name: 'token', query: { code } });
+          }
+        }
+      });
+    }
+  },
+  beforeUnmount() {
+    // Remove the listener when component is destroyed - only on native platforms
+    if (Capacitor.isNativePlatform() && this.appUrlListener) {
+      this.appUrlListener.remove();
     }
   },
   methods: {
@@ -167,8 +197,10 @@ export default {
       this.error = false
 
       const authService = new AuthService()
-      authService.providerUri('google').then((resp) => {
-        window.open(resp.uri, '_self');
+      authService.providerUri('google').then(async (resp) => {
+        // Use Capacitor Browser for in-app authentication
+        await Browser.open({ url: resp.uri, windowName: '_self' });
+        _this.show = false;
       }).catch(() => {
         _this.show = false
         _this.error = this.$t('messages.generic_error')
