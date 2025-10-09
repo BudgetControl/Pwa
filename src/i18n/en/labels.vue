@@ -341,5 +341,9 @@ export default {
     expenses_by_category_comparison: 'Expenses by category (comparison)',
     manage_your_models: 'Manage your templates, add new ones or archive unused ones',
     write_template_name: 'Enter template name',
+    sort_name_asc: 'Name (A-Z)',
+    sort_name_desc: 'Name (Z-A)',
+    sort_amount_desc: 'Amount (High to Low)',
+    sort_amount_asc: 'Amount (Low to High)',
 }
 </script>

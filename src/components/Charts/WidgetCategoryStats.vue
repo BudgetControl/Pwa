@@ -1,12 +1,23 @@
 <template>
     <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-        <div class="rounded-t mb-0 px-4 py-3 border-0 cursor-pointer" @click="toggleVisibility">
+        <div class="rounded-t mb-0 px-4 py-3 border-0">
             <div class="flex flex-wrap items-center">
-                <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+                <div class="relative w-full px-4 max-w-full flex-grow flex-1 cursor-pointer" @click="toggleVisibility">
                     <h3 class="font-semibold text-base text-slate-700">
                         <i class="fas fa-chevron-right mr-2" :class="{ 'transform rotate-90': isVisible }"></i>
                         {{ $t('labels.category_details') }}
                     </h3>
+                </div>
+                <div class="relative px-4" @click.stop>
+                    <select 
+                        v-model="sortOption"
+                        @change="handleSortChange"
+                        class="border-0 px-3 py-1 text-slate-600 bg-white rounded text-xs shadow focus:outline-none focus:ring ease-linear transition-all duration-150">
+                        <option value="name_asc">{{ $t('labels.sort_name_asc') }}</option>
+                        <option value="name_desc">{{ $t('labels.sort_name_desc') }}</option>
+                        <option value="amount_desc">{{ $t('labels.sort_amount_desc') }}</option>
+                        <option value="amount_asc">{{ $t('labels.sort_amount_asc') }}</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -32,7 +43,7 @@
 
 <script>
 import { useAppSettings } from "../../storage/settings.store";
-import { ref } from 'vue';
+import { useGraphStore } from "../../storage/graph";
 import Loading from '../GenericComponents/Loading.vue'
 
 export default {
@@ -43,21 +54,51 @@ export default {
             subTitle: null,
             currency: '€',
             dataset: [],
-            isVisible: true
+            isVisible: true,
+            sortOption: 'name_asc'
         };
     },
 
     setup() {
         const appSettings = useAppSettings();
+        const graphStore = useGraphStore();
 
         return {
             appSettings,
+            graphStore,
         };
+    },
+
+    mounted() {
+        // Load sort preference from store
+        this.sortOption = this.graphStore.category_sort;
     },
 
     methods: {
         toggleVisibility() {
             this.isVisible = !this.isVisible;
+        },
+        handleSortChange() {
+            // Save sort preference to store
+            this.graphStore.setCategorySort(this.sortOption);
+            // Re-sort the existing dataset
+            this.sortDataset();
+        },
+        sortDataset() {
+            switch (this.sortOption) {
+                case 'name_asc':
+                    this.dataset.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'name_desc':
+                    this.dataset.sort((a, b) => b.name.localeCompare(a.name));
+                    break;
+                case 'amount_desc':
+                    this.dataset.sort((a, b) => parseFloat(b.amount) - parseFloat(a.amount));
+                    break;
+                case 'amount_asc':
+                    this.dataset.sort((a, b) => parseFloat(a.amount) - parseFloat(b.amount));
+                    break;
+            }
         },
         setGraph(data) {
             this.isLoading = true
@@ -77,8 +118,8 @@ export default {
                 });
             });
 
-            // Ordina il dataset per nome tradotto
-            this.dataset.sort((a, b) => a.name.localeCompare(b.name));
+            // Apply current sort
+            this.sortDataset();
 
             this.isLoading = false
         },
