@@ -30,7 +30,7 @@ export default {
     },
     created() {
         const apiService = new CoreService()
-        apiService.accounts().then((response) => {
+        apiService.accounts('?filters[archived]=false').then((response) => {
             this.wallets = response;
         });
     },
