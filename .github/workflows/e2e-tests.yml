@@ -2,7 +2,7 @@ name: Cypress E2E Tests
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ master, develop ]
 
 jobs:
   cypress-run:
@@ -19,11 +19,12 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: npm ci
 
-      - name: Run Cypress tests
+      - name: Run Cypress unit tests
         uses: cypress-io/github-action@v6
         with:
           start: npm run serve
+          command: npm run test
           wait-on: 'http://localhost:8080'
           wait-on-timeout: 120
