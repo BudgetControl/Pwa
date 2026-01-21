@@ -45,6 +45,7 @@
 
     <!-- Dynamic Form Components -->
     <ExpenseForm v-if="action.openTab === 'expenses'"
+      ref="currentForm"
       :is-model="isModel"
       :is-planned="isPlanned"
       :accounts="input.account"
@@ -57,6 +58,7 @@
       @save="handleSave" />
 
     <IncomeForm v-if="action.openTab === 'incoming'"
+      ref="currentForm"
       :is-model="isModel"
       :is-planned="isPlanned"
       :accounts="input.account"
@@ -69,6 +71,7 @@
       @save="handleSave" />
 
     <TransferForm v-if="action.openTab === 'transfer'"
+      ref="currentForm"
       :is-model="isModel"
       :is-planned="isPlanned"
       :accounts="input.account"
@@ -79,6 +82,7 @@
       @save="handleSave" />
 
     <DebitForm v-if="action.openTab === 'debit'"
+      ref="currentForm"
       :is-model="isModel"
       :is-planned="isPlanned"
       :accounts="input.account"
@@ -90,6 +94,7 @@
       @save="handleSave" />
 
     <SavingForm v-if="action.openTab === 'saving'"
+      ref="currentForm"
       :is-model="isModel"
       :is-planned="isPlanned"
       :accounts="input.account"
@@ -294,25 +299,10 @@ export default {
     },
     
     resetCurrentForm() {
-      // Reset the active form based on the current tab
-      // Find the active form component by checking which tab is open
+      // Reset the active form using template ref
       this.$nextTick(() => {
-        // Get all child components
-        const children = this.$children || []
-        
-        // Find the form component that matches the current tab
-        for (const child of children) {
-          const componentName = child.$options.name
-          if (componentName === 'ExpenseForm' || 
-              componentName === 'IncomeForm' || 
-              componentName === 'TransferForm' || 
-              componentName === 'DebitForm' || 
-              componentName === 'SavingForm') {
-            if (typeof child.resetForm === 'function') {
-              child.resetForm()
-              break
-            }
-          }
+        if (this.$refs.currentForm && typeof this.$refs.currentForm.resetForm === 'function') {
+          this.$refs.currentForm.resetForm()
         }
       })
     }
