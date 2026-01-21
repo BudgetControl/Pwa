@@ -340,6 +340,9 @@ export default {
     category_details: 'Kategoriedetails',
     expenses_by_category_monthly: 'Ausgaben nach Kategorie (monatlich)',
     expenses_by_category_comparison: 'Ausgaben nach Kategorie (Vergleich)',
-    
+    sort_name_asc: 'Name (A-Z)',
+    sort_name_desc: 'Name (Z-A)',
+    sort_amount_desc: 'Betrag (Hoch-Niedrig)',
+    sort_amount_asc: 'Betrag (Niedrig-Hoch)',
 }
 </script>

@@ -342,5 +342,9 @@ export default {
     expenses_by_category_comparison: 'Dépenses par catégorie (comparaison)',
     manage_your_models: 'Gérez vos modèles, ajoutez-en de nouveaux ou archivez ceux inutilisés',
     write_template_name: 'Écrivez le nom du modèle',
+    sort_name_asc: 'Nom (A-Z)',
+    sort_name_desc: 'Nom (Z-A)',
+    sort_amount_desc: 'Montant (Haut-Bas)',
+    sort_amount_asc: 'Montant (Bas-Haut)',
 }
 </script>

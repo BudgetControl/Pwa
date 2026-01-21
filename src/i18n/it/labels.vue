@@ -341,5 +341,9 @@ export default {
     expenses_by_category_comparison: 'Spese per categoria (confronto)',
     manage_your_models: 'Gestisci i tuoi modelli, aggiungine di nuovi o archivia quelli non utilizzati',
     write_template_name: 'Scrivi il nome del modello',
+    sort_name_asc: 'Nome (A-Z)',
+    sort_name_desc: 'Nome (Z-A)',
+    sort_amount_desc: 'Importo (Alto-Basso)',
+    sort_amount_asc: 'Importo (Basso-Alto)',
 }
 </script>
