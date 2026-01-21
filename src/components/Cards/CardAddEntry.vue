@@ -295,14 +295,6 @@ export default {
     
     resetCurrentForm() {
       // Reset the active form based on the current tab
-      const formComponentMap = {
-        'expenses': ExpenseForm,
-        'incoming': IncomeForm,
-        'transfer': TransferForm,
-        'debit': DebitForm,
-        'saving': SavingForm
-      }
-      
       // Find the active form component by checking which tab is open
       this.$nextTick(() => {
         // Get all child components
