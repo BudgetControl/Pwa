@@ -280,13 +280,49 @@ export default {
           window.alert(message, "success")
           
           if (uuid) {
+            // If editing, redirect to entries list
             this.$router.push('/app/entries')
+          } else {
+            // If creating a new entry, reset the form
+            this.resetCurrentForm()
           }
         })
         .catch((error) => {
           console.error('Error saving entry:', error)
           window.alert(this.$t('messages.generic_error'), "error")
         })
+    },
+    
+    resetCurrentForm() {
+      // Reset the active form based on the current tab
+      const formComponentMap = {
+        'expenses': ExpenseForm,
+        'incoming': IncomeForm,
+        'transfer': TransferForm,
+        'debit': DebitForm,
+        'saving': SavingForm
+      }
+      
+      // Find the active form component by checking which tab is open
+      this.$nextTick(() => {
+        // Get all child components
+        const children = this.$children || []
+        
+        // Find the form component that matches the current tab
+        for (const child of children) {
+          const componentName = child.$options.name
+          if (componentName === 'ExpenseForm' || 
+              componentName === 'IncomeForm' || 
+              componentName === 'TransferForm' || 
+              componentName === 'DebitForm' || 
+              componentName === 'SavingForm') {
+            if (typeof child.resetForm === 'function') {
+              child.resetForm()
+              break
+            }
+          }
+        }
+      })
     }
   }
 }
