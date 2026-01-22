@@ -9,7 +9,8 @@
     :entry-id="entryId"
     ref="baseForm"
     @validate-and-submit="handleSubmit"
-    @entry-loaded="handleEntryLoaded">
+    @entry-loaded="handleEntryLoaded"
+    @reset-form="resetSpecificFields">
     
     <template #specific-fields>
       <div class="w-full lg:w-6/12 px-2 py-2">
@@ -138,6 +139,21 @@ export default {
       
       this.$emit('save', transferData)
     },
+    
+    resetSpecificFields() {
+      // Reset transfer-specific fields to their initial values
+      this.account = "-1"
+      this.transferTo = false
+      this.validationErrors = {
+        account: false,
+        transferTo: false
+      }
+    },
+    
+    resetForm() {
+      // Reset base form and specific fields
+      this.$refs.baseForm.resetForm()
+    }
   }
 }
 </script>

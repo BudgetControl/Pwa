@@ -487,6 +487,38 @@ export default {
             
             // Emetti i dati al componente padre per popolare i campi specifici
             this.$emit('model-loaded', modelData)
+        },
+
+        resetForm() {
+            // Reset all form fields to their initial values
+            this.formData = {
+                amount: null,
+                currency_id: this.appSettings.getCurrencyId() || 1,
+                payment_type: 1,
+                date_time: null,
+                note: null,
+                planning: 0,
+                end_date_time: null,
+                labels: [],
+                uuid: null,
+                transfer_id: false,
+                confirmed: true,
+                waranty: false,
+                geolocalization: "",
+                exclude_from_stats: false
+            }
+            
+            // Reset time to current
+            this.time()
+            
+            // Reset model selector
+            this.selectedModel = "0"
+            
+            // Reset new labels array
+            this.newLabels = []
+            
+            // Emit event to reset specific fields in child forms
+            this.$emit('reset-form')
         }
     }
 }
