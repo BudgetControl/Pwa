@@ -14,7 +14,7 @@ vi.mock('../../../libs', () => ({
 const mockT = (key: string) => {
   const translations: Record<string, string> = {
     'labels.search_labels': 'Search labels...',
-    'labels.or_nsert_new_tag_name': 'Or enter a new tag name'
+    'labels.or_insert_new_tag_name': 'Or enter a new tag name'
   };
   return translations[key] || key;
 };
