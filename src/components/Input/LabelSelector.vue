@@ -121,10 +121,10 @@ export default {
       return [...this.availableLabels].sort((a, b) => a.name.localeCompare(b.name))
     },
     filteredLabels() {
-      if (!this.searchQuery.trim()) {
+      const query = this.searchQuery.trim().toLowerCase()
+      if (!query) {
         return this.sortedLabels
       }
-      const query = this.searchQuery.toLowerCase()
       return this.sortedLabels.filter(label => 
         label.name.toLowerCase().includes(query)
       )

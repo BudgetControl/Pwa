@@ -194,7 +194,7 @@
                                         </option>
                                     </select>
                                     <label class="block text-sm font-medium text-gray-700 mt-4 mb-2">{{ $t('labels.notification_thresholds') }}</label>
-                                    <input type="text" v-model="thresholdInput" @keyup.enter="addThreshold" placeholder="Es: 60 per 60%" class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 mb-2" />
+                                    <input type="text" v-model="thresholdInput" @keyup.enter="addThreshold" :placeholder="$t('labels.notification_threshold_example')" class="w-full border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 mb-2" />
                                     <div class="flex flex-wrap gap-2 mb-2">
                                         <span v-for="(t, idx) in data.thresholds" :key="idx" class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">
                                             {{ t }}% <button @click="removeThreshold(idx)" class="ml-1 text-red-500">&times;</button>
@@ -307,7 +307,7 @@ export default {
     methods: {
         addThreshold() {
             const val = parseInt(this.thresholdInput)
-            if (!isNaN(val) && val > 0 && val < 100 && !this.data.thresholds.includes(val)) {
+            if (!isNaN(val) && val > 0 && val <= 100 && !this.data.thresholds.includes(val)) {
                 this.data.thresholds.push(val)
                 this.thresholdInput = ''
             }
