@@ -115,6 +115,7 @@ export default {
     unarchive: 'Desarchivar',
     search: 'Buscar',
     search_labels: 'Buscar etiquetas...',
+    or_insert_new_tag_name: 'O ingresa un nuevo nombre de etiqueta',
     show_details: 'Mostrar detalles',
     bounce_rate: 'Tasa de rebote',
     session_duration: 'Duración de la sesión',
@@ -349,5 +350,8 @@ export default {
     sort_name_desc: 'Nombre (Z-A)',
     sort_amount_desc: 'Cantidad (Alta-Baja)',
     sort_amount_asc: 'Cantidad (Baja-Alta)',
+    notification_emails: 'Correos de notificación',
+    notification_thresholds: 'Umbrales de notificación',
+    notification_threshold_example: 'Ej: 60 para 60%',
 }
 </script>
