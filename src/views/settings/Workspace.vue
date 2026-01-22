@@ -296,13 +296,14 @@ export default {
             const confirmed = await confirm(this.$t('messages.workspace.confirm_delete'));
             if (confirmed) {
                 const workspaceService = new WorkspaceService();
-                workspaceService.delete(this.currentWorkspace.uuid).then(() => {
+                try {
+                    await workspaceService.delete(this.currentWorkspace.uuid);
                     alert(this.$t('messages.workspace.deleted'), 'success');
                     this.loadWorkspaces();
                     this.closeWorkspaceModal();
-                }).catch(() => {
+                } catch (error) {
                     alert(this.$t('messages.generic_error'), 'error');
-                });
+                }
             }
         },
         openModal(id) {
