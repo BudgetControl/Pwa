@@ -10,7 +10,8 @@
         :entry-id="entryId"
         ref="baseForm"
         @validate-and-submit="handleSubmit"
-        @entry-loaded="handleEntryLoaded">
+        @entry-loaded="handleEntryLoaded"
+        @reset-form="resetSpecificFields">
 
         <template #specific-fields>
             <div class="w-full lg:w-6/12 px-2 py-2">
@@ -195,6 +196,24 @@ export default {
             
             this.$emit('save', savingData)
         },
+        
+        resetSpecificFields() {
+            // Reset saving-specific fields to their initial values
+            this.account = "-1"
+            this.goal_id = false
+            this.saving_type = '+'
+            this.validationErrors = {
+                account: false,
+                goal: false
+            }
+        },
+        
+        resetForm() {
+            // Reset base form and specific fields
+            if (this.$refs.baseForm) {
+                this.$refs.baseForm.resetForm()
+            }
+        }
     }
 }
 </script>

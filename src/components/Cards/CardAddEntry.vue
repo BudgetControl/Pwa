@@ -45,6 +45,7 @@
 
     <!-- Dynamic Form Components -->
     <ExpenseForm v-if="action.openTab === 'expenses'"
+      ref="currentForm"
       :is-model="isModel"
       :is-planned="isPlanned"
       :accounts="input.account"
@@ -57,6 +58,7 @@
       @save="handleSave" />
 
     <IncomeForm v-if="action.openTab === 'incoming'"
+      ref="currentForm"
       :is-model="isModel"
       :is-planned="isPlanned"
       :accounts="input.account"
@@ -69,6 +71,7 @@
       @save="handleSave" />
 
     <TransferForm v-if="action.openTab === 'transfer'"
+      ref="currentForm"
       :is-model="isModel"
       :is-planned="isPlanned"
       :accounts="input.account"
@@ -79,6 +82,7 @@
       @save="handleSave" />
 
     <DebitForm v-if="action.openTab === 'debit'"
+      ref="currentForm"
       :is-model="isModel"
       :is-planned="isPlanned"
       :accounts="input.account"
@@ -90,6 +94,7 @@
       @save="handleSave" />
 
     <SavingForm v-if="action.openTab === 'saving'"
+      ref="currentForm"
       :is-model="isModel"
       :is-planned="isPlanned"
       :accounts="input.account"
@@ -280,13 +285,26 @@ export default {
           window.alert(message, "success")
           
           if (uuid) {
+            // If editing, redirect to entries list
             this.$router.push('/app/entries')
+          } else {
+            // If creating a new entry, reset the form
+            this.resetCurrentForm()
           }
         })
         .catch((error) => {
           console.error('Error saving entry:', error)
           window.alert(this.$t('messages.generic_error'), "error")
         })
+    },
+    
+    resetCurrentForm() {
+      // Reset the active form using template ref
+      this.$nextTick(() => {
+        if (this.$refs.currentForm && typeof this.$refs.currentForm.resetForm === 'function') {
+          this.$refs.currentForm.resetForm()
+        }
+      })
     }
   }
 }

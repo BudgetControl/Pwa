@@ -267,8 +267,13 @@ export default {
                 this.isLoading = true
                 this.searchService.filter(data, currentPage).then((res) => {
                     if (res.data.length > 0) {
-                        _this.$refs.entryIncoming.buildEntriesTable(res.data)
                         _this.action.no_entry_found = false
+                        // Wait for next tick to ensure component is rendered
+                        _this.$nextTick(() => {
+                            if (_this.$refs.entryIncoming) {
+                                _this.$refs.entryIncoming.buildEntriesTable(res.data)
+                            }
+                        })
                     } else {
                         _this.action.no_entry_found = true
                     }
@@ -338,7 +343,9 @@ export default {
                 planned: true,
                 date_time: null
             }
-            this.$refs.entryIncoming.entries = []
+            if (this.$refs.entryIncoming) {
+                this.$refs.entryIncoming.entries = []
+            }
             this.pagination.enabled = false
             if (this.$refs._paginator !== undefined) {
                 this.$refs._paginator.hasMorePage = false

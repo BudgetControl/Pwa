@@ -11,7 +11,8 @@
     ref="baseForm"
     @validate-and-submit="handleSubmit"
     @entry-loaded="handleEntryLoaded"
-    @model-loaded="handleModelLoaded">
+    @model-loaded="handleModelLoaded"
+    @reset-form="resetSpecificFields">
     
     <template #specific-fields>
       <div class="w-full lg:w-6/12 px-2 py-2">
@@ -151,6 +152,21 @@ export default {
       
       this.$emit('save', expenseData)
     },
+    
+    resetSpecificFields() {
+      // Reset expense-specific fields to their initial values
+      this.account = "-1"
+      this.category = 0
+      this.validationErrors = {
+        account: false,
+        category: false
+      }
+    },
+    
+    resetForm() {
+      // Reset base form and specific fields
+      this.$refs.baseForm.resetForm()
+    }
   }
 }
 </script>

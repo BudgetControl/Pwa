@@ -111,6 +111,8 @@ export default {
     archive: 'Archive',
     unarchive: 'Unarchive',
     search: 'Search',
+    search_labels: 'Search labels...',
+    or_insert_new_tag_name: 'Or enter a new tag name',
     show_details: 'Show details',
     bounce_rate: 'Bounce rate',
     session_duration: 'Session duration',
@@ -341,5 +343,12 @@ export default {
     expenses_by_category_comparison: 'Expenses by category (comparison)',
     manage_your_models: 'Manage your templates, add new ones or archive unused ones',
     write_template_name: 'Enter template name',
+    sort_name_asc: 'Name (A-Z)',
+    sort_name_desc: 'Name (Z-A)',
+    sort_amount_desc: 'Amount (High to Low)',
+    sort_amount_asc: 'Amount (Low to High)',
+    notification_emails: 'Notification Emails',
+    notification_thresholds: 'Notification Thresholds',
+    notification_threshold_example: 'E.g., 60 for 60%',
 }
 </script>

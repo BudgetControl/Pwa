@@ -111,6 +111,8 @@ export default {
     archive: 'Archivia',
     unarchive: 'Disarchivia',
     search: 'Cerca',
+    search_labels: 'Cerca etichette...',
+    or_insert_new_tag_name: 'Oppure inserisci un nuovo nome di etichetta',
     show_details: 'Mostra dettagli',
     bounce_rate: 'Differenza',
     session_duration: 'Durata sessione',
@@ -340,5 +342,12 @@ export default {
     expenses_by_category_comparison: 'Spese per categoria (confronto)',
     manage_your_models: 'Gestisci i tuoi modelli, aggiungine di nuovi o archivia quelli non utilizzati',
     write_template_name: 'Scrivi il nome del modello',
+    sort_name_asc: 'Nome (A-Z)',
+    sort_name_desc: 'Nome (Z-A)',
+    sort_amount_desc: 'Importo (Alto-Basso)',
+    sort_amount_asc: 'Importo (Basso-Alto)',
+    notification_emails: 'E-mail di notifica',
+    notification_thresholds: 'Soglie di notifica',
+    notification_threshold_example: 'Es: 60 per 60%',
 }
 </script>

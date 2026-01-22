@@ -111,6 +111,8 @@ export default {
     archive: 'Archivieren',
     unarchive: 'Wiederherstellen',
     search: 'Suchen',
+    search_labels: 'Etiketten suchen...',
+    or_insert_new_tag_name: 'Oder neuen Tag-Namen eingeben',
     show_details: 'Details anzeigen',
     bounce_rate: 'Absprungrate',
     session_duration: 'Sitzungsdauer',
@@ -339,6 +341,14 @@ export default {
     category_details: 'Kategoriedetails',
     expenses_by_category_monthly: 'Ausgaben nach Kategorie (monatlich)',
     expenses_by_category_comparison: 'Ausgaben nach Kategorie (Vergleich)',
-    
+    manage_your_models: 'Verwalten Sie Ihre Vorlagen, fügen Sie neue hinzu oder archivieren Sie ungenutzte',
+    write_template_name: 'Vorlagenname eingeben',
+    sort_name_asc: 'Name (A-Z)',
+    sort_name_desc: 'Name (Z-A)',
+    sort_amount_desc: 'Betrag (Hoch-Niedrig)',
+    sort_amount_asc: 'Betrag (Niedrig-Hoch)',
+    notification_emails: 'Benachrichtigungs-E-Mails',
+    notification_thresholds: 'Benachrichtigungsschwellenwerte',
+    notification_threshold_example: 'Z.B. 60 für 60%',
 }
 </script>

@@ -12,6 +12,7 @@ const getDefaultDates = () => {
 export const useGraphStore = defineStore(STORE_NAME, {
   state: () => ({
     ...getDefaultDates(),
+    category_sort: 'name_asc' as 'name_asc' | 'name_desc' | 'amount_asc' | 'amount_desc',
   }),
   actions: {
     set(start_date: string, end_date: string) {
@@ -21,6 +22,9 @@ export const useGraphStore = defineStore(STORE_NAME, {
     get(): { start_date: string, end_date: string } {
       return this
     },
+    setCategorySort(sort: 'name_asc' | 'name_desc' | 'amount_asc' | 'amount_desc') {
+      this.category_sort = sort
+    },
   },
-  persist: false,
+  persist: true,
 })
