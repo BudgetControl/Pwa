@@ -53,7 +53,7 @@
       <input 
         v-model="newLabelInput" 
         type="text" 
-        :placeholder="$t('labels.or_nsert_new_tag_name')"
+        :placeholder="$t('labels.or_insert_new_tag_name')"
         @keypress.enter.prevent="addNewLabel"
         @input="handleInputChange"
         class="flex-1 border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded-l text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150" />
@@ -121,10 +121,10 @@ export default {
       return [...this.availableLabels].sort((a, b) => a.name.localeCompare(b.name))
     },
     filteredLabels() {
-      if (!this.searchQuery.trim()) {
+      const query = this.searchQuery.trim().toLowerCase()
+      if (!query) {
         return this.sortedLabels
       }
-      const query = this.searchQuery.toLowerCase()
       return this.sortedLabels.filter(label => 
         label.name.toLowerCase().includes(query)
       )

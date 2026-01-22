@@ -26,5 +26,5 @@ export const useGraphStore = defineStore(STORE_NAME, {
       this.category_sort = sort
     },
   },
-  persist: false,
+  persist: true,
 })
