@@ -68,6 +68,9 @@ export default {
     labels: 'Labels',
     entry_type: 'Entry type',
     enable_email_notification: 'Enable email notification',
+    notification_emails: 'Notification emails',
+    notification_thresholds: 'Notification thresholds',
+    notification_threshold_example: 'E.g.: 60 for 60%',
     save_budget: 'Save budget',
     add_new_wallet: 'Add new wallet',
     show_archived: 'Show archived',
@@ -347,8 +350,5 @@ export default {
     sort_name_desc: 'Name (Z-A)',
     sort_amount_desc: 'Amount (High to Low)',
     sort_amount_asc: 'Amount (Low to High)',
-    notification_emails: 'Notification Emails',
-    notification_thresholds: 'Notification Thresholds',
-    notification_threshold_example: 'E.g., 60 for 60%',
 }
 </script>
