@@ -39,7 +39,10 @@ export default {
     workspace: {
         updated: 'Arbeitsbereich aktualisiert',
         added: 'Arbeitsbereich hinzugefügt',
-        user_not_fount: 'Benutzer nicht gefunden'
+        user_not_fount: 'Benutzer nicht gefunden',
+        user_unshared: 'Benutzer aus dem Arbeitsbereich entfernt',
+        confirm_delete: 'Bist du sicher, dass du diesen Arbeitsbereich löschen möchtest?',
+        deleted: 'Arbeitsbereich erfolgreich gelöscht'
     },
     search: {
         no_results: 'Keine Ergebnisse gefunden',

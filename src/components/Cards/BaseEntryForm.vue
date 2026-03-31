@@ -64,7 +64,7 @@
                     <label class="block uppercase text-slate-600 text-xs font-bold mb-2">
                         {{ $t('labels.date_start') }}
                     </label>
-                    <Calendar v-model="formData.date" :label="''" />
+                    <Calendar v-model="formData.date_time" :label="''" />
                 </div>
 
                 <div class="w-full lg:w-6/12 px-2 py-2">
@@ -270,11 +270,11 @@ export default {
                 errors.push(this.$t('messages.validation.choose_planned_type'))
             }
 
-            if (!this.formData.date) {
+            if (!this.formData.date_time) {
                 errors.push(this.$t('messages.validation.choose_start_date'))
             }
 
-            if (this.formData.end_date_time && this.formData.date && this.formData.end_date_time < this.formData.date) {
+            if (this.formData.end_date_time && this.formData.date_time && this.formData.end_date_time < this.formData.date_time) {
                 errors.push(this.$t('messages.validation.end_date_greater_than_start_date'))
             }
 

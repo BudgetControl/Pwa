@@ -117,10 +117,15 @@
                             class="flex-1 bg-gray-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-300 transition-colors font-medium">
                             {{ $t('labels.cancel') }}
                         </button>
+                        <button v-if="editingWorkspace" @click="deleteWorkspace"
+                            class="flex-1 bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-colors font-medium">
+                            {{ $t('labels.delete') }}
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+        <ConfirmModal ref="confirmModal" />
         <AlertModal ref="alertModal" />
     </div>
 </template>
@@ -129,15 +134,16 @@
 
 import '@vuepic/vue-datepicker/dist/main.css'
 import AlertModal from '../../components/GenericComponents/AlertModal.vue';
+import ConfirmModal from '../../components/GenericComponents/ConfirmModal.vue';
 import CoreService from "../../services/core.service";
 import WorkspaceService from "../../services/workspace.service";
-import AuthService from "../../services/auth.service";
 import { useAppSettings } from '../../storage/settings.store';
 
 
 export default {
     components: {
-        AlertModal
+        AlertModal,
+        ConfirmModal
     },
     data() {
         return {
@@ -168,6 +174,9 @@ export default {
     created() {
         window.alert = (message, type = 'success') => {
             this.$refs.alertModal.show(message, type);
+        };
+        window.confirm = (message) => {
+            return this.$refs.confirmModal.show(message);
         };
     },
     methods: {
@@ -282,6 +291,20 @@ export default {
                 alert(this.$t('messages.generic_error'), 'error');
             });
             this.currentWorkspace.shareWith.splice(i, 1);
+        },
+        async deleteWorkspace() {
+            const confirmed = await confirm(this.$t('messages.workspace.confirm_delete'));
+            if (confirmed) {
+                const workspaceService = new WorkspaceService();
+                try {
+                    await workspaceService.delete(this.currentWorkspace.uuid);
+                    alert(this.$t('messages.workspace.deleted'), 'success');
+                    this.loadWorkspaces();
+                    this.closeWorkspaceModal();
+                } catch (error) {
+                    alert(this.$t('messages.generic_error'), 'error');
+                }
+            }
         },
         openModal(id) {
             if (id === null)

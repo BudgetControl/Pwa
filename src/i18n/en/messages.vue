@@ -39,7 +39,10 @@ export default {
     workspace: {
         updated: 'Workspace updated',
         added: 'Workspace added',
-        user_not_fount: 'User not found'
+        user_not_fount: 'User not found',
+        user_unshared: 'User removed from workspace',
+        confirm_delete: 'Are you sure you want to delete this workspace?',
+        deleted: 'Workspace deleted successfully'
     },
     search: {
         no_results: 'No results found',
