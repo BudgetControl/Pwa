@@ -349,8 +349,5 @@ export default {
     sort_name_desc: 'Nome (Z-A)',
     sort_amount_desc: 'Importo (Alto-Basso)',
     sort_amount_asc: 'Importo (Basso-Alto)',
-    notification_emails: 'E-mail di notifica',
-    notification_thresholds: 'Soglie di notifica',
-    notification_threshold_example: 'Es: 60 per 60%',
 }
 </script>

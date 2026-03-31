@@ -350,8 +350,5 @@ export default {
     sort_name_desc: 'Nom (Z-A)',
     sort_amount_desc: 'Montant (Haut-Bas)',
     sort_amount_asc: 'Montant (Bas-Haut)',
-    notification_emails: 'E-mails de notification',
-    notification_thresholds: 'Seuils de notification',
-    notification_threshold_example: 'Ex: 60 pour 60%',
 }
 </script>
