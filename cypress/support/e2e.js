@@ -49,7 +49,8 @@ Cypress.on('window:before:load', (win) => {
       for (const mutation of mutations) {
         if (mutation.addedNodes.length > 0) {
           for (const node of mutation.addedNodes) {
-            if (node.id === 'webpack-dev-server-client-overlay') {
+            // Check if it's an element node before accessing id property
+            if (node.nodeType === 1 && node.id === 'webpack-dev-server-client-overlay') {
               hideOverlay();
               return;
             }
