@@ -43,13 +43,25 @@ Cypress.on('window:before:load', (win) => {
   hideOverlay();
   
   // Also observe for when overlay gets added
-  if (win.MutationObserver) {
-    const observer = new win.MutationObserver(() => {
-      hideOverlay();
+  if (win.MutationObserver && !win.__cypressOverlayObserver) {
+    const observer = new win.MutationObserver((mutations) => {
+      // Only check if the specific overlay element was added
+      for (const mutation of mutations) {
+        if (mutation.addedNodes.length > 0) {
+          for (const node of mutation.addedNodes) {
+            if (node.id === 'webpack-dev-server-client-overlay') {
+              hideOverlay();
+              return;
+            }
+          }
+        }
+      }
     });
     observer.observe(win.document.documentElement, {
       childList: true,
       subtree: true
     });
+    // Mark that we've added an observer to this window
+    win.__cypressOverlayObserver = observer;
   }
 });
