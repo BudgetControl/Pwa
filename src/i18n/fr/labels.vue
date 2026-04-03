@@ -68,6 +68,9 @@ export default {
     labels: 'Étiquettes',
     entry_type: 'Type d\'entrée',
     enable_email_notification: 'Activer la notification par email',
+    notification_emails: 'Emails de notification',
+    notification_thresholds: 'Seuils de notification',
+    notification_threshold_example: 'Ex.: 60 pour 60%',
     save_budget: 'Enregistrer le budget',
     add_new_wallet: 'Ajouter un nouveau portefeuille',
     show_archived: 'Afficher les archivés',
@@ -347,8 +350,5 @@ export default {
     sort_name_desc: 'Nom (Z-A)',
     sort_amount_desc: 'Montant (Haut-Bas)',
     sort_amount_asc: 'Montant (Bas-Haut)',
-    notification_emails: 'E-mails de notification',
-    notification_thresholds: 'Seuils de notification',
-    notification_threshold_example: 'Ex: 60 pour 60%',
 }
 </script>

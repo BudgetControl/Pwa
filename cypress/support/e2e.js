@@ -29,3 +29,40 @@ if (!app.document.head.querySelector('[data-hide-command-log-request]')) {
   style.setAttribute('data-hide-command-log-request', '');
   app.document.head.appendChild(style);
 }
+
+// Hide webpack-dev-server error overlay during tests
+Cypress.on('window:before:load', (win) => {
+  // Hide the webpack-dev-server overlay
+  const hideOverlay = () => {
+    const overlay = win.document.getElementById('webpack-dev-server-client-overlay');
+    if (overlay) {
+      overlay.style.display = 'none';
+    }
+  };
+  
+  hideOverlay();
+  
+  // Also observe for when overlay gets added
+  if (win.MutationObserver && !win.__cypressOverlayObserver) {
+    const observer = new win.MutationObserver((mutations) => {
+      // Only check if the specific overlay element was added
+      for (const mutation of mutations) {
+        if (mutation.addedNodes.length > 0) {
+          for (const node of mutation.addedNodes) {
+            // Check if it's an element node before accessing id property
+            if (node.nodeType === 1 && node.id === 'webpack-dev-server-client-overlay') {
+              hideOverlay();
+              return;
+            }
+          }
+        }
+      }
+    });
+    observer.observe(win.document.documentElement, {
+      childList: true,
+      subtree: true
+    });
+    // Mark that we've added an observer to this window
+    win.__cypressOverlayObserver = observer;
+  }
+});
