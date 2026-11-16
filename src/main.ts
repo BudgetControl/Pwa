@@ -45,6 +45,7 @@ import DetailsGoal from "./components/Goal/DetailsGoal.vue";
 import Profile from "./views/settings/Profile.vue";
 import Settings from "./views/settings/Settings.vue";
 import Wallet from "./views/settings/Wallet.vue";
+import OpenBanking from "./views/settings/OpenBanking.vue";
 import Category from "./views/settings/Category.vue";
 import CategoryCard from "./views/settings/Cards/CategoryCard.vue";
 import Label from "./views/settings/Label.vue";
@@ -218,6 +219,10 @@ const routes = [
       {
         path: "/app/settings/wallet",
         component: Wallet,
+      },
+      {
+        path: "/app/settings/open-banking",
+        component: OpenBanking,
       },
       {
         path: "/app/settings/category",
