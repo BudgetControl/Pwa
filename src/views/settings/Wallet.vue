@@ -21,6 +21,8 @@
                     <i class="fas fa-plus mr-2"></i>{{ $t('labels.add_new_wallet') }}
                 </button>
 
+                <router-link to="/app/settings/open-banking" class="bg-white text-emerald-700 px-4 py-2 rounded-lg shadow flex items-center">Open Banking</router-link>
+
                 <!-- Dropdown per filtrare wallet archiviati -->
                 <select v-model="walletFilter"
                     class="border-0 px-3 py-2 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring focus:ring-emerald-200">
