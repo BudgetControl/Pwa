@@ -319,7 +319,7 @@ export default {
                 name: '',
                 type: 'bank',
                 balance: 0,
-                currency_id: 1,
+                currency: 1,
                 color: '#' + Math.floor(Math.random() * 16777215).toString(16),
                 archived: false,
                 exclude_stats: false,
@@ -425,7 +425,7 @@ export default {
                 type: wallet.type || 'bank',
                 color: wallet.color || '#' + Math.floor(Math.random() * 16777215).toString(16),
                 exclude_stats: wallet.exclude_stats || false,
-                currency_id: wallet.currency_id || 1
+                currency: wallet.currency || 1
             };
             this.showAddWalletModal = true;
         },
@@ -457,7 +457,7 @@ export default {
                 name: this.currentWallet.name,
                 type: this.currentWallet.type,
                 balance: this.currentWallet.balance || 0,
-                currency_id: this.currentWallet.currency_id,
+                currency: this.currentWallet.currency,
                 color: this.currentWallet.color,
                 archived: this.currentWallet.archived,
                 exclude_stats: this.currentWallet.exclude_stats,
@@ -516,7 +516,7 @@ export default {
                 name: '',
                 type: 'bank',
                 balance: 0,
-                currency_id: 1,
+                currency: 1,
                 color: '#' + Math.floor(Math.random() * 16777215).toString(16),
                 archived: false,
                 exclude_stats: false,
