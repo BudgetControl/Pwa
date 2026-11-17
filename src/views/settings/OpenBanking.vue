@@ -112,7 +112,11 @@ export default {
       try {
         const [connection_id, account_uid] = this.selectedAccount.split(':');
         const result = await this.api.call('sync', {...this.form, connection_id:Number(connection_id), account_uid});
-        this.$refs.alertModal.show(this.text.result.replace('{imported}', result.imported).replace('{duplicates}', result.duplicates).replace('{skipped}', result.skipped), 'success');
+        const summary = this.text.result.replace('{imported}', result.imported).replace('{duplicates}', result.duplicates).replace('{skipped}', result.skipped);
+        const balanceWarning = this.$i18n.locale === 'it'
+          ? 'Sincronizzazione associata, ma il saldo bancario non è stato allineato. Riprova o controlla i log di Sync.'
+          : 'Synchronization configured, but the bank balance was not aligned. Retry or check the Sync logs.';
+        this.$refs.alertModal.show(result.balance_updated === false ? `${summary} ${balanceWarning}` : summary, result.balance_updated === false ? 'error' : 'success');
       } catch (e) { this.$refs.alertModal.show(e.response?.data?.error || this.text.failed, 'error'); }
       finally { this.busy = false; }
     },

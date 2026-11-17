@@ -39,7 +39,11 @@
                 :style="'border-color: ' + wallet.color + '; border-top-width: 2px; border-style: solid;'">
                 <div class="p-4 border-b border-gray-200">
                     <div class="flex justify-between items-center">
-                        <h3 class="text-lg font-semibold text-gray-800">{{ wallet.name }}</h3>
+                        <h3 class="text-lg font-semibold text-gray-800">
+                            {{ wallet.name }}
+                            <i v-if="syncedWalletIds.includes(Number(wallet.id))" class="fas fa-sync-alt ml-2 text-emerald-600 text-sm"
+                                :title="syncConfiguredLabel" role="img" :aria-label="syncConfiguredLabel"></i>
+                        </h3>
                         <div class="flex space-x-2">
                             <button @click="editWallet(wallet)" class="text-blue-500 hover:text-blue-700">
                                 <i class="fas fa-edit"></i>
@@ -290,10 +294,15 @@
 
 <script>
 import CoreService from '../../services/core.service';
+import ApiService from '../../services/api.service';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import CurrencySelector from '../../components/Input/CurrencySelector.vue';
 import AlertModal from '../../components/GenericComponents/AlertModal.vue';
+
+class WalletSyncApi extends ApiService {
+    async call(action) { return (await this.instance.post('/api/sync/' + action, {})).data; }
+}
 
 export default {
     components: {
@@ -303,11 +312,12 @@ export default {
     },
     setup() {
         const apiService = new CoreService();
-        return { apiService };
+        return { apiService, syncApi: new WalletSyncApi() };
     },
     data() {
         return {
             wallets: [],
+            syncedWalletIds: [],
             walletFilter: 'active',
             showAddWalletModal: false,
             showDeleteConfirmation: false,
@@ -339,6 +349,9 @@ export default {
         };
     },
     computed: {
+        syncConfiguredLabel() {
+            return this.$i18n.locale === 'it' ? 'Sincronizzazione bancaria configurata' : 'Bank synchronization configured';
+        },
         filteredWallets() {
             switch (this.walletFilter) {
                 case 'active':
@@ -368,8 +381,19 @@ export default {
     mounted() {
         this.loadWallets();
         this.loadCurrencies();
+        this.loadSyncedWallets();
     },
     methods: {
+        async loadSyncedWallets() {
+            try {
+                const eligibility = await this.syncApi.call('eligibility');
+                if (!eligibility.eligible) return;
+                const response = await this.syncApi.call('connections');
+                this.syncedWalletIds = response.wallet_ids || [];
+            } catch (error) {
+                this.syncedWalletIds = [];
+            }
+        },
         loadWallets() {
             this.apiService.accounts('?order[name]=asc').then((res) => {
                 const getWalletBalance = function (wallet) {
